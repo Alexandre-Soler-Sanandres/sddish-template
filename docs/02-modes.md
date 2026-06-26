@@ -86,7 +86,7 @@ Executes one plan step at a time by default. Sets Task status to `in-progress` �
 Checks artifacts, plans, and implementations against process and behavioral criteria. Does not run technical checks — those belong to Implementation mode, guided by `QUALITY.md` and `TOOLING.md`.
 
 **Covers:** Artifact completeness, process rule compliance, acceptance criteria, readiness checks  
-**Output:** `agent-harness/reviews/active/REVIEW-*.md` (when a formal record is needed)
+**Output:** Findings documented inline in the plan step summary, or as a Review artifact when a formal record is needed — created via Review mode.
 
 ## Review Mode
 

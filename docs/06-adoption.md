@@ -7,7 +7,7 @@ A new project can adopt the harness through these stack-neutral steps:
 1. Create or import the repository using the normal tooling for the chosen stack
 2. Add root loader files: `AGENTS.md` and `CLAUDE.md`
 3. Add the `agent-harness/` directory
-4. Add `CORE.md`, `CATALOG.md`, and `OUTPUTS.md`
+4. Add `agent-harness/CORE.md`, `agent-harness/CATALOG.md`, and `agent-harness/OUTPUTS.md`
 5. Add all mode files under `agent-harness/modes/`
 6. Add all artifact templates under `agent-harness/templates/`
 7. Add reference files under `agent-harness/reference/`
@@ -63,13 +63,30 @@ The legacy codebase is evidence, not authority. Do not treat existing code as au
 
 ## Minimal Adoption Path
 
-You do not need to use all modes immediately. The minimal viable adoption is:
+The harness can be introduced gradually across six phases:
 
-1. Write a Spec before any implementation
-2. Create an Implementation Plan and get it approved
-3. Implement against the plan
+**Phase 1: Minimal Agent-Ready Repo**
+- `AGENTS.md`, `CLAUDE.md`
+- `agent-harness/CORE.md`
+- `agent-harness/modes/IMPLEMENTATION.md`
+- `agent-harness/modes/VALIDATION.md`
 
-Add more structure (Use Cases, Tasks, Validation, Review) as the team and codebase grow.
+**Phase 2: Spec Driven Artifacts**
+Add: `use-cases/`, `specs/`, `implementation-plans/`
+
+**Phase 3: Tasks When Needed**
+Add: `tasks/`, `TASK-template.md`, task decision rules
+
+**Phase 4: Partnering and Ideas**
+Add: `PARTNERING.md`, `ideas/`, `transcripts/`
+
+**Phase 5: Review and Improvement**
+Add: `reviews/`, `improvements/`, `REVIEW.md`, `IMPROVEMENT.md`
+
+**Phase 6: Legacy Discovery**
+Add: `LEGACY-DISCOVERY.md`, `legacy/`, `source-map/`, legacy findings
+
+You do not need to use all modes immediately. Even Phase 1 alone prevents the most common failure mode: implementing before requirements are clear.
 
 ## Stack-Specific Guides
 

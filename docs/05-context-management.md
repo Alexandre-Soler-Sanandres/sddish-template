@@ -2,6 +2,21 @@
 
 Agents have limited context windows. The harness is designed to keep context small and precise — not to load everything at once.
 
+## Default Context Loading Order
+
+When an agent starts a task, it loads context in this order — stopping as soon as it has enough:
+
+1. User request
+2. Root loader file (`AGENTS.md`)
+3. `agent-harness/CORE.md`
+4. Active mode file
+5. Explicitly referenced artifact
+6. Frontmatter links (`source`, `derived_*`, `related`)
+7. Local `SUMMARY.md` if the target artifact is ambiguous
+8. Full related artifact — only if required
+9. Reference files — only when affected by the current task
+10. Archived artifacts — only when explicitly needed
+
 ## Core Rules
 
 - **Start from the explicitly referenced artifact** — do not scan entire directories
@@ -9,6 +24,8 @@ Agents have limited context windows. The harness is designed to keep context sma
 - **Use frontmatter links to navigate** — `source`, `derived_*`, `related` fields point to related artifacts
 - **Use `CATALOG.md` to locate artifacts** when the target is unknown or ambiguous
 - **Use local `SUMMARY.md` files** only when the target artifact cannot be identified from CATALOG.md alone
+- **Prefer frontmatter before full body** when only metadata is needed
+- **Summarize findings** when context becomes large
 
 ## Always Load
 
