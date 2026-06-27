@@ -56,18 +56,3 @@ Each artifact directory uses subfolders to reflect lifecycle state.
 
 New artifacts are created in `active/`.
 Move artifacts between subfolders as their status changes — do not rename the file ID.
-
-## Initiatives
-
-Initiatives group related Use Cases and Plans under a shared goal. They live in CATALOG.md —
-not as separate files. Each initiative entry uses the following format:
-
-```markdown
-### INIT-NNN — Name of Initiative
-Status: planned | in-progress | done
-Use Cases: UC-NNN, UC-NNN
-Active Plans: PLAN-NNN
-```
-
-Initiatives are created manually when a theme emerges across multiple Use Cases or Plans.
-They do not have their own artifact directory. The CATALOG.md entry is the authoritative record.

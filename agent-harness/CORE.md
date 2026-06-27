@@ -13,7 +13,7 @@
 ## Context Loading
 
 1. Start from the user request.
-2. Use `agent-harness/CATALOG.md` to locate the artifact type and any active initiatives when the artifact identity is unknown or ambiguous.
+2. Use `agent-harness/CATALOG.md` to locate the artifact type when the artifact identity is unknown or ambiguous.
 3. Load the explicitly referenced artifact.
 4. Load the active mode file.
 5. Load linked parent or child artifacts only when required.
@@ -53,4 +53,4 @@ Extra care is required when touching:
   conflict — list both Plan IDs and the overlapping paths. Do not proceed until the user
   explicitly resolves it.
 - Concurrent Plans on non-overlapping Specs are permitted without restriction.
-- CATALOG.md must reflect all Plans at `approved` or `in-progress` status under their initiative.
+- CATALOG.md must reflect all Plans at `approved` or `in-progress` status.

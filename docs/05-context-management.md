@@ -48,7 +48,6 @@ Reference files are loaded only when needed — not by default:
 
 `agent-harness/CATALOG.md` is a tiny navigation file — not a god-index. It lists:
 - Where each artifact type lives
-- Which high-level initiatives are currently active
 
 It must not list hundreds of individual artifacts. Use frontmatter links and SUMMARY files for that.
 

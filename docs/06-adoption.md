@@ -41,7 +41,7 @@ The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` should be u
 |---|---|
 | `agent-harness/CORE.md` | Universal — do not modify |
 | `agent-harness/OUTPUTS.md` | Universal — do not modify |
-| `agent-harness/CATALOG.md` | Universal structure, project fills Active Initiatives |
+| `agent-harness/CATALOG.md` | Universal navigation structure |
 | `agent-harness/modes/*.md` | Universal — do not modify |
 | `agent-harness/templates/*.md` | Universal — do not modify |
 | `agent-harness/reference/ARCHITECTURE.md` | Project-specific — fill in |

@@ -52,7 +52,7 @@ A Spec frontmatter field for linking to external technical artifacts (OpenAPI sp
 An optional lightweight navigation file created per artifact directory when the number of artifacts makes discovery difficult.
 
 **CATALOG.md**  
-A tiny harness navigation file listing artifact locations and currently active initiatives. Not a god-index.
+A tiny harness navigation file listing artifact locations. Not a god-index.
 
 **God-Index Anti-Pattern**  
 The failure mode where an agent loads a massive index of every artifact instead of navigating from a specific referenced artifact. Causes context collapse and loss of precision.

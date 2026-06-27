@@ -54,7 +54,7 @@ Every stage produces a Markdown file. Every file is traceable to its source. Eve
 agent-harness/
   CORE.md              ← universal rules (always loaded)
   OUTPUTS.md           ← artifact formats and folder structure (always loaded)
-  CATALOG.md           ← navigation: where artifacts live, active initiatives
+  CATALOG.md           ← navigation: where artifacts live
   modes/               ← one file per mode (universal, stack-neutral)
   templates/           ← artifact templates
   reference/           ← project-specific (fill these in)

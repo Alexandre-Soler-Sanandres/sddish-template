@@ -152,10 +152,3 @@ An artifact is mature enough to proceed when its status is at an accepted level:
 | Use Case | `ready-for-spec` or `approved` |
 | Spec | `approved` |
 | Task | `ready` or `planned` |
-| Implementation Plan | `approved` |
-
-## Initiatives
-
-Initiatives group related Use Cases and Plans under a shared goal. They are not standalone
-artifacts — they live as named sections in `CATALOG.md`. See `agent-harness/OUTPUTS.md` for
-the initiative entry format.
