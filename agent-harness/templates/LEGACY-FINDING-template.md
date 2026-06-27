@@ -16,11 +16,11 @@ tags: []
 
 ## Finding
 
-_(describe what was found in the legacy code or documentation)_
+(describe what was found in the legacy code or documentation)
 
 ## Evidence
 
-_(quote or reference the specific legacy source — file path, line numbers, snippet)_
+(quote or reference the specific legacy source — file path, line numbers, snippet)
 
 ## Classification
 
@@ -31,8 +31,8 @@ _(quote or reference the specific legacy source — file path, line numbers, sni
 
 ## Candidate Artifacts
 
-_(what Use Cases or Specs this finding could inform)_
+(what Use Cases or Specs this finding could inform)
 
 ## Open Questions
 
-_(what needs further investigation before converting to a formal artifact)_
+(what needs further investigation before converting to a formal artifact)

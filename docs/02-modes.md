@@ -9,7 +9,7 @@ Mode transitions happen only when the user explicitly requests them. Ambiguous i
 ## Mode Overview
 
 | Mode | CLI | Purpose |
-|---|---|---|
+| --- | --- | --- |
 | Partnering | — | Structured conversation to capture ideas and problems |
 | Use Cases | `/tw-create-use-case` | Define behavioral anchors from actor goals |
 | Specs | `/tw-create-spec <use-case-file>` | Define desired behavior from Use Cases |
@@ -65,6 +65,7 @@ Tasks must always be created from an approved Spec. Tasks are not always mandato
 The mandatory gate before code changes. These commands mean: inspect the artifact, gather downstream artifacts, verify maturity, produce an Implementation Plan, and wait for approval.
 
 **Entry points and routing:**
+
 - `/tw-implement-task <task-file>` — verify Task is `ready`, create focused plan
 - `/tw-implement-spec <spec-file>` — find Tasks, apply Task Decision Matrix, create plan
 - `/tw-implement-use-case <use-case-file>` — find all derived Specs and Tasks, create end-to-end plan
@@ -103,7 +104,7 @@ Evaluates outputs and decisions. Review is not only approval — it is how proce
 After review, the agent takes a prescribed action based on the outcome and stops:
 
 | Outcome | Agent action |
-|---|---|
+| --- | --- |
 | `accepted` | Advance artifact to next accepted status. Report. |
 | `accepted-with-notes` | Advance status. Add findings as open questions in the artifact. |
 | `changes-requested` | Set artifact to `draft`. Record findings. Wait for user instruction. |

@@ -66,7 +66,7 @@ Load these when relevant — do not load all of them by default:
 After completing a review, take the following action based on the outcome. Do not deviate.
 
 | Outcome | Action |
-|---|---|
+| --- | --- |
 | `accepted` | Advance artifact to its next accepted status. Report completion. |
 | `accepted-with-notes` | Advance artifact status. Add findings as open questions in the artifact. |
 | `changes-requested` | Set artifact status to `draft`. Record findings in the Review artifact. Stop and wait for user instruction. |

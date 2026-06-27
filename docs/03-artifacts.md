@@ -18,7 +18,7 @@ updated: ""   # YYYY-MM-DD
 ### ID Prefixes
 
 | Prefix | Type |
-|---|---|
+| --- | --- |
 | `TRANSCRIPT-` | Transcript |
 | `IDEA-` | Idea |
 | `UC-` | Use Case |
@@ -32,7 +32,7 @@ updated: ""   # YYYY-MM-DD
 ### Relationship Fields
 
 | Field | Purpose |
-|---|---|
+| --- | --- |
 | `source` | what this artifact was created from |
 | `derived_*` | artifacts derived from this one |
 | `related` | loosely related artifacts |
@@ -137,7 +137,7 @@ to its gate status, every checklist item must be checked. A single unchecked ite
 status change.
 
 | Artifact | Gate status | Checklist section |
-|---|---|---|
+| --- | --- | --- |
 | Use Case | `ready-for-spec` | `## Readiness Checklist` |
 | Spec | `approved` | `## Readiness Checklist` |
 | Task | `ready` | `## Readiness Checklist` |
@@ -148,7 +148,8 @@ status change.
 An artifact is mature enough to proceed when its status is at an accepted level:
 
 | Artifact | Required Status Before Next Step |
-|---|---|
+| --- | --- |
 | Use Case | `ready-for-spec` or `approved` |
 | Spec | `approved` |
 | Task | `ready` or `planned` |
+| Implementation Plan | `approved` |

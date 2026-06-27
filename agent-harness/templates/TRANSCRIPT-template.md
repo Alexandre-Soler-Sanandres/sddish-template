@@ -17,12 +17,12 @@ tags: []
 
 ## Raw Content
 
-_(paste or transcribe raw content here — may preserve original language)_
+(paste or transcribe raw content here — may preserve original language)
 
 ## Summary
 
-_(optional short summary of key points — in English)_
+(optional short summary of key points — in English)
 
 ## Open Questions
 
-_(questions identified during review)_
+(questions identified during review)

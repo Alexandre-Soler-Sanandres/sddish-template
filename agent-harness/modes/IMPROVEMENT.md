@@ -23,7 +23,7 @@ Via natural language: explicit instruction to improve a harness file, template, 
 
 ## Improvement Process
 
-```
+```text
 Review -> Improvement artifact -> approved harness change -> validation -> updated files
 ```
 

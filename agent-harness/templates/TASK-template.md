@@ -20,23 +20,23 @@ tags: []
 
 ## Goal
 
-_(what this task achieves)_
+(what this task achieves)
 
 ## Scope
 
-_(what files and areas are in scope)_
+(what files and areas are in scope)
 
 ## Non-Goals
 
-_(what this task explicitly does not do)_
+(what this task explicitly does not do)
 
 ## Implementation Notes
 
-_(any relevant hints, patterns or constraints for implementation)_
+(any relevant hints, patterns or constraints for implementation)
 
 ## Validation
 
-_(describe how to verify this task is complete, beyond the commands in frontmatter)_
+(describe how to verify this task is complete, beyond the commands in frontmatter)
 
 ## Readiness Checklist
 

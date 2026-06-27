@@ -26,7 +26,7 @@ The central principle is: **no code without a Spec, no Spec without a Use Case, 
 
 This creates a clear dependency chain:
 
-```
+```text
 Voice / Text / Legacy Code
   → Transcript / Idea
   → Use Case

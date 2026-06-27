@@ -5,33 +5,34 @@
 
 ## System Overview
 
-_(describe the high-level system architecture in 2-3 sentences)_
+(describe the high-level system architecture in 2-3 sentences)
 
 ## Layers and Boundaries
 
-_(describe the main layers — e.g. frontend, backend, database, infrastructure — and what belongs in each)_
+(describe the main layers — e.g. frontend, backend, database, infrastructure — and what belongs in each)
 
 ## Key Components
 
-_(list and describe the main components or services)_
+(list and describe the main components or services)
 
 ## Technical Artifacts
 
-_(declare where project-specific technical specs live — agents use this when resolving `technical_refs` entries in Specs)_
+(declare where project-specific technical specs live — agents use this when resolving `technical_refs` entries in Specs)
 
 Examples:
+
 - API specification: `docs/api/openapi.yaml`
 - Database schema: `docs/db/schema.sql`
 - Event contracts: `docs/contracts/`
 
 ## External Integrations
 
-_(list external systems, APIs, or services this project integrates with)_
+(list external systems, APIs, or services this project integrates with)
 
 ## Deployment
 
-_(describe the deployment model — e.g. containers, cloud provider, environments)_
+(describe the deployment model — e.g. containers, cloud provider, environments)
 
 ## Allowed and Forbidden Paths
 
-_(optional — list path conventions agents must respect when planning implementation)_
+(optional — list path conventions agents must respect when planning implementation)

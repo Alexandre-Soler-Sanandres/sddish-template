@@ -19,7 +19,7 @@ approval:
 
 ## Target
 
-_(what this plan implements)_
+(what this plan implements)
 
 ## Readiness Checks
 
@@ -33,11 +33,11 @@ All items must be checked before this plan may advance to `approved`:
 
 ## Included Artifacts
 
-_(list Tasks or Specs included in this plan)_
+(list Tasks or Specs included in this plan)
 
 ## Excluded Artifacts
 
-_(list what is deliberately excluded and why)_
+(list what is deliberately excluded and why)
 
 ## Plan Steps
 
@@ -51,7 +51,7 @@ _(list what is deliberately excluded and why)_
 
 ### Step 2 — _(title)_
 
-_(repeat as needed — every step must define expected files, validation, and a suggested commit regardless of whether Task artifacts exist)_
+(repeat as needed — every step must define expected files, validation, and a suggested commit regardless of whether Task artifacts exist)
 
 ## Approval
 

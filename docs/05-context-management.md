@@ -47,6 +47,7 @@ Reference files are loaded only when needed — not by default:
 ## CATALOG.md
 
 `agent-harness/CATALOG.md` is a tiny navigation file — not a god-index. It lists:
+
 - Where each artifact type lives
 
 It must not list hundreds of individual artifacts. Use frontmatter links and SUMMARY files for that.
@@ -60,6 +61,7 @@ SUMMARY files are not indexes of everything. They are lightweight navigation aid
 ## Why This Matters
 
 Loading too much context:
+
 - Reduces precision — the agent loses focus on the current task
 - Wastes tokens — irrelevant artifacts consume context
 - Increases hallucination risk — more context to get confused by

@@ -84,7 +84,7 @@ Keep Tasks separate when:
 
 ## Commit Message Convention
 
-```
+```text
 feat(area): short description
 
 Implements:

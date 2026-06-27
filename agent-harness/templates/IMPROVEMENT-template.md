@@ -17,20 +17,20 @@ approval:
 
 ## Problem
 
-_(what process problem this improvement addresses)_
+(what process problem this improvement addresses)
 
 ## Root Cause
 
-_(why the problem occurred — template gap, unclear rule, missing validation, etc.)_
+(why the problem occurred — template gap, unclear rule, missing validation, etc.)
 
 ## Proposed Change
 
-_(what should change and how)_
+(what should change and how)
 
 ## Expected Impact
 
-_(how this improvement will prevent the problem from recurring)_
+(how this improvement will prevent the problem from recurring)
 
 ## Validation
 
-_(how to verify the improvement is effective)_
+(how to verify the improvement is effective)

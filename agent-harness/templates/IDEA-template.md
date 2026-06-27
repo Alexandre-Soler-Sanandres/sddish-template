@@ -15,16 +15,16 @@ next: []                 # e.g. [UC-001]
 
 ## Problem or Opportunity
 
-_(what problem or opportunity does this idea address?)_
+(what problem or opportunity does this idea address?)
 
 ## Initial Thoughts
 
-_(raw ideas, hunches, early solution directions)_
+(raw ideas, hunches, early solution directions)
 
 ## Open Questions
 
-_(what needs to be clarified before this can become a Use Case?)_
+(what needs to be clarified before this can become a Use Case?)
 
 ## Notes
 
-_(any additional context)_
+(any additional context)

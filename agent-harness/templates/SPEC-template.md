@@ -22,53 +22,53 @@ tags: []
 
 ## Problem
 
-_(what problem this spec addresses)_
+(what problem this spec addresses)
 
 ## Goal
 
-_(what this spec achieves)_
+(what this spec achieves)
 
 ## Scope
 
-_(what is included)_
+(what is included)
 
 ## Non-Goals
 
-_(what is explicitly excluded)_
+(what is explicitly excluded)
 
 ## Functional Requirements
 
-- FR-1: _(requirement)_
+- FR-1: (requirement)
 
 ## Non-Functional Requirements
 
-- NFR-1: _(requirement — performance, reliability, security, etc.)_
+- NFR-1: (requirement — performance, reliability, security, etc.)
 
 ## Acceptance Criteria
 
-- AC-1: _(concrete, testable criterion)_
+- AC-1: (concrete, testable criterion)
 
 ## Constraints
 
-_(technical or business constraints that limit the solution space)_
+(technical or business constraints that limit the solution space)
 
 ## Dependencies
 
-_(other specs, tasks or external systems this depends on)_
+(other specs, tasks or external systems this depends on)
 
 ## Risks
 
 | Risk | Likelihood | Impact | Mitigation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | | | | |
 
 ## Validation Approach
 
-_(how this spec will be validated — tests, checks, manual review)_
+(how this spec will be validated — tests, checks, manual review)
 
 ## Task Decision Notes
 
-_(are Tasks required for this spec? rationale)_
+(are Tasks required for this spec? rationale)
 
 ## Readiness Checklist
 

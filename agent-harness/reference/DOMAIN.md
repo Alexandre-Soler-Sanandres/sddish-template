@@ -5,32 +5,32 @@
 
 ## Domain Overview
 
-_(describe the business domain in 2-3 sentences)_
+(describe the business domain in 2-3 sentences)
 
 ## Key Actors
 
-_(list the main actors — users, operators, external systems — and their roles)_
+(list the main actors — users, operators, external systems — and their roles)
 
 ## Core Concepts
 
-_(define the key domain entities and concepts agents must understand)_
+(define the key domain entities and concepts agents must understand)
 
 | Concept | Definition |
-|---|---|
+| --- | --- |
 | | |
 
 ## Business Rules
 
-_(list the critical business rules and invariants — things that must always be true)_
+(list the critical business rules and invariants — things that must always be true)
 
 ## Terminology
 
-_(define domain-specific terms that have precise meaning in this project)_
+(define domain-specific terms that have precise meaning in this project)
 
 | Term | Definition |
-|---|---|
+| --- | --- |
 | | |
 
 ## Domain Boundaries
 
-_(describe what is in scope for this domain and what is explicitly out of scope)_
+(describe what is in scope for this domain and what is explicitly out of scope)

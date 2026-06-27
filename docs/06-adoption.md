@@ -38,7 +38,7 @@ The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` should be u
 ## What Belongs Where
 
 | File | Universal or Project-Specific |
-|---|---|
+| --- | --- |
 | `agent-harness/CORE.md` | Universal — do not modify |
 | `agent-harness/OUTPUTS.md` | Universal — do not modify |
 | `agent-harness/CATALOG.md` | Universal navigation structure |
@@ -66,6 +66,7 @@ The legacy codebase is evidence, not authority. Do not treat existing code as au
 The harness can be introduced gradually across six phases:
 
 **Phase 1: Minimal Agent-Ready Repo**
+
 - `AGENTS.md`, `CLAUDE.md`
 - `agent-harness/CORE.md`
 - `agent-harness/modes/IMPLEMENTATION.md`
@@ -92,7 +93,7 @@ You do not need to use all modes immediately. Even Phase 1 alone prevents the mo
 
 Concrete setup instructions for specific tech stacks belong in optional guides:
 
-```
+```text
 agent-harness/guides/
   BOOTSTRAP-python-uv.md
   BOOTSTRAP-node.md

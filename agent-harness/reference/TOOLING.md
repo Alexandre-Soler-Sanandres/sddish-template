@@ -5,50 +5,50 @@
 
 ## Package Manager
 
-_(e.g. uv | npm | poetry | cargo | gradle | maven)_
+(e.g. uv | npm | poetry | cargo | gradle | maven)_
 
 ## Project Structure
 
-_(describe the monorepo or single-repo structure — workspaces, apps, packages)_
+(describe the monorepo or single-repo structure — workspaces, apps, packages)_
 
 ## Common Commands
 
 ### Run Tests
 
-```
+```text
 _(e.g. uv run pytest apps/myapp/tests/)_
 ```
 
 ### Lint
 
-```
+```text
 _(e.g. uv run ruff check .)_
 ```
 
 ### Type Check
 
-```
+```text
 _(e.g. uv run mypy .)_
 ```
 
 ### Format
 
-```
+```text
 _(e.g. uv run ruff format .)_
 ```
 
 ### Build
 
-```
+```text
 _(e.g. uv build)_
 ```
 
 ### Local Development
 
-```
+```text
 _(e.g. uv run uvicorn myapp:app --reload)_
 ```
 
 ## Notes
 
-_(any project-specific tooling quirks, environment requirements, or setup steps agents should know)_
+(any project-specific tooling quirks, environment requirements, or setup steps agents should know)

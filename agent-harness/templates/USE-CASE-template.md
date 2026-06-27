@@ -17,35 +17,35 @@ risk: low                # low | medium | high
 
 ## Goal
 
-_(what the primary actor is trying to achieve)_
+(what the primary actor is trying to achieve)
 
 ## Trigger
 
-_(what causes this use case to begin)_
+(what causes this use case to begin)
 
 ## Preconditions
 
-_(what must be true before this use case can start)_
+(what must be true before this use case can start)
 
 ## Main Success Scenario
 
-1. _(step by step — actor actions and system responses)_
+1. (step by step — actor actions and system responses)
 
 ## Alternatives and Failure Paths
 
-- _(describe key alternatives or error conditions)_
+- (describe key alternatives or error conditions)
 
 ## Non-Goals
 
-- _(what this use case explicitly does not cover)_
+- (what this use case explicitly does not cover)
 
 ## Observable Outcome
 
-_(what the actor or system can observe when this use case succeeds)_
+(what the actor or system can observe when this use case succeeds)
 
 ## Open Questions
 
-_(unresolved questions that may affect the spec)_
+(unresolved questions that may affect the spec)
 
 ## Readiness Checklist
 

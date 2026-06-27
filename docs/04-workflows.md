@@ -147,7 +147,7 @@ verify every item in the artifact's Readiness Checklist. A single unchecked item
 status change.
 
 | Artifact | Gate status | Checklist location |
-|---|---|---|
+| --- | --- | --- |
 | Use Case | `ready-for-spec` | `## Readiness Checklist` in the artifact |
 | Spec | `approved` | `## Readiness Checklist` in the artifact |
 | Task | `ready` | `## Readiness Checklist` in the artifact |
