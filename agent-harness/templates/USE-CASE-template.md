@@ -46,3 +46,16 @@ _(what the actor or system can observe when this use case succeeds)_
 ## Open Questions
 
 _(unresolved questions that may affect the spec)_
+
+## Readiness Checklist
+
+Before advancing to `ready-for-spec`, verify all items are checked:
+
+- [ ] Primary actor is defined
+- [ ] Goal is clear and specific
+- [ ] Trigger is identified
+- [ ] Preconditions are stated
+- [ ] Main success scenario has at least 3 steps
+- [ ] Alternatives and failure paths are defined
+- [ ] Observable outcome is defined
+- [ ] No open questions remain that would block Spec creation

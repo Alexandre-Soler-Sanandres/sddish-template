@@ -61,6 +61,11 @@ Load these when relevant — do not load all of them by default:
 - `agent-harness/reference/TOOLING.md` — when specifying validation commands in Task frontmatter
 - `agent-harness/reference/DOMAIN.md` — when the Task touches domain-critical areas (payments, security, data integrity)
 
+## Readiness Gate
+
+Before setting a Task status to `ready`, verify the Readiness Checklist in the artifact.
+All items must be checked. A single unchecked item blocks the status change.
+
 ## Boundaries — Must Not
 
 - Implement or change code

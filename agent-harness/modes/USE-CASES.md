@@ -66,6 +66,11 @@ A Use Case may be refined when:
 
 Refining does not change the Use Case ID. Update the `updated` field and status as appropriate.
 
+## Readiness Gate
+
+Before setting a Use Case status to `ready-for-spec`, verify the Readiness Checklist in the artifact.
+All items must be checked. A single unchecked item blocks the status change.
+
 ## Boundaries — Must Not
 
 - Contain low-level implementation detail (unless essential to the scenario)

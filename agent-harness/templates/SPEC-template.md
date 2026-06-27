@@ -16,6 +16,7 @@ approval:
   approved_at: null      # YYYY-MM-DD
 requires: []             # harness reference files needed, e.g. [agent-harness/reference/ARCHITECTURE.md#database]
 technical_refs: []       # external technical artifacts, e.g. [docs/api/openapi.yaml, docs/db/schema.sql]
+test_refs: []            # populated during implementation — paths to test files covering each AC
 tags: []
 ---
 
@@ -68,3 +69,17 @@ _(how this spec will be validated — tests, checks, manual review)_
 ## Task Decision Notes
 
 _(are Tasks required for this spec? rationale)_
+
+## Readiness Checklist
+
+Before advancing to `approved`, verify all items are checked:
+
+- [ ] Problem is clearly stated
+- [ ] Goal is measurable or verifiable
+- [ ] Scope and non-goals are defined
+- [ ] All functional requirements are concrete
+- [ ] Acceptance criteria are testable
+- [ ] Risks are identified
+- [ ] Dependencies are resolved or explicitly accepted
+- [ ] Task decision notes are filled in
+- [ ] No open questions remain

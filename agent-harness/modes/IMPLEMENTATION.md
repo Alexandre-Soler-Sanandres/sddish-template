@@ -28,6 +28,10 @@ Via natural language: explicit instruction referencing an approved plan.
 - Run the planned validation after each step
 - Follow the suggested commit boundaries defined in the plan
 - Summarize results per Task or plan step
+- Before marking a plan step done, verify that every acceptance criterion in the Spec is covered
+  by either: (a) an entry in `test_refs` in the Spec frontmatter pointing to an existing test
+  file, or (b) a validation command in the Task frontmatter that exercises that criterion.
+  A plan step is not done until this is satisfied.
 - Stop if validation fails outside the expected scope
 - Stop if missing or contradictory requirements are discovered
 - Stop if a high-risk area is encountered that was not covered by the plan

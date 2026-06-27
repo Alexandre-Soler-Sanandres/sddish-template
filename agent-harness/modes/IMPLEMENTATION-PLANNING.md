@@ -108,6 +108,11 @@ Load these when relevant — do not load all of them by default:
 - `agent-harness/reference/TOOLING.md` — when specifying validation commands per plan step
 - `agent-harness/reference/DOMAIN.md` — when the plan touches domain-critical areas (payments, security, data integrity)
 
+## Readiness Gate
+
+Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact.
+All items must be checked. A single unchecked item blocks the status change.
+
 ## Boundaries — Must Not
 
 - Change code

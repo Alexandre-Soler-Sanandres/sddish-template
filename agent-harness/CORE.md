@@ -44,3 +44,13 @@ Extra care is required when touching:
 - deployment or infrastructure
 - payment or financial transaction execution
 - domain-critical business logic (define specifics in `agent-harness/reference/DOMAIN.md`)
+
+## Parallel Work
+
+- Each Spec may have at most one Implementation Plan at status `approved` or `in-progress` at a time.
+- Before approving a new Plan, check CATALOG.md for other Plans at `approved` or `in-progress`.
+- If two active Plans have overlapping `allowed_paths` across their Tasks: stop. Surface the
+  conflict — list both Plan IDs and the overlapping paths. Do not proceed until the user
+  explicitly resolves it.
+- Concurrent Plans on non-overlapping Specs are permitted without restriction.
+- CATALOG.md must reflect all Plans at `approved` or `in-progress` status under their initiative.

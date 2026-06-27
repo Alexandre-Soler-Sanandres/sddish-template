@@ -37,3 +37,13 @@ _(any relevant hints, patterns or constraints for implementation)_
 ## Validation
 
 _(describe how to verify this task is complete, beyond the commands in frontmatter)_
+
+## Readiness Checklist
+
+Before advancing to `ready`, verify all items are checked:
+
+- [ ] Source Spec is approved
+- [ ] Goal is specific enough to implement
+- [ ] allowed_paths are defined
+- [ ] Validation commands are specified
+- [ ] No unresolved blocking dependencies

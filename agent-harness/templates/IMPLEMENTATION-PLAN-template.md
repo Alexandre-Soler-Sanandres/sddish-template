@@ -23,10 +23,13 @@ _(what this plan implements)_
 
 ## Readiness Checks
 
+All items must be checked before this plan may advance to `approved`:
+
 - [ ] Source artifact is approved
 - [ ] Required Tasks exist and are ready
 - [ ] No blockers or unresolved dependencies
 - [ ] High-risk areas identified
+- [ ] Each plan step defines expected files, validation, and a suggested commit
 
 ## Included Artifacts
 

@@ -14,10 +14,20 @@
 
 ## Current Active Initiatives
 
-<!-- Add one line per active initiative when work begins. Example format: -->
-<!-- UC-011 Review and reduce news storage growth — status: ready-for-spec -->
-<!-- SPEC-021 News retention policy — status: approved -->
-<!-- PLAN-009 Implement news retention policy — status: in-progress -->
+<!--
+Initiative format:
+
+### INIT-001 — Name of Initiative
+Status: planned | in-progress | done
+Use Cases: UC-001, UC-002
+Active Plans: PLAN-001
+
+Rules:
+- When creating a Use Case, check for active initiatives. If it clearly belongs to one,
+  add it to that initiative's Use Cases list.
+- When a Plan reaches `approved` status, add it to the relevant initiative's Active Plans.
+- Keep this section updated as work progresses — it is the single source of parallel work status.
+-->
 
 none yet
 

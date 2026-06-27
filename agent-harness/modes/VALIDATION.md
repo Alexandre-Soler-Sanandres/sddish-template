@@ -35,6 +35,8 @@ Check that the process rules have been followed:
 Check that the implementation satisfies the acceptance criteria defined in the Spec:
 
 - Each acceptance criterion is met and verifiable
+- `test_refs` in the Spec frontmatter are populated and all referenced test files exist
+- Each acceptance criterion is traceable to an entry in `test_refs` or a Task validation command
 - Non-goals were not implemented
 - Scope did not drift beyond what was planned
 - Technical checks were run during Implementation (see `agent-harness/modes/IMPLEMENTATION.md`)

@@ -61,9 +61,25 @@ Load these when relevant — do not load all of them by default:
 - Use `agent-harness/templates/REVIEW-template.md` for every new Review.
 - The Review artifact feeds into Improvement mode when process problems are found.
 
+## After Review — Required Agent Actions
+
+After completing a review, take the following action based on the outcome. Do not deviate.
+
+| Outcome | Action |
+|---|---|
+| `accepted` | Advance artifact to its next accepted status. Report completion. |
+| `accepted-with-notes` | Advance artifact status. Add findings as open questions in the artifact. |
+| `changes-requested` | Set artifact status to `draft`. Record findings in the Review artifact. Stop and wait for user instruction. |
+| `rejected` | Set artifact status to `rejected`. Move artifact to `archive/`. Stop and wait for user instruction. |
+| `follow-up-required` | Hold artifact at current status. Create an Improvement artifact if a process problem was found. Stop and wait for user instruction. |
+
+The agent never autonomously re-enters a producing mode after `changes-requested`, `rejected`, or `follow-up-required`.
+The user must explicitly request the next action.
+
 ## Boundaries — Must Not
 
 - Change the artifact under review
 - Implement fixes
 - Create Tasks or Specs as a side effect
 - Modify harness files without an Improvement artifact
+- Re-enter any producing mode after a rejection or escalation without explicit user instruction

@@ -140,6 +140,19 @@ Source:
 
 **Technical checks** (tests, linting, typing, migrations) are project-specific. They are defined in `agent-harness/reference/QUALITY.md` and run using commands from `agent-harness/reference/TOOLING.md`.
 
+## Readiness Gates
+
+Every artifact has a gate status. Before the agent advances an artifact past its gate, it must
+verify every item in the artifact's Readiness Checklist. A single unchecked item blocks the
+status change.
+
+| Artifact | Gate status | Checklist location |
+|---|---|---|
+| Use Case | `ready-for-spec` | `## Readiness Checklist` in the artifact |
+| Spec | `approved` | `## Readiness Checklist` in the artifact |
+| Task | `ready` | `## Readiness Checklist` in the artifact |
+| Implementation Plan | `approved` | `## Readiness Checks` in the artifact |
+
 ## Review and Harness Improvement
 
 Every significant artifact or implementation should be reviewable. Reviews answer:
@@ -148,6 +161,13 @@ Every significant artifact or implementation should be reviewable. Reviews answe
 - Did the agent load the right context?
 - Were the rules clear enough?
 - Should the harness improve?
+
+After review, the agent takes a prescribed action and stops — it does not autonomously continue:
+
+- `accepted` / `accepted-with-notes` → advance artifact, optionally add open questions
+- `changes-requested` → set artifact to `draft`, wait for user
+- `rejected` → archive artifact, wait for user
+- `follow-up-required` → hold status, create Improvement if needed, wait for user
 
 If a process problem is found:
 

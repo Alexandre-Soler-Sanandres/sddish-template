@@ -81,6 +81,10 @@ Executes one plan step at a time by default. Sets Task status to `in-progress` �
 **Entry:** `/tw-execute-plan <plan-file>`  
 **Must not:** Deviate from approved scope. Skip validation. Refactor unrelated code.
 
+A plan step is not done until every acceptance criterion in the Spec is covered by either an
+entry in `test_refs` (pointing to an existing test file) or a validation command in the Task
+frontmatter. The agent populates `test_refs` on the Spec during implementation.
+
 ## Validation Mode
 
 Checks artifacts, plans, and implementations against process and behavioral criteria. Does not run technical checks — those belong to Implementation mode, guided by `QUALITY.md` and `TOOLING.md`.
@@ -95,6 +99,18 @@ Evaluates outputs and decisions. Review is not only approval — it is how proce
 **Entry:** `/tw-review <artifact-file>`  
 **Output:** `agent-harness/reviews/active/REVIEW-*.md`  
 **Must not:** Change the artifact under review. Implement fixes. Modify harness files without an Improvement artifact.
+
+After review, the agent takes a prescribed action based on the outcome and stops:
+
+| Outcome | Agent action |
+|---|---|
+| `accepted` | Advance artifact to next accepted status. Report. |
+| `accepted-with-notes` | Advance status. Add findings as open questions in the artifact. |
+| `changes-requested` | Set artifact to `draft`. Record findings. Wait for user instruction. |
+| `rejected` | Set artifact to `rejected`. Move to archive. Wait for user instruction. |
+| `follow-up-required` | Hold status. Create Improvement if process problem found. Wait for user instruction. |
+
+The agent never autonomously re-enters a producing mode after rejection or escalation.
 
 ## Harness Improvement Mode
 

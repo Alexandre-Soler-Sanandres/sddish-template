@@ -81,6 +81,8 @@ Body should include: problem, goal, scope, non-goals, functional requirements, n
 
 The `technical_refs` frontmatter field links to external technical artifacts (OpenAPI specs, schemas, contracts) that live outside `agent-harness/`.
 
+The `test_refs` frontmatter field is populated by the agent during implementation — it lists paths to test files that cover each acceptance criterion. A plan step is not done until `test_refs` is populated or each AC is covered by a Task validation command.
+
 ### Task
 
 Execution unit derived from a Spec. Tasks are not the source of truth for behavior — Specs are.  
@@ -128,6 +130,19 @@ Records evidence extracted from legacy projects.
 
 Must distinguish: observed behavior, documented behavior, inferred intent, accidental complexity, dead or uncertain code.
 
+## Readiness Checklists
+
+Every artifact template contains a Readiness Checklist. Before the agent advances an artifact
+to its gate status, every checklist item must be checked. A single unchecked item blocks the
+status change.
+
+| Artifact | Gate status | Checklist section |
+|---|---|---|
+| Use Case | `ready-for-spec` | `## Readiness Checklist` |
+| Spec | `approved` | `## Readiness Checklist` |
+| Task | `ready` | `## Readiness Checklist` |
+| Implementation Plan | `approved` | `## Readiness Checks` |
+
 ## Artifact Maturity
 
 An artifact is mature enough to proceed when its status is at an accepted level:
@@ -138,3 +153,9 @@ An artifact is mature enough to proceed when its status is at an accepted level:
 | Spec | `approved` |
 | Task | `ready` or `planned` |
 | Implementation Plan | `approved` |
+
+## Initiatives
+
+Initiatives group related Use Cases and Plans under a shared goal. They are not standalone
+artifacts — they live as named sections in `CATALOG.md`. See `agent-harness/OUTPUTS.md` for
+the initiative entry format.
