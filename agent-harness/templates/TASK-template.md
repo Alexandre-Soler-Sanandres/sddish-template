@@ -5,7 +5,7 @@ status: draft            # draft | ready | planned | in-progress | done | blocke
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-area: ""                 # domain area, e.g. news-storage | auth | reporting
+area: ""                 # domain area, e.g. user-management | payments | reporting
 source: []               # e.g. [SPEC-001]
 depends_on: []           # e.g. [TASK-000]
 blocks: []               # e.g. [TASK-002]

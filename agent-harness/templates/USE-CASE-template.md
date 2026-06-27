@@ -5,7 +5,7 @@ status: draft            # draft | review | ready-for-spec | converted | impleme
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-area: ""                 # domain area, e.g. news-storage | auth | reporting
+area: ""                 # domain area, e.g. user-management | payments | reporting
 primary_actor: ""        # e.g. operator | user | system | external-service
 supporting_actors: []
 source: []               # e.g. [IDEA-001]

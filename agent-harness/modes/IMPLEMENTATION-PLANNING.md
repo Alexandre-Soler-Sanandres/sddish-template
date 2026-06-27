@@ -80,7 +80,7 @@ Keep Tasks separate when:
 - Separate commits are needed
 - Review concerns differ
 - Dependencies are unclear
-- The change touches database, deployment, security, broker execution, scoring semantics, or backtesting correctness
+- The change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules
 
 ## Commit Message Convention
 
@@ -106,7 +106,7 @@ Load these when relevant — do not load all of them by default:
 
 - `agent-harness/reference/ARCHITECTURE.md` — when defining expected file areas or architectural boundaries in the plan
 - `agent-harness/reference/TOOLING.md` — when specifying validation commands per plan step
-- `agent-harness/reference/DOMAIN.md` — when the plan touches domain-critical areas (trading, scoring, backtesting)
+- `agent-harness/reference/DOMAIN.md` — when the plan touches domain-critical areas (payments, security, data integrity)
 
 ## Boundaries — Must Not
 

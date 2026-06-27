@@ -8,7 +8,7 @@ updated: ""              # YYYY-MM-DD
 legacy_source: []        # paths in legacy/imported/
 evidence_type: ""        # observed | documented | inferred | uncertain
 confidence: medium       # low | medium | high
-area: ""                 # domain area, e.g. news-storage | auth | reporting
+area: ""                 # domain area, e.g. user-management | payments | reporting
 candidate_artifacts: []  # e.g. [UC-001, SPEC-001]
 risk: low                # low | medium | high
 tags: []

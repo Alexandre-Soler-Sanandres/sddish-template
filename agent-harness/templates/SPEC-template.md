@@ -5,7 +5,7 @@ status: draft            # draft | review | approved | taskified | implemented |
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-area: ""                 # domain area, e.g. news-storage | auth | reporting
+area: ""                 # domain area, e.g. user-management | payments | reporting
 source: []               # e.g. [UC-001]
 related: []              # e.g. [SPEC-002, IDEA-001]
 derived_tasks: []        # e.g. [TASK-001, TASK-002]

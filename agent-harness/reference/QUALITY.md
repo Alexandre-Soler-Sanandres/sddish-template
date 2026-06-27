@@ -32,4 +32,4 @@ _(describe any security requirements for code changes — e.g. no secrets in cod
 
 ## High-Risk Areas
 
-_(list areas that require extra care and additional validation — e.g. database migrations, auth, broker execution)_
+_(list areas that require extra care and additional validation — e.g. database migrations, auth, payment execution)_

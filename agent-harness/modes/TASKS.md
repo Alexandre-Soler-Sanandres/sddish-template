@@ -32,9 +32,8 @@ The Spec must be at status `approved` before Tasks may be created.
 | Destructive data job | Yes | High risk |
 | Deployment or infrastructure change | Yes | Operational risk |
 | Security, secrets or auth | Yes | Safety-critical |
-| Broker or trading execution | Yes | Safety-critical |
-| Scoring semantics | Yes | Domain-critical |
-| Backtesting correctness | Yes | Validation-critical |
+| Payment or financial transaction execution | Yes | Safety-critical |
+| Domain-critical business logic | Yes | Domain-critical |
 | Major architecture change | Yes | Requires reviewable slices |
 
 ## Task Body Should Include
@@ -60,7 +59,7 @@ Load these when relevant — do not load all of them by default:
 
 - `agent-harness/reference/ARCHITECTURE.md` — when defining allowed and forbidden paths or verifying scope against system boundaries
 - `agent-harness/reference/TOOLING.md` — when specifying validation commands in Task frontmatter
-- `agent-harness/reference/DOMAIN.md` — when the Task touches domain-critical areas (trading, scoring, backtesting)
+- `agent-harness/reference/DOMAIN.md` — when the Task touches domain-critical areas (payments, security, data integrity)
 
 ## Boundaries — Must Not
 

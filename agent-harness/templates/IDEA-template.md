@@ -5,7 +5,7 @@ status: captured         # captured | clarifying | ready-for-use-case | converte
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-area: ""                 # domain area, e.g. news-storage | auth | reporting
+area: ""                 # domain area, e.g. user-management | payments | reporting
 source: []               # e.g. [TRANSCRIPT-001]
 tags: []
 maturity: low            # low | medium | high

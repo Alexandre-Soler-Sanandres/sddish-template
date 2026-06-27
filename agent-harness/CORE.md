@@ -5,7 +5,6 @@
 - Use the smallest sufficient context.
 - Do not load unrelated artifact directories.
 - Do not expose secrets.
-- Do not execute real trades or broker actions.
 - Do not run commands that are irreversible or have a wide blast radius (data loss, schema changes, production state changes, force operations) without explicit approval.
 - Do not implement from Partnering mode.
 - Do not implement before an accepted Implementation Plan exists.
@@ -41,8 +40,7 @@ Implementation may only start after:
 Extra care is required when touching:
 
 - database migrations
-- broker or trading execution
 - security, secrets or auth
 - deployment or infrastructure
-- scoring semantics
-- backtesting correctness
+- payment or financial transaction execution
+- domain-critical business logic (define specifics in `agent-harness/reference/DOMAIN.md`)

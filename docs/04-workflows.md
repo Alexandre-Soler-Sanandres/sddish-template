@@ -2,7 +2,7 @@
 
 ## The Standard Flow
 
-```
+```text
 Voice / Text / Ideas
   → Partnering (TRANSCRIPT, IDEA)
   → Use Case Mode (UC-*)
@@ -19,12 +19,14 @@ Voice / Text / Ideas
 Partnering is the front door for unclear thinking.
 
 **Responsibilities:**
+
 - Listen first, capture relevant statements
 - Separate problem, goal, solution idea, and assumption
 - Ask focused clarification questions
 - Identify candidate ideas and possible Use Case drafts
 
 **Output paths:**
+
 - `agent-harness/transcripts/active/TRANSCRIPT-*.md`
 - `agent-harness/ideas/active/IDEA-*.md`
 - `agent-harness/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
@@ -34,6 +36,7 @@ Partnering must not create Specs, Tasks, or Implementation Plans, or infer appro
 ## Use Case Creation
 
 Create a Use Case when:
+
 - A human actor or external system has a goal to pursue
 - A decision flow or business workflow needs to be defined
 - Observable behavior or failure paths need to be captured
@@ -56,7 +59,7 @@ A Use Case may be created from: Idea, Transcript, Partnering discussion, Legacy 
 ## Are Tasks Required?
 
 | Situation | Tasks Required? | Reason |
-|---|---|---|
+| --- | --- | --- |
 | Small documentation-only change | No | Inline plan is sufficient |
 | Small isolated config change | Optional | Use inline plan if validation is clear |
 | Small bugfix in one module | Optional | Use inline plan if scope is clear |
@@ -70,14 +73,14 @@ A Use Case may be created from: Idea, Transcript, Partnering discussion, Legacy 
 | Destructive data job | Yes | High risk |
 | Deployment or Docker change | Yes | Operational risk |
 | Security, secrets or auth | Yes | Safety-critical |
-| Broker/trading execution | Yes | Safety-critical |
-| Scoring semantics | Yes | Domain-critical |
-| Backtesting correctness | Yes | Validation-critical |
+| Payment or financial transaction execution | Yes | Safety-critical |
+| Domain-critical business logic | Yes | Domain-critical |
 | Major architecture change | Yes | Requires reviewable slices |
 
 ### Inline Plan Without Task Artifacts
 
 For small, low-risk, single-area Specs, an Implementation Plan may contain inline steps without separate Task artifacts if:
+
 - The Spec is approved
 - Acceptance criteria are clear
 - Validation is clear
@@ -110,7 +113,7 @@ Keep Tasks separate when: risk is high, validation differs, commits should be se
 
 Each plan step should propose a commit boundary. A commit may correspond to one Task, one safe group of Tasks, or one plan step. Example:
 
-```
+```text
 feat(area): short description
 
 Implements:
@@ -140,13 +143,15 @@ Source:
 ## Review and Harness Improvement
 
 Every significant artifact or implementation should be reviewable. Reviews answer:
+
 - Was the output correct and complete?
 - Did the agent load the right context?
 - Were the rules clear enough?
 - Should the harness improve?
 
 If a process problem is found:
-```
+
+```text
 Review → Improvement artifact → approved harness change → updated harness files
 ```
 
@@ -154,7 +159,7 @@ Improvement artifacts must originate from Review findings — not from Partnerin
 
 ## Legacy Discovery Flow
 
-```
+```text
 legacy/imported/old-project
   → legacy inventory
   → source maps
