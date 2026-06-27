@@ -23,7 +23,7 @@ The harness should be introduced as early as possible, but it can also be added 
 
 This repository is a ready-to-use template. To adopt it:
 
-1. Copy the full `agent-harness/` directory into your project
+1. Copy the full `agent-harness/` directory into your project — this includes all mode files, templates, reference stubs, and the pre-built artifact folder structure (e.g. `specs/active/`, `use-cases/active/`) ready to use immediately
 2. Copy `AGENTS.md` and `CLAUDE.md` to your project root
 3. Fill in the four project-specific reference files:
    - `agent-harness/reference/ARCHITECTURE.md`
@@ -32,6 +32,7 @@ This repository is a ready-to-use template. To adopt it:
    - `agent-harness/reference/QUALITY.md`
 4. Update `CATALOG.md` as work begins
 5. Optionally add stack-specific bootstrap guides under `agent-harness/guides/`
+6. Optionally copy the `docs/` directory if you want the harness documentation co-located with your project — the most current version is always in the original template repository
 
 The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` should be used as-is. They are universal — do not add project-specific content to them.
 
@@ -52,7 +53,9 @@ The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` should be u
 
 ## Adopting for Existing Projects
 
-If you are adopting the harness for an existing codebase:
+This only applies to codebases that are actively being developed and will continue to receive changes. There is no value in adding the harness to a project that is not going to be updated.
+
+If you are adopting the harness for an existing active codebase:
 
 1. Use **Legacy Discovery mode** to extract evidence from the existing code
 2. Produce Legacy Findings → candidate Use Cases
