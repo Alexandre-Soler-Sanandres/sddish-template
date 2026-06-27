@@ -20,7 +20,7 @@ Without structure, agents drift: they implement before requirements are clear, m
 
 No code without a Spec. No Spec without a Use Case. No implementation without an approved plan.
 
-```
+```text
 Voice / Text / Ideas
   → Partnering
   → Use Case
@@ -36,7 +36,7 @@ Every stage produces a Markdown file. Every file is traceable to its source. Eve
 ## Modes
 
 | Mode | Purpose |
-|---|---|
+| --- | --- |
 | Partnering | Structured conversation to capture ideas and problems |
 | Use Cases | Define behavioral anchors from actor goals |
 | Specs | Define desired behavior from Use Cases |
@@ -50,7 +50,7 @@ Every stage produces a Markdown file. Every file is traceable to its source. Eve
 
 ## Repository Structure
 
-```
+``` text
 agent-harness/
   CORE.md              ← universal rules (always loaded)
   OUTPUTS.md           ← artifact formats and folder structure (always loaded)
@@ -76,22 +76,22 @@ agent-harness/
 
 ## Getting Started
 
-1. Copy the full `agent-harness/` directory into your project
-2. Copy `AGENTS.md` and `CLAUDE.md` to your project root
-3. Fill in the four project-specific reference files in `agent-harness/reference/`
-4. Start with a Use Case or Partnering session
+This repository is a GitHub template. Click **Use this template** to create a new repository with the full harness structure and a clean git history. Alternatively, clone it locally and reinitialize git:
 
-Template complete means the universal harness files are present and usable.
-Adoption complete means the project-specific reference files in `agent-harness/reference/` have been filled in for this repo.
+```bash
+git clone <template-url> your-project
+cd your-project
+rm -rf .git && git init
+```
 
-The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` are universal — use them as-is and do not add project-specific content.
+Then fill in the four project-specific reference files in `agent-harness/reference/` and start with a Partnering or Use Case session.
 
-See [docs/06-adoption.md](docs/06-adoption.md) for detailed adoption instructions.
+See [docs/06-adoption.md](docs/06-adoption.md) for full adoption instructions.
 
 ## Documentation
 
 | Document | Contents |
-|---|---|
+| --- | --- |
 | [docs/01-core-principles.md](docs/01-core-principles.md) | Why this exists, the core principle, design philosophy |
 | [docs/02-modes.md](docs/02-modes.md) | All 10 modes explained with boundaries and outputs |
 | [docs/03-artifacts.md](docs/03-artifacts.md) | Artifact types, frontmatter, statuses, templates |
