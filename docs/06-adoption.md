@@ -1,24 +1,5 @@
 # Adoption
 
-## Minimal Bootstrap Steps
-
-A new project can adopt the harness through these stack-neutral steps:
-
-1. Create or import the repository using the normal tooling for the chosen stack
-2. Add root loader files: `AGENTS.md` and `CLAUDE.md`
-3. Add the `agent-harness/` directory
-4. Add `agent-harness/CORE.md`, `agent-harness/CATALOG.md`, and `agent-harness/OUTPUTS.md`
-5. Add all mode files under `agent-harness/modes/`
-6. Add all artifact templates under `agent-harness/templates/`
-7. Add reference files under `agent-harness/reference/`
-8. Document stack-specific commands in `agent-harness/reference/TOOLING.md` and quality standards in `agent-harness/reference/QUALITY.md`
-9. Document architecture boundaries in `ARCHITECTURE.md` — including a "Technical Artifacts" section declaring where project-specific technical specs live (OpenAPI, schemas, contracts)
-10. Document domain rules in `DOMAIN.md`
-11. Create the first Use Case, Spec, or Legacy Discovery artifact
-12. Create or approve an Implementation Plan before coding starts
-
-The harness should be introduced as early as possible, but it can also be added to an existing repository.
-
 ## Using This Template
 
 This repository is marked as a GitHub template. There are two ways to create a new project from it.
