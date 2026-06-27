@@ -64,34 +64,6 @@ If you are adopting the harness for an existing active codebase:
 
 The legacy codebase is evidence, not authority. Do not treat existing code as automatically correct.
 
-## Minimal Adoption Path
-
-The harness can be introduced gradually across six phases:
-
-**Phase 1: Minimal Agent-Ready Repo**
-
-- `AGENTS.md`, `CLAUDE.md`
-- `agent-harness/CORE.md`
-- `agent-harness/modes/IMPLEMENTATION.md`
-- `agent-harness/modes/VALIDATION.md`
-
-**Phase 2: SDD-ish Artifacts**
-Add: `use-cases/`, `specs/`, `implementation-plans/`
-
-**Phase 3: Tasks When Needed**
-Add: `tasks/`, `TASK-template.md`, task decision rules
-
-**Phase 4: Partnering and Ideas**
-Add: `PARTNERING.md`, `ideas/`, `transcripts/`
-
-**Phase 5: Review and Improvement**
-Add: `reviews/`, `improvements/`, `REVIEW.md`, `IMPROVEMENT.md`
-
-**Phase 6: Legacy Discovery**
-Add: `LEGACY-DISCOVERY.md`, `legacy/`, `source-map/`, legacy findings
-
-You do not need to use all modes immediately. Even Phase 1 alone prevents the most common failure mode: implementing before requirements are clear.
-
 ## Stack-Specific Guides
 
 Concrete setup instructions for specific tech stacks belong in optional guides:
