@@ -122,7 +122,7 @@ Changes the harness itself. Only triggered by Review findings — not from Partn
 
 ## Legacy Discovery Mode
 
-Analyzes an existing project as evidence for a new Spec Driven Development process. The legacy project is evidence, not authority.
+Analyzes an existing project as evidence for a new SDD-ish development process. The legacy project is evidence, not authority.
 
 **Entry:** `/tw-discover-legacy <path>`  
 **Must not:** Modify legacy source code. Implement new code. Create Specs without a Use Case unless evidence is unambiguous and strong.

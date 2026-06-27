@@ -70,7 +70,7 @@ Body should include: primary actor, supporting actors, goal, trigger, preconditi
 
 ### Spec
 
-The central artifact of Spec Driven Development. Defines desired behavior and acceptance criteria.  
+The central artifact of the SDD-ish process. Defines desired behavior and acceptance criteria.  
 Must always be created from a Use Case at `ready-for-spec` or `approved` status.
 
 **Statuses:** `draft` → `review` → `approved` → `taskified` → `implemented` → `archived` → `rejected`  

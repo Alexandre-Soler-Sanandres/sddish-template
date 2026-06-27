@@ -9,6 +9,8 @@
 .vscode/
 .idea/
 
+.continue/
+
 # OS
 .DS_Store
 Thumbs.db

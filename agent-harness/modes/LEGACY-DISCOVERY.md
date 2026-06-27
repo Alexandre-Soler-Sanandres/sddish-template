@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Legacy Discovery analyzes an existing project as evidence for a new Spec Driven Development process.
+Legacy Discovery analyzes an existing project as evidence for a new SDD-ish development process.
 The legacy project is evidence, not authority.
 
 ## Entry

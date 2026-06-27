@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Spec Driven Agent Harness provides a structured, file-based process for working with AI agents on software development tasks.
+The SDD-ish Agent Harness provides a structured, file-based process for working with AI agents on software development tasks.
 
 It gives agents a clear operating context — defining what they are allowed to do, what artifacts they produce, and how they hand off to the next stage. Without structure, agents drift: they implement before requirements are clear, mix concerns across artifacts, and lose traceability between decisions and code.
 
@@ -20,7 +20,7 @@ Working with AI agents on software is powerful but fragile. The main failure mod
 
 The harness addresses all of these through explicit modes, bounded artifacts, and structured handoffs.
 
-## Core Principle: Spec Driven Development
+## Core Principle: SDD-ish Development
 
 The central principle is: **no code without a Spec, no Spec without a Use Case, no implementation without an approved plan.**
 

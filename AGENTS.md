@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repository uses a Spec Driven Agent Harness under `agent-harness/`.
+This repository uses an SDD-ish Agent Harness under `agent-harness/`.
 
 ## Always Follow
 

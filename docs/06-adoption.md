@@ -71,7 +71,7 @@ The harness can be introduced gradually across six phases:
 - `agent-harness/modes/IMPLEMENTATION.md`
 - `agent-harness/modes/VALIDATION.md`
 
-**Phase 2: Spec Driven Artifacts**
+**Phase 2: SDD-ish Artifacts**
 Add: `use-cases/`, `specs/`, `implementation-plans/`
 
 **Phase 3: Tasks When Needed**

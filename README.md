@@ -1,10 +1,18 @@
-# Spec Driven Agent Harness
+# SDD-ish Agent Harness
 
 A file-based process harness for working with AI agents on software development tasks.
+The project is intentionally SDD-ish rather than rigidly spec-driven.
+
+## License
+
+Unless otherwise noted, the content in this repository is licensed under
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
+
+Copyright (c) 2026 Alexandre Soler Sanandres.
 
 ## What It Is
 
-The Spec Driven Agent Harness gives AI agents a clear operating context — defining what they are allowed to do, what artifacts they produce, and how they hand off to the next stage.
+The SDD-ish Agent Harness gives AI agents a clear operating context, defining what they are allowed to do, what artifacts they produce, and how they hand off to the next stage.
 
 Without structure, agents drift: they implement before requirements are clear, mix concerns across artifacts, and lose traceability between decisions and code. The harness prevents this through explicit modes, bounded artifacts, and structured handoffs.
 
