@@ -21,20 +21,39 @@ The harness should be introduced as early as possible, but it can also be added 
 
 ## Using This Template
 
-This repository is a ready-to-use template. To adopt it:
+This repository is marked as a GitHub template. There are two ways to create a new project from it.
 
-1. Copy the full `agent-harness/` directory into your project — this includes all mode files, templates, reference stubs, and the pre-built artifact folder structure (e.g. `specs/active/`, `use-cases/active/`) ready to use immediately
-2. Copy `AGENTS.md` and `CLAUDE.md` to your project root
+### Option A: GitHub (recommended)
+
+1. Click **Use this template** on the repository page and create a new repository
+2. Clone your new repository locally
 3. Fill in the four project-specific reference files:
    - `agent-harness/reference/ARCHITECTURE.md`
    - `agent-harness/reference/DOMAIN.md`
    - `agent-harness/reference/TOOLING.md`
    - `agent-harness/reference/QUALITY.md`
-4. Update `CATALOG.md` as work begins
-5. Optionally add stack-specific bootstrap guides under `agent-harness/guides/`
-6. Optionally copy the `docs/` directory if you want the harness documentation co-located with your project — the most current version is always in the original template repository
+4. Start with a Partnering or Use Case session
 
-The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` should be used as-is. They are universal — do not add project-specific content to them.
+You get the full structure — mode files, templates, artifact folders, and Claude Code commands — with a clean git history.
+
+### Option B: Local clone
+
+If you do not use GitHub or prefer to work locally:
+
+```bash
+git clone <template-url> your-project
+cd your-project
+rm -rf .git && git init
+```
+
+Then fill in the four project-specific reference files as above.
+
+### After setup (both options)
+
+- `CATALOG.md` starts empty — update it as artifacts are created
+- Optionally add stack-specific bootstrap guides under `agent-harness/guides/`
+- Optionally keep the `docs/` directory for local reference — the most current version is always in the original template repository
+- The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` are universal — do not add project-specific content to them
 
 ## What Belongs Where
 
