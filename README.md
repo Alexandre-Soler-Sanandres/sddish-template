@@ -81,6 +81,9 @@ agent-harness/
 3. Fill in the four project-specific reference files in `agent-harness/reference/`
 4. Start with a Use Case or Partnering session
 
+Template complete means the universal harness files are present and usable.
+Adoption complete means the project-specific reference files in `agent-harness/reference/` have been filled in for this repo.
+
 The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` are universal — use them as-is and do not add project-specific content.
 
 See [docs/06-adoption.md](docs/06-adoption.md) for detailed adoption instructions.

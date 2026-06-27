@@ -1,7 +1,7 @@
 ---
 id: REVIEW-001
 type: review
-status: draft            # draft | completed
+status: draft            # draft | completed; decision semantics live in outcome
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
@@ -33,6 +33,10 @@ _(list findings — positive or negative)_
 ## Outcome
 
 _(accepted | accepted-with-notes | changes-requested | rejected | follow-up-required)_
+
+## Lifecycle Note
+
+Review artifacts stay on a simple `draft` -> `completed` path because the actual review decision is recorded separately in `outcome`.
 
 ## Follow-Up
 
