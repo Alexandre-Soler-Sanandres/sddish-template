@@ -48,14 +48,65 @@ Load these when relevant — do not load all of them by default:
 
 ## Outputs May Include
 
-- `agent-harness/legacy/INVENTORY.md`
-- `agent-harness/legacy/source-map/*.md`
-- `agent-harness/legacy/FINDINGS.md`
-- `agent-harness/legacy/QUESTIONS.md`
+- `agent-harness/legacy/apps/<legacy-app-slug>/INVENTORY.md`
+- `agent-harness/legacy/apps/<legacy-app-slug>/SOURCE-MAP.md`
+- `agent-harness/legacy/apps/<legacy-app-slug>/FINDINGS.md`
+- `agent-harness/legacy/apps/<legacy-app-slug>/QUESTIONS.md`
+- `agent-harness/legacy/cross-system/SUMMARY.md`
+- `agent-harness/legacy/cross-system/CONTRACTS.md`
+- `agent-harness/legacy/cross-system/FINDINGS.md`
+- `agent-harness/legacy/cross-system/QUESTIONS.md`
+- `agent-harness/legacy/cross-system/PARITY-MATRIX.md`
+- `agent-harness/legacy/cross-system/REWRITE-READINESS.md`
 - `agent-harness/legacy/active/LEGACY-FINDING-*.md`
 - `agent-harness/use-cases/active/UC-*.md` (candidate, draft)
 - `agent-harness/specs/active/SPEC-*.md` (candidate, only when evidence is strong)
 - Harness Improvement candidates
+
+## Legacy Artifact Structure
+
+Use app-scoped legacy folders for app-specific discovery. A legacy app is any imported source root that can be
+discovered independently, such as an engine, dashboard, inference service, worker, library, or old monolith.
+
+```text
+agent-harness/legacy/apps/<legacy-app-slug>/
+  INVENTORY.md
+  SOURCE-MAP.md
+  FINDINGS.md
+  QUESTIONS.md
+```
+
+Each app-scoped `SOURCE-MAP.md` is the restart point for that app. It must include:
+
+- source root
+- primary evidence files
+- code areas
+- candidate discovery slices
+- working discovery plan
+- current slice status
+- completed slice notes
+- open source-map notes
+- reference enrichment routing
+
+Use cross-system artifacts only after app-scoped evidence exists and a finding, question, or readiness judgment
+requires more than one app:
+
+```text
+agent-harness/legacy/cross-system/
+  SUMMARY.md
+  CONTRACTS.md
+  FINDINGS.md
+  QUESTIONS.md
+  PARITY-MATRIX.md
+  REWRITE-READINESS.md
+```
+
+Do not put app-local evidence directly into cross-system artifacts. Cross-system artifacts should cite the
+app-scoped artifact and source evidence they synthesize.
+
+Older flat files directly under `agent-harness/legacy/` may exist in repositories that started discovery before
+this structure was introduced. Treat them as legacy layout debt. Continue new discovery in the scoped structure
+unless an explicit Improvement or cleanup task migrates the old files.
 
 ## Boundaries — Must Not
 
@@ -64,3 +115,4 @@ Load these when relevant — do not load all of them by default:
 - Treat legacy code as automatically correct
 - Create Specs directly without a Use Case unless evidence is unambiguous and strong
 - Mark inferred intent as observed behavior
+- Commit findings only when the user explicitly requests it. See `CORE.md` Commits section.

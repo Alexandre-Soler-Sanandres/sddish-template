@@ -11,6 +11,8 @@
 - Reviews: `agent-harness/reviews/`
 - Improvements: `agent-harness/improvements/`
 - Legacy: `agent-harness/legacy/`
+  - Legacy app discovery: `agent-harness/legacy/apps/<legacy-app-slug>/`
+  - Cross-system legacy synthesis: `agent-harness/legacy/cross-system/`
 
 ## Loading Rule
 

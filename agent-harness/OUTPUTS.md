@@ -56,3 +56,13 @@ Each artifact directory uses subfolders to reflect lifecycle state.
 
 New artifacts are created in `active/`.
 Move artifacts between subfolders as their status changes — do not rename the file ID.
+
+## Legacy Discovery Structure
+
+Legacy Discovery uses scoped folders:
+
+- App-specific discovery: `agent-harness/legacy/apps/<legacy-app-slug>/`
+- Cross-system synthesis: `agent-harness/legacy/cross-system/`
+
+Detailed Legacy Discovery layout and rules are defined in
+`agent-harness/modes/LEGACY-DISCOVERY.md`.
