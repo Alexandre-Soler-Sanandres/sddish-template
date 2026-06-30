@@ -27,6 +27,15 @@ Via natural language: explicit instruction to improve a harness file, template, 
 Review -> Improvement artifact -> approved harness change -> validation -> updated files
 ```
 
+Before an Improvement artifact is set to `done` or moved to `done/`, record validation in the artifact itself:
+
+- Keep `## Validation` as the validation plan or checklist.
+- Add `## Validation Result` with the date, checks performed, and outcome.
+- If a validation item is prospective and cannot be fully proven yet, state that explicitly instead of treating it
+  as completed evidence.
+- Do not move an Improvement artifact to `done/` until the approved target changes are applied and the validation
+  result is documented.
+
 ## Reference Files
 
 Load these when relevant — do not load all of them by default:

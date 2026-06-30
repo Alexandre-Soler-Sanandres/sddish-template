@@ -56,6 +56,8 @@ Each artifact directory uses subfolders to reflect lifecycle state.
 
 New artifacts are created in `active/`.
 Move artifacts between subfolders as their status changes — do not rename the file ID.
+For Improvements, `done/` means the approved target changes are applied and the artifact records a
+`## Validation Result` confirming what was checked.
 
 ## Legacy Discovery Structure
 
