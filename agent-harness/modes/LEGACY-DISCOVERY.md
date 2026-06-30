@@ -108,6 +108,12 @@ agent-harness/legacy/cross-system/
 Do not put app-local evidence directly into cross-system artifacts. Cross-system artifacts should cite the
 app-scoped artifact and source evidence they synthesize.
 
+Start cross-system synthesis by creating `agent-harness/legacy/cross-system/SUMMARY.md` from
+`agent-harness/templates/CROSS-SYSTEM-SUMMARY-template.md`. The summary is the cross-system restart point and working
+plan: it defines the active synthesis scope, entry criteria, slice order, artifact routing, and next action. Create
+`CONTRACTS.md`, `FINDINGS.md`, `QUESTIONS.md`, `PARITY-MATRIX.md`, and `REWRITE-READINESS.md` only when a slice
+produces evidence that needs those artifacts; do not create empty placeholders speculatively.
+
 Older flat files directly under `agent-harness/legacy/` may exist in repositories that started discovery before
 this structure was introduced. Treat them as legacy layout debt. Continue new discovery in the scoped structure
 unless an explicit Improvement or cleanup task migrates the old files.

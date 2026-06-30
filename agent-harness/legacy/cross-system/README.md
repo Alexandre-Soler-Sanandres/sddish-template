@@ -14,6 +14,17 @@ Cross-system synthesis may only start when:
 
 Do not start cross-system synthesis while any in-scope app is still at `app-discovery-active`.
 
+## Planning and Template
+
+Start cross-system synthesis with `SUMMARY.md`.
+
+Use `agent-harness/templates/CROSS-SYSTEM-SUMMARY-template.md` when creating it. The summary is the cross-system
+restart point and working plan: it defines the active synthesis scope, confirms entry criteria, records slice order,
+routes outputs to the other cross-system artifacts, and names the next action.
+
+Create the other cross-system artifacts only when a slice produces evidence that needs them. Do not create empty
+placeholder files speculatively.
+
 ## Citation Requirements
 
 Every cross-system artifact must cite the app-scoped source maps and source evidence it synthesizes. Do not
