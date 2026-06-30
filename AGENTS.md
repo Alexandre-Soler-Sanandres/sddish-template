@@ -39,6 +39,12 @@ This repository uses an SDD-ish Agent Harness under `agent-harness/`.
 - Use `agent-harness/CATALOG.md` to locate artifacts.
 - Use `SUMMARY.md` files only when the target artifact is unknown.
 
+## Context Checkpoint
+
+At the start of harness work, load `AGENTS.md`, `CORE.md`, `OUTPUTS.md`, the active mode file, and the explicitly
+referenced artifact. After a resume or context compaction, repeat the checkpoint before the next high-impact action.
+See `agent-harness/CORE.md` for the full checkpoint and high-impact action list.
+
 ## Implementation Gate
 
 Do not implement before an accepted Implementation Plan exists.

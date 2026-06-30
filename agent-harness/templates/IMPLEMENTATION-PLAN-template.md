@@ -41,20 +41,20 @@ All items must be checked before this plan may advance to `approved`:
 
 ## Plan Steps
 
-### Step 1 — _(title)_
+### Step 1 — (title)
 
-- Tasks: _(TASK-XXX, TASK-YYY — or "inline" if no Task artifacts exist)_
-- Expected files: _(list paths)_
-- Validation: _(commands or checks)_
+- Tasks: (TASK-XXX, TASK-YYY — or "inline" if no Task artifacts exist)
+- Expected files: (list paths)
+- Validation: (commands or checks)
 - Risk: low / medium / high
-- Suggested commit: `_(message)_`
+- Suggested commit: (message)
 
-### Step 2 — _(title)_
+### Step 2 — (title)
 
 (repeat as needed — every step must define expected files, validation, and a suggested commit regardless of whether Task artifacts exist)
 
 ## Approval
 
 - Status: proposed
-- Approved by: _(name)_
-- Approved at: _(date)_
+- Approved by: (name)
+- Approved at: (date)

@@ -30,6 +30,7 @@ Via natural language: explicit instruction to review a specific artifact, plan, 
 - Was context too large or too small?
 - Were the rules clear enough?
 - Did validation catch the right risks?
+- Did the agent follow the context checkpoint before high-impact actions?
 - Should the harness improve?
 
 ## Possible Outcomes

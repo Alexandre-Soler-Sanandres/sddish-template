@@ -15,7 +15,7 @@ follow_up: []            # e.g. [IMPROVEMENT-001]
 
 ## Target
 
-_(what is being reviewed)_
+(what is being reviewed)
 
 ## Criteria Checklist
 
@@ -23,16 +23,17 @@ _(what is being reviewed)_
 - [ ] Output is complete
 - [ ] Scope was appropriate (not too broad)
 - [ ] Agent loaded the right context
+- [ ] Agent followed context checkpoint before high-impact actions
 - [ ] Validation covered the right risks
 - [ ] Artifacts are traceable
 
 ## Findings
 
-_(list findings — positive or negative)_
+(list findings — positive or negative)
 
 ## Outcome
 
-_(accepted | accepted-with-notes | changes-requested | rejected | follow-up-required)_
+(accepted | accepted-with-notes | changes-requested | rejected | follow-up-required)
 
 ## Lifecycle Note
 
@@ -40,4 +41,4 @@ Review artifacts stay on a simple `draft` -> `completed` path because the actual
 
 ## Follow-Up
 
-_(list any follow-up artifacts, tasks or improvements required)_
+(list any follow-up artifacts, tasks or improvements required)

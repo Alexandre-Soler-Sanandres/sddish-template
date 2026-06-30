@@ -35,6 +35,32 @@ Implementation may only start after:
 - required artifacts are at an accepted status — not draft or under review (e.g. Spec must be approved, Use Case must be ready-for-spec, Task must be ready)
 - safety and risk rules are satisfied
 
+## Context Checkpoint
+
+Before any high-impact action, verify:
+
+- What mode is active?
+- Which artifact is the restart point?
+- Does the latest user message explicitly authorize this action?
+- Which files are in scope?
+- What validation is required before stopping or committing?
+
+High-impact actions that require this verification:
+
+- Committing
+- Changing harness mode files, templates, or reference process rules
+- Creating Review or Improvement artifacts
+- Changing source-map workflow or status rules
+- Moving artifacts between lifecycle folders
+- Starting cross-system synthesis
+
+After a resume or context compaction, repeat the checkpoint before the next high-impact action.
+
+## Commits
+
+- Never commit unless the user explicitly requests it.
+- When committing, follow the project's commit conventions in `agent-harness/reference/QUALITY.md`.
+
 ## High-Risk Areas
 
 Extra care is required when touching:

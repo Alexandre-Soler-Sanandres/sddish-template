@@ -24,10 +24,15 @@ tags: []
 
 ## Classification
 
-- **Observed behavior**: _(what the code actually does)_
-- **Documented behavior**: _(what the docs say it does)_
-- **Inferred intent**: _(what it was probably meant to do)_
-- **Accidental complexity**: _(anything that looks unintentional or unclear)_
+- **Observed behavior**: (what the code actually does)
+- **Documented behavior**: (what the docs say it does)
+- **Inferred intent**: (what it was probably meant to do)
+- **Accidental complexity**: (anything that looks unintentional or unclear)
+
+## Evidence Conflict
+
+(if sources disagree, record the conflict here: which sources conflict, and which was treated as authoritative and
+why — e.g. "current code contradicts stale README; current code is authoritative")
 
 ## Candidate Artifacts
 
