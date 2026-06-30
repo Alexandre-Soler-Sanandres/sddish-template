@@ -187,6 +187,35 @@ An app source map must not contain:
 Do not start cross-system synthesis until every app in the active synthesis scope has reached `app-local-complete`
 discovery state. See lifecycle state definitions in the Discovery Lifecycle section below.
 
+## Post-Discovery Artifact Normalization
+
+After app-local discovery and cross-system synthesis are complete, run an artifact normalization pass before moving
+legacy evidence into Use Cases, Specs, Tasks, or Implementation Planning.
+
+Normalization is not new discovery. It is a documentation-quality pass over already captured evidence.
+
+Run normalization in this order:
+
+1. One app-scoped folder at a time: `INVENTORY.md`, `SOURCE-MAP.md`, `FINDINGS.md`, and `QUESTIONS.md`.
+2. Cross-system artifacts after the app-scoped passes: `SUMMARY.md`, `CONTRACTS.md`, `FINDINGS.md`, `QUESTIONS.md`,
+   `PARITY-MATRIX.md`, and `REWRITE-READINESS.md`.
+
+For each artifact:
+
+- Fix Markdown formatting, heading hierarchy, table consistency, stale restart pointers, and obvious ordering issues.
+- Merge duplicate or near-duplicate sections inside the same file when they carry the same claim.
+- Preserve information density, evidence paths, artifact IDs, question IDs, finding IDs, proof IDs, and lifecycle
+  metadata.
+- Preserve distinctions between observed behavior, documented behavior, inferred intent, uncertainty, accidental
+  complexity, target-product decisions, and proof needs.
+- Do not remove evidence just because it is verbose when it is still needed for traceability.
+- Do not add new findings from legacy source during normalization. If a gap requires source inspection, record a
+  follow-up question or proof item instead of expanding the normalization pass.
+- Validate with `git diff --check`; use additional Markdown checks when the repository defines them.
+- Commit only when the user explicitly asks.
+
+After normalization, update the relevant restart pointer to the next non-discovery phase, usually Use Cases or Specs.
+
 ## Discovery Lifecycle
 
 Each app source map carries a `discovery_state` field. This is distinct from the artifact lifecycle `status` field.

@@ -66,6 +66,7 @@ until it is compared with the producing app.
 | 6 | Domain ownership and workflow boundary synthesis | pending | `FINDINGS.md`, `QUESTIONS.md`, candidate Use Cases/Specs as needed | Confirm which app owns canonical outcomes versus presentation, orchestration, or adapter behavior. |
 | 7 | Rewrite proof and parity matrix | pending | `PARITY-MATRIX.md` | Turn known drift into executable proof candidates and parity rows. |
 | 8 | Cross-system rewrite-readiness assessment | pending | `REWRITE-READINESS.md` | Decide what is rewrite-ready, what remains a target-product decision, and what must feed Use Cases, Specs, or Implementation Planning. |
+| 9 | Post-discovery artifact normalization | pending | App and cross-system legacy artifacts | Format, deduplicate, and merge within each artifact without losing information density, evidence paths, IDs, or correctness. |
 
 Adjust slice names and count to the active synthesis scope. Keep every slice focused enough to complete with a small
 evidence set.
@@ -110,3 +111,7 @@ Start from:
 - `agent-harness/legacy/apps/<app-slug>/SOURCE-MAP.md`
 
 Read only the source-map sections and evidence paths needed for the next slice.
+
+After cross-system discovery is complete, run post-discovery artifact normalization before moving into Use Cases,
+Specs, Tasks, or Implementation Planning. Normalize app-scoped artifacts first, then cross-system artifacts, and do
+not change evidence meaning or remove traceability.

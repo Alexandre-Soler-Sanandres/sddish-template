@@ -85,6 +85,10 @@ Nested Git metadata check: `find legacy/imported/<app-slug> -path '*/.git' -type
 
 Next action: (slice or block name and status)
 
+When all app-local slices are complete and cross-system synthesis is done, the next legacy action is artifact
+normalization: format, deduplicate, and merge within this app's legacy artifacts without changing evidence meaning
+or losing traceability. See `agent-harness/modes/LEGACY-DISCOVERY.md`.
+
 ## Reference Enrichment Routing
 
 When evidence is stable, route findings to the appropriate reference doc before closing the slice.
