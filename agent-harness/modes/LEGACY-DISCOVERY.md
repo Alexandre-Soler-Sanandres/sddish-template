@@ -133,7 +133,9 @@ Each discovery slice follows the same roundtrip:
 5. Update the source map with completed slice notes and useful evidence paths.
 6. Add unresolved decisions to the app `QUESTIONS.md`.
 7. Enrich project reference docs when evidence is stable: `ARCHITECTURE.md`, `DOMAIN.md`, `TOOLING.md`,
-   and `QUALITY.md`.
+   and `QUALITY.md`. For blockwise discovery, enrich after each block before committing the block.
+   Deferring enrichment across blocks is acceptable when noted in the source map Open App Notes, but
+   enrichment must be complete before `app-local-complete` is declared.
 8. Validate docs with `git diff --check`.
 9. Commit only when the user explicitly asks for a commit.
 
@@ -149,6 +151,10 @@ rewrite boundary together. Blocks are a planning convenience, not a replacement 
   decisions. Do not hide unresolved decisions inside the block note.
 - After a block completes, set the next unfinished slice or next coherent block as `next`.
 - Block rules belong in this mode file and the source-map template, not in each app source map.
+
+Reference enrichment (step 7 of the slice roundtrip) applies per block. Complete enrichment for each block
+before committing it. If enrichment is deferred across multiple blocks, record this explicitly in the source
+map Open App Notes and ensure enrichment completes before `app-local-complete` is declared.
 
 ## Source Map Content Boundaries
 
@@ -192,7 +198,10 @@ Cross-system synthesis may start only when every app in the active synthesis sco
 An app source map may move to `app-local-complete` when all of the following hold:
 
 - All planned slices have status `done`, `not-needed`, or an explicitly deferred status.
-- Open questions are classified as `app-local`, `cross-system`, or `target-product` decisions.
+- Open questions are classified as `app-local`, `cross-system`, or `target-product` decisions. This
+  classification must be recorded in the source map's "Deferred and Cross-System Questions" table before
+  `app-local-complete` is declared. QUESTIONS.md may organize questions by topic area; the source map
+  table is the classification record that makes this criterion verifiable.
 - Stable findings have been propagated to reference docs where appropriate.
 - No remaining slice is needed to support rewrite planning from app-local evidence alone.
 
@@ -236,8 +245,7 @@ after confirming the log does not contain secrets.
 
 ### No mutation during discovery
 
-Do not remove or rewrite imported artifacts during normal discovery. Cleanup requires an explicit hygiene
-task approved by the user.
+Do not remove or rewrite imported artifacts during normal discovery.
 
 ### Nested Git metadata
 
@@ -251,8 +259,17 @@ Expected result: no output. Surface any hit to the user before proceeding.
 
 ### Source maps
 
-May include a path-only import-noise inventory and open cleanup questions. Record these in the Import
-Hygiene section of the source map.
+Must include an Import Hygiene section (see SOURCE-MAP template) whenever the snapshot contains
+secret-like files, local runtime artifacts, or nested repository metadata. The section must list
+found paths and their type.
+
+For each category of import noise that requires a user decision (secret-like files, nested `.git`
+hits, unusual local artifacts), write:
+
+- A FINDINGS entry documenting what was found and what risk it represents.
+- A QUESTIONS entry asking what action to take (remove, quarantine, leave as-is).
+
+The user's response to the open QUESTIONS authorizes any cleanup action.
 
 ## Evidence Precedence
 

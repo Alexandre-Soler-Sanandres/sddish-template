@@ -56,6 +56,8 @@ apply to every app source map.
 
 ## Current Status
 
+Valid status values: `done` | `next` | `pending` | `not-needed`. Do not use custom values.
+
 | Order | Slice | Status | Notes |
 | --- | --- | --- | --- |
 
@@ -66,8 +68,9 @@ decisions)
 
 ## Import Hygiene
 
-(record path-only inventory of import noise when relevant: `.env`, `.venv`, caches, logs, nested `.git`,
-secret-like files; do not open secret-like content during normal discovery)
+Complete this section when the imported snapshot contains secret-like files, local artifacts, or nested
+repository metadata. Leave blank with a "none found" note only when the snapshot is clean. Do not skip.
+Write FINDINGS + QUESTIONS entries for any category that requires a user decision.
 
 | Path pattern | Type | Notes |
 | --- | --- | --- |
