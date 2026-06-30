@@ -2,71 +2,42 @@
 
 ## Purpose
 
-Legacy Discovery analyzes an existing project as evidence for a new SDD-ish development process.
-The legacy project is evidence, not authority.
+Legacy Discovery extracts rewrite-quality evidence from existing systems. Legacy code is evidence, not authority.
 
 ## Entry
 
-Via CLI: `/tw-discover-legacy <path>`
-Via natural language: explicit instruction to analyze a legacy codebase or imported project directory.
+- CLI: `/tw-discover-legacy <path>`
+- Natural language: explicit instruction to analyze a legacy codebase or imported project directory.
 
-## Inputs May Include
+## Core Rules
 
-- Old source code
-- Old documentation
-- Tests, Docker files, CI configuration
-- Deployment scripts, README files, issue notes
+- Do not modify legacy source code or implement new code.
+- Do not treat legacy behavior as automatically correct target behavior.
+- Inspect current code first, then docs, then tests.
+- Record evidence paths for every finding.
+- Distinguish observed behavior, documented behavior, inferred intent, uncertainty, accidental complexity, dead code,
+  stale notes, target-product decisions, and proof needs.
+- Mark inferred intent clearly; never present it as observed behavior.
+- Extract candidate Use Cases and candidate Specs only when evidence is strong enough.
+- Do not create Specs directly without a Use Case unless the evidence is unambiguous and strong.
+- Preserve app-local evidence inside app-scoped artifacts until cross-system synthesis is in scope.
+- Validate docs with `git diff --check`; use additional Markdown checks when the repository defines them.
+- Commit only when the user explicitly asks.
 
-## Agent Must
+## Context
 
-- Not modify legacy source code
-- Not implement new code
-- Not treat legacy code as automatically correct
-- Identify observed behavior
-- Identify documented behavior
-- Mark inferred intent clearly
-- Mark uncertainty explicitly
-- Identify accidental complexity
-- Extract candidate Use Cases
-- Extract candidate Specs only when evidence is strong enough
-- Record evidence paths
+Load reference files only when directly relevant:
 
-## Agent Must Distinguish
+| File | Load when |
+| --- | --- |
+| `agent-harness/reference/DOMAIN.md` | Extracting domain concepts, rules, actors, workflows, or terminology. |
+| `agent-harness/reference/ARCHITECTURE.md` | Mapping legacy structure, boundaries, ownership, or runtime topology. |
+| `agent-harness/reference/TOOLING.md` | Recording commands, local services, validation checks, CI, or tooling. |
+| `agent-harness/reference/QUALITY.md` | Recording quality gates, proof standards, coverage, or hygiene rules. |
 
-- Observed behavior (code does X)
-- Documented behavior (docs say X)
-- Inferred intent (likely meant X)
-- Accidental complexity (unclear why X exists)
-- Dead or uncertain code
+## Artifact Routing
 
-## Reference Files
-
-Load these when relevant — do not load all of them by default:
-
-- `agent-harness/reference/DOMAIN.md` — when extracting domain concepts, rules, or terminology from legacy code
-- `agent-harness/reference/ARCHITECTURE.md` — when mapping legacy structure to the current system architecture
-
-## Outputs May Include
-
-- `agent-harness/legacy/apps/<legacy-app-slug>/INVENTORY.md`
-- `agent-harness/legacy/apps/<legacy-app-slug>/SOURCE-MAP.md`
-- `agent-harness/legacy/apps/<legacy-app-slug>/FINDINGS.md`
-- `agent-harness/legacy/apps/<legacy-app-slug>/QUESTIONS.md`
-- `agent-harness/legacy/cross-system/SUMMARY.md`
-- `agent-harness/legacy/cross-system/CONTRACTS.md`
-- `agent-harness/legacy/cross-system/FINDINGS.md`
-- `agent-harness/legacy/cross-system/QUESTIONS.md`
-- `agent-harness/legacy/cross-system/PARITY-MATRIX.md`
-- `agent-harness/legacy/cross-system/REWRITE-READINESS.md`
-- `agent-harness/legacy/active/LEGACY-FINDING-*.md`
-- `agent-harness/use-cases/active/UC-*.md` (candidate, draft)
-- `agent-harness/specs/active/SPEC-*.md` (candidate, only when evidence is strong)
-- Harness Improvement candidates
-
-## Legacy Artifact Structure
-
-Use app-scoped legacy folders for app-specific discovery. A legacy app is any imported source root that can be
-discovered independently, such as an engine, dashboard, inference service, worker, library, or old monolith.
+App-specific discovery goes under:
 
 ```text
 agent-harness/legacy/apps/<legacy-app-slug>/
@@ -76,24 +47,7 @@ agent-harness/legacy/apps/<legacy-app-slug>/
   QUESTIONS.md
 ```
 
-Each app-scoped `SOURCE-MAP.md` is the restart point for that app. Use
-`agent-harness/templates/SOURCE-MAP-template.md` for every new source map. Each source map must include:
-
-- source root
-- primary evidence files
-- code areas
-- candidate discovery slices
-- block list and status (when blockwise discovery is used)
-- current slice status table
-- completed slice notes
-- open source-map notes
-- reference enrichment routing
-
-Source maps must contain app-specific material only. Do not copy generic slice rules, block rules, or roundtrip
-steps into each app source map — those belong in this mode file and the source-map template.
-
-Use cross-system artifacts only after app-scoped evidence exists and a finding, question, or readiness judgment
-requires more than one app:
+Cross-system synthesis goes under:
 
 ```text
 agent-harness/legacy/cross-system/
@@ -105,225 +59,175 @@ agent-harness/legacy/cross-system/
   REWRITE-READINESS.md
 ```
 
-Do not put app-local evidence directly into cross-system artifacts. Cross-system artifacts should cite the
-app-scoped artifact and source evidence they synthesize.
+Other outputs may include `agent-harness/legacy/active/LEGACY-FINDING-*.md`, candidate
+`agent-harness/use-cases/active/UC-*.md`, candidate `agent-harness/specs/active/SPEC-*.md`, and Harness Improvement
+candidates.
+
+### App Source Maps
+
+Each app `SOURCE-MAP.md` is the app restart point. Use `agent-harness/templates/SOURCE-MAP-template.md`.
+It must stay app-local and contain only:
+
+- source root, primary evidence files, code areas, and candidate discovery slices
+- block list and status when blockwise discovery is used
+- slice status table, completed slice/block notes, open app notes, restart pointers, and reference enrichment routing
+- deferred/cross-system question classification before `app-local-complete`
+- import hygiene when the snapshot contains secret-like files, local artifacts, or nested repository metadata
+
+Do not copy generic slice rules, block rules, roundtrip steps, cross-system judgments, or reusable process policy into
+app source maps.
+
+### Cross-System Artifacts
 
 Start cross-system synthesis by creating `agent-harness/legacy/cross-system/SUMMARY.md` from
 `agent-harness/templates/CROSS-SYSTEM-SUMMARY-template.md`. The summary is the cross-system restart point and working
-plan: it defines the active synthesis scope, entry criteria, slice order, artifact routing, and next action. Create
-`CONTRACTS.md`, `FINDINGS.md`, `QUESTIONS.md`, `PARITY-MATRIX.md`, and `REWRITE-READINESS.md` only when a slice
-produces evidence that needs those artifacts; do not create empty placeholders speculatively.
+plan: it names the active synthesis scope, entry criteria, slice order, artifact routing, and next action.
 
-Older flat files directly under `agent-harness/legacy/` may exist in repositories that started discovery before
-this structure was introduced. Treat them as legacy layout debt. Continue new discovery in the scoped structure
-unless an explicit Improvement or cleanup task migrates the old files.
+Create `CONTRACTS.md`, `FINDINGS.md`, `QUESTIONS.md`, `PARITY-MATRIX.md`, and `REWRITE-READINESS.md` only when a
+slice produces evidence that needs them. Do not create empty placeholders speculatively. Cross-system artifacts cite
+app-scoped artifacts and source evidence instead of copying app-local detail.
 
-## Slice Rules
+Older flat files directly under `agent-harness/legacy/` are legacy layout debt. Continue new discovery in the scoped
+structure unless an explicit Improvement or cleanup task migrates them.
 
-Slices are the durable unit of discovery progress.
+## Discovery Phases
 
-- A source map may define as many slices as necessary to support rewrite-quality app-local discovery.
-- Every slice must be marked individually with a status: `done`, `next`, `pending`, or `not-needed`.
-- Do not close a slice as `done` until its findings and unresolved questions are recorded.
-- Completed slice notes must list: evidence paths used, stable findings, and any unresolved decisions.
+| Phase | Entry gate | Work | Exit gate |
+| --- | --- | --- | --- |
+| App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `FINDINGS.md`, `QUESTIONS.md`, and stable reference docs. | Source map reaches `app-local-complete`. |
+| Cross-system synthesis | Active scope is explicit and all in-scope apps are `app-local-complete`. | Synthesize contracts, parity, questions, proof needs, and readiness across apps. | Cross-system `SUMMARY.md` marks synthesis complete and names the restart point. |
+| Artifact normalization | App-local and required cross-system discovery are complete. | Format, dedupe, order, and tighten existing artifacts without new source discovery. | Restart pointer moves to question clarification. |
+| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. | Restart pointer moves to Use Cases or Specs. |
 
-## Slice Roundtrip
+## App-Local Discovery
 
-Each discovery slice follows the same roundtrip:
+### Slice Rules
+
+- Slices are the durable unit of discovery progress.
+- A source map may define as many slices as needed for rewrite-quality app evidence.
+- Every slice has status `done`, `next`, `pending`, or `not-needed`.
+- Do not mark a slice `done` until findings and unresolved questions are recorded.
+- Completed slice notes list evidence paths, stable findings, and unresolved decisions.
+
+### Slice Roundtrip
 
 1. Select the smallest useful evidence set from the source map.
-2. Inspect current code first, then docs, then tests for the slice.
-3. Distinguish observed behavior, documented behavior, inferred intent, uncertainty, accidental complexity, and
-   stale historical notes.
-4. Add or update findings in the app `FINDINGS.md`.
-5. Update the source map with completed slice notes and useful evidence paths.
-6. Add unresolved decisions to the app `QUESTIONS.md`.
-7. Enrich project reference docs when evidence is stable: `ARCHITECTURE.md`, `DOMAIN.md`, `TOOLING.md`,
-   and `QUALITY.md`. For blockwise discovery, enrich after each block before committing the block.
-   Deferring enrichment across blocks is acceptable when noted in the source map Open App Notes, but
-   enrichment must be complete before `app-local-complete` is declared.
-8. Validate docs with `git diff --check`.
-9. Commit only when the user explicitly asks for a commit.
+2. Inspect code, then docs, then tests.
+3. Classify evidence and conflicts using the Core Rules.
+4. Update app `FINDINGS.md`, `QUESTIONS.md`, and `SOURCE-MAP.md`.
+5. Enrich stable reference docs: `ARCHITECTURE.md`, `DOMAIN.md`, `TOOLING.md`, and `QUALITY.md`.
+6. Validate with `git diff --check`.
+7. Commit only when explicitly asked.
 
-## Blockwise Discovery Rules
+Reference enrichment may be deferred across blockwise work only when the source map says so; it must be complete
+before `app-local-complete`.
 
-Slices may be grouped into a block when they share a focused, overlapping evidence set and produce a more coherent
-rewrite boundary together. Blocks are a planning convenience, not a replacement for slices.
+### Blockwise Discovery
 
-- Mark every included slice individually in the slice status table even when running as a block.
-- Use a block only when the grouped slices can be discovered from a focused, overlapping evidence set.
-- Keep blocks app-scoped. Do not turn block work into cross-system or cross-cutting synthesis.
-- Write one completed block note that lists: included slices, evidence paths, stable findings, and unresolved
-  decisions. Do not hide unresolved decisions inside the block note.
-- After a block completes, set the next unfinished slice or next coherent block as `next`.
-- Block rules belong in this mode file and the source-map template, not in each app source map.
+Blocks are a planning convenience for related slices with overlapping evidence. They do not replace slices.
 
-Reference enrichment (step 7 of the slice roundtrip) applies per block. Complete enrichment for each block
-before committing it. If enrichment is deferred across multiple blocks, record this explicitly in the source
-map Open App Notes and ensure enrichment completes before `app-local-complete` is declared.
+- Mark each included slice individually in the slice status table.
+- Use a block only when the grouped slices share a focused evidence set.
+- Keep blocks app-scoped.
+- Write one completed block note listing included slices, evidence paths, stable findings, and unresolved decisions.
+- After a block completes, set the next unfinished slice or coherent block to `next`.
 
-## Source Map Content Boundaries
+## Cross-System Synthesis
 
-An app source map is an app-local evidence ledger. It must contain only:
+Do not start cross-system synthesis until every app in the active synthesis scope is `app-local-complete`. The active
+scope must be explicit; do not infer it.
 
-- source root
-- evidence inventory (primary files, areas, candidate slices)
-- block list and status (app-specific block plans and completed block notes)
-- slice status table (individual slice progress)
-- completed notes per slice or block
-- open app-specific notes
-- restart pointers
-- reference enrichment routing
+Use cross-system artifacts only when a finding, question, contract, proof need, or readiness judgment requires more
+than one app. Route stable target-relevant findings to reference docs; leave legacy drift in legacy artifacts.
 
-An app source map must not contain:
+## Post-Discovery Gates
 
-- generic slice rules or roundtrip steps (those belong in this mode file)
-- generic block rules (those belong in this mode file)
-- cross-system or cross-app findings or judgments
-- reusable process policy of any kind
+### Artifact Normalization
 
-## Cross-System Deferral
+Run normalization after app-local discovery and cross-system synthesis are complete, before moving legacy evidence
+into Use Cases, Specs, Tasks, or Implementation Planning.
 
-Do not start cross-system synthesis until every app in the active synthesis scope has reached `app-local-complete`
-discovery state. See lifecycle state definitions in the Discovery Lifecycle section below.
+Normalize in this order:
 
-## Post-Discovery Artifact Normalization
+1. One app folder at a time: `INVENTORY.md`, `SOURCE-MAP.md`, `FINDINGS.md`, and `QUESTIONS.md`.
+2. Cross-system artifacts: `SUMMARY.md`, `CONTRACTS.md`, `FINDINGS.md`, `QUESTIONS.md`, `PARITY-MATRIX.md`, and
+   `REWRITE-READINESS.md`.
 
-After app-local discovery and cross-system synthesis are complete, run an artifact normalization pass before moving
-legacy evidence into Use Cases, Specs, Tasks, or Implementation Planning.
+For each artifact, fix Markdown formatting, heading hierarchy, table consistency, stale restart pointers, obvious
+ordering issues, and duplicate sections with the same claim. Preserve information density, evidence paths, artifact
+IDs, question IDs, finding IDs, proof IDs, lifecycle metadata, and evidence classifications.
 
-Normalization is not new discovery. It is a documentation-quality pass over already captured evidence.
+Normalization is not new discovery. Do not add findings from source inspection. If a gap needs source inspection or
+runtime execution, record a follow-up question or proof item.
 
-Run normalization in this order:
+### Question Clarification
 
-1. One app-scoped folder at a time: `INVENTORY.md`, `SOURCE-MAP.md`, `FINDINGS.md`, and `QUESTIONS.md`.
-2. Cross-system artifacts after the app-scoped passes: `SUMMARY.md`, `CONTRACTS.md`, `FINDINGS.md`, `QUESTIONS.md`,
-   `PARITY-MATRIX.md`, and `REWRITE-READINESS.md`.
+After normalization, clarify open discovery questions before moving toward Use Cases, Specs, Tasks, or Implementation
+Planning.
 
-For each artifact:
+Inputs, in order:
 
-- Fix Markdown formatting, heading hierarchy, table consistency, stale restart pointers, and obvious ordering issues.
-- Merge duplicate or near-duplicate sections inside the same file when they carry the same claim.
-- Preserve information density, evidence paths, artifact IDs, question IDs, finding IDs, proof IDs, and lifecycle
-  metadata.
-- Preserve distinctions between observed behavior, documented behavior, inferred intent, uncertainty, accidental
-  complexity, target-product decisions, and proof needs.
-- Do not remove evidence just because it is verbose when it is still needed for traceability.
-- Do not add new findings from legacy source during normalization. If a gap requires source inspection, record a
-  follow-up question or proof item instead of expanding the normalization pass.
-- Validate with `git diff --check`; use additional Markdown checks when the repository defines them.
-- Commit only when the user explicitly asks.
-
-After normalization, update the relevant restart pointer to the post-discovery question clarification pass. Do not
-move legacy evidence into Use Cases, Specs, Tasks, or Implementation Planning until the question clarification pass
-is complete.
-
-## Post-Discovery Question Clarification
-
-After normalization, clarify the open points found during discovery before moving toward Use Cases, Specs, Tasks, or
-Implementation Planning.
-
-Question clarification is not new discovery. It is a decision-preparation pass over already captured evidence and
-open questions.
-
-Use these inputs:
-
-1. App-scoped `QUESTIONS.md` files and each source map's deferred/cross-system question table.
-2. Cross-system `QUESTIONS.md` when cross-system synthesis exists.
+1. App `QUESTIONS.md` files and each source map's deferred/cross-system question table.
+2. Cross-system `QUESTIONS.md` when synthesis exists.
 3. Cross-system `PARITY-MATRIX.md` proof candidates and `REWRITE-READINESS.md` blockers when they exist.
-4. Relevant `FINDINGS.md`, `CONTRACTS.md`, or source-map notes only when needed to understand an existing question.
+4. Relevant `FINDINGS.md`, `CONTRACTS.md`, or source-map notes only to understand an existing question.
 
 For each open question:
 
 - Keep the original question ID stable.
-- Merge or cross-reference duplicate and near-duplicate questions instead of leaving competing versions.
-- Classify the question as one of: `must-decide-before-use-cases`, `must-decide-before-specs`,
+- Merge or cross-reference duplicates and near-duplicates.
+- Classify it as `must-decide-before-use-cases`, `must-decide-before-specs`,
   `must-decide-before-implementation-planning`, `proof-needed`, `accepted-deferred`, or `not-needed`.
-- Record concrete options and a recommended proposal when asking the user for a target-product decision.
-- Preserve evidence paths, finding IDs, proof IDs, and uncertainty notes that explain why the question exists.
-- Mark a question as resolved only when the answer is captured in the appropriate question file and any affected
-  restart pointer or readiness note is updated.
-- If the question requires source inspection or runtime execution beyond already captured evidence, convert it into a
-  proof item or follow-up task instead of expanding the clarification pass.
+- Present target-product decisions with concrete options and a recommended proposal.
+- Preserve evidence paths, finding IDs, proof IDs, and uncertainty notes.
+- Mark resolved only after the answer is captured in the right question file and affected restart/readiness notes.
+- Convert questions requiring new source inspection or runtime execution into proof items or follow-up tasks.
 
-Before starting Use Cases or Specs:
-
-- Every open discovery question in scope must be resolved, explicitly deferred with rationale, marked not-needed, or
-  routed to a named proof item.
-- P0 or migration-critical blockers from rewrite readiness must be resolved, explicitly accepted as deferred, or
-  routed to proof work before any Spec relies on that behavior.
-- Update the relevant restart pointer to the next non-discovery phase only after the question files reflect this
-  classification.
+Before starting Use Cases or Specs, every in-scope discovery question must be resolved, explicitly deferred with
+rationale, marked not-needed, or routed to a named proof item. P0 or migration-critical blockers must be resolved,
+explicitly accepted as deferred, or routed to proof work before any Spec relies on that behavior.
 
 ## Discovery Lifecycle
 
-Each app source map carries a `discovery_state` field. This is distinct from the artifact lifecycle `status` field.
+Each app source map carries a `discovery_state` field distinct from artifact `status`.
 
 | State | Meaning |
 | --- | --- |
 | `app-discovery-active` | App-local slices are still being discovered. |
-| `app-local-complete` | Slice coverage is sufficient for app-local rewrite evidence. |
-| `rewrite-ready` | App-local evidence, cross-system synthesis, and required proof checks are complete enough to feed Use Cases, Specs, or Implementation Planning. |
+| `app-local-complete` | App evidence is sufficient for app-local rewrite planning. |
+| `rewrite-ready` | App evidence, cross-system synthesis, and required proof checks are complete or explicitly deferred. |
 
-Cross-system synthesis may start only when every app in the active synthesis scope has reached `app-local-complete`.
+### App-Local Completion Criteria
 
-### App-Local Completion Exit Criteria
+An app may move to `app-local-complete` when:
 
-An app source map may move to `app-local-complete` when all of the following hold:
-
-- All planned slices have status `done`, `not-needed`, or an explicitly deferred status.
-- Open questions are classified as `app-local`, `cross-system`, or `target-product` decisions. This
-  classification must be recorded in the source map's "Deferred and Cross-System Questions" table before
-  `app-local-complete` is declared. QUESTIONS.md may organize questions by topic area; the source map
-  table is the classification record that makes this criterion verifiable.
-- Stable findings have been propagated to reference docs where appropriate.
-- No remaining slice is needed to support rewrite planning from app-local evidence alone.
+- all planned slices are `done`, `not-needed`, or explicitly deferred
+- open questions are classified as `app-local`, `cross-system`, or `target-product` in the source map table
+- stable findings have been propagated to reference docs where appropriate
+- no remaining slice is needed for app-local rewrite planning
 
 ### Proof Gate
 
-Each source map also carries a `proof_needed` flag:
+Each source map carries `proof_needed`:
 
-- `proof_needed: true` — discovery found drift or runtime behavior that must be verified with executable checks
-  before rewrite planning may treat it as stable.
-- `proof_needed: false` — no required executable proof is currently known, or required proof has already been
-  completed.
+- `true`: discovery found drift or runtime behavior needing executable proof before rewrite planning treats it as
+  stable
+- `false`: no required executable proof is known, or required proof is complete
 
-An app may reach `app-local-complete` with `proof_needed: true`. Rewrite-readiness requires that required proofs
-are completed or explicitly deferred with an accepted decision.
-
-### Active Synthesis Scope
-
-The active synthesis scope is the set of apps that must all reach `app-local-complete` before cross-system
-synthesis starts. Scope is defined explicitly in the cross-system work or by the user — do not infer it.
+An app may be `app-local-complete` with `proof_needed: true`. Rewrite-readiness requires required proofs to be
+completed or explicitly deferred with an accepted decision.
 
 ## Import Hygiene
 
-Imported legacy snapshots often contain secret-like files, local runtime artifacts, and nested repository
-metadata. Apply these rules during normal discovery.
+During normal discovery, inventory these by path only and do not open contents:
 
-### Path-only inventory
+- `.env`, `.env.*`, `.env.local`, `secrets/`, `*.key`, `*.pem`, password files, token files
+- logs, caches, virtual environments, coverage output, test artifacts, generated metadata, egg-info, and build output
 
-Inventory the following by path only. Do not open their contents during normal discovery:
-
-- `.env`, `.env.*`, `.env.local`, and similar environment files
-- `secrets/`, `*.key`, `*.pem`, password files, token files
-- local logs, caches (`.cache/`, `__pycache__/`, `*.pyc`)
-- virtual environments (`.venv/`, `venv/`, `env/`)
-- coverage output, test artifacts, generated metadata
-- egg-info and build output directories
-
-### Log files
-
-Inventory log files by path only. Open log contents only in an explicit log or security discovery slice,
-after confirming the log does not contain secrets.
-
-### No mutation during discovery
-
+Open log contents only in an explicit log or security discovery slice after confirming they do not contain secrets.
 Do not remove or rewrite imported artifacts during normal discovery.
 
-### Nested Git metadata
-
-Before committing an imported snapshot or import-hygiene change, verify no nested `.git` directories exist:
+Before committing an imported snapshot or import-hygiene change, verify nested Git metadata:
 
 ```sh
 find legacy/imported/<app-slug> -path '*/.git' -type d
@@ -331,37 +235,25 @@ find legacy/imported/<app-slug> -path '*/.git' -type d
 
 Expected result: no output. Surface any hit to the user before proceeding.
 
-### Source maps
-
-Must include an Import Hygiene section (see SOURCE-MAP template) whenever the snapshot contains
-secret-like files, local runtime artifacts, or nested repository metadata. The section must list
-found paths and their type.
-
-For each category of import noise that requires a user decision (secret-like files, nested `.git`
-hits, unusual local artifacts), write:
-
-- A FINDINGS entry documenting what was found and what risk it represents.
-- A QUESTIONS entry asking what action to take (remove, quarantine, leave as-is).
-
-The user's response to the open QUESTIONS authorizes any cleanup action.
+When import noise needs a user decision, add a FINDINGS entry for the risk and a QUESTIONS entry asking whether to
+remove, quarantine, or leave it as-is. The user's response authorizes cleanup.
 
 ## Evidence Precedence
 
-When sources conflict, apply this default precedence model. Record deviations explicitly in the source map.
+When sources conflict, apply this default order and record deviations:
 
-1. **Current runtime code and tests** — highest authority for observed behavior.
-2. **Completed migration or audit docs** — supersede the plans they replaced.
-3. **Checked-in contract snapshots** — evidence of intent; may drift from another app's current runtime.
-4. **Historical docs, README snippets, agent rules** — low confidence when current code contradicts them.
-5. **Stale setup or deployment docs** — background context only; verify against current code before use.
+1. Current runtime code and tests.
+2. Completed migration or audit docs.
+3. Checked-in contract snapshots.
+4. Historical docs, README snippets, and agent rules.
+5. Stale setup or deployment docs.
 
-Every finding must state whether its claim is based on observed behavior, documented behavior, or inference.
-When evidence sources disagree, record the conflict and which source was treated as authoritative.
+Every finding states whether it is based on observed behavior, documented behavior, or inference, and records which
+source was treated as authoritative when evidence conflicts.
 
 ## Reference Enrichment
 
-Enrich reference docs (`ARCHITECTURE.md`, `DOMAIN.md`, `TOOLING.md`, `QUALITY.md`) when app-local evidence
-is stable. Route findings by type:
+Enrich reference docs when app-local evidence is stable:
 
 | Finding type | Target reference doc |
 | --- | --- |
@@ -370,17 +262,4 @@ is stable. Route findings by type:
 | Tools, commands, CI, test setup | `TOOLING.md` |
 | Quality standards, test coverage, hygiene | `QUALITY.md` |
 
-Do not enrich reference docs with findings that are:
-
-- still unresolved or uncertain
-- cross-system (wait for cross-system synthesis)
-- speculative or inferred without code evidence
-
-## Boundaries — Must Not
-
-- Modify legacy source code
-- Implement new code
-- Treat legacy code as automatically correct
-- Create Specs directly without a Use Case unless evidence is unambiguous and strong
-- Mark inferred intent as observed behavior
-- Commit findings only when the user explicitly requests it. See `CORE.md` Commits section.
+Do not enrich references with unresolved, uncertain, cross-system-before-synthesis, or speculative findings.
