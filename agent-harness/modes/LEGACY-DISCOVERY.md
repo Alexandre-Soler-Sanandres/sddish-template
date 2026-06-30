@@ -214,7 +214,46 @@ For each artifact:
 - Validate with `git diff --check`; use additional Markdown checks when the repository defines them.
 - Commit only when the user explicitly asks.
 
-After normalization, update the relevant restart pointer to the next non-discovery phase, usually Use Cases or Specs.
+After normalization, update the relevant restart pointer to the post-discovery question clarification pass. Do not
+move legacy evidence into Use Cases, Specs, Tasks, or Implementation Planning until the question clarification pass
+is complete.
+
+## Post-Discovery Question Clarification
+
+After normalization, clarify the open points found during discovery before moving toward Use Cases, Specs, Tasks, or
+Implementation Planning.
+
+Question clarification is not new discovery. It is a decision-preparation pass over already captured evidence and
+open questions.
+
+Use these inputs:
+
+1. App-scoped `QUESTIONS.md` files and each source map's deferred/cross-system question table.
+2. Cross-system `QUESTIONS.md` when cross-system synthesis exists.
+3. Cross-system `PARITY-MATRIX.md` proof candidates and `REWRITE-READINESS.md` blockers when they exist.
+4. Relevant `FINDINGS.md`, `CONTRACTS.md`, or source-map notes only when needed to understand an existing question.
+
+For each open question:
+
+- Keep the original question ID stable.
+- Merge or cross-reference duplicate and near-duplicate questions instead of leaving competing versions.
+- Classify the question as one of: `must-decide-before-use-cases`, `must-decide-before-specs`,
+  `must-decide-before-implementation-planning`, `proof-needed`, `accepted-deferred`, or `not-needed`.
+- Record concrete options and a recommended proposal when asking the user for a target-product decision.
+- Preserve evidence paths, finding IDs, proof IDs, and uncertainty notes that explain why the question exists.
+- Mark a question as resolved only when the answer is captured in the appropriate question file and any affected
+  restart pointer or readiness note is updated.
+- If the question requires source inspection or runtime execution beyond already captured evidence, convert it into a
+  proof item or follow-up task instead of expanding the clarification pass.
+
+Before starting Use Cases or Specs:
+
+- Every open discovery question in scope must be resolved, explicitly deferred with rationale, marked not-needed, or
+  routed to a named proof item.
+- P0 or migration-critical blockers from rewrite readiness must be resolved, explicitly accepted as deferred, or
+  routed to proof work before any Spec relies on that behavior.
+- Update the relevant restart pointer to the next non-discovery phase only after the question files reflect this
+  classification.
 
 ## Discovery Lifecycle
 
