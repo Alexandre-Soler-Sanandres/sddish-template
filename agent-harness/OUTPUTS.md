@@ -26,6 +26,8 @@ Original-language content may be preserved in:
 ## Artifact Format
 
 All harness artifacts use YAML frontmatter for metadata and Markdown for the body.
+`README.md` files are not harness artifacts. Use mode files, templates, `CATALOG.md`, and scoped restart artifacts
+such as `SOURCE-MAP.md` or `SUMMARY.md` for harness guidance.
 
 ## File Naming Conventions
 

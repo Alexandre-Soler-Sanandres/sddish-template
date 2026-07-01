@@ -126,6 +126,7 @@ structure.
 Start cross-system synthesis by creating `agent-harness/legacy/cross-system/SUMMARY.md` from
 `agent-harness/templates/CROSS-SYSTEM-SUMMARY-template.md`. The summary is the cross-system restart point and working
 plan: it names the active synthesis scope, entry criteria, slice order, artifact routing, and next action.
+Cross-system artifacts are outputs of cross-system synthesis, not app-local discovery.
 
 Create `CONTRACTS.md`, `findings/` entries, `QUESTIONS.md`, `PARITY-MATRIX.md`, and `REWRITE-READINESS.md` only when
 a slice produces evidence that needs them. Do not create empty placeholders speculatively. Cross-system artifacts
@@ -133,6 +134,8 @@ cite app-scoped artifacts and source evidence instead of copying app-local detai
 
 Use the cross-system artifacts for distinct jobs:
 
+- `SUMMARY.md` defines the active synthesis scope, confirms entry criteria, records slice order, routes outputs, and
+  names the restart action.
 - `CONTRACTS.md` defines the inter-app boundaries: API, data, auth, health, observability, deployment, and ownership
   contracts.
 - `findings/` stores synthesized cross-app claims that require evidence from more than one app.

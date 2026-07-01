@@ -11,8 +11,8 @@
 - Reviews: `agent-harness/reviews/`
 - Improvements: `agent-harness/improvements/`
 - Legacy: `agent-harness/legacy/`
-  - Legacy app discovery: `agent-harness/legacy/apps/<legacy-app-slug>/`
-  - Cross-system legacy synthesis: `agent-harness/legacy/cross-system/`
+  - Legacy app discovery: `agent-harness/legacy/apps/<legacy-app-slug>/` with `SOURCE-MAP.md` as the restart point
+  - Cross-system legacy synthesis: `agent-harness/legacy/cross-system/` with `SUMMARY.md` as the restart point
 
 ## Loading Rule
 
