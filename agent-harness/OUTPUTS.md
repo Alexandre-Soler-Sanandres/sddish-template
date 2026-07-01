@@ -26,8 +26,9 @@ Original-language content may be preserved in:
 ## Artifact Format
 
 All harness artifacts use YAML frontmatter for metadata and Markdown for the body.
-`README.md` files are not harness artifacts. Use mode files, templates, `CATALOG.md`, and scoped restart artifacts
-such as `SOURCE-MAP.md` or `SUMMARY.md` for harness guidance.
+`agent-harness/README.md` is the harness overview, not a lifecycle artifact. Do not create directory-scoped README
+files as harness artifacts; use mode files, templates, `CATALOG.md`, and scoped restart artifacts such as
+`SOURCE-MAP.md` or `SUMMARY.md` for harness guidance.
 
 ## File Naming Conventions
 

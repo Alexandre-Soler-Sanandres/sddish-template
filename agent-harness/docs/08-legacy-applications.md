@@ -411,5 +411,5 @@ find legacy/imported/<app-slug> -path '*/.git' -type d
 rg --files agent-harness -g 'README.md' -g 'README.*'
 ```
 
-Expected result for the last command: no harness READMEs. Imported application READMEs under `legacy/imported/` are
-source evidence, not harness artifacts.
+Expected result for the last command: only `agent-harness/README.md`. Extra directory-scoped harness READMEs should
+not appear. Imported application READMEs under `legacy/imported/` are source evidence, not harness artifacts.

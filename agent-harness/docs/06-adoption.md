@@ -33,7 +33,8 @@ Then fill in the four project-specific reference files as above.
 
 - `CATALOG.md` ships ready to use — it is a navigation index of where artifact types live, not a log of individual artifacts; agents use it to locate artifacts and it only changes if the harness structure itself changes
 - Optionally add stack-specific bootstrap guides under `agent-harness/guides/`
-- Optionally keep the `docs/` directory for local reference — the most current version is always in the original template repository
+- Keep `agent-harness/docs/` for harness guidance; project documentation can use the repository root or another
+  project-owned docs location
 - The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` are universal — do not add project-specific content to them
 
 ## What Belongs Where
