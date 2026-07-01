@@ -110,3 +110,27 @@ target-product decision)
 
 | Question | Classification | Notes |
 | --- | --- | --- |
+
+## Discovery-Complete Shape
+
+Apply this section once `discovery_state` reaches `app-local-complete`, as part of Post-Discovery Artifact
+Normalization (see `agent-harness/modes/LEGACY-DISCOVERY.md`). This is a collapse of the same file at the same
+path — do not rename it or create a second file.
+
+Precondition: every "stable finding" and "candidate Use Case" note inside `Completed Notes` / slice notes must
+already have an equivalent entry in this app's `findings/`, or in the relevant reference doc, before it is cut
+from the source map. If a note has no home yet, move it there first.
+
+Collapse the source map to only:
+
+- `Source Root`
+- `Evidence Inventory` (`Primary Evidence Files`, `Code Areas`, `Source Confidence`)
+- `Import Hygiene`
+- `Reference Enrichment Routing`
+- `Open App Notes`, trimmed to durable open notes only — drop per-slice scratch notes that have already been
+  captured elsewhere
+- `Deferred and Cross-System Questions`
+
+Remove: `Candidate Discovery Slices`, `Block Plan`, `Working Discovery Plan`, `Current Status`, `Completed Notes`,
+and `Restart Pointer`. Replace the restart pointer with a single line naming the next non-discovery phase (Use
+Cases or Specs) directly under `Deferred and Cross-System Questions`.

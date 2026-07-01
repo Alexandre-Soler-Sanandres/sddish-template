@@ -1,5 +1,5 @@
 ---
-id: LEGACY-FINDING-001
+id: LF-<APP>-NNN         # e.g. LF-TW-ENGINE-001; app findings use the app slug, cross-system findings use LF-CROSS-NNN
 type: legacy-finding
 status: draft            # draft | reviewed | converted | archived | rejected
 title: ""

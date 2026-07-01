@@ -43,7 +43,9 @@ App-specific discovery goes under:
 agent-harness/legacy/apps/<legacy-app-slug>/
   INVENTORY.md
   SOURCE-MAP.md
-  FINDINGS.md
+  findings/
+    active/<LF-ID>.md
+    archive/<LF-ID>.md
   QUESTIONS.md
 ```
 
@@ -53,15 +55,38 @@ Cross-system synthesis goes under:
 agent-harness/legacy/cross-system/
   SUMMARY.md
   CONTRACTS.md
-  FINDINGS.md
+  findings/
+    active/<LF-ID>.md
+    archive/<LF-ID>.md
   QUESTIONS.md
   PARITY-MATRIX.md
   REWRITE-READINESS.md
 ```
 
-Other outputs may include `agent-harness/legacy/active/LEGACY-FINDING-*.md`, candidate
-`agent-harness/use-cases/active/UC-*.md`, candidate `agent-harness/specs/active/SPEC-*.md`, and Harness Improvement
-candidates.
+Other outputs may include candidate `agent-harness/use-cases/active/UC-*.md`, candidate
+`agent-harness/specs/active/SPEC-*.md`, and Harness Improvement candidates.
+
+### Inventory
+
+Each app `INVENTORY.md` uses `agent-harness/templates/INVENTORY-template.md`: fixed `Scope`, `Identity`, `Major
+Runtime Areas`, `Operations, Tooling, and Quality`, and `Inventory Gaps` sections, plus as many app-specific
+structural sections as the app's own shape needs in between. Name app-specific sections after what they actually
+cover in this app — do not copy another app's section names by default.
+
+### Findings
+
+Store each finding as its own file, using `agent-harness/templates/LEGACY-FINDING-template.md` as-is:
+`agent-harness/legacy/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, and
+`agent-harness/legacy/cross-system/findings/active/<LF-ID>.md` for cross-system findings. IDs follow the existing
+`LF-<APP>-NNN` convention, numbered once per app (or `LF-CROSS-NNN` for cross-system) and never reused, even after a
+finding moves or is merged.
+
+Move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`,
+or `rejected`. Findings with `status: draft` or `status: reviewed` stay in `findings/active/`.
+
+Always look up or add a finding by ID — scan `findings/active/` and `findings/archive/` file names or frontmatter,
+never by reading through file append order. Do not create slice-numbered or subsystem-named headings as a
+substitute for the ID; that is exactly the structure this replaces.
 
 ### App Source Maps
 
@@ -77,15 +102,24 @@ It must stay app-local and contain only:
 Do not copy generic slice rules, block rules, roundtrip steps, cross-system judgments, or reusable process policy into
 app source maps.
 
+### Questions
+
+Each app and cross-system `QUESTIONS.md` uses `agent-harness/templates/QUESTIONS-template.md`: an `Open Decisions`
+table with stable `Q-<APP>-NNN` IDs, a `Classification` column (`app-local` | `cross-system` | `target-product`), and
+a `Decision type` column (`scope-v1` | `preserve-vs-adapt` | `fidelity` | `naming` | `deferred-feature`), followed by
+a flat `Resolved Decisions` list. Do not organize `QUESTIONS.md` into sections named after the discovery slice,
+subsystem, or process block that raised the question — that is metadata (`Area`), not structure. Before adding a
+question, check existing rows for the same decision by content and merge instead of duplicating.
+
 ### Cross-System Artifacts
 
 Start cross-system synthesis by creating `agent-harness/legacy/cross-system/SUMMARY.md` from
 `agent-harness/templates/CROSS-SYSTEM-SUMMARY-template.md`. The summary is the cross-system restart point and working
 plan: it names the active synthesis scope, entry criteria, slice order, artifact routing, and next action.
 
-Create `CONTRACTS.md`, `FINDINGS.md`, `QUESTIONS.md`, `PARITY-MATRIX.md`, and `REWRITE-READINESS.md` only when a
-slice produces evidence that needs them. Do not create empty placeholders speculatively. Cross-system artifacts cite
-app-scoped artifacts and source evidence instead of copying app-local detail.
+Create `CONTRACTS.md`, `findings/` entries, `QUESTIONS.md`, `PARITY-MATRIX.md`, and `REWRITE-READINESS.md` only when
+a slice produces evidence that needs them. Do not create empty placeholders speculatively. Cross-system artifacts
+cite app-scoped artifacts and source evidence instead of copying app-local detail.
 
 Older flat files directly under `agent-harness/legacy/` are legacy layout debt. Continue new discovery in the scoped
 structure unless an explicit Improvement or cleanup task migrates them.
@@ -94,7 +128,7 @@ structure unless an explicit Improvement or cleanup task migrates them.
 
 | Phase | Entry gate | Work | Exit gate |
 | --- | --- | --- | --- |
-| App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `FINDINGS.md`, `QUESTIONS.md`, and stable reference docs. | Source map reaches `app-local-complete`. |
+| App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `findings/`, `QUESTIONS.md`, and stable reference docs. | Source map reaches `app-local-complete`. |
 | Cross-system synthesis | Active scope is explicit and all in-scope apps are `app-local-complete`. | Synthesize contracts, parity, questions, proof needs, and readiness across apps. | Cross-system `SUMMARY.md` marks synthesis complete and names the restart point. |
 | Artifact normalization | App-local and required cross-system discovery are complete. | Format, dedupe, order, and tighten existing artifacts without new source discovery. | Restart pointer moves to question clarification. |
 | Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. | Restart pointer moves to Use Cases or Specs. |
@@ -114,7 +148,8 @@ structure unless an explicit Improvement or cleanup task migrates them.
 1. Select the smallest useful evidence set from the source map.
 2. Inspect code, then docs, then tests.
 3. Classify evidence and conflicts using the Core Rules.
-4. Update app `FINDINGS.md`, `QUESTIONS.md`, and `SOURCE-MAP.md`.
+4. Update app `findings/` (add or merge into an `LF-<APP>-NNN` file, looked up by ID), `QUESTIONS.md`, and
+   `SOURCE-MAP.md`.
 5. Enrich stable reference docs: `ARCHITECTURE.md`, `DOMAIN.md`, `TOOLING.md`, and `QUALITY.md`.
 6. Validate with `git diff --check`.
 7. Commit only when explicitly asked.
@@ -149,13 +184,26 @@ into Use Cases, Specs, Tasks, or Implementation Planning.
 
 Normalize in this order:
 
-1. One app folder at a time: `INVENTORY.md`, `SOURCE-MAP.md`, `FINDINGS.md`, and `QUESTIONS.md`.
-2. Cross-system artifacts: `SUMMARY.md`, `CONTRACTS.md`, `FINDINGS.md`, `QUESTIONS.md`, `PARITY-MATRIX.md`, and
+1. One app folder at a time: `INVENTORY.md`, `SOURCE-MAP.md`, `findings/`, and `QUESTIONS.md`.
+2. Cross-system artifacts: `SUMMARY.md`, `CONTRACTS.md`, `findings/`, `QUESTIONS.md`, `PARITY-MATRIX.md`, and
    `REWRITE-READINESS.md`.
 
 For each artifact, fix Markdown formatting, heading hierarchy, table consistency, stale restart pointers, obvious
 ordering issues, and duplicate sections with the same claim. Preserve information density, evidence paths, artifact
 IDs, question IDs, finding IDs, proof IDs, lifecycle metadata, and evidence classifications.
+
+For `findings/`, normalizing duplicates means merging two `LF-<APP>-NNN` files that make the same claim into one:
+keep the ID with the stronger evidence set, fold the other file's evidence paths into it, and do not delete the
+superseded file — set its `status` to `archived`, add a one-line pointer to the surviving ID, and move it to
+`findings/archive/`. IDs are never reused or silently dropped.
+
+`SOURCE-MAP.md` and cross-system `SUMMARY.md` additionally collapse to their `Discovery-Complete Shape` (see
+`SOURCE-MAP-template.md` and `CROSS-SYSTEM-SUMMARY-template.md`) as part of this pass, once `discovery_state` is
+`app-local-complete` (app-scoped) or cross-system synthesis is finished. Before collapsing, verify every stable
+finding and candidate Use Case note in the sections being removed already has an equivalent entry in `findings/`
+or the reference docs; port it forward first if it does not. This is a structural collapse of session-resumption
+scaffolding whose purpose has ended, not a loss of evidence — the same file, same path, stays the artifact's stable
+restart point.
 
 Normalization is not new discovery. Do not add findings from source inspection. If a gap needs source inspection or
 runtime execution, record a follow-up question or proof item.
@@ -170,7 +218,7 @@ Inputs, in order:
 1. App `QUESTIONS.md` files and each source map's deferred/cross-system question table.
 2. Cross-system `QUESTIONS.md` when synthesis exists.
 3. Cross-system `PARITY-MATRIX.md` proof candidates and `REWRITE-READINESS.md` blockers when they exist.
-4. Relevant `FINDINGS.md`, `CONTRACTS.md`, or source-map notes only to understand an existing question.
+4. Relevant `findings/`, `CONTRACTS.md`, or source-map notes only to understand an existing question.
 
 For each open question:
 
