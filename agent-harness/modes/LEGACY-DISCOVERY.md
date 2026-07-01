@@ -88,6 +88,10 @@ Always look up or add a finding by ID — scan `findings/active/` and `findings/
 never by reading through file append order. Do not create slice-numbered or subsystem-named headings as a
 substitute for the ID; that is exactly the structure this replaces.
 
+Cross-system findings are synthesized claims, not app-local copies. They must cite the contributing app findings and
+source evidence they depend on, state the cross-app claim once, and carry only the boundary-specific synthesis needed
+for downstream contracts, questions, parity rows, or readiness judgments.
+
 ### App Source Maps
 
 Each app `SOURCE-MAP.md` is the app restart point. Use `agent-harness/templates/SOURCE-MAP-template.md`.
@@ -105,11 +109,17 @@ app source maps.
 ### Questions
 
 Each app and cross-system `QUESTIONS.md` uses `agent-harness/templates/QUESTIONS-template.md`: an `Open Decisions`
-table with stable `Q-<APP>-NNN` IDs, a `Classification` column (`app-local` | `cross-system` | `target-product`), and
-a `Decision type` column (`scope-v1` | `preserve-vs-adapt` | `fidelity` | `naming` | `deferred-feature`), followed by
-a flat `Resolved Decisions` list. Do not organize `QUESTIONS.md` into sections named after the discovery slice,
-subsystem, or process block that raised the question — that is metadata (`Area`), not structure. Before adding a
-question, check existing rows for the same decision by content and merge instead of duplicating.
+table with stable IDs (`Q-<APP>-NNN` for app-scoped questions, `CSQ-NNN` for cross-system questions), a
+`Classification` column (`app-local` | `cross-system` | `target-product`), and a `Decision type` column
+(`scope-v1` | `preserve-vs-adapt` | `fidelity` | `naming` | `deferred-feature`), followed by a flat
+`Resolved Decisions` list. Do not organize `QUESTIONS.md` into sections named after the discovery slice, subsystem,
+or process block that raised the question — that is metadata (`Area`), not structure. Before adding a question,
+check existing rows for the same decision by content and merge instead of duplicating.
+
+Every question links back to the finding(s) that raised it through the `Source finding(s)` column. For cross-system
+questions, those source finding IDs should usually be `LF-CROSS-NNN`, with app finding IDs added in `Notes` only when
+the extra traceability matters. Provenance like slice name or artifact of origin belongs in `Notes`, not in the table
+structure.
 
 ### Cross-System Artifacts
 
@@ -120,6 +130,20 @@ plan: it names the active synthesis scope, entry criteria, slice order, artifact
 Create `CONTRACTS.md`, `findings/` entries, `QUESTIONS.md`, `PARITY-MATRIX.md`, and `REWRITE-READINESS.md` only when
 a slice produces evidence that needs them. Do not create empty placeholders speculatively. Cross-system artifacts
 cite app-scoped artifacts and source evidence instead of copying app-local detail.
+
+Use the cross-system artifacts for distinct jobs:
+
+- `CONTRACTS.md` defines the inter-app boundaries: API, data, auth, health, observability, deployment, and ownership
+  contracts.
+- `findings/` stores synthesized cross-app claims that require evidence from more than one app.
+- `QUESTIONS.md` captures unresolved cross-app or target-product decisions raised by those synthesized findings.
+- `PARITY-MATRIX.md` records where producer and consumer behavior matched, drifted, or still needs executable proof.
+- `REWRITE-READINESS.md` states what is stable enough for Use Cases and Specs, and what blockers or proof items still
+  prevent implementation planning.
+
+These artifacts are connected, not independent. Cross-system findings should feed `CONTRACTS.md`, `QUESTIONS.md`,
+`PARITY-MATRIX.md`, and `REWRITE-READINESS.md` by citation; parity rows and readiness blockers should point back to
+the finding IDs and proof/question IDs they depend on.
 
 Older flat files directly under `agent-harness/legacy/` are legacy layout debt. Continue new discovery in the scoped
 structure unless an explicit Improvement or cleanup task migrates them.
@@ -185,6 +209,15 @@ scope must be explicit; do not infer it.
 Use cross-system artifacts only when a finding, question, contract, proof need, or readiness judgment requires more
 than one app. Route stable target-relevant findings to reference docs; leave legacy drift in legacy artifacts.
 
+Cross-system synthesis is a second layer over app-local discovery:
+
+- app-scoped artifacts keep local evidence close to the source app
+- cross-system findings synthesize boundary claims from multiple app artifacts
+- cross-system questions, parity rows, and readiness blockers trace back to those synthesized findings
+
+Do not flatten app-local evidence into cross-system narrative summaries when an app finding or source-map citation is
+enough.
+
 ## Post-Discovery Gates
 
 ### Artifact Normalization
@@ -201,6 +234,10 @@ Normalize in this order:
 For each artifact, fix Markdown formatting, heading hierarchy, table consistency, stale restart pointers, obvious
 ordering issues, and duplicate sections with the same claim. Preserve information density, evidence paths, artifact
 IDs, question IDs, finding IDs, proof IDs, lifecycle metadata, and evidence classifications.
+
+For cross-system artifacts specifically, preserve the traceability chain across app finding IDs, cross-system finding
+IDs, question IDs, proof IDs, parity rows, and readiness blockers. Normalization may tighten wording or merge
+duplicates, but it must not sever those links.
 
 For `findings/`, normalizing duplicates means merging two `LF-<APP>-NNN` files that make the same claim into one:
 keep the ID with the stronger evidence set, fold the other file's evidence paths into it, and do not delete the

@@ -20,7 +20,8 @@ tags: []
 
 ## Evidence
 
-(quote or reference the specific legacy source — file path, line numbers, snippet)
+(quote or reference the specific legacy source — file path, line numbers, snippet. For cross-system findings, cite the
+contributing app finding IDs and the underlying source evidence they synthesize.)
 
 ## Classification
 
@@ -40,11 +41,12 @@ why — e.g. "current code contradicts stale README; current code is authoritati
 
 ## Open Questions
 
-(list `Q-<APP>-NNN` IDs from `QUESTIONS.md` still open against this finding — empty means no open
-question-blockers on this finding)
+(list open question IDs from `QUESTIONS.md` still open against this finding — `Q-<APP>-NNN` for app findings,
+`CSQ-NNN` for cross-system findings. Empty means no open question-blockers on this finding.)
 
 ## Resolved Questions
 
-(for each `Q-<APP>-NNN` ID that used to be listed above and has since been resolved in `QUESTIONS.md`'s `Resolved
-Decisions`, move it here with the resolution text copied in directly — e.g. `` `Q-<APP>-NNN`: decision text `` — so
-this finding is self-contained without re-opening `QUESTIONS.md`)
+(for each question ID that used to be listed above and has since been resolved in `QUESTIONS.md`'s `Resolved
+Decisions`, move it here with the resolution text copied in directly — e.g.
+`` `Q-<APP>-NNN`: decision text `` or `` `CSQ-NNN`: decision text `` — so this finding is self-contained without
+re-opening `QUESTIONS.md`)

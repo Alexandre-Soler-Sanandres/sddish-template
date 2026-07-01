@@ -29,6 +29,10 @@ Create the other cross-system artifacts only when a slice produces evidence that
 
 Do not create empty placeholder artifacts speculatively.
 
+Cross-system findings are synthesized, not copied. They should cite the app-scoped finding IDs and source evidence
+that support the cross-app claim, then feed downstream contracts, questions, parity rows, and readiness judgments by
+citation.
+
 ## Entry Criteria
 
 Cross-system synthesis scope is explicit:
@@ -52,6 +56,10 @@ Use this precedence when app artifacts disagree:
 
 Mark stale or superseded evidence explicitly. Do not treat a checked-in contract snapshot as current runtime behavior
 until it is compared with the producing app.
+
+When a checked-in contract snapshot, consumer adapter, and producing runtime disagree, capture the mismatch in a
+cross-system finding first, then route the downstream decision to `QUESTIONS.md`, the executable proof need to
+`PARITY-MATRIX.md`, and any planning impact to `REWRITE-READINESS.md`.
 
 ## Working Discovery Plan
 
@@ -79,10 +87,12 @@ For each cross-system slice:
 2. Load only the app-scoped source-map sections relevant to the slice.
 3. Follow citations from source maps to app findings, QUESTIONS, tests, contracts, and source files only when needed.
 4. Record synthesized cross-app facts in the appropriate cross-system artifact.
-5. Record unresolved cross-app decisions in `QUESTIONS.md`.
-6. Route stable system-level findings to reference docs only when they are target-relevant and not merely legacy drift.
-7. Validate docs with `git diff --check`.
-8. Commit only when the user explicitly asks.
+5. Record or update the supporting cross-system finding first whenever the slice makes a cross-app claim.
+6. Record unresolved cross-app decisions in `QUESTIONS.md`.
+7. Link parity rows and readiness blockers back to the finding, question, or proof IDs they depend on.
+8. Route stable system-level findings to reference docs only when they are target-relevant and not merely legacy drift.
+9. Validate docs with `git diff --check`.
+10. Commit only when the user explicitly asks.
 
 ## Reference Enrichment Routing
 
@@ -92,6 +102,14 @@ For each cross-system slice:
 | Cross-app domain ownership, actors, workflows, canonical outcomes | `agent-harness/reference/DOMAIN.md` |
 | Cross-app commands, local Compose, ports, validation/proof commands | `agent-harness/reference/TOOLING.md` |
 | Contract tests, parity tests, security gates, readiness/proof standards | `agent-harness/reference/QUALITY.md` |
+
+Cross-system artifact responsibilities:
+
+- `CONTRACTS.md`: record the boundary surface and ownership model.
+- `findings/`: record synthesized cross-app claims with evidence and downstream links.
+- `QUESTIONS.md`: record unresolved cross-app or target-product decisions.
+- `PARITY-MATRIX.md`: record match/drift/proof status for important legacy-to-target behavior.
+- `REWRITE-READINESS.md`: state what is ready for Use Cases or Specs and what still blocks planning.
 
 ## Initial Cross-System Questions
 
@@ -138,3 +156,6 @@ Collapse `SUMMARY.md` to only:
 Remove: `Documentation Decision`, `Working Discovery Plan`, `Slice Roundtrip`, `Completed Slice Notes`, and
 `Restart Pointer`. Replace the restart pointer with a single line naming the next non-discovery phase (Use Cases or
 Specs) directly under `Reference Enrichment Routing`.
+
+Keep enough structure in the collapsed summary to explain the active synthesis scope and the boundary between
+contracts, questions, parity/proof tracking, and rewrite-readiness.

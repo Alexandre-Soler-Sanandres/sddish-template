@@ -30,16 +30,33 @@ placeholder files speculatively.
 Every cross-system artifact must cite the app-scoped source maps and source evidence it synthesizes. Do not
 copy app-local evidence directly into cross-system artifacts — reference it by path and artifact ID.
 
+Cross-system findings are synthesized claims, not duplicates of app-local findings. Cite the app finding IDs and
+source evidence that support the boundary claim, then let downstream artifacts cite that cross-system finding instead
+of repeating the same narrative again.
+
 ## Artifacts
 
 | Artifact | Purpose |
 | --- | --- |
 | `SUMMARY.md` | High-level cross-system discovery summary |
 | `CONTRACTS.md` | Inter-app API and data contracts |
-| `FINDINGS.md` | Cross-system findings that require evidence from more than one app |
-| `QUESTIONS.md` | Open questions that cannot be resolved from a single app's evidence |
-| `PARITY-MATRIX.md` | Feature or behavior parity between legacy apps and the target |
-| `REWRITE-READINESS.md` | Cross-system rewrite-readiness assessment |
+| `findings/active/<LF-ID>.md` | Cross-system findings that require evidence from more than one app |
+| `QUESTIONS.md` | Open questions and target-product decisions that cannot be resolved from a single app's evidence |
+| `PARITY-MATRIX.md` | Match/drift/proof tracking for feature or behavior parity between legacy apps and the target |
+| `REWRITE-READINESS.md` | Cross-system rewrite-readiness assessment and planning blockers |
 
 Create artifacts only when evidence from app-local discovery makes them necessary. Empty placeholder files
 should not be created speculatively.
+
+## Traceability Shape
+
+Use cross-system artifacts as a chain, not as isolated notes:
+
+1. app-scoped findings capture local evidence
+2. cross-system findings synthesize cross-app claims
+3. `QUESTIONS.md` records unresolved decisions raised by those claims
+4. `PARITY-MATRIX.md` records matched behavior, drift, and executable proof needs
+5. `REWRITE-READINESS.md` records what is stable enough for Use Cases/Specs and what still blocks planning
+
+`CONTRACTS.md` sits alongside that chain and defines the inter-app boundary surface the other artifacts are talking
+about.
