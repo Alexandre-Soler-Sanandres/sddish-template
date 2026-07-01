@@ -114,9 +114,10 @@ Cross-system artifact responsibilities:
 `PARITY-MATRIX.md` owns the canonical proof/parity IDs. When `REWRITE-READINESS.md` summarizes blockers, it should
 cite those existing proof IDs directly instead of introducing a second blocker-ID namespace.
 
-When cross-system clarification begins after normalization, the highest-impact cross-system blocker may drive the
-sequence first. Resolve any dependent or implicitly answered app questions in the same pass and update every affected
-artifact together instead of waiting for a later app-only cleanup sweep.
+When cross-system clarification begins after normalization, the highest-impact cross-system blocker should normally
+drive the sequence first whenever it represents the broadest open concern. Resolve any dependent or implicitly
+answered app questions in the same pass and update every affected artifact together instead of waiting for a later
+app-only cleanup sweep.
 
 ## Initial Cross-System Questions
 

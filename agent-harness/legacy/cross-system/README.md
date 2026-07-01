@@ -66,8 +66,8 @@ when it summarizes blockers, rather than creating a second readiness-specific ID
 
 ## Clarification Flow
 
-After cross-system normalization, question clarification may be driven by the cross-system blocker set rather than by
-strictly walking every app file first.
+After cross-system normalization, question clarification should normally be driven by the cross-system blocker set
+when those blockers represent the broadest open concerns, rather than by strictly walking every app file first.
 
 Recommended working method:
 
@@ -77,4 +77,5 @@ Recommended working method:
    rows, and rewrite-readiness notes
 4. after the cross-system blocker set is clarified, finish any remaining truly app-local questions
 
-This keeps the broad architectural decisions in front while still preserving app-level traceability.
+Only fall back to an app-first clarification pass when no cross-system blocker clearly dominates the next decision
+boundary. This keeps the broad architectural decisions in front while still preserving app-level traceability.

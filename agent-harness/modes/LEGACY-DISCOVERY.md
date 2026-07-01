@@ -262,23 +262,33 @@ runtime execution, record a follow-up question or proof item.
 After normalization, clarify open discovery questions before moving toward Use Cases, Specs, Tasks, or Implementation
 Planning.
 
-Inputs, in order:
+Context sources:
 
 1. App `QUESTIONS.md` files and each source map's deferred/cross-system question table.
 2. Cross-system `QUESTIONS.md` when synthesis exists.
 3. Cross-system `PARITY-MATRIX.md` proof candidates and `REWRITE-READINESS.md` blockers when they exist.
 4. Relevant `findings/`, `CONTRACTS.md`, or source-map notes only to understand an existing question.
 
-Use that input order to gather context, not as a rigid execution order. When cross-system synthesis exists and its P0
-or migration-critical questions clearly dominate the next decision boundary, it is acceptable to let a cross-system
-question drive the sequence first. In that mode:
+Use those sources to gather context, not as a required execution order.
+
+Default execution order:
+
+- when cross-system synthesis exists and its P0 or migration-critical questions dominate the next decision boundary,
+  start with the highest-impact cross-system blocker or question first
+- pull in app questions only when they are prerequisites for that answer or are implicitly answered by it
+- update the cross-system artifacts and every affected app artifact in the same pass so the traceability stays aligned
+- after the cross-system blocker set is clarified, finish any remaining truly app-local questions
+
+Only when no cross-system blocker clearly dominates should clarification start by walking app-local questions first.
+
+In cross-system-driven clarification:
 
 - start from the cross-system question, blocker, or proof need with the broadest impact
 - pull in app questions only when they are prerequisites for that answer or are implicitly answered by it
 - update the cross-system artifacts and every affected app artifact in the same pass so the traceability stays aligned
 
-This means cross-system questions may drive the clarification workflow, while app-local questions are still resolved
-immediately whenever the cross-system decision settles them.
+This means cross-system questions are the default driver whenever they represent the broadest open concerns, while
+app-local questions are resolved immediately whenever the cross-system decision settles them.
 
 For each open question:
 
