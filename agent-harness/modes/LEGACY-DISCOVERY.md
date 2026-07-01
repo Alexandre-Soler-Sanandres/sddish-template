@@ -269,6 +269,17 @@ Inputs, in order:
 3. Cross-system `PARITY-MATRIX.md` proof candidates and `REWRITE-READINESS.md` blockers when they exist.
 4. Relevant `findings/`, `CONTRACTS.md`, or source-map notes only to understand an existing question.
 
+Use that input order to gather context, not as a rigid execution order. When cross-system synthesis exists and its P0
+or migration-critical questions clearly dominate the next decision boundary, it is acceptable to let a cross-system
+question drive the sequence first. In that mode:
+
+- start from the cross-system question, blocker, or proof need with the broadest impact
+- pull in app questions only when they are prerequisites for that answer or are implicitly answered by it
+- update the cross-system artifacts and every affected app artifact in the same pass so the traceability stays aligned
+
+This means cross-system questions may drive the clarification workflow, while app-local questions are still resolved
+immediately whenever the cross-system decision settles them.
+
 For each open question:
 
 - Keep the original question ID stable.
@@ -284,6 +295,10 @@ For each open question:
   as a later reconciliation pass. A source map's initial baseline-decision capture, before any slice work begins,
   also uses the `Resolved Decisions` table with `Origin: baseline` — see `QUESTIONS-template.md`.
 - Convert questions requiring new source inspection or runtime execution into proof items or follow-up tasks.
+
+When a cross-system clarification pass resolves an app question indirectly, update the app `QUESTIONS.md`, the linked
+app finding(s), and any affected source-map notes in that same pass. Do not leave the app artifact waiting for a
+later reconciliation sweep.
 
 Before starting Use Cases or Specs, every in-scope discovery question must be resolved, explicitly deferred with
 rationale, marked not-needed, or routed to a named proof item. P0 or migration-critical blockers must be resolved,

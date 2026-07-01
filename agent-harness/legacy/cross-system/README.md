@@ -63,3 +63,18 @@ about.
 
 `PARITY-MATRIX.md` owns the canonical proof/parity IDs. `REWRITE-READINESS.md` should reference those existing IDs
 when it summarizes blockers, rather than creating a second readiness-specific ID namespace.
+
+## Clarification Flow
+
+After cross-system normalization, question clarification may be driven by the cross-system blocker set rather than by
+strictly walking every app file first.
+
+Recommended working method:
+
+1. start from the highest-impact cross-system blocker or question
+2. pull in app questions only when they are dependencies of that blocker or are resolved by the same decision
+3. update all touched artifacts together: cross-system `QUESTIONS.md`, app `QUESTIONS.md`, linked findings, parity
+   rows, and rewrite-readiness notes
+4. after the cross-system blocker set is clarified, finish any remaining truly app-local questions
+
+This keeps the broad architectural decisions in front while still preserving app-level traceability.
