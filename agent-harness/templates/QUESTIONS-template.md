@@ -49,8 +49,21 @@ you record a question here, also add its ID to the cited finding's `## Open Ques
 
 ## Resolved Decisions
 
-Keep the ID — findings reference resolved questions back by ID in their own `## Resolved Questions` section, so
-the ID must stay addressable after a question moves out of `Open Decisions`. State the decision itself, not the
-original question.
+Table, parallel in shape to `Open Decisions`. State the decision itself in the `Decision` column, not the original
+question.
 
-- **Q-\<APP\>-NNN**: (decision)
+| ID | Decision | Origin | Source finding(s) | Notes |
+| --- | --- | --- | --- | --- |
+| Q-\<APP\>-001 |  | resolved-from-open \| baseline |  |  |
+
+Origin:
+
+- `resolved-from-open` — this decision was a row in `Open Decisions` and moved here on resolution, keeping the
+  `Q-<APP>-NNN` ID it already had. Findings reference it back by that ID in their own `## Resolved Questions`
+  section, so the ID must stay addressable.
+- `baseline` — this decision was already known/resolved before or independent of the `Open Decisions` cycle (e.g.
+  captured during initial baseline discovery). Leave `ID` blank. Do not assign a new `Q-<APP>-NNN` ID to a baseline
+  decision — it was never open, nothing references it by ID, and inventing one would misrepresent it as having gone
+  through the `Open Decisions` cycle when it did not.
+
+`Source finding(s)`: same semantics as the `Open Decisions` column.

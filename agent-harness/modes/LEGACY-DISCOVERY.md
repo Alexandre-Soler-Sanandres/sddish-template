@@ -239,9 +239,11 @@ For each open question:
 - Present target-product decisions with concrete options and a recommended proposal.
 - Preserve evidence paths, finding IDs, proof IDs, and uncertainty notes.
 - Mark resolved only after the answer is captured in the right question file and affected restart/readiness notes.
-- When marking a question resolved, move it to `Resolved Decisions` keeping its ID, and for every finding listed
-  in its `Source finding(s)`, move the ID from that finding's `## Open Questions` to `## Resolved Questions` with
-  the resolution text — do this at the same time, not as a later reconciliation pass.
+- When marking a question resolved, move its row to the `Resolved Decisions` table keeping its ID, set
+  `Origin: resolved-from-open`, and for every finding listed in its `Source finding(s)`, move the ID from that
+  finding's `## Open Questions` to `## Resolved Questions` with the resolution text — do this at the same time, not
+  as a later reconciliation pass. A source map's initial baseline-decision capture, before any slice work begins,
+  also uses the `Resolved Decisions` table with `Origin: baseline` — see `QUESTIONS-template.md`.
 - Convert questions requiring new source inspection or runtime execution into proof items or follow-up tasks.
 
 Before starting Use Cases or Specs, every in-scope discovery question must be resolved, explicitly deferred with
