@@ -45,7 +45,9 @@ risk: low                # low | medium | high
 
 ## Open Questions
 
-(unresolved questions that may affect the spec)
+(unresolved questions that may affect the spec. Tag each with its origin: a legacy question ID (`CSQ-NNN` /
+`Q-<APP>-NNN`) when it traces to Legacy Discovery, or a short origin note — e.g. "raised during Partnering,
+YYYY-MM-DD" or "raised while drafting this Use Case" — when it does not.)
 
 ## Readiness Checklist
 

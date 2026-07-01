@@ -160,7 +160,7 @@ structure unless an explicit Improvement or cleanup task migrates them.
 | App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `findings/`, `QUESTIONS.md`, and stable reference docs. | Source map reaches `app-local-complete`. |
 | Cross-system synthesis | Active scope is explicit and all in-scope apps are `app-local-complete`. | Synthesize contracts, parity, questions, proof needs, and readiness across apps. | Cross-system `SUMMARY.md` marks synthesis complete and names the restart point. |
 | Artifact normalization | App-local and required cross-system discovery are complete. | Format, dedupe, order, and tighten existing artifacts without new source discovery. | Restart pointer moves to question clarification. |
-| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. | Restart pointer moves to Use Cases or Specs. |
+| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. | P0/migration-critical blockers resolved, deferred, or proof-routed — restart pointer moves to Use Cases or Specs. Remaining non-P0 questions carry forward into individual Use Cases/Specs as their own `Open Questions`; each artifact's own Readiness Checklist (not this phase) gates when it is finished. |
 
 ## App-Local Discovery
 
@@ -335,9 +335,12 @@ When a cross-system clarification pass resolves an app question indirectly, upda
 app finding(s), and any affected source-map notes in that same pass. Do not leave the app artifact waiting for a
 later reconciliation sweep.
 
-Before starting Use Cases or Specs, every in-scope discovery question must be resolved, explicitly deferred with
-rationale, marked not-needed, or routed to a named proof item. P0 or migration-critical blockers must be resolved,
-explicitly accepted as deferred, or routed to proof work before any Spec relies on that behavior.
+P0 or migration-critical blockers must be resolved, explicitly accepted as deferred, or routed to proof work
+before any Use Case or Spec work begins. Once that gate is met, any cross-system or app-local finding may seed a
+Use Case or Spec regardless of remaining non-P0 open questions — carry those questions forward into the
+artifact's own `Open Questions` section. An individual Use Case or Spec is not finished (cannot reach
+`ready-for-spec` / `approved`) until its own open questions are resolved, deferred, marked not-needed, or routed
+to proof, per that artifact's Readiness Checklist.
 
 ## Discovery Lifecycle
 

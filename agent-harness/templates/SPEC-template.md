@@ -70,6 +70,12 @@ tags: []
 
 (are Tasks required for this spec? rationale)
 
+## Open Questions
+
+(unresolved questions that may affect approval. Tag each with its origin: a legacy question ID (`CSQ-NNN` /
+`Q-<APP>-NNN`) when it traces to Legacy Discovery, or a short origin note — e.g. "raised during Partnering,
+YYYY-MM-DD" or "raised while drafting this Spec" — when it does not.)
+
 ## Readiness Checklist
 
 Before advancing to `approved`, verify all items are checked:
