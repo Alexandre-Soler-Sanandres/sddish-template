@@ -40,4 +40,11 @@ why — e.g. "current code contradicts stale README; current code is authoritati
 
 ## Open Questions
 
-(what needs further investigation before converting to a formal artifact)
+(list `Q-<APP>-NNN` IDs from `QUESTIONS.md` still open against this finding — empty means no open
+question-blockers on this finding)
+
+## Resolved Questions
+
+(for each `Q-<APP>-NNN` ID that used to be listed above and has since been resolved in `QUESTIONS.md`'s `Resolved
+Decisions`, move it here with the resolution text copied in directly — e.g. `` `Q-<APP>-NNN`: decision text `` — so
+this finding is self-contained without re-opening `QUESTIONS.md`)

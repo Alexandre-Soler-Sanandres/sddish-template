@@ -22,9 +22,9 @@ Each question gets a stable ID: `Q-<APP>-NNN`, numbered once and never reused, m
 ID convention. IDs are permanent even if the question is later merged into another — record the merge in `Notes`
 instead of deleting the row.
 
-| ID | Question | Classification | Decision type | Area | Notes |
-| --- | --- | --- | --- | --- | --- |
-| Q-\<APP\>-001 |  | app-local \| cross-system \| target-product |  |  |  |
+| ID | Question | Classification | Decision type | Area | Source finding(s) | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Q-\<APP\>-001 |  | app-local \| cross-system \| target-product |  |  |  |  |
 
 Classification: same meaning as the source map's Deferred and Cross-System Questions table — `app-local` (can be
 answered from this app's evidence), `cross-system` (needs evidence from more than one app), or `target-product`
@@ -42,9 +42,15 @@ Area: a short domain tag for the app's own subsystems (defined by the app's `SOU
 template) for filtering. Metadata only — do not create a section per area; that is the structure this template
 replaces.
 
+Source finding(s): one or more `LF-<APP>-NNN` IDs whose evidence raised this question, comma-separated, or
+`baseline` / `cross-cutting` when the question does not trace to a specific finding (broad architecture, naming, or
+deployment-topology calls raised independent of any single finding). Link bidirectionally at authoring time: when
+you record a question here, also add its ID to the cited finding's `## Open Questions` section.
+
 ## Resolved Decisions
 
-Flat list, no ID required — nothing else references a resolved decision back by ID. State the decision itself, not
-the original question.
+Keep the ID — findings reference resolved questions back by ID in their own `## Resolved Questions` section, so
+the ID must stay addressable after a question moves out of `Open Decisions`. State the decision itself, not the
+original question.
 
-- (decision)
+- **Q-\<APP\>-NNN**: (decision)

@@ -149,13 +149,23 @@ structure unless an explicit Improvement or cleanup task migrates them.
 2. Inspect code, then docs, then tests.
 3. Classify evidence and conflicts using the Core Rules.
 4. Update app `findings/` (add or merge into an `LF-<APP>-NNN` file, looked up by ID), `QUESTIONS.md`, and
-   `SOURCE-MAP.md`.
+   `SOURCE-MAP.md`. When a question is recorded, link it bidirectionally: cite the originating finding(s) in
+   `QUESTIONS.md`'s `Source finding(s)` column, and add the question ID to each cited finding's
+   `## Open Questions` section. Use `baseline` / `cross-cutting` in `Source finding(s)` when the question does not
+   trace to a specific finding.
 5. Enrich stable reference docs: `ARCHITECTURE.md`, `DOMAIN.md`, `TOOLING.md`, and `QUALITY.md`.
 6. Validate with `git diff --check`.
 7. Commit only when explicitly asked.
 
 Reference enrichment may be deferred across blockwise work only when the source map says so; it must be complete
 before `app-local-complete`.
+
+Record any forward-looking candidate list a slice produces — candidate Use Cases, candidate Specs, candidate
+quality gates, or anything similarly shaped — in the relevant finding's `## Candidate Artifacts` section at
+authoring time. Do not invent a new per-slice `"Candidate <Something>"` list in `SOURCE-MAP.md`'s slice notes under
+any label; that is the same duplication regardless of what the list is called. When a candidate spans multiple
+findings from the same slice, record it in each contributing finding's `Candidate Artifacts`, not as a new shared
+list. `Completed Notes` in the source map holds evidence paths, stable findings, and unresolved decisions only.
 
 ### Blockwise Discovery
 
@@ -229,6 +239,9 @@ For each open question:
 - Present target-product decisions with concrete options and a recommended proposal.
 - Preserve evidence paths, finding IDs, proof IDs, and uncertainty notes.
 - Mark resolved only after the answer is captured in the right question file and affected restart/readiness notes.
+- When marking a question resolved, move it to `Resolved Decisions` keeping its ID, and for every finding listed
+  in its `Source finding(s)`, move the ID from that finding's `## Open Questions` to `## Resolved Questions` with
+  the resolution text — do this at the same time, not as a later reconciliation pass.
 - Convert questions requiring new source inspection or runtime execution into proof items or follow-up tasks.
 
 Before starting Use Cases or Specs, every in-scope discovery question must be resolved, explicitly deferred with
