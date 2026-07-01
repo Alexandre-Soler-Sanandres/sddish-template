@@ -249,6 +249,23 @@ keep the ID with the stronger evidence set, fold the other file's evidence paths
 superseded file — set its `status` to `archived`, add a one-line pointer to the surviving ID, and move it to
 `findings/archive/`. IDs are never reused or silently dropped.
 
+For `QUESTIONS.md` (app-local and cross-system), sweep `Open Decisions` for duplicate rows before normalization is
+considered complete:
+
+- Flag any two rows whose `Source finding(s)` sets overlap — this is a strong, mechanical signal of the same
+  underlying decision raised more than once.
+- Flag any row whose `Notes` column references another question ID (e.g. "see CSQ-", "same as Q-", "duplicate
+  of") — these are self-flagged candidates that must be resolved into an actual merge, not left as narrative.
+- Merge confirmed duplicates without resolving them — normalization does not decide open questions. Keep the row
+  with the clearer/more complete question text as the single `Open Decisions` entry, and add a one-line note in
+  its `Notes` column recording the merged-away ID and why (e.g. "merges duplicate CSQ-012, same source finding
+  LF-CROSS-016"). Do not silently drop the merged-away row — the ID must stay traceable even though it no longer
+  has its own row, mirroring how finding-dedup keeps a pointer instead of deleting the superseded file. The
+  question itself stays open until Question Clarification actually resolves it.
+
+For cross-system `findings/`, verify each finding's `## Evidence` section cites the contributing app finding IDs
+it synthesizes, not only raw source paths — add the missing citations before normalization is considered complete.
+
 `SOURCE-MAP.md` and cross-system `SUMMARY.md` additionally collapse to their `Discovery-Complete Shape` (see
 `SOURCE-MAP-template.md` and `CROSS-SYSTEM-SUMMARY-template.md`) as part of this pass, once `discovery_state` is
 `app-local-complete` (app-scoped) or cross-system synthesis is finished. Before collapsing, verify every stable
@@ -307,6 +324,11 @@ For each open question:
   finding's `## Open Questions` to `## Resolved Questions` with the resolution text — do this at the same time, not
   as a later reconciliation pass. A source map's initial baseline-decision capture, before any slice work begins,
   also uses the `Resolved Decisions` table with `Origin: baseline` — see `QUESTIONS-template.md`.
+- When a resolution produces a stable, target-relevant fact (architecture boundary, domain rule, tooling/command,
+  quality standard), enrich the matching reference doc in the same pass — do not defer it. Use the app-local
+  routing table in `## Reference Enrichment` below, or the cross-system `SUMMARY.md`'s `Reference Enrichment
+  Routing` table when the decision is cross-system. Skip enrichment only when the decision is purely
+  process/traceability bookkeeping (e.g., merging a duplicate ID) with no new stable fact to record.
 - Convert questions requiring new source inspection or runtime execution into proof items or follow-up tasks.
 
 When a cross-system clarification pass resolves an app question indirectly, update the app `QUESTIONS.md`, the linked
@@ -383,7 +405,8 @@ source was treated as authoritative when evidence conflicts.
 
 ## Reference Enrichment
 
-Enrich reference docs when app-local evidence is stable:
+Enrich reference docs when evidence is stable — from App-Local Discovery, Cross-System Synthesis, or Question
+Clarification:
 
 | Finding type | Target reference doc |
 | --- | --- |
