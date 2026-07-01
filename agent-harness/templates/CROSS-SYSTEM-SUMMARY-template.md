@@ -111,6 +111,9 @@ Cross-system artifact responsibilities:
 - `PARITY-MATRIX.md`: record match/drift/proof status for important legacy-to-target behavior.
 - `REWRITE-READINESS.md`: state what is ready for Use Cases or Specs and what still blocks planning.
 
+`PARITY-MATRIX.md` owns the canonical proof/parity IDs. When `REWRITE-READINESS.md` summarizes blockers, it should
+cite those existing proof IDs directly instead of introducing a second blocker-ID namespace.
+
 ## Initial Cross-System Questions
 
 (planning seeds only; move or refine into `QUESTIONS.md` when a slice confirms they cannot be answered from available

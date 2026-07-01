@@ -60,3 +60,6 @@ Use cross-system artifacts as a chain, not as isolated notes:
 
 `CONTRACTS.md` sits alongside that chain and defines the inter-app boundary surface the other artifacts are talking
 about.
+
+`PARITY-MATRIX.md` owns the canonical proof/parity IDs. `REWRITE-READINESS.md` should reference those existing IDs
+when it summarizes blockers, rather than creating a second readiness-specific ID namespace.

@@ -144,6 +144,8 @@ Use the cross-system artifacts for distinct jobs:
 These artifacts are connected, not independent. Cross-system findings should feed `CONTRACTS.md`, `QUESTIONS.md`,
 `PARITY-MATRIX.md`, and `REWRITE-READINESS.md` by citation; parity rows and readiness blockers should point back to
 the finding IDs and proof/question IDs they depend on.
+Use the proof/parity IDs defined in `PARITY-MATRIX.md` as the canonical IDs. `REWRITE-READINESS.md` should reference
+those existing proof IDs directly instead of inventing a second blocker-ID namespace.
 
 Older flat files directly under `agent-harness/legacy/` are legacy layout debt. Continue new discovery in the scoped
 structure unless an explicit Improvement or cleanup task migrates them.
