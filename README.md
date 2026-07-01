@@ -99,6 +99,7 @@ See [docs/06-adoption.md](docs/06-adoption.md) for full adoption instructions.
 | [docs/05-context-management.md](docs/05-context-management.md) | Context rules, CATALOG, SUMMARY files |
 | [docs/06-adoption.md](docs/06-adoption.md) | Bootstrap steps, minimal adoption path, what belongs where |
 | [docs/07-glossary.md](docs/07-glossary.md) | Term definitions |
+| [docs/08-legacy-applications.md](docs/08-legacy-applications.md) | Practical legacy application discovery playbook |
 
 ## Key Principles
 

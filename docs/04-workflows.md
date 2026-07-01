@@ -179,6 +179,9 @@ Improvement artifacts must originate from Review findings — not from Partnerin
 
 ## Legacy Discovery Flow
 
+For the practical step-by-step legacy application playbook, see
+[08-legacy-applications.md](08-legacy-applications.md).
+
 ```text
 legacy/imported/old-project
   → legacy inventory
