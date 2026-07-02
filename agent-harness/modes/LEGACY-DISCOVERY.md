@@ -40,7 +40,7 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | --- | --- |
 | `app-discovery-active` | App-local slices are still being discovered. |
 | `app-local-complete` | App evidence is sufficient for app-local rewrite planning. |
-| `rewrite-ready` | App evidence, cross-system synthesis, and required proof checks are complete or explicitly deferred. |
+| `rewrite-ready` | App evidence, cross-system synthesis, and target decisions are sufficient to begin rewrite design work. Proof obligations may still remain when they are explicit and do not block coherent design. |
 
 ## Rules
 
@@ -71,7 +71,7 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | LD-023 | Completion-Criteria | No remaining slice is needed for app-local rewrite planning. |
 | LD-024 | Proof-Gate | `proof_needed: true` — discovery found drift or runtime behavior needing executable proof before rewrite planning treats it as stable. |
 | LD-025 | Proof-Gate | `proof_needed: false` — no required executable proof is known, or required proof is complete. |
-| LD-026 | Proof-Gate | An app may be `app-local-complete` with `proof_needed: true`. Rewrite-readiness requires required proofs to be completed or explicitly deferred with an accepted decision. |
+| LD-026 | Proof-Gate | An app may be `app-local-complete` with `proof_needed: true`. Rewrite-ready means the remaining proof obligations are explicit and can be carried forward into Use Cases, Specs, validation, or later implementation work without making the rewrite design incoherent. |
 | LD-027 | Import-Hygiene | During normal discovery, inventory `.env`, `.env.*`, `.env.local`, `secrets/`, `*.key`, `*.pem`, password files, token files, logs, caches, virtual environments, coverage output, test artifacts, generated metadata, egg-info, and build output by path only — do not open contents. |
 | LD-028 | Import-Hygiene | Open log contents only in an explicit log or security discovery slice, after confirming they do not contain secrets. |
 | LD-029 | Import-Hygiene | Do not remove or rewrite imported artifacts during normal discovery. |

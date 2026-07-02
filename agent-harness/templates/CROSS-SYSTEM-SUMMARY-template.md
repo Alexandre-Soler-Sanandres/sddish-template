@@ -73,7 +73,7 @@ cross-system finding first, then route the downstream decision to `QUESTIONS.md`
 | 5 | Deployment, runtime topology, and configuration parity | pending | `CONTRACTS.md`, `findings/` entries, `QUESTIONS.md` as needed | Synthesize ports, networks, Compose/Swarm/Kubernetes posture, images, volumes, env vars, and runtime responsibilities. |
 | 6 | Domain ownership and workflow boundary synthesis | pending | `findings/` entries, `QUESTIONS.md` | Confirm which app owns canonical outcomes versus presentation, orchestration, or adapter behavior. Record candidate Use Cases/Specs in the relevant finding's `Candidate Artifacts`, not as a separate list. |
 | 7 | Rewrite proof and parity matrix | pending | `PARITY-MATRIX.md` | Turn known drift into executable proof candidates and parity rows. |
-| 8 | Cross-system rewrite-readiness assessment | pending | `REWRITE-READINESS.md` | Decide what is rewrite-ready, what remains a target-product decision, and what must feed Use Cases, Specs, or Implementation Planning. |
+| 8 | Cross-system rewrite-readiness assessment | pending | `REWRITE-READINESS.md` | Decide what is ready to feed rewrite design work, what remains a target-product decision, and which proof or validation obligations must be carried forward into Use Cases, Specs, validation, or Implementation Planning. |
 | 9 | Post-discovery artifact normalization | pending | App and cross-system legacy artifacts | Format, deduplicate, and merge within each artifact without losing information density, evidence paths, IDs, or correctness. |
 
 Adjust slice names and count to the active synthesis scope. Keep every slice focused enough to complete with a small

@@ -252,7 +252,9 @@ Before accepting `app-local-complete`, check:
 - the app source map names the next meaningful step
 
 Important distinction: app-local complete is not the same as rewrite-ready. It means local evidence is mapped.
-Cross-system synthesis, proof, and target decisions may still be required.
+Rewrite-ready means the evidence and decisions are sufficient to begin rewrite design work; cross-system synthesis,
+target decisions, and some explicit proof obligations may still remain before that point. Proof does not need to be
+fully closed if the remaining obligations are named and do not block coherent design.
 
 Tip: do not ask for more app-local slices just because there is more code. Ask whether more local discovery changes
 the next decision.
@@ -265,7 +267,8 @@ Start it only when:
 
 - the active app scope is explicit
 - every in-scope app is app-local complete
-- you want to understand boundaries, contracts, parity, proof needs, or rewrite readiness across apps
+- you want to understand boundaries, contracts, parity, proof needs, or whether the cross-system evidence is ready
+  to feed rewrite design across apps
 
 Useful prompt:
 
@@ -295,7 +298,7 @@ Use the artifacts this way:
 | `findings/active/LF-CROSS-NNN.md` | What cross-app claim is supported by multiple evidence trails? |
 | `QUESTIONS.md` | What cross-app or target-product decision remains open? |
 | `PARITY-MATRIX.md` | What matches, drifts, or needs executable proof? |
-| `REWRITE-READINESS.md` | What is ready for Use Cases/Specs and what still blocks planning? |
+| `REWRITE-READINESS.md` | What is ready to feed Use Cases/Specs and what proof or planning obligations still need to be carried forward? |
 
 Tip: proof IDs should come from `PARITY-MATRIX.md`; readiness should cite them instead of creating another ID system.
 
@@ -315,8 +318,8 @@ a question or proof item.
 
 ## Step 14: Clarify Questions Before Specs
 
-Before Use Cases or Specs, open questions should be resolved, deferred with rationale, marked not-needed, or routed to
-proof.
+Before Use Cases or Specs, make sure the questions that actually block the topic you want to design are resolved,
+deferred with rationale, marked not-needed, or routed to proof.
 
 Ask the agent for options:
 
@@ -345,7 +348,7 @@ You are ready when:
 
 - findings can be cited cleanly
 - questions are resolved or intentionally routed
-- required proof is complete or explicitly deferred
+- remaining proof obligations are explicit, and any unresolved proof does not make the design incoherent
 - candidate Use Cases and Specs have supporting evidence
 - the desired target behavior is not being confused with accidental legacy behavior
 
@@ -369,7 +372,7 @@ not blindly preserve old behavior.
 | Treating old docs as truth | Ask whether current code or tests confirm them. |
 | Deciding target architecture too early | Record open target-product decisions and keep service splits provisional. |
 | Letting cross-system work start before app-local completion | Finish in-scope app source maps first, then synthesize. |
-| Confusing app-local complete with rewrite-ready | Check cross-system synthesis, proof, and accepted deferrals. |
+| Confusing app-local complete with rewrite-ready | Check cross-system synthesis, target decisions, and whether any remaining proof still blocks coherent design. |
 | Leaving decisions in chat | Ask the agent to update `QUESTIONS.md`, findings, source maps, and readiness notes. |
 
 ## Useful Human Review Checklist

@@ -89,6 +89,9 @@ When all app-local slices are complete and cross-system synthesis is done, the n
 normalization: format, deduplicate, and merge within this app's legacy artifacts without changing evidence meaning
 or losing traceability. See `agent-harness/modes/LEGACY-DISCOVERY.md`.
 
+`rewrite-ready` means the app's evidence and cross-system decisions are sufficient to begin rewrite design work.
+Proof obligations may still remain if they are explicit and do not block coherent Use Cases, Specs, or planning.
+
 ## Reference Enrichment Routing
 
 When evidence is stable, route findings to the appropriate reference doc before closing the slice.
