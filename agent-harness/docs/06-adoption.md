@@ -36,8 +36,8 @@ Then fill in the four project-specific reference files as above.
   changes. Live per-project state (e.g. active Implementation Plan pointers, per `CORE.md`'s Parallel Work rule)
   lives in the separate `harness-data/CATALOG.md` instead — same name, different root, on purpose: one is the
   universal index, the other is this project's own bookkeeping against it
-- Optionally add `harness-data/RUN-LOG.md` for active or interrupted high-risk work; keep it temporary and collapse
-  or clear it after completion
+- Optionally add `harness-data/RUN-LOG.md` only for interrupted, approval-heavy, multi-step, or high-risk work;
+  keep it temporary and collapse or clear it after completion
 - Optionally add `REPO-MAP.md` at repo root or a major subtree when the codebase is large enough that normal context
   loading becomes clumsy
 - Optionally add stack-specific bootstrap guides under `harness-data/guides/`
@@ -63,7 +63,7 @@ harness produces (Use Cases, Specs, Tasks, Plans, Reviews, Improvements, Transcr
 | `agent-harness/modes/**/*.md` | Universal — do not modify |
 | `agent-harness/templates/*.md` | Universal — do not modify |
 | `harness-data/CATALOG.md` | Project-specific — live state, not part of the template |
-| `harness-data/RUN-LOG.md` | Optional — temporary operational trace for active/interrupted work |
+| `harness-data/RUN-LOG.md` | Optional — temporary operational trace only for interrupted or higher-risk work |
 | `REPO-MAP.md` | Optional — structural context for large repos or major subtrees |
 | `harness-data/reference/ARCHITECTURE.md` | Project-specific — fill in |
 | `harness-data/reference/DOMAIN.md` | Project-specific — fill in |

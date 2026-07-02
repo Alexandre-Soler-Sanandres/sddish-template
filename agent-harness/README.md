@@ -70,7 +70,7 @@ Nothing here is ever copied into or out of the template:
 ``` text
 harness-data/
   CATALOG.md           ← this project's live state (e.g. active Implementation Plans)
-  RUN-LOG.md           ← optional rolling execution log for active or interrupted work
+  RUN-LOG.md           ← optional exception-only execution log for interrupted or high-risk work
   REPO-MAP.md          ← optional structural context for large repos
   reference/           ← project-specific (fill these in)
     ARCHITECTURE.md

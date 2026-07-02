@@ -136,12 +136,22 @@ Source:
 
 ### Optional Operational Trace
 
-For long-running, interrupted, or high-risk work, a project may keep a rolling `harness-data/RUN-LOG.md`:
+Default: do not create a run log for ordinary short interactive work.
+
+For interrupted, approval-heavy, multi-step, or high-risk work, a project may keep a rolling
+`harness-data/RUN-LOG.md`:
 
 - It is temporary operational state, not a source-of-truth artifact.
 - Use it for approvals, resumptions, interruptions, and validation checkpoints that help work continue safely.
 - When work finishes, collapse it to a short closure note or clear it.
 - Durable decisions and outcomes must still be written back into the real artifacts.
+
+This is the harness's lightweight observability layer when runtime visibility matters:
+
+- what context was loaded
+- what commands or checks were run
+- where work paused or resumed
+- why execution stopped
 
 ## Validation and Quality
 

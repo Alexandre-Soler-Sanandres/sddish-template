@@ -72,13 +72,17 @@ every run.
 
 ## RUN-LOG.md
 
-An optional `harness-data/RUN-LOG.md` may exist for active or recently interrupted work.
+An optional `harness-data/RUN-LOG.md` may exist for interrupted, approval-heavy, multi-step, or high-risk work.
+Do not create it by default for ordinary short interactive work.
 
 Use it as a rolling operational log for:
 
+- context actually loaded when that matters for safe resume
 - approvals
 - interruptions and resumptions
 - validation checkpoints
+- commands or checks run
+- stop reason
 - temporary execution notes needed to continue safely
 
 It is not a source-of-truth artifact. Keep it small, and collapse it to a short closure note or clear it when the
