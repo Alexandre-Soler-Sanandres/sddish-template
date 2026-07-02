@@ -9,6 +9,9 @@
 - Do not implement from Partnering mode.
 - Do not implement before an accepted Implementation Plan exists.
 - Preserve traceability across Use Cases, Specs, Tasks, Plans and Reviews.
+- Do not retroactively rewrite artifacts in `done/` or `archive/` folders when paths, structure, or conventions
+  change elsewhere in the harness — they are historical snapshots of what was true when written, the same way a
+  commit message is, not living references that track later changes.
 
 ## Context Loading
 
@@ -59,7 +62,7 @@ After a resume or context compaction, repeat the checkpoint before the next high
 ## Commits
 
 - Never commit unless the user explicitly requests it.
-- When committing, follow the project's commit conventions in `agent-harness/reference/QUALITY.md`.
+- When committing, follow the project's commit conventions in `harness-data/reference/QUALITY.md`.
 
 ## High-Risk Areas
 
@@ -69,14 +72,14 @@ Extra care is required when touching:
 - security, secrets or auth
 - deployment or infrastructure
 - payment or financial transaction execution
-- domain-critical business logic (define specifics in `agent-harness/reference/DOMAIN.md`)
+- domain-critical business logic (define specifics in `harness-data/reference/DOMAIN.md`)
 
 ## Parallel Work
 
 - Each Spec may have at most one Implementation Plan at status `approved` or `in-progress` at a time.
-- Before approving a new Plan, check CATALOG.md for other Plans at `approved` or `in-progress`.
+- Before approving a new Plan, check `harness-data/CATALOG.md` for other Plans at `approved` or `in-progress`.
 - If two active Plans have overlapping `allowed_paths` across their Tasks: stop. Surface the
   conflict — list both Plan IDs and the overlapping paths. Do not proceed until the user
   explicitly resolves it.
 - Concurrent Plans on non-overlapping Specs are permitted without restriction.
-- CATALOG.md must reflect all Plans at `approved` or `in-progress` status.
+- `harness-data/CATALOG.md` must reflect all Plans at `approved` or `in-progress` status.

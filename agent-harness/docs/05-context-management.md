@@ -39,10 +39,10 @@ These files are always loaded regardless of mode:
 
 Reference files are loaded only when needed — not by default:
 
-- `agent-harness/reference/DOMAIN.md` — when domain concepts or terminology are involved
-- `agent-harness/reference/ARCHITECTURE.md` — when validating scope, boundaries, or allowed paths
-- `agent-harness/reference/TOOLING.md` — when running validation commands (Implementation mode)
-- `agent-harness/reference/QUALITY.md` — when checking definition of done (Implementation mode)
+- `harness-data/reference/DOMAIN.md` — when domain concepts or terminology are involved
+- `harness-data/reference/ARCHITECTURE.md` — when validating scope, boundaries, or allowed paths
+- `harness-data/reference/TOOLING.md` — when running validation commands (Implementation mode)
+- `harness-data/reference/QUALITY.md` — when checking definition of done (Implementation mode)
 
 ## CATALOG.md
 
@@ -54,7 +54,7 @@ It must not list hundreds of individual artifacts. Use frontmatter links and SUM
 
 ## SUMMARY.md Files
 
-Local `SUMMARY.md` files may exist in artifact directories (e.g. `agent-harness/specs/SUMMARY.md`) when the number of artifacts makes navigation difficult. They are created on demand — not required upfront.
+Local `SUMMARY.md` files may exist in artifact directories (e.g. `harness-data/specs/SUMMARY.md`) when the number of artifacts makes navigation difficult. They are created on demand — not required upfront.
 
 SUMMARY files are not indexes of everything. They are lightweight navigation aids for finding an artifact when its ID is not known.
 

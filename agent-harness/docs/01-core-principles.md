@@ -43,7 +43,7 @@ Each stage produces a file-based artifact. Each artifact is traceable to its sou
 
 Mode files (`agent-harness/modes/`) define process rules that apply to every project using this harness, regardless of tech stack. They must never contain stack-specific commands, tool names, or technology choices.
 
-Reference files (`agent-harness/reference/`) are project-specific. They define the concrete details that vary per project: architecture, domain concepts, tooling commands, and quality standards.
+Reference files (`harness-data/reference/`) are project-specific. They define the concrete details that vary per project: architecture, domain concepts, tooling commands, and quality standards.
 
 `agent-harness/OUTPUTS.md` is the universal exception — it defines artifact formats, naming conventions, and folder structure for all projects.
 

@@ -14,7 +14,7 @@ approval:
   required: true
   approved_by: null
   approved_at: null      # YYYY-MM-DD
-requires: []             # harness reference files needed, e.g. [agent-harness/reference/ARCHITECTURE.md#database]
+requires: []             # harness reference files needed, e.g. [harness-data/reference/ARCHITECTURE.md#database]
 technical_refs: []       # external technical artifacts, e.g. [docs/api/openapi.yaml, docs/db/schema.sql]
 test_refs: []            # populated during implementation — paths to test files covering each AC
 tags: []

@@ -27,7 +27,7 @@ risk.
 Start with a concrete app or imported source path:
 
 ```text
-Please run legacy discovery for `legacy/imported/<app-slug>`.
+Please run legacy discovery for `harness-data/legacy/imported/<app-slug>`.
 ```
 
 If you are unsure about scope, ask for a short discovery proposal first:
@@ -87,7 +87,7 @@ be your call.
 For each app, discovery should live under:
 
 ```text
-agent-harness/legacy/apps/<app-slug>/
+harness-data/legacy/apps/<app-slug>/
 ```
 
 The important files are:
@@ -231,10 +231,10 @@ Check that stable facts are routed to:
 
 | Stable fact | Reference doc |
 | --- | --- |
-| Architecture boundaries, layer contracts, runtime topology | `agent-harness/reference/ARCHITECTURE.md` |
-| Domain concepts, rules, terminology, actors, workflows | `agent-harness/reference/DOMAIN.md` |
-| Commands, ports, services, CI, local validation | `agent-harness/reference/TOOLING.md` |
-| Quality gates, test expectations, proof standards, hygiene | `agent-harness/reference/QUALITY.md` |
+| Architecture boundaries, layer contracts, runtime topology | `harness-data/reference/ARCHITECTURE.md` |
+| Domain concepts, rules, terminology, actors, workflows | `harness-data/reference/DOMAIN.md` |
+| Commands, ports, services, CI, local validation | `harness-data/reference/TOOLING.md` |
+| Quality gates, test expectations, proof standards, hygiene | `harness-data/reference/QUALITY.md` |
 
 Human check: reject reference updates that are speculative, unresolved, or merely old-system noise. References should
 help future target work, not preserve every legacy detail.
@@ -407,9 +407,9 @@ You can ask the agent to run these when relevant:
 
 ```sh
 git diff --check
-find legacy/imported/<app-slug> -path '*/.git' -type d
+find harness-data/legacy/imported/<app-slug> -path '*/.git' -type d
 rg --files agent-harness -g 'README.md' -g 'README.*'
 ```
 
 Expected result for the last command: only `agent-harness/README.md`. Extra directory-scoped harness READMEs should
-not appear. Imported application READMEs under `legacy/imported/` are source evidence, not harness artifacts.
+not appear. Imported application READMEs under `harness-data/legacy/imported/` are source evidence, not harness artifacts.

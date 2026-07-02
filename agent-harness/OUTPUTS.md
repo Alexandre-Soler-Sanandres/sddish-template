@@ -60,14 +60,15 @@ Each artifact directory uses subfolders to reflect lifecycle state.
 New artifacts are created in `active/`.
 Move artifacts between subfolders as their status changes — do not rename the file ID.
 For Improvements, `done/` means the approved target changes are applied and the artifact records a
-`## Validation Result` confirming what was checked.
+`## Validation Result` confirming what was checked. Once an artifact reaches `done/` or `archive/`, its content is
+not retroactively rewritten when paths or conventions change elsewhere — see `CORE.md`'s Universal Rules.
 
 ## Legacy Discovery Structure
 
 Legacy Discovery uses scoped folders:
 
-- App-specific discovery: `agent-harness/legacy/apps/<legacy-app-slug>/`
-- Cross-system synthesis: `agent-harness/legacy/cross-system/`
+- App-specific discovery: `harness-data/legacy/apps/<legacy-app-slug>/`
+- Cross-system synthesis: `harness-data/legacy/cross-system/`
 
 Detailed Legacy Discovery layout and rules are defined in
 `agent-harness/modes/LEGACY-DISCOVERY.md`.

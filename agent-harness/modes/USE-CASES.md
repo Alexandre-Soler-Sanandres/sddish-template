@@ -44,35 +44,25 @@ Create a Use Case when:
 - Observable outcome
 - Open questions
 
+## Rules
+
+| ID | Type | Rule |
+| --- | --- | --- |
+| UCS-001 | Refining | A Use Case may be refined when new information from a Partnering session or Legacy Finding changes the scope, open questions are resolved, or the primary actor or scenario needs correction. |
+| UCS-002 | Refining | Refining does not change the Use Case ID. Update the `updated` field and status as appropriate. |
+| UCS-003 | Readiness-Gate | Before setting a Use Case status to `ready-for-spec`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
+| UCS-004 | Boundaries | Do not contain low-level implementation detail (unless essential to the scenario). |
+| UCS-005 | Boundaries | Do not trigger implementation. |
+| UCS-006 | Boundaries | Do not create Specs, Tasks, or Implementation Plans. |
+
 ## Output
 
-- `agent-harness/use-cases/active/UC-*.md`
+- `harness-data/use-cases/active/UC-*.md`
 - Use `agent-harness/templates/USE-CASE-template.md` as the starting point for every new Use Case.
 
 ## Reference Files
 
 Load these when relevant — do not load all of them by default:
 
-- `agent-harness/reference/DOMAIN.md` — when defining actors, goals, or business rules that require domain knowledge
-- `agent-harness/reference/ARCHITECTURE.md` — when the use case involves system boundaries or external integrations
-
-## Refining a Use Case
-
-A Use Case may be refined when:
-
-- New information from a Partnering session or Legacy Finding changes the scope
-- Open questions are resolved
-- The primary actor or scenario needs correction
-
-Refining does not change the Use Case ID. Update the `updated` field and status as appropriate.
-
-## Readiness Gate
-
-Before setting a Use Case status to `ready-for-spec`, verify the Readiness Checklist in the artifact.
-All items must be checked. A single unchecked item blocks the status change.
-
-## Boundaries — Must Not
-
-- Contain low-level implementation detail (unless essential to the scenario)
-- Trigger implementation
-- Create Specs, Tasks, or Implementation Plans
+- `harness-data/reference/DOMAIN.md` — when defining actors, goals, or business rules that require domain knowledge
+- `harness-data/reference/ARCHITECTURE.md` — when the use case involves system boundaries or external integrations

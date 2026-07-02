@@ -26,10 +26,10 @@ This repository uses an SDD-ish Agent Harness under `agent-harness/`.
 
 ## Reference
 
-- `agent-harness/reference/DOMAIN.md` — domain concepts and terminology
-- `agent-harness/reference/ARCHITECTURE.md` — system architecture overview
-- `agent-harness/reference/TOOLING.md` — tools and commands available
-- `agent-harness/reference/QUALITY.md` — technical quality standards and definition of done
+- `harness-data/reference/DOMAIN.md` — domain concepts and terminology
+- `harness-data/reference/ARCHITECTURE.md` — system architecture overview
+- `harness-data/reference/TOOLING.md` — tools and commands available
+- `harness-data/reference/QUALITY.md` — technical quality standards and definition of done
 
 ## Context Loading Rules
 

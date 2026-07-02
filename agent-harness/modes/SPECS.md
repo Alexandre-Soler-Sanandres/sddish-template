@@ -10,13 +10,6 @@ Specs are the source of truth for desired behavior.
 Via CLI: `/tw-create-spec <use-case-file>`
 Via natural language: explicit, unambiguous instruction referencing the source artifact.
 
-## Sources
-
-A Spec must always be created from a Use Case.
-The Use Case must be at status `ready-for-spec` or `approved` before a Spec may be created.
-
-Legacy Findings, Ideas and Transcripts are upstream inputs — they produce Use Cases, not Specs directly.
-
 ## Spec Creation Should
 
 1. Verify the source artifact is at an accepted status before proceeding.
@@ -52,26 +45,6 @@ These are project artifacts (OpenAPI specs, database schemas, contracts) that li
 They are input constraints or expected outputs, not part of the behavioral spec itself.
 Their location is project-defined — the harness does not enforce a specific folder.
 
-## Output
-
-- `agent-harness/specs/active/SPEC-*.md`
-- Use `agent-harness/templates/SPEC-template.md` as the starting point for every new Spec.
-
-## Readiness Gate
-
-Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact.
-All items must be checked. A single unchecked item blocks the status change.
-
-## Updating a Spec
-
-A Spec may be updated when:
-
-- New information changes the scope or requirements
-- Open questions are resolved
-- Acceptance criteria need correction
-
-Updating does not change the Spec ID. Update the `updated` field.
-
 ## When a Spec Changes
 
 A **significant change** is any modification to: scope, non-goals, functional requirements,
@@ -88,15 +61,27 @@ When a significant change is made to an approved Spec:
 4. Report the full impact — list affected Task IDs and Plan IDs.
 5. Stop and wait for user instruction before proceeding.
 
+## Rules
+
+| ID | Type | Rule |
+| --- | --- | --- |
+| SPS-001 | Sources | A Spec must always be created from a Use Case. The Use Case must be at status `ready-for-spec` or `approved` before a Spec may be created. |
+| SPS-002 | Sources | Legacy Findings, Ideas and Transcripts are upstream inputs — they produce Use Cases, not Specs directly. |
+| SPS-003 | Readiness-Gate | Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
+| SPS-004 | Updating | A Spec may be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
+| SPS-005 | Updating | Updating does not change the Spec ID. Update the `updated` field. |
+| SPS-006 | Boundaries | Do not implement or change code. |
+| SPS-007 | Boundaries | Do not create Tasks or Implementation Plans. |
+| SPS-008 | Boundaries | Do not proceed if the source Use Case is not at an accepted status. |
+
+## Output
+
+- `harness-data/specs/active/SPEC-*.md`
+- Use `agent-harness/templates/SPEC-template.md` as the starting point for every new Spec.
+
 ## Reference Files
 
 Load these when relevant — do not load all of them by default:
 
-- `agent-harness/reference/DOMAIN.md` — when defining requirements that involve domain concepts, business rules, or domain terminology
-- `agent-harness/reference/ARCHITECTURE.md` — when scope touches system boundaries, layers, or architectural constraints
-
-## Boundaries — Must Not
-
-- Implement or change code
-- Create Tasks or Implementation Plans
-- Proceed if the source Use Case is not at an accepted status
+- `harness-data/reference/DOMAIN.md` — when defining requirements that involve domain concepts, business rules, or domain terminology
+- `harness-data/reference/ARCHITECTURE.md` — when scope touches system boundaries, layers, or architectural constraints

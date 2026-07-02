@@ -10,11 +10,6 @@ Tasks are execution units, not the source of truth for behavior — Specs are.
 Via CLI: `/tw-create-tasks <spec-file>`
 Via natural language: explicit instruction referencing the Spec.
 
-## Sources
-
-Tasks must always be created from an approved Spec.
-The Spec must be at status `approved` before Tasks may be created.
-
 ## Task Decision Matrix
 
 | Situation | Tasks required? | Reason |
@@ -48,26 +43,25 @@ The Spec must be at status `approved` before Tasks may be created.
 - Risk level
 - Estimated size
 
+## Rules
+
+| ID | Type | Rule |
+| --- | --- | --- |
+| TSK-001 | Sources | Tasks must always be created from an approved Spec. The Spec must be at status `approved` before Tasks may be created. |
+| TSK-002 | Readiness-Gate | Before setting a Task status to `ready`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
+| TSK-003 | Boundaries | Do not implement or change code. |
+| TSK-004 | Boundaries | Do not create Implementation Plans. |
+| TSK-005 | Boundaries | Do not proceed if the source Spec is not at status `approved`. |
+
 ## Output
 
-- `agent-harness/tasks/active/TASK-*.md`
+- `harness-data/tasks/active/TASK-*.md`
 - Use `agent-harness/templates/TASK-template.md` as the starting point for every new Task.
 
 ## Reference Files
 
 Load these when relevant — do not load all of them by default:
 
-- `agent-harness/reference/ARCHITECTURE.md` — when defining allowed and forbidden paths or verifying scope against system boundaries
-- `agent-harness/reference/TOOLING.md` — when specifying validation commands in Task frontmatter
-- `agent-harness/reference/DOMAIN.md` — when the Task touches domain-critical areas (payments, security, data integrity)
-
-## Readiness Gate
-
-Before setting a Task status to `ready`, verify the Readiness Checklist in the artifact.
-All items must be checked. A single unchecked item blocks the status change.
-
-## Boundaries — Must Not
-
-- Implement or change code
-- Create Implementation Plans
-- Proceed if the source Spec is not at status `approved`
+- `harness-data/reference/ARCHITECTURE.md` — when defining allowed and forbidden paths or verifying scope against system boundaries
+- `harness-data/reference/TOOLING.md` — when specifying validation commands in Task frontmatter
+- `harness-data/reference/DOMAIN.md` — when the Task touches domain-critical areas (payments, security, data integrity)

@@ -6,7 +6,7 @@ title: "<app-slug> Legacy Inventory"
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 legacy_roots:
-  - legacy/imported/<app-slug>
+  - harness-data/legacy/imported/<app-slug>
 tags: [legacy-discovery, <app-slug>]
 ---
 
@@ -14,7 +14,7 @@ tags: [legacy-discovery, <app-slug>]
 
 ## Scope
 
-This inventory covers the first discovery baseline for `legacy/imported/<app-slug>`.
+This inventory covers the first discovery baseline for `harness-data/legacy/imported/<app-slug>`.
 The legacy source is evidence for the new monorepo, not authority.
 
 ## Identity

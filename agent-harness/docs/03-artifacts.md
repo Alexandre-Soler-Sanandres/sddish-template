@@ -43,38 +43,38 @@ updated: ""   # YYYY-MM-DD
 
 ### Transcript
 
-Raw or lightly processed input from voice, chat, meetings, or imported notes.  
+Raw or lightly processed input from voice, chat, meetings, or imported notes.
 Transcripts are evidence — not approved requirements.
 
-**Statuses:** `raw` → `reviewed` → `processed` → `archived`  
-**Location:** `agent-harness/transcripts/active/TRANSCRIPT-*.md`  
+**Statuses:** `raw` → `reviewed` → `processed` → `archived`
+**Location:** `harness-data/transcripts/active/TRANSCRIPT-*.md`
 **Template:** `agent-harness/templates/TRANSCRIPT-template.md`
 
 ### Idea
 
 Early structured thoughts. Not implementation requests.
 
-**Statuses:** `captured` → `clarifying` → `ready-for-use-case` → `converted` → `archived` → `rejected`  
-**Location:** `agent-harness/ideas/active/IDEA-*.md`  
+**Statuses:** `captured` → `clarifying` → `ready-for-use-case` → `converted` → `archived` → `rejected`
+**Location:** `harness-data/ideas/active/IDEA-*.md`
 **Template:** `agent-harness/templates/IDEA-template.md`
 
 ### Use Case
 
 Describes actor-driven behavior. A behavioral anchor — not an implementation plan.
 
-**Statuses:** `draft` → `review` → `ready-for-spec` → `converted` → `implemented` → `archived` → `rejected`  
-**Location:** `agent-harness/use-cases/active/UC-*.md`  
+**Statuses:** `draft` → `review` → `ready-for-spec` → `converted` → `implemented` → `archived` → `rejected`
+**Location:** `harness-data/use-cases/active/UC-*.md`
 **Template:** `agent-harness/templates/USE-CASE-template.md`
 
 Body should include: primary actor, supporting actors, goal, trigger, preconditions, main success scenario, alternatives and failure paths, non-goals, observable outcome, open questions.
 
 ### Spec
 
-The central artifact of the SDD-ish process. Defines desired behavior and acceptance criteria.  
+The central artifact of the SDD-ish process. Defines desired behavior and acceptance criteria.
 Must always be created from a Use Case at `ready-for-spec` or `approved` status.
 
-**Statuses:** `draft` → `review` → `approved` → `taskified` → `implemented` → `archived` → `rejected`  
-**Location:** `agent-harness/specs/active/SPEC-*.md`  
+**Statuses:** `draft` → `review` → `approved` → `taskified` → `implemented` → `archived` → `rejected`
+**Location:** `harness-data/specs/active/SPEC-*.md`
 **Template:** `agent-harness/templates/SPEC-template.md`
 
 Body should include: problem, goal, scope, non-goals, functional requirements, non-functional requirements, acceptance criteria, constraints, dependencies, risks, validation approach, task decision notes.
@@ -85,11 +85,11 @@ The `test_refs` frontmatter field is populated by the agent during implementatio
 
 ### Task
 
-Execution unit derived from a Spec. Tasks are not the source of truth for behavior — Specs are.  
+Execution unit derived from a Spec. Tasks are not the source of truth for behavior — Specs are.
 Must always be created from an approved Spec. Not always required — see [04-workflows.md](04-workflows.md).
 
-**Statuses:** `draft` → `ready` → `planned` → `in-progress` → `done` → `blocked` → `archived` → `rejected`  
-**Location:** `agent-harness/tasks/active/TASK-*.md`  
+**Statuses:** `draft` → `ready` → `planned` → `in-progress` → `done` → `blocked` → `archived` → `rejected`
+**Location:** `harness-data/tasks/active/TASK-*.md`
 **Template:** `agent-harness/templates/TASK-template.md`
 
 Task frontmatter includes `allowed_paths` and `forbidden_paths` to constrain implementation scope.
@@ -98,8 +98,8 @@ Task frontmatter includes `allowed_paths` and `forbidden_paths` to constrain imp
 
 Defines how implementation will proceed. Required before any code changes.
 
-**Statuses:** `proposed` → `review` → `approved` → `in-progress` → `done` → `rejected` → `archived`  
-**Location:** `agent-harness/implementation-plans/active/PLAN-*.md`  
+**Statuses:** `proposed` → `review` → `approved` → `in-progress` → `done` → `rejected` → `archived`
+**Location:** `harness-data/implementation-plans/active/PLAN-*.md`
 **Template:** `agent-harness/templates/IMPLEMENTATION-PLAN-template.md`
 
 Each plan step must define: Tasks (or "inline"), expected files, validation, risk level, and a suggested commit boundary.
@@ -108,24 +108,24 @@ Each plan step must define: Tasks (or "inline"), expected files, validation, ris
 
 Evaluates artifacts, plans, implementations, or process results.
 
-**Outcomes:** `accepted` | `accepted-with-notes` | `changes-requested` | `rejected` | `follow-up-required`  
-**Location:** `agent-harness/reviews/active/REVIEW-*.md`  
+**Outcomes:** `accepted` | `accepted-with-notes` | `changes-requested` | `rejected` | `follow-up-required`
+**Location:** `harness-data/reviews/active/REVIEW-*.md`
 **Template:** `agent-harness/templates/REVIEW-template.md`
 
 ### Harness Improvement
 
 Changes the process itself. Triggered by Review findings.
 
-**Statuses:** `proposed` → `approved` → `in-progress` → `done` → `rejected` → `archived`  
-**Location:** `agent-harness/improvements/active/IMPROVEMENT-*.md`  
+**Statuses:** `proposed` → `approved` → `in-progress` → `done` → `rejected` → `archived`
+**Location:** `harness-data/improvements/active/IMPROVEMENT-*.md`
 **Template:** `agent-harness/templates/IMPROVEMENT-template.md`
 
 ### Legacy Finding
 
 Records evidence extracted from legacy projects.
 
-**Statuses:** `draft` → `reviewed` → `converted` → `archived` → `rejected`  
-**Location:** `agent-harness/legacy/active/LEGACY-FINDING-*.md`  
+**Statuses:** `draft` → `reviewed` → `converted` → `archived` → `rejected`
+**Location:** `harness-data/legacy/active/LEGACY-FINDING-*.md`
 **Template:** `agent-harness/templates/LEGACY-FINDING-template.md`
 
 Must distinguish: observed behavior, documented behavior, inferred intent, accidental complexity, dead or uncertain code.

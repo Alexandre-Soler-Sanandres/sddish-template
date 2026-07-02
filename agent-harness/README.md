@@ -49,15 +49,26 @@ Every stage produces a Markdown file. Every file is traceable to its source. Eve
 
 ## Repository Structure
 
+The harness spans two top-level roots. `agent-harness/` is the portable definition — the same for every project
+using this harness, and the only thing that syncs to or from the template repo:
+
 ``` text
 agent-harness/
   README.md            ← harness overview
   CORE.md              ← universal rules (always loaded)
   OUTPUTS.md           ← artifact formats and folder structure (always loaded)
-  CATALOG.md           ← navigation: where artifacts live
+  CATALOG.md           ← universal navigation: where artifacts live
   docs/                ← harness documentation and human guides
   modes/               ← one file per mode (universal, stack-neutral)
   templates/           ← artifact templates
+```
+
+`harness-data/` is this project's own data — project-specific config plus everything the harness generates.
+Nothing here is ever copied into or out of the template:
+
+``` text
+harness-data/
+  CATALOG.md           ← this project's live state (e.g. active Implementation Plans)
   reference/           ← project-specific (fill these in)
     ARCHITECTURE.md
     DOMAIN.md
@@ -86,7 +97,7 @@ cd your-project
 rm -rf .git && git init
 ```
 
-Then fill in the four project-specific reference files in `agent-harness/reference/` and start with a Partnering or Use Case session.
+Then fill in the four project-specific reference files in `harness-data/reference/` and start with a Partnering or Use Case session.
 
 See [docs/06-adoption.md](docs/06-adoption.md) for full adoption instructions.
 

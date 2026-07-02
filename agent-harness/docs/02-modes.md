@@ -36,8 +36,8 @@ Mode transition: Partnering ends only when the user explicitly requests a mode c
 
 Creates or refines Use Case artifacts. A Use Case is a behavioral anchor — it defines who does what, under what conditions, and with what observable outcome.
 
-**Sources:** Idea, Transcript, Partnering discussion, Legacy Finding, existing documentation  
-**Output:** `agent-harness/use-cases/active/UC-*.md`  
+**Sources:** Idea, Transcript, Partnering discussion, Legacy Finding, existing documentation
+**Output:** `harness-data/use-cases/active/UC-*.md`
 **Must not:** Trigger implementation. Create Specs, Tasks, or Plans.
 
 ## Spec Mode
@@ -46,7 +46,7 @@ Creates or updates Spec artifacts. Specs are the source of truth for desired beh
 
 A Spec must always be created from a Use Case at status `ready-for-spec` or `approved`. Legacy Findings, Ideas, and Transcripts are upstream inputs — they produce Use Cases, not Specs directly.
 
-**Output:** `agent-harness/specs/active/SPEC-*.md`  
+**Output:** `harness-data/specs/active/SPEC-*.md`
 **Must not:** Implement code. Create Tasks or Plans. Proceed if source Use Case is not at an accepted status.
 
 A Spec may reference external technical artifacts (OpenAPI specs, database schemas, contracts) via the `technical_refs` frontmatter field. These live outside `agent-harness/` — their location is project-defined.
@@ -57,7 +57,7 @@ Creates Task artifacts when they are required. Tasks are execution units, not th
 
 Tasks must always be created from an approved Spec. Tasks are not always mandatory — see [04-workflows.md](04-workflows.md) for the Task Decision Matrix.
 
-**Output:** `agent-harness/tasks/active/TASK-*.md`  
+**Output:** `harness-data/tasks/active/TASK-*.md`
 **Must not:** Implement code. Proceed if source Spec is not approved.
 
 ## Implementation Planning Mode
@@ -70,7 +70,7 @@ The mandatory gate before code changes. These commands mean: inspect the artifac
 - `/tw-implement-spec <spec-file>` — find Tasks, apply Task Decision Matrix, create plan
 - `/tw-implement-use-case <use-case-file>` — find all derived Specs and Tasks, create end-to-end plan
 
-**Output:** `agent-harness/implementation-plans/active/PLAN-*.md`  
+**Output:** `harness-data/implementation-plans/active/PLAN-*.md`
 **Must not:** Change code. Proceed without verifying artifact maturity.
 
 ## Implementation Mode
@@ -97,8 +97,8 @@ Checks artifacts, plans, and implementations against process and behavioral crit
 
 Evaluates outputs and decisions. Review is not only approval — it is how process problems are discovered.
 
-**Entry:** `/tw-review <artifact-file>`  
-**Output:** `agent-harness/reviews/active/REVIEW-*.md`  
+**Entry:** `/tw-review <artifact-file>`
+**Output:** `harness-data/reviews/active/REVIEW-*.md`
 **Must not:** Change the artifact under review. Implement fixes. Modify harness files without an Improvement artifact.
 
 After review, the agent takes a prescribed action based on the outcome and stops:
@@ -117,8 +117,8 @@ The agent never autonomously re-enters a producing mode after rejection or escal
 
 Changes the harness itself. Only triggered by Review findings — not from Partnering or direct requests.
 
-**Entry:** `/tw-improve-harness <review-file>`  
-**Output:** `agent-harness/improvements/active/IMPROVEMENT-*.md`  
+**Entry:** `/tw-improve-harness <review-file>`
+**Output:** `harness-data/improvements/active/IMPROVEMENT-*.md`
 **Must not:** Change harness during normal feature implementation.
 
 ## Legacy Discovery Mode

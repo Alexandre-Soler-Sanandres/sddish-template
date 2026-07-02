@@ -8,7 +8,7 @@ updated: ""                              # YYYY-MM-DD
 
 ## Source Root
 
-`legacy/imported/<app-slug>/`
+`harness-data/legacy/imported/<app-slug>/`
 
 ## Evidence Inventory
 
@@ -75,7 +75,7 @@ Write FINDINGS + QUESTIONS entries for any category that requires a user decisio
 | Path pattern | Type | Notes |
 | --- | --- | --- |
 
-Nested Git metadata check: `find legacy/imported/<app-slug> -path '*/.git' -type d` — expected: no output.
+Nested Git metadata check: `find harness-data/legacy/imported/<app-slug> -path '*/.git' -type d` — expected: no output.
 
 ## Open App Notes
 
@@ -114,8 +114,8 @@ target-product decision)
 ## Discovery-Complete Shape
 
 Apply this section once `discovery_state` reaches `app-local-complete`, as part of Post-Discovery Artifact
-Normalization (see `agent-harness/modes/LEGACY-DISCOVERY.md`). This is a collapse of the same file at the same
-path — do not rename it or create a second file.
+Normalization (see `agent-harness/modes/legacy-discovery/GATES.md`, LDG-007). This is a collapse of the same file
+at the same path — do not rename it or create a second file.
 
 Precondition: every "stable finding" and "candidate Use Case" note inside `Completed Notes` / slice notes must
 already have an equivalent entry in this app's `findings/`, or in the relevant reference doc, before it is cut

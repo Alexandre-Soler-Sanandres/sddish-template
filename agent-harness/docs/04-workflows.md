@@ -27,9 +27,9 @@ Partnering is the front door for unclear thinking.
 
 **Output paths:**
 
-- `agent-harness/transcripts/active/TRANSCRIPT-*.md`
-- `agent-harness/ideas/active/IDEA-*.md`
-- `agent-harness/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
+- `harness-data/transcripts/active/TRANSCRIPT-*.md`
+- `harness-data/ideas/active/IDEA-*.md`
+- `harness-data/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
 
 Partnering must not create Specs, Tasks, or Implementation Plans, or infer approval from discussion.
 
@@ -138,7 +138,7 @@ Source:
 
 **Validation mode** covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks. It is universal and does not contain stack-specific commands.
 
-**Technical checks** (tests, linting, typing, migrations) are project-specific. They are defined in `agent-harness/reference/QUALITY.md` and run using commands from `agent-harness/reference/TOOLING.md`.
+**Technical checks** (tests, linting, typing, migrations) are project-specific. They are defined in `harness-data/reference/QUALITY.md` and run using commands from `harness-data/reference/TOOLING.md`.
 
 ## Readiness Gates
 
@@ -183,7 +183,7 @@ For the practical step-by-step legacy application playbook, see
 [08-legacy-applications.md](08-legacy-applications.md).
 
 ```text
-legacy/imported/old-project
+harness-data/legacy/imported/old-project
   → legacy inventory
   → source maps
   → findings (LEGACY-FINDING-*)

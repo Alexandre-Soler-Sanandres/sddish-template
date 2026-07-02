@@ -41,13 +41,6 @@ Via natural language: explicit instruction to review a specific artifact, plan, 
 - `rejected`
 - `follow-up-required`
 
-## Reference Files
-
-Load these when relevant — do not load all of them by default:
-
-- `agent-harness/reference/DOMAIN.md` — when reviewing domain correctness of a Spec, Use Case, or implementation
-- `agent-harness/reference/ARCHITECTURE.md` — when reviewing scope or boundary decisions
-
 ## Review Body Should Include
 
 - Target artifact or implementation
@@ -55,12 +48,6 @@ Load these when relevant — do not load all of them by default:
 - Findings
 - Outcome
 - Follow-up artifacts (Improvements, new Tasks, etc.)
-
-## Output
-
-- `agent-harness/reviews/active/REVIEW-*.md`
-- Use `agent-harness/templates/REVIEW-template.md` for every new Review.
-- The Review artifact feeds into Improvement mode when process problems are found.
 
 ## After Review — Required Agent Actions
 
@@ -74,13 +61,25 @@ After completing a review, take the following action based on the outcome. Do no
 | `rejected` | Set artifact status to `rejected`. Move artifact to `archive/`. Stop and wait for user instruction. |
 | `follow-up-required` | Hold artifact at current status. Create an Improvement artifact if a process problem was found. Stop and wait for user instruction. |
 
-The agent never autonomously re-enters a producing mode after `changes-requested`, `rejected`, or `follow-up-required`.
-The user must explicitly request the next action.
+## Rules
 
-## Boundaries — Must Not
+| ID | Type | Rule |
+| --- | --- | --- |
+| RVW-001 | Escalation | The agent never autonomously re-enters a producing mode after `changes-requested`, `rejected`, or `follow-up-required` — the user must explicitly request the next action. |
+| RVW-002 | Boundaries | Do not change the artifact under review. |
+| RVW-003 | Boundaries | Do not implement fixes. |
+| RVW-004 | Boundaries | Do not create Tasks or Specs as a side effect. |
+| RVW-005 | Boundaries | Do not modify harness files without an Improvement artifact. |
 
-- Change the artifact under review
-- Implement fixes
-- Create Tasks or Specs as a side effect
-- Modify harness files without an Improvement artifact
-- Re-enter any producing mode after a rejection or escalation without explicit user instruction
+## Output
+
+- `harness-data/reviews/active/REVIEW-*.md`
+- Use `agent-harness/templates/REVIEW-template.md` for every new Review.
+- The Review artifact feeds into Improvement mode when process problems are found.
+
+## Reference Files
+
+Load these when relevant — do not load all of them by default:
+
+- `harness-data/reference/DOMAIN.md` — when reviewing domain correctness of a Spec, Use Case, or implementation
+- `harness-data/reference/ARCHITECTURE.md` — when reviewing scope or boundary decisions

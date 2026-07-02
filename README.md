@@ -2,8 +2,14 @@
 
 This is the project README for this reusable SDD-ish Agent Harness template.
 
-The harness itself lives under `agent-harness/` so projects created from this template can keep their own project
-README and root documentation separate from harness guidance.
+The harness spans two top-level roots so projects created from this template can keep their own project README
+and root documentation separate from harness guidance:
+
+- **`agent-harness/`** — the portable harness definition: modes, templates, and core rules. The same for every
+  project using this harness, and the only thing that syncs to or from this template repo.
+- **`harness-data/`** — each project's own data once adopted: filled-in reference config, Legacy Discovery
+  findings, and every artifact the harness produces (Use Cases, Specs, Tasks, Plans, Reviews, Improvements,
+  Transcripts, Ideas). Ships here as an empty skeleton; nothing in it is ever copied back into this template.
 
 ## Harness
 
@@ -13,7 +19,8 @@ README and root documentation separate from harness guidance.
 | [agent-harness/docs/](agent-harness/docs/) | Harness documentation and human guides |
 | [AGENTS.md](AGENTS.md) | Agent entry instructions for repositories using the harness |
 | [CLAUDE.md](CLAUDE.md) | Claude entry file; defers to `AGENTS.md` |
-| [agent-harness/CATALOG.md](agent-harness/CATALOG.md) | Harness artifact navigation |
+| [agent-harness/CATALOG.md](agent-harness/CATALOG.md) | Universal artifact-location index |
+| [harness-data/CATALOG.md](harness-data/CATALOG.md) | Per-project live state (e.g. active Implementation Plans) |
 | [agent-harness/LICENSE](agent-harness/LICENSE) | Harness content license |
 
 Start with the [adoption guide](agent-harness/docs/06-adoption.md) when applying the template to a project.

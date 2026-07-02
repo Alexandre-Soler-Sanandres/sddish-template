@@ -62,26 +62,6 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 - Suggested commit boundaries
 - Approval status
 
-## Grouping Rules
-
-Group Tasks in one step when:
-
-- They belong to the same approved Spec
-- They are small and tightly related
-- They share a validation strategy
-- Their scopes do not conflict
-- They produce a coherent, reviewable diff
-- No high-risk work is involved
-
-Keep Tasks separate when:
-
-- Risk is high
-- Validation differs between Tasks
-- Separate commits are needed
-- Review concerns differ
-- Dependencies are unclear
-- The change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules
-
 ## Commit Message Convention
 
 ```text
@@ -95,27 +75,27 @@ Source:
 - SPEC-XXX
 ```
 
+## Rules
+
+| ID | Type | Rule |
+| --- | --- | --- |
+| IPL-001 | Grouping | Group Tasks in one step when they belong to the same approved Spec, are small and tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and no high-risk work is involved. |
+| IPL-002 | Grouping | Keep Tasks separate when risk is high, validation differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules. |
+| IPL-003 | Readiness-Gate | Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact. All items must be checked. A single unchecked item blocks the status change. |
+| IPL-004 | Boundaries | Do not change code. |
+| IPL-005 | Boundaries | Do not treat `proposed` status as approved. |
+| IPL-006 | Boundaries | Do not proceed if the source artifact is not at an accepted status. |
+| IPL-007 | Boundaries | Do not generate duplicate Tasks or skip existing ones. |
+
 ## Output
 
-- `agent-harness/implementation-plans/active/PLAN-*.md`
+- `harness-data/implementation-plans/active/PLAN-*.md`
 - Use `agent-harness/templates/IMPLEMENTATION-PLAN-template.md` as the starting point for every new plan.
 
 ## Reference Files
 
 Load these when relevant — do not load all of them by default:
 
-- `agent-harness/reference/ARCHITECTURE.md` — when defining expected file areas or architectural boundaries in the plan
-- `agent-harness/reference/TOOLING.md` — when specifying validation commands per plan step
-- `agent-harness/reference/DOMAIN.md` — when the plan touches domain-critical areas (payments, security, data integrity)
-
-## Readiness Gate
-
-Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact.
-All items must be checked. A single unchecked item blocks the status change.
-
-## Boundaries — Must Not
-
-- Change code
-- Treat `proposed` status as approved
-- Proceed if the source artifact is not at an accepted status
-- Generate duplicate Tasks or skip existing ones
+- `harness-data/reference/ARCHITECTURE.md` — when defining expected file areas or architectural boundaries in the plan
+- `harness-data/reference/TOOLING.md` — when specifying validation commands per plan step
+- `harness-data/reference/DOMAIN.md` — when the plan touches domain-critical areas (payments, security, data integrity)

@@ -4,7 +4,7 @@ type: cross-system-summary
 status: active
 discovery_state: cross-system-active
 updated: ""                 # YYYY-MM-DD
-active_synthesis_scope: []  # app slugs, e.g. [tw-engine, tw-dashboard]
+active_synthesis_scope: []  # app slugs, e.g. [app-one, app-two]
 source_maps: []             # app-scoped source-map paths
 tags: [legacy-discovery, cross-system]
 ---
@@ -39,7 +39,7 @@ Cross-system synthesis scope is explicit:
 
 | App | Source map | Discovery state | Proof flag |
 | --- | --- | --- | --- |
-| `<app-slug>` | `agent-harness/legacy/apps/<app-slug>/SOURCE-MAP.md` | `app-local-complete` | `proof_needed: false` |
+| `<app-slug>` | `harness-data/legacy/apps/<app-slug>/SOURCE-MAP.md` | `app-local-complete` | `proof_needed: false` |
 
 All in-scope app source maps must be at `app-local-complete` before synthesis starts. App-level proof flags do not
 block cross-system synthesis when they are already accepted or explicitly deferred, but cross-system slices may still
@@ -98,10 +98,10 @@ For each cross-system slice:
 
 | Finding kind | Target reference doc |
 | --- | --- |
-| System boundaries, app ownership, runtime topology, API contracts | `agent-harness/reference/ARCHITECTURE.md` |
-| Cross-app domain ownership, actors, workflows, canonical outcomes | `agent-harness/reference/DOMAIN.md` |
-| Cross-app commands, local Compose, ports, validation/proof commands | `agent-harness/reference/TOOLING.md` |
-| Contract tests, parity tests, security gates, readiness/proof standards | `agent-harness/reference/QUALITY.md` |
+| System boundaries, app ownership, runtime topology, API contracts | `harness-data/reference/ARCHITECTURE.md` |
+| Cross-app domain ownership, actors, workflows, canonical outcomes | `harness-data/reference/DOMAIN.md` |
+| Cross-app commands, local Compose, ports, validation/proof commands | `harness-data/reference/TOOLING.md` |
+| Contract tests, parity tests, security gates, readiness/proof standards | `harness-data/reference/QUALITY.md` |
 
 Cross-system artifact responsibilities:
 
@@ -134,7 +134,7 @@ Next action: (slice name and status)
 
 Start from:
 
-- `agent-harness/legacy/apps/<app-slug>/SOURCE-MAP.md`
+- `harness-data/legacy/apps/<app-slug>/SOURCE-MAP.md`
 
 Read only the source-map sections and evidence paths needed for the next slice.
 
@@ -145,8 +145,8 @@ not change evidence meaning or remove traceability.
 ## Discovery-Complete Shape
 
 Apply this section once cross-system synthesis is finished, as part of Post-Discovery Artifact Normalization (see
-`agent-harness/modes/LEGACY-DISCOVERY.md`). This is a collapse of the same file at the same path — do not rename it
-or create a second file.
+`agent-harness/modes/legacy-discovery/GATES.md`, LDG-007). This is a collapse of the same file at the same path —
+do not rename it or create a second file.
 
 Precondition: every synthesized fact recorded in `Completed Slice Notes` must already have an equivalent entry in
 `findings/`, `CONTRACTS.md`, `PARITY-MATRIX.md`, or `REWRITE-READINESS.md` before it is cut from `SUMMARY.md`. If

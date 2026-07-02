@@ -5,7 +5,7 @@ status: draft            # draft | reviewed | converted | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-legacy_source: []        # paths in legacy/imported/
+legacy_source: []        # paths in harness-data/legacy/imported/
 evidence_type: ""        # observed | documented | inferred | uncertain
 confidence: medium       # low | medium | high
 area: ""                 # domain area, e.g. user-management | payments | reporting
