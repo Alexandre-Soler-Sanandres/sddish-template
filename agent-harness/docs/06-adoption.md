@@ -29,6 +29,180 @@ rm -rf .git && git init
 
 Then fill in the four project-specific reference files as above.
 
+## Minimum Viable Adoption
+
+Do not treat the four reference files as a large upfront documentation project. The harness becomes useful long
+before those files are exhaustive.
+
+The goal of the first pass is only this:
+
+- give agents enough domain and architecture context to avoid obvious misunderstanding
+- define the exact tooling and quality commands needed before implementation begins
+- leave deeper project detail for later refinement
+
+Keep the template honest:
+
+- the files under `harness-data/reference/` stay project-owned
+- this template does not ship fake project content into them
+- examples in this document are illustrative only
+
+### Smallest Useful First Fill-In
+
+#### `ARCHITECTURE.md`
+
+Enough for a first pass:
+
+- a 2-3 sentence system overview
+- the main layers or major subsystems
+- the important boundaries agents must not blur
+- where technical artifacts such as API specs or schemas live
+
+Illustrative shape:
+
+```md
+## System Overview
+Customer-facing web app with one backend API and one relational database.
+
+## Layers and Boundaries
+- `frontend/` renders UI only
+- `backend/` owns business logic and persistence
+- `infra/` holds deployment configuration
+
+## Technical Artifacts
+- API specification: `docs/api/openapi.yaml`
+```
+
+What can wait:
+
+- detailed deployment prose
+- exhaustive component inventory
+- every infrastructure nuance
+
+#### `DOMAIN.md`
+
+Enough for a first pass:
+
+- a short domain overview
+- the main actors
+- the handful of concepts and rules agents must not misuse
+
+Illustrative shape:
+
+```md
+## Domain Overview
+Internal operations system for handling customer support workflows.
+
+## Key Actors
+- operator
+- customer
+- billing-service
+
+## Business Rules
+- A closed case cannot be edited without reopening it.
+- Refund approval requires operator confirmation.
+```
+
+What can wait:
+
+- full glossary coverage
+- edge-case business rules that do not affect current work
+- broad product history
+
+#### `TOOLING.md`
+
+Enough for a first pass:
+
+- the package manager
+- the real commands for tests, linting, type checking, formatting, build, and local development
+- any one or two critical setup quirks
+
+Illustrative shape:
+
+```md
+## Package Manager
+uv
+
+## Common Commands
+### Run Tests
+`uv run pytest`
+
+### Lint
+`uv run ruff check .`
+
+### Type Check
+`uv run mypy .`
+```
+
+What cannot wait once implementation begins:
+
+- exact runnable commands
+- any environment requirement that would make those commands fail
+
+#### `QUALITY.md`
+
+Enough for a first pass:
+
+- a minimal definition of done
+- test expectations
+- lint/typecheck expectations
+- the project's high-risk areas
+
+Illustrative shape:
+
+```md
+## Definition of Done
+- [ ] tests pass
+- [ ] lint passes
+- [ ] type check passes
+- [ ] changed behavior is covered by tests
+
+## High-Risk Areas
+- authentication
+- billing
+- database migrations
+```
+
+What can wait:
+
+- polished prose
+- long policy explanations
+- quality rules that are irrelevant to current work
+
+### What May Stay Unknown Early
+
+These are acceptable to leave incomplete during early adoption:
+
+- detailed deployment model
+- exhaustive terminology tables
+- complete architecture narrative
+- deep historical context
+- optional stack guides under `harness-data/guides/`
+
+### What Must Be Concrete Before Implementation
+
+Before any real implementation work starts, these must be concrete enough for an agent to act safely:
+
+- the main system boundaries in `ARCHITECTURE.md`
+- the core domain actors/rules relevant to the task in `DOMAIN.md`
+- the actual validation commands in `TOOLING.md`
+- the definition of done and high-risk areas in `QUALITY.md`
+
+## First Successful Path
+
+Use this as the smallest useful onboarding path for a new project:
+
+1. Fill `ARCHITECTURE.md` with a short system overview, boundaries, and technical artifact locations.
+2. Fill `DOMAIN.md` with the main actors, core concepts, and a few critical rules.
+3. Fill `TOOLING.md` with the exact commands an agent must run.
+4. Fill `QUALITY.md` with a minimal definition of done and high-risk areas.
+5. Create one Use Case for a real task or workflow.
+6. Create one Spec from that Use Case.
+7. Decide whether Tasks are required.
+8. Create one Implementation Plan.
+9. Run one validation pass against the resulting artifacts or implementation step.
+
+That is enough to prove the harness works in a real project. Everything beyond that is refinement.
+
 ### After setup (both options)
 
 - `agent-harness/CATALOG.md` ships ready to use — it is a navigation index of where artifact types live, not a log

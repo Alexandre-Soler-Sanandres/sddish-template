@@ -100,9 +100,9 @@ cd your-project
 rm -rf .git && git init
 ```
 
-Then fill in the four project-specific reference files in `harness-data/reference/` and start with a Partnering or Use Case session.
-
-See [docs/06-adoption.md](docs/06-adoption.md) for full adoption instructions.
+Then fill in the four project-specific reference files in `harness-data/reference/` and start with a Partnering or
+Use Case session. Use the Minimum Viable Adoption section in [docs/06-adoption.md](docs/06-adoption.md) for the
+smallest useful first pass and the same guide for full adoption instructions.
 
 ## Documentation
 
