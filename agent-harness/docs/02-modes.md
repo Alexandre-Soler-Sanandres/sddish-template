@@ -44,7 +44,7 @@ Creates or refines Use Case artifacts. A Use Case is a behavioral anchor — it 
 
 Creates or updates Spec artifacts. Specs are the source of truth for desired behavior.
 
-A Spec must always be created from a Use Case at status `ready-for-spec` or `approved`. Legacy Findings, Ideas, and Transcripts are upstream inputs — they produce Use Cases, not Specs directly.
+A Spec must always be created from a Use Case at status `ready-for-spec`. Legacy Findings, Ideas, and Transcripts are upstream inputs — they produce Use Cases, not Specs directly.
 
 **Output:** `harness-data/specs/active/SPEC-*.md`
 **Must not:** Implement code. Create Tasks or Plans. Proceed if source Use Case is not at an accepted status.
@@ -95,7 +95,8 @@ Checks artifacts, plans, and implementations against process and behavioral crit
 
 ## Review Mode
 
-Evaluates outputs and decisions. Review is not only approval — it is how process problems are discovered.
+Evaluates outputs and decisions. Review is not only approval — it is how process problems are discovered. In the
+overall harness, this is an optional advanced mode rather than something every team must use for everyday work.
 
 **Entry:** `/tw-review <artifact-file>`
 **Output:** `harness-data/reviews/active/REVIEW-*.md`
@@ -106,7 +107,7 @@ After review, the agent takes a prescribed action based on the outcome and stops
 | Outcome | Agent action |
 | --- | --- |
 | `accepted` | Advance artifact to next accepted status. Report. |
-| `accepted-with-notes` | Advance status. Add findings as open questions in the artifact. |
+| `accepted-with-notes` | Advance status. Record follow-up notes in the Review artifact, and add open questions to the target artifact only when that artifact is the correct place to carry the note forward. |
 | `changes-requested` | Set artifact to `draft`. Record findings. Wait for user instruction. |
 | `rejected` | Set artifact to `rejected`. Move to archive. Wait for user instruction. |
 | `follow-up-required` | Hold status. Create Improvement if process problem found. Wait for user instruction. |
@@ -115,7 +116,8 @@ The agent never autonomously re-enters a producing mode after rejection or escal
 
 ## Harness Improvement Mode
 
-Changes the harness itself. Only triggered by Review findings — not from Partnering or direct requests.
+Changes the harness itself. Only triggered by Review findings — not from Partnering or direct requests. Like Review,
+this is an optional advanced discipline in the overall operating model, even though its rules are strict when used.
 
 **Entry:** `/tw-improve-harness <review-file>`
 **Output:** `harness-data/improvements/active/IMPROVEMENT-*.md`

@@ -14,16 +14,19 @@ When an agent starts a task, it loads context in this order — stopping as soon
 6. Frontmatter links (`source`, `derived_*`, `related`)
 7. Local `SUMMARY.md` if the target artifact is ambiguous
 8. Full related artifact — only if required
-9. Reference files — only when affected by the current task
-10. Archived artifacts — only when explicitly needed
+9. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
+10. Reference files — only when affected by the current task
+11. Archived artifacts — only when explicitly needed
 
 ## Core Rules
 
 - **Start from the explicitly referenced artifact** — do not scan entire directories
 - **Use the smallest sufficient context** — load only what the current task requires
 - **Use frontmatter links to navigate** — `source`, `derived_*`, `related` fields point to related artifacts
+- **Keep frontmatter links synchronized** — when creating or updating a derived artifact, update the corresponding parent/child links in the same pass
 - **Use `CATALOG.md` to locate artifacts** when the target is unknown or ambiguous
 - **Use local `SUMMARY.md` files** only when the target artifact cannot be identified from CATALOG.md alone
+- **Use `REPO-MAP.md` only for large-structure help** — it is optional, structural, and should not become a second catalog
 - **Prefer frontmatter before full body** when only metadata is needed
 - **Summarize findings** when context becomes large
 
@@ -51,6 +54,35 @@ Reference files are loaded only when needed — not by default:
 - Where each artifact type lives
 
 It must not list hundreds of individual artifacts. Use frontmatter links and SUMMARY files for that.
+
+## REPO-MAP.md
+
+An optional `REPO-MAP.md` may exist at repo root or a major subtree when the codebase is large enough that normal
+artifact navigation is not sufficient.
+
+Use it for durable structural context only:
+
+- major subsystems
+- important boundaries
+- key entrypoints
+- major dependencies across areas
+
+Do not use it as a file dump, changelog, or session scratchpad. Update it when structure changes materially, not on
+every run.
+
+## RUN-LOG.md
+
+An optional `harness-data/RUN-LOG.md` may exist for active or recently interrupted work.
+
+Use it as a rolling operational log for:
+
+- approvals
+- interruptions and resumptions
+- validation checkpoints
+- temporary execution notes needed to continue safely
+
+It is not a source-of-truth artifact. Keep it small, and collapse it to a short closure note or clear it when the
+work finishes.
 
 ## SUMMARY.md Files
 

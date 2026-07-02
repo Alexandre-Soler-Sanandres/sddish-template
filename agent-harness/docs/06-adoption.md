@@ -36,6 +36,10 @@ Then fill in the four project-specific reference files as above.
   changes. Live per-project state (e.g. active Implementation Plan pointers, per `CORE.md`'s Parallel Work rule)
   lives in the separate `harness-data/CATALOG.md` instead — same name, different root, on purpose: one is the
   universal index, the other is this project's own bookkeeping against it
+- Optionally add `harness-data/RUN-LOG.md` for active or interrupted high-risk work; keep it temporary and collapse
+  or clear it after completion
+- Optionally add `REPO-MAP.md` at repo root or a major subtree when the codebase is large enough that normal context
+  loading becomes clumsy
 - Optionally add stack-specific bootstrap guides under `harness-data/guides/`
 - Keep `agent-harness/docs/` for harness guidance; project documentation can use the repository root or another
   project-owned docs location
@@ -59,6 +63,8 @@ harness produces (Use Cases, Specs, Tasks, Plans, Reviews, Improvements, Transcr
 | `agent-harness/modes/**/*.md` | Universal — do not modify |
 | `agent-harness/templates/*.md` | Universal — do not modify |
 | `harness-data/CATALOG.md` | Project-specific — live state, not part of the template |
+| `harness-data/RUN-LOG.md` | Optional — temporary operational trace for active/interrupted work |
+| `REPO-MAP.md` | Optional — structural context for large repos or major subtrees |
 | `harness-data/reference/ARCHITECTURE.md` | Project-specific — fill in |
 | `harness-data/reference/DOMAIN.md` | Project-specific — fill in |
 | `harness-data/reference/TOOLING.md` | Project-specific — fill in |
@@ -94,3 +100,15 @@ harness-data/guides/
 These guides describe: package manager setup, workspace or monorepo setup, test framework, linting, type checking, local development, Docker, CI setup.
 
 Stack-specific rules must never be placed in mode files. Mode files reference the relevant reference file instead.
+
+## Optional Advanced Disciplines
+
+Review and Improvement are part of the harness, but they do not need to dominate everyday usage.
+
+For many teams, the default path is:
+
+```text
+Partnering → Use Case → Spec → [Task] → Implementation Plan → Implementation → Validation
+```
+
+Use Review and Improvement when you want a stronger formal loop around output evaluation or process correction.

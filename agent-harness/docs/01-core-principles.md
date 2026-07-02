@@ -34,10 +34,11 @@ Voice / Text / Legacy Code
   → Tasks (when required)
   → Implementation Plan (approved)
   → Implementation
-  → Validation / Review
+  → Validation
+  → [Review / Improvement — when a stronger formal loop is wanted]
 ```
 
-Each stage produces a file-based artifact. Each artifact is traceable to its source. No stage may be skipped — but stages may be lightweight when the work is small and low-risk.
+Each persistent stage produces a file-based artifact. Each artifact is traceable to its source. No stage may be skipped — but stages may be lightweight when the work is small and low-risk.
 
 ## Modes Are Universal. References Are Project-Specific.
 
@@ -58,5 +59,5 @@ Reference files (`harness-data/reference/`) are project-specific. They define th
 - **Modes are bounded** — each mode has clear responsibilities and must-nots
 - **Rejection paths are prescribed** — after review, the agent takes a defined action and stops; the user decides what happens next
 - **Parallel work is coordinated** — concurrent Plans on overlapping paths are surfaced and blocked until resolved
-- **Process improves itself** — Review and Improvement modes close the loop
+- **Process improves itself when needed** — Review and Improvement exist when teams want a stronger formal loop
 - **Universal harness, project-specific details** — the process is the same everywhere; the stack details vary

@@ -16,16 +16,16 @@ Via natural language: explicit instruction to validate a specific artifact, plan
 | --- | --- | --- |
 | VAL-001 | Artifact-Validation | Required frontmatter fields are present and filled. |
 | VAL-002 | Artifact-Validation | Status is appropriate for the current stage. |
-| VAL-003 | Artifact-Validation | Traceability links are present (source, derived, related). |
+| VAL-003 | Artifact-Validation | Traceability links are present and synchronized where required (`source`, `derived_*`, `related`). |
 | VAL-004 | Artifact-Validation | ID is stable and follows naming conventions. |
 | VAL-005 | Artifact-Validation | Body sections are complete and not left as placeholders. |
-| VAL-006 | Process-Validation | The artifact was created from an accepted source (e.g. Spec from approved Use Case). |
+| VAL-006 | Process-Validation | The artifact was created from an accepted source (e.g. Spec from a `ready-for-spec` Use Case). |
 | VAL-007 | Process-Validation | The Implementation Plan is at status `approved` before implementation started. |
 | VAL-008 | Process-Validation | No implementation happened before a plan was accepted. |
 | VAL-009 | Process-Validation | No Specs or Tasks were created from Partnering mode. |
 | VAL-010 | Process-Validation | High-risk areas were handled with extra care. |
 | VAL-011 | Behavioral-Validation | Each acceptance criterion is met and verifiable. |
-| VAL-012 | Behavioral-Validation | `test_refs` in the Spec frontmatter are populated and all referenced test files exist. |
+| VAL-012 | Behavioral-Validation | `test_refs` in the Spec frontmatter are populated, contain only test file paths, and all referenced test files exist. |
 | VAL-013 | Behavioral-Validation | Each acceptance criterion is traceable to an entry in `test_refs` or a Task validation command. |
 | VAL-014 | Behavioral-Validation | Non-goals were not implemented. |
 | VAL-015 | Behavioral-Validation | Scope did not drift beyond what was planned. |

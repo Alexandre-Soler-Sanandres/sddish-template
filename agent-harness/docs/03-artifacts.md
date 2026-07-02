@@ -39,6 +39,14 @@ updated: ""   # YYYY-MM-DD
 | `depends_on` | what must exist before this can proceed |
 | `blocks` | what this artifact is blocking |
 
+When a new artifact is created from an existing one, update the relationship fields in the same pass:
+
+- child artifact: set `source` to the parent ID
+- parent artifact: add the child ID to the relevant `derived_*` field when that field exists
+- sibling or cross-cutting links: update `related`, `depends_on`, or `blocks` where needed
+
+Frontmatter links are part of the harness's navigation contract, not optional bookkeeping.
+
 ## Artifact Types
 
 ### Transcript
@@ -71,7 +79,7 @@ Body should include: primary actor, supporting actors, goal, trigger, preconditi
 ### Spec
 
 The central artifact of the SDD-ish process. Defines desired behavior and acceptance criteria.
-Must always be created from a Use Case at `ready-for-spec` or `approved` status.
+Must always be created from a Use Case at `ready-for-spec` status.
 
 **Statuses:** `draft` → `review` → `approved` → `taskified` → `implemented` → `archived` → `rejected`
 **Location:** `harness-data/specs/active/SPEC-*.md`
@@ -81,7 +89,7 @@ Body should include: problem, goal, scope, non-goals, functional requirements, n
 
 The `technical_refs` frontmatter field links to external technical artifacts (OpenAPI specs, schemas, contracts) that live outside `agent-harness/`.
 
-The `test_refs` frontmatter field is populated by the agent during implementation — it lists paths to test files that cover each acceptance criterion. A plan step is not done until `test_refs` is populated or each AC is covered by a Task validation command.
+The `test_refs` frontmatter field is populated by the agent during implementation — it lists paths to test files that cover each acceptance criterion. It is only for test file paths, not legacy proof IDs or other backlog references. A plan step is not done until `test_refs` is populated or each AC is covered by a Task validation command.
 
 ### Task
 
@@ -149,7 +157,7 @@ An artifact is mature enough to proceed when its status is at an accepted level:
 
 | Artifact | Required Status Before Next Step |
 | --- | --- |
-| Use Case | `ready-for-spec` or `approved` |
+| Use Case | `ready-for-spec` |
 | Spec | `approved` |
 | Task | `ready` or `planned` |
 | Implementation Plan | `approved` |

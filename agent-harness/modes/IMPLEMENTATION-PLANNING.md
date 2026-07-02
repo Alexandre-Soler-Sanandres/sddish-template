@@ -37,7 +37,7 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 ### Entering via `/tw-implement-use-case`
 
 1. Load the Use Case.
-2. Verify the Use Case is at status `approved` or `ready-for-spec`. If not, stop and report.
+2. Verify the Use Case is at status `ready-for-spec`. If not, stop and report.
 3. Find all derived Specs from the Use Case frontmatter.
    - If Specs are missing or not at status `approved` → stop and route to `/tw-create-spec`.
 4. For each Spec, find existing Tasks and check their status:

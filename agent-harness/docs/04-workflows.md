@@ -10,8 +10,8 @@ Voice / Text / Ideas
   → [Task Mode (TASK-*) — when required]
   → Implementation Planning (PLAN-*)
   → Implementation
-  → Validation / Review
-  → [Harness Improvement — when process problems found]
+  → Validation
+  → [Review / Harness Improvement — when a team wants formal evaluation or process correction]
 ```
 
 ## Partnering Workflow
@@ -45,7 +45,7 @@ A Use Case may be created from: Idea, Transcript, Partnering discussion, Legacy 
 
 ## Spec Creation
 
-1. Verify the Use Case is at `ready-for-spec` or `approved`
+1. Verify the Use Case is at `ready-for-spec`
 2. Read the Use Case
 3. Inspect source Ideas or Legacy Findings for additional context
 4. Identify problem and goal
@@ -134,6 +134,15 @@ Source:
 - Stop if missing or contradictory requirements are discovered
 - Stop if a high-risk area is encountered not covered by the plan
 
+### Optional Operational Trace
+
+For long-running, interrupted, or high-risk work, a project may keep a rolling `harness-data/RUN-LOG.md`:
+
+- It is temporary operational state, not a source-of-truth artifact.
+- Use it for approvals, resumptions, interruptions, and validation checkpoints that help work continue safely.
+- When work finishes, collapse it to a short closure note or clear it.
+- Durable decisions and outcomes must still be written back into the real artifacts.
+
 ## Validation and Quality
 
 **Validation mode** covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks. It is universal and does not contain stack-specific commands.
@@ -155,7 +164,8 @@ status change.
 
 ## Review and Harness Improvement
 
-Every significant artifact or implementation should be reviewable. Reviews answer:
+Every significant artifact or implementation should be reviewable. For teams that want a lighter default flow, Review
+and Improvement are optional advanced disciplines rather than a mandatory everyday step. When used, Reviews answer:
 
 - Was the output correct and complete?
 - Did the agent load the right context?
@@ -164,7 +174,7 @@ Every significant artifact or implementation should be reviewable. Reviews answe
 
 After review, the agent takes a prescribed action and stops — it does not autonomously continue:
 
-- `accepted` / `accepted-with-notes` → advance artifact, optionally add open questions
+- `accepted` / `accepted-with-notes` → advance artifact, record follow-up notes, and update the target artifact only when it is the correct place to carry those notes forward
 - `changes-requested` → set artifact to `draft`, wait for user
 - `rejected` → archive artifact, wait for user
 - `follow-up-required` → hold status, create Improvement if needed, wait for user

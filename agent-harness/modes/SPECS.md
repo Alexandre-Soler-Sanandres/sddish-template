@@ -72,7 +72,7 @@ When a significant change is made to an approved Spec:
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| SPS-001 | Sources | A Spec must always be created from a Use Case. The Use Case must be at status `ready-for-spec` or `approved` before a Spec may be created. |
+| SPS-001 | Sources | A Spec must always be created from a Use Case. The Use Case must be at status `ready-for-spec` before a Spec may be created. |
 | SPS-002 | Sources | Legacy Findings, Ideas and Transcripts are upstream inputs — they produce Use Cases, not Specs directly. |
 | SPS-003 | Readiness-Gate | Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
 | SPS-004 | Updating | A Spec may be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
@@ -81,7 +81,7 @@ When a significant change is made to an approved Spec:
 | SPS-007 | Boundaries | Do not create Tasks or Implementation Plans. |
 | SPS-008 | Boundaries | Do not proceed if the source Use Case is not at an accepted status. |
 | SPS-009 | Legacy-Handoff | When the source Use Case inherits unresolved legacy questions or parity/proof obligations, load those referenced items and route them into the Spec sections they actually constrain. |
-| SPS-010 | Legacy-Handoff | Keep `PARITY-MATRIX.md` as the canonical proof/parity backlog. A Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions, but should not duplicate unrelated matrix rows. |
+| SPS-010 | Legacy-Handoff | Keep `PARITY-MATRIX.md` as the canonical proof/parity backlog. A Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions, but should not duplicate unrelated matrix rows or store proof IDs in `test_refs`. |
 
 ## Output
 

@@ -27,10 +27,11 @@ Voice / Text / Ideas
   → [Tasks — when required]
   → Implementation Plan (approved)
   → Implementation
-  → Validation / Review
+  → Validation
+  → [Review / Improvement — when a team wants formal evaluation or process correction]
 ```
 
-Every stage produces a Markdown file. Every file is traceable to its source. Every implementation starts from an approved plan.
+Every persistent artifact lives in Markdown, every file is traceable to its source, and every implementation starts from an approved plan.
 
 ## Modes
 
@@ -69,6 +70,8 @@ Nothing here is ever copied into or out of the template:
 ``` text
 harness-data/
   CATALOG.md           ← this project's live state (e.g. active Implementation Plans)
+  RUN-LOG.md           ← optional rolling execution log for active or interrupted work
+  REPO-MAP.md          ← optional structural context for large repos
   reference/           ← project-specific (fill these in)
     ARCHITECTURE.md
     DOMAIN.md
@@ -121,4 +124,4 @@ See [docs/06-adoption.md](docs/06-adoption.md) for full adoption instructions.
 - **Artifacts over memory** — everything lives in files, not agent context
 - **Explicit gates** — implementation requires an approved plan; no exceptions
 - **Smallest sufficient context** — agents load only what they need
-- **Process improves itself** — Review and Improvement modes close the loop
+- **Process improves itself when needed** — Review and Improvement exist for teams that want a stronger formal loop

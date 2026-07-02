@@ -56,7 +56,7 @@ After completing a review, take the following action based on the outcome. Do no
 | Outcome | Action |
 | --- | --- |
 | `accepted` | Advance artifact to its next accepted status. Report completion. |
-| `accepted-with-notes` | Advance artifact status. Add findings as open questions in the artifact. |
+| `accepted-with-notes` | Advance artifact status. Record findings in the Review artifact, and add open questions to the target artifact only when that artifact is the correct place to carry those notes forward. |
 | `changes-requested` | Set artifact status to `draft`. Record findings in the Review artifact. Stop and wait for user instruction. |
 | `rejected` | Set artifact status to `rejected`. Move artifact to `archive/`. Stop and wait for user instruction. |
 | `follow-up-required` | Hold artifact at current status. Create an Improvement artifact if a process problem was found. Stop and wait for user instruction. |
@@ -66,7 +66,7 @@ After completing a review, take the following action based on the outcome. Do no
 | ID | Type | Rule |
 | --- | --- | --- |
 | RVW-001 | Escalation | The agent never autonomously re-enters a producing mode after `changes-requested`, `rejected`, or `follow-up-required` — the user must explicitly request the next action. |
-| RVW-002 | Boundaries | Do not change the artifact under review. |
+| RVW-002 | Boundaries | Do not change the substantive content of the artifact under review as part of the review itself. Status transitions and explicitly prescribed follow-up metadata updates are allowed. |
 | RVW-003 | Boundaries | Do not implement fixes. |
 | RVW-004 | Boundaries | Do not create Tasks or Specs as a side effect. |
 | RVW-005 | Boundaries | Do not modify harness files without an Improvement artifact. |

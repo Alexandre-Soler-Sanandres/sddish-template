@@ -16,8 +16,7 @@ approval:
   approved_at: null      # YYYY-MM-DD
 requires: []             # harness reference files needed, e.g. [harness-data/reference/ARCHITECTURE.md#database]
 technical_refs: []       # external technical artifacts, e.g. [docs/api/openapi.yaml, docs/db/schema.sql]
-test_refs: []            # populated during implementation — paths to test files covering each AC; may also note
-                         # legacy proof/parity targets that must later be covered
+test_refs: []            # populated during implementation — test file paths covering each AC only
 tags: []
 ---
 
@@ -68,7 +67,7 @@ ID when relevant)
 ## Validation Approach
 
 (how this spec will be validated — tests, checks, manual review; cite any inherited `CSP-*` proof obligations that
-must later be discharged)
+must later be discharged here or in Open Questions, not in `test_refs`)
 
 ## Task Decision Notes
 

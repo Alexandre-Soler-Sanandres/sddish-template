@@ -375,7 +375,7 @@ sections they constrain:
 
 - requirements and constraints for design limits
 - dependencies and risks for cross-cutting obligations
-- validation approach and later `test_refs` for proof that still needs to be discharged
+- validation approach, later tests, and any remaining cited proof IDs for proof that still needs to be discharged
 - `Open Questions` only for what is still unresolved for that specific Spec
 
 Tip: keep `PARITY-MATRIX.md` as the canonical home of proof/parity rows. Downstream artifacts should cite relevant
