@@ -362,6 +362,25 @@ findings and call out any target-product decision that must be settled first.
 Human check: Use Cases and Specs describe the desired system. They can be informed by legacy evidence, but they should
 not blindly preserve old behavior.
 
+When you start a Use Case from legacy evidence, ask the agent to carry forward only the legacy items that actually
+shape the scenario:
+
+- actor-visible or workflow-shaping open decisions should appear in the Use Case's `Open Questions`
+- behavior-shaping proof or parity obligations should appear in the Use Case's preconditions, failure paths, or
+  `Open Questions`
+- the Use Case should cite canonical IDs such as `CSQ-*`, `Q-<APP>-*`, and `CSP-*`, not copy large backlog tables
+
+When you then move from Use Case to Spec, ask the agent to carry forward the remaining technical obligations into the
+sections they constrain:
+
+- requirements and constraints for design limits
+- dependencies and risks for cross-cutting obligations
+- validation approach and later `test_refs` for proof that still needs to be discharged
+- `Open Questions` only for what is still unresolved for that specific Spec
+
+Tip: keep `PARITY-MATRIX.md` as the canonical home of proof/parity rows. Downstream artifacts should cite relevant
+IDs, not duplicate the whole matrix.
+
 ## Common Human Traps
 
 | Trap | Better move |

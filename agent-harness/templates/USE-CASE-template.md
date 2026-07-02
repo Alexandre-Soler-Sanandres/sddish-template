@@ -8,7 +8,7 @@ updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
 primary_actor: ""        # e.g. operator | user | system | external-service
 supporting_actors: []
-source: []               # e.g. [IDEA-001]
+source: []               # e.g. [IDEA-001]; include legacy finding IDs when derived from Legacy Discovery
 derived_specs: []        # e.g. [SPEC-001]
 tags: []
 confidence: medium       # low | medium | high
@@ -33,7 +33,8 @@ risk: low                # low | medium | high
 
 ## Alternatives and Failure Paths
 
-- (describe key alternatives or error conditions)
+- (describe key alternatives or error conditions; if a legacy proof/parity item changes scenario behavior, cite its
+  ID here or in Open Questions)
 
 ## Non-Goals
 
@@ -46,8 +47,9 @@ risk: low                # low | medium | high
 ## Open Questions
 
 (unresolved questions that may affect the spec. Tag each with its origin: a legacy question ID (`CSQ-NNN` /
-`Q-<APP>-NNN`) when it traces to Legacy Discovery, or a short origin note — e.g. "raised during Partnering,
-YYYY-MM-DD" or "raised while drafting this Use Case" — when it does not.)
+`Q-<APP>-NNN`) when it traces to Legacy Discovery, add related `CSP-*` IDs when a parity/proof obligation still
+shapes the scenario, or use a short origin note — e.g. "raised during Partnering, YYYY-MM-DD" or "raised while
+drafting this Use Case" — when it does not. Keep the canonical IDs instead of copying full legacy backlog rows.)
 
 ## Readiness Checklist
 

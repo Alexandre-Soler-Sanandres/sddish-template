@@ -15,13 +15,14 @@ Via natural language: explicit, unambiguous instruction referencing the source a
 1. Verify the source artifact is at an accepted status before proceeding.
 2. Read the Use Case or Legacy Finding.
 3. Inspect source Ideas or Legacy Findings when additional context is needed.
-4. Identify problem and goal.
-5. Define scope and non-goals.
-6. Define functional and non-functional requirements.
-7. Define acceptance criteria.
-8. Identify risks and constraints.
-9. Identify whether Tasks are likely required.
-10. Stop before implementation.
+4. When the Use Case originated from Legacy Discovery, inspect the inherited legacy question IDs and any referenced parity/proof obligations that still shape the design.
+5. Identify problem and goal.
+6. Define scope and non-goals.
+7. Define functional and non-functional requirements.
+8. Define acceptance criteria.
+9. Identify risks and constraints.
+10. Identify whether Tasks are likely required.
+11. Stop before implementation.
 
 ## Spec Body Should Include
 
@@ -37,6 +38,12 @@ Via natural language: explicit, unambiguous instruction referencing the source a
 - Risks
 - Validation approach
 - Task decision notes (if relevant)
+
+When legacy evidence is involved, the Spec should additionally:
+
+- carry inherited legacy open questions into `Open Questions` until they are resolved, deferred, marked not-needed, or proof-routed for this Spec
+- place technical legacy obligations in the section they constrain: requirements, constraints, dependencies, risks, validation, or `technical_refs` / `test_refs`
+- cite canonical legacy IDs (`CSQ-*`, `Q-<APP>-*`, `CSP-*`) rather than duplicating full legacy backlog rows
 
 ## Technical References
 
@@ -73,6 +80,8 @@ When a significant change is made to an approved Spec:
 | SPS-006 | Boundaries | Do not implement or change code. |
 | SPS-007 | Boundaries | Do not create Tasks or Implementation Plans. |
 | SPS-008 | Boundaries | Do not proceed if the source Use Case is not at an accepted status. |
+| SPS-009 | Legacy-Handoff | When the source Use Case inherits unresolved legacy questions or parity/proof obligations, load those referenced items and route them into the Spec sections they actually constrain. |
+| SPS-010 | Legacy-Handoff | Keep `PARITY-MATRIX.md` as the canonical proof/parity backlog. A Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions, but should not duplicate unrelated matrix rows. |
 
 ## Output
 
@@ -85,3 +94,4 @@ Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/DOMAIN.md` — when defining requirements that involve domain concepts, business rules, or domain terminology
 - `harness-data/reference/ARCHITECTURE.md` — when scope touches system boundaries, layers, or architectural constraints
+- relevant legacy `QUESTIONS.md`, `PARITY-MATRIX.md`, or `REWRITE-READINESS.md` artifacts — when inherited legacy decisions or obligations still constrain the Spec
