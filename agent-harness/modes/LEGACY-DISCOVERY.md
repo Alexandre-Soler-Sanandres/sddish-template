@@ -262,6 +262,13 @@ considered complete:
   LF-CROSS-016"). Do not silently drop the merged-away row — the ID must stay traceable even though it no longer
   has its own row, mirroring how finding-dedup keeps a pointer instead of deleting the superseded file. The
   question itself stays open until Question Clarification actually resolves it.
+- Flag any ID that appears in both `Open Decisions` and `Resolved Decisions` in the same file — a resolution that
+  added a `Resolved Decisions` row without removing the original `Open Decisions` row. Remove the stale
+  `Open Decisions` row; the `Resolved Decisions` row is authoritative.
+- For each row in `Resolved Decisions`, re-check every finding listed in its `Source finding(s)` column — the ID
+  must appear in that finding's `## Resolved Questions`, not left in `## Open Questions`. This applies to *every*
+  cited finding, not just the first one checked; a multi-finding citation list is a common place for one sibling
+  finding to be missed while the others are updated correctly.
 
 For cross-system `findings/`, verify each finding's `## Evidence` section cites the contributing app finding IDs
 it synthesizes, not only raw source paths — add the missing citations before normalization is considered complete.
@@ -419,3 +426,8 @@ Clarification:
 | Quality standards, test coverage, hygiene | `QUALITY.md` |
 
 Do not enrich references with unresolved, uncertain, cross-system-before-synthesis, or speculative findings.
+
+During Artifact Normalization, re-walk the full `Resolved Decisions` list (app and cross-system `QUESTIONS.md`
+files) against the reference docs and confirm each decision that produces a stable, target-relevant fact is
+actually reflected there. This is a repeatable sweep run every normalization pass, not a one-time backfill — a
+resolution landing after the last sweep is exactly the kind of gap it exists to catch.
