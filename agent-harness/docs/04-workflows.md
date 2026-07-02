@@ -153,6 +153,28 @@ This is the harness's lightweight observability layer when runtime visibility ma
 - where work paused or resumed
 - why execution stopped
 
+### Pause / Resume Protocol
+
+When implementation or planning work is interrupted and will continue later:
+
+Before pausing:
+
+- record the exact restart point
+- record the current execution state
+- record any checks that must be re-run before continuing
+
+On resume:
+
+- repeat the context checkpoint
+- confirm the restart point is still valid
+- confirm no newer artifact, status change, or user instruction invalidates the old path
+- re-run any validations or checks that were still uncertain at pause time
+
+Use the lightest place needed for this state:
+
+- the real Task, Plan, or artifact when the pause changes durable status or blockers
+- `harness-data/RUN-LOG.md` when it is temporary operational state for interrupted or higher-risk work
+
 ## Validation and Quality
 
 **Validation mode** covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks. It is universal and does not contain stack-specific commands.

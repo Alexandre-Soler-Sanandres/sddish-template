@@ -59,6 +59,23 @@ High-impact actions that require this verification:
 
 After a resume or context compaction, repeat the checkpoint before the next high-impact action.
 
+## Pause / Resume
+
+When interrupted work will continue later, keep the resume protocol lightweight:
+
+- Before pausing, record:
+  - the exact restart point
+  - the current execution state (for example: waiting for approval, blocked by validation, awaiting user input)
+  - any checks that must be re-run before continuing
+- On resume:
+  - repeat the context checkpoint
+  - confirm the restart point is still valid
+  - confirm no newer artifact, status change, or user instruction invalidates the old plan
+  - re-run any validations or checks that were still uncertain at pause time
+
+Temporary pause/resume state may live in `harness-data/RUN-LOG.md` when that file is in use. Durable outcomes still
+belong in the real artifacts.
+
 ## Commits
 
 - Never commit unless the user explicitly requests it.

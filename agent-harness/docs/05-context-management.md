@@ -88,6 +88,16 @@ Use it as a rolling operational log for:
 It is not a source-of-truth artifact. Keep it small, and collapse it to a short closure note or clear it when the
 work finishes.
 
+## Resume Discipline
+
+After a pause, interruption, or context compaction:
+
+- reload the active mode and restart artifact
+- re-check whether a newer artifact or status change changed the correct restart point
+- re-check any validations that were still uncertain when the work paused
+
+Do not assume the last conversational state is still safe to continue from without this mini-checkpoint.
+
 ## SUMMARY.md Files
 
 Local `SUMMARY.md` files may exist in artifact directories (e.g. `harness-data/specs/SUMMARY.md`) when the number of artifacts makes navigation difficult. They are created on demand — not required upfront.
