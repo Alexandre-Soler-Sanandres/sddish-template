@@ -38,6 +38,7 @@ Every persistent artifact lives in Markdown, every file is traceable to its sour
 | Mode | Purpose |
 | --- | --- |
 | Partnering | Structured conversation to capture ideas and problems |
+| ADR | Capture settled structural/architectural decisions |
 | Use Cases | Define behavioral anchors from actor goals |
 | Specs | Define desired behavior from Use Cases |
 | Tasks | Break Specs into execution units |
@@ -83,6 +84,7 @@ harness-data/
   artifacts/           ← lifecycle artifacts generated and maintained through harness modes
     transcripts/
     ideas/
+    adrs/
     use-cases/
     specs/
     tasks/

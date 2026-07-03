@@ -50,3 +50,4 @@ Load these when relevant — do not load all of them by default:
 - `harness-data/reference/QUALITY.md` — always load when running validation after a plan step; defines the definition of done and technical quality standards
 - `harness-data/reference/TOOLING.md` — always load when running validation commands; defines the actual commands to execute
 - `harness-data/reference/ARCHITECTURE.md` — when verifying allowed paths or architectural boundaries during execution
+- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`

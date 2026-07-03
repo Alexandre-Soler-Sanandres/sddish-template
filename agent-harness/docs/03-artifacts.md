@@ -34,6 +34,7 @@ updated: ""   # YYYY-MM-DD
 | `PLAN-` | Implementation Plan |
 | `REVIEW-` | Review |
 | `IMPROVEMENT-` | Harness Improvement |
+| `ADR-` | Architecture Decision Record |
 | `LF-<APP>-` / `LF-CROSS-` | Legacy Finding (app / cross-system, see `agent-harness/modes/LEGACY-DISCOVERY.md` LD-013/LD-014) |
 
 ### Relationship Fields
@@ -72,6 +73,23 @@ Early structured thoughts. Not implementation requests.
 **Statuses:** `captured` → `clarifying` → `ready-for-use-case` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/ideas/active/IDEA-*.md`
 **Template:** `agent-harness/templates/IDEA-template.md`
+
+### ADR (Architecture Decision Record)
+
+A settled structural or architectural decision — durable and citable, unlike an Idea (which is pre-decision) or
+a Use Case (which cannot itself decide architecture, per `UCS-004`/`005`/`006`). Referenced as authority by
+`harness-data/reference/ARCHITECTURE.md`, Use Cases, and Specs.
+
+**Statuses:** `proposed` → `accepted` → `superseded` | `rejected`
+**Location:** `harness-data/artifacts/adrs/proposed/ADR-*.md` (not yet settled),
+`harness-data/artifacts/adrs/accepted/ADR-*.md` (in force, citable authority), or
+`harness-data/artifacts/adrs/archive/ADR-*.md` (superseded/rejected)
+**Template:** `agent-harness/templates/ADR-template.md`
+
+Body should include: context, decision, considered alternatives, consequences, open questions, and a Readiness
+Checklist gating advancement to `accepted`. Once `accepted`, the decision and consequences are not rewritten in
+place — a change of direction produces a new ADR that supersedes it, linked via the `supersedes`/`superseded_by`
+frontmatter fields.
 
 ### Use Case
 
@@ -165,6 +183,7 @@ status change.
 | Spec | `approved` | `## Readiness Checklist` |
 | Task | `ready` | `## Readiness Checklist` |
 | Implementation Plan | `approved` | `## Readiness Checks` |
+| ADR | `accepted` | `## Readiness Checklist` |
 
 ## Artifact Maturity
 
@@ -176,3 +195,4 @@ An artifact is mature enough to proceed when its status is at an accepted level:
 | Spec | `approved` |
 | Task | `ready` or `planned` |
 | Implementation Plan | `approved` |
+| ADR (before being cited as settled authority) | `accepted` |

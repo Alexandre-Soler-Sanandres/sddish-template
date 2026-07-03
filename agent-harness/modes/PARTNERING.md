@@ -29,12 +29,14 @@ The agent acts as a structured sparring partner — not a solution machine.
 | PTN-018 | Boundaries | Do not modify code. |
 | PTN-019 | Boundaries | Do not infer approval from discussion. |
 | PTN-020 | Boundaries | Do not treat raw transcript as final requirement. |
+| PTN-021 | Responsibilities | Identify a candidate ADR when the conversation reaches a settled structural or architectural decision. Full rules live in `agent-harness/modes/ADR.md`, not here. |
 
 ## Possible Outputs
 
 - `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
 - `harness-data/artifacts/ideas/active/IDEA-*.md`
 - `harness-data/artifacts/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
+- `harness-data/artifacts/adrs/proposed/ADR-*.md` (when a structural/architectural decision has been reached)
 - Open questions list
 
 ## Reference Files

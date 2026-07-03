@@ -7,7 +7,7 @@ Use this guide when you already understand the artifact types and want the norma
 
 ```text
 Voice / Text / Ideas
-  → Partnering (TRANSCRIPT, IDEA)
+  → Partnering (TRANSCRIPT, IDEA, ADR when a structural decision settles)
   → Use Case Mode (UC-*)
   → Spec Mode (SPEC-*)
   → [Task Mode (TASK-*) — when required]
@@ -36,14 +36,33 @@ Partnering is the front door for unclear thinking.
 - Separate problem, goal, solution idea, and assumption
 - Ask focused clarification questions
 - Identify candidate ideas and possible Use Case drafts
+- Identify a candidate ADR when the conversation reaches a settled structural/architectural decision
 
 **Output paths:**
 
 - `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
 - `harness-data/artifacts/ideas/active/IDEA-*.md`
 - `harness-data/artifacts/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
+- `harness-data/artifacts/adrs/proposed/ADR-*.md` (when a structural/architectural decision has been reached)
 
 Partnering must not create Specs, Tasks, or Implementation Plans, or infer approval from discussion.
+
+## ADR Creation
+
+An ADR is appropriate when the conversation reaches a settled structural or architectural decision — not an
+actor-goal scenario (that's a Use Case) and not an early hunch (that's an Idea). Unlike Use Case and Spec, an ADR
+is not restricted to originating from one mode: any mode may draft a candidate ADR at status `proposed` when it
+surfaces one — Partnering discussion is the common case, but a Review finding or another mode noticing an
+architecturally significant decision can start one too. What's restricted is not authorship, but acceptance: an
+ADR only becomes citable authority once its Readiness Checklist passes and the user has explicitly confirmed
+`accepted` status. See `agent-harness/modes/ADR.md` for the full rule set.
+
+**Output path:** `harness-data/artifacts/adrs/proposed/ADR-*.md` (moves to `accepted/` once settled, `archive/` if
+superseded or rejected)
+
+ADRs are cited as reference authority by Use Cases and Specs; they do not themselves produce a Use Case or Spec —
+the relationship is one-directional, the same way `ARCHITECTURE.md`/`DOMAIN.md` are cited rather than treated as
+sources.
 
 ## Use Case Creation
 

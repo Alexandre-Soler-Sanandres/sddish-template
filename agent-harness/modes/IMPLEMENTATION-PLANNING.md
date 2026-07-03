@@ -101,5 +101,6 @@ Source:
 Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/ARCHITECTURE.md` — when defining expected file areas or architectural boundaries in the plan
+- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
 - `harness-data/reference/TOOLING.md` — when specifying validation commands per plan step
 - `harness-data/reference/DOMAIN.md` — when the plan touches domain-critical areas (payments, security, data integrity)

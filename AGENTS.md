@@ -14,6 +14,7 @@ This repository uses an SDD-ish Agent Harness under `agent-harness/`.
 | Mode | File | Purpose |
 | --- | --- | --- |
 | Partnering | `agent-harness/modes/PARTNERING.md` | Structured conversation to capture ideas and problems |
+| ADR | `agent-harness/modes/ADR.md` | Capture settled structural/architectural decisions |
 | Use Cases | `agent-harness/modes/USE-CASES.md` | Define behavioral anchors from actor goals |
 | Specs | `agent-harness/modes/SPECS.md` | Define desired behavior from Use Cases |
 | Tasks | `agent-harness/modes/TASKS.md` | Break Specs into execution units |

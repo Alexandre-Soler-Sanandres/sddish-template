@@ -1,7 +1,7 @@
 # Glossary
 
 **Artifact**  
-A Markdown file representing a structured unit of work or knowledge, such as an Idea, Use Case, Spec, Task, Plan, Review, or Improvement.
+A Markdown file representing a structured unit of work or knowledge, such as an Idea, ADR, Use Case, Spec, Task, Plan, Review, or Improvement.
 
 **Mode**  
 A bounded agent behavior profile that defines what the agent may do. Only one mode is active at a time.
@@ -11,6 +11,9 @@ Conversational mode for capture, clarification, and idea formation. The front do
 
 **Use Case**  
 A behavioral anchor that describes who does what, under what conditions, and with what observable outcome. Created from Ideas, Transcripts, or Partnering discussions.
+
+**ADR (Architecture Decision Record)**  
+A settled structural or architectural decision — durable and citable, unlike an Idea. Produced from Partnering when the conversation reaches a decision rather than a scenario or a hunch. Immutable once `accepted`; a change of direction produces a new ADR that supersedes it.
 
 **Spec**  
 The source of truth for desired behavior. Always created from a Use Case. Defines problem, goal, scope, requirements, acceptance criteria, and risks.

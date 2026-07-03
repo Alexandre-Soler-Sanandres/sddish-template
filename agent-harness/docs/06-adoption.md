@@ -269,7 +269,7 @@ When in doubt:
 | `harness-data/reference/QUALITY.md` | Project-specific — fill in |
 | `harness-data/guides/` | Optional — add project-specific setup and operating guidance |
 | `harness-data/playbooks/` | Optional — add project-specific scoped procedures for recurring work in this repo |
-| `harness-data/artifacts/{legacy,use-cases,specs,tasks,implementation-plans,reviews,improvements,transcripts,ideas}/` | Project-specific — lifecycle artifacts generated and managed by using the harness |
+| `harness-data/artifacts/{legacy,use-cases,specs,tasks,implementation-plans,reviews,improvements,transcripts,ideas,decisions}/` | Project-specific — lifecycle artifacts generated and managed by using the harness |
 
 ## Adopting for Existing Projects
 

@@ -46,6 +46,7 @@ Review -> Improvement artifact -> approved harness change -> validation -> updat
 Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/ARCHITECTURE.md` — when the improvement touches architectural boundaries or tooling structure
+- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
 
 ## Output
 

@@ -11,6 +11,7 @@ Mode transitions happen only when the user explicitly requests them. Ambiguous i
 | Mode | CLI | Purpose |
 | --- | --- | --- |
 | Partnering | — | Structured conversation to capture ideas and problems |
+| ADR | `/tw-create-adr` | Capture settled structural/architectural decisions |
 | Use Cases | `/tw-create-use-case` | Define behavioral anchors from actor goals |
 | Specs | `/tw-create-spec <use-case-file>` | Define desired behavior from Use Cases |
 | Tasks | `/tw-create-tasks <spec-file>` | Break Specs into execution units |
@@ -25,12 +26,27 @@ Mode transitions happen only when the user explicitly requests them. Ambiguous i
 
 The conversational front door for unclear thinking. The agent acts as a structured sparring partner — not a solution machine.
 
-**May produce:** Transcripts, Ideas, Use Case drafts (if sufficiently mature)  
+**May produce:** Transcripts, Ideas, Use Case drafts (if sufficiently mature), ADRs (when a structural/architectural decision is reached)  
 **Must not:** Create Specs, Tasks, or Implementation Plans. Modify code.
 
 The transcript is raw data. The agent writes it proactively as the conversation unfolds.
 
 Mode transition: Partnering ends only when the user explicitly requests a mode change. A vague statement like "we should maybe make a spec later" does not trigger Spec mode.
+
+## ADR Mode
+
+Captures a settled structural or architectural decision — durable and citable, unlike an Idea (pre-decision) or a
+Use Case (cannot itself decide architecture). Unlike every other producing mode, authorship is not restricted to
+one entry point: any mode may draft a candidate ADR at `proposed` when it surfaces one, since real-world ADR
+practice treats this as broadly proposable. What is restricted is acceptance — an ADR only becomes citable
+authority once its Readiness Checklist passes and the user explicitly confirms `accepted` status.
+
+**Entry:** `/tw-create-adr`, or via natural language from any mode
+**Sources:** Partnering discussion, Transcript, an Idea being promoted, a Review finding, or any mode surfacing a
+structural decision
+**Output:** `harness-data/artifacts/adrs/proposed/ADR-*.md` (moves to `accepted/` once settled)
+**Must not:** Trigger implementation. Create Specs, Tasks, or Implementation Plans directly. Be edited in place
+after `accepted` (a change of direction produces a new ADR that supersedes it).
 
 ## Use Case Mode
 

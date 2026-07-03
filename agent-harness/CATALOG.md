@@ -20,6 +20,7 @@ Support-file discovery uses these index files instead:
 - Implementation Plans: `harness-data/artifacts/implementation-plans/`
 - Reviews: `harness-data/artifacts/reviews/`
 - Improvements: `harness-data/artifacts/improvements/`
+- ADRs: `harness-data/artifacts/adrs/`
 - Legacy: `harness-data/artifacts/legacy/`
   - Legacy app discovery: `harness-data/artifacts/legacy/apps/<legacy-app-slug>/` with `SOURCE-MAP.md` as the restart point
   - Cross-system legacy synthesis: `harness-data/artifacts/legacy/cross-system/` with `SUMMARY.md` as the restart point

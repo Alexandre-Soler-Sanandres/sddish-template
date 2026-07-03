@@ -85,3 +85,4 @@ Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/DOMAIN.md` — when reviewing domain correctness of a Spec, Use Case, or implementation
 - `harness-data/reference/ARCHITECTURE.md` — when reviewing scope or boundary decisions
+- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`

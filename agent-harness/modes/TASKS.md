@@ -63,5 +63,6 @@ Via natural language: explicit instruction referencing the Spec.
 Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/ARCHITECTURE.md` — when defining allowed and forbidden paths or verifying scope against system boundaries
+- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
 - `harness-data/reference/TOOLING.md` — when specifying validation commands in Task frontmatter
 - `harness-data/reference/DOMAIN.md` — when the Task touches domain-critical areas (payments, security, data integrity)
