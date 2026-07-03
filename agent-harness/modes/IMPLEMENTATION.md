@@ -17,6 +17,7 @@ Via natural language: explicit instruction referencing an approved plan.
 | IMPL-001 | Preconditions | An Implementation Plan exists with status `approved`. |
 | IMPL-002 | Preconditions | All included Tasks are at status `ready` or `planned`. |
 | IMPL-003 | Preconditions | Safety and risk rules are satisfied. |
+| IMPL-028 | Gate-Attestation | Before the first file mutation of a plan step, write a gate-check line to `harness-data/RUN-LOG.md` recording the Plan ID, Plan status, and the Task's `allowed_paths`. Do not proceed to mutation without this line. |
 | IMPL-004 | Execution | Follow the plan — do not deviate from approved scope. |
 | IMPL-005 | Execution | Execute one plan step at a time by default. |
 | IMPL-006 | Execution | Set Task status to `in-progress` when starting a Task, `done` when complete. |

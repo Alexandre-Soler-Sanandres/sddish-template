@@ -223,7 +223,8 @@ These are the details people most often need once the basic files exist:
   lives in the separate `harness-data/CATALOG.md` instead — same name, different root, on purpose: one is the
   universal index, the other is this project's own bookkeeping against it
 - `harness-data/RUN-LOG.md` is not required by default, but the agent may use it for interrupted, approval-heavy,
-  multi-step, or high-risk work; keep it temporary and collapse or clear it after completion
+  multi-step, or high-risk work; keep it temporary and collapse or clear it after completion. The one mandatory
+  case is the `IMPL-028` gate-check line written before the first file mutation of a plan step.
 - Optionally add `REPO-MAP.md` at repo root or a major subtree when the codebase is large enough that normal context
   loading becomes clumsy
 - Optionally add project-specific setup and operating guides under `harness-data/guides/`

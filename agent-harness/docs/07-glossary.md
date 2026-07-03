@@ -73,4 +73,4 @@ An optional support file describing a reusable procedure for a recurring task sh
 Task frontmatter fields that constrain implementation scope during Implementation mode. The agent must not modify files outside `allowed_paths` or inside `forbidden_paths`.
 
 **RUN-LOG.md**  
-An optional, temporary operational trace at `harness-data/RUN-LOG.md` used for interrupted, approval-heavy, or high-risk work. Not a source-of-truth artifact; kept small and collapsed or cleared when work finishes.
+An optional, temporary operational trace at `harness-data/RUN-LOG.md` used for interrupted, approval-heavy, or high-risk work. Not a source-of-truth artifact; kept small and collapsed or cleared when work finishes. Writing to it is mandatory in one case: the Implementation gate-check required by `IMPL-028`, recorded before the first file mutation of a plan step.

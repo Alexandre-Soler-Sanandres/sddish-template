@@ -41,7 +41,7 @@ Universal harness rules that apply in every mode.
 | COR-031 | Checkpoint | Treat these as high-impact actions: committing; changing harness mode files, templates, or reference process rules; creating Review or Improvement artifacts; changing source-map workflow or status rules; moving artifacts between lifecycle folders; starting cross-system synthesis. |
 | COR-032 | Checkpoint | After a resume or context compaction, repeat the checkpoint before the next high-impact action. |
 | COR-033 | Observability | Record temporary operational trace only when it helps safe continuation, validation, or explanation of agent behavior. |
-| COR-034 | Observability | Use `harness-data/RUN-LOG.md` only when operational trace is useful; it is not required by default. |
+| COR-034 | Observability | Use `harness-data/RUN-LOG.md` only when operational trace is useful; it is not required by default, except for the Implementation gate-check required by `IMPL-028`. |
 | COR-035 | Observability | Record only operational facts that matter, such as context loaded, approvals, commands/checks run, current execution state, restart point, and stop reason. |
 | COR-036 | Observability | Move durable decisions, stable blockers, and lasting outcomes into the real artifacts instead of leaving them only in operational trace. |
 | COR-037 | Observability | Keep operational trace small and temporary; collapse it to a short closure note or clear it when the work finishes. |

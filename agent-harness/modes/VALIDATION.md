@@ -31,7 +31,8 @@ Via natural language: explicit instruction to validate a specific artifact, plan
 | VAL-015 | Behavioral-Validation | Scope did not drift beyond what was planned. |
 | VAL-016 | Behavioral-Validation | Technical checks were run during Implementation (see `agent-harness/modes/IMPLEMENTATION.md`). |
 | VAL-017 | Readiness-Checks | Before moving to the next stage, verify: no open `changes-requested` or `rejected` review findings, all blockers are resolved, and dependent artifacts are at an accepted status. |
-| VAL-018 | Fallback | Manual review is acceptable as a fallback when automation is unavailable. Document what was checked and the outcome. |
+| VAL-018 | Fallback | Manual review is the primary verification mechanism by design, not a fallback for missing automation. Document what was checked and the outcome. |
+| VAL-024 | Process-Validation | Reconcile the actual code changes (via `git log`/`git diff`) against the approved Implementation Plan's `allowed_paths` and steps. Flag any file changed outside `allowed_paths`, or any change with no corresponding Plan step, as a finding. |
 | VAL-019 | Boundaries | Do not implement or change code. |
 | VAL-020 | Boundaries | Do not modify artifacts beyond updating their status. |
 | VAL-021 | Boundaries | Do not skip validation steps without explicit approval. |

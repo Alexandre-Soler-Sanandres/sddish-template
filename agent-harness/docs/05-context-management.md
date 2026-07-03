@@ -141,7 +141,8 @@ changes materially, not on every run.
 ## RUN-LOG.md
 
 An optional `harness-data/RUN-LOG.md` may exist for interrupted, approval-heavy, multi-step, or high-risk work. It is
-not required by default, but the agent may use it when temporary operational trace helps safe continuation.
+not required by default, but the agent may use it when temporary operational trace helps safe continuation. The one
+mandatory case is the `IMPL-028` gate-check line, written before the first file mutation of any plan step.
 
 When the agent uses it, it serves as a rolling operational log for:
 
