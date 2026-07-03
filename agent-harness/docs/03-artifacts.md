@@ -69,7 +69,7 @@ Transcripts are evidence — not approved requirements.
 
 Early structured thoughts. Not implementation requests.
 
-**Statuses:** `captured` → `clarifying` → `ready-for-use-case` → `converted` → `archived` → `rejected`
+**Statuses:** `captured` → `clarifying` → `ready-for-use-case` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/ideas/active/IDEA-*.md`
 **Template:** `agent-harness/templates/IDEA-template.md`
 
