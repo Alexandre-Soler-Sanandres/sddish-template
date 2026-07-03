@@ -30,7 +30,7 @@ Load reference files only when directly relevant:
 | App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `findings/`, `QUESTIONS.md`, and stable reference docs. See `agent-harness/modes/legacy-discovery/APP-LOCAL.md`. | Source map reaches `app-local-complete`. |
 | Cross-system synthesis | Active scope is explicit and all in-scope apps are `app-local-complete`. | Synthesize contracts, parity, questions, proof needs, and readiness across apps. See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`. | Cross-system `SUMMARY.md` marks synthesis complete and names the restart point. |
 | Artifact normalization | App-local and required cross-system discovery are complete. | Format, dedupe, order, and tighten existing artifacts without new source discovery. See `agent-harness/modes/legacy-discovery/GATES.md`. | Restart pointer moves to question clarification. |
-| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. See `agent-harness/modes/legacy-discovery/GATES.md`. | P0/migration-critical blockers resolved, deferred, or proof-routed — restart pointer moves to Use Cases or Specs. Remaining non-P0 questions carry forward into individual Use Cases/Specs as their own `Open Questions`; each artifact's own Readiness Checklist (not this phase) gates when it is finished. |
+| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. See `agent-harness/modes/legacy-discovery/GATES.md`. | Downstream-work is unblocked once P0/migration-critical blockers are resolved, deferred, or proof-routed, so the restart pointer may move to Use Cases or Specs. This does not mean Question Clarification is complete, and it does not make other open questions irrelevant. Any remaining open cross-system or app-local questions stay tracked in the legacy artifacts until they are resolved, deferred, marked not-needed, converted to proof work, or intentionally carried into individual Use Cases/Specs as `Open Questions`; each downstream artifact's own Readiness Checklist then gates when that artifact is finished. |
 
 ## Discovery Lifecycle
 
@@ -40,7 +40,7 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | --- | --- |
 | `app-discovery-active` | App-local slices are still being discovered. |
 | `app-local-complete` | App evidence is sufficient for app-local rewrite planning. |
-| `rewrite-ready` | App evidence, cross-system synthesis, and target decisions are sufficient to begin rewrite design work. Proof obligations may still remain when they are explicit and do not block coherent design. |
+| `rewrite-ready` | App evidence, cross-system synthesis, and target decisions are sufficient to begin rewrite design work. This is an unblock state, not a claim that every legacy question is closed. Proof obligations and non-blocking open questions may still remain when they are explicit, still tracked, and do not block coherent design. |
 
 ## Rules
 

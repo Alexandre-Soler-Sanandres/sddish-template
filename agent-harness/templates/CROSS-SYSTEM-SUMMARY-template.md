@@ -109,7 +109,8 @@ Cross-system artifact responsibilities:
 - `findings/`: record synthesized cross-app claims with evidence and downstream links.
 - `QUESTIONS.md`: record unresolved cross-app or target-product decisions.
 - `PARITY-MATRIX.md`: record match/drift/proof status for important legacy-to-target behavior.
-- `REWRITE-READINESS.md`: state what is ready for Use Cases or Specs and what still blocks planning.
+- `REWRITE-READINESS.md`: state what is ready to unblock Use Cases or Specs, what still blocks planning, and which
+  non-blocking questions or proof obligations still need to be carried forward.
 
 `PARITY-MATRIX.md` owns the canonical proof/parity IDs. When `REWRITE-READINESS.md` summarizes blockers, it should
 cite those existing proof IDs directly instead of introducing a second blocker-ID namespace.
