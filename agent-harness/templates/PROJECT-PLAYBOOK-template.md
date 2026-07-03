@@ -1,15 +1,19 @@
 # <Project Playbook Title>
 
-## Purpose
-
 ## Use When
+
+## Do Not Use For
+
+## Required Inputs
 
 ## Relevant Paths
 
-## Procedure
+## Agent Procedure
 
-## Required Validation
+## Required Checks
 
-## Common Pitfalls
+## Required Output
+
+## Escalate When
 
 ## Related Files

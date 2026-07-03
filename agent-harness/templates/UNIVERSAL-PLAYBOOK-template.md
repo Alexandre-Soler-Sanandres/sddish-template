@@ -1,19 +1,15 @@
 # <Universal Playbook Title>
 
-## Purpose
-
 ## Use When
 
 ## Do Not Use For
 
-## Inputs To Gather
+## Required Inputs
 
-## Procedure
+## Agent Procedure
 
-## Evidence Expectations
+## Required Checks
 
-## Validation Expectations
+## Required Output
 
-## Common Pitfalls
-
-## Output Expectations
+## Escalate When
