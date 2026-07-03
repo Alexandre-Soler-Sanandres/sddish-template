@@ -1,7 +1,7 @@
 # Workflows
 
 This file is the practical "what happens next?" guide.
-Use it when you already understand the artifact types and need the normal operating flow.
+Use this guide when you already understand the artifact types and want the normal operating flow explained clearly.
 
 ## The Standard Flow
 
@@ -47,7 +47,7 @@ Partnering must not create Specs, Tasks, or Implementation Plans, or infer appro
 
 ## Use Case Creation
 
-Create a Use Case when:
+A Use Case is appropriate when:
 
 - A human actor or external system has a goal to pursue
 - A decision flow or business workflow needs to be defined
@@ -57,20 +57,22 @@ A Use Case may be created from: Idea, Transcript, Partnering discussion, Legacy 
 
 ## Spec Creation
 
-1. Verify the Use Case is at `ready-for-spec`
-2. Read the Use Case
-3. Inspect source Ideas or Legacy Findings for additional context
-4. Identify problem and goal
-5. Define scope and non-goals
-6. Define functional and non-functional requirements
-7. Define acceptance criteria
-8. Identify risks and constraints
-9. Identify whether Tasks are likely required
-10. Stop before implementation
+A typical Spec-creation pass by the agent includes:
+
+1. verifying that the Use Case is at `ready-for-spec`
+2. reading the Use Case
+3. inspecting source Ideas or Legacy Findings for additional context
+4. identifying problem and goal
+5. defining scope and non-goals
+6. defining functional and non-functional requirements
+7. defining acceptance criteria
+8. identifying risks and constraints
+9. identifying whether Tasks are likely required
+10. stopping before implementation
 
 ## Are Tasks Required?
 
-Use this table as a practical decision aid, not as permission to skip planning entirely.
+This table is a practical decision aid, not permission to skip planning entirely.
 If Tasks are not required, the work still needs an Implementation Plan.
 
 | Situation | Tasks Required? | Reason |
@@ -121,14 +123,17 @@ Bad fit:
 
 Implementation Planning entry points and what they mean:
 
-**`/tw-implement-task TASK-001`**  
-Create a focused plan for this Task. Do not code until approved.
+**`/tw-plan-task TASK-001`**
+This command tells the agent to create a focused plan for this Task and stop before coding until the plan is approved.
 
-**`/tw-implement-spec SPEC-001`**  
-Find existing Tasks. Check maturity. Apply Task Decision Matrix. Create plan. If Tasks are required but missing, stop and route to `/tw-create-tasks`. Wait for approval.
+**`/tw-plan-spec SPEC-001`**
+This command tells the agent to find existing Tasks, check maturity, apply the Task Decision Matrix, and create a plan.
+If Tasks are required but missing, the agent should stop and route to `/tw-create-tasks`, then wait for approval.
 
-**`/tw-implement-use-case UC-001`**  
-Find all derived Specs. Verify they are approved (if not, stop and route to `/tw-create-spec`). For each Spec apply the same Task discovery logic. Create a coherent end-to-end plan. Wait for approval.
+**`/tw-plan-use-case UC-001`**
+This command tells the agent to find all derived Specs, verify they are approved, apply the same Task discovery logic
+for each Spec, and create a coherent end-to-end plan. If approval prerequisites are missing, the agent should stop and
+route to the correct upstream step, then wait for approval.
 
 ### Plan Step Grouping
 
@@ -155,13 +160,15 @@ The important part is not the exact commit wording. The important part is that t
 
 ## Implementation Execution
 
-- Execute one plan step at a time by default
-- Set Task status `in-progress` when starting, `done` when complete
-- Set Plan status `in-progress` when execution begins, `done` when all steps complete
-- Run technical checks (from `QUALITY.md` / `TOOLING.md`) after each step
-- Stop if validation fails outside the expected scope
-- Stop if missing or contradictory requirements are discovered
-- Stop if a high-risk area is encountered not covered by the plan
+During implementation, the agent should:
+
+- execute one plan step at a time by default
+- set Task status `in-progress` when starting, `done` when complete
+- set Plan status `in-progress` when execution begins, `done` when all steps complete
+- run technical checks (from `QUALITY.md` / `TOOLING.md`) after each step
+- stop if validation fails outside the expected scope
+- stop if missing or contradictory requirements are discovered
+- stop if a high-risk area is encountered that is not covered by the plan
 
 ### Optional Operational Trace
 
@@ -169,8 +176,8 @@ The important part is not the exact commit wording. The important part is that t
 multi-step, or high-risk work:
 
 - It is temporary operational state, not a source-of-truth artifact.
-- Use it for approvals, resumptions, interruptions, and validation checkpoints that help work continue safely.
-- When work finishes, collapse it to a short closure note or clear it.
+- The agent can use it for approvals, resumptions, interruptions, and validation checkpoints that help work continue safely.
+- When work finishes, the agent should collapse it to a short closure note or clear it.
 - Durable decisions and outcomes must still be written back into the real artifacts.
 
 This is the harness's lightweight observability layer when runtime visibility matters:
@@ -186,27 +193,27 @@ Most work does not need a run log. Reach for it when a future resume would other
 
 When implementation or planning work is interrupted and will continue later:
 
-Before pausing:
+Before pausing, the agent should:
 
 - record the exact restart point
 - record the current execution state
 - record any checks that must be re-run before continuing
 
-On resume:
+On resume, the agent should:
 
 - repeat the context checkpoint
 - confirm the restart point is still valid
 - confirm no newer artifact, status change, or user instruction invalidates the old path
 - re-run any validations or checks that were still uncertain at pause time
 
-Use the lightest place needed for this state:
+The lightest appropriate place for this state is:
 
 - the real Task, Plan, or artifact when the pause changes durable status or blockers
 - `harness-data/RUN-LOG.md` when it is temporary operational state for interrupted or higher-risk work
 
 ## Validation and Quality
 
-**Validation mode** covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks. It is universal and does not contain stack-specific commands.
+**Validation mode** covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks. It is universal and does not contain project-specific commands.
 
 **Technical checks** (tests, linting, typing, migrations) are project-specific. They are defined in `harness-data/reference/QUALITY.md` and run using commands from `harness-data/reference/TOOLING.md`.
 

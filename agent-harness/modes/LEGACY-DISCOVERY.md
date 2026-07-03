@@ -6,7 +6,7 @@ Legacy Discovery extracts rewrite-quality evidence from existing systems. Legacy
 
 ## Entry
 
-- CLI: `/tw-discover-legacy <path>`
+- CLI: `/tw-legacy-discovery <path>`
 - Natural language: explicit instruction to analyze a legacy codebase or imported project directory.
 
 ## Context

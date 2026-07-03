@@ -7,20 +7,20 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 
 ## Entry Points
 
-- `/tw-implement-task <task-file>`
-- `/tw-implement-spec <spec-file>`
-- `/tw-implement-use-case <use-case-file>`
+- `/tw-plan-task <task-file>`
+- `/tw-plan-spec <spec-file>`
+- `/tw-plan-use-case <use-case-file>`
 
 ## Required Steps
 
-### Entering via `/tw-implement-task`
+### Entering via `/tw-plan-task`
 
 1. Load the Task.
 2. Verify the Task is at status `ready`. If not, stop and report.
 3. Create a focused Implementation Plan for that Task.
 4. Wait for approval — do not change code.
 
-### Entering via `/tw-implement-spec`
+### Entering via `/tw-plan-spec`
 
 1. Load the Spec.
 2. Verify the Spec is at status `approved`. If not, stop and report.
@@ -34,7 +34,7 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 5. Create the Implementation Plan.
 6. Wait for approval — do not change code.
 
-### Entering via `/tw-implement-use-case`
+### Entering via `/tw-plan-use-case`
 
 1. Load the Use Case.
 2. Verify the Use Case is at status `ready-for-spec`. If not, stop and report.

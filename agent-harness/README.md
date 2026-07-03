@@ -61,6 +61,7 @@ agent-harness/
   CATALOG.md           ← universal navigation: where artifacts live
   docs/                ← harness documentation and human guides
   modes/               ← one file per mode (universal, stack-neutral)
+  playbooks/           ← optional universal reusable procedures
   templates/           ← artifact templates
 ```
 

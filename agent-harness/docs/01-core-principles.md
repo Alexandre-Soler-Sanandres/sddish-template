@@ -42,7 +42,7 @@ Each persistent stage produces a file-based artifact. Each artifact is traceable
 
 ## Modes Are Universal. References Are Project-Specific.
 
-Mode files (`agent-harness/modes/`) define process rules that apply to every project using this harness, regardless of tech stack. They must never contain stack-specific commands, tool names, or technology choices.
+Mode files (`agent-harness/modes/`) define process rules that apply to every project using this harness. They must never contain project-specific commands, tool names, or technology choices.
 
 Reference files (`harness-data/reference/`) are project-specific. They define the concrete details that vary per project: architecture, domain concepts, tooling commands, and quality standards.
 
@@ -60,4 +60,4 @@ Reference files (`harness-data/reference/`) are project-specific. They define th
 - **Rejection paths are prescribed** — after review, the agent takes a defined action and stops; the user decides what happens next
 - **Parallel work is coordinated** — concurrent Plans on overlapping paths are surfaced and blocked until resolved
 - **Process improves itself when needed** — Review and Improvement exist when teams want a stronger formal loop
-- **Universal harness, project-specific details** — the process is the same everywhere; the stack details vary
+- **Universal harness, project-specific details** — the process is the same everywhere; the project details vary

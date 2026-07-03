@@ -255,6 +255,7 @@ When in doubt:
 | `agent-harness/OUTPUTS.md` | Universal — do not modify |
 | `agent-harness/CATALOG.md` | Universal — do not modify |
 | `agent-harness/modes/**/*.md` | Universal — do not modify |
+| `agent-harness/playbooks/` | Universal — reusable procedures owned by the harness |
 | `agent-harness/templates/*.md` | Universal — do not modify |
 | `harness-data/CATALOG.md` | Project-specific — live state, not part of the template |
 | `harness-data/RUN-LOG.md` | Optional — temporary operational trace the agent may use for interrupted or higher-risk work |
@@ -297,7 +298,9 @@ Use these docs for the detailed guidance:
 - [09-guides.md](09-guides.md)
 - [10-playbooks.md](10-playbooks.md)
 
-Stack-specific rules must never be placed in mode files. Mode files reference the relevant reference file instead.
+`agent-harness/playbooks/` is a separate harness-owned layer for reusable procedures.
+
+Project-specific rules must never be placed in mode files. Put them in the relevant project-owned support file instead.
 
 ## Optional Advanced Disciplines
 

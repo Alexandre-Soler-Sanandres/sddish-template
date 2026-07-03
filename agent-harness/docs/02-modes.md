@@ -14,12 +14,12 @@ Mode transitions happen only when the user explicitly requests them. Ambiguous i
 | Use Cases | `/tw-create-use-case` | Define behavioral anchors from actor goals |
 | Specs | `/tw-create-spec <use-case-file>` | Define desired behavior from Use Cases |
 | Tasks | `/tw-create-tasks <spec-file>` | Break Specs into execution units |
-| Implementation Planning | `/tw-implement-task/spec/use-case` | Plan and gate code changes |
+| Implementation Planning | `/tw-plan-task/spec/use-case` | Plan and gate code changes |
 | Implementation | `/tw-execute-plan <plan-file>` | Execute an approved plan |
 | Validation | `/tw-validate` | Verify artifacts and implementations |
 | Review | `/tw-review <artifact-file>` | Evaluate outputs and discover process problems |
 | Improvement | `/tw-improve-harness <review-file>` | Change the harness itself |
-| Legacy Discovery | `/tw-discover-legacy <path>` | Extract evidence from existing code |
+| Legacy Discovery | `/tw-legacy-discovery <path>` | Extract evidence from existing code |
 
 ## Partnering
 
@@ -66,9 +66,9 @@ The mandatory gate before code changes. These commands mean: inspect the artifac
 
 **Entry points and routing:**
 
-- `/tw-implement-task <task-file>` — verify Task is `ready`, create focused plan
-- `/tw-implement-spec <spec-file>` — find Tasks, apply Task Decision Matrix, create plan
-- `/tw-implement-use-case <use-case-file>` — find all derived Specs and Tasks, create end-to-end plan
+- `/tw-plan-task <task-file>` — verify Task is `ready`, create focused plan
+- `/tw-plan-spec <spec-file>` — find Tasks, apply Task Decision Matrix, create plan
+- `/tw-plan-use-case <use-case-file>` — find all derived Specs and Tasks, create end-to-end plan
 
 **Output:** `harness-data/artifacts/implementation-plans/active/PLAN-*.md`
 **Must not:** Change code. Proceed without verifying artifact maturity.
@@ -127,5 +127,5 @@ this is an optional advanced discipline in the overall operating model, even tho
 
 Analyzes an existing project as evidence for a new SDD-ish development process. The legacy project is evidence, not authority.
 
-**Entry:** `/tw-discover-legacy <path>`  
+**Entry:** `/tw-legacy-discovery <path>`
 **Must not:** Modify legacy source code. Implement new code. Create Specs without a Use Case unless evidence is unambiguous and strong.

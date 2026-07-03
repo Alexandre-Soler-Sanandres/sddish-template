@@ -5,7 +5,7 @@ They are project-owned, not lifecycle artifacts, and they exist to help agents a
 
 ## What Guides Are For
 
-Use guides for practical project-specific setup and operating knowledge such as:
+Guides are useful for practical project-specific setup and operating knowledge such as:
 
 - package manager and environment bootstrap
 - local services and startup order
@@ -36,14 +36,14 @@ Recurring project procedures belong in `harness-data/playbooks/`.
 
 ## When To Create A Guide
 
-Create a guide when:
+A guide is worth creating when:
 
 - an agent would otherwise repeat the same setup mistakes
 - one subsystem has non-obvious bootstrap or operating steps
 - practical local workflow knowledge does not fit cleanly in `reference/`
 - the setup is stable enough to be worth documenting
 
-Do not create a guide just because the folder exists.
+A guide is not needed just because the folder exists.
 
 ## Who Creates And Maintains Guides
 
@@ -51,11 +51,11 @@ Guides are project-owned support files.
 They may be written or updated by humans or AI, but they are not required harness outputs.
 
 The harness does not automatically generate or lifecycle-manage them.
-Create or refine them only when they add real operational value.
+They are worth creating or refining only when they add real operational value.
 
 ## How Agents Should Use Guides
 
-Load a guide only when the current task depends on local setup, tooling usage, bootstrap steps, or operating quirks.
+Agents should load a guide only when the current task depends on local setup, tooling usage, bootstrap steps, or operating quirks.
 
 Typical examples:
 
@@ -64,11 +64,11 @@ Typical examples:
 - test data or seed steps are easy to get wrong
 - one repo area has local operational conventions not captured elsewhere
 
-Do not load guides by default for every task.
+Agents should not load guides by default for every task.
 
 ## Suggested Shape
 
-Use [GUIDE-template.md](../templates/GUIDE-template.md) as a neutral structure when helpful.
+The [GUIDE-template.md](../templates/GUIDE-template.md) template can be used as a neutral structure when helpful.
 
 Recommended sections:
 
@@ -112,5 +112,5 @@ Explain how this project bootstraps Python tooling and runs common local command
 
 ## Template Discipline
 
-Keep `harness-data/guides/` empty in the template repository until a real adopted project adds real local content.
-Do not fill guides with placeholder or imaginary project details.
+The template repository should keep `harness-data/guides/` empty until a real adopted project adds real local content.
+Guides should not be filled with placeholder or imaginary project details.

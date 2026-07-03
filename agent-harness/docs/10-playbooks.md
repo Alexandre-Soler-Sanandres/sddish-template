@@ -5,7 +5,7 @@ They are project-owned, not lifecycle artifacts, and they capture recurring proj
 
 ## What Playbooks Are For
 
-Use playbooks for repeatable work patterns that are specific to one repository, subsystem, or local delivery process.
+Playbooks are useful for repeatable work patterns that are specific to one repository, subsystem, or local delivery process.
 
 Examples:
 
@@ -27,28 +27,30 @@ Playbooks are not:
 - a place for fake template content
 
 Setup and operating help belongs in `harness-data/guides/`.
+Universal reusable procedures belong in `agent-harness/playbooks/`.
 
 ## When To Create A Playbook
 
-Create a project playbook when:
+A project playbook is worth creating when:
 
 - the same repo-specific procedure appears more than once
 - one area has extra local checks that should not be rediscovered every time
 - the work pattern is stable enough to document
 - a generic procedure needs a repo-local version
 
-Do not create a playbook for one-off work.
+A playbook is not needed for one-off work.
+A project playbook is also not needed if the procedure is generic enough to live in `agent-harness/playbooks/`.
 
 ## Who Creates And Maintains Playbooks
 
 Project playbooks are project-owned support files.
 They may be written or updated by humans or AI, but they are not required harness outputs and are not lifecycle-managed.
 
-Create or refine them only when they make future work safer, faster, or more consistent.
+They are worth creating or refining only when they make future work safer, faster, or more consistent.
 
 ## How Agents Should Use Playbooks
 
-Load a playbook only when the task matches a recurring project-specific procedure or subsystem workflow.
+Agents should load a playbook only when the task matches a recurring project-specific procedure or subsystem workflow.
 
 Typical examples:
 
@@ -56,11 +58,17 @@ Typical examples:
 - a release hotfix needs a known local checklist
 - one subsystem has extra verification beyond the normal plan validation
 
-Do not load playbooks by default for every task.
+Agents should not load playbooks by default for every task.
+
+When both a universal playbook and a project playbook are relevant, agents should:
+
+1. load the universal playbook for the generic procedure
+2. load the project playbook for repo-local rules or overrides
+3. follow the project-specific constraint when they differ
 
 ## Suggested Shape
 
-Use [PROJECT-PLAYBOOK-template.md](../templates/PROJECT-PLAYBOOK-template.md) as a neutral structure when helpful.
+The [PROJECT-PLAYBOOK-template.md](../templates/PROJECT-PLAYBOOK-template.md) template can be used as a neutral structure when helpful.
 
 Recommended sections:
 
@@ -110,5 +118,5 @@ Describe the repo-specific steps required when an API request or response shape 
 
 ## Template Discipline
 
-Keep `harness-data/playbooks/` empty in the template repository until a real adopted project adds real local content.
-Do not fill playbooks with placeholder or imaginary project details.
+The template repository should keep `harness-data/playbooks/` empty until a real adopted project adds real local content.
+Playbooks should not be filled with placeholder or imaginary project details.
