@@ -27,7 +27,6 @@ Playbooks are not:
 - a place for fake template content
 
 Setup and operating help belongs in `harness-data/guides/`.
-Universal reusable procedures belong in `agent-harness/` if the harness later adds universal playbooks there.
 
 ## When To Create A Playbook
 
