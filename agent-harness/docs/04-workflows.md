@@ -136,10 +136,8 @@ Source:
 
 ### Optional Operational Trace
 
-Default: do not create a run log for ordinary short interactive work.
-
-For interrupted, approval-heavy, multi-step, or high-risk work, a project may keep a rolling
-`harness-data/RUN-LOG.md`:
+`harness-data/RUN-LOG.md` is not required by default, but the agent may use it for interrupted, approval-heavy,
+multi-step, or high-risk work:
 
 - It is temporary operational state, not a source-of-truth artifact.
 - Use it for approvals, resumptions, interruptions, and validation checkpoints that help work continue safely.

@@ -72,8 +72,8 @@ every run.
 
 ## RUN-LOG.md
 
-An optional `harness-data/RUN-LOG.md` may exist for interrupted, approval-heavy, multi-step, or high-risk work.
-Do not create it by default for ordinary short interactive work.
+An optional `harness-data/RUN-LOG.md` may exist for interrupted, approval-heavy, multi-step, or high-risk work. It is
+not required by default, but the agent may use it when temporary operational trace helps safe continuation.
 
 Use it as a rolling operational log for:
 
