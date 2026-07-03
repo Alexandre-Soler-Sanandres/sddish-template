@@ -108,14 +108,14 @@ smallest useful first pass and the same guide for full adoption instructions.
 
 | Document | Contents |
 | --- | --- |
-| [docs/01-core-principles.md](docs/01-core-principles.md) | Why this exists, the core principle, design philosophy |
-| [docs/02-modes.md](docs/02-modes.md) | All 10 modes explained with boundaries and outputs |
-| [docs/03-artifacts.md](docs/03-artifacts.md) | Artifact types, frontmatter, statuses, templates |
-| [docs/04-workflows.md](docs/04-workflows.md) | End-to-end flows, Task Decision Matrix, commit boundaries |
-| [docs/05-context-management.md](docs/05-context-management.md) | Context rules, CATALOG, SUMMARY files |
-| [docs/06-adoption.md](docs/06-adoption.md) | Bootstrap steps, minimal adoption path, what belongs where |
-| [docs/07-glossary.md](docs/07-glossary.md) | Term definitions |
-| [docs/08-legacy-applications.md](docs/08-legacy-applications.md) | Practical legacy application discovery playbook |
+| [docs/01-core-principles.md](docs/01-core-principles.md) | Start here for why the harness exists and what problems it is trying to prevent |
+| [docs/02-modes.md](docs/02-modes.md) | Use this when you need to know which mode you are in and what it allows |
+| [docs/03-artifacts.md](docs/03-artifacts.md) | Use this to check what file should exist, what it contains, and what status it should have |
+| [docs/04-workflows.md](docs/04-workflows.md) | Use this for the normal flow from idea to implementation and for Task/Plan decisions |
+| [docs/05-context-management.md](docs/05-context-management.md) | Use this when deciding what to load into context and when to use `CATALOG.md`, `SUMMARY.md`, or `RUN-LOG.md` |
+| [docs/06-adoption.md](docs/06-adoption.md) | Use this when adopting the harness in a new or existing repository |
+| [docs/07-glossary.md](docs/07-glossary.md) | Use this when a harness term is unclear |
+| [docs/08-legacy-applications.md](docs/08-legacy-applications.md) | Use this for practical legacy discovery work in an existing codebase |
 
 ## Key Principles
 

@@ -1,5 +1,7 @@
 # Adoption
 
+This guide is for turning the template into a usable project workspace without over-documenting on day one.
+
 ## Using This Template
 
 This repository is marked as a GitHub template. There are two ways to create a new project from it.
@@ -29,6 +31,8 @@ rm -rf .git && git init
 
 Then fill in the four project-specific reference files as above.
 
+If you are adopting the harness into a repo that already exists, jump to [Adopting for Existing Projects](#adopting-for-existing-projects).
+
 ## Minimum Viable Adoption
 
 Do not treat the four reference files as a large upfront documentation project. The harness becomes useful long
@@ -39,6 +43,8 @@ The goal of the first pass is only this:
 - give agents enough domain and architecture context to avoid obvious misunderstanding
 - define the exact tooling and quality commands needed before implementation begins
 - leave deeper project detail for later refinement
+
+The harness should become useful quickly. A thin but accurate first pass is better than a polished but imaginary one.
 
 Keep the template honest:
 
@@ -187,6 +193,8 @@ Before any real implementation work starts, these must be concrete enough for an
 - the actual validation commands in `TOOLING.md`
 - the definition of done and high-risk areas in `QUALITY.md`
 
+That is the real pre-implementation threshold. Everything else can mature while the team uses the harness.
+
 ## First Successful Path
 
 Use this as the smallest useful onboarding path for a new project:
@@ -204,6 +212,8 @@ Use this as the smallest useful onboarding path for a new project:
 That is enough to prove the harness works in a real project. Everything beyond that is refinement.
 
 ### After setup (both options)
+
+These are the details people most often need once the basic files exist:
 
 - `agent-harness/CATALOG.md` ships ready to use — it is a navigation index of where artifact types live, not a log
   of individual artifacts; agents use it to locate artifacts, and it only changes if the harness structure itself
@@ -226,6 +236,11 @@ same for every project using this harness, and the only thing that syncs to/from
 is this project's own data: its filled-in reference config, its Legacy Discovery findings, and every artifact the
 harness produces (Use Cases, Specs, Tasks, Plans, Reviews, Improvements, Transcripts, Ideas). Nothing in
 `harness-data/` is ever copied into or out of the template.
+
+When in doubt:
+
+- change `agent-harness/` only if you are changing the harness for every future adopter
+- change `harness-data/` when you are describing or tracking one specific project
 
 ## What Belongs Where
 
@@ -258,6 +273,8 @@ If you are adopting the harness for an existing active codebase:
 4. Use Specs as the basis for all future work
 
 The legacy codebase is evidence, not authority. Do not treat existing code as automatically correct.
+
+Keep the adoption target modest: get to trustworthy Use Cases and Specs first, then let normal planning and implementation flow from there.
 
 ## Stack-Specific Guides
 

@@ -2,6 +2,8 @@
 
 Agents have limited context windows. The harness is designed to keep context small and precise — not to load everything at once.
 
+For most tasks, you do not need a repo tour. You need the current request, the harness rules that always apply, the active mode, and the specific artifact you were asked to touch.
+
 ## Default Context Loading Order
 
 When an agent starts a task, it loads context in this order — stopping as soon as it has enough:
@@ -9,14 +11,17 @@ When an agent starts a task, it loads context in this order — stopping as soon
 1. User request
 2. Root loader file (`AGENTS.md`)
 3. `agent-harness/CORE.md`
-4. Active mode file
-5. Explicitly referenced artifact
-6. Frontmatter links (`source`, `derived_*`, `related`)
-7. Local `SUMMARY.md` if the target artifact is ambiguous
-8. Full related artifact — only if required
-9. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
-10. Reference files — only when affected by the current task
-11. Archived artifacts — only when explicitly needed
+4. `agent-harness/OUTPUTS.md`
+5. Active mode file
+6. Explicitly referenced artifact
+7. Frontmatter links (`source`, `derived_*`, `related`)
+8. Local `SUMMARY.md` if the target artifact is ambiguous
+9. Full related artifact — only if required
+10. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
+11. Reference files — only when affected by the current task
+12. Archived artifacts — only when explicitly needed
+
+In many cases, you can stop at step 6.
 
 ## Core Rules
 
@@ -38,6 +43,8 @@ These files are always loaded regardless of mode:
 - `agent-harness/OUTPUTS.md` — artifact formats and folder structure
 - The active mode file
 
+Treat this as the minimum harness checkpoint before high-impact work.
+
 ## Load When Relevant
 
 Reference files are loaded only when needed — not by default:
@@ -54,6 +61,11 @@ Reference files are loaded only when needed — not by default:
 - Where each artifact type lives
 
 It must not list hundreds of individual artifacts. Use frontmatter links and SUMMARY files for that.
+
+There are two files named `CATALOG.md`, and they do different jobs:
+
+- `agent-harness/CATALOG.md` explains the universal artifact locations and restart-point conventions.
+- `harness-data/CATALOG.md` is project-local bookkeeping, such as active Plan pointers required by some rules in `CORE.md`.
 
 ## REPO-MAP.md
 
@@ -88,6 +100,8 @@ Use it as a rolling operational log for:
 It is not a source-of-truth artifact. Keep it small, and collapse it to a short closure note or clear it when the
 work finishes.
 
+If the work is short, low-risk, and unlikely to be resumed later, skip it.
+
 ## Resume Discipline
 
 After a pause, interruption, or context compaction:
@@ -103,6 +117,8 @@ Do not assume the last conversational state is still safe to continue from witho
 Local `SUMMARY.md` files may exist in artifact directories (e.g. `harness-data/specs/SUMMARY.md`) when the number of artifacts makes navigation difficult. They are created on demand — not required upfront.
 
 SUMMARY files are not indexes of everything. They are lightweight navigation aids for finding an artifact when its ID is not known.
+
+If you already know the exact artifact path, do not open a summary just because it exists.
 
 ## Why This Matters
 

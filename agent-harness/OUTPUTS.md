@@ -1,34 +1,27 @@
 # OUTPUTS.md
 
-## Artifact Language
+## Purpose
 
-Normalized artifacts are written in English by default.
+Canonical output rules for harness artifacts: format, naming, placement, and lifecycle folders.
+For artifact-language rules and closed-artifact rewrite rules, see `agent-harness/CORE.md`.
 
-This applies to:
+## Rules
 
-- Ideas
-- Use Cases
-- Specs
-- Tasks
-- Implementation Plans
-- Reviews
-- Improvements
-- Legacy Findings
-- Source Maps
-
-Original-language content may be preserved in:
-
-- Transcripts
-- Raw notes
-- Quoted source excerpts
-- Evidence snippets
+| ID | Type | Rule |
+| --- | --- | --- |
+| OUT-001 | Format | All lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body. |
+| OUT-002 | Scope | `agent-harness/README.md` is the harness overview, not a lifecycle artifact. |
+| OUT-003 | Scope | Do not create directory-scoped README files as harness artifacts. Use mode files, templates, `CATALOG.md`, and scoped restart artifacts such as `SOURCE-MAP.md` or `SUMMARY.md` for harness guidance. |
+| OUT-004 | Naming | Artifact filenames must follow the canonical naming patterns in `## File Naming Conventions`. |
+| OUT-005 | Naming | IDs must remain stable even if filenames or folders change. |
+| OUT-006 | Lifecycle | New artifacts are created in `active/` unless a mode explicitly defines a different starting location. |
+| OUT-007 | Lifecycle | Move artifacts between lifecycle subfolders as their status changes. Do not rename the file ID when moving them. |
+| OUT-008 | Improvement-Lifecycle | For Improvements, `done/` means the approved target changes are applied and the artifact records a `## Validation Result` confirming what was checked. |
+| OUT-009 | Legacy-Discovery | Legacy Discovery artifacts must use the scoped folder structure defined in `## Legacy Discovery Structure`. |
 
 ## Artifact Format
 
-All harness artifacts use YAML frontmatter for metadata and Markdown for the body.
-`agent-harness/README.md` is the harness overview, not a lifecycle artifact. Do not create directory-scoped README
-files as harness artifacts; use mode files, templates, `CATALOG.md`, and scoped restart artifacts such as
-`SOURCE-MAP.md` or `SUMMARY.md` for harness guidance.
+Lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body.
 
 ## File Naming Conventions
 
@@ -56,12 +49,6 @@ Each artifact directory uses subfolders to reflect lifecycle state.
 | `archive/` | all artifact dirs | artifact is closed, superseded or no longer relevant |
 | `approved/` | `implementation-plans/` | plan has been approved and is awaiting execution |
 | `done/` | `implementation-plans/`, `tasks/`, `improvements/` | execution is complete |
-
-New artifacts are created in `active/`.
-Move artifacts between subfolders as their status changes — do not rename the file ID.
-For Improvements, `done/` means the approved target changes are applied and the artifact records a
-`## Validation Result` confirming what was checked. Once an artifact reaches `done/` or `archive/`, its content is
-not retroactively rewritten when paths or conventions change elsewhere — see `CORE.md`'s Universal Rules.
 
 ## Legacy Discovery Structure
 

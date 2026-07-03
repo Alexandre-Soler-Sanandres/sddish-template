@@ -1,5 +1,8 @@
 # Workflows
 
+This file is the practical "what happens next?" guide.
+Use it when you already understand the artifact types and need the normal operating flow.
+
 ## The Standard Flow
 
 ```text
@@ -13,6 +16,15 @@ Voice / Text / Ideas
   → Validation
   → [Review / Harness Improvement — when a team wants formal evaluation or process correction]
 ```
+
+In plain terms:
+
+- Partnering helps when the request is still fuzzy.
+- Use Case and Spec make the intended behavior explicit.
+- Tasks are only added when the work needs smaller execution slices.
+- Implementation Planning is the gate that turns requirements into an approved path.
+- Implementation executes that path.
+- Validation checks that the result and the process both hold up.
 
 ## Partnering Workflow
 
@@ -58,6 +70,9 @@ A Use Case may be created from: Idea, Transcript, Partnering discussion, Legacy 
 
 ## Are Tasks Required?
 
+Use this table as a practical decision aid, not as permission to skip planning entirely.
+If Tasks are not required, the work still needs an Implementation Plan.
+
 | Situation | Tasks Required? | Reason |
 | --- | --- | --- |
 | Small documentation-only change | No | Inline plan is sufficient |
@@ -89,6 +104,18 @@ For small, low-risk, single-area Specs, an Implementation Plan may contain inlin
 - No separate review boundaries are needed
 
 Inline steps must still define: expected files, validation, risk level, and a suggested commit boundary.
+
+Good fit:
+
+- one small doc change
+- one isolated config change
+- one contained bugfix with obvious validation
+
+Bad fit:
+
+- changes that span multiple subsystems
+- work with risky rollout or safety implications
+- anything that would be easier to review in slices
 
 ## Implementation Planning
 
@@ -124,6 +151,8 @@ Source:
 - SPEC-001
 ```
 
+The important part is not the exact commit wording. The important part is that the plan proposes reviewable change boundaries before implementation starts.
+
 ## Implementation Execution
 
 - Execute one plan step at a time by default
@@ -150,6 +179,8 @@ This is the harness's lightweight observability layer when runtime visibility ma
 - what commands or checks were run
 - where work paused or resumed
 - why execution stopped
+
+Most work does not need a run log. Reach for it when a future resume would otherwise depend on fragile chat memory.
 
 ### Pause / Resume Protocol
 
@@ -178,6 +209,11 @@ Use the lightest place needed for this state:
 **Validation mode** covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks. It is universal and does not contain stack-specific commands.
 
 **Technical checks** (tests, linting, typing, migrations) are project-specific. They are defined in `harness-data/reference/QUALITY.md` and run using commands from `harness-data/reference/TOOLING.md`.
+
+Short version:
+
+- Validation mode asks "did we follow the process, and is the behavior verifiable?"
+- Implementation mode asks "did we run the actual project checks?"
 
 ## Readiness Gates
 
@@ -216,6 +252,8 @@ Review → Improvement artifact → approved harness change → updated harness 
 ```
 
 Improvement artifacts must originate from Review findings — not from Partnering or direct requests.
+
+That stricter loop exists to keep harness changes deliberate and reviewable instead of being mixed into unrelated work.
 
 ## Legacy Discovery Flow
 
