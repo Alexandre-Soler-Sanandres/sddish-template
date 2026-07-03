@@ -296,7 +296,7 @@ They may be created by humans or AI when useful, but the harness does not requir
 Use these docs for the detailed guidance:
 
 - [09-guides.md](09-guides.md)
-- [10-playbooks.md](10-playbooks.md)
+- [10-project-playbooks.md](10-project-playbooks.md)
 
 `agent-harness/playbooks/` is a separate harness-owned layer for reusable procedures.
 

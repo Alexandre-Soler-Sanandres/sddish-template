@@ -70,6 +70,8 @@ After completing a review, take the following action based on the outcome. Do no
 | RVW-003 | Boundaries | Do not implement fixes. |
 | RVW-004 | Boundaries | Do not create Tasks or Specs as a side effect. |
 | RVW-005 | Boundaries | Do not modify harness files without an Improvement artifact. |
+| RVW-006 | Procedure | When the review target matches a specialized review procedure, load the relevant playbook before reviewing. |
+| RVW-007 | Procedure | Playbooks may refine how the review is performed, but they do not change Review outcomes, follow-up actions, or mode boundaries. |
 
 ## Output
 

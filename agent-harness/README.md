@@ -120,7 +120,7 @@ smallest useful first pass and the same guide for full adoption instructions.
 | [docs/07-glossary.md](docs/07-glossary.md) | Use this when a harness term is unclear |
 | [docs/08-legacy-applications.md](docs/08-legacy-applications.md) | Use this for practical legacy discovery work in an existing codebase |
 | [docs/09-guides.md](docs/09-guides.md) | Use this to understand project-specific setup and operating guides under `harness-data/guides/` |
-| [docs/10-playbooks.md](docs/10-playbooks.md) | Use this to understand project-specific scoped procedures under `harness-data/playbooks/` |
+| [docs/10-project-playbooks.md](docs/10-project-playbooks.md) | Use this to understand project-specific scoped procedures under `harness-data/playbooks/` |
 
 ## Key Principles
 
@@ -128,6 +128,7 @@ smallest useful first pass and the same guide for full adoption instructions.
 - **References are project-specific** — architecture, domain, tooling, and quality vary per project
 - **Guides are project-specific** — setup and operating guidance stays local to each adopting repository
 - **Project playbooks are project-specific** — scoped procedures live under `harness-data/`, not in the universal harness
+- **Support files are selective context** — agents load relevant universal playbooks, project playbooks, and guides only when the task needs them
 - **Lifecycle artifacts are separate** — harness-managed project artifacts live under `harness-data/artifacts/`
 - **Artifacts over memory** — everything lives in files, not agent context
 - **Explicit gates** — implementation requires an approved plan; no exceptions

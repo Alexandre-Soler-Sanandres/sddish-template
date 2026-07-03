@@ -86,6 +86,8 @@ Source:
 | IPL-005 | Boundaries | Do not treat `proposed` status as approved. |
 | IPL-006 | Boundaries | Do not proceed if the source artifact is not at an accepted status. |
 | IPL-007 | Boundaries | Do not generate duplicate Tasks or skip existing ones. |
+| IPL-008 | Procedure | When the planning task matches a reusable procedure, load the relevant universal and project playbooks before finalizing the plan. |
+| IPL-009 | Procedure | Reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
 
 ## Output
 

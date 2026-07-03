@@ -20,8 +20,9 @@ When an agent starts a task, it loads context in this order — stopping as soon
 10. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
 11. Reference files — only when affected by the current task
 12. Universal playbooks — only when the task matches a recurring cross-project procedure
-13. Project guides or project playbooks — only when the task depends on local setup, operating guidance, or scoped procedures
-14. Archived artifacts — only when explicitly needed
+13. Project playbooks — only when the task matches a repo-specific recurring procedure or subsystem workflow
+14. Project guides — only when the task depends on local setup, tooling usage, or operating context
+15. Archived artifacts — only when explicitly needed
 
 In many cases, you can stop at step 6.
 
@@ -56,13 +57,41 @@ Reference files are loaded only when needed — not by default:
 - `harness-data/reference/TOOLING.md` — when running validation commands (Implementation mode)
 - `harness-data/reference/QUALITY.md` — when checking definition of done (Implementation mode)
 
-Supporting files are also loaded by the agent only when needed — not by default:
+Supporting files are also loaded only when the current task needs them.
+See [09-guides.md](09-guides.md) and [10-project-playbooks.md](10-project-playbooks.md) for the meaning of each support-file type.
 
-- `agent-harness/playbooks/` — when the task matches a recurring reusable procedure defined by the harness
-- `harness-data/guides/` — when the task depends on project-specific setup, tooling usage, bootstrap steps, or local operating quirks
-- `harness-data/playbooks/` — when the task matches a recurring project-specific procedure or subsystem workflow
+## Support-File Selection
 
-See [09-guides.md](09-guides.md) and [10-playbooks.md](10-playbooks.md) for when to create project-owned support files and how agents should use them.
+Agents should check support files in this order:
+
+1. Does the task match a reusable cross-project procedure? If yes, load the relevant file from `agent-harness/playbooks/`.
+2. Does the task also match a repo-specific recurring procedure? If yes, load the relevant file from `harness-data/playbooks/`.
+3. Does the task depend on local setup or operating knowledge? If yes, load the relevant file from `harness-data/guides/`.
+4. Stop when the smallest sufficient support-file set is loaded.
+
+Use this precedence when more than one support file applies:
+
+- `CORE.md` and the active mode file
+- project playbooks
+- universal playbooks
+- guides
+
+Project playbooks refine the generic procedure for this repository.
+Guides provide local operating context.
+Neither may override core rules, mode boundaries, or approval gates.
+
+## Support-File Examples
+
+| Task shape | Load |
+| --- | --- |
+| reviewing code changes | `agent-harness/playbooks/code-review.md` |
+| investigating a product bug | `agent-harness/playbooks/bug-investigation.md` |
+| triaging a flaky test | `agent-harness/playbooks/flaky-test-triage.md` |
+| upgrading a dependency | `agent-harness/playbooks/dependency-upgrade.md` |
+| moving or renaming repo structure | `agent-harness/playbooks/repo-structure-change.md` |
+| planning or reviewing a schema migration | `agent-harness/playbooks/database-migration-safety.md` |
+| running Python with `uv` in this repo | relevant file under `harness-data/guides/` |
+| following one subsystem's local rollout flow | relevant file under `harness-data/playbooks/` |
 
 ## CATALOG.md
 
@@ -79,7 +108,7 @@ There are two files named `CATALOG.md`, and they do different jobs:
 
 Lifecycle artifacts live under `harness-data/artifacts/`. Project support files such as `reference/`, `guides/`, and
 `playbooks/` stay at the root of `harness-data/`. Harness-owned reusable procedures live under `agent-harness/playbooks/`.
-Agents should load all of these only when relevant.
+Agents should check these only when the current task needs them.
 
 ## REPO-MAP.md
 

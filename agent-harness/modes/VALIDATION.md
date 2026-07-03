@@ -35,6 +35,8 @@ Via natural language: explicit instruction to validate a specific artifact, plan
 | VAL-019 | Boundaries | Do not implement or change code. |
 | VAL-020 | Boundaries | Do not modify artifacts beyond updating their status. |
 | VAL-021 | Boundaries | Do not skip validation steps without explicit approval. |
+| VAL-022 | Procedure | When a relevant playbook defines required checks or outputs for the work under validation, verify that those expectations were followed. |
+| VAL-023 | Procedure | Playbooks may refine what to verify for a task shape, but Validation mode still owns the validation decision and boundaries. |
 
 ## Output
 

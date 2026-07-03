@@ -56,6 +56,7 @@ They are worth creating or refining only when they add real operational value.
 ## How Agents Should Use Guides
 
 Agents should load a guide only when the current task depends on local setup, tooling usage, bootstrap steps, or operating quirks.
+Guides give local operating context for this repository. They do not define the main procedure for a task shape.
 
 Typical examples:
 
@@ -65,6 +66,8 @@ Typical examples:
 - one repo area has local operational conventions not captured elsewhere
 
 Agents should not load guides by default for every task.
+When both a playbook and a guide are relevant, the playbook defines the procedure and the guide supplies the local operating details.
+Guides do not override `agent-harness/CORE.md`, the active mode file, or relevant playbooks.
 
 ## Suggested Shape
 

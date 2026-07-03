@@ -37,6 +37,8 @@ Via natural language: explicit instruction referencing an approved plan.
 | IMPL-021 | Boundaries | Do not refactor unrelated code. |
 | IMPL-022 | Boundaries | Do not modify files outside the allowed paths defined in Task frontmatter. |
 | IMPL-023 | Boundaries | Do not continue past a failing validation without explicit approval. |
+| IMPL-024 | Procedure | Before substantive execution, load any relevant playbook or guide required by the task shape or local project context. |
+| IMPL-025 | Procedure | Playbooks and guides may refine execution steps and checks, but they do not expand approved scope or override plan boundaries. |
 
 ## Reference Files
 

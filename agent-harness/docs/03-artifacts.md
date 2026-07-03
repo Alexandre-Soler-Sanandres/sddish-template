@@ -7,7 +7,7 @@ This document covers harness-managed lifecycle artifacts only. Project-owned sup
 `harness-data/reference/`, `harness-data/guides/`, and `harness-data/playbooks/` are not artifacts and do not follow
 artifact lifecycle statuses.
 
-For project-owned support files, see [09-guides.md](09-guides.md) and [10-playbooks.md](10-playbooks.md).
+For project-owned support files, see [09-guides.md](09-guides.md) and [10-project-playbooks.md](10-project-playbooks.md).
 
 ## YAML Frontmatter
 
