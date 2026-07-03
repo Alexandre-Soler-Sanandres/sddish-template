@@ -61,7 +61,7 @@ agent-harness/
   CATALOG.md           ← universal navigation: where artifacts live
   docs/                ← harness documentation and human guides
   modes/               ← one file per mode (universal, stack-neutral)
-  playbooks/           ← optional universal reusable procedures
+  playbooks/           ← optional universal reusable procedures + index.yaml
   templates/           ← artifact templates
 ```
 
@@ -78,8 +78,8 @@ harness-data/
     DOMAIN.md
     TOOLING.md
     QUALITY.md
-  guides/              ← optional project-specific setup and operating guidance
-  playbooks/           ← optional project-specific scoped procedures
+  guides/              ← optional project-specific setup and operating guidance + index.yaml
+  playbooks/           ← optional project-specific scoped procedures + index.yaml
   artifacts/           ← lifecycle artifacts generated and maintained through harness modes
     transcripts/
     ideas/
@@ -128,7 +128,7 @@ smallest useful first pass and the same guide for full adoption instructions.
 - **References are project-specific** — architecture, domain, tooling, and quality vary per project
 - **Guides are project-specific** — setup and operating guidance stays local to each adopting repository
 - **Project playbooks are project-specific** — scoped procedures live under `harness-data/`, not in the universal harness
-- **Support files are selective context** — agents load relevant universal playbooks, project playbooks, and guides only when the task needs them
+- **Support files are selective context** — agents consult support-file `index.yaml` files and load only the matched guides or playbooks they need
 - **Lifecycle artifacts are separate** — harness-managed project artifacts live under `harness-data/artifacts/`
 - **Artifacts over memory** — everything lives in files, not agent context
 - **Explicit gates** — implementation requires an approved plan; no exceptions

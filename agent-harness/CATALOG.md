@@ -6,6 +6,12 @@ These are the lifecycle-managed artifact roots under `harness-data/artifacts/`. 
 `harness-data/reference/`, `harness-data/guides/`, and `harness-data/playbooks/` are not listed here because they are
 not lifecycle artifacts.
 
+Support-file discovery uses these index files instead:
+
+- `agent-harness/playbooks/index.yaml`
+- `harness-data/playbooks/index.yaml`
+- `harness-data/guides/index.yaml`
+
 - Transcripts: `harness-data/artifacts/transcripts/`
 - Ideas: `harness-data/artifacts/ideas/`
 - Use Cases: `harness-data/artifacts/use-cases/`

@@ -1,0 +1,55 @@
+version: 1
+entries:
+  - file: bug-investigation.md
+    when:
+      - investigating a reported bug
+      - narrowing unexpected behavior
+  - file: code-review.md
+    when:
+      - reviewing code changes
+      - producing formal findings on an implementation diff
+  - file: flaky-test-triage.md
+    when:
+      - triaging a flaky test
+      - investigating nondeterministic test behavior
+  - file: dependency-upgrade.md
+    when:
+      - upgrading a dependency
+      - checking upgrade impact before or after implementation
+  - file: repo-structure-change.md
+    when:
+      - moving or renaming files or folders
+      - realigning docs and references after structural repo changes
+  - file: database-migration-safety.md
+    when:
+      - planning a schema migration
+      - reviewing data-change risk or rollback readiness
+  - file: regression-analysis.md
+    when:
+      - behavior that previously worked has stopped working
+      - determining whether a recent change introduced a defect
+  - file: integration-debugging.md
+    when:
+      - a failure spans two or more services or subsystems
+      - a contract mismatch is suspected across a boundary
+  - file: test-gap-analysis.md
+    when:
+      - assessing how much confidence current tests provide
+      - deciding what to test before or after a change
+  - file: refactor-safety.md
+    when:
+      - restructuring code without an intended behavior change
+      - extracting, renaming, or consolidating logic across files
+  - file: documentation-sync.md
+    when:
+      - reconciling docs with actual current behavior after drift is suspected
+      - checking whether docs are stale after a code or structure change
+  - file: performance-investigation.md
+    when:
+      - reported latency, throughput, or resource-usage regression
+      - confirming whether a performance concern is real before optimizing
+  - file: security-review.md
+    when:
+      - reviewing changes to auth, access control, or session handling
+      - reviewing changes touching secrets, credentials, or sensitive data
+      - assessing security impact of a dependency, config, or infra change

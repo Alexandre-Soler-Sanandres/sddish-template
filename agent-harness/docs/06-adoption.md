@@ -184,6 +184,7 @@ These are acceptable to leave incomplete during early adoption:
 - deep historical context
 - optional project-specific setup and operating guides under `harness-data/guides/`
 - optional project playbooks under `harness-data/playbooks/`
+- the support-file `index.yaml` files can stay empty until real guides or project playbooks exist
 
 ### What Must Be Concrete Before Implementation
 
@@ -227,6 +228,7 @@ These are the details people most often need once the basic files exist:
   loading becomes clumsy
 - Optionally add project-specific setup and operating guides under `harness-data/guides/`
 - Optionally add project-specific scoped procedures under `harness-data/playbooks/`
+- Keep `harness-data/guides/index.yaml` and `harness-data/playbooks/index.yaml` accurate when those support files exist
 - Keep `agent-harness/docs/` for harness guidance; project documentation can use the repository root or another
   project-owned docs location
 - The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` are universal — do not add project-specific content to them
@@ -299,6 +301,7 @@ Use these docs for the detailed guidance:
 - [10-project-playbooks.md](10-project-playbooks.md)
 
 `agent-harness/playbooks/` is a separate harness-owned layer for reusable procedures.
+Each support-file layer uses an `index.yaml` file so agents can discover relevant support files without opening every file.
 
 Project-specific rules must never be placed in mode files. Put them in the relevant project-owned support file instead.
 

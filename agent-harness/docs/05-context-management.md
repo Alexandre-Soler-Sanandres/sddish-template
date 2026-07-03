@@ -19,10 +19,11 @@ When an agent starts a task, it loads context in this order — stopping as soon
 9. Full related artifact — only if required
 10. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
 11. Reference files — only when affected by the current task
-12. Universal playbooks — only when the task matches a recurring cross-project procedure
-13. Project playbooks — only when the task matches a repo-specific recurring procedure or subsystem workflow
-14. Project guides — only when the task depends on local setup, tooling usage, or operating context
-15. Archived artifacts — only when explicitly needed
+12. Universal playbook index — only when the task may match a recurring cross-project procedure
+13. Project playbook index — only when the task may match a repo-specific recurring procedure or subsystem workflow
+14. Project guide index — only when the task may depend on local setup, tooling usage, or operating context
+15. Matched support files — only when the relevant index points to them
+16. Archived artifacts — only when explicitly needed
 
 In many cases, you can stop at step 6.
 
@@ -57,41 +58,53 @@ Reference files are loaded only when needed — not by default:
 - `harness-data/reference/TOOLING.md` — when running validation commands (Implementation mode)
 - `harness-data/reference/QUALITY.md` — when checking definition of done (Implementation mode)
 
-Supporting files are also loaded only when the current task needs them.
+Support-file discovery starts from these index files:
+
+- `agent-harness/playbooks/index.yaml`
+- `harness-data/playbooks/index.yaml`
+- `harness-data/guides/index.yaml`
+
 See [09-guides.md](09-guides.md) and [10-project-playbooks.md](10-project-playbooks.md) for the meaning of each support-file type.
 
 ## Support-File Selection
 
 Agents should check support files in this order:
 
-1. Does the task match a reusable cross-project procedure? If yes, load the relevant file from `agent-harness/playbooks/`.
-2. Does the task also match a repo-specific recurring procedure? If yes, load the relevant file from `harness-data/playbooks/`.
-3. Does the task depend on local setup or operating knowledge? If yes, load the relevant file from `harness-data/guides/`.
-4. Stop when the smallest sufficient support-file set is loaded.
+1. If the task may match a reusable cross-project procedure, check `agent-harness/playbooks/index.yaml`.
+2. If the task may match a repo-specific recurring procedure, check `harness-data/playbooks/index.yaml`.
+3. If the task may depend on local setup or operating knowledge, check `harness-data/guides/index.yaml`.
+4. Load only the files matched by those index entries.
+5. Stop when the smallest sufficient support-file set is loaded.
 
 Use this precedence when more than one support file applies:
 
 - `CORE.md` and the active mode file
-- project playbooks
 - universal playbooks
+- project playbooks
 - guides
 
 Project playbooks refine the generic procedure for this repository.
 Guides provide local operating context.
 Neither may override core rules, mode boundaries, or approval gates.
 
+Each index entry should stay minimal. Use:
+
+- `file` — the support file to load
+- `when` — short matching conditions
+- `paths` — optional path hints when they improve matching
+
 ## Support-File Examples
 
 | Task shape | Load |
 | --- | --- |
-| reviewing code changes | `agent-harness/playbooks/code-review.md` |
-| investigating a product bug | `agent-harness/playbooks/bug-investigation.md` |
-| triaging a flaky test | `agent-harness/playbooks/flaky-test-triage.md` |
-| upgrading a dependency | `agent-harness/playbooks/dependency-upgrade.md` |
-| moving or renaming repo structure | `agent-harness/playbooks/repo-structure-change.md` |
-| planning or reviewing a schema migration | `agent-harness/playbooks/database-migration-safety.md` |
-| running Python with `uv` in this repo | relevant file under `harness-data/guides/` |
-| following one subsystem's local rollout flow | relevant file under `harness-data/playbooks/` |
+| reviewing code changes | `agent-harness/playbooks/index.yaml` -> `code-review.md` |
+| investigating a product bug | `agent-harness/playbooks/index.yaml` -> `bug-investigation.md` |
+| triaging a flaky test | `agent-harness/playbooks/index.yaml` -> `flaky-test-triage.md` |
+| upgrading a dependency | `agent-harness/playbooks/index.yaml` -> `dependency-upgrade.md` |
+| moving or renaming repo structure | `agent-harness/playbooks/index.yaml` -> `repo-structure-change.md` |
+| planning or reviewing a schema migration | `agent-harness/playbooks/index.yaml` -> `database-migration-safety.md` |
+| running Python with `uv` in this repo | `harness-data/guides/index.yaml` -> matching guide |
+| following one subsystem's local rollout flow | `harness-data/playbooks/index.yaml` -> matching playbook |
 
 ## CATALOG.md
 
@@ -108,7 +121,7 @@ There are two files named `CATALOG.md`, and they do different jobs:
 
 Lifecycle artifacts live under `harness-data/artifacts/`. Project support files such as `reference/`, `guides/`, and
 `playbooks/` stay at the root of `harness-data/`. Harness-owned reusable procedures live under `agent-harness/playbooks/`.
-Agents should check these only when the current task needs them.
+Agents should check the support-file indexes before opening support files broadly.
 
 ## REPO-MAP.md
 

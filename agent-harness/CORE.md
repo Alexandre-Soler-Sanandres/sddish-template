@@ -26,10 +26,10 @@ Universal harness rules that apply in every mode.
 | COR-016 | Context-Loading | Prefer summaries before full historical artifacts when both are available. |
 | COR-017 | Context-Loading | Load reference files only when the current task is directly affected by them. |
 | COR-018 | Context-Loading | Load archived artifacts only when they are explicitly needed. |
-| COR-019 | Support-Files | Load a universal playbook from `agent-harness/playbooks/` when the task matches a harness-defined reusable procedure. |
-| COR-020 | Support-Files | Load a project playbook from `harness-data/playbooks/` when the task matches a repo-specific recurring procedure or subsystem workflow. |
-| COR-021 | Support-Files | Load a guide from `harness-data/guides/` when the task depends on project-specific setup, tooling usage, bootstrap steps, or local operating knowledge. |
-| COR-022 | Support-Files | Load only the smallest relevant set of playbooks and guides needed for the current task. |
+| COR-019 | Support-Files | Consult `agent-harness/playbooks/index.yaml` before loading universal playbooks broadly. |
+| COR-020 | Support-Files | Consult `harness-data/playbooks/index.yaml` before loading project playbooks broadly. |
+| COR-021 | Support-Files | Consult `harness-data/guides/index.yaml` before loading guides broadly. |
+| COR-022 | Support-Files | Load only the matched support files needed for the current task. Do not inspect an entire support-file folder when its index is sufficient. |
 | COR-023 | Support-Files | When both a universal playbook and a project playbook apply, follow the universal playbook for the generic procedure and the project playbook for repo-local refinement. |
 | COR-024 | Support-Files | Guides provide local operating context. They do not replace procedural instructions from playbooks. |
 | COR-025 | Support-Files | Playbooks and guides must not override core rules, mode boundaries, or explicit approval gates. |

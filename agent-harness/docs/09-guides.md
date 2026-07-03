@@ -52,6 +52,7 @@ They may be written or updated by humans or AI, but they are not required harnes
 
 The harness does not automatically generate or lifecycle-manage them.
 They are worth creating or refining only when they add real operational value.
+Each guide should be registered in `harness-data/guides/index.yaml`.
 
 ## How Agents Should Use Guides
 
@@ -68,6 +69,12 @@ Typical examples:
 Agents should not load guides by default for every task.
 When both a playbook and a guide are relevant, the playbook defines the procedure and the guide supplies the local operating details.
 Guides do not override `agent-harness/CORE.md`, the active mode file, or relevant playbooks.
+
+`harness-data/guides/index.yaml` should stay minimal. Each entry uses:
+
+- `file`
+- `when`
+- optional `paths`
 
 ## Suggested Shape
 
@@ -117,3 +124,4 @@ Explain how this project bootstraps Python tooling and runs common local command
 
 The template repository should keep `harness-data/guides/` empty until a real adopted project adds real local content.
 Guides should not be filled with placeholder or imaginary project details.
+The template may still keep an empty `index.yaml` so agents have one place to look first.

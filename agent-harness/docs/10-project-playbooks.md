@@ -51,12 +51,14 @@ Project playbooks are project-owned support files.
 They may be written or updated by humans or AI, but they are not required harness outputs and are not lifecycle-managed.
 
 They are worth creating or refining only when they make future work safer, faster, or more consistent.
+Each project playbook should be registered in `harness-data/playbooks/index.yaml`.
 
 Universal playbooks are different:
 
 - they live under `agent-harness/playbooks/`
 - they are owned by the harness
 - they should be changed only as harness work, not as normal project-specific maintenance
+- they are selected through `agent-harness/playbooks/index.yaml`
 
 ## How Agents Should Use Project Playbooks
 
@@ -77,6 +79,12 @@ When both a universal playbook and a project playbook are relevant, agents shoul
 3. follow the project-specific constraint when they differ
 
 When both apply, the universal playbook provides the generic procedure and the project playbook refines it for this repository.
+
+`harness-data/playbooks/index.yaml` should stay minimal. Each entry uses:
+
+- `file`
+- `when`
+- optional `paths`
 
 ## Suggested Shape
 
@@ -144,3 +152,4 @@ If a file mostly explains environment setup or operating context, it is probably
 
 The template repository should keep `harness-data/playbooks/` empty until a real adopted project adds real local content.
 Project playbooks should not be filled with placeholder or imaginary project details.
+The template may still keep an empty `index.yaml` so agents have one place to look first.
