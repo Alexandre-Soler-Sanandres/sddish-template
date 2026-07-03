@@ -1,7 +1,7 @@
 ---
 id: PLAN-001
 type: implementation-plan
-status: proposed         # proposed | review | approved | in-progress | done | rejected | archived
+status: proposed         # proposed | approved | in-progress | done | rejected | archived
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD

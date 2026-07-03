@@ -1,7 +1,7 @@
 ---
 id: UC-001
 type: use-case
-status: draft            # draft | review | ready-for-spec | converted | implemented | archived | rejected
+status: draft            # draft | ready-for-spec | implemented | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD

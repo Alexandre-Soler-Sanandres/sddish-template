@@ -31,4 +31,7 @@ here.
 
 Start from the explicitly referenced artifact.
 Use frontmatter links to navigate to related artifacts.
-Use a local `SUMMARY.md` file only when the target artifact is unknown or ambiguous — these are created per-directory as needed and are not required upfront.
+Load this file (`agent-harness/CATALOG.md`) when the artifact's type is known but its location or root folder is
+not — it resolves type to folder.
+Use a local `SUMMARY.md` file only when the target artifact within that folder is still unknown or ambiguous — these
+are created per-directory as needed and are not required upfront.

@@ -34,7 +34,7 @@ updated: ""   # YYYY-MM-DD
 | `PLAN-` | Implementation Plan |
 | `REVIEW-` | Review |
 | `IMPROVEMENT-` | Harness Improvement |
-| `LEGACY-FINDING-` | Legacy Finding |
+| `LF-<APP>-` / `LF-CROSS-` | Legacy Finding (app / cross-system, see `agent-harness/modes/LEGACY-DISCOVERY.md` LD-013/LD-014) |
 
 ### Relationship Fields
 
@@ -77,7 +77,7 @@ Early structured thoughts. Not implementation requests.
 
 Describes actor-driven behavior. A behavioral anchor — not an implementation plan.
 
-**Statuses:** `draft` → `review` → `ready-for-spec` → `converted` → `implemented` → `archived` → `rejected`
+**Statuses:** `draft` → `ready-for-spec` → `implemented` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/use-cases/active/UC-*.md`
 **Template:** `agent-harness/templates/USE-CASE-template.md`
 
@@ -88,7 +88,7 @@ Body should include: primary actor, supporting actors, goal, trigger, preconditi
 The central artifact of the SDD-ish process. Defines desired behavior and acceptance criteria.
 Must always be created from a Use Case at `ready-for-spec` status.
 
-**Statuses:** `draft` → `review` → `approved` → `taskified` → `implemented` → `archived` → `rejected`
+**Statuses:** `draft` → `approved` → `implemented` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/specs/active/SPEC-*.md`
 **Template:** `agent-harness/templates/SPEC-template.md`
 
@@ -113,7 +113,7 @@ Task frontmatter includes `allowed_paths` and `forbidden_paths` to constrain imp
 
 Defines how implementation will proceed. Required before any code changes.
 
-**Statuses:** `proposed` → `review` → `approved` → `in-progress` → `done` → `rejected` → `archived`
+**Statuses:** `proposed` → `approved` → `in-progress` → `done` → `rejected` → `archived`
 **Location:** `harness-data/artifacts/implementation-plans/active/PLAN-*.md`
 **Template:** `agent-harness/templates/IMPLEMENTATION-PLAN-template.md`
 
@@ -123,6 +123,7 @@ Each plan step must define: Tasks (or "inline"), expected files, validation, ris
 
 Evaluates artifacts, plans, implementations, or process results.
 
+**Statuses:** `draft` → `completed`
 **Outcomes:** `accepted` | `accepted-with-notes` | `changes-requested` | `rejected` | `follow-up-required`
 **Location:** `harness-data/artifacts/reviews/active/REVIEW-*.md`
 **Template:** `agent-harness/templates/REVIEW-template.md`
@@ -140,10 +141,17 @@ Changes the process itself. Triggered by Review findings.
 Records evidence extracted from legacy projects.
 
 **Statuses:** `draft` → `reviewed` → `converted` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/legacy/active/LEGACY-FINDING-*.md`
+**Location:** `harness-data/artifacts/legacy/apps/<legacy-app-slug>/findings/active/<LF-ID>.md` (app-scoped) or
+`harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` (cross-system) — see
+`agent-harness/modes/LEGACY-DISCOVERY.md` (LD-013)
 **Template:** `agent-harness/templates/LEGACY-FINDING-template.md`
 
 Must distinguish: observed behavior, documented behavior, inferred intent, accidental complexity, dead or uncertain code.
+
+Legacy Discovery also produces `INVENTORY.md`, `SOURCE-MAP.md`, `QUESTIONS.md`, and `CROSS-SYSTEM-SUMMARY.md`
+(templates under `agent-harness/templates/`). These are scoped Legacy Discovery artifacts, not general-purpose
+lifecycle types — see [08-legacy-applications.md](08-legacy-applications.md) and
+`agent-harness/modes/LEGACY-DISCOVERY.md` for their statuses, IDs, and folder layout.
 
 ## Readiness Checklists
 

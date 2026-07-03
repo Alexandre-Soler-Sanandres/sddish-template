@@ -1,7 +1,7 @@
 ---
 id: SPEC-001
 type: spec
-status: draft            # draft | review | approved | taskified | implemented | archived | rejected
+status: draft            # draft | approved | implemented | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD

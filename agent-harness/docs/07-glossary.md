@@ -56,3 +56,21 @@ A tiny harness navigation file listing artifact locations. Not a god-index.
 
 **God-Index Anti-Pattern**  
 The failure mode where an agent loads a massive index of every artifact instead of navigating from a specific referenced artifact. Causes context collapse and loss of precision.
+
+**Legacy Finding**  
+An artifact recording a single piece of evidence extracted from a legacy project — observed behavior, documented behavior, inferred intent, accidental complexity, or dead/uncertain code. Scoped per app or cross-system; see `agent-harness/modes/LEGACY-DISCOVERY.md`.
+
+**Readiness Checklist**  
+A section present in every artifact template. Every item must be checked before the agent advances the artifact to its gate status (e.g. Spec to `approved`, Task to `ready`). A single unchecked item blocks the status change.
+
+**Task Decision Matrix**  
+The table in `agent-harness/modes/TASKS.md` used to decide whether a Spec needs separate Task artifacts or can proceed straight to an inline Implementation Plan.
+
+**Playbook**  
+An optional support file describing a reusable procedure for a recurring task shape. Universal playbooks live under `agent-harness/playbooks/` and apply across projects; project playbooks live under `harness-data/playbooks/` and refine the generic procedure for one repository. See `agent-harness/docs/10-project-playbooks.md`.
+
+**allowed_paths / forbidden_paths**  
+Task frontmatter fields that constrain implementation scope during Implementation mode. The agent must not modify files outside `allowed_paths` or inside `forbidden_paths`.
+
+**RUN-LOG.md**  
+An optional, temporary operational trace at `harness-data/RUN-LOG.md` used for interrupted, approval-heavy, or high-risk work. Not a source-of-truth artifact; kept small and collapsed or cleared when work finishes.

@@ -26,7 +26,7 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 2. Verify the Spec is at status `approved`. If not, stop and report.
 3. Find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
-   - If Tasks exist but are draft, blocked, stale or inconsistent → stop and report.
+   - If Tasks exist but are draft or blocked → stop and report.
    - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/TASKS.md`).
    - If Tasks are required but missing → stop and route to `/tw-create-tasks`.
    - If Tasks are not required → create an inline Implementation Plan.
@@ -42,7 +42,7 @@ These commands do not mean "start coding now" — they mean "create a plan and w
    - If Specs are missing or not at status `approved` → stop and route to `/tw-create-spec`.
 4. For each Spec, find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
-   - If Tasks exist but are draft, blocked, stale or inconsistent → stop and report.
+   - If Tasks exist but are draft or blocked → stop and report.
    - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/TASKS.md`).
    - If Tasks are required but missing → stop and route to `/tw-create-tasks`.
 5. Do not generate duplicate Tasks or ignore existing ones.
@@ -82,6 +82,8 @@ Source:
 | IPL-001 | Grouping | Group Tasks in one step when they belong to the same approved Spec, are small and tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and no high-risk work is involved. |
 | IPL-002 | Grouping | Keep Tasks separate when risk is high, validation differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules. |
 | IPL-003 | Readiness-Gate | Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact. All items must be checked. A single unchecked item blocks the status change. |
+| IPL-010 | Parallel-Work | Before setting a Plan status to `approved`, check `harness-data/CATALOG.md` for other Plans at status `approved` or `in-progress` on the same Spec (COR-053) or with overlapping Task `allowed_paths` (COR-055); stop and surface the conflict if either applies. |
+| IPL-011 | Parallel-Work | When a Plan's status changes to `approved`, add or update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (COR-057). |
 | IPL-004 | Boundaries | Do not change code. |
 | IPL-005 | Boundaries | Do not treat `proposed` status as approved. |
 | IPL-006 | Boundaries | Do not proceed if the source artifact is not at an accepted status. |

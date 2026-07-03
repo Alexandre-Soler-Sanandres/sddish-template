@@ -35,7 +35,7 @@ Review -> Improvement artifact -> approved harness change -> validation -> updat
 | IMPR-002 | Validation | Add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done` or moved to `done/`. |
 | IMPR-003 | Validation | If a validation item is prospective and cannot be fully proven yet, state that explicitly instead of treating it as completed evidence. |
 | IMPR-004 | Validation | Do not move an Improvement artifact to `done/` until the approved target changes are applied and the validation result is documented. |
-| IMPR-005 | Scope | Approved changes are applied to: mode files, templates, reference files, CATALOG.md. |
+| IMPR-005 | Scope | Approved changes are applied to: mode files, templates, reference files, `agent-harness/CATALOG.md`. |
 | IMPR-006 | Boundaries | Do not change the harness during normal feature implementation. |
 | IMPR-007 | Boundaries | Harness changes must be explicit and approved. |
 | IMPR-008 | Boundaries | Target files must be listed in frontmatter. |

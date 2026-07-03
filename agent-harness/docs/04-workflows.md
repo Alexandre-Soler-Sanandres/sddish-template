@@ -84,11 +84,11 @@ If Tasks are not required, the work still needs an Implementation Plan.
 | Multiple implementation steps | Yes | Ordering and validation boundaries |
 | Cross-cutting change | Yes | Scope control |
 | Unclear dependencies | Yes | Dependency management |
-| Use Case-level implementation with multiple Specs | Yes | Too broad for inline planning |
+| Use Case with multiple Specs | Yes | Too broad for inline planning |
 | Spec with multiple features | Yes | Needs execution slices |
 | Database migration | Yes | High risk |
 | Destructive data job | Yes | High risk |
-| Deployment or Docker change | Yes | Operational risk |
+| Deployment or infrastructure change | Yes | Operational risk |
 | Security, secrets or auth | Yes | Safety-critical |
 | Payment or financial transaction execution | Yes | Safety-critical |
 | Domain-critical business logic | Yes | Domain-critical |

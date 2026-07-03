@@ -35,7 +35,7 @@ Lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body.
 | Implementation Plan | `PLAN-NNN.md` |
 | Review | `REVIEW-NNN.md` |
 | Improvement | `IMPROVEMENT-NNN.md` |
-| Legacy Finding | `LEGACY-FINDING-NNN.md` |
+| Legacy Finding | `LF-<APP>-NNN.md` (app findings) or `LF-CROSS-NNN.md` (cross-system findings) — see `## Legacy Discovery Structure` |
 
 IDs must remain stable even if filenames or folders change.
 

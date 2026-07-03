@@ -35,7 +35,7 @@ Universal harness rules that apply in every mode.
 | COR-025 | Support-Files | Playbooks and guides must not override core rules, mode boundaries, or explicit approval gates. |
 | COR-026 | Implementation-Gate | Verify that an Implementation Plan exists before implementation starts. |
 | COR-027 | Implementation-Gate | Verify that the Implementation Plan is at status `approved` before implementation starts. |
-| COR-028 | Implementation-Gate | Verify that required upstream artifacts are at accepted status, not draft or under review (for example: Spec `approved`, Use Case `ready-for-spec`, Task `ready`). |
+| COR-028 | Implementation-Gate | Verify that required upstream artifacts are at accepted status, not draft (for example: Spec `approved`, Use Case `ready-for-spec`, Task `ready`). |
 | COR-029 | Implementation-Gate | Verify that safety and risk rules are satisfied before implementation starts. |
 | COR-030 | Checkpoint | Before any high-impact action, verify the active mode, restart artifact, explicit user authorization, in-scope files, and required validation before stopping or committing. |
 | COR-031 | Checkpoint | Treat these as high-impact actions: committing; changing harness mode files, templates, or reference process rules; creating Review or Improvement artifacts; changing source-map workflow or status rules; moving artifacts between lifecycle folders; starting cross-system synthesis. |
