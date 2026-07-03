@@ -9,6 +9,25 @@ artifact lifecycle statuses.
 
 For project-owned support files, see [09-guides.md](09-guides.md) and [10-project-playbooks.md](10-project-playbooks.md).
 
+## Reference File Structure
+
+`harness-data/reference/{ARCHITECTURE,DOMAIN,TOOLING,QUALITY}.md` mix content with two different mutability
+profiles. Structure each file with up to two top-level sections so a reader can tell them apart:
+
+- `## Discovered` — present only in projects that ran Legacy Discovery. Facts extracted from `LF-*` findings.
+  Cite the finding ID inline (e.g. "engine owns OHLC writes (LF-TW-ENGINE-014)"). Stable once written — edit only
+  to correct a transcription error against the finding, never because a target decision changed.
+- `## Decisions` — present once at least one target-architecture decision exists. States the decision in one or
+  two lines, then cites whatever settled it: an accepted ADR (`ADR-NNN`), a Legacy Finding (`LF-*`), or a legacy
+  synthesis artifact (`QUESTIONS.md`, `PARITY-MATRIX.md`, `REWRITE-READINESS.md`, `CONTRACTS.md`). Cite authority,
+  don't restate its reasoning — mirrors `DEC-003`'s rule for Use Cases/Specs citing ADRs.
+
+A greenfield project (no Legacy Discovery) has `## Decisions` only — do not add a `## Discovered` section with
+placeholder content just because this convention exists.
+
+When the artifact a `## Decisions` entry cites is superseded (an ADR superseded per `DEC-005`, or a Legacy
+Finding/Question re-resolved), update the citation in the same pass — see `DEC-009`.
+
 ## YAML Frontmatter
 
 Every artifact has a minimum set of frontmatter fields:

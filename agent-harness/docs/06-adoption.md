@@ -174,6 +174,11 @@ What can wait:
 - long policy explanations
 - quality rules that are irrelevant to current work
 
+The illustrative shapes above are day-one, greenfield content — informal `## Decisions`-equivalent prose with no
+`## Discovered` section, since no Legacy Discovery has run yet. Once this project starts Legacy Discovery or
+accepts its first ADR, split content per `docs/03-artifacts.md`'s Reference File Structure convention rather than
+leaving discovered facts and target decisions interleaved.
+
 ### What May Stay Unknown Early
 
 These are acceptable to leave incomplete during early adoption:
@@ -269,7 +274,7 @@ When in doubt:
 | `harness-data/reference/QUALITY.md` | Project-specific — fill in |
 | `harness-data/guides/` | Optional — add project-specific setup and operating guidance |
 | `harness-data/playbooks/` | Optional — add project-specific scoped procedures for recurring work in this repo |
-| `harness-data/artifacts/{legacy,use-cases,specs,tasks,implementation-plans,reviews,improvements,transcripts,ideas,decisions}/` | Project-specific — lifecycle artifacts generated and managed by using the harness |
+| `harness-data/artifacts/{legacy,use-cases,specs,tasks,implementation-plans,reviews,improvements,transcripts,ideas,adrs}/` | Project-specific — lifecycle artifacts generated and managed by using the harness |
 
 ## Adopting for Existing Projects
 

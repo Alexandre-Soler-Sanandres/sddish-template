@@ -239,6 +239,10 @@ Check that stable facts are routed to:
 Human check: reject reference updates that are speculative, unresolved, or merely old-system noise. References should
 help future target work, not preserve every legacy detail.
 
+Write these updates under that doc's `## Discovered` heading, citing the finding ID (`LD-034`) — this section is a
+transcription of legacy evidence, not a target decision. Target decisions land separately, under that doc's
+`## Decisions` heading, once actually settled (see `docs/03-artifacts.md`'s Reference File Structure convention).
+
 ## Step 10: Decide When App-Local Discovery Is Done
 
 An app is app-local complete when the source map is enough for app-local rewrite planning.

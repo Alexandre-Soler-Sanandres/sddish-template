@@ -79,6 +79,7 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | LD-031 | Import-Hygiene | When import noise needs a user decision, add a FINDINGS entry for the risk and a QUESTIONS entry asking whether to remove, quarantine, or leave it as-is. The user's response authorizes cleanup. |
 | LD-032 | Evidence-Precedence | Every finding states whether it is based on observed behavior, documented behavior, or inference, and records which source was treated as authoritative when evidence conflicts. |
 | LD-033 | Reference-Enrichment | Do not enrich references with unresolved, uncertain, cross-system-before-synthesis, or speculative findings. |
+| LD-034 | Reference-Enrichment | Write reference-doc enrichment from findings under that doc's `## Discovered` heading, citing the specific `LF-*` ID. Do not write target-decision language into `## Discovered` — a settled target decision belongs under `## Decisions`, added when the decision is actually made (via Question Clarification outcome or a later ADR), not during Legacy Discovery itself. |
 
 ## Evidence Precedence
 
@@ -101,3 +102,7 @@ Clarification:
 | Domain concepts, rules, terminology | `DOMAIN.md` |
 | Tools, commands, CI, test setup | `TOOLING.md` |
 | Quality standards, test coverage, hygiene | `QUALITY.md` |
+
+Write enrichment under that doc's `## Discovered` heading, citing the specific `LF-*` ID (`LD-034`). This is a
+transcription of stable evidence, not a target decision — target decisions land under that doc's separate
+`## Decisions` heading instead, per `docs/03-artifacts.md`'s Reference File Structure convention.

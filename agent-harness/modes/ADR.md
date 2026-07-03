@@ -57,6 +57,7 @@ or when the decision is actually about actor-visible behavior (that belongs in a
 | DEC-006 | Approval | Status must not be set to `accepted` without the user's explicit confirmation — do not infer approval from discussion. |
 | DEC-007 | Relationship-Fields | When a Use Case or Spec is created that depends on an accepted ADR, add the ADR's ID to that artifact's `related` field and add the new artifact's ID to the ADR's own `derived_use_cases`/`derived_specs` field in the same pass. |
 | DEC-008 | Citation-Gate | Use Cases and Specs may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled. |
+| DEC-009 | Reference-Sync | When a `harness-data/reference/*.md` `## Decisions` entry cites this ADR and the ADR is superseded per `DEC-005`, update that reference doc's citation to the superseding ADR in the same pass. |
 
 ## Output
 
