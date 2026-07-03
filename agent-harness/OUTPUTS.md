@@ -41,7 +41,9 @@ IDs must remain stable even if filenames or folders change.
 
 ## Folder Structure
 
-Each artifact directory uses subfolders to reflect lifecycle state.
+All lifecycle artifacts live under `harness-data/artifacts/`.
+
+Within that root, each artifact directory uses subfolders to reflect lifecycle state.
 
 | Subfolder | Used in | Meaning |
 | --- | --- | --- |
@@ -54,8 +56,8 @@ Each artifact directory uses subfolders to reflect lifecycle state.
 
 Legacy Discovery uses scoped folders:
 
-- App-specific discovery: `harness-data/legacy/apps/<legacy-app-slug>/`
-- Cross-system synthesis: `harness-data/legacy/cross-system/`
+- App-specific discovery: `harness-data/artifacts/legacy/apps/<legacy-app-slug>/`
+- Cross-system synthesis: `harness-data/artifacts/legacy/cross-system/`
 
 Detailed Legacy Discovery layout and rules are defined in
 `agent-harness/modes/LEGACY-DISCOVERY.md`.

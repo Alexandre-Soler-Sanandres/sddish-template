@@ -27,7 +27,7 @@ risk.
 Start with a concrete app or imported source path:
 
 ```text
-Please run legacy discovery for `harness-data/legacy/imported/<app-slug>`.
+Please run legacy discovery for `harness-data/artifacts/legacy/imported/<app-slug>`.
 ```
 
 If you are unsure about scope, ask for a short discovery proposal first:
@@ -87,7 +87,7 @@ be your call.
 For each app, discovery should live under:
 
 ```text
-harness-data/legacy/apps/<app-slug>/
+harness-data/artifacts/legacy/apps/<app-slug>/
 ```
 
 The important files are:
@@ -435,9 +435,9 @@ You can ask the agent to run these when relevant:
 
 ```sh
 git diff --check
-find harness-data/legacy/imported/<app-slug> -path '*/.git' -type d
+find harness-data/artifacts/legacy/imported/<app-slug> -path '*/.git' -type d
 rg --files agent-harness -g 'README.md' -g 'README.*'
 ```
 
 Expected result for the last command: only `agent-harness/README.md`. Extra directory-scoped harness READMEs should
-not appear. Imported application READMEs under `harness-data/legacy/imported/` are source evidence, not harness artifacts.
+not appear. Imported application READMEs under `harness-data/artifacts/legacy/imported/` are source evidence, not harness artifacts.

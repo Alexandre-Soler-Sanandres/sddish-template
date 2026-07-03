@@ -64,8 +64,8 @@ agent-harness/
   templates/           ← artifact templates
 ```
 
-`harness-data/` is this project's own data — project-specific config plus everything the harness generates.
-Nothing here is ever copied into or out of the template:
+`harness-data/` is this project's own data. It holds both project-owned support files and the lifecycle artifacts
+the harness creates while the project uses it. Nothing here is ever copied into or out of the template:
 
 ``` text
 harness-data/
@@ -77,16 +77,18 @@ harness-data/
     DOMAIN.md
     TOOLING.md
     QUALITY.md
-  guides/              ← optional stack-specific bootstrap guides
-  transcripts/
-  ideas/
-  use-cases/
-  specs/
-  tasks/
-  implementation-plans/
-  reviews/
-  improvements/
-  legacy/
+  guides/              ← optional project-specific setup and operating guidance
+  playbooks/           ← optional project-specific scoped procedures
+  artifacts/           ← lifecycle artifacts generated and maintained through harness modes
+    transcripts/
+    ideas/
+    use-cases/
+    specs/
+    tasks/
+    implementation-plans/
+    reviews/
+    improvements/
+    legacy/
 ```
 
 ## Getting Started
@@ -116,11 +118,16 @@ smallest useful first pass and the same guide for full adoption instructions.
 | [docs/06-adoption.md](docs/06-adoption.md) | Use this when adopting the harness in a new or existing repository |
 | [docs/07-glossary.md](docs/07-glossary.md) | Use this when a harness term is unclear |
 | [docs/08-legacy-applications.md](docs/08-legacy-applications.md) | Use this for practical legacy discovery work in an existing codebase |
+| [docs/09-guides.md](docs/09-guides.md) | Use this to understand project-specific setup and operating guides under `harness-data/guides/` |
+| [docs/10-playbooks.md](docs/10-playbooks.md) | Use this to understand project-specific scoped procedures under `harness-data/playbooks/` |
 
 ## Key Principles
 
 - **Modes are universal** — mode files work for any tech stack without modification
 - **References are project-specific** — architecture, domain, tooling, and quality vary per project
+- **Guides are project-specific** — setup and operating guidance stays local to each adopting repository
+- **Project playbooks are project-specific** — scoped procedures live under `harness-data/`, not in the universal harness
+- **Lifecycle artifacts are separate** — harness-managed project artifacts live under `harness-data/artifacts/`
 - **Artifacts over memory** — everything lives in files, not agent context
 - **Explicit gates** — implementation requires an approved plan; no exceptions
 - **Smallest sufficient context** — agents load only what they need

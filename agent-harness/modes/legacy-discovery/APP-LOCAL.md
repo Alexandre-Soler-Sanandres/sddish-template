@@ -13,7 +13,7 @@ Load this file when running App-Local Discovery (see the Discovery Phases table 
 App-specific discovery goes under:
 
 ```text
-harness-data/legacy/apps/<legacy-app-slug>/
+harness-data/artifacts/legacy/apps/<legacy-app-slug>/
   INVENTORY.md
   SOURCE-MAP.md
   findings/

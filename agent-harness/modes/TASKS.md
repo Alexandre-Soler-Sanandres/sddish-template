@@ -55,7 +55,7 @@ Via natural language: explicit instruction referencing the Spec.
 
 ## Output
 
-- `harness-data/tasks/active/TASK-*.md`
+- `harness-data/artifacts/tasks/active/TASK-*.md`
 - Use `agent-harness/templates/TASK-template.md` as the starting point for every new Task.
 
 ## Reference Files

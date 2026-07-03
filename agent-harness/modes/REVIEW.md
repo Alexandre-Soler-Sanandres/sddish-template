@@ -73,7 +73,7 @@ After completing a review, take the following action based on the outcome. Do no
 
 ## Output
 
-- `harness-data/reviews/active/REVIEW-*.md`
+- `harness-data/artifacts/reviews/active/REVIEW-*.md`
 - Use `agent-harness/templates/REVIEW-template.md` for every new Review.
 - The Review artifact feeds into Improvement mode when process problems are found.
 

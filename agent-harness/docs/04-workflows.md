@@ -39,9 +39,9 @@ Partnering is the front door for unclear thinking.
 
 **Output paths:**
 
-- `harness-data/transcripts/active/TRANSCRIPT-*.md`
-- `harness-data/ideas/active/IDEA-*.md`
-- `harness-data/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
+- `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
+- `harness-data/artifacts/ideas/active/IDEA-*.md`
+- `harness-data/artifacts/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
 
 Partnering must not create Specs, Tasks, or Implementation Plans, or infer approval from discussion.
 
@@ -261,7 +261,7 @@ For the practical step-by-step legacy application playbook, see
 [08-legacy-applications.md](08-legacy-applications.md).
 
 ```text
-harness-data/legacy/imported/old-project
+harness-data/artifacts/legacy/imported/old-project
   → legacy inventory
   → source maps
   → findings (LEGACY-FINDING-*)

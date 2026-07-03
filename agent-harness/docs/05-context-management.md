@@ -19,7 +19,8 @@ When an agent starts a task, it loads context in this order — stopping as soon
 9. Full related artifact — only if required
 10. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
 11. Reference files — only when affected by the current task
-12. Archived artifacts — only when explicitly needed
+12. Project guides or project playbooks — only when the task depends on local setup, operating guidance, or scoped procedures
+13. Archived artifacts — only when explicitly needed
 
 In many cases, you can stop at step 6.
 
@@ -54,6 +55,13 @@ Reference files are loaded only when needed — not by default:
 - `harness-data/reference/TOOLING.md` — when running validation commands (Implementation mode)
 - `harness-data/reference/QUALITY.md` — when checking definition of done (Implementation mode)
 
+Project-local supporting files are also loaded only when needed — not by default:
+
+- `harness-data/guides/` — when the task depends on project-specific setup, tooling usage, bootstrap steps, or local operating quirks
+- `harness-data/playbooks/` — when the task matches a recurring project-specific procedure or subsystem workflow
+
+See [09-guides.md](09-guides.md) and [10-playbooks.md](10-playbooks.md) for when to create these files and how agents should use them.
+
 ## CATALOG.md
 
 `agent-harness/CATALOG.md` is a tiny navigation file — not a god-index. It lists:
@@ -66,6 +74,9 @@ There are two files named `CATALOG.md`, and they do different jobs:
 
 - `agent-harness/CATALOG.md` explains the universal artifact locations and restart-point conventions.
 - `harness-data/CATALOG.md` is project-local bookkeeping, such as active Plan pointers required by some rules in `CORE.md`.
+
+Lifecycle artifacts live under `harness-data/artifacts/`. Project support files such as `reference/`, `guides/`, and
+`playbooks/` stay at the root of `harness-data/` and are loaded only when relevant.
 
 ## REPO-MAP.md
 
@@ -114,7 +125,7 @@ Do not assume the last conversational state is still safe to continue from witho
 
 ## SUMMARY.md Files
 
-Local `SUMMARY.md` files may exist in artifact directories (e.g. `harness-data/specs/SUMMARY.md`) when the number of artifacts makes navigation difficult. They are created on demand — not required upfront.
+Local `SUMMARY.md` files may exist in artifact directories (e.g. `harness-data/artifacts/specs/SUMMARY.md`) when the number of artifacts makes navigation difficult. They are created on demand — not required upfront.
 
 SUMMARY files are not indexes of everything. They are lightweight navigation aids for finding an artifact when its ID is not known.
 

@@ -49,5 +49,5 @@ Load these when relevant — do not load all of them by default:
 
 ## Output
 
-- `harness-data/improvements/active/IMPROVEMENT-*.md`
+- `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
 - Use `agent-harness/templates/IMPROVEMENT-template.md` for every new Improvement artifact.

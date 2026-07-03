@@ -57,8 +57,8 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | LD-009 | Core | Preserve app-local evidence inside app-scoped artifacts until cross-system synthesis is in scope. |
 | LD-010 | Core | Validate docs with `git diff --check`; use additional Markdown checks when the repository defines them. |
 | LD-011 | Core | Commit only when the user explicitly asks. |
-| LD-012 | Routing | Other outputs may include candidate `harness-data/use-cases/active/UC-*.md`, candidate `harness-data/specs/active/SPEC-*.md`, and Harness Improvement candidates. |
-| LD-013 | Findings | Store each finding as its own file, using `agent-harness/templates/LEGACY-FINDING-template.md` as-is: `harness-data/legacy/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, `harness-data/legacy/cross-system/findings/active/<LF-ID>.md` for cross-system findings. |
+| LD-012 | Routing | Other outputs may include candidate `harness-data/artifacts/use-cases/active/UC-*.md`, candidate `harness-data/artifacts/specs/active/SPEC-*.md`, and Harness Improvement candidates. |
+| LD-013 | Findings | Store each finding as its own file, using `agent-harness/templates/LEGACY-FINDING-template.md` as-is: `harness-data/artifacts/legacy/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` for cross-system findings. |
 | LD-014 | Findings | IDs follow the existing `LF-<APP>-NNN` convention, numbered once per app (or `LF-CROSS-NNN` for cross-system) and never reused, even after a finding moves or is merged. |
 | LD-015 | Findings | Move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`, or `rejected`. Findings with `status: draft` or `status: reviewed` stay in `findings/active/`. |
 | LD-016 | Findings | Always look up or add a finding by ID — scan `findings/active/` and `findings/archive/` file names or frontmatter, never by reading through file append order. Do not create slice-numbered or subsystem-named headings as a substitute for the ID. |
@@ -75,7 +75,7 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | LD-027 | Import-Hygiene | During normal discovery, inventory `.env`, `.env.*`, `.env.local`, `secrets/`, `*.key`, `*.pem`, password files, token files, logs, caches, virtual environments, coverage output, test artifacts, generated metadata, egg-info, and build output by path only — do not open contents. |
 | LD-028 | Import-Hygiene | Open log contents only in an explicit log or security discovery slice, after confirming they do not contain secrets. |
 | LD-029 | Import-Hygiene | Do not remove or rewrite imported artifacts during normal discovery. |
-| LD-030 | Import-Hygiene | Before committing an imported snapshot or import-hygiene change, verify nested Git metadata: `find harness-data/legacy/imported/<app-slug> -path '*/.git' -type d` — expected result is no output. Surface any hit to the user before proceeding. |
+| LD-030 | Import-Hygiene | Before committing an imported snapshot or import-hygiene change, verify nested Git metadata: `find harness-data/artifacts/legacy/imported/<app-slug> -path '*/.git' -type d` — expected result is no output. Surface any hit to the user before proceeding. |
 | LD-031 | Import-Hygiene | When import noise needs a user decision, add a FINDINGS entry for the risk and a QUESTIONS entry asking whether to remove, quarantine, or leave it as-is. The user's response authorizes cleanup. |
 | LD-032 | Evidence-Precedence | Every finding states whether it is based on observed behavior, documented behavior, or inference, and records which source was treated as authoritative when evidence conflicts. |
 | LD-033 | Reference-Enrichment | Do not enrich references with unresolved, uncertain, cross-system-before-synthesis, or speculative findings. |

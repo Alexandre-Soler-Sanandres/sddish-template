@@ -8,7 +8,7 @@ updated: ""                              # YYYY-MM-DD
 
 ## Source Root
 
-`harness-data/legacy/imported/<app-slug>/`
+`harness-data/artifacts/legacy/imported/<app-slug>/`
 
 ## Evidence Inventory
 
@@ -75,7 +75,7 @@ Write FINDINGS + QUESTIONS entries for any category that requires a user decisio
 | Path pattern | Type | Notes |
 | --- | --- | --- |
 
-Nested Git metadata check: `find harness-data/legacy/imported/<app-slug> -path '*/.git' -type d` — expected: no output.
+Nested Git metadata check: `find harness-data/artifacts/legacy/imported/<app-slug> -path '*/.git' -type d` — expected: no output.
 
 ## Open App Notes
 

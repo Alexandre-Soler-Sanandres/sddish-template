@@ -39,7 +39,7 @@ Cross-system synthesis scope is explicit:
 
 | App | Source map | Discovery state | Proof flag |
 | --- | --- | --- | --- |
-| `<app-slug>` | `harness-data/legacy/apps/<app-slug>/SOURCE-MAP.md` | `app-local-complete` | `proof_needed: false` |
+| `<app-slug>` | `harness-data/artifacts/legacy/apps/<app-slug>/SOURCE-MAP.md` | `app-local-complete` | `proof_needed: false` |
 
 All in-scope app source maps must be at `app-local-complete` before synthesis starts. App-level proof flags do not
 block cross-system synthesis when they are already accepted or explicitly deferred, but cross-system slices may still
@@ -135,7 +135,7 @@ Next action: (slice name and status)
 
 Start from:
 
-- `harness-data/legacy/apps/<app-slug>/SOURCE-MAP.md`
+- `harness-data/artifacts/legacy/apps/<app-slug>/SOURCE-MAP.md`
 
 Read only the source-map sections and evidence paths needed for the next slice.
 

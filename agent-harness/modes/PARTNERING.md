@@ -32,9 +32,9 @@ The agent acts as a structured sparring partner — not a solution machine.
 
 ## Possible Outputs
 
-- `harness-data/transcripts/active/TRANSCRIPT-*.md`
-- `harness-data/ideas/active/IDEA-*.md`
-- `harness-data/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
+- `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
+- `harness-data/artifacts/ideas/active/IDEA-*.md`
+- `harness-data/artifacts/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
 - Open questions list
 
 ## Reference Files

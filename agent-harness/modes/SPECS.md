@@ -85,7 +85,7 @@ When a significant change is made to an approved Spec:
 
 ## Output
 
-- `harness-data/specs/active/SPEC-*.md`
+- `harness-data/artifacts/specs/active/SPEC-*.md`
 - Use `agent-harness/templates/SPEC-template.md` as the starting point for every new Spec.
 
 ## Reference Files

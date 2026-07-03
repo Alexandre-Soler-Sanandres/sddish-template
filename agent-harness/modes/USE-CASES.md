@@ -71,7 +71,7 @@ When legacy evidence is involved, the body should also preserve the design-relev
 
 ## Output
 
-- `harness-data/use-cases/active/UC-*.md`
+- `harness-data/artifacts/use-cases/active/UC-*.md`
 - Use `agent-harness/templates/USE-CASE-template.md` as the starting point for every new Use Case.
 
 ## Reference Files

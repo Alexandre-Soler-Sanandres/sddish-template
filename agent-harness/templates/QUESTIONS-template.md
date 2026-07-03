@@ -6,7 +6,7 @@ title: "<app-slug> Legacy Discovery Questions"
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 legacy_source:
-  - harness-data/legacy/imported/<app-slug>
+  - harness-data/artifacts/legacy/imported/<app-slug>
 tags: [legacy-discovery, <app-slug>]
 ---
 

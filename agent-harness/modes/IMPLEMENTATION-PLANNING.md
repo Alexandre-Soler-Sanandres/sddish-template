@@ -89,7 +89,7 @@ Source:
 
 ## Output
 
-- `harness-data/implementation-plans/active/PLAN-*.md`
+- `harness-data/artifacts/implementation-plans/active/PLAN-*.md`
 - Use `agent-harness/templates/IMPLEMENTATION-PLAN-template.md` as the starting point for every new plan.
 
 ## Reference Files
