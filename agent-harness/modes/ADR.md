@@ -58,6 +58,7 @@ or when the decision is actually about actor-visible behavior (that belongs in a
 | DEC-007 | Relationship-Fields | When a Use Case or Spec is created that depends on an accepted ADR, add the ADR's ID to that artifact's `related` field and add the new artifact's ID to the ADR's own `derived_use_cases`/`derived_specs` field in the same pass. |
 | DEC-008 | Citation-Gate | Use Cases and Specs may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled. |
 | DEC-009 | Reference-Sync | When a `harness-data/reference/*.md` `## Decisions` entry cites this ADR and the ADR is superseded per `DEC-005`, update that reference doc's citation to the superseding ADR in the same pass. |
+| DEC-010 | Relations | Every ID listed in `related` must be explained in the ADR body under a "Relation to (ID) (type):" note, naming which of a fixed vocabulary the relationship is — `supersession-deferred`, `reuse`, `dependency`, `additive`, or `sibling-split` — plus the concrete reason. IDs already covered by `supersedes`/`superseded_by` don't need a separate note; this targets `related`, where the relationship is otherwise implicit. |
 
 ## Output
 
