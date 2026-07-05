@@ -11,15 +11,15 @@ substitutes for the other.
 
 ## Entry Points
 
-- `/tw-create-spec <use-case-file>`
-- `/tw-create-tasks <spec-file>`
+- `/create-spec <use-case-file>`
+- `/create-tasks <spec-file>`
 
 ## Consumes / Produces
 
-- `/tw-create-spec`: consumes a Use Case at status `ready-for-spec`; produces a Spec.
-- `/tw-create-tasks`: consumes a Spec at status `approved`; produces Task(s).
+- `/create-spec`: consumes a Use Case at status `ready-for-spec`; produces a Spec.
+- `/create-tasks`: consumes a Spec at status `approved`; produces Task(s).
 
-## Spec Creation Should (via `/tw-create-spec`)
+## Spec Creation Should (via `/create-spec`)
 
 1. Verify the source Use Case is at status `ready-for-spec` before proceeding.
 2. Read the Use Case.
@@ -36,7 +36,7 @@ Questions-registry carry-forward (inspecting inherited open items from the sourc
 is a separate, cross-cutting concern, not part of this mechanical derivation — see
 `agent-harness/artifact-specs/SPECS.md`'s `SPS-009`.
 
-## Task Decision Matrix (via `/tw-create-tasks`)
+## Task Decision Matrix (via `/create-tasks`)
 
 | Situation | Tasks required? | Reason |
 | --- | --- | --- |
@@ -69,7 +69,7 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 | TSK-003 | Boundaries | Do not implement or change code. |
 | TSK-004 | Boundaries | Do not create Implementation Plans. |
 | TSK-005 | Boundaries | Do not proceed if the source Spec is not at status `approved`. |
-| REF-001 | Dedup | Before generating Tasks from a Spec — via this entry point directly, not only when Planning-Implementation happens to check first — verify existing Tasks derived from that Spec; do not generate duplicate Tasks or skip existing ones. This rule is owned here, not borrowed from `PLANNING-IMPLEMENTATION.md`'s `IPL-007`, so `/tw-create-tasks` is protected regardless of entry path. |
+| REF-001 | Dedup | Before generating Tasks from a Spec — via this entry point directly, not only when Planning-Implementation happens to check first — verify existing Tasks derived from that Spec; do not generate duplicate Tasks or skip existing ones. This rule is owned here, not borrowed from `PLANNING-IMPLEMENTATION.md`'s `IPL-007`, so `/create-tasks` is protected regardless of entry path. |
 
 ## Output
 

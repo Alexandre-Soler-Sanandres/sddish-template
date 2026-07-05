@@ -8,7 +8,7 @@ It is not an implementation plan.
 
 ## Entry
 
-Via CLI: `/tw-create-use-case`
+Via CLI: `/create-use-case`
 Via natural language: explicit instruction referencing a source artifact or describing an actor goal.
 
 ## Sources

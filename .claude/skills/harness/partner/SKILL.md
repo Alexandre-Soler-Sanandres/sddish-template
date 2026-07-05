@@ -1,3 +1,8 @@
+---
+description: Enter Partnering mode for structured conversation to capture ideas and problems.
+disable-model-invocation: true
+---
+
 Enter Partnering mode.
 Follow agent-harness/modes/PARTNERING.md.
 Listen, capture, clarify. Do not create Specs or implement anything.

@@ -9,7 +9,7 @@ It is not a scenario, and it is not a hunch.
 
 ## Entry
 
-Via CLI: `/tw-create-adr` (command registration lives outside `agent-harness/`).
+Via CLI: `/create-adr` (command registration lives outside `agent-harness/`).
 Via natural language: from any mode, when a settled structural/architectural decision is reached.
 
 Unlike Use Case and Spec, authorship is not restricted to one entry point — real-world ADR practice treats

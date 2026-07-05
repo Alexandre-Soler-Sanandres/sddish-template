@@ -8,7 +8,7 @@ This is the only Mode allowed to modify `agent-harness/*`.
 
 ## Entry
 
-Via CLI: `/tw-improve-harness <review-file>`
+Via CLI: `/improve-harness <review-file>`
 Via natural language: explicit instruction to improve a harness file, template, or process rule — triggered by a Review finding.
 
 ## Consumes
@@ -36,7 +36,7 @@ Review -> Improvement artifact -> approved harness change -> validation -> updat
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IMPR-005 | Scope | Approved changes may be applied by default to: any file under `agent-harness/` (mode files, artifact specs, shared procedures, templates, playbooks, docs, `CATALOG.md`, `CORE.md`, `OUTPUTS.md`, `README.md` alike — the category is "the harness itself," not an enumerated subset); `.claude/commands/` (the harness's CLI entry-point layer, not a separate project concern, despite living outside `agent-harness/` on disk); and root-level `AGENTS.md`/`CLAUDE.md` (the harness's loader files). Changes to any other file are also allowed when the Improvement explicitly calls for it — most often because the harness change requires a matching update elsewhere for consistency (e.g. `harness-data/reference/*.md` or other `harness-data/` bookkeeping). |
+| IMPR-005 | Scope | Approved changes may be applied by default to: any file under `agent-harness/` (mode files, artifact specs, shared procedures, templates, playbooks, docs, `CATALOG.md`, `CORE.md`, `OUTPUTS.md`, `README.md` alike — the category is "the harness itself," not an enumerated subset); `.claude/skills/harness/` (the harness's CLI entry-point layer, not a separate project concern, despite living outside `agent-harness/` on disk); and root-level `AGENTS.md`/`CLAUDE.md` (the harness's loader files). Changes to any other file are also allowed when the Improvement explicitly calls for it — most often because the harness change requires a matching update elsewhere for consistency (e.g. `harness-data/reference/*.md` or other `harness-data/` bookkeeping). |
 | IMPR-006 | Boundaries | Do not change the harness during normal feature implementation. |
 | IMPR-007 | Boundaries | Harness changes must be explicit and approved. |
 | IMPR-008 | Boundaries | Target files must be listed in frontmatter. |

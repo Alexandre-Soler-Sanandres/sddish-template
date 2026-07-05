@@ -7,7 +7,7 @@ Review is not only approval — it is how process problems are discovered.
 
 ## Entry
 
-Via CLI: `/tw-review <artifact-file>`
+Via CLI: `/review-artifact <artifact-file>`
 Via natural language: explicit instruction to review a specific artifact, plan, implementation, or process step.
 
 ## Review May Target

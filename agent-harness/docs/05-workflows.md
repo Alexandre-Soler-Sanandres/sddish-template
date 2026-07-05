@@ -145,14 +145,14 @@ Bad fit:
 
 Planning-Implementation entry points and what they mean:
 
-**`/tw-plan-task TASK-001`**
+**`/plan-task TASK-001`**
 This command tells the agent to create a focused plan for this Task and stop before coding until the plan is approved.
 
-**`/tw-plan-spec SPEC-001`**
+**`/plan-spec SPEC-001`**
 This command tells the agent to find existing Tasks, check maturity, apply the Task Decision Matrix, and create a plan.
-If Tasks are required but missing, the agent should stop and route to `/tw-create-tasks`, then wait for approval.
+If Tasks are required but missing, the agent should stop and route to `/create-tasks`, then wait for approval.
 
-**`/tw-plan-use-case UC-001`**
+**`/plan-use-case UC-001`**
 This command tells the agent to find all derived Specs, verify they are approved, apply the same Task discovery logic
 for each Spec, and create a coherent end-to-end plan. If approval prerequisites are missing, the agent should stop and
 route to the correct upstream step, then wait for approval.

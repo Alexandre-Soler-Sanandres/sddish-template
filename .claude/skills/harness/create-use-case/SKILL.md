@@ -1,3 +1,9 @@
+---
+description: Create or refine a Use Case.
+disable-model-invocation: true
+argument-hint: [reference-artifact]
+---
+
 Create or refine a Use Case.
 Follow agent-harness/artifact-specs/USE-CASES.md. Use Case is not a mode — this may be invoked from whatever mode
 is currently active.

@@ -7,7 +7,7 @@ It does not run technical checks — those are the responsibility of Implementin
 
 ## Entry
 
-Via CLI: `/tw-validate`
+Via CLI: `/validate`
 Via natural language: explicit instruction to validate a specific artifact, plan step, or implementation.
 
 ## Rules

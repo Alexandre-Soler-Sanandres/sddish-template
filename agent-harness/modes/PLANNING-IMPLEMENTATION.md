@@ -7,9 +7,9 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 
 ## Entry Points
 
-- `/tw-plan-task <task-file>`
-- `/tw-plan-spec <spec-file>`
-- `/tw-plan-use-case <use-case-file>`
+- `/plan-task <task-file>`
+- `/plan-spec <spec-file>`
+- `/plan-use-case <use-case-file>`
 
 ## Consumes
 
@@ -20,14 +20,14 @@ governs the resulting Plan's own body schema and readiness gate.
 
 ## Required Steps
 
-### Entering via `/tw-plan-task`
+### Entering via `/plan-task`
 
 1. Load the Task.
 2. Verify the Task is at status `ready`. If not, stop and report.
 3. Create a focused Implementation Plan for that Task.
 4. Wait for approval — do not change code.
 
-### Entering via `/tw-plan-spec`
+### Entering via `/plan-spec`
 
 1. Load the Spec.
 2. Verify the Spec is at status `approved`. If not, stop and report.
@@ -35,23 +35,23 @@ governs the resulting Plan's own body schema and readiness gate.
    - If ready Tasks exist → use them as the planning basis.
    - If Tasks exist but are draft or blocked → stop and report.
    - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/REFINING.md`).
-   - If Tasks are required but missing → stop and route to `/tw-create-tasks`.
+   - If Tasks are required but missing → stop and route to `/create-tasks`.
    - If Tasks are not required → create an inline Implementation Plan.
 4. Do not generate duplicate Tasks or ignore existing ones.
 5. Create the Implementation Plan.
 6. Wait for approval — do not change code.
 
-### Entering via `/tw-plan-use-case`
+### Entering via `/plan-use-case`
 
 1. Load the Use Case.
 2. Verify the Use Case is at status `ready-for-spec`. If not, stop and report.
 3. Find all derived Specs from the Use Case frontmatter.
-   - If Specs are missing or not at status `approved` → stop and route to `/tw-create-spec`.
+   - If Specs are missing or not at status `approved` → stop and route to `/create-spec`.
 4. For each Spec, find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
    - If Tasks exist but are draft or blocked → stop and report.
    - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/REFINING.md`).
-   - If Tasks are required but missing → stop and route to `/tw-create-tasks`.
+   - If Tasks are required but missing → stop and route to `/create-tasks`.
 5. Do not generate duplicate Tasks or ignore existing ones.
 6. Create a coherent end-to-end Implementation Plan covering all derived Specs.
 7. Wait for approval — do not change code.

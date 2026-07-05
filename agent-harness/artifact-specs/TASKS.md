@@ -9,7 +9,7 @@ creating or updating a Task.
 
 ## Sources
 
-A Task is created only from within Refining (`/tw-create-tasks`), from an approved Spec.
+A Task is created only from within Refining (`/create-tasks`), from an approved Spec.
 
 ## Task Body Should Include
 

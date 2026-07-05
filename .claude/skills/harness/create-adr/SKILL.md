@@ -1,3 +1,9 @@
+---
+description: Create or refine an ADR (Architecture Decision Record).
+disable-model-invocation: true
+argument-hint: [reference-artifact]
+---
+
 Create or refine an ADR.
 Follow agent-harness/artifact-specs/ADR.md. ADR is not a mode — this may be invoked from whatever mode is
 currently active, per COR-058.

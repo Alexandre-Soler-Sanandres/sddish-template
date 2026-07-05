@@ -8,7 +8,7 @@ boundary rules; the mechanical activity of deriving a Spec from a Use Case lives
 
 ## Sources
 
-A Spec is created only from within Refining (`/tw-create-spec`), from a Use Case. Legacy Findings, Ideas,
+A Spec is created only from within Refining (`/create-spec`), from a Use Case. Legacy Findings, Ideas,
 Transcripts, and ADRs are upstream/reference inputs, not direct Spec sources — Legacy Findings, Ideas, and
 Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use
 Case or Spec directly (see `agent-harness/artifact-specs/ADR.md`'s `DEC-003`).

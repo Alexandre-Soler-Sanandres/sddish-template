@@ -7,7 +7,7 @@ Default execution is one plan step at a time.
 
 ## Entry
 
-Via CLI: `/tw-execute-plan <plan-file>`
+Via CLI: `/execute-plan <plan-file>`
 Via natural language: explicit instruction referencing an approved plan.
 
 ## Consumes
