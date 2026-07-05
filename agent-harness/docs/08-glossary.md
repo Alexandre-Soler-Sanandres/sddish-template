@@ -97,7 +97,7 @@ A section present in every artifact template. Every item must be checked before 
 The table in `agent-harness/modes/REFINING.md` used to decide whether a Spec needs separate Task artifacts or can proceed straight to an inline Implementation Plan.
 
 **Playbook**  
-An optional support file describing a reusable procedure for a recurring task shape. Universal playbooks live under `agent-harness/playbooks/` and apply across projects; project playbooks live under `harness-data/playbooks/` and refine the generic procedure for one repository. See `agent-harness/docs/10-project-playbooks.md`.
+An optional support file describing a reusable procedure for a recurring task shape. Universal playbooks live under `agent-harness/playbooks/` and apply across projects; project playbooks live under `harness-data/playbooks/` and refine the generic procedure for one repository. See `agent-harness/docs/11-project-playbooks.md`.
 
 **allowed_paths / forbidden_paths**  
 Task frontmatter fields that constrain implementation scope during Implementing mode. The agent must not modify files outside `allowed_paths` or inside `forbidden_paths`.

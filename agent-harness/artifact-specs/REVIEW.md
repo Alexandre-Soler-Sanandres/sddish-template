@@ -102,7 +102,7 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
 
 - `harness-data/artifacts/reviews/active/REVIEW-*.md`
 - Use `agent-harness/templates/REVIEW-template.md` for every new Review.
-- The Review artifact feeds into Improvement mode when process problems are found.
+- The Review artifact feeds into Improving-Harness mode when process problems are found.
 
 ## Reference Files
 
