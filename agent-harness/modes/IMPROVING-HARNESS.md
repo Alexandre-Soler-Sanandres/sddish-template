@@ -1,14 +1,19 @@
-# IMPROVEMENT.md
+# IMPROVING-HARNESS.md
 
 ## Purpose
 
-Harness Improvement mode changes the harness itself.
+Improving-Harness mode changes the harness itself.
 Changes should be explicit, focused and reviewable — not opportunistic.
+This is the only Mode allowed to modify `agent-harness/*`.
 
 ## Entry
 
 Via CLI: `/tw-improve-harness <review-file>`
 Via natural language: explicit instruction to improve a harness file, template, or process rule — triggered by a Review finding.
+
+## Consumes
+
+A harness/process-flavored Review finding (see `agent-harness/artifact-specs/REVIEW.md`) — never entered from Partnering or any other unreviewed source.
 
 ## When to Use
 
@@ -31,11 +36,7 @@ Review -> Improvement artifact -> approved harness change -> validation -> updat
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IMPR-001 | Validation | Keep `## Validation` as the validation plan or checklist. |
-| IMPR-002 | Validation | Add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done` or moved to `done/`. |
-| IMPR-003 | Validation | If a validation item is prospective and cannot be fully proven yet, state that explicitly instead of treating it as completed evidence. |
-| IMPR-004 | Validation | Do not move an Improvement artifact to `done/` until the approved target changes are applied and the validation result is documented. |
-| IMPR-005 | Scope | Approved changes are applied to: mode files, templates, reference files, `agent-harness/CATALOG.md`. |
+| IMPR-005 | Scope | Approved changes may be applied by default to: any file under `agent-harness/` (mode files, artifact specs, shared procedures, templates, playbooks, docs, `CATALOG.md`, `CORE.md`, `OUTPUTS.md`, `README.md` alike — the category is "the harness itself," not an enumerated subset); `.claude/commands/` (the harness's CLI entry-point layer, not a separate project concern, despite living outside `agent-harness/` on disk); and root-level `AGENTS.md`/`CLAUDE.md` (the harness's loader files). Changes to any other file are also allowed when the Improvement explicitly calls for it — most often because the harness change requires a matching update elsewhere for consistency (e.g. `harness-data/reference/*.md` or other `harness-data/` bookkeeping). |
 | IMPR-006 | Boundaries | Do not change the harness during normal feature implementation. |
 | IMPR-007 | Boundaries | Harness changes must be explicit and approved. |
 | IMPR-008 | Boundaries | Target files must be listed in frontmatter. |
@@ -51,4 +52,6 @@ Load these when relevant — do not load all of them by default:
 ## Output
 
 - `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
-- Use `agent-harness/templates/IMPROVEMENT-template.md` for every new Improvement artifact.
+- Use `agent-harness/artifact-specs/IMPROVEMENT.md` and `agent-harness/templates/IMPROVEMENT-template.md` for every new Improvement artifact.
+- Also produces the harness/process flavor of Review (`agent-harness/artifact-specs/REVIEW.md`'s Two Flavors) —
+  this is what triggers Entry into this Mode in the first place, per `IMPR-009`.

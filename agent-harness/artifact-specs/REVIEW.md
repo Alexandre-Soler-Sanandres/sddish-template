@@ -21,15 +21,31 @@ Via natural language: explicit instruction to review a specific artifact, plan, 
 - Validation results
 - Harness behavior
 
-## Review Answers
+## Two Flavors
+
+A Review is one of two flavors, determined entirely by `target_type` — never both at once:
+
+- **Product/requirements review** — `target_type` is `idea`/`use-case`/`spec`/`task`/`implementation-plan`/
+  `implementation`. Produced from within `Implementing` (`agent-harness/modes/IMPLEMENTING.md`). Evaluates whether
+  a deliverable is correct, complete, and in scope; `accepted` advances that artifact's own status.
+- **Harness/process review** — `target_type` is `process`/`harness`. Produced from within any Mode when a process
+  problem surfaces, and consumed by `Improving-Harness` (`agent-harness/modes/IMPROVING-HARNESS.md`), which is
+  entered only from a Review finding. Evaluates whether the agent's behavior had a problem; there is no target
+  artifact whose status advances.
+
+## Review Answers — Product/Requirements Flavor
 
 - Was the output correct?
 - Was it complete?
 - Was it too broad?
+- Did validation cover the right risks?
+- Are the artifacts traceable?
+
+## Review Answers — Harness/Process Flavor
+
 - Did the agent load the right context?
 - Was context too large or too small?
 - Were the rules clear enough?
-- Did validation catch the right risks?
 - Did the agent follow the context checkpoint before high-impact actions?
 - Should the harness improve?
 
@@ -44,14 +60,12 @@ Via natural language: explicit instruction to review a specific artifact, plan, 
 ## Review Body Should Include
 
 - Target artifact or implementation
-- Checklist of criteria
+- Checklist of criteria (from the matching flavor above)
 - Findings
 - Outcome
 - Follow-up artifacts (Improvements, new Tasks, etc.)
 
-## After Review — Required Agent Actions
-
-After completing a review, take the following action based on the outcome. Do not deviate.
+## After Review — Required Agent Actions, Product/Requirements Flavor
 
 | Outcome | Action |
 | --- | --- |
@@ -60,6 +74,16 @@ After completing a review, take the following action based on the outcome. Do no
 | `changes-requested` | Set artifact status to `draft`. Record findings in the Review artifact. Stop and wait for user instruction. |
 | `rejected` | Set artifact status to `rejected`. Move artifact to `archive/`. Stop and wait for user instruction. |
 | `follow-up-required` | Hold artifact at current status. Create an Improvement artifact if a process problem was found. Stop and wait for user instruction. |
+
+## After Review — Required Agent Actions, Harness/Process Flavor
+
+| Outcome | Action |
+| --- | --- |
+| `accepted` | Record findings. Report completion. No target-artifact status to advance. |
+| `accepted-with-notes` | Record findings in the Review artifact. No target-artifact status to advance. |
+| `changes-requested` | Record findings in the Review artifact. Stop and wait for user instruction. |
+| `rejected` | Record findings in the Review artifact. Stop and wait for user instruction. |
+| `follow-up-required` | Create an Improvement artifact (only from within `Improving-Harness`). Stop and wait for user instruction. |
 
 ## Rules
 
@@ -72,6 +96,7 @@ After completing a review, take the following action based on the outcome. Do no
 | RVW-005 | Boundaries | Do not modify harness files without an Improvement artifact. |
 | RVW-006 | Procedure | When the review target matches a specialized review procedure, load the relevant playbook before reviewing. |
 | RVW-007 | Procedure | Playbooks may refine how the review is performed, but they do not change Review outcomes, follow-up actions, or mode boundaries. |
+| RVW-008 | Flavor | `target_type` determines the flavor (see Two Flavors) — use the matching Criteria Checklist and After-Review action table; never mix the two. |
 
 ## Output
 

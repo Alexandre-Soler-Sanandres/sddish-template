@@ -17,21 +17,11 @@ tags: [legacy-discovery, cross-system]
 
 ## Documentation Decision
 
-Document the whole cross-system discovery plan in this `SUMMARY.md`.
-
-Create the other cross-system artifacts only when a slice produces evidence that needs them:
-
-- `CONTRACTS.md` for inter-app API, data, auth, health, observability, and deployment contracts.
-- `findings/active/<LF-ID>.md` for cross-system findings that require evidence from more than one app.
-- `QUESTIONS.md` for unresolved decisions that cannot be answered from one app alone.
-- `PARITY-MATRIX.md` for legacy-to-target parity and proof tracking.
-- `REWRITE-READINESS.md` for the final readiness assessment after contracts, questions, and proof needs are known.
-
-Do not create empty placeholder artifacts speculatively.
-
-Cross-system findings are synthesized, not copied. They should cite the app-scoped finding IDs and source evidence
-that support the cross-app claim, then feed downstream contracts, questions, parity rows, and readiness judgments by
-citation.
+This `SUMMARY.md` documents the whole cross-system discovery plan. The other cross-system artifacts
+(`CONTRACTS.md`, `findings/`, `REWRITE-READINESS.md`, plus `CSQ-*`/`CSP-*` rows in the harness Questions registry)
+are created only when a slice produces evidence that needs them — see
+`agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s `LDC-002`/`003` for the governing rules and each
+artifact's job.
 
 ## Entry Criteria
 
@@ -47,52 +37,31 @@ identify proof work required before rewrite-readiness.
 
 ## Evidence Precedence
 
-Use this precedence when app artifacts disagree:
-
-1. Current runtime code and tests from the relevant imported app.
-2. Current checked-in API contracts and app source maps.
-3. Completed migration, audit, or implementation notes.
-4. Historical README, old plans, and agent guidance.
-
-Mark stale or superseded evidence explicitly. Do not treat a checked-in contract snapshot as current runtime behavior
-until it is compared with the producing app.
-
-When a checked-in contract snapshot, consumer adapter, and producing runtime disagree, capture the mismatch in a
-cross-system finding first, then route the downstream decision to `QUESTIONS.md`, the executable proof need to
-`PARITY-MATRIX.md`, and any planning impact to `REWRITE-READINESS.md`.
+See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s own `## Evidence Precedence` section for the
+governing default order and conflict-routing rule.
 
 ## Working Discovery Plan
+
+Example slice order — adjust names and count to the active synthesis scope; keep every slice focused enough to
+complete with a small evidence set:
 
 | Order | Slice | Status | Primary output | Purpose |
 | --- | --- | --- | --- | --- |
 | 0 | Cross-system plan and scope setup | done | `SUMMARY.md` | Define the synthesis scope, restart point, slice order, artifact routing, and validation expectations. |
-| 1 | Inter-app topology and contract inventory | next | `CONTRACTS.md`, `findings/` entries, `QUESTIONS.md` as needed | Map runtime relationships, inter-app calls, shared assumptions, and operator entry points. |
-| 2 | Contract parity and drift | pending | `CONTRACTS.md`, `PARITY-MATRIX.md`, `QUESTIONS.md` as needed | Compare producer contracts, consumer adapters, checked-in snapshots, compatibility shims, and known drift. |
-| 3 | Health, readiness, metrics, and observability | pending | `CONTRACTS.md`, `findings/` entries, `QUESTIONS.md` as needed | Synthesize liveness/readiness semantics, metrics surfaces, logs, dashboards, and alerting across apps. |
-| 4 | Security, auth, secrets, and trust boundaries | pending | `CONTRACTS.md`, `QUESTIONS.md`, `PARITY-MATRIX.md` as needed | Clarify user auth, service auth, API keys, secret handling, network trust, and target decisions. |
-| 5 | Deployment, runtime topology, and configuration parity | pending | `CONTRACTS.md`, `findings/` entries, `QUESTIONS.md` as needed | Synthesize ports, networks, Compose/Swarm/Kubernetes posture, images, volumes, env vars, and runtime responsibilities. |
-| 6 | Domain ownership and workflow boundary synthesis | pending | `findings/` entries, `QUESTIONS.md` | Confirm which app owns canonical outcomes versus presentation, orchestration, or adapter behavior. Record candidate Use Cases/Specs in the relevant finding's `Candidate Artifacts`, not as a separate list. |
-| 7 | Rewrite proof and parity matrix | pending | `PARITY-MATRIX.md` | Turn known drift into executable proof candidates and parity rows. |
+| 1 | Inter-app topology and contract inventory | next | `CONTRACTS.md`, `findings/` entries, Questions registry as needed | Map runtime relationships, inter-app calls, shared assumptions, and operator entry points. |
+| 2 | Contract parity and drift | pending | `CONTRACTS.md`, Questions registry (`CSP-*`) | Compare producer contracts, consumer adapters, checked-in snapshots, compatibility shims, and known drift. |
+| 3 | Health, readiness, metrics, and observability | pending | `CONTRACTS.md`, `findings/` entries, Questions registry as needed | Synthesize liveness/readiness semantics, metrics surfaces, logs, dashboards, and alerting across apps. |
+| 4 | Security, auth, secrets, and trust boundaries | pending | `CONTRACTS.md`, Questions registry | Clarify user auth, service auth, API keys, secret handling, network trust, and target decisions. |
+| 5 | Deployment, runtime topology, and configuration parity | pending | `CONTRACTS.md`, `findings/` entries, Questions registry as needed | Synthesize ports, networks, Compose/Swarm/Kubernetes posture, images, volumes, env vars, and runtime responsibilities. |
+| 6 | Domain ownership and workflow boundary synthesis | pending | `findings/` entries, Questions registry | Confirm which app owns canonical outcomes versus presentation, orchestration, or adapter behavior. Record candidate Use Cases/Specs in the relevant finding's `Candidate Artifacts`, not as a separate list. |
+| 7 | Rewrite proof and parity | pending | Questions registry (`CSP-*`) | Turn known drift into executable proof candidates and parity rows. |
 | 8 | Cross-system rewrite-readiness assessment | pending | `REWRITE-READINESS.md` | Decide what is ready to feed rewrite design work, what remains a target-product decision, and which proof or validation obligations must be carried forward into Use Cases, Specs, validation, or Implementation Planning. |
 | 9 | Post-discovery artifact normalization | pending | App and cross-system legacy artifacts | Format, deduplicate, and merge within each artifact without losing information density, evidence paths, IDs, or correctness. |
 
-Adjust slice names and count to the active synthesis scope. Keep every slice focused enough to complete with a small
-evidence set.
-
 ## Slice Roundtrip
 
-For each cross-system slice:
-
-1. Start from this `SUMMARY.md`.
-2. Load only the app-scoped source-map sections relevant to the slice.
-3. Follow citations from source maps to app findings, QUESTIONS, tests, contracts, and source files only when needed.
-4. Record synthesized cross-app facts in the appropriate cross-system artifact.
-5. Record or update the supporting cross-system finding first whenever the slice makes a cross-app claim.
-6. Record unresolved cross-app decisions in `QUESTIONS.md`.
-7. Link parity rows and readiness blockers back to the finding, question, or proof IDs they depend on.
-8. Route stable system-level findings to reference docs only when they are target-relevant and not merely legacy drift.
-9. Validate docs with `git diff --check`.
-10. Commit only when the user explicitly asks.
+See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s own `## Slice Roundtrip` section for the governing
+per-slice procedure.
 
 ## Reference Enrichment Routing
 
@@ -103,27 +72,14 @@ For each cross-system slice:
 | Cross-app commands, local Compose, ports, validation/proof commands | `harness-data/reference/TOOLING.md` |
 | Contract tests, parity tests, security gates, readiness/proof standards | `harness-data/reference/QUALITY.md` |
 
-Cross-system artifact responsibilities:
-
-- `CONTRACTS.md`: record the boundary surface and ownership model.
-- `findings/`: record synthesized cross-app claims with evidence and downstream links.
-- `QUESTIONS.md`: record unresolved cross-app or target-product decisions.
-- `PARITY-MATRIX.md`: record match/drift/proof status for important legacy-to-target behavior.
-- `REWRITE-READINESS.md`: state what is ready to unblock Use Cases or Specs, what still blocks planning, and which
-  non-blocking questions or proof obligations still need to be carried forward.
-
-`PARITY-MATRIX.md` owns the canonical proof/parity IDs. When `REWRITE-READINESS.md` summarizes blockers, it should
-cite those existing proof IDs directly instead of introducing a second blocker-ID namespace.
-
-When cross-system clarification begins after normalization, the highest-impact cross-system blocker should normally
-drive the sequence first whenever it represents the broadest open concern. Resolve any dependent or implicitly
-answered app questions in the same pass and update every affected artifact together instead of waiting for a later
-app-only cleanup sweep.
+Cross-system artifact responsibilities and canonical-ID ownership: see
+`agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s Artifact Routing table and `LDC-004`. Clarification
+sequencing after normalization: see `agent-harness/modes/legacy-discovery/GATES.md`'s `LDG-016`/`018`.
 
 ## Initial Cross-System Questions
 
-(planning seeds only; move or refine into `QUESTIONS.md` when a slice confirms they cannot be answered from available
-evidence)
+(planning seeds only; move or refine into the harness Questions registry when a slice confirms they cannot be
+answered from available evidence)
 
 | Question | Likely slice | Notes |
 | --- | --- | --- |
@@ -145,26 +101,13 @@ not change evidence meaning or remove traceability.
 
 ## Discovery-Complete Shape
 
-Apply this section once cross-system synthesis is finished, as part of Post-Discovery Artifact Normalization (see
-`agent-harness/modes/legacy-discovery/GATES.md`, LDG-007). This is a collapse of the same file at the same path —
-do not rename it or create a second file.
+The collapsed shape of this same file once cross-system synthesis is finished — see
+`agent-harness/modes/legacy-discovery/GATES.md`'s `LDG-007` for the collapse procedure itself.
 
-Precondition: every synthesized fact recorded in `Completed Slice Notes` must already have an equivalent entry in
-`findings/`, `CONTRACTS.md`, `PARITY-MATRIX.md`, or `REWRITE-READINESS.md` before it is cut from `SUMMARY.md`. If
-a note has no home yet, move it there first.
+Collapses to only: `Purpose`, `Entry Criteria` (kept as a record of the scope synthesis actually ran against),
+`Evidence Precedence`, `Reference Enrichment Routing`, and any unresolved items from `Initial Cross-System
+Questions` that were never moved into the harness Questions registry (move them there now instead of leaving them
+here), plus a single line naming the next non-discovery phase in place of `Restart Pointer`.
 
-Collapse `SUMMARY.md` to only:
-
-- `Purpose`
-- `Entry Criteria` (kept as a record of the scope synthesis actually ran against)
-- `Evidence Precedence`
-- `Reference Enrichment Routing`
-- Any unresolved items from `Initial Cross-System Questions` that were never moved into `QUESTIONS.md` — move them
-  there now instead of leaving them here
-
-Remove: `Documentation Decision`, `Working Discovery Plan`, `Slice Roundtrip`, `Completed Slice Notes`, and
-`Restart Pointer`. Replace the restart pointer with a single line naming the next non-discovery phase (Use Cases or
-Specs) directly under `Reference Enrichment Routing`.
-
-Keep enough structure in the collapsed summary to explain the active synthesis scope and the boundary between
-contracts, questions, parity/proof tracking, and rewrite-readiness.
+Removed: `Documentation Decision`, `Working Discovery Plan`, `Slice Roundtrip`, `Completed Slice Notes`, `Restart
+Pointer`.

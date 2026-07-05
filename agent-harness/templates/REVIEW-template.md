@@ -19,13 +19,23 @@ follow_up: []            # e.g. [IMPROVEMENT-001]
 
 ## Criteria Checklist
 
+Use the list matching this Review's `target_type` (see `agent-harness/artifact-specs/REVIEW.md`'s Two Flavors) —
+delete the other list, don't fill both.
+
+Product/requirements flavor (`target_type`: idea/use-case/spec/task/implementation-plan/implementation):
+
 - [ ] Output is correct
 - [ ] Output is complete
 - [ ] Scope was appropriate (not too broad)
-- [ ] Agent loaded the right context
-- [ ] Agent followed context checkpoint before high-impact actions
 - [ ] Validation covered the right risks
 - [ ] Artifacts are traceable
+
+Harness/process flavor (`target_type`: process/harness):
+
+- [ ] Agent loaded the right context
+- [ ] Rules were clear enough
+- [ ] Agent followed context checkpoint before high-impact actions
+- [ ] Harness improvement need assessed
 
 ## Findings
 

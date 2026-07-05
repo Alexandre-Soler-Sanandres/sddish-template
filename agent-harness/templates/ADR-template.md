@@ -51,4 +51,4 @@ Before advancing to `accepted`, verify all items are checked:
 
 ## Lifecycle Note
 
-See `agent-harness/modes/ADR.md`'s `DEC-004`–`DEC-006` for the acceptance gate, immutability, and approval rules.
+See `agent-harness/artifact-specs/ADR.md`'s `DEC-004`–`DEC-006` for the acceptance gate, immutability, and approval rules.

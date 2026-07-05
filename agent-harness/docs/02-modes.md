@@ -1,26 +1,21 @@
 # Modes
 
-A mode defines what the agent is allowed to do. Only one mode is active at a time.
-
-Voice, text, and chat are **input channels** — not modes. The input channel does not change what the agent may do. Partnering is the mode for conversation regardless of how the input arrives.
-
-Mode transitions happen only when the user explicitly requests them. Ambiguous intent must be clarified before switching modes.
+A Mode is a true, distinct behavioral posture the agent adopts. See [01-core-principles.md](01-core-principles.md)'s
+"Three Kinds of Harness File" section for how Modes relate to artifact specs and shared procedures. This document
+covers Modes only.
 
 ## Mode Overview
 
 | Mode | CLI | Purpose |
 | --- | --- | --- |
 | Partnering | — | Structured conversation to capture ideas and problems |
-| ADR | `/tw-create-adr` | Capture settled structural/architectural decisions |
-| Use Cases | `/tw-create-use-case` | Define behavioral anchors from actor goals |
-| Specs | `/tw-create-spec <use-case-file>` | Define desired behavior from Use Cases |
-| Tasks | `/tw-create-tasks <spec-file>` | Break Specs into execution units |
-| Implementation Planning | `/tw-plan-task/spec/use-case` | Plan and gate code changes |
-| Implementation | `/tw-execute-plan <plan-file>` | Execute an approved plan |
-| Validation | `/tw-validate` | Verify artifacts and implementations |
-| Review | `/tw-review <artifact-file>` | Evaluate outputs and discover process problems |
-| Improvement | `/tw-improve-harness <review-file>` | Change the harness itself |
-| Legacy Discovery | `/tw-legacy-discovery <path>` | Extract evidence from existing code |
+| Refining | `/tw-create-spec <use-case-file>`, `/tw-create-tasks <spec-file>` | Derive a Spec from a Use Case, or Tasks from a Spec |
+| Planning-Implementation | `/tw-plan-task/spec/use-case` | Plan and gate code changes |
+| Implementing | `/tw-execute-plan <plan-file>` | Execute an approved plan |
+| Discovering-Legacy | `/tw-legacy-discovery <path>` | Extract evidence from existing code |
+| Improving-Harness | `/tw-improve-harness <review-file>` | Change the harness itself |
+
+---
 
 ## Partnering
 
@@ -31,69 +26,39 @@ The conversational front door for unclear thinking. The agent acts as a structur
 
 The transcript is raw data. The agent writes it proactively as the conversation unfolds.
 
-Mode transition: Partnering ends only when the user explicitly requests a mode change. A vague statement like "we should maybe make a spec later" does not trigger Spec mode.
+Mode transition: Partnering ends only when the user explicitly requests a mode change. A vague statement like "we should maybe make a spec later" does not trigger a mode change.
 
-## ADR Mode
+## Refining
 
-Captures a settled structural or architectural decision — durable and citable, unlike an Idea (pre-decision) or a
-Use Case (cannot itself decide architecture). Unlike every other producing mode, authorship is not restricted to
-one entry point: any mode may draft a candidate ADR at `proposed` when it surfaces one, since real-world ADR
-practice treats this as broadly proposable. What is restricted is acceptance — an ADR only becomes citable
-authority once its Readiness Checklist passes and the user explicitly confirms `accepted` status.
+Derives the next artifact in the Use-Case → Spec → Task funnel from its immediate source — the mechanical
+derivation activity only. The resulting document's own schema and lifecycle rules live in the corresponding
+artifact spec ([03-artifacts.md](03-artifacts.md)) — load both before acting.
 
-**Entry:** `/tw-create-adr`, or via natural language from any mode
-**Sources:** Partnering discussion, Transcript, an Idea being promoted, a Review finding, or any mode surfacing a
-structural decision
-**Output:** `harness-data/artifacts/adrs/proposed/ADR-*.md` (moves to `accepted/` once settled)
-**Must not:** Trigger implementation. Create Specs, Tasks, or Implementation Plans directly. Be edited in place
-after `accepted` (a change of direction produces a new ADR that supersedes it).
+**Entry points:** `/tw-create-spec <use-case-file>` (consumes a Use Case at `ready-for-spec`, produces a Spec);
+`/tw-create-tasks <spec-file>` (consumes an approved Spec, produces Tasks)  
+**Must not:** Change code. Generate duplicate Tasks or skip existing ones (owned natively here, not borrowed from
+Planning-Implementation).
 
-## Use Case Mode
-
-Creates or refines Use Case artifacts. A Use Case is a behavioral anchor — it defines who does what, under what conditions, and with what observable outcome.
-
-**Sources:** Idea, Transcript, Partnering discussion, Legacy Finding, existing documentation
-**Output:** `harness-data/artifacts/use-cases/active/UC-*.md`
-**Must not:** Trigger implementation. Create Specs, Tasks, or Plans.
-
-## Spec Mode
-
-Creates or updates Spec artifacts. Specs are the source of truth for desired behavior.
-
-A Spec must always be created from a Use Case at status `ready-for-spec`. Legacy Findings, Ideas, and Transcripts are upstream inputs — they produce Use Cases, not Specs directly.
-
-**Output:** `harness-data/artifacts/specs/active/SPEC-*.md`
-**Must not:** Implement code. Create Tasks or Plans. Proceed if source Use Case is not at an accepted status.
-
-A Spec may reference external technical artifacts (OpenAPI specs, database schemas, contracts) via the `technical_refs` frontmatter field. These live outside `agent-harness/` — their location is project-defined.
-
-## Tasks Mode
-
-Creates Task artifacts when they are required. Tasks are execution units, not the source of truth for behavior — Specs are.
-
-Tasks must always be created from an approved Spec. Tasks are not always mandatory — see [04-workflows.md](04-workflows.md) for the Task Decision Matrix.
-
-**Output:** `harness-data/artifacts/tasks/active/TASK-*.md`
-**Must not:** Implement code. Proceed if source Spec is not approved.
-
-## Implementation Planning Mode
+## Planning-Implementation
 
 The mandatory gate before code changes. These commands mean: inspect the artifact, gather downstream artifacts, verify maturity, produce an Implementation Plan, and wait for approval.
 
 **Entry points and routing:**
 
 - `/tw-plan-task <task-file>` — verify Task is `ready`, create focused plan
-- `/tw-plan-spec <spec-file>` — find Tasks, apply Task Decision Matrix, create plan
+- `/tw-plan-spec <spec-file>` — find Tasks, apply the Task Decision Matrix (in `REFINING.md`), create plan
 - `/tw-plan-use-case <use-case-file>` — find all derived Specs and Tasks, create end-to-end plan
 
 **Output:** `harness-data/artifacts/implementation-plans/active/PLAN-*.md`
 **Must not:** Change code. Proceed without verifying artifact maturity.
 
-## Implementation Mode
+## Implementing
 
 Changes code. May only start after an approved Implementation Plan exists and all included Tasks are `ready` or `planned`.
 
-Executes one plan step at a time by default. Sets Task status to `in-progress` → `done` as work proceeds.
+Executes one plan step at a time by default. Sets Task status to `in-progress` → `done` as work proceeds. Invokes
+the shared Validation procedure ([04-shared-procs.md](04-shared-procs.md)) as its own closing gate after each step,
+and produces the product/requirements flavor of Review when a durable record is needed.
 
 **Entry:** `/tw-execute-plan <plan-file>`  
 **Must not:** Deviate from approved scope. Skip validation. Refactor unrelated code.
@@ -102,46 +67,17 @@ A plan step is not done until every acceptance criterion in the Spec is covered 
 entry in `test_refs` (pointing to an existing test file) or a validation command in the Task
 frontmatter. The agent populates `test_refs` on the Spec during implementation.
 
-## Validation Mode
-
-Checks artifacts, plans, and implementations against process and behavioral criteria. Does not run technical checks — those belong to Implementation mode, guided by `QUALITY.md` and `TOOLING.md`.
-
-**Covers:** Artifact completeness, process rule compliance, acceptance criteria, readiness checks  
-**Output:** Findings documented inline in the plan step summary, or as a Review artifact when a formal record is needed — created via Review mode.
-
-## Review Mode
-
-Evaluates outputs and decisions. Review is not only approval — it is how process problems are discovered. In the
-overall harness, this is an optional advanced mode rather than something every team must use for everyday work.
-
-**Entry:** `/tw-review <artifact-file>`
-**Output:** `harness-data/artifacts/reviews/active/REVIEW-*.md`
-**Must not:** Change the artifact under review. Implement fixes. Modify harness files without an Improvement artifact.
-
-After review, the agent takes a prescribed action based on the outcome and stops:
-
-| Outcome | Agent action |
-| --- | --- |
-| `accepted` | Advance artifact to next accepted status. Report. |
-| `accepted-with-notes` | Advance status. Record follow-up notes in the Review artifact, and add open questions to the target artifact only when that artifact is the correct place to carry the note forward. |
-| `changes-requested` | Set artifact to `draft`. Record findings. Wait for user instruction. |
-| `rejected` | Set artifact to `rejected`. Move to archive. Wait for user instruction. |
-| `follow-up-required` | Hold status. Create Improvement if process problem found. Wait for user instruction. |
-
-The agent never autonomously re-enters a producing mode after rejection or escalation.
-
-## Harness Improvement Mode
-
-Changes the harness itself. Only triggered by Review findings — not from Partnering or direct requests. Like Review,
-this is an optional advanced discipline in the overall operating model, even though its rules are strict when used.
-
-**Entry:** `/tw-improve-harness <review-file>`
-**Output:** `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
-**Must not:** Change harness during normal feature implementation.
-
-## Legacy Discovery Mode
+## Discovering-Legacy
 
 Analyzes an existing project as evidence for a new SDD-ish development process. The legacy project is evidence, not authority.
 
 **Entry:** `/tw-legacy-discovery <path>`
 **Must not:** Modify legacy source code. Implement new code. Create Specs without a Use Case unless evidence is unambiguous and strong.
+
+## Improving-Harness
+
+Changes the harness itself. Only triggered by a harness/process-flavored Review finding — not from Partnering or direct requests. This is the only Mode allowed to modify `agent-harness/*`.
+
+**Entry:** `/tw-improve-harness <review-file>`
+**Output:** `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
+**Must not:** Change harness during normal feature implementation.

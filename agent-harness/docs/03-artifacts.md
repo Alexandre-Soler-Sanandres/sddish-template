@@ -7,7 +7,7 @@ This document covers harness-managed lifecycle artifacts only. Project-owned sup
 `harness-data/reference/`, `harness-data/guides/`, and `harness-data/playbooks/` are not artifacts and do not follow
 artifact lifecycle statuses.
 
-For project-owned support files, see [09-guides.md](09-guides.md) and [10-project-playbooks.md](10-project-playbooks.md).
+For project-owned support files, see [10-guides.md](10-guides.md) and [11-project-playbooks.md](11-project-playbooks.md).
 
 ## Reference File Structure
 
@@ -15,12 +15,12 @@ For project-owned support files, see [09-guides.md](09-guides.md) and [10-projec
 profiles. Structure each file with up to two top-level sections so a reader can tell them apart:
 
 - `## Discovered` — present only in projects that ran Legacy Discovery. Facts extracted from `LF-*` findings.
-  Cite the finding ID inline (e.g. "engine owns OHLC writes (LF-TW-ENGINE-014)"). Stable once written — edit only
-  to correct a transcription error against the finding, never because a target decision changed.
+  Cite the finding ID inline (e.g. "billing service owns invoice writes (LF-BILLING-014)"). Stable once written —
+  edit only to correct a transcription error against the finding, never because a target decision changed.
 - `## Decisions` — present once at least one target-architecture decision exists. States the decision in one or
-  two lines, then cites whatever settled it: an accepted ADR (`ADR-NNN`), a Legacy Finding (`LF-*`), or a legacy
-  synthesis artifact (`QUESTIONS.md`, `PARITY-MATRIX.md`, `REWRITE-READINESS.md`, `CONTRACTS.md`). Cite authority,
-  don't restate its reasoning — mirrors `DEC-003`'s rule for Use Cases/Specs citing ADRs.
+  two lines, then cites whatever settled it: an accepted ADR (`ADR-NNN`), a Legacy Finding (`LF-*`), the Questions
+  registry (`CSQ-*`/`CSP-*` rows), or a legacy synthesis artifact (`REWRITE-READINESS.md`, `CONTRACTS.md`). Cite
+  authority, don't restate its reasoning — mirrors `DEC-003`'s rule for Use Cases/Specs citing ADRs.
 
 A greenfield project (no Legacy Discovery) has `## Decisions` only — do not add a `## Discovered` section with
 placeholder content just because this convention exists.
@@ -54,7 +54,8 @@ updated: ""   # YYYY-MM-DD
 | `REVIEW-` | Review |
 | `IMPROVEMENT-` | Harness Improvement |
 | `ADR-` | Architecture Decision Record |
-| `LF-<APP>-` / `LF-CROSS-` | Legacy Finding (app / cross-system, see `agent-harness/modes/LEGACY-DISCOVERY.md` LD-013/LD-014) |
+| `LF-<APP>-` / `LF-CROSS-` | Legacy Finding (app / cross-system, see `agent-harness/modes/DISCOVERING-LEGACY.md` LD-013/LD-014) |
+| `Q-NNN` (new) / `Q-<APP>-NNN`, `CSQ-`, `CSP-` (migrated legacy) | Question |
 
 ### Relationship Fields
 
@@ -138,7 +139,7 @@ The `test_refs` frontmatter field is populated by the agent during implementatio
 ### Task
 
 Execution unit derived from a Spec. Tasks are not the source of truth for behavior — Specs are.
-Must always be created from an approved Spec. Not always required — see [04-workflows.md](04-workflows.md).
+Must always be created from an approved Spec. Not always required — see [05-workflows.md](05-workflows.md).
 
 **Statuses:** `draft` → `ready` → `planned` → `in-progress` → `done` → `blocked` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/tasks/active/TASK-*.md`
@@ -158,12 +159,22 @@ Each plan step must define: Tasks (or "inline"), expected files, validation, ris
 
 ### Review
 
-Evaluates artifacts, plans, implementations, or process results.
+Evaluates artifacts, plans, implementations, or process results — one of two flavors depending on `target_type`.
+Review is not only approval — it is how process problems are discovered.
+
+- **Product/requirements flavor** (`idea`/`use-case`/`spec`/`task`/`implementation-plan`/`implementation`):
+  produced from within Implementing. `accepted` advances the target artifact's own status.
+- **Harness/process flavor** (`process`/`harness`): produced from within any Mode when a process problem
+  surfaces; consumed by Improving-Harness, which is entered only from one. No target-artifact status to advance.
 
 **Statuses:** `draft` → `completed`
 **Outcomes:** `accepted` | `accepted-with-notes` | `changes-requested` | `rejected` | `follow-up-required`
 **Location:** `harness-data/artifacts/reviews/active/REVIEW-*.md`
 **Template:** `agent-harness/templates/REVIEW-template.md`
+
+After review, the agent takes a prescribed action based on the outcome and stops — it never autonomously
+re-enters a producing mode after rejection or escalation. See `agent-harness/artifact-specs/REVIEW.md`'s own
+outcome-action table for the exact required action per outcome, for each flavor.
 
 ### Harness Improvement
 
@@ -180,15 +191,31 @@ Records evidence extracted from legacy projects.
 **Statuses:** `draft` → `reviewed` → `converted` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/legacy/apps/<legacy-app-slug>/findings/active/<LF-ID>.md` (app-scoped) or
 `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` (cross-system) — see
-`agent-harness/modes/LEGACY-DISCOVERY.md` (LD-013)
+`agent-harness/modes/DISCOVERING-LEGACY.md` (LD-013)
 **Template:** `agent-harness/templates/LEGACY-FINDING-template.md`
 
 Must distinguish: observed behavior, documented behavior, inferred intent, accidental complexity, dead or uncertain code.
 
-Legacy Discovery also produces `INVENTORY.md`, `SOURCE-MAP.md`, `QUESTIONS.md`, and `CROSS-SYSTEM-SUMMARY.md`
+Legacy Discovery also produces `INVENTORY.md`, `SOURCE-MAP.md`, and `CROSS-SYSTEM-SUMMARY.md`
 (templates under `agent-harness/templates/`). These are scoped Legacy Discovery artifacts, not general-purpose
-lifecycle types — see [08-legacy-applications.md](08-legacy-applications.md) and
-`agent-harness/modes/LEGACY-DISCOVERY.md` for their statuses, IDs, and folder layout.
+lifecycle types — see [09-legacy-applications.md](09-legacy-applications.md) and
+`agent-harness/modes/DISCOVERING-LEGACY.md` for their statuses, IDs, and folder layout. Questions raised during
+Legacy Discovery are not a scoped Legacy Discovery artifact — they go into the harness-level Question registry
+below, like questions from any other mode.
+
+### Question
+
+An unresolved (or resolved) point that needs a decision before some artifact can be trusted as final. Durable and
+discoverable, unlike a Non-Goal (permanent exclusion) or an Idea (candidate work, not a question). May be created
+from any mode — no mode switch required.
+
+**Statuses:** none as a field — which of the three files a row lives in *is* its status (`Open`, `Resolved`,
+`Discarded`); see `agent-harness/artifact-specs/QUESTIONS.md`.
+**Location:** `harness-data/artifacts/questions/QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, `QUESTIONS-DISCARDED.md`
+**Template:** `agent-harness/templates/QUESTIONS-template.md`
+
+Classified by blast radius (`local` / `cross-artifact` / `systemic`), not by origin. IDs are permanent — a resolved
+or discarded question is moved to the corresponding file, never deleted.
 
 ## Readiness Checklists
 

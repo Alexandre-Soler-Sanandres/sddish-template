@@ -21,11 +21,10 @@ A Use Case may be created from:
 - Legacy Finding
 - Existing documentation
 
-When the source is legacy evidence, also inspect the smallest relevant set of legacy handoff artifacts:
-
-- the related app or cross-system `QUESTIONS.md` entries
-- the related `PARITY-MATRIX.md` rows when they shape behavior
-- the related `REWRITE-READINESS.md` note only when it clarifies whether the topic is ready for design
+When creating a Use Case, check the Questions registry (`agent-harness/artifact-specs/QUESTIONS.md`) for entries
+tied to the source artifact and carry forward whichever ones shape actor goals, workflow shape, scope boundaries,
+alternatives, or failure paths (see `UCS-007`). This replaces inspecting legacy handoff artifacts directly —
+legacy-origin entries live in the same registry as everything else once migrated.
 
 ## When to Create a Use Case
 
@@ -66,9 +65,9 @@ When legacy evidence is involved, the body should also preserve the design-relev
 | UCS-004 | Boundaries | Do not contain low-level implementation detail (unless essential to the scenario). |
 | UCS-005 | Boundaries | Do not trigger implementation. |
 | UCS-006 | Boundaries | Do not create Specs, Tasks, or Implementation Plans. |
-| UCS-007 | Legacy-Handoff | When a Use Case is created from legacy evidence, load the related finding plus any unresolved legacy question or parity/proof item that changes actor goals, workflow shape, scope boundaries, alternatives, or failure paths. |
-| UCS-008 | Legacy-Handoff | Carry legacy items forward by effect: actor-visible uncertainty belongs in `Open Questions`; behavior constraints belong in the scenario, preconditions, or failure paths; use canonical IDs instead of restating entire legacy tables. |
-| UCS-009 | Sources | ADRs are cited as reference authority when a Use Case touches a system boundary or structural decision they settle; an ADR is never itself a source that produces a Use Case (see `agent-harness/modes/ADR.md`'s `DEC-003`). |
+| UCS-007 | Carry-Forward | When a Use Case is created, check the Questions registry for entries tied to the source artifact — regardless of legacy or non-legacy origin — and load any that changes actor goals, workflow shape, scope boundaries, alternatives, or failure paths. Before advancing to `ready-for-spec`, verify the registry holds nothing unresolved that should block the advance (see `UCS-003`). |
+| UCS-008 | Carry-Forward | Carry registry items forward by effect: actor-visible uncertainty belongs in `Open Questions`; behavior constraints belong in the scenario, preconditions, or failure paths; cite the registry's canonical ID instead of restating its full text. |
+| UCS-009 | Sources | ADRs are cited as reference authority when a Use Case touches a system boundary or structural decision they settle; an ADR is never itself a source that produces a Use Case (see `agent-harness/artifact-specs/ADR.md`'s `DEC-003`). |
 | UCS-010 | Legacy-Handoff | A Use Case may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled (see `DEC-008`). |
 
 ## Output
@@ -83,4 +82,4 @@ Load these when relevant — do not load all of them by default:
 - `harness-data/reference/DOMAIN.md` — when defining actors, goals, or business rules that require domain knowledge
 - `harness-data/reference/ARCHITECTURE.md` — when the use case involves system boundaries or external integrations
 - `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when the use case touches a system boundary or structural decision already settled by an ADR
-- relevant legacy `QUESTIONS.md`, `PARITY-MATRIX.md`, or `REWRITE-READINESS.md` artifacts — when the Use Case is being derived from Legacy Discovery and those artifacts affect the scenario
+- the Questions registry (`harness-data/artifacts/questions/`) or `REWRITE-READINESS.md` — when the Use Case is being derived from Legacy Discovery and those artifacts affect the scenario

@@ -2,8 +2,8 @@
 
 ## Purpose
 
-Validation mode checks artifacts, plans and harness changes against process and behavioral criteria.
-It does not run technical checks — those are the responsibility of Implementation mode, guided by `harness-data/reference/QUALITY.md` and `harness-data/reference/TOOLING.md`.
+Validation checks artifacts, plans and harness changes against process and behavioral criteria.
+It does not run technical checks — those are the responsibility of Implementing, guided by `harness-data/reference/QUALITY.md` and `harness-data/reference/TOOLING.md`.
 
 ## Entry
 
@@ -29,7 +29,7 @@ Via natural language: explicit instruction to validate a specific artifact, plan
 | VAL-013 | Behavioral-Validation | Each acceptance criterion is traceable to an entry in `test_refs` or a Task validation command. |
 | VAL-014 | Behavioral-Validation | Non-goals were not implemented. |
 | VAL-015 | Behavioral-Validation | Scope did not drift beyond what was planned. |
-| VAL-016 | Behavioral-Validation | Technical checks were run during Implementation (see `agent-harness/modes/IMPLEMENTATION.md`). |
+| VAL-016 | Behavioral-Validation | Technical checks were run during Implementation (see `agent-harness/modes/IMPLEMENTING.md`). |
 | VAL-017 | Readiness-Checks | Before moving to the next stage, verify: no open `changes-requested` or `rejected` review findings, all blockers are resolved, and dependent artifacts are at an accepted status. |
 | VAL-018 | Fallback | Manual review is the primary verification mechanism by design, not a fallback for missing automation. Document what was checked and the outcome. |
 | VAL-024 | Process-Validation | Reconcile the actual code changes (via `git log`/`git diff`) against the approved Implementation Plan's `allowed_paths` and steps. Flag any file changed outside `allowed_paths`, or any change with no corresponding Plan step, as a finding. |
@@ -37,7 +37,7 @@ Via natural language: explicit instruction to validate a specific artifact, plan
 | VAL-020 | Boundaries | Do not modify artifacts beyond updating their status. |
 | VAL-021 | Boundaries | Do not skip validation steps without explicit approval. |
 | VAL-022 | Procedure | When a relevant playbook defines required checks or outputs for the work under validation, verify that those expectations were followed. |
-| VAL-023 | Procedure | Playbooks may refine what to verify for a task shape, but Validation mode still owns the validation decision and boundaries. |
+| VAL-023 | Procedure | Playbooks may refine what to verify for a task shape, but Validation still owns the validation decision and boundaries. |
 
 ## Output
 

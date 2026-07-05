@@ -1,4 +1,4 @@
-# LEGACY-DISCOVERY.md
+# DISCOVERING-LEGACY.md
 
 ## Purpose
 
@@ -19,7 +19,7 @@ Load reference files only when directly relevant:
 | `harness-data/reference/ARCHITECTURE.md` | Mapping legacy structure, boundaries, ownership, or runtime topology. |
 | `harness-data/reference/TOOLING.md` | Recording commands, local services, validation checks, CI, or tooling. |
 | `harness-data/reference/QUALITY.md` | Recording quality gates, proof standards, coverage, or hygiene rules. |
-| `agent-harness/modes/legacy-discovery/APP-LOCAL.md` | Running App-Local Discovery: slicing an app, updating its `INVENTORY.md`, `SOURCE-MAP.md`, `findings/`, or `QUESTIONS.md`. |
+| `agent-harness/modes/legacy-discovery/APP-LOCAL.md` | Running App-Local Discovery: slicing an app, updating its `INVENTORY.md`, `SOURCE-MAP.md`, `findings/`, or its rows in the Questions registry. |
 | `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md` | Running Cross-System Synthesis across apps that are all `app-local-complete`. |
 | `agent-harness/modes/legacy-discovery/GATES.md` | Running Artifact Normalization or Question Clarification (Post-Discovery Gates). |
 
@@ -27,7 +27,7 @@ Load reference files only when directly relevant:
 
 | Phase | Entry gate | Work | Exit gate |
 | --- | --- | --- | --- |
-| App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `findings/`, `QUESTIONS.md`, and stable reference docs. See `agent-harness/modes/legacy-discovery/APP-LOCAL.md`. | Source map reaches `app-local-complete`. |
+| App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `findings/`, the Questions registry, and stable reference docs. See `agent-harness/modes/legacy-discovery/APP-LOCAL.md`. | Source map reaches `app-local-complete`. |
 | Cross-system synthesis | Active scope is explicit and all in-scope apps are `app-local-complete`. | Synthesize contracts, parity, questions, proof needs, and readiness across apps. See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`. | Cross-system `SUMMARY.md` marks synthesis complete and names the restart point. |
 | Artifact normalization | App-local and required cross-system discovery are complete. | Format, dedupe, order, and tighten existing artifacts without new source discovery. See `agent-harness/modes/legacy-discovery/GATES.md`. | Restart pointer moves to question clarification. |
 | Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. See `agent-harness/modes/legacy-discovery/GATES.md`. | Downstream-work is unblocked once P0/migration-critical blockers are resolved, deferred, or proof-routed, so the restart pointer may move to Use Cases or Specs. This does not mean Question Clarification is complete, and it does not make other open questions irrelevant. Any remaining open cross-system or app-local questions stay tracked in the legacy artifacts until they are resolved, deferred, marked not-needed, converted to proof work, or intentionally carried into individual Use Cases/Specs as `Open Questions`; each downstream artifact's own Readiness Checklist then gates when that artifact is finished. |
@@ -62,11 +62,11 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | LD-014 | Findings | IDs follow the existing `LF-<APP>-NNN` convention, numbered once per app (or `LF-CROSS-NNN` for cross-system) and never reused, even after a finding moves or is merged. |
 | LD-015 | Findings | Move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`, or `rejected`. Findings with `status: draft` or `status: reviewed` stay in `findings/active/`. |
 | LD-016 | Findings | Always look up or add a finding by ID — scan `findings/active/` and `findings/archive/` file names or frontmatter, never by reading through file append order. Do not create slice-numbered or subsystem-named headings as a substitute for the ID. |
-| LD-017 | Questions | Each app and cross-system `QUESTIONS.md` (using `agent-harness/templates/QUESTIONS-template.md`) has an `Open Decisions` table with stable IDs (`Q-<APP>-NNN` for app-scoped, `CSQ-NNN` for cross-system), a `Classification` column (`app-local` \| `cross-system` \| `target-product`), and a `Decision type` column (`scope-v1` \| `preserve-vs-adapt` \| `fidelity` \| `naming` \| `deferred-feature`), followed by a flat `Resolved Decisions` list. Do not organize `QUESTIONS.md` into sections named after the discovery slice, subsystem, or process block that raised the question — that is metadata (`Area`), not structure. |
-| LD-018 | Questions | Before adding a question, check existing rows for the same decision by content and merge instead of duplicating. |
-| LD-019 | Questions | Every question links back to the finding(s) that raised it through the `Source finding(s)` column. For cross-system questions, those source finding IDs should usually be `LF-CROSS-NNN`, with app finding IDs added in `Notes` only when the extra traceability matters. Provenance like slice name or artifact of origin belongs in `Notes`, not in the table structure. |
+| LD-017 | Questions | Legacy Discovery questions live in the harness-level Questions registry (`harness-data/artifacts/questions/QUESTIONS-OPEN.md`/`QUESTIONS-RESOLVED.md`/`QUESTIONS-DISCARDED.md`, schema in `agent-harness/artifact-specs/QUESTIONS.md`), not in per-app files — migrated there by `IMPROVEMENT-047`. Use stable IDs (`Q-<APP>-NNN` for app-scoped, `CSQ-NNN` for cross-system), the registry's `Classification` column (`local` \| `cross-artifact` \| `systemic` — `app-local`/`cross-system`/`target-product` are the retired legacy names for these three), and fold `Decision type` (`scope-v1` \| `preserve-vs-adapt` \| `fidelity` \| `naming` \| `deferred-feature`) into `Notes`. A question whose resolution is "defer to later" is still `Resolved` (the decision to defer is settled), not a separate status — do not organize the registry into sections named after the discovery slice, subsystem, or process block that raised the question either; that is metadata, not structure. |
+| LD-018 | Questions | Before adding a question, check existing registry rows for the same decision by content and merge instead of duplicating. |
+| LD-019 | Questions | Every question links back to the finding(s) that raised it through the registry's `Source` column. For cross-system questions, those source finding IDs should usually be `LF-CROSS-NNN`, with app finding IDs added in `Notes` only when the extra traceability matters. Provenance like slice name or artifact of origin belongs in `Notes`, not in the table structure. |
 | LD-020 | Completion-Criteria | An app may move to `app-local-complete` when all planned slices are `done`, `not-needed`, or explicitly deferred. |
-| LD-021 | Completion-Criteria | Open questions are classified as `app-local`, `cross-system`, or `target-product` in the source map table. |
+| LD-021 | Completion-Criteria | Open questions are classified as `local`, `cross-artifact`, or `systemic` (per `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-001`) in the source map table. |
 | LD-022 | Completion-Criteria | Stable findings have been propagated to reference docs where appropriate. |
 | LD-023 | Completion-Criteria | No remaining slice is needed for app-local rewrite planning. |
 | LD-024 | Proof-Gate | `proof_needed: true` — discovery found drift or runtime behavior needing executable proof before rewrite planning treats it as stable. |

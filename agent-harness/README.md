@@ -22,32 +22,29 @@ No code without a Spec. No Spec without a Use Case. No implementation without an
 ```text
 Voice / Text / Ideas
   → Partnering
-  → Use Case
-  → Spec
-  → [Tasks — when required]
-  → Implementation Plan (approved)
-  → Implementation
+  → Refining (Use Case → Spec → [Tasks, when required])
+  → Planning-Implementation (approved plan)
+  → Implementing
   → Validation
-  → [Review / Improvement — when a team wants formal evaluation or process correction]
+  → [Review / Improving-Harness — when a team wants formal evaluation or process correction]
 ```
 
 Every persistent artifact lives in Markdown, every file is traceable to its source, and every implementation starts from an approved plan.
 
 ## Modes
 
+A Mode is a true, distinct behavioral posture — only one is active at a time. Artifact schemas (ADR, Use Case,
+Spec, Task, Review, Improvement, Question, ...) are defined separately as artifact specs, and Validation is a
+shared procedure, not a mode — see [docs/01-core-principles.md](docs/01-core-principles.md).
+
 | Mode | Purpose |
 | --- | --- |
 | Partnering | Structured conversation to capture ideas and problems |
-| ADR | Capture settled structural/architectural decisions |
-| Use Cases | Define behavioral anchors from actor goals |
-| Specs | Define desired behavior from Use Cases |
-| Tasks | Break Specs into execution units |
-| Implementation Planning | Plan and gate code changes |
-| Implementation | Execute an approved plan |
-| Validation | Verify artifacts and process compliance |
-| Review | Evaluate outputs and discover process problems |
-| Improvement | Change the harness itself |
-| Legacy Discovery | Extract evidence from existing code |
+| Refining | Derive a Spec from a Use Case, or Tasks from a Spec |
+| Planning-Implementation | Plan and gate code changes |
+| Implementing | Execute an approved plan |
+| Discovering-Legacy | Extract evidence from existing code |
+| Improving-Harness | Change the harness itself |
 
 ## Repository Structure
 
@@ -61,7 +58,9 @@ agent-harness/
   OUTPUTS.md           ← artifact formats and folder structure (always loaded)
   CATALOG.md           ← universal navigation: where artifacts live
   docs/                ← harness documentation and human guides
-  modes/               ← one file per mode (universal, stack-neutral)
+  modes/               ← one file per Mode (universal, stack-neutral)
+  artifact-specs/      ← one file per artifact type: schema, creation trigger, lifecycle gate
+  shared-procs/        ← procedures invoked by name from within a Mode (e.g. Validation)
   playbooks/           ← optional universal reusable procedures + index.yaml
   templates/           ← artifact templates
 ```
@@ -91,6 +90,7 @@ harness-data/
     implementation-plans/
     reviews/
     improvements/
+    questions/
     legacy/
 ```
 
@@ -106,23 +106,24 @@ rm -rf .git && git init
 ```
 
 Then fill in the four project-specific reference files in `harness-data/reference/` and start with a Partnering or
-Use Case session. Use the Minimum Viable Adoption section in [docs/06-adoption.md](docs/06-adoption.md) for the
+Use Case session. Use the Minimum Viable Adoption section in [docs/07-adoption.md](docs/07-adoption.md) for the
 smallest useful first pass and the same guide for full adoption instructions.
 
 ## Documentation
 
 | Document | Contents |
 | --- | --- |
-| [docs/01-core-principles.md](docs/01-core-principles.md) | Start here for why the harness exists and what problems it is trying to prevent |
+| [docs/01-core-principles.md](docs/01-core-principles.md) | Start here for why the harness exists, what problems it is trying to prevent, and how Modes/artifact specs/shared procedures relate |
 | [docs/02-modes.md](docs/02-modes.md) | Use this when you need to know which mode you are in and what it allows |
 | [docs/03-artifacts.md](docs/03-artifacts.md) | Use this to check what file should exist, what it contains, and what status it should have |
-| [docs/04-workflows.md](docs/04-workflows.md) | Use this for the normal flow from idea to implementation and for Task/Plan decisions |
-| [docs/05-context-management.md](docs/05-context-management.md) | Use this when deciding what to load into context and when to use `CATALOG.md`, `SUMMARY.md`, or `RUN-LOG.md` |
-| [docs/06-adoption.md](docs/06-adoption.md) | Use this when adopting the harness in a new or existing repository |
-| [docs/07-glossary.md](docs/07-glossary.md) | Use this when a harness term is unclear |
-| [docs/08-legacy-applications.md](docs/08-legacy-applications.md) | Use this for practical legacy discovery work in an existing codebase |
-| [docs/09-guides.md](docs/09-guides.md) | Use this to understand project-specific setup and operating guides under `harness-data/guides/` |
-| [docs/10-project-playbooks.md](docs/10-project-playbooks.md) | Use this to understand project-specific scoped procedures under `harness-data/playbooks/` |
+| [docs/04-shared-procs.md](docs/04-shared-procs.md) | Use this to understand Validation and other procedures invoked from within a Mode |
+| [docs/05-workflows.md](docs/05-workflows.md) | Use this for the normal flow from idea to implementation and for Task/Plan decisions |
+| [docs/06-context-management.md](docs/06-context-management.md) | Use this when deciding what to load into context and when to use `CATALOG.md`, `SUMMARY.md`, or `RUN-LOG.md` |
+| [docs/07-adoption.md](docs/07-adoption.md) | Use this when adopting the harness in a new or existing repository |
+| [docs/08-glossary.md](docs/08-glossary.md) | Use this when a harness term is unclear |
+| [docs/09-legacy-applications.md](docs/09-legacy-applications.md) | Use this for practical legacy discovery work in an existing codebase |
+| [docs/10-guides.md](docs/10-guides.md) | Use this to understand project-specific setup and operating guides under `harness-data/guides/` |
+| [docs/11-project-playbooks.md](docs/11-project-playbooks.md) | Use this to understand project-specific scoped procedures under `harness-data/playbooks/` |
 
 ## Key Principles
 
@@ -135,4 +136,4 @@ smallest useful first pass and the same guide for full adoption instructions.
 - **Artifacts over memory** — everything lives in files, not agent context
 - **Explicit gates** — implementation requires an approved plan; no exceptions
 - **Smallest sufficient context** — agents load only what they need
-- **Process improves itself when needed** — Review and Improvement exist for teams that want a stronger formal loop
+- **Process improves itself when needed** — Review and Improving-Harness exist for teams that want a stronger formal loop

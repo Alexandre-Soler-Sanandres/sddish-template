@@ -55,8 +55,8 @@ Reference files are loaded only when needed — not by default:
 
 - `harness-data/reference/DOMAIN.md` — when domain concepts or terminology are involved
 - `harness-data/reference/ARCHITECTURE.md` — when validating scope, boundaries, or allowed paths
-- `harness-data/reference/TOOLING.md` — when running validation commands (Implementation mode)
-- `harness-data/reference/QUALITY.md` — when checking definition of done (Implementation mode)
+- `harness-data/reference/TOOLING.md` — when running validation commands (Implementing mode)
+- `harness-data/reference/QUALITY.md` — when checking definition of done (Implementing mode)
 
 Support-file discovery starts from these index files:
 
@@ -64,7 +64,7 @@ Support-file discovery starts from these index files:
 - `harness-data/playbooks/index.yaml`
 - `harness-data/guides/index.yaml`
 
-See [09-guides.md](09-guides.md) and [10-project-playbooks.md](10-project-playbooks.md) for the meaning of each support-file type.
+See [10-guides.md](10-guides.md) and [11-project-playbooks.md](11-project-playbooks.md) for the meaning of each support-file type.
 
 ## Support-File Selection
 

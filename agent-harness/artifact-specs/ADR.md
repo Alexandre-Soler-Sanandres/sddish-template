@@ -23,6 +23,7 @@ An ADR may be created from:
 - Transcript
 - An Idea being promoted once it's recognized as a settled decision rather than a hunch
 - A Review finding that recommends an architectural change
+- A Question (`agent-harness/artifact-specs/QUESTIONS.md`) that resolves toward a settled structural/architectural decision
 - Any other mode where a structural decision surfaces incidentally to its main work
 
 ## When to Create an ADR
@@ -60,6 +61,7 @@ or when the decision is actually about actor-visible behavior (that belongs in a
 | DEC-009 | Reference-Sync | When a `harness-data/reference/*.md` `## Decisions` entry cites this ADR and the ADR is superseded per `DEC-005`, update that reference doc's citation to the superseding ADR in the same pass. |
 | DEC-010 | Relations | Every ID listed in `related` must be explained in the ADR body under a "Relation to (ID) (type):" note, naming which of a fixed vocabulary the relationship is — `supersession-deferred`, `reuse`, `dependency`, `additive`, or `sibling-split` — plus the concrete reason. IDs already covered by `supersedes`/`superseded_by` don't need a separate note; this targets `related`, where the relationship is otherwise implicit. |
 | DEC-011 | Supersession-Timing | A `proposed` ADR that intends to supersede an already-`accepted` ADR must not set `supersedes` for that target, and the target must not set `superseded_by`, until the superseding ADR's own `status` actually transitions to `accepted` — record the relationship via `related` with a `supersession-deferred` note (per `DEC-010`) until then. Both frontmatter fields update together, in the same pass, at that transition. |
+| DEC-012 | Resolution-Sync | When an ADR settles a Questions-registry entry (mirrors `DEC-007`'s relationship-field pattern), update that entry's `Status` to `Resolved` citing this ADR's ID, in the same pass as setting the ADR to `accepted`. |
 
 ## Output
 
@@ -78,5 +80,5 @@ Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/DOMAIN.md` — when the decision involves domain concepts or business rules
 - `harness-data/reference/ARCHITECTURE.md` — when the decision touches system boundaries already described there
-- relevant legacy `QUESTIONS.md` or `CONTRACTS.md` artifacts — when the decision builds on, narrows, or overrides
+- the Questions registry (`harness-data/artifacts/questions/`) or `CONTRACTS.md` — when the decision builds on, narrows, or overrides
   a legacy-derived decision (cite via the `legacy_refs` frontmatter field rather than restating the text)

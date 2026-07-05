@@ -3,7 +3,7 @@
 This guide is for humans using the harness to understand and rewrite legacy applications. It explains how to steer the
 work, what to ask for, what to review, and which decisions you should keep in your hands.
 
-The detailed agent rules live in `agent-harness/modes/LEGACY-DISCOVERY.md`. Use this guide as the human playbook.
+The detailed agent rules live in `agent-harness/modes/DISCOVERING-LEGACY.md`. Use this guide as the human playbook.
 
 ## Your Role
 
@@ -97,7 +97,7 @@ The important files are:
 | `INVENTORY.md` | Understand what exists before interpreting behavior. |
 | `SOURCE-MAP.md` | See the discovery plan, slice status, evidence areas, and restart point. |
 | `findings/active/LF-<APP>-NNN.md` | Review durable claims backed by evidence. |
-| `QUESTIONS.md` | Track decisions discovery cannot settle by itself. |
+| Questions registry (`harness-data/artifacts/questions/QUESTIONS-OPEN.md` and friends) | Track decisions discovery cannot settle by itself — harness-level, not per-app. |
 
 Ask the agent to use the templates and keep `SOURCE-MAP.md` as the restart point.
 
@@ -201,12 +201,14 @@ Tip: if a finding cannot survive those questions, it should stay draft, be narro
 
 ## Step 8: Keep Questions Decision-Shaped
 
-`QUESTIONS.md` is for decisions, not scratch notes.
+The Questions registry (`harness-data/artifacts/questions/`) is for decisions, not scratch notes.
 
 Each question should make clear:
 
 - what decision is needed
-- whether it is `app-local`, `cross-system`, or `target-product`
+- its blast-radius classification: `local` (confined to this app), `cross-artifact` (affects more than one
+  artifact), or `systemic` (affects overall architecture/target-product shape broadly) — judge each by its actual
+  content, not by mechanically mapping the old app-local/cross-system/target-product split
 - what kind of decision it is: `scope-v1`, `preserve-vs-adapt`, `fidelity`, `naming`, or `deferred-feature`
 - which finding raised it
 - what evidence or uncertainty matters
@@ -292,7 +294,7 @@ Ask:
 - "Which app findings support this claim?"
 - "What boundary or contract does this define?"
 - "Is this a real runtime relationship or a documented intention?"
-- "Does this belong in `CONTRACTS.md`, `QUESTIONS.md`, `PARITY-MATRIX.md`, or `REWRITE-READINESS.md`?"
+- "Does this belong in `CONTRACTS.md`, the Questions registry, or `REWRITE-READINESS.md`?"
 
 Use the artifacts this way:
 
@@ -300,11 +302,11 @@ Use the artifacts this way:
 | --- | --- |
 | `CONTRACTS.md` | What are the producer/consumer, API, data, auth, health, deployment, and ownership boundaries? |
 | `findings/active/LF-CROSS-NNN.md` | What cross-app claim is supported by multiple evidence trails? |
-| `QUESTIONS.md` | What cross-app or target-product decision remains open? |
-| `PARITY-MATRIX.md` | What matches, drifts, or needs executable proof? |
+| Questions registry, `CSQ-*` rows | What cross-app or systemic decision remains open? |
+| Questions registry, `CSP-*` rows | What matches, drifts, or needs executable proof? |
 | `REWRITE-READINESS.md` | What is ready to feed Use Cases/Specs and what proof or planning obligations still need to be carried forward? |
 
-Tip: proof IDs should come from `PARITY-MATRIX.md`; readiness should cite them instead of creating another ID system.
+Tip: proof IDs should come from the Questions registry's `CSP-*` rows; readiness should cite them instead of creating another ID system.
 
 ## Step 13: Normalize Without Rediscovering
 
@@ -388,8 +390,8 @@ sections they constrain:
 - validation approach, later tests, and any remaining cited proof IDs for proof that still needs to be discharged
 - `Open Questions` only for what is still unresolved for that specific Spec
 
-Tip: keep `PARITY-MATRIX.md` as the canonical home of proof/parity rows. Downstream artifacts should cite relevant
-IDs, not duplicate the whole matrix.
+Tip: keep the Questions registry's `CSP-*` rows as the canonical home of proof/parity rows. Downstream artifacts
+should cite relevant IDs, not duplicate the whole matrix.
 
 ## Common Human Traps
 
@@ -402,7 +404,7 @@ IDs, not duplicate the whole matrix.
 | Deciding target architecture too early | Record open target-product decisions and keep service splits provisional. |
 | Letting cross-system work start before app-local completion | Finish in-scope app source maps first, then synthesize. |
 | Confusing app-local complete with rewrite-ready | Check cross-system synthesis, target decisions, and whether any remaining proof still blocks coherent design. |
-| Leaving decisions in chat | Ask the agent to update `QUESTIONS.md`, findings, source maps, and readiness notes. |
+| Leaving decisions in chat | Ask the agent to update the Questions registry, findings, source maps, and readiness notes. |
 
 ## Useful Human Review Checklist
 
@@ -411,7 +413,7 @@ Before accepting a discovery slice or block:
 - Did the agent inspect the right files for the slice or block?
 - Are claims backed by evidence paths?
 - Are observed, documented, inferred, and uncertain points separated?
-- Are open decisions in `QUESTIONS.md`?
+- Are open decisions in the Questions registry?
 - Are question IDs linked from findings?
 - Were stable target-relevant facts routed to reference docs?
 - Does `SOURCE-MAP.md` clearly say what is next?
@@ -430,7 +432,7 @@ Before accepting cross-system completion:
 - Is the active app scope explicit?
 - Are cross-system claims supported by app findings?
 - Are contracts, questions, parity rows, and readiness notes linked?
-- Are proof IDs canonical in `PARITY-MATRIX.md`?
+- Are proof IDs canonical in the Questions registry's `CSP-*` rows?
 - Are target-product decisions separated from legacy facts?
 
 ## Useful Commands to Ask For

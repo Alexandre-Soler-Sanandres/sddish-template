@@ -1,5 +1,5 @@
 ---
-id: LF-<APP>-NNN         # e.g. LF-TW-ENGINE-001; app findings use the app slug, cross-system findings use LF-CROSS-NNN
+id: LF-<APP>-NNN         # e.g. LF-BILLING-001; app findings use the app slug, cross-system findings use LF-CROSS-NNN
 type: legacy-finding
 status: draft            # draft | reviewed | converted | archived | rejected
 title: ""
@@ -41,12 +41,11 @@ why — e.g. "current code contradicts stale README; current code is authoritati
 
 ## Open Questions
 
-(list open question IDs from `QUESTIONS.md` still open against this finding — `Q-<APP>-NNN` for app findings,
+(list open question IDs from `QUESTIONS-OPEN.md` still open against this finding — `Q-<APP>-NNN` for app findings,
 `CSQ-NNN` for cross-system findings. Empty means no open question-blockers on this finding.)
 
 ## Resolved Questions
 
-(for each question ID that used to be listed above and has since been resolved in `QUESTIONS.md`'s `Resolved
-Decisions`, move it here with the resolution text copied in directly — e.g.
-`` `Q-<APP>-NNN`: decision text `` or `` `CSQ-NNN`: decision text `` — so this finding is self-contained without
-re-opening `QUESTIONS.md`)
+(for each question ID that used to be listed above and has since been resolved in `QUESTIONS-RESOLVED.md`, move it
+here with the resolution text copied in directly — e.g. `` `Q-<APP>-NNN`: decision text `` or
+`` `CSQ-NNN`: decision text `` — so this finding is self-contained without re-opening the registry)

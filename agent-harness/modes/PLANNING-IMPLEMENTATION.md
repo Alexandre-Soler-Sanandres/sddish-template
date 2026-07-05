@@ -1,8 +1,8 @@
-# IMPLEMENTATION-PLANNING.md
+# PLANNING-IMPLEMENTATION.md
 
 ## Purpose
 
-Implementation Planning is the mandatory gate before code changes.
+Planning-Implementation is the mandatory gate before code changes.
 These commands do not mean "start coding now" — they mean "create a plan and wait for approval."
 
 ## Entry Points
@@ -10,6 +10,13 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 - `/tw-plan-task <task-file>`
 - `/tw-plan-spec <spec-file>`
 - `/tw-plan-use-case <use-case-file>`
+
+## Consumes
+
+Task, Spec, or Use Case (depending on entry point) — see each entry point's Required Steps below for the exact
+precondition. Produces: Implementation Plan. Per `COR-058`, load `agent-harness/artifact-specs/
+IMPLEMENTATION-PLAN.md` in addition to this file — this file governs the planning activity, the artifact spec
+governs the resulting Plan's own body schema and readiness gate.
 
 ## Required Steps
 
@@ -27,7 +34,7 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 3. Find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
    - If Tasks exist but are draft or blocked → stop and report.
-   - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/TASKS.md`).
+   - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/REFINING.md`).
    - If Tasks are required but missing → stop and route to `/tw-create-tasks`.
    - If Tasks are not required → create an inline Implementation Plan.
 4. Do not generate duplicate Tasks or ignore existing ones.
@@ -43,58 +50,22 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 4. For each Spec, find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
    - If Tasks exist but are draft or blocked → stop and report.
-   - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/TASKS.md`).
+   - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/REFINING.md`).
    - If Tasks are required but missing → stop and route to `/tw-create-tasks`.
 5. Do not generate duplicate Tasks or ignore existing ones.
 6. Create a coherent end-to-end Implementation Plan covering all derived Specs.
 7. Wait for approval — do not change code.
 
-## Plan Body Should Include
-
-- Target artifact
-- Readiness checks
-- Included artifacts
-- Excluded artifacts
-- Plan steps with validation per step
-- Task grouping rationale
-- Expected file areas
-- Risk level per step
-- Suggested commit boundaries
-- Approval status
-
-## Commit Message Convention
-
-```text
-feat(area): short description
-
-Implements:
-- TASK-XXX
-- TASK-YYY
-
-Source:
-- SPEC-XXX
-```
-
 ## Rules
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IPL-001 | Grouping | Group Tasks in one step when they belong to the same approved Spec, are small and tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and no high-risk work is involved. |
-| IPL-002 | Grouping | Keep Tasks separate when risk is high, validation differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules. |
-| IPL-003 | Readiness-Gate | Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact. All items must be checked. A single unchecked item blocks the status change. |
-| IPL-010 | Parallel-Work | Before setting a Plan status to `approved`, check `harness-data/CATALOG.md` for other Plans at status `approved` or `in-progress` on the same Spec (COR-053) or with overlapping Task `allowed_paths` (COR-055); stop and surface the conflict if either applies. |
-| IPL-011 | Parallel-Work | When a Plan's status changes to `approved`, add or update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (COR-057). |
 | IPL-004 | Boundaries | Do not change code. |
 | IPL-005 | Boundaries | Do not treat `proposed` status as approved. |
 | IPL-006 | Boundaries | Do not proceed if the source artifact is not at an accepted status. |
 | IPL-007 | Boundaries | Do not generate duplicate Tasks or skip existing ones. |
 | IPL-008 | Procedure | When the planning task matches a reusable procedure, load the relevant universal and project playbooks before finalizing the plan. |
 | IPL-009 | Procedure | Reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
-
-## Output
-
-- `harness-data/artifacts/implementation-plans/active/PLAN-*.md`
-- Use `agent-harness/templates/IMPLEMENTATION-PLAN-template.md` as the starting point for every new plan.
 
 ## Reference Files
 

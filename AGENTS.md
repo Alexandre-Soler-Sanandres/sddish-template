@@ -11,19 +11,28 @@ This repository uses an SDD-ish Agent Harness under `agent-harness/`.
 
 ## Modes
 
+A Mode is a true, distinct behavioral posture — only one is active at a time, and switching happens only on
+explicit user request.
+
 | Mode | File | Purpose |
 | --- | --- | --- |
 | Partnering | `agent-harness/modes/PARTNERING.md` | Structured conversation to capture ideas and problems |
-| ADR | `agent-harness/modes/ADR.md` | Capture settled structural/architectural decisions |
-| Use Cases | `agent-harness/modes/USE-CASES.md` | Define behavioral anchors from actor goals |
-| Specs | `agent-harness/modes/SPECS.md` | Define desired behavior from Use Cases |
-| Tasks | `agent-harness/modes/TASKS.md` | Break Specs into execution units |
-| Implementation Planning | `agent-harness/modes/IMPLEMENTATION-PLANNING.md` | Plan and gate code changes |
-| Implementation | `agent-harness/modes/IMPLEMENTATION.md` | Execute an approved plan |
-| Validation | `agent-harness/modes/VALIDATION.md` | Verify artifacts and implementations |
-| Review | `agent-harness/modes/REVIEW.md` | Evaluate outputs and discover process problems |
-| Improvement | `agent-harness/modes/IMPROVEMENT.md` | Change the harness itself |
-| Legacy Discovery | `agent-harness/modes/LEGACY-DISCOVERY.md` | Extract evidence from existing code |
+| Refining | `agent-harness/modes/REFINING.md` | Derive a Spec from a Use Case, or Tasks from a Spec |
+| Planning-Implementation | `agent-harness/modes/PLANNING-IMPLEMENTATION.md` | Plan and gate code changes |
+| Implementing | `agent-harness/modes/IMPLEMENTING.md` | Execute an approved plan |
+| Discovering-Legacy | `agent-harness/modes/DISCOVERING-LEGACY.md` | Extract evidence from existing code |
+| Improving-Harness | `agent-harness/modes/IMPROVING-HARNESS.md` | Change the harness itself |
+
+## Artifact Specs
+
+An artifact spec defines the schema, creation trigger, and lifecycle gate for one document type. Any Mode's own
+rules may invoke one directly — no mode switch required. See `agent-harness/artifact-specs/` and
+`agent-harness/docs/03-artifacts.md`.
+
+## Shared Procedures
+
+A shared procedure is a checklist invoked by name from within a Mode's own rules — no schema, no artifact of its
+own. See `agent-harness/shared-procs/VALIDATION.md` and `agent-harness/docs/04-shared-procs.md`.
 
 ## Reference
 
@@ -48,4 +57,4 @@ See `agent-harness/CORE.md` for the full checkpoint and high-impact action list.
 
 ## Implementation Gate
 
-Do not implement before an accepted Implementation Plan exists.
+Do not implement before an approved Implementation Plan exists.

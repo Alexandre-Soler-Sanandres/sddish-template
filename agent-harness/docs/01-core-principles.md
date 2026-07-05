@@ -35,10 +35,25 @@ Voice / Text / Legacy Code
   → Implementation Plan (approved)
   → Implementation
   → Validation
-  → [Review / Improvement — when a stronger formal loop is wanted]
+  → [Review / Improving-Harness — when a stronger formal loop is wanted]
 ```
 
 Each persistent stage produces a file-based artifact. Each artifact is traceable to its source. No stage may be skipped — but stages may be lightweight when the work is small and low-risk.
+
+## Three Kinds of Harness File
+
+The harness distinguishes three kinds of file under `agent-harness/`, by location and purpose:
+
+- **Modes** (`agent-harness/modes/`) — a true interaction-pattern the agent adopts. Only one is active at a time.
+  Mode transitions happen only when the user explicitly requests them; ambiguous intent must be clarified before
+  switching. Voice, text, and chat are **input channels**, not modes — the input channel never changes what the
+  agent may do. See [02-modes.md](02-modes.md).
+- **Artifact specs** (`agent-harness/artifact-specs/`) — the schema, creation trigger, and lifecycle gate for one
+  document type. Producing or updating one of these does not require switching Mode; any Mode's own rules may
+  invoke one directly (this mirrors how ADR has always worked: "any mode may draft a candidate ADR"). See
+  [03-artifacts.md](03-artifacts.md).
+- **Shared procedures** (`agent-harness/shared-procs/`) — a checklist invoked by name from within a Mode's own
+  rules. No schema, no artifact of its own. See [04-shared-procs.md](04-shared-procs.md).
 
 ## Modes Are Universal. References Are Project-Specific.
 
@@ -59,5 +74,5 @@ Reference files (`harness-data/reference/`) are project-specific. They define th
 - **Modes are bounded** — each mode has clear responsibilities and must-nots
 - **Rejection paths are prescribed** — after review, the agent takes a defined action and stops; the user decides what happens next
 - **Parallel work is coordinated** — concurrent Plans on overlapping paths are surfaced and blocked until resolved
-- **Process improves itself when needed** — Review and Improvement exist when teams want a stronger formal loop
+- **Process improves itself when needed** — Review and Improving-Harness exist when teams want a stronger formal loop
 - **Universal harness, project-specific details** — the process is the same everywhere; the project details vary

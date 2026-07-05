@@ -1,14 +1,22 @@
-# IMPLEMENTATION.md
+# IMPLEMENTING.md
 
 ## Purpose
 
-Implementation mode executes an approved Implementation Plan.
+Implementing mode executes an approved Implementation Plan.
 Default execution is one plan step at a time.
 
 ## Entry
 
 Via CLI: `/tw-execute-plan <plan-file>`
 Via natural language: explicit instruction referencing an approved plan.
+
+## Consumes
+
+An Implementation Plan at status `approved` (`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`) whose included
+Tasks are `ready`/`planned` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-058`, this file's Execution rules
+trigger status changes on Task, Spec, and Use Case (`IMPL-006`, `IMPL-014`, `IMPL-027`) — load
+`agent-harness/artifact-specs/TASKS.md`, `SPECS.md`, and `USE-CASES.md` for those artifacts' own status-transition
+rules; this file only says when to trigger the change, not what the change requires.
 
 ## Rules
 
@@ -42,6 +50,14 @@ Via natural language: explicit instruction referencing an approved plan.
 | IMPL-023 | Boundaries | Do not continue past a failing validation without explicit approval. |
 | IMPL-024 | Procedure | Before substantive execution, load any relevant playbook or guide required by the task shape or local project context. |
 | IMPL-025 | Procedure | Playbooks and guides may refine execution steps and checks, but they do not expand approved scope or override plan boundaries. |
+
+## Output
+
+Implementing does not produce a new artifact type of its own — it updates Task/Plan/Spec/Use Case status
+(`IMPL-006`, `IMPL-007`, `IMPL-027`) and the code itself. When a durable record is needed (e.g. before a status
+advance that should be citable later), it produces the product/requirements flavor of Review
+(`agent-harness/artifact-specs/REVIEW.md`'s Two Flavors) — not required for every plan step, only when a formal
+record is warranted.
 
 ## Reference Files
 

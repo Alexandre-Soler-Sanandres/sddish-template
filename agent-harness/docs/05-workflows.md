@@ -8,22 +8,25 @@ Use this guide when you already understand the artifact types and want the norma
 ```text
 Voice / Text / Ideas
   → Partnering (TRANSCRIPT, IDEA, ADR when a structural decision settles)
-  → Use Case Mode (UC-*)
-  → Spec Mode (SPEC-*)
-  → [Task Mode (TASK-*) — when required]
-  → Implementation Planning (PLAN-*)
-  → Implementation
-  → Validation
-  → [Review / Harness Improvement — when a team wants formal evaluation or process correction]
+  → Refining: Use Case → Spec (SPEC-*)
+  → Refining: Spec → Tasks (TASK-*) — when required
+  → Planning-Implementation (PLAN-*)
+  → Implementing
+  → Validation (shared procedure, invoked from within Implementing)
+  → [Review / Improving-Harness — when a team wants formal evaluation or process correction]
 ```
+
+A Question (`harness-data/artifacts/questions/`) may be raised from any point in this flow without switching
+mode — it does not appear as its own step above because it is not a stage the work passes through, but a
+cross-cutting registry any mode can write to.
 
 In plain terms:
 
 - Partnering helps when the request is still fuzzy.
-- Use Case and Spec make the intended behavior explicit.
-- Tasks are only added when the work needs smaller execution slices.
-- Implementation Planning is the gate that turns requirements into an approved path.
-- Implementation executes that path.
+- Refining derives Spec from Use Case, and Tasks from Spec — these make the intended behavior explicit and,
+  when needed, break it into execution slices.
+- Planning-Implementation is the gate that turns requirements into an approved path.
+- Implementing executes that path.
 - Validation checks that the result and the process both hold up.
 
 ## Partnering Workflow
@@ -55,7 +58,7 @@ is not restricted to originating from one mode: any mode may draft a candidate A
 surfaces one — Partnering discussion is the common case, but a Review finding or another mode noticing an
 architecturally significant decision can start one too. What's restricted is not authorship, but acceptance: an
 ADR only becomes citable authority once its Readiness Checklist passes and the user has explicitly confirmed
-`accepted` status. See `agent-harness/modes/ADR.md` for the full rule set.
+`accepted` status. See `agent-harness/artifact-specs/ADR.md` for the full rule set.
 
 **Output path:** `harness-data/artifacts/adrs/proposed/ADR-*.md` (moves to `accepted/` once settled, `archive/` if
 superseded or rejected)
@@ -138,9 +141,9 @@ Bad fit:
 - work with risky rollout or safety implications
 - anything that would be easier to review in slices
 
-## Implementation Planning
+## Planning-Implementation
 
-Implementation Planning entry points and what they mean:
+Planning-Implementation entry points and what they mean:
 
 **`/tw-plan-task TASK-001`**
 This command tells the agent to create a focused plan for this Task and stop before coding until the plan is approved.
@@ -233,14 +236,16 @@ The lightest appropriate place for this state is:
 
 ## Validation and Quality
 
-**Validation mode** covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks. It is universal and does not contain project-specific commands.
+**Validation** (a shared procedure, not a mode or artifact — invoked by name from within Implementing and
+Improving-Harness) covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks.
+It is universal and does not contain project-specific commands.
 
 **Technical checks** (tests, linting, typing, migrations) are project-specific. They are defined in `harness-data/reference/QUALITY.md` and run using commands from `harness-data/reference/TOOLING.md`.
 
 Short version:
 
-- Validation mode asks "did we follow the process, and is the behavior verifiable?"
-- Implementation mode asks "did we run the actual project checks?"
+- Validation asks "did we follow the process, and is the behavior verifiable?"
+- Implementing asks "did we run the actual project checks?"
 
 ## Readiness Gates
 
@@ -255,10 +260,10 @@ status change.
 | Task | `ready` | `## Readiness Checklist` in the artifact |
 | Implementation Plan | `approved` | `## Readiness Checks` in the artifact |
 
-## Review and Harness Improvement
+## Review and Improving-Harness
 
 Every significant artifact or implementation should be reviewable. For teams that want a lighter default flow, Review
-and Improvement are optional advanced disciplines rather than a mandatory everyday step. When used, Reviews answer:
+and Improving-Harness are optional advanced disciplines rather than a mandatory everyday step. When used, Reviews answer:
 
 - Was the output correct and complete?
 - Did the agent load the right context?
@@ -285,7 +290,7 @@ That stricter loop exists to keep harness changes deliberate and reviewable inst
 ## Legacy Discovery Flow
 
 For the practical step-by-step legacy application playbook, see
-[08-legacy-applications.md](08-legacy-applications.md).
+[09-legacy-applications.md](09-legacy-applications.md).
 
 ```text
 harness-data/artifacts/legacy/imported/old-project

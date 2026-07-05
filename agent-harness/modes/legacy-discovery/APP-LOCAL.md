@@ -3,10 +3,10 @@
 ## Purpose
 
 App-Local Discovery rules: slicing a single legacy app and maintaining its `INVENTORY.md`, `SOURCE-MAP.md`,
-`findings/`, and `QUESTIONS.md`.
+`findings/`, and its rows in the unified Questions registry.
 
 Load this file when running App-Local Discovery (see the Discovery Phases table in
-`agent-harness/modes/LEGACY-DISCOVERY.md`).
+`agent-harness/modes/DISCOVERING-LEGACY.md`).
 
 ## Artifact Routing
 
@@ -19,20 +19,23 @@ harness-data/artifacts/legacy/apps/<legacy-app-slug>/
   findings/
     active/<LF-ID>.md
     archive/<LF-ID>.md
-  QUESTIONS.md
 ```
+
+Questions raised during this app's discovery live in the harness-level Questions registry
+(`harness-data/artifacts/questions/QUESTIONS-OPEN.md`/`QUESTIONS-RESOLVED.md`/`QUESTIONS-DISCARDED.md`), not a
+per-app file.
 
 ## Slice Roundtrip
 
 1. Select the smallest useful evidence set from the source map.
 2. Inspect code, then docs, then tests.
-3. Classify evidence and conflicts using the Core rules in `agent-harness/modes/LEGACY-DISCOVERY.md`.
-4. Update app `findings/` (add or merge into an `LF-<APP>-NNN` file, looked up by ID), `QUESTIONS.md`, and
-   `SOURCE-MAP.md`. When a question is recorded, link it bidirectionally: cite the originating finding(s) in
-   `QUESTIONS.md`'s `Source finding(s)` column, and add the question ID to each cited finding's
-   `## Open Questions` section. Use `baseline` / `cross-cutting` in `Source finding(s)` when the question does not
-   trace to a specific finding.
-5. Enrich stable reference docs per the Reference Enrichment table in `agent-harness/modes/LEGACY-DISCOVERY.md`.
+3. Classify evidence and conflicts using the Core rules in `agent-harness/modes/DISCOVERING-LEGACY.md`.
+4. Update app `findings/` (add or merge into an `LF-<APP>-NNN` file, looked up by ID), the unified Questions
+   registry, and `SOURCE-MAP.md`. When a question is recorded, link it bidirectionally: cite the originating
+   finding(s) in the registry's `Source` column, and add the question ID to each cited finding's
+   `## Open Questions` section. Use `baseline` / `cross-cutting` in `Source` when the question does not trace to a
+   specific finding.
+5. Enrich stable reference docs per the Reference Enrichment table in `agent-harness/modes/DISCOVERING-LEGACY.md`.
 6. Validate with `git diff --check`.
 7. Commit only when explicitly asked.
 

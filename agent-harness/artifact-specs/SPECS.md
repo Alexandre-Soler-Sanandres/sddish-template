@@ -2,27 +2,16 @@
 
 ## Purpose
 
-Spec mode creates or updates Spec artifacts.
-Specs are the source of truth for desired behavior.
+Specs are the source of truth for desired behavior. This file is the Spec artifact's schema, lifecycle, and
+boundary rules; the mechanical activity of deriving a Spec from a Use Case lives in
+`agent-harness/modes/REFINING.md` — load both (per `COR-058`) before creating or updating a Spec.
 
-## Entry
+## Sources
 
-Via CLI: `/tw-create-spec <use-case-file>`
-Via natural language: explicit, unambiguous instruction referencing the source artifact.
-
-## Spec Creation Should
-
-1. Verify the source artifact is at an accepted status before proceeding.
-2. Read the Use Case or Legacy Finding.
-3. Inspect source Ideas or Legacy Findings when additional context is needed.
-4. When the Use Case originated from Legacy Discovery, inspect the inherited legacy question IDs and any referenced parity/proof obligations that still shape the design.
-5. Identify problem and goal.
-6. Define scope and non-goals.
-7. Define functional and non-functional requirements.
-8. Define acceptance criteria.
-9. Identify risks and constraints.
-10. Identify whether Tasks are likely required.
-11. Stop before implementation.
+A Spec is created only from within Refining (`/tw-create-spec`), from a Use Case. Legacy Findings, Ideas,
+Transcripts, and ADRs are upstream/reference inputs, not direct Spec sources — Legacy Findings, Ideas, and
+Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use
+Case or Spec directly (see `agent-harness/artifact-specs/ADR.md`'s `DEC-003`).
 
 ## Spec Body Should Include
 
@@ -72,17 +61,13 @@ When a significant change is made to an approved Spec:
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| SPS-001 | Sources | A Spec must always be created from a Use Case. The Use Case must be at status `ready-for-spec` before a Spec may be created. |
-| SPS-002 | Sources | Legacy Findings, Ideas, Transcripts, and ADRs are upstream/reference inputs — Legacy Findings, Ideas, and Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use Case or Spec directly (see `agent-harness/modes/ADR.md`'s `DEC-003`). |
-| SPS-011 | Legacy-Handoff | A Spec may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled (mirrors `SPS-001`'s Use Case readiness gate; see `DEC-008`). |
+| SPS-002 | Sources | Legacy Findings, Ideas, Transcripts, and ADRs are upstream/reference inputs — Legacy Findings, Ideas, and Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use Case or Spec directly (see `agent-harness/artifact-specs/ADR.md`'s `DEC-003`). |
+| SPS-011 | Legacy-Handoff | A Spec may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled (mirrors `SPS-001`'s Use Case readiness gate, in `REFINING.md`; see `DEC-008`). |
 | SPS-003 | Readiness-Gate | Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
 | SPS-004 | Updating | A Spec may be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
 | SPS-005 | Updating | Updating does not change the Spec ID. Update the `updated` field. |
-| SPS-006 | Boundaries | Do not implement or change code. |
-| SPS-007 | Boundaries | Do not create Tasks or Implementation Plans. |
-| SPS-008 | Boundaries | Do not proceed if the source Use Case is not at an accepted status. |
-| SPS-009 | Legacy-Handoff | When the source Use Case inherits unresolved legacy questions or parity/proof obligations, load those referenced items and route them into the Spec sections they actually constrain. |
-| SPS-010 | Legacy-Handoff | Keep `PARITY-MATRIX.md` as the canonical proof/parity backlog. A Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions, but should not duplicate unrelated matrix rows or store proof IDs in `test_refs`. |
+| SPS-009 | Carry-Forward | When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy origin — load those referenced items and route them into the Spec sections they actually constrain. Before setting status to `approved` (see `SPS-003`), verify the registry holds nothing unresolved that should block the advance. |
+| SPS-010 | Legacy-Handoff | Keep the Questions registry's `CSP-*` rows as the canonical proof/parity backlog. A Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions, but should not duplicate unrelated rows or store proof IDs in `test_refs`. |
 
 ## Output
 
@@ -96,4 +81,4 @@ Load these when relevant — do not load all of them by default:
 - `harness-data/reference/DOMAIN.md` — when defining requirements that involve domain concepts, business rules, or domain terminology
 - `harness-data/reference/ARCHITECTURE.md` — when scope touches system boundaries, layers, or architectural constraints
 - `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when scope touches a system boundary or structural decision already settled by an ADR
-- relevant legacy `QUESTIONS.md`, `PARITY-MATRIX.md`, or `REWRITE-READINESS.md` artifacts — when inherited legacy decisions or obligations still constrain the Spec
+- the Questions registry (`harness-data/artifacts/questions/`) or `REWRITE-READINESS.md` — when inherited legacy decisions or obligations still constrain the Spec

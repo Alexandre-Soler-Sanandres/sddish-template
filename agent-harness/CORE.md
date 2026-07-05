@@ -13,7 +13,7 @@ Universal harness rules that apply in every mode.
 | COR-003 | Universal | Do not expose secrets. |
 | COR-004 | Universal | Do not run commands that are irreversible or have a wide blast radius (data loss, schema changes, production state changes, force operations) without explicit approval. |
 | COR-005 | Universal | Do not implement from Partnering mode. |
-| COR-006 | Universal | Do not implement before an accepted Implementation Plan exists. |
+| COR-006 | Universal | Do not implement before an approved Implementation Plan exists. |
 | COR-007 | Universal | Keep traceability links aligned across Use Cases, Specs, Tasks, Plans, and Reviews. |
 | COR-008 | Universal | Do not retroactively rewrite artifacts in `done/` or `archive/` folders when paths, structure, or conventions change elsewhere in the harness. |
 | COR-009 | Artifact-Language | Write normalized artifacts in English by default. |
@@ -21,7 +21,7 @@ Universal harness rules that apply in every mode.
 | COR-011 | Context-Loading | Start context loading from the user request. |
 | COR-012 | Context-Loading | Use `agent-harness/CATALOG.md` when the artifact identity is unknown or ambiguous. |
 | COR-013 | Context-Loading | Load the explicitly referenced artifact before exploring related artifacts. |
-| COR-014 | Context-Loading | Load the active mode file before taking mode-specific action. |
+| COR-014 | Context-Loading | Load the active true-Mode file (`agent-harness/modes/`) before taking mode-specific action. A true Mode is one of: Partnering, Implementing, Discovering-Legacy, Improving-Harness, Planning-Implementation, Refining. |
 | COR-015 | Context-Loading | Load linked parent or child artifacts only when they are required for the current task. |
 | COR-016 | Context-Loading | Prefer summaries before full historical artifacts when both are available. |
 | COR-017 | Context-Loading | Load reference files only when the current task is directly affected by them. |
@@ -33,13 +33,11 @@ Universal harness rules that apply in every mode.
 | COR-023 | Support-Files | When both a universal playbook and a project playbook apply, follow the universal playbook for the generic procedure and the project playbook for repo-local refinement. |
 | COR-024 | Support-Files | Guides provide local operating context. They do not replace procedural instructions from playbooks. |
 | COR-025 | Support-Files | Playbooks and guides must not override core rules, mode boundaries, or explicit approval gates. |
-| COR-026 | Implementation-Gate | Verify that an Implementation Plan exists before implementation starts. |
-| COR-027 | Implementation-Gate | Verify that the Implementation Plan is at status `approved` before implementation starts. |
-| COR-028 | Implementation-Gate | Verify that required upstream artifacts are at accepted status, not draft (for example: Spec `approved`, Use Case `ready-for-spec`, Task `ready`). |
-| COR-029 | Implementation-Gate | Verify that safety and risk rules are satisfied before implementation starts. |
 | COR-030 | Checkpoint | Before any high-impact action, verify the active mode, restart artifact, explicit user authorization, in-scope files, and required validation before stopping or committing. |
 | COR-031 | Checkpoint | Treat these as high-impact actions: committing; changing harness mode files, templates, or reference process rules; creating Review or Improvement artifacts; changing source-map workflow or status rules; moving artifacts between lifecycle folders; starting cross-system synthesis. |
 | COR-032 | Checkpoint | After a resume or context compaction, repeat the checkpoint before the next high-impact action. |
+| COR-059 | Checkpoint | The checkpoint (`COR-030`) verifies state (which mode is active, what the restart point is), which is not the same as re-reading rule text — a rule can silently fall out of live consideration even when the agent would still correctly name the active mode. On a resume or context compaction (extending `COR-032`), re-read `CORE.md` in full and the active true-Mode file in full, not only confirm mode identity/restart point. |
+| COR-060 | Checkpoint | On a true Mode transition (Partnering ↔ Implementing ↔ Discovering-Legacy ↔ Improving-Harness ↔ Planning-Implementation ↔ Refining — per `COR-014`'s list, not every artifact-producing action), re-read the newly-active mode file in full before taking any mode-specific action. |
 | COR-033 | Observability | Record temporary operational trace only when it helps safe continuation, validation, or explanation of agent behavior. |
 | COR-034 | Observability | Use `harness-data/RUN-LOG.md` only when operational trace is useful; it is not required by default, except for the Implementation gate-check required by `IMPL-028`. |
 | COR-035 | Observability | Record only operational facts that matter, such as context loaded, approvals, commands/checks run, current execution state, restart point, and stop reason. |
@@ -65,3 +63,5 @@ Universal harness rules that apply in every mode.
 | COR-055 | Parallel-Work | If two active Plans have overlapping `allowed_paths` across their Tasks, stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution. |
 | COR-056 | Parallel-Work | Allow concurrent Plans on non-overlapping Specs without restriction. |
 | COR-057 | Parallel-Work | Keep `harness-data/CATALOG.md` accurate for all Plans at status `approved` or `in-progress`. |
+| COR-058 | Context-Loading | Before creating or updating an artifact of a given type, load that artifact type's spec under `agent-harness/artifact-specs/` in addition to the active true-Mode file (`COR-014`) — neither substitutes for the other. An action like creating a Spec is governed by two files at once: the Mode governing the creation activity (e.g. `REFINING.md`), and the artifact spec governing the resulting document's own schema and lifecycle (e.g. `SPECS.md`). |
+| COR-061 | Context-Loading | `agent-harness/shared-procs/` holds procedures invoked by name from within a true Mode's own rules (e.g. `Implementing`'s `IMPL-011`, `Improving-Harness`'s "Improvement Process" line, both invoking `VALIDATION.md`) — neither a true Mode nor an artifact spec: no `Body Should Include`, no artifact of its own. Load a shared procedure only when the active Mode's own rules direct it to, not by default. |

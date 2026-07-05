@@ -274,7 +274,7 @@ When in doubt:
 | `harness-data/reference/QUALITY.md` | Project-specific — fill in |
 | `harness-data/guides/` | Optional — add project-specific setup and operating guidance |
 | `harness-data/playbooks/` | Optional — add project-specific scoped procedures for recurring work in this repo |
-| `harness-data/artifacts/{legacy,use-cases,specs,tasks,implementation-plans,reviews,improvements,transcripts,ideas,adrs}/` | Project-specific — lifecycle artifacts generated and managed by using the harness |
+| `harness-data/artifacts/{legacy,use-cases,specs,tasks,implementation-plans,reviews,improvements,transcripts,ideas,adrs,questions}/` | Project-specific — lifecycle artifacts generated and managed by using the harness |
 
 ## Adopting for Existing Projects
 
@@ -282,7 +282,7 @@ This only applies to codebases that are actively being developed and will contin
 
 If you are adopting the harness for an existing active codebase:
 
-1. Use **Legacy Discovery mode** to extract evidence from the existing code
+1. Use **Discovering-Legacy mode** to extract evidence from the existing code
 2. Produce Legacy Findings → candidate Use Cases
 3. Refine Use Cases → create Specs
 4. Use Specs as the basis for all future work
@@ -303,8 +303,8 @@ They may be created by humans or AI when useful, but the harness does not requir
 
 Use these docs for the detailed guidance:
 
-- [09-guides.md](09-guides.md)
-- [10-project-playbooks.md](10-project-playbooks.md)
+- [10-guides.md](10-guides.md)
+- [11-project-playbooks.md](11-project-playbooks.md)
 
 `agent-harness/playbooks/` is a separate harness-owned layer for reusable procedures.
 Each support-file layer uses an `index.yaml` file so agents can discover relevant support files without opening every file.
@@ -313,12 +313,12 @@ Project-specific rules must never be placed in mode files. Put them in the relev
 
 ## Optional Advanced Disciplines
 
-Review and Improvement are part of the harness, but they do not need to dominate everyday usage.
+Review and Improving-Harness are part of the harness, but they do not need to dominate everyday usage.
 
 For many teams, the default path is:
 
 ```text
-Partnering → Use Case → Spec → [Task] → Implementation Plan → Implementation → Validation
+Partnering → Refining (Use Case → Spec → [Task]) → Planning-Implementation → Implementing → Validation
 ```
 
-Use Review and Improvement when you want a stronger formal loop around output evaluation or process correction.
+Use Review and Improving-Harness when you want a stronger formal loop around output evaluation or process correction.
