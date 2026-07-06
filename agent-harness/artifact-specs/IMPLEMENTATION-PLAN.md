@@ -41,11 +41,11 @@ Source:
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IPL-001 | Grouping | Group Tasks in one step when they belong to the same approved Spec, are small and tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and no high-risk work is involved. |
-| IPL-002 | Grouping | Keep Tasks separate when risk is high, validation differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules. |
-| IPL-003 | Readiness-Gate | Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact. All items must be checked. A single unchecked item blocks the status change. |
-| IPL-010 | Parallel-Work | Before setting a Plan status to `approved`, check `harness-data/CATALOG.md` for other Plans at status `approved` or `in-progress` on the same Spec (`IPL-012`) or with overlapping Task `allowed_paths` (`IPL-014`); stop and surface the conflict if either applies. |
-| IPL-011 | Parallel-Work | When a Plan's status changes to `approved`, add or update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (`IPL-016`). |
+| IPL-01-010 | Grouping | Group Tasks in one step when they belong to the same approved Spec, are small and tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and no high-risk work is involved. |
+| IPL-01-020 | Grouping | Keep Tasks separate when risk is high, validation differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules. |
+| IPL-02-010 | Readiness-Gate | Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact. All items must be checked. A single unchecked item blocks the status change. |
+| IPL-05-010 | Parallel-Work | Before setting a Plan status to `approved`, check `harness-data/CATALOG.md` for other Plans at status `approved` or `in-progress` on the same Spec (`IPL-05-030`) or with overlapping Task `allowed_paths` (`IPL-05-050`); stop and surface the conflict if either applies. |
+| IPL-05-020 | Parallel-Work | When a Plan's status changes to `approved`, add or update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (`IPL-05-070`). |
 
 ## Output
 

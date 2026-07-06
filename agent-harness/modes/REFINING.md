@@ -96,7 +96,7 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 | TSK-03-010 | Boundaries | Do not implement or change code. |
 | TSK-03-020 | Boundaries | Do not create Implementation Plans. |
 | TSK-03-030 | Boundaries | Do not proceed if the source Spec is not at status `approved`. |
-| TSK-04-010 | Dedup | Before generating Tasks from a Spec — via this entry point directly, not only when Planning-Implementation happens to check first — verify existing Tasks derived from that Spec; do not generate duplicate Tasks or skip existing ones. This rule is owned here, not borrowed from `PLANNING-IMPLEMENTATION.md`'s `IPL-007`, so `/create-tasks` is protected regardless of entry path. |
+| TSK-04-010 | Dedup | Before generating Tasks from a Spec — via this entry point directly, not only when Planning-Implementation happens to check first — verify existing Tasks derived from that Spec; do not generate duplicate Tasks or skip existing ones. This rule is owned here, not borrowed from `PLANNING-IMPLEMENTATION.md`'s `IPL-03-040`, so `/create-tasks` is protected regardless of entry path. |
 
 ## Output
 

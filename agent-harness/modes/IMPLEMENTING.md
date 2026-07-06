@@ -30,7 +30,7 @@ rules; this file only says when to trigger the change, not what the change requi
 | IMPL-005 | Execution | Execute one plan step at a time by default. |
 | IMPL-006 | Execution | Set Task status to `in-progress` when starting a Task, `done` when complete. |
 | IMPL-007 | Execution | Set Plan status to `in-progress` when execution begins, `done` when all steps are complete. |
-| IMPL-026 | Execution | When a Plan's status changes into or out of `in-progress` (including to `done`), update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (`IPL-016`); remove the row once the Plan is no longer `approved` or `in-progress`. |
+| IMPL-026 | Execution | When a Plan's status changes into or out of `in-progress` (including to `done`), update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (`IPL-05-070`); remove the row once the Plan is no longer `approved` or `in-progress`. |
 | IMPL-027 | Execution | When a Plan reaches status `done` and every Task derived from a Spec is `done`, set that Spec's status to `implemented`. When every Spec derived from a Use Case is `implemented`, set the Use Case's status to `implemented`. |
 | IMPL-008 | Execution | Keep the diff focused on the current step. |
 | IMPL-009 | Execution | Respect allowed and forbidden paths from Task frontmatter. |
