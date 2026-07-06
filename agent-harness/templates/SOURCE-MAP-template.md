@@ -69,7 +69,7 @@ decisions)
 ## Import Hygiene
 
 Inventory of secret-like files, local artifacts, or nested repository metadata found in the imported snapshot —
-see `agent-harness/modes/DISCOVERING-LEGACY.md`'s `LD-027`–`031` for the governing rules. A "none found" note is
+see `agent-harness/modes/legacy-discovery/IMPORT-HYGIENE.md`'s `LD-07-010`–`050` for the governing rules. A "none found" note is
 the expected content when the snapshot is clean, not an empty section.
 
 | Path pattern | Type | Notes |
@@ -98,7 +98,7 @@ Cases, Specs, or planning.
 ## Reference Enrichment Routing
 
 Route stable findings to the appropriate reference doc before closing the slice — see
-`agent-harness/modes/DISCOVERING-LEGACY.md`'s `LD-033`/`034` for what qualifies as stable enough to enrich.
+`agent-harness/modes/DISCOVERING-LEGACY.md`'s `LD-09-010`/`020` for what qualifies as stable enough to enrich.
 
 | Finding type | Target reference doc |
 | --- | --- |
@@ -118,7 +118,7 @@ Route stable findings to the appropriate reference doc before closing the slice 
 ## Discovery-Complete Shape
 
 The collapsed shape of this same file once `discovery_state` reaches `app-local-complete` — see
-`agent-harness/modes/legacy-discovery/NORMALIZATION.md`'s `LDG-007` for the collapse procedure itself.
+`agent-harness/modes/legacy-discovery/NORMALIZATION.md`'s `LDG-01-070` for the collapse procedure itself.
 
 Collapses to only: `Source Root`, `Evidence Inventory`, `Import Hygiene`, `Reference Enrichment Routing`,
 `Open App Notes` (trimmed to durable notes only), and `Deferred and Cross-System Questions` (with a single line

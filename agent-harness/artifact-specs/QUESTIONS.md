@@ -4,8 +4,9 @@
 
 A Question is an unresolved (or resolved) point that needs a decision before some artifact can be trusted as
 final. Durable and discoverable, unlike a Non-Goal (permanent exclusion) or a captured Idea (candidate work, not a
-question). Generalizes Legacy Discovery's own question-tracking machinery (`LD-017`–`019`, `NORMALIZATION.md`'s
-`LDG-009`–`014`, `CLARIFICATION.md`'s `LDG-015`–`030`) to every origin, not only legacy evidence.
+question). Generalizes Legacy Discovery's own question-tracking machinery (`LD-04-010`–`030`, `NORMALIZATION.md`'s
+`LDG-01-090`/`LDG-02-010`–`050`, `CLARIFICATION.md`'s `LDG-03-010`–`LDG-04-110`) to every origin, not only legacy
+evidence.
 
 ## Sources
 
@@ -29,7 +30,7 @@ item instead).
 | QST-001 | Classification | Classify by blast radius: `local` (one artifact), `cross-artifact` (multiple artifacts), or `systemic` (overall architecture/target-product shape). Judge legacy `target-product` tags by content, not mechanical mapping — see Notes. |
 | QST-002 | ID-Scheme | Migrated legacy entries keep their exact existing ID (`Q-<APP>-NNN`, `CSQ-NNN`, `CSP-*`), unchanged. Brand-new, non-legacy entries get a plain `Q-NNN` ID — the next unused integer in one shared counter across all three files (not per-file, not per-classification). |
 | QST-003 | Status | Status is one of `Open`, `Resolved`, `Discarded` — the file a row lives in *is* its status, no separate column. A decision to defer ("not now, revisit later") is still `Resolved`, since the decision itself is settled; only a genuinely undecided, deprioritized item stays `Open` (noted in `Notes`). |
-| QST-004 | Dedup | Before adding a new entry, check existing rows across all three files for the same underlying question by content and merge into the existing row instead of filing a duplicate (mirrors Legacy Discovery's `LD-018`). |
+| QST-004 | Dedup | Before adding a new entry, check existing rows across all three files for the same underlying question by content and merge into the existing row instead of filing a duplicate (mirrors Legacy Discovery's `LD-04-020`). |
 | QST-005 | Non-Deletion | IDs are permanent even if the question is later merged, discarded, or resolved — record the disposition in `Notes` instead of deleting the row (same non-destructive precedent as `COR-01-080`). |
 | QST-006 | Idea-vs-Question | A Question is an open fork with no proposed solution yet — test: "we haven't decided whether/how to X." A rough candidate direction — "we might build/do X" — belongs in `IDEA.md` instead. A Question resolving toward "yes, pursue this" spins off a new Idea citing the Question's ID; its own `Status` moves to `Resolved`, it doesn't silently become an Idea in place. |
 | QST-007 | Moving-Rows | Whenever anything resolves or discards a Question, move the row out of `QUESTIONS-OPEN.md` into `QUESTIONS-RESOLVED.md` or `QUESTIONS-DISCARDED.md` in the same pass (see Notes for common triggers): (1) keep the ID exactly; (2) the `Question` column's text becomes the `Decision` column; (3) `Notes` must record what settled it, citing the artifact; (4) delete the row from `QUESTIONS-OPEN.md` — no duplicate left behind. There is no `Status` field to set (`QST-003`). A question that is still genuinely undecided stays in `QUESTIONS-OPEN.md`. |
@@ -38,7 +39,7 @@ item instead).
 
 **Classification (`QST-001`):** Legacy's `target-product` tag doesn't map 1:1 to `systemic` — it was legacy's catch-all for "a decision about the new product," not a claim of architectural breadth. Only whole-architecture decisions (core safety boundaries, service-topology) are `systemic`; most single-app feature/config/deployment decisions are `local`; anything crossing an app boundary via a shared contract, volume, or visible field is `cross-artifact`.
 
-**Moving rows (`QST-007`):** Common triggers include a Mode's own rule (e.g. `DEC-012`, `IDA-005`), a Use Case/Spec readiness-gate carry-forward check (`SPS-05-010`, `UCS-05-010`), or Discovering-Legacy's Question Clarification gate (`LDG-025`).
+**Moving rows (`QST-007`):** Common triggers include a Mode's own rule (e.g. `DEC-012`, `IDA-005`), a Use Case/Spec readiness-gate carry-forward check (`SPS-05-010`, `UCS-05-010`), or Discovering-Legacy's Question Clarification gate (`LDG-04-060`).
 
 ## Output
 

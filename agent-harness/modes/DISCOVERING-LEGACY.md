@@ -48,35 +48,35 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| LD-001 | Core | Do not modify legacy source code or implement new code. |
-| LD-002 | Core | Do not treat legacy behavior as automatically correct target behavior. |
-| LD-003 | Core | Inspect current code first, then docs, then tests. |
-| LD-004 | Core | Record evidence paths for every finding. |
-| LD-005 | Core | Distinguish observed behavior, documented behavior, inferred intent, uncertainty, accidental complexity, dead code, stale notes, target-product decisions, and proof needs. |
-| LD-006 | Core | Mark inferred intent clearly; never present it as observed behavior. |
-| LD-007 | Core | Flag when evidence is strong enough to warrant a Use Case or Spec. Do not draft a Use Case directly — route to Refining (`/create-use-case`) once a Legacy Finding is strong enough (see `LD-012`); Specs may still be drafted directly only per `LD-008`'s exception. |
-| LD-008 | Core | Do not create Specs directly without a Use Case unless the evidence is unambiguous and strong. |
-| LD-009 | Core | Preserve app-local evidence inside app-scoped artifacts until cross-system synthesis is in scope. |
-| LD-010 | Core | Validate docs with `git diff --check`; use additional Markdown checks when the repository defines them. |
-| LD-011 | Core | Commit only when the user explicitly asks. |
-| LD-012 | Routing | Other outputs may include candidate `harness-data/artifacts/specs/active/SPEC-*.md` (per `LD-008`'s exception) and Harness Improvement candidates. Use Cases are not drafted here — once a Legacy Finding is strong enough (`LD-007`), route to Refining (`/create-use-case`) to create the `UC-*.md`. |
-| LD-013 | Findings | Store each finding as its own file, using `agent-harness/templates/LEGACY-FINDING-template.md` as-is: `harness-data/artifacts/legacy/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` for cross-system findings. |
-| LD-014 | Findings | IDs follow the existing `LF-<APP>-NNN` convention, numbered once per app (or `LF-CROSS-NNN` for cross-system) and never reused, even after a finding moves or is merged. |
-| LD-015 | Findings | Move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`, or `rejected`. Findings with `status: draft` or `status: reviewed` stay in `findings/active/`. |
-| LD-016 | Findings | Always look up or add a finding by ID — scan `findings/active/` and `findings/archive/` file names or frontmatter, never by reading through file append order. Do not create slice-numbered or subsystem-named headings as a substitute for the ID. |
-| LD-017 | Questions | Legacy Discovery questions live in the harness-level Questions registry (`QUESTIONS-OPEN`/`RESOLVED`/`DISCARDED.md`, schema in `agent-harness/artifact-specs/QUESTIONS.md`), not per-app files. Use `Q-<APP>-NNN` (app-scoped) or `CSQ-NNN` (cross-system) IDs, fold `Decision type` (`scope-v1` \| `preserve-vs-adapt` \| `fidelity` \| `naming` \| `deferred-feature`) into `Notes`, and follow the registry's own classification (`QST-001`) and status (`QST-003`) rules. Don't organize the registry by discovery slice, subsystem, or process block. |
-| LD-018 | Questions | Before adding a question, check existing registry rows for the same decision by content and merge instead of duplicating. |
-| LD-019 | Questions | Every question links back to the finding(s) that raised it through the registry's `Source` column. For cross-system questions, those source finding IDs should usually be `LF-CROSS-NNN`, with app finding IDs added in `Notes` only when the extra traceability matters. Provenance like slice name or artifact of origin belongs in `Notes`, not in the table structure. |
-| LD-020 | Completion-Criteria | An app may move to `app-local-complete` when all planned slices are `done`, `not-needed`, or explicitly deferred. |
-| LD-021 | Completion-Criteria | Open questions are classified as `local`, `cross-artifact`, or `systemic` (per `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-001`) in the source map table. |
-| LD-022 | Completion-Criteria | Stable findings have been propagated to reference docs where appropriate. |
-| LD-023 | Completion-Criteria | No remaining slice is needed for app-local rewrite planning. |
-| LD-024 | Proof-Gate | `proof_needed: true` — discovery found drift or runtime behavior needing executable proof before rewrite planning treats it as stable. |
-| LD-025 | Proof-Gate | `proof_needed: false` — no required executable proof is known, or required proof is complete. |
-| LD-026 | Proof-Gate | An app may be `app-local-complete` with `proof_needed: true`. Rewrite-ready means the remaining proof obligations are explicit and can be carried forward into Use Cases, Specs, validation, or later implementation work without making the rewrite design incoherent. |
-| LD-032 | Evidence-Precedence | Every finding states whether it is based on observed behavior, documented behavior, or inference, and records which source was treated as authoritative when evidence conflicts. |
-| LD-033 | Reference-Enrichment | Do not enrich references with unresolved, uncertain, cross-system-before-synthesis, or speculative findings. |
-| LD-034 | Reference-Enrichment | Write reference-doc enrichment from findings under that doc's `## Discovered` heading, citing the specific `LF-*` ID. Do not write target-decision language into `## Discovered` — a settled target decision belongs under `## Decisions`, added when the decision is actually made (via Question Clarification outcome or a later ADR), not during Legacy Discovery itself. |
+| LD-01-010 | Core | Do not modify legacy source code or implement new code. |
+| LD-01-020 | Core | Do not treat legacy behavior as automatically correct target behavior. |
+| LD-01-030 | Core | Inspect current code first, then docs, then tests. |
+| LD-01-040 | Core | Record evidence paths for every finding. |
+| LD-01-050 | Core | Distinguish observed behavior, documented behavior, inferred intent, uncertainty, accidental complexity, dead code, stale notes, target-product decisions, and proof needs. |
+| LD-01-060 | Core | Mark inferred intent clearly; never present it as observed behavior. |
+| LD-01-070 | Core | Flag when evidence is strong enough to warrant a Use Case or Spec. Do not draft a Use Case directly — route to Refining (`/create-use-case`) once a Legacy Finding is strong enough (see `LD-02-010`); Specs may still be drafted directly only per `LD-01-080`'s exception. |
+| LD-01-080 | Core | Do not create Specs directly without a Use Case unless the evidence is unambiguous and strong. |
+| LD-01-090 | Core | Preserve app-local evidence inside app-scoped artifacts until cross-system synthesis is in scope. |
+| LD-01-100 | Core | Validate docs with `git diff --check`; use additional Markdown checks when the repository defines them. |
+| LD-01-110 | Core | Commit only when the user explicitly asks. |
+| LD-02-010 | Routing | Other outputs may include candidate `harness-data/artifacts/specs/active/SPEC-*.md` (per `LD-01-080`'s exception) and Harness Improvement candidates. Use Cases are not drafted here — once a Legacy Finding is strong enough (`LD-01-070`), route to Refining (`/create-use-case`) to create the `UC-*.md`. |
+| LD-03-010 | Findings | Store each finding as its own file, using `agent-harness/templates/LEGACY-FINDING-template.md` as-is: `harness-data/artifacts/legacy/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` for cross-system findings. |
+| LD-03-020 | Findings | IDs follow the existing `LF-<APP>-NNN` convention, numbered once per app (or `LF-CROSS-NNN` for cross-system) and never reused, even after a finding moves or is merged. |
+| LD-03-030 | Findings | Move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`, or `rejected`. Findings with `status: draft` or `status: reviewed` stay in `findings/active/`. |
+| LD-03-040 | Findings | Always look up or add a finding by ID — scan `findings/active/` and `findings/archive/` file names or frontmatter, never by reading through file append order. Do not create slice-numbered or subsystem-named headings as a substitute for the ID. |
+| LD-04-010 | Questions | Legacy Discovery questions live in the harness-level Questions registry (`QUESTIONS-OPEN`/`RESOLVED`/`DISCARDED.md`, schema in `agent-harness/artifact-specs/QUESTIONS.md`), not per-app files. Use `Q-<APP>-NNN` (app-scoped) or `CSQ-NNN` (cross-system) IDs, fold `Decision type` (`scope-v1` \| `preserve-vs-adapt` \| `fidelity` \| `naming` \| `deferred-feature`) into `Notes`, and follow the registry's own classification (`QST-001`) and status (`QST-003`) rules. Don't organize the registry by discovery slice, subsystem, or process block. |
+| LD-04-020 | Questions | Before adding a question, check existing registry rows for the same decision by content and merge instead of duplicating. |
+| LD-04-030 | Questions | Every question links back to the finding(s) that raised it through the registry's `Source` column. For cross-system questions, those source finding IDs should usually be `LF-CROSS-NNN`, with app finding IDs added in `Notes` only when the extra traceability matters. Provenance like slice name or artifact of origin belongs in `Notes`, not in the table structure. |
+| LD-05-010 | Completion-Criteria | An app may move to `app-local-complete` when all planned slices are `done`, `not-needed`, or explicitly deferred. |
+| LD-05-020 | Completion-Criteria | Open questions are classified as `local`, `cross-artifact`, or `systemic` (per `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-001`) in the source map table. |
+| LD-05-030 | Completion-Criteria | Stable findings have been propagated to reference docs where appropriate. |
+| LD-05-040 | Completion-Criteria | No remaining slice is needed for app-local rewrite planning. |
+| LD-06-010 | Proof-Gate | `proof_needed: true` — discovery found drift or runtime behavior needing executable proof before rewrite planning treats it as stable. |
+| LD-06-020 | Proof-Gate | `proof_needed: false` — no required executable proof is known, or required proof is complete. |
+| LD-06-030 | Proof-Gate | An app may be `app-local-complete` with `proof_needed: true`. Rewrite-ready means the remaining proof obligations are explicit and can be carried forward into Use Cases, Specs, validation, or later implementation work without making the rewrite design incoherent. |
+| LD-08-010 | Evidence-Precedence | Every finding states whether it is based on observed behavior, documented behavior, or inference, and records which source was treated as authoritative when evidence conflicts. |
+| LD-09-010 | Reference-Enrichment | Do not enrich references with unresolved, uncertain, cross-system-before-synthesis, or speculative findings. |
+| LD-09-020 | Reference-Enrichment | Write reference-doc enrichment from findings under that doc's `## Discovered` heading, citing the specific `LF-*` ID. Do not write target-decision language into `## Discovered` — a settled target decision belongs under `## Decisions`, added when the decision is actually made (via Question Clarification outcome or a later ADR), not during Legacy Discovery itself. |
 
 ## Evidence Precedence
 
@@ -100,6 +100,6 @@ Clarification:
 | Tools, commands, CI, test setup | `TOOLING.md` |
 | Quality standards, test coverage, hygiene | `QUALITY.md` |
 
-Write enrichment under that doc's `## Discovered` heading, citing the specific `LF-*` ID (`LD-034`). This is a
+Write enrichment under that doc's `## Discovered` heading, citing the specific `LF-*` ID (`LD-09-020`). This is a
 transcription of stable evidence, not a target decision — target decisions land under that doc's separate
 `## Decisions` heading instead, per `agent-harness/docs/03-artifacts.md`'s Reference File Structure convention.

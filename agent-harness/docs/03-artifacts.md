@@ -54,7 +54,7 @@ updated: ""   # YYYY-MM-DD
 | `REVIEW-` | Review |
 | `IMPROVEMENT-` | Harness Improvement |
 | `ADR-` | Architecture Decision Record |
-| `LF-<APP>-` / `LF-CROSS-` | Legacy Finding (app / cross-system, see `agent-harness/modes/DISCOVERING-LEGACY.md` LD-013/LD-014) |
+| `LF-<APP>-` / `LF-CROSS-` | Legacy Finding (app / cross-system, see `agent-harness/modes/DISCOVERING-LEGACY.md` LD-03-010/LD-03-020) |
 | `Q-NNN` (new) / `Q-<APP>-NNN`, `CSQ-`, `CSP-` (migrated legacy) | Question |
 
 ### Relationship Fields
@@ -193,7 +193,7 @@ Records evidence extracted from legacy projects.
 **Statuses:** `draft` → `reviewed` → `converted` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/legacy/apps/<legacy-app-slug>/findings/active/<LF-ID>.md` (app-scoped) or
 `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` (cross-system) — see
-`agent-harness/modes/DISCOVERING-LEGACY.md` (LD-013)
+`agent-harness/modes/DISCOVERING-LEGACY.md` (LD-03-010)
 **Template:** `agent-harness/templates/LEGACY-FINDING-template.md`
 
 Must distinguish: observed behavior, documented behavior, inferred intent, accidental complexity, dead or uncertain code.

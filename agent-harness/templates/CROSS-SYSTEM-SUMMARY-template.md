@@ -20,7 +20,7 @@ tags: [legacy-discovery, cross-system]
 This `SUMMARY.md` documents the whole cross-system discovery plan. The other cross-system artifacts
 (`CONTRACTS.md`, `findings/`, `REWRITE-READINESS.md`, plus `CSQ-*`/`CSP-*` rows in the harness Questions registry)
 are created only when a slice produces evidence that needs them — see
-`agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s `LDC-002`/`003` for the governing rules and each
+`agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s `LDC-01-020`/`030` for the governing rules and each
 artifact's job.
 
 ## Entry Criteria
@@ -73,8 +73,8 @@ per-slice procedure.
 | Contract tests, parity tests, security gates, readiness/proof standards | `harness-data/reference/QUALITY.md` |
 
 Cross-system artifact responsibilities and canonical-ID ownership: see
-`agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s Artifact Routing table and `LDC-004`. Clarification
-sequencing after normalization: see `agent-harness/modes/legacy-discovery/CLARIFICATION.md`'s `LDG-016`/`018`.
+`agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s Artifact Routing table and `LDC-01-040`. Clarification
+sequencing after normalization: see `agent-harness/modes/legacy-discovery/CLARIFICATION.md`'s `LDG-03-020`/`040`.
 
 ## Initial Cross-System Questions
 
@@ -102,7 +102,7 @@ not change evidence meaning or remove traceability.
 ## Discovery-Complete Shape
 
 The collapsed shape of this same file once cross-system synthesis is finished — see
-`agent-harness/modes/legacy-discovery/NORMALIZATION.md`'s `LDG-007` for the collapse procedure itself.
+`agent-harness/modes/legacy-discovery/NORMALIZATION.md`'s `LDG-01-070` for the collapse procedure itself.
 
 Collapses to only: `Purpose`, `Entry Criteria` (kept as a record of the scope synthesis actually ran against),
 `Evidence Precedence`, `Reference Enrichment Routing`, and any unresolved items from
