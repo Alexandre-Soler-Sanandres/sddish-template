@@ -164,10 +164,10 @@ For the practical step-by-step legacy application playbook, see
 [09-legacy-applications.md](09-legacy-applications.md).
 
 ```text
-harness-data/artifacts/legacy/imported/old-project
+harness-data/artifacts/legacy/apps/<legacy-app-slug>/
   → legacy inventory
   → source maps
-  → findings (LEGACY-FINDING-*)
+  → findings (LF-<APP>-NNN, or LF-CROSS-NNN for cross-system findings)
   → Refining: Legacy Finding → Use Case (once evidence is strong enough)
   → Specs (only when evidence is strong enough — directly from Legacy Discovery is the rare exception)
   → Tasks if required

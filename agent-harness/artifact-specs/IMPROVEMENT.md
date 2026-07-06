@@ -31,5 +31,5 @@ An Improvement is created only from a harness/process-flavored Review finding
 
 ## Output
 
-- `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
+- `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md` while drafting or in progress; `done/` once `IMPR-03-040`'s conditions are met (approved changes applied, validation result documented). See `agent-harness/OUTPUTS.md` for the full lifecycle-folder rules.
 - Use `agent-harness/templates/IMPROVEMENT-template.md` as the starting point for every new Improvement artifact.

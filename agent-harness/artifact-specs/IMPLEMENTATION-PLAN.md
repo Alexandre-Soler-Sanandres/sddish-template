@@ -49,5 +49,5 @@ Source:
 
 ## Output
 
-- `harness-data/artifacts/implementation-plans/active/PLAN-*.md`
+- `harness-data/artifacts/implementation-plans/active/PLAN-*.md` while drafting or in progress; `approved/` once `IPL-02-010`'s Readiness Gate passes; `done/` on completion. See `agent-harness/OUTPUTS.md` for the full lifecycle-folder rules.
 - Use `agent-harness/templates/IMPLEMENTATION-PLAN-template.md` as the starting point for every new plan.

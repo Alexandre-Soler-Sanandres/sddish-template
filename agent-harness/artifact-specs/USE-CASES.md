@@ -56,7 +56,7 @@ When legacy evidence is involved, the body should also preserve the design-relev
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| UCS-01-020 | Sources | ADRs are cited as reference authority when a Use Case touches a system boundary or structural decision they settle — only `accepted` ADRs count as settled authority, a `proposed` ADR may be noted as pending context but not treated as settled (`DEC-05-010`); an ADR is never itself a source that produces a Use Case (`DEC-02-020`). |
+| UCS-01-020 | Sources | ADRs are reference authority only, never a source that produces a Use Case — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
 | UCS-02-010 | Refining | A Use Case may be refined when new information from a Partnering session or Legacy Finding changes the scope, open questions are resolved, or the primary actor or scenario needs correction. |
 | UCS-02-020 | Refining | Refining does not change the Use Case ID. Update the `updated` field and status as appropriate. |
 | UCS-03-010 | Readiness-Gate | Before setting a Use Case status to `ready-for-spec`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |

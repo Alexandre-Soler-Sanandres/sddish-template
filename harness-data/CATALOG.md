@@ -5,7 +5,7 @@ structure and location conventions; this file tracks this project's live state w
 
 ## Active Implementation Plans
 
-`CORE.md`'s Parallel Work rule requires this table to reflect all Plans at status `approved` or `in-progress`.
+`IMPLEMENTATION-PLAN.md`'s Parallel-Work rules (`IPL-05-*`) require this table to reflect all Plans at status `approved` or `in-progress`.
 Update it in the same pass a Plan's status changes into or out of either value.
 
 | Plan ID | Spec ID | Status | Notes |

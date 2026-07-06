@@ -60,16 +60,11 @@ activity, the artifact spec governs the resulting Plan's own body schema and rea
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IPL-03-010 | Boundaries | Do not change code. |
-| IPL-03-020 | Boundaries | Do not treat `proposed` status as approved. |
-| IPL-03-030 | Boundaries | Do not proceed if the source artifact is not at an accepted status. |
-| IPL-03-040 | Boundaries | Do not generate duplicate Tasks or skip existing ones. |
+| IPL-03-010 | Boundaries | Do not change code; do not treat `proposed` status as approved; do not proceed if the source artifact is not at an accepted status; do not generate duplicate Tasks or skip existing ones. |
 | IPL-04-010 | Procedure | When the planning task matches a reusable procedure, load the relevant universal and project playbooks before finalizing the plan. |
 | IPL-04-020 | Procedure | Reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
-| IPL-05-030 | Parallel-Work | Allow at most one Implementation Plan at status `approved` or `in-progress` per Spec. |
-| IPL-05-040 | Parallel-Work | Check `harness-data/CATALOG.md` for existing Plans at status `approved` or `in-progress` before approving a new Plan. |
+| IPL-05-030 | Parallel-Work | Allow at most one Implementation Plan at status `approved` or `in-progress` per Spec. Plans on non-overlapping Specs may run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
 | IPL-05-050 | Parallel-Work | If two active Plans have overlapping `allowed_paths` across their Tasks, stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution. |
-| IPL-05-060 | Parallel-Work | Allow concurrent Plans on non-overlapping Specs without restriction. |
 | IPL-05-070 | Parallel-Work | Keep `harness-data/CATALOG.md` accurate for all Plans at status `approved` or `in-progress`. |
 
 ## Reference Files

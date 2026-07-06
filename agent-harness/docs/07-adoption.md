@@ -225,7 +225,7 @@ These are the details people most often need once the basic files exist:
 
 - `agent-harness/CATALOG.md` ships ready to use — it is a navigation index of where artifact types live, not a log
   of individual artifacts; agents use it to locate artifacts, and it only changes if the harness structure itself
-  changes. Live per-project state (e.g. active Implementation Plan pointers, per `CORE.md`'s Parallel Work rule)
+  changes. Live per-project state (e.g. active Implementation Plan pointers, per `IMPLEMENTATION-PLAN.md`'s Parallel-Work rules)
   lives in the separate `harness-data/CATALOG.md` instead — same name, different root, on purpose: one is the
   universal index, the other is this project's own bookkeeping against it
 - `harness-data/RUN-LOG.md` is not required by default, but the agent may use it for interrupted, approval-heavy,

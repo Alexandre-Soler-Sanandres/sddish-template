@@ -20,8 +20,9 @@ covers Modes only.
 ## Partnering
 
 The conversational front door for unclear thinking — a structured sparring partner, not a solution machine.
-Produces Transcripts and Ideas, and identifies (but does not draft) ADRs and Use Cases for hand-off to the
-appropriate mode. Ends only on explicit user request, never on a vague statement. See
+Produces Transcripts and Ideas, and identifies ADRs and Use Cases for hand-off to the appropriate mode — Partnering
+may draft a candidate ADR itself when a settled decision surfaces (`DEC-01-010`, mirrored by `PTN-02-100`), but
+does not draft Use Cases; those hand off to Refining. Ends only on explicit user request, never on a vague statement. See
 `agent-harness/modes/PARTNERING.md` for the full rule set.
 
 ## Refining

@@ -43,13 +43,8 @@ rules; this file only says when to trigger the change, not what the change requi
 | IMPL-03-150 | Execution | When a Plan's status changes into or out of `in-progress` (including to `done`), update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (`IPL-05-070`); remove the row once the Plan is no longer `approved` or `in-progress`. |
 | IMPL-03-160 | Execution | When a Plan reaches status `done` and every Task derived from a Spec is `done`, set that Spec's status to `implemented`. When every Spec derived from a Use Case is `implemented`, set the Use Case's status to `implemented`. |
 | IMPL-04-010 | Batch | Batch implementation is allowed only when explicitly planned and approved. High-risk tasks must remain separate unless explicitly approved. |
-| IMPL-05-010 | Boundaries | Do not implement beyond the approved plan scope. |
-| IMPL-05-020 | Boundaries | Do not skip planned validation steps. |
-| IMPL-05-030 | Boundaries | Do not refactor unrelated code. |
-| IMPL-05-040 | Boundaries | Do not modify files outside the allowed paths defined in Task frontmatter. |
 | IMPL-05-050 | Boundaries | Do not continue past a failing validation without explicit approval. |
-| IMPL-06-010 | Procedure | Before substantive execution, load any relevant playbook or guide required by the task shape or local project context. |
-| IMPL-06-020 | Procedure | Playbooks and guides may refine execution steps and checks, but they do not expand approved scope or override plan boundaries. |
+| IMPL-06-010 | Procedure | Before substantive execution, load any relevant playbook or guide required by the task shape or local project context. Playbooks and guides may refine execution steps and checks, but they do not expand approved scope or override plan boundaries (`COR-04-070`). |
 
 ## Output
 

@@ -23,7 +23,7 @@ Via natural language: explicit instruction to validate a specific artifact, plan
 | VAL-02-020 | Process-Validation | The Implementation Plan is at status `approved` before implementation started. |
 | VAL-02-030 | Process-Validation | No implementation happened before a plan was accepted. |
 | VAL-02-040 | Process-Validation | No Specs or Tasks were created from Partnering mode. |
-| VAL-02-050 | Process-Validation | High-risk areas were handled with extra care. |
+| VAL-02-050 | Process-Validation | Verify `COR-09-010`'s high-risk handling (scope and validation coverage, plus approval coverage for payments) was actually followed for any high-risk area touched. |
 | VAL-02-060 | Process-Validation | Reconcile the actual code changes (via `git log`/`git diff`) against the approved Implementation Plan's `allowed_paths` and steps. Flag any file changed outside `allowed_paths`, or any change with no corresponding Plan step, as a finding. |
 | VAL-03-010 | Behavioral-Validation | Each acceptance criterion is met and verifiable. |
 | VAL-03-020 | Behavioral-Validation | `test_refs` in the Spec frontmatter are populated, contain only test file paths, and all referenced test files exist. |
@@ -36,8 +36,7 @@ Via natural language: explicit instruction to validate a specific artifact, plan
 | VAL-06-010 | Boundaries | Do not implement or change code. |
 | VAL-06-020 | Boundaries | Do not modify artifacts beyond updating their status. |
 | VAL-06-030 | Boundaries | Do not skip validation steps without explicit approval. |
-| VAL-07-010 | Procedure | When a relevant playbook defines required checks or outputs for the work under validation, verify that those expectations were followed. |
-| VAL-07-020 | Procedure | Playbooks may refine what to verify for a task shape, but Validation still owns the validation decision and boundaries. |
+| VAL-07-010 | Procedure | When a relevant playbook defines required checks or outputs for the work under validation, verify that those expectations were followed. Playbooks may refine what to verify for a task shape, but Validation still owns the validation decision and boundaries (`COR-04-070`). |
 
 ## Output
 
