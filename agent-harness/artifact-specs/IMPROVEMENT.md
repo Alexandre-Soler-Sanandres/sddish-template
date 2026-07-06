@@ -24,10 +24,10 @@ An Improvement is created only from a harness/process-flavored Review finding
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IMPR-001 | Validation | Keep `## Validation` as the validation plan or checklist. |
-| IMPR-002 | Validation | Add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done` or moved to `done/`. |
-| IMPR-003 | Validation | If a validation item is prospective and cannot be fully proven yet, state that explicitly instead of treating it as completed evidence. |
-| IMPR-004 | Validation | Do not move an Improvement artifact to `done/` until the approved target changes are applied and the validation result is documented. |
+| IMPR-03-010 | Validation | Keep `## Validation` as the validation plan or checklist. |
+| IMPR-03-020 | Validation | Add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done` or moved to `done/`. |
+| IMPR-03-030 | Validation | If a validation item is prospective and cannot be fully proven yet, state that explicitly instead of treating it as completed evidence. |
+| IMPR-03-040 | Validation | Do not move an Improvement artifact to `done/` until the approved target changes are applied and the validation result is documented. |
 
 ## Output
 

@@ -36,11 +36,11 @@ Review -> Improvement artifact -> approved harness change -> validation -> updat
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IMPR-005 | Scope | Approved changes may be applied by default to: any file under `agent-harness/`; `.claude/skills/harness/` and `.agents/skills/harness/` (the per-agent CLI entry-point layers); and root-level `AGENTS.md`/`CLAUDE.md` (the harness's loader files). Mirror a change to one entry-point layer across the others unless it's agent-specific. Other files may change too when the Improvement explicitly calls for it (e.g. a matching `harness-data/reference/*.md` update). |
-| IMPR-006 | Boundaries | Do not change the harness during normal feature implementation. |
-| IMPR-007 | Boundaries | Harness changes must be explicit and approved. |
-| IMPR-008 | Boundaries | Target files must be listed in frontmatter. |
-| IMPR-009 | Boundaries | Do not create Improvement artifacts from Partnering — only from Review findings. |
+| IMPR-01-010 | Scope | Approved changes may be applied by default to: any file under `agent-harness/`; `.claude/skills/harness/` and `.agents/skills/harness/` (the per-agent CLI entry-point layers); and root-level `AGENTS.md`/`CLAUDE.md` (the harness's loader files). Mirror a change to one entry-point layer across the others unless it's agent-specific. Other files may change too when the Improvement explicitly calls for it (e.g. a matching `harness-data/reference/*.md` update). |
+| IMPR-02-010 | Boundaries | Do not change the harness during normal feature implementation. |
+| IMPR-02-020 | Boundaries | Harness changes must be explicit and approved. |
+| IMPR-02-030 | Boundaries | Target files must be listed in frontmatter. |
+| IMPR-02-040 | Boundaries | Do not create Improvement artifacts from Partnering — only from Review findings. |
 
 ## Reference Files
 
