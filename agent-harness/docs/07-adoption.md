@@ -17,7 +17,8 @@ This repository is marked as a GitHub template. There are two ways to create a n
    - `harness-data/reference/QUALITY.md`
 4. Start with a Partnering or Use Case session
 
-You get the full structure — mode files, templates, artifact folders, and Claude Code commands — with a clean git history.
+You get the full structure — mode files, templates, artifact folders, and CLI entry points for both Claude Code
+(`.claude/skills/harness/`) and Codex CLI (`.agents/skills/harness/`) — with a clean git history.
 
 ### Option B: Local clone
 

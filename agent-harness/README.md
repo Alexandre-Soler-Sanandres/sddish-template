@@ -94,6 +94,10 @@ harness-data/
     legacy/
 ```
 
+A third, thin layer wires the harness into each agent's own CLI: `.claude/skills/harness/` for Claude Code and
+`.agents/skills/harness/` for Codex CLI, one skill per mode/artifact entry point. These are per-agent invocation
+wrappers, not harness logic — each just names the mode or artifact-spec file to follow.
+
 ## Getting Started
 
 When using the harness as a GitHub template, click **Use this template** to create a new repository with the full
