@@ -89,14 +89,14 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| RVW-001 | Escalation | The agent never autonomously re-enters a producing mode after `changes-requested`, `rejected`, or `follow-up-required` — the user must explicitly request the next action. |
-| RVW-002 | Boundaries | Do not change the substantive content of the artifact under review as part of the review itself. Status transitions and explicitly prescribed follow-up metadata updates are allowed. |
-| RVW-003 | Boundaries | Do not implement fixes. |
-| RVW-004 | Boundaries | Do not create Tasks or Specs as a side effect. |
-| RVW-005 | Boundaries | Do not modify harness files without an Improvement artifact. |
-| RVW-006 | Procedure | When the review target matches a specialized review procedure, load the relevant playbook before reviewing. |
-| RVW-007 | Procedure | Playbooks may refine how the review is performed, but they do not change Review outcomes, follow-up actions, or mode boundaries. |
-| RVW-008 | Flavor | `target_type` determines the flavor (see Two Flavors) — use the matching Criteria Checklist and After-Review action table; never mix the two. |
+| RVW-01-010 | Escalation | The agent never autonomously re-enters a producing mode after `changes-requested`, `rejected`, or `follow-up-required` — the user must explicitly request the next action. |
+| RVW-02-010 | Boundaries | Do not change the substantive content of the artifact under review as part of the review itself. Status transitions and explicitly prescribed follow-up metadata updates are allowed. |
+| RVW-02-020 | Boundaries | Do not implement fixes. |
+| RVW-02-030 | Boundaries | Do not create Tasks or Specs as a side effect. |
+| RVW-02-040 | Boundaries | Do not modify harness files without an Improvement artifact. |
+| RVW-03-010 | Procedure | When the review target matches a specialized review procedure, load the relevant playbook before reviewing. |
+| RVW-03-020 | Procedure | Playbooks may refine how the review is performed, but they do not change Review outcomes, follow-up actions, or mode boundaries. |
+| RVW-04-010 | Flavor | `target_type` determines the flavor (see Two Flavors) — use the matching Criteria Checklist and After-Review action table; never mix the two. |
 
 ## Output
 
