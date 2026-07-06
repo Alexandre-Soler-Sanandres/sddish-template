@@ -45,7 +45,8 @@ Source:
 | IPL-01-020 | Grouping | Keep Tasks separate when risk is high, validation differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules. |
 | IPL-02-010 | Readiness-Gate | Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact. All items must be checked. A single unchecked item blocks the status change. |
 | IPL-05-010 | Parallel-Work | Before setting a Plan status to `approved`, check `harness-data/CATALOG.md` for other Plans at status `approved` or `in-progress` on the same Spec (`IPL-05-030`) or with overlapping Task `allowed_paths` (`IPL-05-050`); stop and surface the conflict if either applies. |
-| IPL-05-020 | Parallel-Work | When a Plan's status changes to `approved`, add or update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (`IPL-05-070`). |
+| IPL-05-020 | Parallel-Work | Keep `harness-data/CATALOG.md`'s Active Implementation Plans table accurate for all Plans at status `approved` or `in-progress`: add or update a Plan's row in the same pass its status changes to `approved` or `in-progress`; remove the row once the Plan is no longer either. |
+| IPL-05-080 | Cascade | When a Plan reaches status `done` and every Task derived from a Spec is `done`, set that Spec's status to `implemented`. When every Spec derived from a Use Case is `implemented`, set the Use Case's status to `implemented`. |
 
 ## Output
 

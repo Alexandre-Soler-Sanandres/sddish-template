@@ -65,7 +65,6 @@ activity, the artifact spec governs the resulting Plan's own body schema and rea
 | IPL-04-020 | Procedure | Reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
 | IPL-05-030 | Parallel-Work | Allow at most one Implementation Plan at status `approved` or `in-progress` per Spec. Plans on non-overlapping Specs may run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
 | IPL-05-050 | Parallel-Work | If two active Plans have overlapping `allowed_paths` across their Tasks, stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution. |
-| IPL-05-070 | Parallel-Work | Keep `harness-data/CATALOG.md` accurate for all Plans at status `approved` or `in-progress`. |
 
 ## Reference Files
 

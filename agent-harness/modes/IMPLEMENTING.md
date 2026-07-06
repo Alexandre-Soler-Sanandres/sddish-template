@@ -14,9 +14,10 @@ Via natural language: explicit instruction referencing an approved plan.
 
 An Implementation Plan at status `approved` (`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`) whose included
 Tasks are `ready`/`planned` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-03-090`, this file's Execution rules
-trigger status changes on Task, Spec, and Use Case (`IMPL-03-030`, `IMPL-03-110`, `IMPL-03-160`) — load
-`agent-harness/artifact-specs/TASKS.md`, `SPECS.md`, and `USE-CASES.md` for those artifacts' own status-transition
-rules; this file only says when to trigger the change, not what the change requires.
+trigger status changes on Task, Plan, Spec, and Use Case (`IMPL-03-030`, `IMPL-03-110`) — load
+`agent-harness/artifact-specs/TASKS.md`, `IMPLEMENTATION-PLAN.md`, `SPECS.md`, and `USE-CASES.md` for those
+artifacts' own status-transition rules; this file only says when to trigger the change, not what the change
+requires.
 
 ## Rules
 
@@ -40,8 +41,7 @@ rules; this file only says when to trigger the change, not what the change requi
 | IMPL-03-120 | Execution | Stop if validation fails outside the expected scope. |
 | IMPL-03-130 | Execution | Stop if missing or contradictory requirements are discovered. |
 | IMPL-03-140 | Execution | Stop if a high-risk area is encountered that was not covered by the plan. |
-| IMPL-03-150 | Execution | When a Plan's status changes into or out of `in-progress` (including to `done`), update its row in the `harness-data/CATALOG.md` Active Implementation Plans table in the same pass (`IPL-05-070`); remove the row once the Plan is no longer `approved` or `in-progress`. |
-| IMPL-03-160 | Execution | When a Plan reaches status `done` and every Task derived from a Spec is `done`, set that Spec's status to `implemented`. When every Spec derived from a Use Case is `implemented`, set the Use Case's status to `implemented`. |
+| IMPL-03-150 | Execution | When a Plan's status changes (`in-progress`, `done`), or when every Task derived from a Spec reaches `done`, follow `IMPLEMENTATION-PLAN.md`'s own status-transition rules for CATALOG bookkeeping and the Spec/Use-Case status cascade. |
 | IMPL-04-010 | Batch | Batch implementation is allowed only when explicitly planned and approved. High-risk tasks must remain separate unless explicitly approved. |
 | IMPL-05-050 | Boundaries | Do not continue past a failing validation without explicit approval. |
 | IMPL-06-010 | Procedure | Before substantive execution, load any relevant playbook or guide required by the task shape or local project context. Playbooks and guides may refine execution steps and checks, but they do not expand approved scope or override plan boundaries (`COR-04-070`). |
@@ -49,7 +49,7 @@ rules; this file only says when to trigger the change, not what the change requi
 ## Output
 
 Implementing does not produce a new artifact type of its own — it updates Task/Plan/Spec/Use Case status
-(`IMPL-03-030`, `IMPL-03-040`, `IMPL-03-160`) and the code itself. When a durable record is needed (e.g. before a status
+(`IMPL-03-030`, `IMPL-03-040`, `IMPL-03-150`) and the code itself. When a durable record is needed (e.g. before a status
 advance that should be citable later), it produces the product/requirements flavor of Review
 (`agent-harness/artifact-specs/REVIEW.md`'s Two Flavors) — not required for every plan step, only when a formal
 record is warranted.
