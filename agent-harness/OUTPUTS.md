@@ -9,17 +9,17 @@ For artifact-language rules and closed-artifact rewrite rules, see `agent-harnes
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| OUT-001 | Format | All lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body. |
-| OUT-002 | Scope | `agent-harness/README.md` is the harness overview, not a lifecycle artifact. |
-| OUT-003 | Scope | Do not create directory-scoped README files as harness artifacts. Use mode files, templates, `CATALOG.md`, and scoped restart artifacts such as `SOURCE-MAP.md` or `SUMMARY.md` for harness guidance. |
-| OUT-004 | Naming | Artifact filenames must follow the canonical naming patterns in `## File Naming Conventions`. |
-| OUT-005 | Naming | IDs must remain stable even if filenames or folders change. |
-| OUT-006 | Lifecycle | New artifacts are created in `active/` unless a mode explicitly defines a different starting location. |
-| OUT-007 | Lifecycle | Move artifacts between lifecycle subfolders as their status changes. Do not rename the file ID when moving them. |
-| OUT-008 | Improvement-Lifecycle | For Improvements, `done/` means the approved target changes are applied and the artifact records a `## Validation Result` confirming what was checked. |
-| OUT-009 | Legacy-Discovery | Legacy Discovery artifacts must use the scoped folder structure defined in `## Legacy Discovery Structure`. |
-| OUT-010 | ADR-Lifecycle | ADRs use `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair — see `## Folder Structure`. |
-| OUT-011 | Questions-Lifecycle | The Questions registry does not use lifecycle subfolders. It is three flat files under `harness-data/artifacts/questions/`; a row's file *is* its status — see `agent-harness/artifact-specs/QUESTIONS.md`. |
+| OUT-01-010 | Format | All lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body. |
+| OUT-02-010 | Scope | `agent-harness/README.md` is the harness overview, not a lifecycle artifact. |
+| OUT-02-020 | Scope | Do not create directory-scoped README files as harness artifacts. Use mode files, templates, `CATALOG.md`, and scoped restart artifacts such as `SOURCE-MAP.md` or `SUMMARY.md` for harness guidance. |
+| OUT-03-010 | Naming | Artifact filenames must follow the canonical naming patterns in `## File Naming Conventions`. |
+| OUT-03-020 | Naming | IDs must remain stable even if filenames or folders change. |
+| OUT-04-010 | Lifecycle | New artifacts are created in `active/` unless a mode explicitly defines a different starting location. |
+| OUT-04-020 | Lifecycle | Move artifacts between lifecycle subfolders as their status changes. Do not rename the file ID when moving them. |
+| OUT-05-010 | Improvement-Lifecycle | For Improvements, `done/` means the approved target changes are applied and the artifact records a `## Validation Result` confirming what was checked. |
+| OUT-06-010 | Legacy-Discovery | Legacy Discovery artifacts must use the scoped folder structure defined in `## Legacy Discovery Structure`. |
+| OUT-07-010 | ADR-Lifecycle | ADRs use `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair — see `## Folder Structure`. |
+| OUT-08-010 | Questions-Lifecycle | The Questions registry does not use lifecycle subfolders. It is three flat files under `harness-data/artifacts/questions/`; a row's file *is* its status — see `agent-harness/artifact-specs/QUESTIONS.md`. |
 
 ## Artifact Format
 
@@ -56,8 +56,8 @@ Within that root, each artifact directory uses subfolders to reflect lifecycle s
 | `proposed/` | `adrs/` | not yet settled |
 | `accepted/` | `adrs/` | in force, citable authority |
 
-`adrs/` uses `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair (`OUT-010`).
-`questions/` has no lifecycle subfolders at all — it is three flat files, one per status (`OUT-011`).
+`adrs/` uses `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair (`OUT-07-010`).
+`questions/` has no lifecycle subfolders at all — it is three flat files, one per status (`OUT-08-010`).
 
 ## Legacy Discovery Structure
 
