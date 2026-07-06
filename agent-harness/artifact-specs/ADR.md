@@ -13,7 +13,7 @@ Via CLI: `/create-adr` (command registration lives outside `agent-harness/`).
 Via natural language: from any mode, when a settled structural/architectural decision is reached.
 
 Unlike Use Case and Spec, authorship is not restricted to one entry point — real-world ADR practice treats
-drafting as broadly proposable (see `DEC-001`). What's restricted is acceptance, not authorship.
+drafting as broadly proposable (see `DEC-01-010`). What's restricted is acceptance, not authorship.
 
 ## Sources
 
@@ -49,24 +49,24 @@ or when the decision is actually about actor-visible behavior (that belongs in a
 ## Rules
 
 Load `agent-harness/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md` in addition to this file when the ADR
-supersedes another ADR, cites a `related` ADR, or settles a Questions-registry entry (`DEC-005`, `007`, `009`,
-`010`, `011`, `012` live there).
+supersedes another ADR, cites a `related` ADR, or settles a Questions-registry entry (`DEC-06-010`, `DEC-07-010`,
+`DEC-08-010`, `DEC-09-010`, `DEC-10-010`, `DEC-11-010` live there).
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| DEC-001 | Sources | Any mode may identify and draft a candidate ADR at status `proposed` when it surfaces a settled structural/architectural decision. |
-| DEC-002 | Boundaries | An ADR must not itself trigger implementation, and must not create Specs, Tasks, or Implementation Plans directly. |
-| DEC-003 | Boundaries | An ADR is cited as reference authority by Use Cases and Specs; it is not itself a source that produces a Use Case or Spec (see `SPECS.md`'s `SPS-01-020`, `USE-CASES.md`'s Sources). |
-| DEC-004 | Readiness-Gate | Before setting status to `accepted`, verify the Readiness Checklist in the artifact. An open question blocks acceptance only if answering it differently would require rewriting the `Decision` section itself; a question that only affects implementation detail, performance tuning, or narrower in-scope choices does not block and may remain listed. |
-| DEC-006 | Approval | Status must not be set to `accepted` without the user's explicit confirmation — do not infer approval from discussion. |
-| DEC-008 | Citation-Gate | Use Cases and Specs may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled. |
+| DEC-01-010 | Sources | Any mode may identify and draft a candidate ADR at status `proposed` when it surfaces a settled structural/architectural decision. |
+| DEC-02-010 | Boundaries | An ADR must not itself trigger implementation, and must not create Specs, Tasks, or Implementation Plans directly. |
+| DEC-02-020 | Boundaries | An ADR is cited as reference authority by Use Cases and Specs; it is not itself a source that produces a Use Case or Spec (see `SPECS.md`'s `SPS-01-020`, `USE-CASES.md`'s Sources). |
+| DEC-03-010 | Readiness-Gate | Before setting status to `accepted`, verify the Readiness Checklist in the artifact. An open question blocks acceptance only if answering it differently would require rewriting the `Decision` section itself; a question that only affects implementation detail, performance tuning, or narrower in-scope choices does not block and may remain listed. |
+| DEC-04-010 | Approval | Status must not be set to `accepted` without the user's explicit confirmation — do not infer approval from discussion. |
+| DEC-05-010 | Citation-Gate | Use Cases and Specs may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled. |
 
 ## Output
 
 - `harness-data/artifacts/adrs/proposed/ADR-*.md` (every new ADR starts here)
 - Use `agent-harness/templates/ADR-template.md` as the starting point for every new ADR.
-- A new ADR is created in `proposed/`. When it advances to `accepted` (per `DEC-004`, `DEC-006`), move it to
-  `accepted/` — this is the load-bearing status that makes it citable authority (`DEC-008`), the same reason
+- A new ADR is created in `proposed/`. When it advances to `accepted` (per `DEC-03-010`, `DEC-04-010`), move it to
+  `accepted/` — this is the load-bearing status that makes it citable authority (`DEC-05-010`), the same reason
   Implementation Plan gives `approved` its own folder rather than lumping it into `active/`. `superseded` and
   `rejected` ADRs move to `archive/` together (content preserved, per the same non-destructive precedent as
   `COR-01-080`) — no operational reason to split those two further, matching how Idea lumps `archived`/`rejected`

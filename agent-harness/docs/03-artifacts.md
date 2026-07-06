@@ -20,13 +20,13 @@ profiles. Structure each file with up to two top-level sections so a reader can 
 - `## Decisions` — present once at least one target-architecture decision exists. States the decision in one or
   two lines, then cites whatever settled it: an accepted ADR (`ADR-NNN`), a Legacy Finding (`LF-*`), the Questions
   registry (`CSQ-*`/`CSP-*` rows), or a legacy synthesis artifact (`REWRITE-READINESS.md`, `CONTRACTS.md`). Cite
-  authority, don't restate its reasoning — mirrors `DEC-003`'s rule for Use Cases/Specs citing ADRs.
+  authority, don't restate its reasoning — mirrors `DEC-02-020`'s rule for Use Cases/Specs citing ADRs.
 
 A greenfield project (no Legacy Discovery) has `## Decisions` only — do not add a `## Discovered` section with
 placeholder content just because this convention exists.
 
-When the artifact a `## Decisions` entry cites is superseded (an ADR superseded per `DEC-005`, or a Legacy
-Finding/Question re-resolved), update the citation in the same pass — see `DEC-009`.
+When the artifact a `## Decisions` entry cites is superseded (an ADR superseded per `DEC-06-010`, or a Legacy
+Finding/Question re-resolved), update the citation in the same pass — see `DEC-08-010`.
 
 ## YAML Frontmatter
 

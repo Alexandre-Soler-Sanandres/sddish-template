@@ -10,7 +10,7 @@ source: []                # e.g. [TRANSCRIPT-002], [IDEA-001]
 legacy_refs: []            # e.g. [CSQ-NNN] — legacy decisions this ADR builds on, narrows, or overrides
 supersedes: []            # e.g. [IDEA-001] — artifacts this ADR replaces
 superseded_by: []         # e.g. [ADR-010] — filled in later if this ADR is ever replaced
-related: []                # e.g. [SPEC-002, ADR-005] — loosely related artifacts; each needs a "Relation to" note in the body, per DEC-010
+related: []                # e.g. [SPEC-002, ADR-005] — loosely related artifacts; each needs a "Relation to" note in the body, per DEC-09-010
 derived_use_cases: []      # e.g. [UC-011] — Use Cases created that depend on this ADR
 derived_specs: []          # e.g. [SPEC-021] — Specs created that depend on this ADR
 tags: []
@@ -44,11 +44,12 @@ Before advancing to `accepted`, verify all items are checked:
 - [ ] Decision is stated as a single, standalone statement that could be quoted without needing the rest of the document
 - [ ] At least one real alternative is documented in Considered Alternatives, with a concrete reason for rejection
 - [ ] Consequences names concrete downstream effects, not a restatement of the Decision
-- [ ] `legacy_refs`, `supersedes`, `superseded_by`, and `related` are accurate and complete (`derived_use_cases`/`derived_specs` are expected to be empty at acceptance — they're populated later, per `DEC-007`)
-- [ ] Every ID in `related` has an inline "Relation to" note stating its relationship type and reason (per `DEC-010`)
+- [ ] `legacy_refs`, `supersedes`, `superseded_by`, and `related` are accurate and complete (`derived_use_cases`/`derived_specs` are expected to be empty at acceptance — they're populated later, per `DEC-07-010`)
+- [ ] Every ID in `related` has an inline "Relation to" note stating its relationship type and reason (per `DEC-09-010`)
 - [ ] No open questions remain that would change the Decision itself
 - [ ] The user has explicitly confirmed acceptance (not inferred from discussion)
 
 ## Lifecycle Note
 
-See `agent-harness/artifact-specs/ADR.md`'s `DEC-004`–`DEC-006` for the acceptance gate, immutability, and approval rules.
+See `agent-harness/artifact-specs/ADR.md`'s `DEC-03-010` (acceptance gate) and `DEC-04-010` (approval), plus
+`agent-harness/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md`'s `DEC-06-010` (immutability).
