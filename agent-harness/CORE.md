@@ -30,6 +30,7 @@ instances of this live in the Context-Loading group below.
 | COR-03-080 | Context-Loading | Load archived artifacts only when they are explicitly needed. |
 | COR-03-090 | Context-Loading | Before creating or updating an artifact, also load that artifact type's spec under `agent-harness/artifact-specs/` (in addition to the active Mode file, `COR-03-040`) — e.g. creating a Spec loads both `REFINING.md` and `SPECS.md`. |
 | COR-03-100 | Context-Loading | `agent-harness/shared-procs/` holds procedures explicitly invoked during a Mode's own work (e.g. Validation, invoked during Implementing or named in Improving-Harness's Improvement Process) — not a Mode or artifact spec itself. Load only when actually invoked, not by default. |
+| COR-03-110 | Context-Loading | A delegation prompt to a sub-agent doing mode-scoped work must name, as required reading for that sub-agent: `CORE.md`, the active mode file, and the relevant artifact spec — the same set `COR-03-040`/`COR-03-090` already require the primary agent to load. This does not require the sub-agent to read every reference file (`COR-03-070` still applies); it only stops the mode/spec/core layer from being left to the orchestrator's own prompt wording. |
 | COR-04-010 | Support-Files | Consult `agent-harness/playbooks/index.yaml` before loading universal playbooks broadly. |
 | COR-04-020 | Support-Files | Consult `harness-data/playbooks/index.yaml` before loading project playbooks broadly. |
 | COR-04-030 | Support-Files | Consult `harness-data/guides/index.yaml` before loading guides broadly. |

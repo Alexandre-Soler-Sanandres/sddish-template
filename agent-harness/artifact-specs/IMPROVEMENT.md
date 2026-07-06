@@ -28,6 +28,7 @@ An Improvement is created only from a harness/process-flavored Review finding
 | IMPR-03-020 | Validation | Add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done` or moved to `done/`. |
 | IMPR-03-030 | Validation | If a validation item is prospective and cannot be fully proven yet, state that explicitly instead of treating it as completed evidence. |
 | IMPR-03-040 | Validation | Do not move an Improvement artifact to `done/` until the approved target changes are applied and the validation result is documented. |
+| IMPR-03-050 | Validation | `status: proposed -> approved` is a distinct, user-only gate from this file's `approved -> done` validation gate (`IMPR-03-040`) — see `IMPR-02-025` in `IMPROVING-HARNESS.md`. Meeting `IMPR-03-040`'s validation conditions never substitutes for that approval. |
 
 ## Output
 

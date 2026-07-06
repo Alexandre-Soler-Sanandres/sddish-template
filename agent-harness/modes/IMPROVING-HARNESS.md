@@ -41,6 +41,7 @@ Review -> Improvement artifact -> approved harness change -> validation -> updat
 | --- | --- | --- |
 | IMPR-01-010 | Scope | Approved changes may be applied by default to: any file under `agent-harness/`; `.claude/skills/harness/` and `.agents/skills/harness/` (the per-agent CLI entry-point layers); and root-level `AGENTS.md`/`CLAUDE.md` (the harness's loader files). Mirror a change to one entry-point layer across the others unless it's agent-specific. Other files may change too when the Improvement explicitly calls for it (e.g. a matching `harness-data/reference/*.md` update). |
 | IMPR-02-020 | Boundaries | Harness changes must be explicit and approved. |
+| IMPR-02-025 | Boundaries | Only the user may set `approval.approved_by`/`approved_at`, or move an Improvement's `status` from `proposed` to `approved` — the agent must never write those fields or that transition itself (this is `COR-01-090` applied to Improvement artifacts specifically). A general instruction to improve the harness is not approval of any specific `IMPROVEMENT-NNN`; approval must be given after the user has had the chance to see that artifact's own proposed change. Do not apply an Improvement's target-file changes before that specific approval exists. |
 | IMPR-02-030 | Boundaries | Target files must be listed in frontmatter. |
 | IMPR-02-040 | Boundaries | Do not create Improvement artifacts from Partnering — only from Review findings. |
 

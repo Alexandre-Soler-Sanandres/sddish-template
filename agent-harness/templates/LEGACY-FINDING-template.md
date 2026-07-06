@@ -42,7 +42,10 @@ why — e.g. "current code contradicts stale README; current code is authoritati
 ## Open Questions
 
 (list open question IDs from `QUESTIONS-OPEN.md` still open against this finding — `Q-<APP>-NNN` for app findings,
-`CSQ-NNN` for cross-system findings. Empty means no open question-blockers on this finding.)
+`CSQ-NNN` for cross-system findings. Empty means no open question-blockers on this finding. Before leaving this
+empty, re-read this finding's own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test
+— "we haven't decided whether/how to X." If the finding's own wording already reads that way (e.g. "worth
+tracking so a rewrite standardises on X"), raise a registry row instead of leaving it as prose.)
 
 ## Resolved Questions
 

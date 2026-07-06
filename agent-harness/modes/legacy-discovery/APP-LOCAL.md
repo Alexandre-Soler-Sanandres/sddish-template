@@ -34,10 +34,15 @@ per-app file.
    registry, and `SOURCE-MAP.md`. When a question is recorded, link it bidirectionally: cite the originating
    finding(s) in the registry's `Source` column, and add the question ID to each cited finding's
    `## Open Questions` section. Use `baseline` / `cross-cutting` in `Source` when the question does not trace to a
-   specific finding.
+   specific finding. Before leaving any finding's `## Open Questions` empty, test its own `Classification` and
+   `Evidence Conflict` text against `QST-06-010` — if it reads as an undecided fork, raise a `Q-<APP>-NNN` row
+   instead of leaving it as prose (`LDA-04-040`).
 5. Enrich stable reference docs per the Reference Enrichment table in `agent-harness/modes/DISCOVERING-LEGACY.md`.
-6. Validate with `git diff --check`.
-7. Commit only when explicitly asked.
+6. Before marking a slice `done`, confirm at least one of its findings is a plain baseline/descriptive finding —
+   what the slice's area concretely contains or does — not only anomaly, conflict, or edge-case findings; write
+   the missing baseline finding first if every finding so far is anomaly-shaped (`LDA-04-050`).
+7. Validate with `git diff --check`.
+8. Commit only when explicitly asked.
 
 ## Rules
 
@@ -55,6 +60,8 @@ per-app file.
 | LDA-04-010 | Slice-Roundtrip | Reference enrichment may be deferred across blockwise work only when the source map says so; it must be complete before `app-local-complete`. |
 | LDA-04-020 | Slice-Roundtrip | Record any forward-looking candidate list a slice produces — candidate Use Cases, candidate Specs, candidate quality gates, or anything similarly shaped — in the relevant finding's `## Candidate Artifacts` section at authoring time. |
 | LDA-04-030 | Slice-Roundtrip | Do not invent a new per-slice `"Candidate <Something>"` list in `SOURCE-MAP.md`'s slice notes under any label; that is the same duplication regardless of what the list is called. When a candidate spans multiple findings from the same slice, record it in each contributing finding's `Candidate Artifacts`, not as a new shared list. |
+| LDA-04-040 | Slice-Roundtrip | Before leaving a finding's `## Open Questions` empty, test its own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test ("we haven't decided whether/how to X"); raise a `Q-<APP>-NNN` registry row if it matches, rather than leaving the fork as prose inside the finding. |
+| LDA-04-050 | Slice-Roundtrip | Do not mark a slice `done` unless at least one of its findings is a plain baseline/descriptive finding — what the slice's area concretely contains or does, independent of any anomaly. A slice whose findings are all anomaly, conflict, or edge-case findings is not done; write the missing baseline finding first. |
 | LDA-05-010 | Blockwise | Blocks are a planning convenience for related slices with overlapping evidence; they do not replace slices. Mark each included slice individually in the slice status table. |
 | LDA-05-020 | Blockwise | Use a block only when the grouped slices share a focused evidence set. |
 | LDA-05-030 | Blockwise | Keep blocks app-scoped. |
