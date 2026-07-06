@@ -102,4 +102,4 @@ Clarification:
 
 Write enrichment under that doc's `## Discovered` heading, citing the specific `LF-*` ID (`LD-034`). This is a
 transcription of stable evidence, not a target decision — target decisions land under that doc's separate
-`## Decisions` heading instead, per `docs/03-artifacts.md`'s Reference File Structure convention.
+`## Decisions` heading instead, per `agent-harness/docs/03-artifacts.md`'s Reference File Structure convention.

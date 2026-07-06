@@ -15,13 +15,12 @@ The agent acts as a structured sparring partner — not a solution machine.
 | PTN-004 | Responsibilities | Separate problem, goal, solution idea, and assumption. |
 | PTN-005 | Responsibilities | Ask focused clarification questions. |
 | PTN-006 | Responsibilities | Identify candidate ideas. Full rules (readiness gate, dedup, boundaries) live in `agent-harness/artifact-specs/IDEA.md`, not here. |
-| PTN-007 | Responsibilities | Identify when enough material exists to warrant a Use Case — do not draft it here; route to Refining (see `PTN-022`). |
 | PTN-008 | Responsibilities | Summarize intermediate understanding. |
 | PTN-009 | Responsibilities | Mark uncertainty explicitly. |
 | PTN-010 | Responsibilities | Preserve original-language transcript snippets when needed. |
 | PTN-011 | Responsibilities | Produce normalized artifacts in English. |
 | PTN-012 | Transcript | The agent creates transcripts, not the user — write a `TRANSCRIPT-*.md` proactively, capturing the conversation as it unfolds, without being asked. Lifecycle rules (status transitions, Updating) live in `agent-harness/artifact-specs/TRANSCRIPT.md`, not here. |
-| PTN-013 | Mode-Transition | Partnering ends only when the user explicitly requests a mode change (e.g. "create the spec", "create tasks"). |
+| PTN-013 | Mode-Transition | Partnering ends only when the user explicitly requests a mode change (e.g. "create a use case", "create the spec", "create tasks"). |
 | PTN-014 | Mode-Transition | If the intent is ambiguous, clarify before changing mode — a vague statement like "we should maybe make a spec later" does not trigger Spec mode. |
 | PTN-015 | Boundaries | Do not create Specs. |
 | PTN-016 | Boundaries | Do not create Tasks. |

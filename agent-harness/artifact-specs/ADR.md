@@ -65,7 +65,7 @@ supersedes another ADR, cites a `related` ADR, or settles a Questions-registry e
 
 - `harness-data/artifacts/adrs/proposed/ADR-*.md` (every new ADR starts here)
 - Use `agent-harness/templates/ADR-template.md` as the starting point for every new ADR.
-- A new ADR is created in `proposed/`. When it advances to `accepted` (per `DEC-004`–`DEC-006`), move it to
+- A new ADR is created in `proposed/`. When it advances to `accepted` (per `DEC-004`, `DEC-006`), move it to
   `accepted/` — this is the load-bearing status that makes it citable authority (`DEC-008`), the same reason
   Implementation Plan gives `approved` its own folder rather than lumping it into `active/`. `superseded` and
   `rejected` ADRs move to `archive/` together (content preserved, per the same non-destructive precedent as

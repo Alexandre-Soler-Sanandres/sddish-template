@@ -26,6 +26,8 @@ Universal harness rules that apply in every mode.
 | COR-016 | Context-Loading | Prefer summaries before full historical artifacts when both are available. |
 | COR-017 | Context-Loading | Load reference files only when the current task is directly affected by them. |
 | COR-018 | Context-Loading | Load archived artifacts only when they are explicitly needed. |
+| COR-058 | Context-Loading | Before creating or updating an artifact, also load that artifact type's spec under `agent-harness/artifact-specs/` (in addition to the active Mode file, `COR-014`) — e.g. creating a Spec loads both `REFINING.md` and `SPECS.md`. |
+| COR-061 | Context-Loading | `agent-harness/shared-procs/` holds procedures explicitly invoked during a Mode's own work (e.g. Validation, invoked during Implementing or named in Improving-Harness's Improvement Process) — not a Mode or artifact spec itself. Load only when actually invoked, not by default. |
 | COR-019 | Support-Files | Consult `agent-harness/playbooks/index.yaml` before loading universal playbooks broadly. |
 | COR-020 | Support-Files | Consult `harness-data/playbooks/index.yaml` before loading project playbooks broadly. |
 | COR-021 | Support-Files | Consult `harness-data/guides/index.yaml` before loading guides broadly. |
@@ -53,5 +55,3 @@ Universal harness rules that apply in every mode.
 | COR-046 | Commits | Do not commit unless the user explicitly requests it. |
 | COR-047 | Commits | Follow the project's commit conventions in `harness-data/reference/QUALITY.md` when committing. |
 | COR-048 | High-Risk | Treat database migrations, security/secrets/auth, deployment/infrastructure, payment/financial transaction execution, and domain-critical business logic (`harness-data/reference/DOMAIN.md`) as high-risk: do not proceed without explicit scope and validation coverage (payments additionally require explicit approval coverage). |
-| COR-058 | Context-Loading | Before creating or updating an artifact, also load that artifact type's spec under `agent-harness/artifact-specs/` (in addition to the active Mode file, `COR-014`) — e.g. creating a Spec loads both `REFINING.md` and `SPECS.md`. |
-| COR-061 | Context-Loading | `agent-harness/shared-procs/` holds procedures invoked by name from a Mode's own rules (e.g. `Implementing`'s `IMPL-011` invoking `VALIDATION.md`) — not a Mode or artifact spec itself. Load only when the active Mode directs it, not by default. |

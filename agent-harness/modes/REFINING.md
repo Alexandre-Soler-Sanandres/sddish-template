@@ -86,6 +86,8 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 | ID | Type | Rule |
 | --- | --- | --- |
 | UCS-011 | Sources | A Use Case must be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation. If the source is an Idea, it must be at status `ready-for-use-case` (`IDA-001`) before a Use Case may be created from it; other source types have no formal status gate — use judgment instead. |
+| UCS-005 | Boundaries | Do not trigger implementation. |
+| UCS-006 | Boundaries | Do not create Specs, Tasks, or Implementation Plans. |
 | SPS-001 | Sources | A Spec must always be created from a Use Case. The Use Case must be at status `ready-for-spec` before a Spec may be created. |
 | SPS-006 | Boundaries | Do not implement or change code. |
 | SPS-007 | Boundaries | Do not create Tasks or Implementation Plans while creating a Spec. |

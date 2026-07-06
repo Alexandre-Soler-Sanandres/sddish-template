@@ -105,9 +105,10 @@ The collapsed shape of this same file once cross-system synthesis is finished â€
 `agent-harness/modes/legacy-discovery/NORMALIZATION.md`'s `LDG-007` for the collapse procedure itself.
 
 Collapses to only: `Purpose`, `Entry Criteria` (kept as a record of the scope synthesis actually ran against),
-`Evidence Precedence`, `Reference Enrichment Routing`, and any unresolved items from `Initial Cross-System
-Questions` that were never moved into the harness Questions registry (move them there now instead of leaving them
-here), plus a single line naming the next non-discovery phase in place of `Restart Pointer`.
+`Evidence Precedence`, `Reference Enrichment Routing`, and any unresolved items from
+`Initial Cross-System Questions` that were never moved into the harness Questions registry (move them there now
+instead of leaving them here), plus a single line naming the next non-discovery phase in place of
+`Restart Pointer`.
 
-Removed: `Documentation Decision`, `Working Discovery Plan`, `Slice Roundtrip`, `Completed Slice Notes`, `Restart
-Pointer`.
+Removed: `Documentation Decision`, `Working Discovery Plan`, `Slice Roundtrip`, `Completed Slice Notes`,
+`Restart Pointer`.

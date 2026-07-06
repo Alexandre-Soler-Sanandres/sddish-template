@@ -60,8 +60,6 @@ When legacy evidence is involved, the body should also preserve the design-relev
 | UCS-002 | Refining | Refining does not change the Use Case ID. Update the `updated` field and status as appropriate. |
 | UCS-003 | Readiness-Gate | Before setting a Use Case status to `ready-for-spec`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
 | UCS-004 | Boundaries | Do not contain low-level implementation detail (unless essential to the scenario). |
-| UCS-005 | Boundaries | Do not trigger implementation. |
-| UCS-006 | Boundaries | Do not create Specs, Tasks, or Implementation Plans. |
 | UCS-007 | Carry-Forward | When a Use Case is created, check the Questions registry for entries tied to the source artifact — regardless of legacy or non-legacy origin — and load any that changes actor goals, workflow shape, scope boundaries, alternatives, or failure paths. Before advancing to `ready-for-spec`, verify the registry holds nothing unresolved that should block the advance (see `UCS-003`). |
 | UCS-008 | Carry-Forward | Carry registry items forward by effect: actor-visible uncertainty belongs in `Open Questions`; behavior constraints belong in the scenario, preconditions, or failure paths; cite the registry's canonical ID instead of restating its full text. |
 | UCS-009 | Sources | ADRs are cited as reference authority when a Use Case touches a system boundary or structural decision they settle — only `accepted` ADRs count as settled authority, a `proposed` ADR may be noted as pending context but not treated as settled (`DEC-008`); an ADR is never itself a source that produces a Use Case (`DEC-003`). |

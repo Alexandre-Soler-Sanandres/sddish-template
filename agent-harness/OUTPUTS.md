@@ -41,8 +41,6 @@ Lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body.
 | Legacy Finding | `LF-<APP>-NNN.md` (app findings) or `LF-CROSS-NNN.md` (cross-system findings) — see `## Legacy Discovery Structure` |
 | Question | Row ID `Q-NNN` (new) or `Q-<APP>-NNN` / `CSQ-NNN` / `CSP-*` (migrated legacy) — a row in `QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, or `QUESTIONS-DISCARDED.md`, not a separate file per question |
 
-IDs must remain stable even if filenames or folders change.
-
 ## Folder Structure
 
 All lifecycle artifacts live under `harness-data/artifacts/`.

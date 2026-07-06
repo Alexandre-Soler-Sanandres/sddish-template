@@ -8,8 +8,8 @@ file for the behavioral rules governing when and how a harness change may be mad
 
 ## Sources
 
-An Improvement is created only from a harness/process-flavored Review finding (`agent-harness/artifact-specs/
-REVIEW.md`) — never from Partnering.
+An Improvement is created only from a harness/process-flavored Review finding
+(`agent-harness/artifact-specs/REVIEW.md`) — never from Partnering.
 
 ## Body Should Include
 

@@ -124,5 +124,5 @@ Collapses to only: `Source Root`, `Evidence Inventory`, `Import Hygiene`, `Refer
 `Open App Notes` (trimmed to durable notes only), and `Deferred and Cross-System Questions` (with a single line
 naming the next non-discovery phase in place of `Restart Pointer`).
 
-Removed: `Candidate Discovery Slices`, `Block Plan`, `Working Discovery Plan`, `Current Status`, `Completed
-Notes`, `Restart Pointer`.
+Removed: `Candidate Discovery Slices`, `Block Plan`, `Working Discovery Plan`, `Current Status`,
+`Completed Notes`, `Restart Pointer`.

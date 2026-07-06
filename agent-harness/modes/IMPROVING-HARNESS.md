@@ -53,5 +53,3 @@ Load these when relevant — do not load all of them by default:
 
 - `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
 - Use `agent-harness/artifact-specs/IMPROVEMENT.md` and `agent-harness/templates/IMPROVEMENT-template.md` for every new Improvement artifact.
-- Also produces the harness/process flavor of Review (`agent-harness/artifact-specs/REVIEW.md`'s Two Flavors) —
-  this is what triggers Entry into this Mode in the first place, per `IMPR-009`.
