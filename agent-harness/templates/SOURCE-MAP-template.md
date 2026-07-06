@@ -118,7 +118,7 @@ Route stable findings to the appropriate reference doc before closing the slice 
 ## Discovery-Complete Shape
 
 The collapsed shape of this same file once `discovery_state` reaches `app-local-complete` — see
-`agent-harness/modes/legacy-discovery/GATES.md`'s `LDG-007` for the collapse procedure itself.
+`agent-harness/modes/legacy-discovery/NORMALIZATION.md`'s `LDG-007` for the collapse procedure itself.
 
 Collapses to only: `Source Root`, `Evidence Inventory`, `Import Hygiene`, `Reference Enrichment Routing`,
 `Open App Notes` (trimmed to durable notes only), and `Deferred and Cross-System Questions` (with a single line

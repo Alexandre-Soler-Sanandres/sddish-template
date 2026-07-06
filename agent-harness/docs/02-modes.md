@@ -9,80 +9,47 @@ covers Modes only.
 | Mode | CLI | Purpose |
 | --- | --- | --- |
 | Partnering | — | Structured conversation to capture ideas and problems |
-| Refining | `/create-use-case <source>`, `/create-spec <use-case-file>`, `/create-tasks <spec-file>` | Derive a Use Case from an Idea/Transcript/Partnering discussion/Legacy Finding/existing docs, a Spec from a Use Case, or Tasks from a Spec |
-| Planning-Implementation | `/plan-task, /plan-spec, /plan-use-case` | Plan and gate code changes |
-| Implementing | `/execute-plan <plan-file>` | Execute an approved plan |
-| Discovering-Legacy | `/legacy-discovery <path>` | Extract evidence from existing code |
-| Improving-Harness | `/improve-harness <review-file>` | Change the harness itself |
+| Refining | `/create-use-case`, `/create-spec`, `/create-tasks` | Derive a Use Case, Spec, or Tasks from their upstream source |
+| Planning-Implementation | `/plan-task`, `/plan-spec`, `/plan-use-case` | Plan and gate code changes |
+| Implementing | `/execute-plan` | Execute an approved plan |
+| Discovering-Legacy | `/legacy-discovery` | Extract evidence from existing code |
+| Improving-Harness | `/improve-harness` | Change the harness itself |
 
 ---
 
 ## Partnering
 
-The conversational front door for unclear thinking. The agent acts as a structured sparring partner — not a solution machine.
-
-**May produce:** Transcripts, Ideas, ADRs (when a structural/architectural decision is reached)  
-**Must not:** Create Use Cases, Specs, Tasks, or Implementation Plans. Modify code.
-
-The transcript is raw data. The agent writes it proactively as the conversation unfolds. Once enough material
-exists to warrant a Use Case, hand off to Refining (`/create-use-case`) rather than drafting it here.
-
-Mode transition: Partnering ends only when the user explicitly requests a mode change. A vague statement like "we should maybe make a spec later" does not trigger a mode change.
+The conversational front door for unclear thinking — a structured sparring partner, not a solution machine.
+Produces Transcripts and Ideas, and identifies (but does not draft) ADRs and Use Cases for hand-off to the
+appropriate mode. Ends only on explicit user request, never on a vague statement. See
+`agent-harness/modes/PARTNERING.md` for the full rule set.
 
 ## Refining
 
-Derives the next artifact in the Use-Case → Spec → Task funnel from its immediate source — the mechanical
-derivation activity only. The resulting document's own schema and lifecycle rules live in the corresponding
-artifact spec ([03-artifacts.md](03-artifacts.md)) — load both before acting.
-
-**Entry points:** `/create-use-case <source>` (consumes an Idea, Transcript, Partnering discussion, Legacy
-Finding, or existing documentation — an Idea must be at `ready-for-use-case`, produces a Use Case);
-`/create-spec <use-case-file>` (consumes a Use Case at `ready-for-spec`, produces a Spec);
-`/create-tasks <spec-file>` (consumes an approved Spec, produces Tasks). Each entry point also accepts natural
-language, e.g. "use Idea IDEA-012 to create a Use Case."  
-**Must not:** Change code. Generate duplicate Tasks or skip existing ones (owned natively here, not borrowed from
-Planning-Implementation).
+Derives the next artifact in the Use-Case → Spec → Task funnel from its source — a Use Case from an Idea/
+Transcript/Partnering discussion/Legacy Finding/existing docs, a Spec from a Use Case, or Tasks from a Spec. Each
+entry point also accepts natural language. See `agent-harness/modes/REFINING.md` for entry points, gates, and
+boundaries, and [03-artifacts.md](03-artifacts.md) for the resulting documents' own schemas.
 
 ## Planning-Implementation
 
-The mandatory gate before code changes. These commands mean: inspect the artifact, gather downstream artifacts, verify maturity, produce an Implementation Plan, and wait for approval.
-
-**Entry points and routing:**
-
-- `/plan-task <task-file>` — verify Task is `ready`, create focused plan
-- `/plan-spec <spec-file>` — find Tasks, apply the Task Decision Matrix (in `REFINING.md`), create plan
-- `/plan-use-case <use-case-file>` — find all derived Specs and Tasks, create end-to-end plan
-
-**Output:** `harness-data/artifacts/implementation-plans/active/PLAN-*.md`
-**Must not:** Change code. Proceed without verifying artifact maturity.
+The mandatory gate before code changes: inspect the artifact, gather downstream artifacts, verify maturity,
+produce an Implementation Plan, and wait for approval. See `agent-harness/modes/PLANNING-IMPLEMENTATION.md` for
+entry points and routing.
 
 ## Implementing
 
-Changes code. May only start after an approved Implementation Plan exists and all included Tasks are `ready` or `planned`.
-
-Executes one plan step at a time by default. Sets Task status to `in-progress` → `done` as work proceeds. Invokes
-the shared Validation procedure ([04-shared-procs.md](04-shared-procs.md)) as its own closing gate after each step,
-and produces the product/requirements flavor of Review when a durable record is needed.
-
-**Entry:** `/execute-plan <plan-file>`  
-**Must not:** Deviate from approved scope. Skip validation. Refactor unrelated code.
-
-A plan step is not done until every acceptance criterion in the Spec is covered by either an
-entry in `test_refs` (pointing to an existing test file) or a validation command in the Task
-frontmatter. The agent populates `test_refs` on the Spec during implementation.
+Changes code, one plan step at a time by default, only after an approved Implementation Plan exists. Invokes the
+shared Validation procedure ([04-shared-procs.md](04-shared-procs.md)) as its closing gate after each step. See
+`agent-harness/modes/IMPLEMENTING.md`.
 
 ## Discovering-Legacy
 
-Analyzes an existing project as evidence for a new SDD-ish development process. The legacy project is evidence, not authority.
-
-**Entry:** `/legacy-discovery <path>`
-**Must not:** Modify legacy source code. Implement new code. Create Use Cases directly (route to Refining once a
-Legacy Finding is strong enough). Create Specs without a Use Case unless evidence is unambiguous and strong.
+Extracts rewrite-quality evidence from an existing project — evidence, not authority. See
+`agent-harness/modes/DISCOVERING-LEGACY.md`.
 
 ## Improving-Harness
 
-Changes the harness itself. Only triggered by a harness/process-flavored Review finding — not from Partnering or direct requests. This is the only Mode allowed to modify `agent-harness/*`.
-
-**Entry:** `/improve-harness <review-file>`
-**Output:** `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
-**Must not:** Change harness during normal feature implementation.
+Changes the harness itself, triggered only by a harness/process-flavored Review finding — never from Partnering
+or a direct request. The only Mode allowed to modify `agent-harness/*`. See
+`agent-harness/modes/IMPROVING-HARNESS.md`.

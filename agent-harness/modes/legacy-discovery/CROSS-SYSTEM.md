@@ -24,7 +24,7 @@ harness-data/artifacts/legacy/cross-system/
 
 Cross-system questions (`CSQ-*`) and parity/proof rows (`CSP-*`) live in the harness-level Questions registry
 (`harness-data/artifacts/questions/QUESTIONS-OPEN.md`/`QUESTIONS-RESOLVED.md`/`QUESTIONS-DISCARDED.md`), not
-per-cross-system files — migrated there by `IMPROVEMENT-047`.
+per-cross-system files.
 
 Use the cross-system artifacts for distinct jobs:
 

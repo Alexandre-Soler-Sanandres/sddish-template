@@ -74,7 +74,7 @@ per-slice procedure.
 
 Cross-system artifact responsibilities and canonical-ID ownership: see
 `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s Artifact Routing table and `LDC-004`. Clarification
-sequencing after normalization: see `agent-harness/modes/legacy-discovery/GATES.md`'s `LDG-016`/`018`.
+sequencing after normalization: see `agent-harness/modes/legacy-discovery/CLARIFICATION.md`'s `LDG-016`/`018`.
 
 ## Initial Cross-System Questions
 
@@ -102,7 +102,7 @@ not change evidence meaning or remove traceability.
 ## Discovery-Complete Shape
 
 The collapsed shape of this same file once cross-system synthesis is finished — see
-`agent-harness/modes/legacy-discovery/GATES.md`'s `LDG-007` for the collapse procedure itself.
+`agent-harness/modes/legacy-discovery/NORMALIZATION.md`'s `LDG-007` for the collapse procedure itself.
 
 Collapses to only: `Purpose`, `Entry Criteria` (kept as a record of the scope synthesis actually ran against),
 `Evidence Precedence`, `Reference Enrichment Routing`, and any unresolved items from `Initial Cross-System

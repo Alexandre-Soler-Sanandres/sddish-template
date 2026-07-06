@@ -61,8 +61,7 @@ When a significant change is made to an approved Spec:
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| SPS-002 | Sources | Legacy Findings, Ideas, Transcripts, and ADRs are upstream/reference inputs — Legacy Findings, Ideas, and Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use Case or Spec directly (see `agent-harness/artifact-specs/ADR.md`'s `DEC-003`). |
-| SPS-011 | Legacy-Handoff | A Spec may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled (mirrors `SPS-001`'s Use Case readiness gate, in `REFINING.md`; see `DEC-008`). |
+| SPS-002 | Sources | Legacy Findings, Ideas, Transcripts, and ADRs are upstream/reference inputs — Legacy Findings, Ideas, and Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use Case or Spec directly (`DEC-003`). Only `accepted` ADRs count as settled authority — a `proposed` ADR may be noted as pending context but not treated as settled (`DEC-008`). |
 | SPS-003 | Readiness-Gate | Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
 | SPS-004 | Updating | A Spec may be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
 | SPS-005 | Updating | Updating does not change the Spec ID. Update the `updated` field. |
