@@ -5,7 +5,7 @@
 A Use Case is the behavioral anchor at the head of the Use-Case → Spec → Task funnel — it defines who does what,
 under what conditions, and with what observable outcome. It is not an implementation plan. This file is the Use
 Case artifact's schema, lifecycle, and boundary rules; the mechanical activity of deriving a Use Case from its
-source lives in `agent-harness/modes/REFINING.md` — load both (per `COR-058`) before creating or updating a Use
+source lives in `agent-harness/modes/REFINING.md` — load both (per `COR-03-090`) before creating or updating a Use
 Case.
 
 ## Sources

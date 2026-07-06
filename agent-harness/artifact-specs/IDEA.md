@@ -32,4 +32,4 @@ An Idea may be created from Partnering discussion, Transcript, Review finding, o
 ## Output
 
 - `harness-data/artifacts/ideas/active/IDEA-*.md`, using `agent-harness/templates/IDEA-template.md` unchanged.
-- `archived`/`rejected` Ideas move to `harness-data/artifacts/ideas/archive/` (content preserved, per `COR-008`).
+- `archived`/`rejected` Ideas move to `harness-data/artifacts/ideas/archive/` (content preserved, per `COR-01-080`).

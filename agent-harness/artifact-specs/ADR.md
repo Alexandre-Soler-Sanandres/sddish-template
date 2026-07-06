@@ -69,7 +69,7 @@ supersedes another ADR, cites a `related` ADR, or settles a Questions-registry e
   `accepted/` — this is the load-bearing status that makes it citable authority (`DEC-008`), the same reason
   Implementation Plan gives `approved` its own folder rather than lumping it into `active/`. `superseded` and
   `rejected` ADRs move to `archive/` together (content preserved, per the same non-destructive precedent as
-  `COR-008`) — no operational reason to split those two further, matching how Idea lumps `archived`/`rejected`
+  `COR-01-080`) — no operational reason to split those two further, matching how Idea lumps `archived`/`rejected`
   into one `archive/` folder.
 
 ## Reference Files

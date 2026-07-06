@@ -13,7 +13,7 @@ Via natural language: explicit instruction referencing an approved plan.
 ## Consumes
 
 An Implementation Plan at status `approved` (`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`) whose included
-Tasks are `ready`/`planned` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-058`, this file's Execution rules
+Tasks are `ready`/`planned` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-03-090`, this file's Execution rules
 trigger status changes on Task, Spec, and Use Case (`IMPL-006`, `IMPL-014`, `IMPL-027`) — load
 `agent-harness/artifact-specs/TASKS.md`, `SPECS.md`, and `USE-CASES.md` for those artifacts' own status-transition
 rules; this file only says when to trigger the change, not what the change requires.

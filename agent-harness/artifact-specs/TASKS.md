@@ -4,7 +4,7 @@
 
 Tasks are execution units, not the source of truth for behavior — Specs are. This file is the Task artifact's
 schema and lifecycle rules; the mechanical activity of deriving Tasks from a Spec (including the Task Decision
-Matrix and dedup protection) lives in `agent-harness/modes/REFINING.md` — load both (per `COR-058`) before
+Matrix and dedup protection) lives in `agent-harness/modes/REFINING.md` — load both (per `COR-03-090`) before
 creating or updating a Task.
 
 ## Sources

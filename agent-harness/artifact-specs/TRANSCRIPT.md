@@ -23,7 +23,7 @@ Created only from within Partnering, capturing that session's own conversation.
 | --- | --- | --- |
 | TRN-001 | Lifecycle | Before setting status to `reviewed`, verify the content has been normalized per `PTN-011` (original-language snippets preserved only where needed, everything else in English). |
 | TRN-002 | Lifecycle | Before setting status to `processed`, verify `processed_into` actually lists the artifact IDs this transcript was distilled into. |
-| TRN-003 | Lifecycle | `archived` transcripts move to `harness-data/artifacts/transcripts/archive/`, content preserved (same non-destructive precedent as `COR-008`). |
+| TRN-003 | Lifecycle | `archived` transcripts move to `harness-data/artifacts/transcripts/archive/`, content preserved (same non-destructive precedent as `COR-01-080`). |
 | TRN-004 | Updating | The Transcript ID never changes. Appending content while still `raw` is normal and does not require a status change. |
 
 ## Output

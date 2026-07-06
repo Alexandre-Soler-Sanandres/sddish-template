@@ -6,7 +6,7 @@ Refining mode derives the next artifact in the Use-Case → Spec → Task funnel
 Case from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation; a Spec from a
 Use Case; or Task(s) from a Spec. This file governs the mechanical derivation activity only — the resulting
 document's own schema and lifecycle rules (readiness gates, Updating rules, Output) live in the corresponding
-artifact spec. Per `COR-058`, load both this file and the relevant artifact spec
+artifact spec. Per `COR-03-090`, load both this file and the relevant artifact spec
 (`agent-harness/artifact-specs/USE-CASES.md`, `agent-harness/artifact-specs/SPECS.md`, or
 `agent-harness/artifact-specs/TASKS.md`) before acting — neither substitutes for the other.
 

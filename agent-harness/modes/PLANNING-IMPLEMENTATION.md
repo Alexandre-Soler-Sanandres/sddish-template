@@ -14,7 +14,7 @@ These commands do not mean "start coding now" — they mean "create a plan and w
 ## Consumes
 
 Task, Spec, or Use Case (depending on entry point) — see each entry point's Required Steps below for the exact
-precondition. Produces: Implementation Plan. Per `COR-058`, load
+precondition. Produces: Implementation Plan. Per `COR-03-090`, load
 `agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md` in addition to this file — this file governs the planning
 activity, the artifact spec governs the resulting Plan's own body schema and readiness gate.
 

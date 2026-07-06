@@ -4,7 +4,7 @@
 
 Specs are the source of truth for desired behavior. This file is the Spec artifact's schema, lifecycle, and
 boundary rules; the mechanical activity of deriving a Spec from a Use Case lives in
-`agent-harness/modes/REFINING.md` — load both (per `COR-058`) before creating or updating a Spec.
+`agent-harness/modes/REFINING.md` — load both (per `COR-03-090`) before creating or updating a Spec.
 
 ## Sources
 
