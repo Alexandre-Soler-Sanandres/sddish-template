@@ -18,6 +18,7 @@ instances of this live in the Context-Loading group below.
 | COR-01-080 | Universal | Do not retroactively rewrite artifacts in `done/` or `archive/` folders when paths, structure, or conventions change elsewhere in the harness. |
 | COR-01-090 | Universal | Do not infer approval from discussion — any status change or action that requires user approval needs the user's explicit confirmation, not an inference from the conversation's tone or direction. |
 | COR-01-100 | Universal | Only Improving-Harness may modify `agent-harness/*`. Do not change harness mode files, templates, artifact specs, or process rules during normal feature work in any other mode. |
+| COR-01-110 | Universal | When work surfaces something worth tracking that does not block the artifact currently in progress, decide Question vs Idea before creating either: a Question is an open fork with no proposed solution ("we haven't decided whether/how to X"); an Idea is a candidate direction with no open fork ("we might build/do X"). See `QUESTIONS.md`'s `QST-06-010` for the full rule and dedup/ID mechanics. |
 | COR-02-010 | Artifact-Language | Write normalized artifacts in English by default. |
 | COR-02-020 | Artifact-Language | Preserve the original language only in transcripts, raw input, or quoted source material when needed. |
 | COR-03-010 | Context-Loading | Start context loading from the user request. |

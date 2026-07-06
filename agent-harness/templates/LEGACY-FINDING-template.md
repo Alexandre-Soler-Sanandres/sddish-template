@@ -9,7 +9,7 @@ legacy_source: []        # paths in harness-data/artifacts/legacy/imported/
 evidence_type: ""        # observed | documented | inferred | uncertain
 confidence: medium       # low | medium | high
 area: ""                 # domain area, e.g. user-management | payments | reporting
-candidate_artifacts: []  # e.g. [UC-001, SPEC-001]
+candidate_artifacts: []  # e.g. [UC-001, SPEC-001, IDEA-001]
 risk: low                # low | medium | high
 tags: []
 ---
@@ -37,7 +37,9 @@ why — e.g. "current code contradicts stale README; current code is authoritati
 
 ## Candidate Artifacts
 
-(what Use Cases or Specs this finding could inform)
+(what Use Cases, Specs, or Ideas this finding could inform — for documented future/roadmap intent that isn't an
+unresolved fork per `LD-02-020`/`COR-01-110`, note a candidate `IDEA-*.md` here rather than only describing it in
+prose)
 
 ## Open Questions
 
