@@ -108,7 +108,7 @@ requirements, or an uncovered high-risk area. See `agent-harness/modes/IMPLEMENT
 ### Optional Operational Trace
 
 `harness-data/RUN-LOG.md` is not required by default, but the agent may use it for interrupted, approval-heavy,
-multi-step, or high-risk work. One case is mandatory rather than optional: `IMPL-028` requires a gate-check line
+multi-step, or high-risk work. One case is mandatory rather than optional: `IMPL-02-010` requires a gate-check line
 (Plan ID, Plan status, Task `allowed_paths`) written to `RUN-LOG.md` before the first file mutation of any plan step.
 
 It is temporary operational state, not a source-of-truth artifact — durable decisions and outcomes must still be

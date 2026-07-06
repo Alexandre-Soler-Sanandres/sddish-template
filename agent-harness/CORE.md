@@ -40,7 +40,7 @@ Universal harness rules that apply in every mode.
 | COR-05-030 | Checkpoint | After a resume or context compaction, repeat the checkpoint (`COR-05-010`) and re-read `CORE.md` and the active true-Mode file in full before the next high-impact action — the checkpoint verifies state, not rule text, so confirming mode identity alone is not enough. |
 | COR-05-040 | Checkpoint | On a true Mode transition (per `COR-03-040`'s list — not every artifact-producing action), re-read the newly-active mode file in full before taking any mode-specific action. |
 | COR-06-010 | Observability | Record temporary operational trace only when it helps safe continuation, validation, or explanation of agent behavior. |
-| COR-06-020 | Observability | Use `harness-data/RUN-LOG.md` only when operational trace is useful; it is not required by default, except for the Implementation gate-check required by `IMPL-028`. |
+| COR-06-020 | Observability | Use `harness-data/RUN-LOG.md` only when operational trace is useful; it is not required by default, except for the Implementation gate-check required by `IMPL-02-010`. |
 | COR-06-030 | Observability | Record only operational facts that matter, such as context loaded, approvals, commands/checks run, current execution state, restart point, and stop reason. |
 | COR-06-040 | Observability | Move durable decisions, stable blockers, and lasting outcomes into the real artifacts instead of leaving them only in operational trace. |
 | COR-06-050 | Observability | Keep operational trace small and temporary; collapse it to a short closure note or clear it when the work finishes. |
