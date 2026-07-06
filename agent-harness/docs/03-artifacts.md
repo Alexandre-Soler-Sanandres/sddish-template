@@ -97,7 +97,7 @@ Early structured thoughts. Not implementation requests.
 ### ADR (Architecture Decision Record)
 
 A settled structural or architectural decision — durable and citable, unlike an Idea (which is pre-decision) or
-a Use Case (which cannot itself decide architecture, per `UCS-004`/`005`/`006`). Referenced as authority by
+a Use Case (which cannot itself decide architecture, per `UCS-04-010`–`030`). Referenced as authority by
 `harness-data/reference/ARCHITECTURE.md`, Use Cases, and Specs.
 
 **Statuses:** `proposed` → `accepted` → `superseded` | `rejected`

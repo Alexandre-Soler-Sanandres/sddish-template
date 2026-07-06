@@ -27,7 +27,7 @@ A Task is created only from within Refining (`/create-tasks`), from an approved 
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| TSK-002 | Readiness-Gate | Before setting a Task status to `ready`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
+| TSK-02-010 | Readiness-Gate | Before setting a Task status to `ready`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
 
 ## Output
 

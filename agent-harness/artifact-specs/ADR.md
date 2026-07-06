@@ -4,7 +4,7 @@
 
 ADR mode creates or refines Architecture Decision Record artifacts.
 An ADR is a settled structural or architectural decision — durable and citable, unlike an Idea (pre-decision) or
-a Use Case (which cannot itself decide architecture, per `USE-CASES.md`'s `UCS-004`–`006`).
+a Use Case (which cannot itself decide architecture, per `USE-CASES.md`'s `UCS-04-010`–`030`).
 It is not a scenario, and it is not a hunch.
 
 ## Entry
@@ -56,7 +56,7 @@ supersedes another ADR, cites a `related` ADR, or settles a Questions-registry e
 | --- | --- | --- |
 | DEC-001 | Sources | Any mode may identify and draft a candidate ADR at status `proposed` when it surfaces a settled structural/architectural decision. |
 | DEC-002 | Boundaries | An ADR must not itself trigger implementation, and must not create Specs, Tasks, or Implementation Plans directly. |
-| DEC-003 | Boundaries | An ADR is cited as reference authority by Use Cases and Specs; it is not itself a source that produces a Use Case or Spec (see `SPECS.md`'s `SPS-002`, `USE-CASES.md`'s Sources). |
+| DEC-003 | Boundaries | An ADR is cited as reference authority by Use Cases and Specs; it is not itself a source that produces a Use Case or Spec (see `SPECS.md`'s `SPS-01-020`, `USE-CASES.md`'s Sources). |
 | DEC-004 | Readiness-Gate | Before setting status to `accepted`, verify the Readiness Checklist in the artifact. An open question blocks acceptance only if answering it differently would require rewriting the `Decision` section itself; a question that only affects implementation detail, performance tuning, or narrower in-scope choices does not block and may remain listed. |
 | DEC-006 | Approval | Status must not be set to `accepted` without the user's explicit confirmation — do not infer approval from discussion. |
 | DEC-008 | Citation-Gate | Use Cases and Specs may cite only `accepted` ADRs as settled authority; a `proposed` ADR may be noted as pending context but must not be treated as settled. |

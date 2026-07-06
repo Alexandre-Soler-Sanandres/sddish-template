@@ -61,12 +61,12 @@ When a significant change is made to an approved Spec:
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| SPS-002 | Sources | Legacy Findings, Ideas, Transcripts, and ADRs are upstream/reference inputs — Legacy Findings, Ideas, and Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use Case or Spec directly (`DEC-003`). Only `accepted` ADRs count as settled authority — a `proposed` ADR may be noted as pending context but not treated as settled (`DEC-008`). |
-| SPS-003 | Readiness-Gate | Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
-| SPS-004 | Updating | A Spec may be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
-| SPS-005 | Updating | Updating does not change the Spec ID. Update the `updated` field. |
-| SPS-009 | Carry-Forward | When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy origin — load those referenced items and route them into the Spec sections they actually constrain. Before setting status to `approved` (see `SPS-003`), verify the registry holds nothing unresolved that should block the advance. |
-| SPS-010 | Legacy-Handoff | Keep the Questions registry's `CSP-*` rows as the canonical proof/parity backlog. A Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions, but should not duplicate unrelated rows or store proof IDs in `test_refs`. |
+| SPS-01-020 | Sources | Legacy Findings, Ideas, Transcripts, and ADRs are upstream/reference inputs — Legacy Findings, Ideas, and Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use Case or Spec directly (`DEC-003`). Only `accepted` ADRs count as settled authority — a `proposed` ADR may be noted as pending context but not treated as settled (`DEC-008`). |
+| SPS-02-010 | Readiness-Gate | Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
+| SPS-03-010 | Updating | A Spec may be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
+| SPS-03-020 | Updating | Updating does not change the Spec ID. Update the `updated` field. |
+| SPS-05-010 | Carry-Forward | When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy origin — load those referenced items and route them into the Spec sections they actually constrain. Before setting status to `approved` (see `SPS-02-010`), verify the registry holds nothing unresolved that should block the advance. |
+| SPS-06-010 | Legacy-Handoff | Keep the Questions registry's `CSP-*` rows as the canonical proof/parity backlog. A Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions, but should not duplicate unrelated rows or store proof IDs in `test_refs`. |
 
 ## Output
 
