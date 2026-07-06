@@ -39,7 +39,7 @@ item instead).
 
 **Classification (`QST-01-010`):** Legacy's `target-product` tag doesn't map 1:1 to `systemic` — it was legacy's catch-all for "a decision about the new product," not a claim of architectural breadth. Only whole-architecture decisions (core safety boundaries, service-topology) are `systemic`; most single-app feature/config/deployment decisions are `local`; anything crossing an app boundary via a shared contract, volume, or visible field is `cross-artifact`.
 
-**Moving rows (`QST-07-010`):** Common triggers include a Mode's own rule (e.g. `DEC-11-010`, `IDA-005`), a Use Case/Spec readiness-gate carry-forward check (`SPS-05-010`, `UCS-05-010`), or Discovering-Legacy's Question Clarification gate (`LDG-04-060`).
+**Moving rows (`QST-07-010`):** Common triggers include a Mode's own rule (e.g. `DEC-11-010`, `IDA-05-010`), a Use Case/Spec readiness-gate carry-forward check (`SPS-05-010`, `UCS-05-010`), or Discovering-Legacy's Question Clarification gate (`LDG-04-060`).
 
 ## Output
 

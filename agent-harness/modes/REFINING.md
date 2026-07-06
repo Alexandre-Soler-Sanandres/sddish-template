@@ -32,7 +32,7 @@ source and readiness checks as its CLI equivalent.
 ## Use Case Creation Should (via `/create-use-case`)
 
 1. Identify the source: Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation.
-2. If the source is an Idea, verify it is at status `ready-for-use-case` before proceeding (per `IDA-001`). Other
+2. If the source is an Idea, verify it is at status `ready-for-use-case` before proceeding (per `IDA-01-010`). Other
    source types have no formal readiness gate — use judgment that the source material is concrete enough to
    draft a scenario from.
 3. Read the source material.
@@ -85,7 +85,7 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| UCS-01-010 | Sources | A Use Case must be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation. If the source is an Idea, it must be at status `ready-for-use-case` (`IDA-001`) before a Use Case may be created from it; other source types have no formal status gate — use judgment instead. |
+| UCS-01-010 | Sources | A Use Case must be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation. If the source is an Idea, it must be at status `ready-for-use-case` (`IDA-01-010`) before a Use Case may be created from it; other source types have no formal status gate — use judgment instead. |
 | UCS-04-020 | Boundaries | Do not trigger implementation. |
 | UCS-04-030 | Boundaries | Do not create Specs, Tasks, or Implementation Plans. |
 | SPS-01-010 | Sources | A Spec must always be created from a Use Case. The Use Case must be at status `ready-for-spec` before a Spec may be created. |
