@@ -19,7 +19,7 @@ artifact spec. Per `COR-03-090`, load both this file and the relevant artifact s
 Each entry point may also be triggered by natural language — an explicit instruction naming the source and what
 to derive from it, e.g. "use Idea IDEA-012 to create a Use Case," "from our Partnering transcript and ADR-003,
 extract the Use Cases we need," "create the spec for UC-007," or "plan tasks from SPEC-014." The input channel
-does not change what the mode allows (mirrors `PTN-001`) — a natural-language trigger still requires the same
+does not change what the mode allows (mirrors `PTN-01-010`) — a natural-language trigger still requires the same
 source and readiness checks as its CLI equivalent.
 
 ## Consumes / Produces
