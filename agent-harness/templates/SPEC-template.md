@@ -37,7 +37,7 @@ tags: []
 (what is explicitly excluded — permanent exclusion by default; for a deferred/not-now item, add a forward
 pointer: `(deferred, see IDEA-NNN)` for a candidate feature, or `(deferred, see Q-NNN)` for a genuinely
 unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `IDA-004`/
-`agent-harness/artifact-specs/QUESTIONS.md`'s `QST-006` for which applies)
+`agent-harness/artifact-specs/QUESTIONS.md`'s `QST-06-010` for which applies)
 
 ## Functional Requirements
 
