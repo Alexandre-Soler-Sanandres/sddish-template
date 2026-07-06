@@ -2,18 +2,15 @@
 
 ## Purpose
 
-Use Case mode creates or refines Use Case artifacts.
-A Use Case is a behavioral anchor — it defines who does what, under what conditions, and with what observable outcome.
-It is not an implementation plan.
-
-## Entry
-
-Via CLI: `/create-use-case`
-Via natural language: explicit instruction referencing a source artifact or describing an actor goal.
+A Use Case is the behavioral anchor at the head of the Use-Case → Spec → Task funnel — it defines who does what,
+under what conditions, and with what observable outcome. It is not an implementation plan. This file is the Use
+Case artifact's schema, lifecycle, and boundary rules; the mechanical activity of deriving a Use Case from its
+source lives in `agent-harness/modes/REFINING.md` — load both (per `COR-058`) before creating or updating a Use
+Case.
 
 ## Sources
 
-A Use Case may be created from:
+A Use Case is created only from within Refining (`/create-use-case`), from:
 
 - Idea
 - Transcript

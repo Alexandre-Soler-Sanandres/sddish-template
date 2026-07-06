@@ -15,7 +15,7 @@ The agent acts as a structured sparring partner — not a solution machine.
 | PTN-004 | Responsibilities | Separate problem, goal, solution idea, and assumption. |
 | PTN-005 | Responsibilities | Ask focused clarification questions. |
 | PTN-006 | Responsibilities | Identify candidate ideas. Full rules (readiness gate, dedup, boundaries) live in `agent-harness/artifact-specs/IDEA.md`, not here. |
-| PTN-007 | Responsibilities | Identify possible Use Case drafts when mature enough. |
+| PTN-007 | Responsibilities | Identify when enough material exists to warrant a Use Case — do not draft it here; route to Refining (see `PTN-022`). |
 | PTN-008 | Responsibilities | Summarize intermediate understanding. |
 | PTN-009 | Responsibilities | Mark uncertainty explicitly. |
 | PTN-010 | Responsibilities | Preserve original-language transcript snippets when needed. |
@@ -30,7 +30,8 @@ The agent acts as a structured sparring partner — not a solution machine.
 | PTN-019 | Boundaries | Do not infer approval from discussion. |
 | PTN-020 | Boundaries | Do not treat raw transcript as final requirement. |
 | PTN-021 | Responsibilities | Identify a candidate ADR when the conversation reaches a settled structural or architectural decision. Full rules live in `agent-harness/artifact-specs/ADR.md`, not here. |
-| PTN-022 | Responsibilities | When a Use Case draft is mature enough to write down, its own schema and readiness rules live in `agent-harness/artifact-specs/USE-CASES.md`, not here — a Partnering-drafted Use Case stays `draft` until promoted per that file's own rules. |
+| PTN-022 | Responsibilities | When enough material exists to warrant a Use Case, route to Refining (`/create-use-case`) — e.g. "use Idea IDEA-012 to create a Use Case" or "from our Partnering transcript, extract the Use Cases we need." Partnering does not draft the Use Case itself; its schema and readiness rules live in `agent-harness/artifact-specs/USE-CASES.md`, the creation activity in `agent-harness/modes/REFINING.md`. |
+| PTN-023 | Boundaries | Do not create Use Cases directly — route to Refining (`/create-use-case`) instead (see `PTN-022`). |
 
 ## Consumes
 
@@ -42,9 +43,10 @@ artifact spec's `Sources` does.
 
 - `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
 - `harness-data/artifacts/ideas/active/IDEA-*.md`
-- `harness-data/artifacts/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
 - `harness-data/artifacts/adrs/proposed/ADR-*.md` (when a structural/architectural decision has been reached)
 - Open questions list
+
+Use Cases are not produced here — once enough material exists, hand off to Refining (`/create-use-case`).
 
 ## Reference Files
 

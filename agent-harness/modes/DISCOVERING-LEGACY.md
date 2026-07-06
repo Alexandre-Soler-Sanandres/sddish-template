@@ -52,12 +52,12 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | LD-004 | Core | Record evidence paths for every finding. |
 | LD-005 | Core | Distinguish observed behavior, documented behavior, inferred intent, uncertainty, accidental complexity, dead code, stale notes, target-product decisions, and proof needs. |
 | LD-006 | Core | Mark inferred intent clearly; never present it as observed behavior. |
-| LD-007 | Core | Extract candidate Use Cases and candidate Specs only when evidence is strong enough. |
+| LD-007 | Core | Flag when evidence is strong enough to warrant a Use Case or Spec. Do not draft a Use Case directly — route to Refining (`/create-use-case`) once a Legacy Finding is strong enough (see `LD-012`); Specs may still be drafted directly only per `LD-008`'s exception. |
 | LD-008 | Core | Do not create Specs directly without a Use Case unless the evidence is unambiguous and strong. |
 | LD-009 | Core | Preserve app-local evidence inside app-scoped artifacts until cross-system synthesis is in scope. |
 | LD-010 | Core | Validate docs with `git diff --check`; use additional Markdown checks when the repository defines them. |
 | LD-011 | Core | Commit only when the user explicitly asks. |
-| LD-012 | Routing | Other outputs may include candidate `harness-data/artifacts/use-cases/active/UC-*.md`, candidate `harness-data/artifacts/specs/active/SPEC-*.md`, and Harness Improvement candidates. |
+| LD-012 | Routing | Other outputs may include candidate `harness-data/artifacts/specs/active/SPEC-*.md` (per `LD-008`'s exception) and Harness Improvement candidates. Use Cases are not drafted here — once a Legacy Finding is strong enough (`LD-007`), route to Refining (`/create-use-case`) to create the `UC-*.md`. |
 | LD-013 | Findings | Store each finding as its own file, using `agent-harness/templates/LEGACY-FINDING-template.md` as-is: `harness-data/artifacts/legacy/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` for cross-system findings. |
 | LD-014 | Findings | IDs follow the existing `LF-<APP>-NNN` convention, numbered once per app (or `LF-CROSS-NNN` for cross-system) and never reused, even after a finding moves or is merged. |
 | LD-015 | Findings | Move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`, or `rejected`. Findings with `status: draft` or `status: reviewed` stay in `findings/active/`. |

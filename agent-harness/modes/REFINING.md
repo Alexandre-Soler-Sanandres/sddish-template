@@ -2,22 +2,46 @@
 
 ## Purpose
 
-Refining mode derives the next artifact in the Use-Case → Spec → Task funnel from its immediate source: a Spec
-from a Use Case, or Task(s) from a Spec. This file governs the mechanical derivation activity only — the
-resulting document's own schema and lifecycle rules (readiness gates, Updating rules, Output) live in the
-corresponding artifact spec. Per `COR-058`, load both this file and the relevant artifact spec
-(`agent-harness/artifact-specs/SPECS.md` or `agent-harness/artifact-specs/TASKS.md`) before acting — neither
-substitutes for the other.
+Refining mode derives the next artifact in the Use-Case → Spec → Task funnel from its immediate source: a Use
+Case from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation; a Spec from a
+Use Case; or Task(s) from a Spec. This file governs the mechanical derivation activity only — the resulting
+document's own schema and lifecycle rules (readiness gates, Updating rules, Output) live in the corresponding
+artifact spec. Per `COR-058`, load both this file and the relevant artifact spec
+(`agent-harness/artifact-specs/USE-CASES.md`, `agent-harness/artifact-specs/SPECS.md`, or
+`agent-harness/artifact-specs/TASKS.md`) before acting — neither substitutes for the other.
 
 ## Entry Points
 
+- `/create-use-case <source-reference>`
 - `/create-spec <use-case-file>`
 - `/create-tasks <spec-file>`
 
+Each entry point may also be triggered by natural language — an explicit instruction naming the source and what
+to derive from it, e.g. "use Idea IDEA-012 to create a Use Case," "from our Partnering transcript and ADR-003,
+extract the Use Cases we need," "create the spec for UC-007," or "plan tasks from SPEC-014." The input channel
+does not change what the mode allows (mirrors `PTN-001`) — a natural-language trigger still requires the same
+source and readiness checks as its CLI equivalent.
+
 ## Consumes / Produces
 
+- `/create-use-case`: consumes an Idea, Transcript, Partnering discussion, Legacy Finding, or existing
+  documentation — if the source is an Idea, it must be at status `ready-for-use-case`; produces a Use Case.
 - `/create-spec`: consumes a Use Case at status `ready-for-spec`; produces a Spec.
 - `/create-tasks`: consumes a Spec at status `approved`; produces Task(s).
+
+## Use Case Creation Should (via `/create-use-case`)
+
+1. Identify the source: Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation.
+2. If the source is an Idea, verify it is at status `ready-for-use-case` before proceeding (per `IDA-001`). Other
+   source types have no formal readiness gate — use judgment that the source material is concrete enough to
+   draft a scenario from.
+3. Read the source material.
+4. Identify the primary actor and supporting actors.
+5. Define the goal, trigger, and preconditions.
+6. Write the main success scenario, alternatives, and failure paths.
+7. Define non-goals and the observable outcome.
+8. Carry forward relevant Questions-registry entries tied to the source artifact (`UCS-007`).
+9. Stop before creating a Spec, Task, or Implementation Plan.
 
 ## Spec Creation Should (via `/create-spec`)
 
@@ -61,6 +85,7 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| UCS-011 | Sources | A Use Case must be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation. If the source is an Idea, it must be at status `ready-for-use-case` (`IDA-001`) before a Use Case may be created from it; other source types have no formal status gate — use judgment instead. |
 | SPS-001 | Sources | A Spec must always be created from a Use Case. The Use Case must be at status `ready-for-spec` before a Spec may be created. |
 | SPS-006 | Boundaries | Do not implement or change code. |
 | SPS-007 | Boundaries | Do not create Tasks or Implementation Plans while creating a Spec. |
@@ -73,6 +98,7 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 
 ## Output
 
+- Use Case: `harness-data/artifacts/use-cases/active/UC-*.md`, per `agent-harness/artifact-specs/USE-CASES.md`.
 - Spec: `harness-data/artifacts/specs/active/SPEC-*.md`, per `agent-harness/artifact-specs/SPECS.md`.
 - Task: `harness-data/artifacts/tasks/active/TASK-*.md`, per `agent-harness/artifact-specs/TASKS.md`.
 
@@ -80,7 +106,8 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 
 Load these when relevant — do not load all of them by default:
 
-- `harness-data/reference/DOMAIN.md` — when defining requirements or Task scope that involve domain concepts, business rules, or domain-critical areas
+- `harness-data/reference/DOMAIN.md` — when defining actors, requirements, or Task scope that involve domain concepts, business rules, or domain-critical areas
 - `harness-data/reference/ARCHITECTURE.md` — when scope touches system boundaries, layers, or architectural constraints
 - `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when scope touches a system boundary or structural decision already settled by an ADR
+- the Questions registry (`harness-data/artifacts/questions/`) — when the source Idea or Legacy Finding carries open items that shape the Use Case being drafted
 - `harness-data/reference/TOOLING.md` — when specifying validation commands in Task frontmatter

@@ -114,6 +114,8 @@ frontmatter fields.
 ### Use Case
 
 Describes actor-driven behavior. A behavioral anchor — not an implementation plan.
+Must always be created via Refining, from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing
+documentation.
 
 **Statuses:** `draft` → `ready-for-spec` → `implemented` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/use-cases/active/UC-*.md`

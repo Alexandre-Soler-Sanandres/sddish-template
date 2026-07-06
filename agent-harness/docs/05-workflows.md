@@ -8,6 +8,7 @@ Use this guide when you already understand the artifact types and want the norma
 ```text
 Voice / Text / Ideas
   → Partnering (TRANSCRIPT, IDEA, ADR when a structural decision settles)
+  → Refining: Idea/Transcript/Partnering discussion/Legacy Finding/docs → Use Case (UC-*)
   → Refining: Use Case → Spec (SPEC-*)
   → Refining: Spec → Tasks (TASK-*) — when required
   → Planning-Implementation (PLAN-*)
@@ -23,8 +24,9 @@ cross-cutting registry any mode can write to.
 In plain terms:
 
 - Partnering helps when the request is still fuzzy.
-- Refining derives Spec from Use Case, and Tasks from Spec — these make the intended behavior explicit and,
-  when needed, break it into execution slices.
+- Refining derives a Use Case from an Idea/Transcript/Partnering discussion/Legacy Finding/existing docs, a Spec
+  from a Use Case, and Tasks from a Spec — these make the intended behavior explicit and, when needed, break it
+  into execution slices.
 - Planning-Implementation is the gate that turns requirements into an approved path.
 - Implementing executes that path.
 - Validation checks that the result and the process both hold up.
@@ -38,17 +40,18 @@ Partnering is the front door for unclear thinking.
 - Listen first, capture relevant statements
 - Separate problem, goal, solution idea, and assumption
 - Ask focused clarification questions
-- Identify candidate ideas and possible Use Case drafts
+- Identify candidate ideas, and when enough material exists to warrant a Use Case
 - Identify a candidate ADR when the conversation reaches a settled structural/architectural decision
 
 **Output paths:**
 
 - `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
 - `harness-data/artifacts/ideas/active/IDEA-*.md`
-- `harness-data/artifacts/use-cases/active/UC-*.md` (draft only, if sufficiently mature)
 - `harness-data/artifacts/adrs/proposed/ADR-*.md` (when a structural/architectural decision has been reached)
 
-Partnering must not create Specs, Tasks, or Implementation Plans, or infer approval from discussion.
+Partnering must not create Use Cases, Specs, Tasks, or Implementation Plans, or infer approval from discussion.
+Once enough material exists to warrant a Use Case, hand off to Refining (`/create-use-case`) instead of drafting
+it here.
 
 ## ADR Creation
 
@@ -75,7 +78,16 @@ A Use Case is appropriate when:
 - A decision flow or business workflow needs to be defined
 - Observable behavior or failure paths need to be captured
 
-A Use Case may be created from: Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation.
+A Use Case is created via Refining (`/create-use-case`) from: Idea, Transcript, Partnering discussion, Legacy
+Finding, or existing documentation. A typical Use Case-creation pass includes:
+
+1. identifying the source, and verifying it is at `ready-for-use-case` if the source is an Idea
+2. reading the source material
+3. identifying the primary actor and goal
+4. defining trigger, preconditions, main success scenario, alternatives, and failure paths
+5. defining non-goals and the observable outcome
+6. carrying forward relevant Questions-registry entries
+7. stopping before creating a Spec, Task, or Implementation Plan
 
 ## Spec Creation
 

@@ -9,7 +9,7 @@ covers Modes only.
 | Mode | CLI | Purpose |
 | --- | --- | --- |
 | Partnering | — | Structured conversation to capture ideas and problems |
-| Refining | `/create-spec <use-case-file>`, `/create-tasks <spec-file>` | Derive a Spec from a Use Case, or Tasks from a Spec |
+| Refining | `/create-use-case <source>`, `/create-spec <use-case-file>`, `/create-tasks <spec-file>` | Derive a Use Case from an Idea/Transcript/Partnering discussion/Legacy Finding/existing docs, a Spec from a Use Case, or Tasks from a Spec |
 | Planning-Implementation | `/plan-task, /plan-spec, /plan-use-case` | Plan and gate code changes |
 | Implementing | `/execute-plan <plan-file>` | Execute an approved plan |
 | Discovering-Legacy | `/legacy-discovery <path>` | Extract evidence from existing code |
@@ -21,10 +21,11 @@ covers Modes only.
 
 The conversational front door for unclear thinking. The agent acts as a structured sparring partner — not a solution machine.
 
-**May produce:** Transcripts, Ideas, Use Case drafts (if sufficiently mature), ADRs (when a structural/architectural decision is reached)  
-**Must not:** Create Specs, Tasks, or Implementation Plans. Modify code.
+**May produce:** Transcripts, Ideas, ADRs (when a structural/architectural decision is reached)  
+**Must not:** Create Use Cases, Specs, Tasks, or Implementation Plans. Modify code.
 
-The transcript is raw data. The agent writes it proactively as the conversation unfolds.
+The transcript is raw data. The agent writes it proactively as the conversation unfolds. Once enough material
+exists to warrant a Use Case, hand off to Refining (`/create-use-case`) rather than drafting it here.
 
 Mode transition: Partnering ends only when the user explicitly requests a mode change. A vague statement like "we should maybe make a spec later" does not trigger a mode change.
 
@@ -34,8 +35,11 @@ Derives the next artifact in the Use-Case → Spec → Task funnel from its imme
 derivation activity only. The resulting document's own schema and lifecycle rules live in the corresponding
 artifact spec ([03-artifacts.md](03-artifacts.md)) — load both before acting.
 
-**Entry points:** `/create-spec <use-case-file>` (consumes a Use Case at `ready-for-spec`, produces a Spec);
-`/create-tasks <spec-file>` (consumes an approved Spec, produces Tasks)  
+**Entry points:** `/create-use-case <source>` (consumes an Idea, Transcript, Partnering discussion, Legacy
+Finding, or existing documentation — an Idea must be at `ready-for-use-case`, produces a Use Case);
+`/create-spec <use-case-file>` (consumes a Use Case at `ready-for-spec`, produces a Spec);
+`/create-tasks <spec-file>` (consumes an approved Spec, produces Tasks). Each entry point also accepts natural
+language, e.g. "use Idea IDEA-012 to create a Use Case."  
 **Must not:** Change code. Generate duplicate Tasks or skip existing ones (owned natively here, not borrowed from
 Planning-Implementation).
 
@@ -72,7 +76,8 @@ frontmatter. The agent populates `test_refs` on the Spec during implementation.
 Analyzes an existing project as evidence for a new SDD-ish development process. The legacy project is evidence, not authority.
 
 **Entry:** `/legacy-discovery <path>`
-**Must not:** Modify legacy source code. Implement new code. Create Specs without a Use Case unless evidence is unambiguous and strong.
+**Must not:** Modify legacy source code. Implement new code. Create Use Cases directly (route to Refining once a
+Legacy Finding is strong enough). Create Specs without a Use Case unless evidence is unambiguous and strong.
 
 ## Improving-Harness
 

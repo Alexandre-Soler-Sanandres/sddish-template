@@ -1,10 +1,10 @@
 ---
 name: create-use-case
-description: Create or refine a Use Case.
+description: Enter Refining mode to derive a Use Case from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation.
 ---
 
-Create or refine a Use Case.
-Follow agent-harness/artifact-specs/USE-CASES.md. Use Case is not a mode — this may be invoked from whatever mode
-is currently active.
-Reference artifact (if any): as stated in the user's request.
+Enter Refining mode.
+Follow agent-harness/modes/REFINING.md (and agent-harness/artifact-specs/USE-CASES.md per COR-058).
+Source (Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation): as stated in the
+user's request.
 Create or refine a UC-*.md artifact. Do not trigger implementation.
