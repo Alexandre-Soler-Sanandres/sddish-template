@@ -48,22 +48,23 @@ per-app file.
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| LDA-01-010 | Inventory | App `INVENTORY.md` uses `agent-harness/templates/INVENTORY-template.md`: fixed `Scope`, `Identity`, `Major Runtime Areas`, `Operations, Tooling, and Quality`, and `Inventory Gaps` sections, plus as many app-specific structural sections as the app's own shape needs in between. |
-| LDA-01-020 | Inventory | Name app-specific sections after what they actually cover in this app — do not copy another app's section names by default. |
-| LDA-02-010 | Source-Map | Each app `SOURCE-MAP.md` (the app restart point, per `SOURCE-MAP-template.md`) stays app-local, containing only: source root, primary evidence files, code areas, and candidate discovery slices; block list/status when blockwise; slice status table, completed notes, open app notes, restart pointers, and reference enrichment routing; deferred/cross-system question classification before `app-local-complete`; import hygiene when the snapshot has secret-like files, local artifacts, or nested repo metadata. |
-| LDA-02-020 | Source-Map | Do not copy generic slice rules, block rules, roundtrip steps, cross-system judgments, or reusable process policy into app source maps. |
-| LDA-03-010 | Slice | Slices are the durable unit of discovery progress. |
-| LDA-03-020 | Slice | A source map may define as many slices as needed for rewrite-quality app evidence. |
-| LDA-03-030 | Slice | Every slice has status `done`, `next`, `pending`, or `not-needed`. |
-| LDA-03-040 | Slice | Do not mark a slice `done` until findings and unresolved questions are recorded. |
-| LDA-03-050 | Slice | Completed slice notes (`Completed Notes` in the source map) hold evidence paths, stable findings, and unresolved decisions only. |
-| LDA-04-010 | Slice-Roundtrip | Reference enrichment may be deferred across blockwise work only when the source map says so; it must be complete before `app-local-complete`. |
-| LDA-04-020 | Slice-Roundtrip | Record any forward-looking candidate list a slice produces — candidate Use Cases, candidate Specs, candidate quality gates, or anything similarly shaped — in the relevant finding's `## Candidate Artifacts` section at authoring time. |
-| LDA-04-030 | Slice-Roundtrip | Do not invent a new per-slice `"Candidate <Something>"` list in `SOURCE-MAP.md`'s slice notes under any label; that is the same duplication regardless of what the list is called. When a candidate spans multiple findings from the same slice, record it in each contributing finding's `Candidate Artifacts`, not as a new shared list. |
-| LDA-04-040 | Slice-Roundtrip | Before leaving a finding's `## Open Questions` empty, test its own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test ("we haven't decided whether/how to X"); raise a `Q-<APP>-NNN` registry row if it matches, rather than leaving the fork as prose inside the finding. |
-| LDA-04-050 | Slice-Roundtrip | Do not mark a slice `done` unless at least one of its findings is a plain baseline/descriptive finding — what the slice's area concretely contains or does, independent of any anomaly. A slice whose findings are all anomaly, conflict, or edge-case findings is not done; write the missing baseline finding first. |
-| LDA-05-010 | Blockwise | Blocks are a planning convenience for related slices with overlapping evidence; they do not replace slices. Mark each included slice individually in the slice status table. |
-| LDA-05-020 | Blockwise | Use a block only when the grouped slices share a focused evidence set. |
-| LDA-05-030 | Blockwise | Keep blocks app-scoped. |
-| LDA-05-040 | Blockwise | Write one completed block note listing included slices, evidence paths, stable findings, and unresolved decisions. |
-| LDA-05-050 | Blockwise | After a block completes, set the next unfinished slice or coherent block to `next`. |
+| LDA-01-010 | Inventory | App `INVENTORY.md` MUST use `agent-harness/templates/INVENTORY-template.md`: fixed `Scope`, `Identity`, `Major Runtime Areas`, `Operations, Tooling, and Quality`, and `Inventory Gaps` sections, plus as many app-specific structural sections as the app's own shape needs in between. |
+| LDA-01-020 | Inventory | SHOULD name app-specific sections after what they actually cover in this app, not copy another app's section names by default. |
+| LDA-02-010 | Source-Map | Each app `SOURCE-MAP.md` (the app restart point, per `SOURCE-MAP-template.md`) MUST stay app-local, containing only: source root, primary evidence files, code areas, and candidate discovery slices; block list/status when blockwise; slice status table, completed notes, open app notes, restart pointers, and reference enrichment routing; deferred/cross-system question classification before `app-local-complete`; import hygiene when the snapshot has secret-like files, local artifacts, or nested repo metadata. |
+| LDA-02-020 | Source-Map | MUST NOT copy generic slice rules, block rules, roundtrip steps, cross-system judgments, or reusable process policy into app source maps. |
+| LDA-03-010 | Slice | MUST treat slices as the durable unit of discovery progress. |
+| LDA-03-020 | Slice | A source map MAY define as many slices as needed for rewrite-quality app evidence. |
+| LDA-03-030 | Slice | Every slice MUST have status `done`, `next`, `pending`, or `not-needed`. |
+| LDA-03-040 | Slice | MUST NOT mark a slice `done` until findings and unresolved questions are recorded. |
+| LDA-03-050 | Slice | Completed slice notes (`Completed Notes` in the source map) MUST hold evidence paths, stable findings, and unresolved decisions only. |
+| LDA-04-010 | Slice-Roundtrip | Reference enrichment MAY be deferred across blockwise work only when the source map says so. |
+| LDA-04-020 | Slice-Roundtrip | MUST record any forward-looking candidate list a slice produces — candidate Use Cases, candidate Specs, candidate quality gates, or anything similarly shaped — in the relevant finding's `## Candidate Artifacts` section at authoring time. |
+| LDA-04-030 | Slice-Roundtrip | MUST NOT invent a new per-slice `"Candidate <Something>"` list in `SOURCE-MAP.md`'s slice notes under any label; that is the same duplication. When a candidate spans multiple findings from the same slice, record it in each contributing finding's `Candidate Artifacts`, not as a new shared list. |
+| LDA-04-040 | Slice-Roundtrip | MUST test a finding's own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test before leaving its `## Open Questions` empty, and raise a `Q-<APP>-NNN` registry row if it matches, rather than leaving the fork as prose inside the finding. |
+| LDA-04-050 | Slice-Roundtrip | MUST NOT mark a slice `done` unless at least one of its findings is a plain baseline/descriptive finding — what the slice's area concretely contains or does, independent of any anomaly; if every finding so far is anomaly, conflict, or edge-case, write the missing baseline finding first. |
+| LDA-04-060 | Slice-Roundtrip | Reference enrichment MUST be complete before `app-local-complete`. |
+| LDA-05-010 | Blockwise | Blocks are a planning convenience for related slices with overlapping evidence, not a replacement for slices — MUST mark each included slice individually in the slice status table. |
+| LDA-05-020 | Blockwise | MUST use a block only when the grouped slices share a focused evidence set. |
+| LDA-05-030 | Blockwise | MUST keep blocks app-scoped. |
+| LDA-05-040 | Blockwise | MUST write one completed block note listing included slices, evidence paths, stable findings, and unresolved decisions. |
+| LDA-05-050 | Blockwise | MUST set the next unfinished slice or coherent block to `next` after a block completes. |

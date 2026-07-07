@@ -56,13 +56,13 @@ When legacy evidence is involved, the body should also preserve the design-relev
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| UCS-01-020 | Sources | ADRs are reference authority only, never a source that produces a Use Case — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
-| UCS-02-010 | Refining | A Use Case may be refined when new information from a Partnering session or Legacy Finding changes the scope, open questions are resolved, or the primary actor or scenario needs correction. |
-| UCS-02-020 | Refining | Refining does not change the Use Case ID. Update the `updated` field and status as appropriate. |
-| UCS-03-010 | Readiness-Gate | Before setting a Use Case status to `ready-for-spec`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
-| UCS-04-010 | Boundaries | Do not contain low-level implementation detail (unless essential to the scenario). |
-| UCS-05-010 | Carry-Forward | When a Use Case is created, check the Questions registry for entries tied to the source artifact — regardless of legacy or non-legacy origin — and load any that changes actor goals, workflow shape, scope boundaries, alternatives, or failure paths. Before advancing to `ready-for-spec`, verify the registry holds nothing unresolved that should block the advance (see `UCS-03-010`). |
-| UCS-05-020 | Carry-Forward | Carry registry items forward by effect: actor-visible uncertainty belongs in `Open Questions`; behavior constraints belong in the scenario, preconditions, or failure paths; cite the registry's canonical ID instead of restating its full text. |
+| UCS-01-020 | Sources | An ADR MUST NOT be used as a source that produces a Use Case — reference authority only — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
+| UCS-02-010 | Refining | A Use Case MAY be refined when new information from a Partnering session or Legacy Finding changes the scope, open questions are resolved, or the primary actor or scenario needs correction. |
+| UCS-02-020 | Refining | Refining MUST NOT change the Use Case ID; MUST update the `updated` field and status as appropriate. |
+| UCS-03-010 | Readiness-Gate | Before setting a Use Case status to `ready-for-spec`, MUST verify the Readiness Checklist in the artifact; all items must be checked, and a single unchecked item blocks the status change. |
+| UCS-04-010 | Boundaries | MUST NOT contain low-level implementation detail (unless essential to the scenario). |
+| UCS-05-010 | Carry-Forward | When a Use Case is created, MUST check the Questions registry for entries tied to the source artifact — regardless of legacy or non-legacy origin — and load any that changes actor goals, workflow shape, scope boundaries, alternatives, or failure paths. Before advancing to `ready-for-spec`, MUST verify the registry holds nothing unresolved that should block the advance (see `UCS-03-010`). |
+| UCS-05-020 | Carry-Forward | MUST carry registry items forward by effect: actor-visible uncertainty belongs in `Open Questions`; behavior constraints belong in the scenario, preconditions, or failure paths; cite the registry's canonical ID instead of restating its full text. |
 
 ## Output
 

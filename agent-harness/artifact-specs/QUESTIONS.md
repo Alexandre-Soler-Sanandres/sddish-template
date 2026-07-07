@@ -10,14 +10,12 @@ evidence.
 
 ## Sources
 
-A Question may be created from any mode, mirroring ADR's `DEC-01-010` — no mode switch is required. Valid origins:
-Transcript, Idea, Use Case, Spec, Task, ADR, Legacy Finding, Review finding.
+Create a Question from whichever mode surfaces it (`QST-08-010`). Valid origins: Transcript, Idea, Use Case,
+Spec, Task, ADR, Legacy Finding, Review finding.
 
 ## When to Create
 
-Create a Question when something raised during any mode's work is real and needs a decision, but does not block
-the artifact currently being produced (if it does block, it stays inline as that artifact's own Open Questions
-item instead).
+See `QST-09-010` for the standalone-vs-inline test.
 
 ## Body Should Include
 
@@ -27,14 +25,16 @@ item instead).
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| QST-01-010 | Classification | Classify by blast radius: `local` (one artifact), `cross-artifact` (multiple artifacts), or `systemic` (overall architecture/target-product shape). Judge legacy `target-product` tags by content, not mechanical mapping — see Notes. |
-| QST-02-010 | ID-Scheme | Migrated legacy entries keep their exact existing ID (`Q-<APP>-NNN`, `CSQ-NNN`, `CSP-*`), unchanged. Brand-new, non-legacy entries get a plain `Q-NNN` ID — the next unused integer in one shared counter across all three files (not per-file, not per-classification). |
-| QST-03-010 | Status | Status is one of `Open`, `Resolved`, `Discarded` — the file a row lives in *is* its status, no separate column. A decision to defer ("not now, revisit later") is still `Resolved`, since the decision itself is settled; only a genuinely undecided, deprioritized item stays `Open` (noted in `Notes`). |
-| QST-04-010 | Dedup | Before adding a new entry, check existing rows across all three files for the same underlying question by content and merge into the existing row instead of filing a duplicate (mirrors Legacy Discovery's `LD-04-020`). |
-| QST-05-010 | Non-Deletion | IDs are permanent even if the question is later merged, discarded, or resolved — record the disposition in `Notes` instead of deleting the row (same non-destructive precedent as `COR-01-080`). |
-| QST-06-010 | Idea-vs-Question | A Question is an open fork with no proposed solution yet — test: "we haven't decided whether/how to X." A rough candidate direction — "we might build/do X" — belongs in `IDEA.md` instead. A Question resolving toward "yes, pursue this" spins off a new Idea citing the Question's ID; its own `Status` moves to `Resolved`, it doesn't silently become an Idea in place (the mechanical trigger for this is `QST-07-020`). |
-| QST-07-010 | Moving-Rows | Whenever anything resolves or discards a Question, move the row out of `QUESTIONS-OPEN.md` into `QUESTIONS-RESOLVED.md` or `QUESTIONS-DISCARDED.md` in the same pass (see Notes for common triggers): (1) keep the ID exactly; (2) the `Question` column's text becomes the `Decision` column; (3) `Notes` must record what settled it, citing the artifact; (4) delete the row from `QUESTIONS-OPEN.md` — no duplicate left behind. There is no `Status` field to set (`QST-03-010`). A question that is still genuinely undecided stays in `QUESTIONS-OPEN.md`. |
-| QST-07-020 | Idea-Spin-Off | A row moved per `QST-07-010` carries a `Follow-up: resolved\|idea` tag in `Notes`, set by whoever resolves the row — never inferred by the agent from the Decision text. When `idea`, create `IDEA-*.md` in the same pass, citing the question's ID in `source` and populating it from the full context: the question's text/Classification, the Decision, the originating `Source` artifact, and any other artifact citing this ID in its own Open Questions. |
+| QST-01-010 | Classification | MUST classify by blast radius: `local` (one artifact), `cross-artifact` (multiple artifacts), or `systemic` (overall architecture/target-product shape), judging legacy `target-product` tags by content, not mechanical mapping — see Notes. |
+| QST-02-010 | ID-Scheme | Migrated legacy entries MUST keep their exact existing ID (`Q-<APP>-NNN`, `CSQ-NNN`, `CSP-*`), unchanged; brand-new, non-legacy entries get a plain `Q-NNN` ID — the next unused integer in one shared counter across all three files (not per-file, not per-classification). |
+| QST-03-010 | Status | Status MUST be one of `Open`, `Resolved`, `Discarded` — the file a row lives in *is* its status, no separate column. A decision to defer ("not now, revisit later") is still `Resolved`, since the decision itself is settled; only a genuinely undecided, deprioritized item stays `Open` (noted in `Notes`). |
+| QST-04-010 | Dedup | MUST check existing rows across all three files for the same underlying question by content and merge into the existing row instead of filing a duplicate, before adding a new entry (mirrors Legacy Discovery's `LD-04-020`). |
+| QST-05-010 | Non-Deletion | IDs MUST remain permanent even if the question is later merged, discarded, or resolved — record the disposition in `Notes` instead of deleting the row (same non-destructive precedent as `COR-01-080`). |
+| QST-06-010 | Idea-vs-Question | A Question is an open fork with no proposed solution yet — test: "we haven't decided whether/how to X." A rough candidate direction — "we might build/do X" — belongs in `IDEA.md` instead. A Question resolving toward "yes, pursue this" MUST spin off a new Idea citing the Question's ID, with its own `Status` moved to `Resolved` — never silently becoming an Idea in place (the mechanical trigger for this is `QST-07-020`). |
+| QST-07-010 | Moving-Rows | Whenever anything resolves or discards a Question, MUST move the row out of `QUESTIONS-OPEN.md` into `QUESTIONS-RESOLVED.md` or `QUESTIONS-DISCARDED.md` in the same pass (see Notes for common triggers): (1) keep the ID exactly; (2) the `Question` column's text becomes the `Decision` column; (3) `Notes` must record what settled it, citing the artifact; (4) delete the row from `QUESTIONS-OPEN.md` — no duplicate left behind. There is no `Status` field to set (`QST-03-010`). A question that is still genuinely undecided stays in `QUESTIONS-OPEN.md`. |
+| QST-07-020 | Idea-Spin-Off | A row moved per `QST-07-010` MUST carry a `Follow-up: resolved\|idea` tag in `Notes`, set by whoever resolves the row — never inferred by the agent from the Decision text. When `idea`, create `IDEA-*.md` in the same pass, citing the question's ID in `source` and populating it from the full context: the question's text/Classification, the Decision, the originating `Source` artifact, and any other artifact citing this ID in its own Open Questions. |
+| QST-08-010 | Sources | MAY create a Question from any mode — no mode switch required. |
+| QST-09-010 | When-to-Create | MUST keep a raised concern inline as the current artifact's own Open Questions item, not a standalone Question, when it blocks that artifact; file a standalone Question only when it does not. |
 
 ## Notes
 

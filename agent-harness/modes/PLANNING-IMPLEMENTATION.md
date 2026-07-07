@@ -34,7 +34,7 @@ activity, the artifact spec governs the resulting Plan's own body schema and rea
 3. Find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
    - If Tasks exist but are draft or blocked → stop and report.
-   - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/REFINING.md`).
+   - If no Tasks exist → apply the Task Decision Matrix (`IPL-03-020`).
    - If Tasks are required but missing → stop and route to `/create-tasks`.
    - If Tasks are not required → create an inline Implementation Plan.
 4. Do not generate duplicate Tasks or ignore existing ones.
@@ -50,7 +50,7 @@ activity, the artifact spec governs the resulting Plan's own body schema and rea
 4. For each Spec, find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
    - If Tasks exist but are draft or blocked → stop and report.
-   - If no Tasks exist → apply the task decision matrix (see `agent-harness/modes/REFINING.md`).
+   - If no Tasks exist → apply the Task Decision Matrix (`IPL-03-020`).
    - If Tasks are required but missing → stop and route to `/create-tasks`.
 5. Do not generate duplicate Tasks or ignore existing ones.
 6. Create a coherent end-to-end Implementation Plan covering all derived Specs.
@@ -60,11 +60,13 @@ activity, the artifact spec governs the resulting Plan's own body schema and rea
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IPL-03-010 | Boundaries | Do not change code; do not treat `proposed` status as approved; do not proceed if the source artifact is not at an accepted status; do not generate duplicate Tasks or skip existing ones. |
-| IPL-04-010 | Procedure | When the planning task matches a reusable procedure, load the relevant universal and project playbooks before finalizing the plan. |
-| IPL-04-020 | Procedure | Reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
-| IPL-05-030 | Parallel-Work | Allow at most one Implementation Plan at status `approved` or `in-progress` per Spec. Plans on non-overlapping Specs may run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
-| IPL-05-050 | Parallel-Work | If two active Plans have overlapping `allowed_paths` across their Tasks, stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution. |
+| IPL-03-010 | Boundaries | MUST NOT: change code; treat `proposed` status as approved; proceed if the source artifact is not at an accepted status; or generate duplicate Tasks or skip existing ones. |
+| IPL-03-020 | Boundaries | MUST consult `REFINING.md`'s Task Decision Matrix before creating an inline Implementation Plan for a Spec/Use Case with no existing Tasks. Stop and report instead of proceeding if existing Tasks are `draft` or `blocked`. |
+| IPL-04-010 | Procedure | MUST load the relevant universal and project playbooks before finalizing the plan, when the planning task matches a reusable procedure. |
+| IPL-04-020 | Procedure | MUST reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
+| IPL-05-030 | Parallel-Work | MUST NOT allow more than one Implementation Plan at status `approved` or `in-progress` per Spec. |
+| IPL-05-040 | Parallel-Work | Plans on non-overlapping Specs MAY run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
+| IPL-05-050 | Parallel-Work | MUST stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution, if two active Plans have overlapping `allowed_paths` across their Tasks. |
 
 ## Reference Files
 

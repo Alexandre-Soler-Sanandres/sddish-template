@@ -9,52 +9,57 @@ instances of this live in the Context-Loading group below.
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| COR-01-020 | Universal | Do not load unrelated artifact directories. |
-| COR-01-030 | Universal | Do not expose secrets. |
-| COR-01-040 | Universal | Do not run commands that are irreversible or have a wide blast radius (data loss, schema changes, production state changes, force operations) without explicit approval. |
-| COR-01-050 | Universal | Do not implement from Partnering mode. |
-| COR-01-060 | Universal | Do not implement before an approved Implementation Plan exists. |
-| COR-01-070 | Universal | Keep traceability links aligned across Use Cases, Specs, Tasks, Plans, and Reviews. |
-| COR-01-080 | Universal | Do not retroactively rewrite artifacts in `done/` or `archive/` folders when paths, structure, or conventions change elsewhere in the harness. |
-| COR-01-090 | Universal | Do not infer approval from discussion — any status change or action that requires user approval needs the user's explicit confirmation, not an inference from the conversation's tone or direction. |
-| COR-01-100 | Universal | Only Improving-Harness may modify `agent-harness/*`. Do not change harness mode files, templates, artifact specs, or process rules during normal feature work in any other mode. |
-| COR-01-110 | Universal | When work surfaces something worth tracking that does not block the artifact currently in progress, decide Question vs Idea before creating either: a Question is an open fork with no proposed solution ("we haven't decided whether/how to X"); an Idea is a candidate direction with no open fork ("we might build/do X"). See `QUESTIONS.md`'s `QST-06-010` for the full rule and dedup/ID mechanics. |
-| COR-02-010 | Artifact-Language | Write normalized artifacts in English by default. |
-| COR-02-020 | Artifact-Language | Preserve the original language only in transcripts, raw input, or quoted source material when needed. |
-| COR-03-010 | Context-Loading | Start context loading from the user request. |
-| COR-03-020 | Context-Loading | Use `agent-harness/CATALOG.md` when the artifact identity is unknown or ambiguous. |
-| COR-03-030 | Context-Loading | Load the explicitly referenced artifact before exploring related artifacts. |
-| COR-03-040 | Context-Loading | Load the active true-Mode file (`agent-harness/modes/`) before taking mode-specific action. A true Mode is one of: Partnering, Implementing, Discovering-Legacy, Improving-Harness, Planning-Implementation, Refining. |
-| COR-03-050 | Context-Loading | Load linked parent or child artifacts only when they are required for the current task. |
-| COR-03-060 | Context-Loading | Prefer summaries before full historical artifacts when both are available. |
-| COR-03-070 | Context-Loading | Load reference files only when the current task is directly affected by them. |
-| COR-03-080 | Context-Loading | Load archived artifacts only when they are explicitly needed. |
-| COR-03-090 | Context-Loading | Before creating or updating an artifact, also load that artifact type's spec under `agent-harness/artifact-specs/` (in addition to the active Mode file, `COR-03-040`) — e.g. creating a Spec loads both `REFINING.md` and `SPECS.md`. |
-| COR-03-100 | Context-Loading | `agent-harness/shared-procs/` holds procedures explicitly invoked during a Mode's own work (e.g. Validation, invoked during Implementing or named in Improving-Harness's Improvement Process) — not a Mode or artifact spec itself. Load only when actually invoked, not by default. |
-| COR-03-110 | Context-Loading | A delegation prompt to a sub-agent doing mode-scoped work must name, as required reading for that sub-agent: `CORE.md`, the active mode file, and the relevant artifact spec — the same set `COR-03-040`/`COR-03-090` already require the primary agent to load. This does not require the sub-agent to read every reference file (`COR-03-070` still applies); it only stops the mode/spec/core layer from being left to the orchestrator's own prompt wording. |
-| COR-04-010 | Support-Files | Consult `agent-harness/playbooks/index.yaml` before loading universal playbooks broadly. |
-| COR-04-020 | Support-Files | Consult `harness-data/playbooks/index.yaml` before loading project playbooks broadly. |
-| COR-04-030 | Support-Files | Consult `harness-data/guides/index.yaml` before loading guides broadly. |
-| COR-04-040 | Support-Files | Load only the matched support files needed for the current task. Do not inspect an entire support-file folder when its index is sufficient. |
-| COR-04-050 | Support-Files | When both a universal playbook and a project playbook apply, follow the universal playbook for the generic procedure and the project playbook for repo-local refinement. |
-| COR-04-060 | Support-Files | Guides provide local operating context. They do not replace procedural instructions from playbooks. |
-| COR-04-070 | Support-Files | Playbooks and guides must not override core rules, mode boundaries, or explicit approval gates. |
-| COR-05-010 | Checkpoint | Before any high-impact action, verify the active mode, restart artifact, explicit user authorization, in-scope files, and required validation before stopping or committing. |
-| COR-05-020 | Checkpoint | Treat these as high-impact actions: committing; changing harness mode files, templates, or reference process rules; creating Review or Improvement artifacts; moving artifacts between lifecycle folders. Discovering-Legacy mode adds its own high-impact actions on top of this list — see `agent-harness/modes/DISCOVERING-LEGACY.md`. |
-| COR-05-030 | Checkpoint | After a resume or context compaction, repeat the checkpoint (`COR-05-010`) and re-read `CORE.md` and the active true-Mode file in full before the next high-impact action — the checkpoint verifies state, not rule text, so confirming mode identity alone is not enough. |
-| COR-05-040 | Checkpoint | On a true Mode transition (per `COR-03-040`'s list — not every artifact-producing action), re-read the newly-active mode file in full before taking any mode-specific action. |
-| COR-06-010 | Observability | Record temporary operational trace only when it helps safe continuation, validation, or explanation of agent behavior. |
-| COR-06-020 | Observability | Use `harness-data/RUN-LOG.md` only when operational trace is useful; it is not required by default, except for the Implementation gate-check required by `IMPL-02-010`. |
-| COR-06-030 | Observability | Record only operational facts that matter, such as context loaded, approvals, commands/checks run, current execution state, restart point, and stop reason. |
-| COR-06-040 | Observability | Move durable decisions, stable blockers, and lasting outcomes into the real artifacts instead of leaving them only in operational trace. |
-| COR-06-050 | Observability | Keep operational trace small and temporary; collapse it to a short closure note or clear it when the work finishes. |
-| COR-07-010 | Pause-Resume | Before pausing interrupted work that will continue later, record the exact restart point. |
-| COR-07-020 | Pause-Resume | Before pausing, record the current execution state. |
-| COR-07-030 | Pause-Resume | Before pausing, record any checks that must be re-run before continuing. |
-| COR-07-050 | Pause-Resume | On resume, confirm that the restart point is still valid. |
-| COR-07-060 | Pause-Resume | On resume, confirm that no newer artifact, status change, or user instruction invalidates the old plan. |
-| COR-07-070 | Pause-Resume | On resume, re-run any validations or checks that were still uncertain at pause time. |
-| COR-07-080 | Pause-Resume | Do not resume from stale conversational state alone when restart point or validation state matters. |
-| COR-08-010 | Commits | Do not commit unless the user explicitly requests it. |
-| COR-08-020 | Commits | Follow the project's commit conventions in `harness-data/reference/QUALITY.md` when committing. |
-| COR-09-010 | High-Risk | Treat database migrations, security/secrets/auth, deployment/infrastructure, payment/financial transaction execution, and domain-critical business logic (`harness-data/reference/DOMAIN.md`) as high-risk: do not proceed without explicit scope and validation coverage (payments additionally require explicit approval coverage). |
+| COR-01-020 | Universal | MUST NOT load unrelated artifact directories. |
+| COR-01-030 | Universal | MUST NOT expose secrets. |
+| COR-01-040 | Universal | MUST NOT run commands that are irreversible or have a wide blast radius (data loss, schema changes, production state changes, force operations) without explicit approval. |
+| COR-01-050 | Universal | MUST NOT implement from Partnering mode. |
+| COR-01-060 | Universal | MUST NOT implement before an approved Implementation Plan exists. |
+| COR-01-070 | Universal | MUST keep traceability links aligned across Use Cases, Specs, Tasks, Plans, and Reviews. |
+| COR-01-080 | Universal | MUST NOT retroactively rewrite artifacts in `done/` or `archive/` folders when paths, structure, or conventions change elsewhere in the harness. |
+| COR-01-090 | Universal | MUST NOT infer approval from a conversation's tone or direction — any status change or action requiring user approval needs the user's explicit confirmation instead. |
+| COR-01-100 | Universal | MUST NOT modify `agent-harness/*` (harness mode files, templates, artifact specs, process rules) outside Improving-Harness mode. |
+| COR-01-110 | Universal | MUST decide Question vs Idea before creating either, when work surfaces something worth tracking that does not block the artifact currently in progress: a Question is an open fork with no proposed solution ("we haven't decided whether/how to X"); an Idea is a candidate direction with no open fork ("we might build/do X"). See `QUESTIONS.md`'s `QST-06-010` for the full rule and dedup/ID mechanics. |
+| COR-02-010 | Artifact-Language | SHOULD write normalized artifacts in English by default. |
+| COR-02-020 | Artifact-Language | MAY preserve the original language in transcripts, raw input, or quoted source material when needed. |
+| COR-03-010 | Context-Loading | MUST start context loading from the user request. |
+| COR-03-020 | Context-Loading | MUST use `agent-harness/CATALOG.md` when the artifact identity is unknown or ambiguous. |
+| COR-03-030 | Context-Loading | MUST load the explicitly referenced artifact before exploring related artifacts. |
+| COR-03-040 | Context-Loading | MUST load the active true-Mode file (`agent-harness/modes/`) before taking mode-specific action. A true Mode is one of: Partnering, Implementing, Discovering-Legacy, Improving-Harness, Planning-Implementation, Refining. |
+| COR-03-050 | Context-Loading | MUST NOT load linked parent or child artifacts unless they are required for the current task. |
+| COR-03-060 | Context-Loading | SHOULD prefer summaries before full historical artifacts when both are available. |
+| COR-03-070 | Context-Loading | MUST NOT load reference files unless the current task is directly affected by them. |
+| COR-03-080 | Context-Loading | MUST NOT load archived artifacts unless they are explicitly needed. |
+| COR-03-090 | Context-Loading | MUST also load that artifact type's spec under `agent-harness/artifact-specs/` before creating or updating an artifact (in addition to the active Mode file, `COR-03-040`) — e.g. creating a Spec loads both `REFINING.md` and `SPECS.md`. |
+| COR-03-100 | Context-Loading | MUST NOT load `agent-harness/shared-procs/` by default — load only when actually invoked (e.g. Validation, invoked during Implementing or named in Improving-Harness's Improvement Process). |
+| COR-03-110 | Context-Loading | A delegation prompt to a sub-agent doing mode-scoped work MUST name, as required reading for that sub-agent: `CORE.md`, the active mode file, and the relevant artifact spec — the same set `COR-03-040`/`COR-03-090` require the primary agent to load. This does not require the sub-agent to read every reference file (`COR-03-070` still applies); it only stops the mode/spec/core layer being left to the orchestrator's own prompt wording. |
+| COR-04-010 | Support-Files | MUST consult `agent-harness/playbooks/index.yaml` before loading universal playbooks broadly. |
+| COR-04-020 | Support-Files | MUST consult `harness-data/playbooks/index.yaml` before loading project playbooks broadly. |
+| COR-04-030 | Support-Files | MUST consult `harness-data/guides/index.yaml` before loading guides broadly. |
+| COR-04-040 | Support-Files | MUST NOT inspect an entire support-file folder when its index is sufficient — load only the matched support files needed for the current task. |
+| COR-04-050 | Support-Files | MUST follow the universal playbook for the generic procedure and the project playbook for repo-local refinement when both apply. |
+| COR-04-060 | Support-Files | Guides provide local operating context; MUST NOT be treated as replacing procedural instructions from playbooks. |
+| COR-04-070 | Support-Files | Playbooks and guides MUST NOT override core rules, mode boundaries, or explicit approval gates. |
+| COR-05-010 | Checkpoint | MUST verify the active mode, restart artifact, explicit user authorization, in-scope files, and required validation before any high-impact action, before stopping or committing. |
+| COR-05-020 | Checkpoint | MUST treat these as high-impact actions: committing; changing harness mode files, templates, or reference process rules; creating Review or Improvement artifacts; moving artifacts between lifecycle folders. Discovering-Legacy mode adds its own high-impact actions on top of this list — see `agent-harness/modes/DISCOVERING-LEGACY.md`. |
+| COR-05-030 | Checkpoint | MUST repeat the checkpoint (`COR-05-010`) and re-read `CORE.md` and the active true-Mode file in full before the next high-impact action, after a resume or context compaction — the checkpoint verifies state, not rule text, so confirming mode identity alone is not enough. |
+| COR-05-040 | Checkpoint | MUST re-read the newly-active mode file in full before taking any mode-specific action, on a true Mode transition (per `COR-03-040`'s list — not every artifact-producing action). |
+| COR-06-010 | Observability | SHOULD record temporary operational trace only when it helps safe continuation, validation, or explanation of agent behavior. |
+| COR-06-020 | Observability | MAY use `harness-data/RUN-LOG.md`; it is not required by default. |
+| COR-06-030 | Observability | MUST record only operational facts that matter, such as context loaded, approvals, commands/checks run, current execution state, restart point, and stop reason. |
+| COR-06-040 | Observability | MUST move durable decisions, stable blockers, and lasting outcomes into the real artifacts instead of leaving them only in operational trace. |
+| COR-06-050 | Observability | MUST keep operational trace small and temporary; collapse it to a short closure note or clear it when the work finishes. |
+| COR-06-060 | Observability | MUST use `harness-data/RUN-LOG.md` for the Implementation gate-check required by `IMPL-02-010`. |
+| COR-07-010 | Pause-Resume | MUST record the exact restart point before pausing interrupted work that will continue later. |
+| COR-07-020 | Pause-Resume | MUST record the current execution state before pausing. |
+| COR-07-030 | Pause-Resume | MUST record, before pausing, any checks that must be re-run before continuing. |
+| COR-07-050 | Pause-Resume | MUST confirm, on resume, that the restart point is still valid. |
+| COR-07-060 | Pause-Resume | MUST confirm, on resume, that no newer artifact, status change, or user instruction invalidates the old plan. |
+| COR-07-070 | Pause-Resume | MUST re-run, on resume, any validations or checks that were still uncertain at pause time. |
+| COR-07-080 | Pause-Resume | MUST NOT resume from stale conversational state alone when restart point or validation state matters. |
+| COR-08-010 | Commits | MUST NOT commit unless the user explicitly requests it. |
+| COR-08-020 | Commits | MUST follow the project's commit conventions in `harness-data/reference/QUALITY.md` when committing. |
+| COR-09-010 | High-Risk | MUST NOT proceed with database migrations, security/secrets/auth, deployment/infrastructure, payment/financial transaction execution, or domain-critical business logic (`harness-data/reference/DOMAIN.md`) — treated as high-risk — without explicit scope and validation coverage (payments additionally require explicit approval coverage). |
+| COR-10-010 | Rule-Authoring | When a mode file, artifact spec, or template's descriptive prose (a Purpose section, a `## Sources`/`## Candidate Artifacts`-style field description, a frontmatter field comment) states an expectation of agent behavior, back it with a corresponding ID'd rule in that file's own Rules table (or the template's own guidance line, for templates). Prose may explain *why*; it must not be the only place an enforceable *must/should* lives. |
+| COR-10-020 | Rule-Authoring | When a Review finding traces back to prose-only intent (this shape has recurred — see `REVIEW-019`, `021`, `022`, `023`), the resulting Improvement must add the missing rule to the specific file found, and must not treat the instance as fully closed until it does. |
+| COR-10-030 | Rule-Authoring | State every rule's obligation strength using an RFC 2119 keyword (`MUST` / `MUST NOT` / `SHOULD` / `SHOULD NOT` / `MAY`) per RFC 2119/RFC 8174 (BCP 14) — capitalized, exactly one per rule; lowercase modal words carry no special meaning. Do not use ad hoc substitutes ("always," "never," "do not," "should probably") where a keyword conveys the same obligation more precisely. |
+| COR-10-040 | Rule-Authoring | MUST state rule text as concisely as possible while preserving every distinction, condition, exception, and cross-reference the rule currently enforces — the agent's ability to apply the rule correctly to every case it covers today must not shrink. MUST NOT cut content, nuance, or edge-case coverage to save length; only cut redundant wording, restated context available elsewhere, or filler that adds no decision-relevant information. |

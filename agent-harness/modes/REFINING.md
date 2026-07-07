@@ -85,13 +85,14 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| UCS-01-010 | Sources | A Use Case must be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation. If the source is an Idea, it must be at status `ready-for-use-case` (`IDA-01-010`) before a Use Case may be created from it; other source types have no formal status gate — use judgment instead. |
-| UCS-04-020 | Boundaries | Do not trigger implementation, and do not create Specs, Tasks, or Implementation Plans. |
-| SPS-01-010 | Sources | A Spec must always be created from a Use Case, and the Use Case must be at status `ready-for-spec` before a Spec may be created — do not proceed otherwise. |
-| SPS-04-010 | Boundaries | Do not implement or change code, and do not create Tasks or Implementation Plans while creating a Spec. |
-| TSK-01-010 | Sources | Tasks must always be created from an approved Spec, and the Spec must be at status `approved` before Tasks may be created — do not proceed otherwise. |
-| TSK-03-010 | Boundaries | Do not implement or change code, and do not create Implementation Plans. |
-| TSK-04-010 | Dedup | Before generating Tasks from a Spec — via this entry point directly, not only when Planning-Implementation happens to check first — verify existing Tasks derived from that Spec; do not generate duplicate Tasks or skip existing ones. This rule is owned here, not borrowed from `PLANNING-IMPLEMENTATION.md`'s `IPL-03-010`, so `/create-tasks` is protected regardless of entry path. |
+| UCS-01-010 | Sources | A Use Case MUST be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation; if the source is an Idea, it MUST be at status `ready-for-use-case` (`IDA-01-010`) before a Use Case may be created from it. |
+| UCS-01-030 | Sources | For source types other than an Idea, which have no formal status gate, the agent SHOULD use judgment that the source material is concrete enough to draft a scenario from. |
+| UCS-04-020 | Boundaries | MUST NOT trigger implementation, and MUST NOT create Specs, Tasks, or Implementation Plans. |
+| SPS-01-010 | Sources | MUST create a Spec only from a Use Case at status `ready-for-spec` — do not proceed otherwise. |
+| SPS-04-010 | Boundaries | MUST NOT implement or change code, and MUST NOT create Tasks or Implementation Plans while creating a Spec. |
+| TSK-01-010 | Sources | MUST create Tasks only from a Spec at status `approved` — do not proceed otherwise. |
+| TSK-03-010 | Boundaries | MUST NOT implement or change code, and MUST NOT create Implementation Plans. |
+| TSK-04-010 | Dedup | MUST verify existing Tasks derived from that Spec before generating Tasks from a Spec — via this entry point directly, not only when Planning-Implementation happens to check first; do not generate duplicate Tasks or skip existing ones. This rule is owned here, not borrowed from `PLANNING-IMPLEMENTATION.md`'s `IPL-03-010`, so `/create-tasks` is protected regardless of entry path. |
 
 ## Output
 

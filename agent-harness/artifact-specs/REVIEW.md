@@ -89,10 +89,12 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| RVW-01-010 | Escalation | The agent never autonomously re-enters a producing mode after `changes-requested`, `rejected`, or `follow-up-required` — the user must explicitly request the next action. |
-| RVW-02-010 | Boundaries | Do not change the substantive content of the artifact under review as part of the review itself (status transitions and explicitly prescribed follow-up metadata updates are allowed); do not implement fixes; do not create Tasks or Specs as a side effect; do not modify harness files without an Improvement artifact. |
-| RVW-03-010 | Procedure | When the review target matches a specialized review procedure, load the relevant playbook before reviewing. Playbooks may refine how the review is performed, but they do not change Review outcomes, follow-up actions, or mode boundaries (`COR-04-070`). |
-| RVW-04-010 | Flavor | `target_type` determines the flavor (see Two Flavors) — use the matching Criteria Checklist and After-Review action table; never mix the two. |
+| RVW-01-010 | Escalation | The agent MUST NOT autonomously re-enter a producing mode after `changes-requested`, `rejected`, or `follow-up-required` — the user must explicitly request the next action. |
+| RVW-02-010 | Boundaries | MUST NOT change the substantive content of the artifact under review as part of the review itself (status transitions and explicitly prescribed follow-up metadata updates are allowed); MUST NOT implement fixes; MUST NOT create Tasks or Specs as a side effect; MUST NOT modify harness files without an Improvement artifact. |
+| RVW-03-010 | Procedure | MUST load the relevant playbook before reviewing, when the review target matches a specialized review procedure. |
+| RVW-03-020 | Procedure | Playbooks MAY refine how the review is performed; they do not change Review outcomes, follow-up actions, or mode boundaries (`COR-04-070`). |
+| RVW-04-010 | Flavor | `target_type` determines the flavor (see Two Flavors) — MUST use the matching Criteria Checklist and After-Review action table; never mix the two. |
+| RVW-05-010 | Required-Actions | MUST take exactly the action listed in the matching After-Review table for the recorded Outcome before stopping — do not improvise or skip the required status change, archive move, or artifact creation. |
 
 ## Output
 

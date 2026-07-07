@@ -43,30 +43,21 @@ Their location is project-defined — the harness does not enforce a specific fo
 
 ## When a Spec Changes
 
-A **significant change** is any modification to: scope, non-goals, functional requirements,
-acceptance criteria, or constraints.
-
-A **non-significant change** is: typos, clarifications, adding open questions, updating the
-`updated` field.
-
-When a significant change is made to an approved Spec:
-
-1. Reset Spec status to `draft`.
-2. For each Task ID in `derived_tasks`: set Task status to `draft`.
-3. For each Implementation Plan where `source` includes this Spec ID: set Plan status to `proposed`.
-4. Report the full impact — list affected Task IDs and Plan IDs.
-5. Stop and wait for user instruction before proceeding.
+See `SPS-07-010` for what counts as significant, and `SPS-07-020` for the required cascade.
 
 ## Rules
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| SPS-01-020 | Sources | Legacy Findings, Ideas, and Transcripts are upstream inputs, not direct Spec sources — they produce Use Cases, not Specs directly. ADRs are reference authority only, never a Spec source — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
-| SPS-02-010 | Readiness-Gate | Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact. All items must be checked. A single unchecked item blocks the status change. |
-| SPS-03-010 | Updating | A Spec may be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
-| SPS-03-020 | Updating | Updating does not change the Spec ID. Update the `updated` field. |
-| SPS-05-010 | Carry-Forward | When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy origin — load those referenced items and route them into the Spec sections they actually constrain. Before setting status to `approved` (see `SPS-02-010`), verify the registry holds nothing unresolved that should block the advance. |
-| SPS-06-010 | Legacy-Handoff | Keep the Questions registry's `CSP-*` rows as the canonical proof/parity backlog. A Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions, but should not duplicate unrelated rows or store proof IDs in `test_refs`. |
+| SPS-01-020 | Sources | Legacy Findings, Ideas, and Transcripts MUST NOT be treated as direct Spec sources — they are upstream inputs that produce Use Cases, not Specs directly; ADRs likewise must not be treated as a Spec source, reference authority only — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
+| SPS-02-010 | Readiness-Gate | Before setting a Spec status to `approved`, MUST verify the Readiness Checklist in the artifact; all items must be checked, and a single unchecked item blocks the status change. |
+| SPS-03-010 | Updating | A Spec MAY be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
+| SPS-03-020 | Updating | Updating MUST NOT change the Spec ID; must update the `updated` field. |
+| SPS-05-010 | Carry-Forward | When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy origin — MUST load those referenced items and route them into the Spec sections they constrain. Before setting status to `approved` (see `SPS-02-010`), must verify the registry holds nothing unresolved that should block the advance. |
+| SPS-06-010 | Legacy-Handoff | The Questions registry's `CSP-*` rows remain the canonical proof/parity backlog. A Spec MAY cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions. |
+| SPS-06-020 | Legacy-Handoff | A Spec SHOULD NOT duplicate unrelated `CSP-*` rows or store proof IDs in `test_refs`. |
+| SPS-07-010 | Significant-Change | MUST treat a change to scope, non-goals, functional requirements, acceptance criteria, or constraints as significant; a typo, clarification, added open question, or `updated`-field bump is not. |
+| SPS-07-020 | Cascade | MUST run this cascade when a significant change lands on an `approved` Spec: reset the Spec to `draft`; set every Task in `derived_tasks` to `draft`; set every Implementation Plan whose `source` includes this Spec to `proposed`; report all affected IDs; then stop and wait for user instruction. |
 
 ## Output
 

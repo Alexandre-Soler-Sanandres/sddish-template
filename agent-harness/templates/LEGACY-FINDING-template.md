@@ -11,7 +11,9 @@ confidence: medium       # low | medium | high
 area: ""                 # domain area, e.g. user-management | payments | reporting
 candidate_artifacts: []  # e.g. [UC-001, SPEC-001, IDEA-001]
 risk: low                # low | medium | high
-tags: []
+tags: []                 # include `bug` when this finding documents a confirmed defect or dead/wired-but-inert
+                          # code — as distinct from an unresolved fork (raise a Question instead) or
+                          # future-facing intent (raise an Idea candidate instead)
 ---
 
 ## Finding
