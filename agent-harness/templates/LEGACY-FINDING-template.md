@@ -18,7 +18,8 @@ tags: []                 # include `bug` when this finding documents a confirmed
 
 ## Finding
 
-(describe what was found in the legacy code or documentation)
+(describe what was found in the legacy code or documentation; when the evidence clearly supports a rewrite-facing
+conclusion, state that conclusion here too, not only the narrow local fact)
 
 ## Evidence
 
@@ -31,6 +32,12 @@ contributing app finding IDs and the underlying source evidence they synthesize.
 - **Documented behavior**: (what the docs say it does)
 - **Inferred intent**: (what it was probably meant to do)
 - **Accidental complexity**: (anything that looks unintentional or unclear)
+- **Operator/runtime visibility**: (if relevant, what operators, scripts, endpoints, dashboards, or diagnostics use to
+  observe or trust this behavior today)
+- **Persistence/data-model shape**: (if relevant, what storage shape, schema choice, read-model, key typing, or
+  migration-authority boundary this finding establishes)
+- **Architectural boundary implication**: (if relevant, what cross-layer or cross-subsystem contract inside the app
+  this finding establishes)
 
 ## Evidence Conflict
 
@@ -49,7 +56,8 @@ prose)
 `CSQ-NNN` for cross-system findings. Empty means no open question-blockers on this finding. Before leaving this
 empty, re-read this finding's own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test
 — "we haven't decided whether/how to X." If the finding's own wording already reads that way (e.g. "worth
-tracking so a rewrite standardises on X"), raise a registry row instead of leaving it as prose.)
+tracking so a rewrite standardises on X"), or the finding clearly implies a `preserve-vs-adapt`, `scope-v1`,
+`fidelity`, or `naming` fork, raise a registry row instead of leaving it as prose.)
 
 ## Resolved Questions
 
