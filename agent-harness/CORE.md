@@ -26,6 +26,8 @@ instances of this live in the Context-Loading group below.
 | COR-03-030 | Context-Loading | MUST load the explicitly referenced artifact before exploring related artifacts. |
 | COR-03-040 | Context-Loading | MUST load the active true-Mode file (`agent-harness/modes/`) before taking mode-specific action. A true Mode is one of: Partnering, Implementing, Discovering-Legacy, Improving-Harness, Planning-Implementation, Refining. |
 | COR-03-050 | Context-Loading | MUST NOT load linked parent or child artifacts unless they are required for the current task. |
+| COR-03-055 | Context-Loading | MUST NOT exclude an in-scope file or evidence source based only on assumed triviality, filename convention, or boilerplate appearance. |
+| COR-03-056 | Context-Loading | `smallest sufficient context` MUST limit reading depth within in-scope material, not whether that material is read. |
 | COR-03-060 | Context-Loading | SHOULD prefer summaries before full historical artifacts when both are available. |
 | COR-03-070 | Context-Loading | MUST NOT load reference files unless the current task is directly affected by them. |
 | COR-03-080 | Context-Loading | MUST NOT load archived artifacts unless they are explicitly needed. |

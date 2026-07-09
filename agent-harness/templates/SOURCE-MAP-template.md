@@ -20,6 +20,10 @@ updated: ""                              # YYYY-MM-DD
 
 (list the main structural areas of the app: modules, packages, layers, services)
 
+## Evidence Enumeration
+
+(record the app root contents and any package/directory listings needed to support slice scope claims)
+
 ### Source Confidence
 
 | Source | Confidence | Notes |
@@ -64,7 +68,9 @@ Valid status values: `done` | `next` | `pending` | `not-needed`.
 ## Completed Notes
 
 (one entry per completed slice or block; list: included slices, evidence paths used, stable findings, unresolved
-decisions)
+decisions, docs consulted or "none relevant", negative results for checked `LDA-04-055`/`056`/`057`/`058`/`059`
+categories, the evidence basis for those checks, the fresh-context verification result, and any resulting
+follow-up)
 
 ## Import Hygiene
 
@@ -125,4 +131,4 @@ Collapses to only: `Source Root`, `Evidence Inventory`, `Import Hygiene`, `Refer
 naming the next non-discovery phase in place of `Restart Pointer`).
 
 Removed: `Candidate Discovery Slices`, `Block Plan`, `Working Discovery Plan`, `Current Status`,
-`Completed Notes`, `Restart Pointer`.
+`Completed Notes`, `Restart Pointer`, `Evidence Enumeration`.

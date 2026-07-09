@@ -41,8 +41,27 @@ per-app file.
 6. Before marking a slice `done`, confirm at least one of its findings is a plain baseline/descriptive finding —
    what the slice's area concretely contains or does — not only anomaly, conflict, or edge-case findings; write
    the missing baseline finding first if every finding so far is anomaly-shaped (`LDA-04-050`).
-7. Validate with `git diff --check`.
-8. Commit only when explicitly asked.
+7. Complete the Slice Closeout Checklist (`LDA-06-060`).
+8. Validate with `git diff --check`.
+9. Commit only when explicitly asked.
+
+## Slice Closeout Checklist
+
+Before marking a slice `done`:
+
+1. Confirm at least one finding records what the slice's area concretely contains or does.
+2. Check `LDA-04-055`/`056`/`057`/`058`/`059` coverage for the slice.
+3. Create or update any required finding or Question in the same pass.
+4. Record the specific docs consulted for the slice, or explicitly record that none were relevant.
+5. Record negative results for checked `LDA-04-055`/`056`/`057`/`058`/`059` categories when no qualifying
+   evidence is found.
+6. Record the concrete evidence basis for each `LDA-04-055`/`056`/`057`/`058`/`059` check.
+7. Complete a fresh-context verification pass for the slice.
+8. Address any gap found by that verification pass before closing the slice.
+9. Update `SOURCE-MAP.md` before closing the slice.
+
+For this checklist, a fresh-context verification pass means a separate agent invocation that receives only the
+slice's recorded evidence, findings/Questions, and checklist outputs needed to perform the verification.
 
 ## Rules
 
@@ -56,17 +75,17 @@ per-app file.
 | LDA-03-020 | Slice | A source map MAY define as many slices as needed for rewrite-quality app evidence. |
 | LDA-03-030 | Slice | Every slice MUST have status `done`, `next`, `pending`, or `not-needed`. |
 | LDA-03-040 | Slice | MUST NOT mark a slice `done` until findings and unresolved questions are recorded. |
-| LDA-03-050 | Slice | Completed slice notes (`Completed Notes` in the source map) MUST hold evidence paths, stable findings, and unresolved decisions only. |
+| LDA-03-050 | Slice | Completed slice notes (`Completed Notes` in the source map) MUST hold evidence paths, stable findings, unresolved decisions, and required slice-closeout records only. |
 | LDA-04-010 | Slice-Roundtrip | Reference enrichment MAY be deferred across blockwise work only when the source map says so. |
 | LDA-04-020 | Slice-Roundtrip | MUST record any forward-looking candidate list a slice produces — candidate Use Cases, candidate Specs, candidate quality gates, or anything similarly shaped — in the relevant finding's `## Candidate Artifacts` section at authoring time. |
 | LDA-04-030 | Slice-Roundtrip | MUST NOT invent a new per-slice `"Candidate <Something>"` list in `SOURCE-MAP.md`'s slice notes under any label; that is the same duplication. When a candidate spans multiple findings from the same slice, record it in each contributing finding's `Candidate Artifacts`, not as a new shared list. |
 | LDA-04-040 | Slice-Roundtrip | MUST test a finding's own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test before leaving its `## Open Questions` empty, and raise a `Q-<APP>-NNN` registry row if it matches, rather than leaving the fork as prose inside the finding. |
-| LDA-04-050 | Slice-Roundtrip | MUST NOT mark a slice `done` unless at least one of its findings is a plain baseline/descriptive finding — what the slice's area concretely contains or does, independent of any anomaly; if every finding so far is anomaly, conflict, or edge-case, write the missing baseline finding first. |
-| LDA-04-055 | Slice-Roundtrip | MUST check each completed slice for material operational or manual surfaces in scope — including CLI/operator tools, health/readiness/metrics surfaces, SQL diagnostics, or comparable observability paths — and write or update a finding when present. |
-| LDA-04-056 | Slice-Roundtrip | MUST check each completed slice for material data-model shape choices in scope — including storage topology, JSON-vs-typed structure, DB views as read models, key typing, or migration-authority boundaries — and write or update a finding when present. |
-| LDA-04-057 | Slice-Roundtrip | MUST check each completed slice for material provider-set shape in scope — including primary, fallback, overlapping, deferred, or disabled-but-wired providers — and write or update a finding when present. |
-| LDA-04-058 | Slice-Roundtrip | MUST check each completed slice for material non-error runtime states in scope — including warmup, degraded-but-expected, or long-running intermediate states — and write or update a finding when present. |
-| LDA-04-059 | Slice-Roundtrip | MUST check each completed slice for target-design forks implied by the evidence — including `preserve-vs-adapt`, `scope-v1`, `fidelity`, and `naming` forks — and create or update the corresponding Question in the same pass when present. |
+| LDA-04-050 | Slice-Roundtrip | MUST NOT mark a slice `done` until at least one finding records what the slice's area concretely contains or does, independent of anomaly, conflict, or edge-case behavior. |
+| LDA-04-055 | Slice-Roundtrip | MUST check each completed slice for material operational or manual surfaces in scope — including CLI/operator tools, health/readiness/metrics surfaces, SQL diagnostics, or comparable observability paths — and MUST write a new finding or update an existing finding when one is present. |
+| LDA-04-056 | Slice-Roundtrip | MUST check each completed slice for material data-model shape choices in scope — including storage topology, JSON-vs-typed structure, DB views as read models, key typing, or migration-authority boundaries — and MUST write a new finding or update an existing finding when one is present. |
+| LDA-04-057 | Slice-Roundtrip | MUST check each completed slice for material provider-set shape in scope — including primary, fallback, overlapping, deferred, or disabled-but-wired providers — and MUST write a new finding or update an existing finding when one is present. |
+| LDA-04-058 | Slice-Roundtrip | MUST check each completed slice for material non-error runtime states in scope — including warmup, degraded-but-expected, or long-running intermediate states — and MUST write a new finding or update an existing finding when one is present. |
+| LDA-04-059 | Slice-Roundtrip | MUST check each completed slice for target-design forks implied by the evidence — including `preserve-vs-adapt`, `scope-v1`, `fidelity`, and `naming` forks — and MUST create a new Question or update an existing Question when one is present. |
 | LDA-04-060 | Slice-Roundtrip | Reference enrichment MUST be complete before `app-local-complete`. |
 | LDA-04-070 | Slice-Roundtrip | MUST NOT treat the baseline-finding requirement alone as sufficient when a slice also clearly establishes rewrite-facing conclusions, operational/manual surfaces, data-model shape, provider-set shape, non-error runtime states, or target-design forks; those evidence classes still need their own finding or Question coverage in the same pass. |
 | LDA-05-010 | Blockwise | Blocks are a planning convenience for related slices with overlapping evidence, not a replacement for slices — MUST mark each included slice individually in the slice status table. |
@@ -74,3 +93,10 @@ per-app file.
 | LDA-05-030 | Blockwise | MUST keep blocks app-scoped. |
 | LDA-05-040 | Blockwise | MUST write one completed block note listing included slices, evidence paths, stable findings, and unresolved decisions. |
 | LDA-05-050 | Blockwise | MUST set the next unfinished slice or coherent block to `next` after a block completes. |
+| LDA-06-010 | Slice-Closeout | MUST record a listing of the app root's contents and of every package directory a slice's scope references before treating that scope as fully known. |
+| LDA-06-020 | Slice-Closeout | MUST name the specific docs consulted for each completed slice, or explicitly record that no relevant docs were found for that slice's scope. |
+| LDA-06-030 | Slice-Closeout | MUST record a negative result for each checked `LDA-04-055`/`056`/`057`/`058`/`059` category when no qualifying evidence is found. |
+| LDA-06-040 | Slice-Closeout | MUST record the concrete evidence basis for each `LDA-04-055`/`056`/`057`/`058`/`059` check. |
+| LDA-06-050 | Slice-Closeout | MUST complete a fresh-context verification pass before marking a slice `done`. |
+| LDA-06-055 | Slice-Closeout | MUST address any gap found by the fresh-context verification pass before marking a slice `done`. |
+| LDA-06-060 | Slice-Closeout | MUST complete the Slice Closeout Checklist before marking a slice `done`. |
