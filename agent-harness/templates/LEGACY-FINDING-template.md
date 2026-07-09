@@ -19,7 +19,8 @@ tags: []                 # include `bug` when this finding documents a confirmed
 ## Finding
 
 (describe what was found in the legacy code or documentation; when the evidence clearly supports a rewrite-facing
-conclusion, state that conclusion here too, not only the narrow local fact)
+conclusion, state that conclusion here too, not only the narrow local fact. When this finding must remain
+separate to preserve sub-area-local fidelity or a concrete defect, state that reason explicitly.)
 
 ## Evidence
 
@@ -38,6 +39,9 @@ contributing app finding IDs and the underlying source evidence they synthesize.
   migration-authority boundary this finding establishes)
 - **Architectural boundary implication**: (if relevant, what cross-layer or cross-subsystem contract inside the app
   this finding establishes)
+- **Fidelity-critical sub-area detail**: (if relevant, what sub-area-local contract shape, fetch/execution pattern,
+  fallback strategy, interaction model, dependency timing, state model, or cost profile would be lost if this were
+  collapsed into a broader family summary)
 
 ## Evidence Conflict
 
@@ -46,9 +50,12 @@ why — e.g. "current code contradicts stale README; current code is authoritati
 
 ## Candidate Artifacts
 
-(what Use Cases, Specs, or Ideas this finding could inform — for documented future/roadmap intent that isn't an
-unresolved fork per `LD-02-020`/`COR-01-110`, note a candidate `IDEA-*.md` here rather than only describing it in
-prose)
+(review every new or updated finding for downstream artifact candidates before leaving this section empty. Record
+clearly supported Use Case, Idea, or Spec candidates here; prefer Use Case or Idea candidates before direct Spec
+candidates unless the evidence already defines a concrete standalone technical contract, proof surface, or
+implementation-shaping constraint. This section may also note meaningful cross-finding impact when that traceability
+will help later synthesis; record each such note as `- Affects: <LF-ID> — <short reason>`. Frontmatter
+`candidate_artifacts` remains for artifact IDs only.)
 
 ## Open Questions
 
@@ -57,7 +64,9 @@ prose)
 empty, re-read this finding's own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test
 — "we haven't decided whether/how to X." If the finding's own wording already reads that way (e.g. "worth
 tracking so a rewrite standardises on X"), or the finding clearly implies a `preserve-vs-adapt`, `scope-v1`,
-`fidelity`, or `naming` fork, raise a registry row instead of leaving it as prose.)
+`fidelity`, or `naming` fork, raise a registry row instead of leaving it as prose. Do the same when the finding
+establishes visible current behavior or a current policy/scope surface but leaves the target behavior or target
+policy unresolved.)
 
 ## Resolved Questions
 
