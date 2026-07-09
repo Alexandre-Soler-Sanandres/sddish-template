@@ -49,10 +49,8 @@ risk: low                # low | medium | high
 
 ## Open Questions
 
-(unresolved questions that may affect the spec. Tag each with its origin: a legacy question ID (`CSQ-NNN` /
-`Q-<APP>-NNN`) when it traces to Legacy Discovery, add related `CSP-*` IDs when a parity/proof obligation still
-shapes the scenario, or use a short origin note — e.g. "raised during Partnering, YYYY-MM-DD" or "raised while
-drafting this Use Case" — when it does not. Keep the canonical IDs instead of copying full legacy backlog rows.)
+(MUST list canonical Question IDs per `COR-01-120`. MUST NOT restate full backlog text — cite the ID. `UCS-03-010`
+governs whether an unresolved reference stops advancement.)
 
 ## Readiness Checklist
 

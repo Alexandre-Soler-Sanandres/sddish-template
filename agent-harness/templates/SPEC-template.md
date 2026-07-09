@@ -78,10 +78,8 @@ must later be discharged here or in Open Questions, not in `test_refs`)
 
 ## Open Questions
 
-(unresolved questions that may affect approval. Tag each with its origin: a legacy question ID (`CSQ-NNN` /
-`Q-<APP>-NNN`) when it traces to Legacy Discovery, add related `CSP-*` IDs when proof or parity obligations still
-affect approval, or use a short origin note — e.g. "raised during Partnering, YYYY-MM-DD" or "raised while drafting
-this Spec" — when it does not. Keep canonical IDs by reference instead of copying full legacy backlog rows.)
+(MUST list canonical Question IDs per `COR-01-120`. MUST NOT restate full backlog text — cite the ID. `SPS-02-010`
+governs whether an unresolved reference stops approval.)
 
 ## Readiness Checklist
 

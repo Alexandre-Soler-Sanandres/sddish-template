@@ -34,7 +34,8 @@ tags: []
 
 ## Open Questions
 
-(what this decision deliberately does not settle)
+(MUST list canonical Question IDs this decision has not settled yet, per `COR-01-120`. `DEC-03-010` governs
+whether one stops acceptance.)
 
 ## Readiness Checklist
 

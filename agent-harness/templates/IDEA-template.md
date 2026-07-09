@@ -23,7 +23,8 @@ next: []                 # e.g. [UC-001]
 
 ## Open Questions
 
-(what needs to be clarified before this can become a Use Case?)
+(SHOULD list canonical Question IDs that need clarifying before this can become a Use Case, per `COR-01-120` and
+`IDA-05-010` — informal; has no effect on this Idea's own lifecycle.)
 
 ## Notes
 

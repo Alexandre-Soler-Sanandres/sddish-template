@@ -30,7 +30,7 @@ An Idea may be created from Partnering discussion, Transcript, Review finding, o
 | IDA-02-010 | Dedup | Before creating a new Idea, MUST check existing `active` Ideas for overlapping Problem/Opportunity and merge instead of duplicating (scaled-down mirror of Legacy Discovery's `LD-04-020`). |
 | IDA-03-010 | Boundaries | An Idea MUST NOT itself trigger implementation or create a Use Case/Spec directly; promotion to a Use Case requires explicit user confirmation, not inferred from discussion. |
 | IDA-04-010 | Idea-vs-Question | MUST classify an item as an Idea only if it has a candidate direction, not an open fork — see `QUESTIONS.md`'s `QST-06-010` for the exact test and how a Question resolving toward "yes, pursue this" spins off a new Idea. |
-| IDA-05-010 | Carry-Forward | When an Idea is seeded from a source (Transcript, Review finding, etc.) that has its own Questions-registry entries, SHOULD check the registry and note any relevant entry in this Idea's own Open Questions — informally; this does not block `captured` or `clarifying`, since Ideas are not gated the way Use Cases/Specs/ADRs are (see `IDA-01-010`). |
+| IDA-05-010 | Carry-Forward | When an Idea is seeded from a source (Transcript, Review finding, etc.) that has its own Questions-registry entries, SHOULD note the relevant canonical Question ID(s) in this Idea's own Open Questions per `CORE.md`'s `COR-01-120` — informally; this has no effect on `captured` or `clarifying` status, since Ideas are not gated the way Use Cases/Specs/ADRs are (see `IDA-01-010`). |
 
 ## Output
 

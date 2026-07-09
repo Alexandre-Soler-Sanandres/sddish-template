@@ -328,9 +328,9 @@ Before Use Cases or Specs, make sure the questions that actually block the topic
 deferred with rationale, marked not-needed, or routed to proof.
 
 Important distinction: this is the unblock gate for downstream design work, not proof that all legacy question
-clarification is complete. Non-blocking app-local or cross-system questions may still remain open at this point, but
-they must stay tracked and continue toward one of these outcomes: resolved, deferred, marked not-needed, converted to
-proof work, or intentionally carried into a downstream artifact's `Open Questions`.
+clarification is complete. Other app-local or cross-system Questions MAY remain open at this point, but MUST stay
+recorded in the canonical Questions registry and MUST continue toward one of these outcomes: resolved, deferred,
+marked not-needed, converted to proof work, or referenced from a downstream artifact's Open Questions.
 
 Ask the agent for options:
 
@@ -359,7 +359,7 @@ You are ready when:
 
 - findings can be cited cleanly
 - the questions that block the topic you want to design are resolved or intentionally routed
-- any remaining non-blocking open questions are still explicitly tracked and have a clear carry-forward or resolution path
+- any remaining open Questions outside the current gate MUST be recorded in the canonical Questions registry and MUST have a clear carry-forward or resolution path
 - remaining proof obligations are explicit, and any unresolved proof does not make the design incoherent
 - candidate Use Cases and Specs have supporting evidence
 - the desired target behavior is not being confused with accidental legacy behavior

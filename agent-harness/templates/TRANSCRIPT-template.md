@@ -25,4 +25,4 @@ tags: []
 
 ## Open Questions
 
-(questions identified during review)
+(MUST file each as a canonical Question ID in the Questions registry per `COR-01-120` before citing it here.)

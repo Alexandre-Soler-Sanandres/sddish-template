@@ -32,7 +32,7 @@ Load reference files only when directly relevant:
 | App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `findings/`, the Questions registry, and stable reference docs. See `agent-harness/modes/legacy-discovery/APP-LOCAL.md`. | Source map reaches `app-local-complete`. |
 | Cross-system synthesis | Active scope is explicit and all in-scope apps are `app-local-complete`. | Synthesize contracts, parity, questions, proof needs, and readiness across apps. See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`. | Cross-system `SUMMARY.md` marks synthesis complete and names the restart point. |
 | Artifact normalization | App-local and required cross-system discovery are complete. | Format, dedupe, order, and tighten existing artifacts without new source discovery. See `agent-harness/modes/legacy-discovery/NORMALIZATION.md`. | Restart pointer moves to question clarification. |
-| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. See `agent-harness/modes/legacy-discovery/CLARIFICATION.md`. | Downstream-work is unblocked once P0/migration-critical blockers are resolved, deferred, or proof-routed, so the restart pointer may move to Use Cases or Specs. This does not mean Question Clarification is complete, and it does not make other open questions irrelevant. Any remaining open cross-system or app-local questions stay tracked in the legacy artifacts until they are resolved, deferred, marked not-needed, converted to proof work, or intentionally carried into individual Use Cases/Specs as `Open Questions`; each downstream artifact's own Readiness Checklist then gates when that artifact is finished. |
+| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. See `agent-harness/modes/legacy-discovery/CLARIFICATION.md`. | Downstream-work is unblocked once P0/migration-critical blockers are resolved, deferred, or proof-routed (see `CLARIFICATION.md`'s `LDG-04-100`), so the restart pointer may move to Use Cases or Specs. This does not mean Question Clarification is complete, and it does not make other open Questions irrelevant. See `CLARIFICATION.md`'s `LDG-04-120` and `CORE.md`'s `COR-01-120` for how remaining Questions stay tracked and referenced downstream. |
 
 ## Discovery Lifecycle
 
@@ -42,7 +42,7 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | --- | --- |
 | `app-discovery-active` | App-local slices are still being discovered. |
 | `app-local-complete` | App evidence is sufficient for app-local rewrite planning. |
-| `rewrite-ready` | App evidence, cross-system synthesis, and target decisions are sufficient to begin rewrite design work. This is an unblock state, not a claim that every legacy question is closed. Proof obligations and non-blocking open questions may still remain when they are explicit, still tracked, and do not block coherent design. |
+| `rewrite-ready` | App evidence, cross-system synthesis, and target decisions are sufficient to begin rewrite design work. This is an unblock state, not a claim that every legacy question is closed. See `SOURCE-MAP-template.md`'s rewrite-ready note for what may still remain and under what conditions — this table intentionally does not restate it. |
 
 ## Rules
 
@@ -59,6 +59,7 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | LD-01-090 | Core | MUST preserve app-local evidence inside app-scoped artifacts until cross-system synthesis is in scope. |
 | LD-01-100 | Core | MUST validate docs with `git diff --check` and any additional Markdown checks the repository defines. |
 | LD-01-110 | Core | MUST capture the rewrite-facing conclusion when the evidence clearly establishes one, not only the local implementation fact that produced it. |
+| LD-01-115 | Core | MUST capture not only factual legacy behavior but also any material target decisions the evidence leaves unresolved, including latent forks recognized through engineering judgment, not only direct source conflict. |
 | LD-01-120 | Core | MUST treat changing source-map workflow or status rules, and starting cross-system synthesis, as additional high-impact actions under `COR-05-010`'s checkpoint, on top of the universal list in `COR-05-020`. |
 | LD-02-010 | Routing | MAY include, as other outputs, a candidate `harness-data/artifacts/specs/active/SPEC-*.md` (per `LD-01-080`'s exception) and Harness Improvement candidates. |
 | LD-02-020 | Routing | A Legacy Finding's evidence may produce a candidate `harness-data/artifacts/ideas/active/IDEA-*.md` when it states a future/roadmap direction rather than an unresolved fork — apply `COR-01-110`'s test. Note the candidate Idea in the originating finding's `## Candidate Artifacts`. Check existing `active` Ideas for overlap before creating a new one (`IDA-02-010`), and apply `IDA-01-020`'s atomicity rule — one Idea per opportunity, not one per source document. Ideas spun off from a *resolved* Question are governed by `QUESTIONS.md`'s `QST-07-020` instead. |
@@ -77,7 +78,7 @@ Each app source map carries a `discovery_state` field distinct from artifact `st
 | LD-04-020 | Questions | MUST check existing registry rows for the same decision by content and merge instead of duplicating, before adding a question. |
 | LD-04-030 | Questions | MUST link every question back to the finding(s) that raised it through the registry's `Source` column. |
 | LD-04-040 | Questions | SHOULD default cross-system questions' `Source` to `LF-CROSS-NNN`, adding app finding IDs in `Notes` only when the extra traceability matters; provenance like slice name or artifact of origin belongs in `Notes`, not the table structure. |
-| LD-05-010 | Completion-Criteria | MAY move to `app-local-complete` when: all planned slices are `done`, `not-needed`, or explicitly deferred; open questions are classified as `local`, `cross-artifact`, or `systemic` (per `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-01-010`) in the source map table; stable findings have been propagated to reference docs where appropriate; and no remaining slice is needed for app-local rewrite planning. |
+| LD-05-010 | Completion-Criteria | MAY move to `app-local-complete` when: all planned slices are `done`, `not-needed`, or explicitly deferred; every open Question referenced from this app (per `COR-01-120`) has a `QST-01-010` Classification recorded in the canonical Questions registry — not a local copy in the source map; stable findings have been propagated to reference docs where appropriate; and no remaining slice is needed for app-local rewrite planning. |
 | LD-06-010 | Proof-Gate | MUST set `proof_needed` to `true` when discovery found drift or runtime behavior needing executable proof before rewrite planning treats it as stable; to `false` when no required executable proof is known, or required proof is complete. |
 | LD-06-030 | Proof-Gate | MAY reach `app-local-complete` with `proof_needed: true`. Rewrite-ready means the remaining proof obligations are explicit and can be carried forward into Use Cases, Specs, validation, or later implementation work without making the rewrite design incoherent. |
 | LD-08-010 | Evidence-Precedence | Every finding MUST state whether it is based on observed behavior, documented behavior, or inference, and record which source was treated as authoritative when evidence conflicts. |
@@ -95,6 +96,9 @@ When sources conflict, apply this default order and record deviations (`LD-08-02
 3. Checked-in contract snapshots.
 4. Historical docs, README snippets, and agent rules.
 5. Stale setup or deployment docs.
+
+See `CROSS-SYSTEM.md`'s `LDC-04-010`/`LDC-04-015` for why cross-system synthesis deliberately uses a different
+order for the same evidence classes once a fact crosses an app boundary.
 
 ## Reference Enrichment
 

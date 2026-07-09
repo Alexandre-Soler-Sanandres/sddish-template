@@ -1,7 +1,7 @@
 ---
 id: TASK-001
 type: task
-status: draft            # draft | ready | planned | in-progress | done | blocked | archived | rejected
+status: draft            # draft | ready | in-progress | done | blocked | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD

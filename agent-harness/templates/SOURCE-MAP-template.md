@@ -97,9 +97,10 @@ normalization: format, deduplicate, and merge within this app's legacy artifacts
 or losing traceability. See `agent-harness/modes/DISCOVERING-LEGACY.md`.
 
 `rewrite-ready` means the app's evidence and cross-system decisions are sufficient to begin rewrite design work.
-This is an unblock state, not a claim that every legacy question is closed. Proof obligations and non-blocking open
-questions may still remain if they are explicit, still tracked in the legacy artifacts, and do not block coherent Use
-Cases, Specs, or planning.
+This is an unblock state, not a claim that every legacy question is closed. Proof obligations and Questions not
+required for rewrite-readiness MAY remain, provided they are explicit and tracked in the canonical Questions
+registry (referenced from this source map); coherent Use Cases, Specs, and planning MUST still be possible despite
+them.
 
 ## Reference Enrichment Routing
 

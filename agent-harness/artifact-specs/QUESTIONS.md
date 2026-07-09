@@ -15,7 +15,8 @@ Spec, Task, ADR, Legacy Finding, Review finding.
 
 ## When to Create
 
-See `QST-09-010` for the standalone-vs-inline test.
+See `QST-09-010` for registry mechanics, `CORE.md`'s `COR-01-120` for how artifact Open Questions sections
+reference the registry, and `QST-06-020` for when a Question is materially warranted.
 
 ## Body Should Include
 
@@ -30,11 +31,12 @@ See `QST-09-010` for the standalone-vs-inline test.
 | QST-03-010 | Status | Status MUST be one of `Open`, `Resolved`, `Discarded` — the file a row lives in *is* its status, no separate column. A decision to defer ("not now, revisit later") is still `Resolved`, since the decision itself is settled; only a genuinely undecided, deprioritized item stays `Open` (noted in `Notes`). |
 | QST-04-010 | Dedup | MUST check existing rows across all three files for the same underlying question by content and merge into the existing row instead of filing a duplicate, before adding a new entry (mirrors Legacy Discovery's `LD-04-020`). |
 | QST-05-010 | Non-Deletion | IDs MUST remain permanent even if the question is later merged, discarded, or resolved — record the disposition in `Notes` instead of deleting the row (same non-destructive precedent as `COR-01-080`). |
-| QST-06-010 | Idea-vs-Question | A Question is an open fork with no proposed solution yet — test: "we haven't decided whether/how to X." A rough candidate direction — "we might build/do X" — belongs in `IDEA.md` instead. A Question resolving toward "yes, pursue this" MUST spin off a new Idea citing the Question's ID, with its own `Status` moved to `Resolved` — never silently becoming an Idea in place (the mechanical trigger for this is `QST-07-020`). |
+| QST-06-010 | Idea-vs-Question | A Question is an unresolved fork with no proposed solution yet, including both explicit artifact-visible forks and latent forks that become clear after applying engineering judgment to the evidence. A candidate direction without an unresolved fork belongs in `IDEA.md` instead. A Question resolving toward "yes, pursue this" MUST spin off a new Idea citing the Question's ID, with its own `Status` moved to `Resolved` — never silently becoming an Idea in place (the mechanical trigger for this is `QST-07-020`). |
+| QST-06-020 | Idea-vs-Question | MUST NOT create a Question for a merely conceivable improvement or speculative branch. A standalone Question is warranted only when the evidence leaves at least two plausible target directions whose difference would materially affect behavior, architecture, operator workflow, safety posture, or scoped delivery shape. |
 | QST-07-010 | Moving-Rows | Whenever anything resolves or discards a Question, MUST move the row out of `QUESTIONS-OPEN.md` into `QUESTIONS-RESOLVED.md` or `QUESTIONS-DISCARDED.md` in the same pass (see Notes for common triggers): (1) keep the ID exactly; (2) the `Question` column's text becomes the `Decision` column; (3) `Notes` must record what settled it, citing the artifact; (4) delete the row from `QUESTIONS-OPEN.md` — no duplicate left behind. There is no `Status` field to set (`QST-03-010`). A question that is still genuinely undecided stays in `QUESTIONS-OPEN.md`. |
 | QST-07-020 | Idea-Spin-Off | A row moved per `QST-07-010` MUST carry a `Follow-up: resolved\|idea` tag in `Notes`, set by whoever resolves the row — never inferred by the agent from the Decision text. When `idea`, create `IDEA-*.md` in the same pass, citing the question's ID in `source` and populating it from the full context: the question's text/Classification, the Decision, the originating `Source` artifact, and any other artifact citing this ID in its own Open Questions. |
 | QST-08-010 | Sources | MAY create a Question from any mode — no mode switch required. |
-| QST-09-010 | When-to-Create | MUST keep a raised concern inline as the current artifact's own Open Questions item, not a standalone Question, when it blocks that artifact; file a standalone Question only when it does not. |
+| QST-09-010 | When-to-Create | MUST record every Question in the Questions registry — there is no separate local-only Question store, regardless of how material the Question is to any given artifact. See `CORE.md`'s `COR-01-120` for how artifacts reference registry entries in their own Open Questions sections. |
 
 ## Notes
 

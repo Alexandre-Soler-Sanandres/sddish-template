@@ -13,7 +13,7 @@ Via natural language: explicit instruction referencing an approved plan.
 ## Consumes
 
 An Implementation Plan at status `approved` (`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`) whose included
-Tasks are `ready`/`planned` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-03-090`, this file's Execution rules
+Tasks are `ready` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-03-090`, this file's Execution rules
 trigger status changes on Task, Plan, Spec, and Use Case (`IMPL-03-030`, `IMPL-03-110`) — load
 `agent-harness/artifact-specs/TASKS.md`, `IMPLEMENTATION-PLAN.md`, `SPECS.md`, and `USE-CASES.md` for those
 artifacts' own status-transition rules; this file only says when to trigger the change, not what the change
@@ -24,7 +24,7 @@ requires.
 | ID | Type | Rule |
 | --- | --- | --- |
 | IMPL-01-010 | Preconditions | An Implementation Plan MUST exist at status `approved`. |
-| IMPL-01-020 | Preconditions | All included Tasks MUST be at status `ready` or `planned`. |
+| IMPL-01-020 | Preconditions | All included Tasks MUST be at status `ready`. |
 | IMPL-01-030 | Preconditions | Safety and risk rules MUST be satisfied. |
 | IMPL-02-010 | Gate-Attestation | MUST write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of a plan step, recording the Plan ID, Plan status, and the Task's `allowed_paths`. |
 | IMPL-03-010 | Execution | MUST follow the plan — do not deviate from approved scope. |

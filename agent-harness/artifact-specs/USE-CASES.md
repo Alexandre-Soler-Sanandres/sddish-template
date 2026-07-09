@@ -62,7 +62,13 @@ When legacy evidence is involved, the body should also preserve the design-relev
 | UCS-03-010 | Readiness-Gate | Before setting a Use Case status to `ready-for-spec`, MUST verify the Readiness Checklist in the artifact; all items must be checked, and a single unchecked item blocks the status change. |
 | UCS-04-010 | Boundaries | MUST NOT contain low-level implementation detail (unless essential to the scenario). |
 | UCS-05-010 | Carry-Forward | When a Use Case is created, MUST check the Questions registry for entries tied to the source artifact — regardless of legacy or non-legacy origin — and load any that changes actor goals, workflow shape, scope boundaries, alternatives, or failure paths. Before advancing to `ready-for-spec`, MUST verify the registry holds nothing unresolved that should block the advance (see `UCS-03-010`). |
-| UCS-05-020 | Carry-Forward | MUST carry registry items forward by effect: actor-visible uncertainty belongs in `Open Questions`; behavior constraints belong in the scenario, preconditions, or failure paths; cite the registry's canonical ID instead of restating its full text. |
+| UCS-05-020 | Carry-Forward | MUST carry registry items forward by effect per `CORE.md`'s `COR-01-120`: actor-visible uncertainty belongs in `Open Questions` as canonical Question ID references; behavior constraints belong in the scenario, preconditions, or failure paths. `UCS-03-010` governs whether an unresolved reference stops advancement. |
+| UCS-02-030 | Significant-Change | MUST treat a change to the primary actor, goal, trigger, preconditions, main success scenario, or non-goals as significant; a typo, clarification, added Open Questions reference, or `updated`-field bump is not. |
+| UCS-02-040 | Cascade | MUST run this cascade when a significant change lands on a Use Case already at `ready-for-spec` or later: reset the Use Case to `draft`; set every Spec whose `source` includes this Use Case to `draft` (triggering that Spec's own `SPS-07-020` cascade in turn); report all affected IDs; then stop and wait for user instruction. |
+
+## When a Use Case Changes
+
+See `UCS-02-030` for what counts as significant, and `UCS-02-040` for the required cascade.
 
 ## Output
 

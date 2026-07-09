@@ -54,11 +54,13 @@ Before marking a slice `done`:
 3. Create or update any required finding or Question in the same pass.
 4. Record the specific docs consulted for the slice, or explicitly record that none were relevant.
 5. Record negative results for checked `LDA-04-055`/`056`/`057`/`058`/`059` categories when no qualifying
-   evidence is found.
+   evidence or unresolved fork is found.
 6. Record the concrete evidence basis for each `LDA-04-055`/`056`/`057`/`058`/`059` check.
-7. Complete a fresh-context verification pass for the slice.
-8. Address any gap found by that verification pass before closing the slice.
-9. Update `SOURCE-MAP.md` before closing the slice.
+7. Record every material unresolved target choice the slice leaves behind, and create or update a Question for
+   each one that is not merely hypothetical.
+8. Complete a fresh-context verification pass for the slice.
+9. Address any gap found by that verification pass before closing the slice.
+10. Update `SOURCE-MAP.md` before closing the slice.
 
 For this checklist, a fresh-context verification pass means a separate agent invocation that receives only the
 slice's recorded evidence, findings/Questions, and checklist outputs needed to perform the verification.
@@ -69,7 +71,7 @@ slice's recorded evidence, findings/Questions, and checklist outputs needed to p
 | --- | --- | --- |
 | LDA-01-010 | Inventory | App `INVENTORY.md` MUST use `agent-harness/templates/INVENTORY-template.md`: fixed `Scope`, `Identity`, `Major Runtime Areas`, `Operations, Tooling, and Quality`, and `Inventory Gaps` sections, plus as many app-specific structural sections as the app's own shape needs in between. |
 | LDA-01-020 | Inventory | SHOULD name app-specific sections after what they actually cover in this app, not copy another app's section names by default. |
-| LDA-02-010 | Source-Map | Each app `SOURCE-MAP.md` (the app restart point, per `SOURCE-MAP-template.md`) MUST stay app-local, containing only: source root, primary evidence files, code areas, and candidate discovery slices; block list/status when blockwise; slice status table, completed notes, open app notes, restart pointers, and reference enrichment routing; deferred/cross-system question classification before `app-local-complete`; import hygiene when the snapshot has secret-like files, local artifacts, or nested repo metadata. |
+| LDA-02-010 | Source-Map | Each app `SOURCE-MAP.md` (the app restart point, per `SOURCE-MAP-template.md`) MUST stay app-local, containing only: source root, primary evidence files, code areas, and candidate discovery slices; block list/status when blockwise; slice status table, completed notes, open app notes, restart pointers, and reference enrichment routing; deferred/cross-system Question ID references (per `COR-01-120` — classification itself lives only in the Questions registry, never duplicated here) before `app-local-complete`; import hygiene when the snapshot has secret-like files, local artifacts, or nested repo metadata. |
 | LDA-02-020 | Source-Map | MUST NOT copy generic slice rules, block rules, roundtrip steps, cross-system judgments, or reusable process policy into app source maps. |
 | LDA-03-010 | Slice | MUST treat slices as the durable unit of discovery progress. |
 | LDA-03-020 | Slice | A source map MAY define as many slices as needed for rewrite-quality app evidence. |
@@ -79,13 +81,13 @@ slice's recorded evidence, findings/Questions, and checklist outputs needed to p
 | LDA-04-010 | Slice-Roundtrip | Reference enrichment MAY be deferred across blockwise work only when the source map says so. |
 | LDA-04-020 | Slice-Roundtrip | MUST record any forward-looking candidate list a slice produces — candidate Use Cases, candidate Specs, candidate quality gates, or anything similarly shaped — in the relevant finding's `## Candidate Artifacts` section at authoring time. |
 | LDA-04-030 | Slice-Roundtrip | MUST NOT invent a new per-slice `"Candidate <Something>"` list in `SOURCE-MAP.md`'s slice notes under any label; that is the same duplication. When a candidate spans multiple findings from the same slice, record it in each contributing finding's `Candidate Artifacts`, not as a new shared list. |
-| LDA-04-040 | Slice-Roundtrip | MUST test a finding's own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test before leaving its `## Open Questions` empty, and raise a `Q-<APP>-NNN` registry row if it matches, rather than leaving the fork as prose inside the finding. |
+| LDA-04-040 | Slice-Roundtrip | MUST test each finding for a material unresolved target choice before leaving its `## Open Questions` empty, not only its own `Classification`/`Evidence Conflict` prose. If the evidence leaves a fork that satisfies `QST-06-010` and `QST-06-020`, whether explicit or latent after applying engineering judgment, MUST raise or update a `Q-<APP>-NNN` registry row instead of leaving the fork only as prose in the finding. |
 | LDA-04-050 | Slice-Roundtrip | MUST NOT mark a slice `done` until at least one finding records what the slice's area concretely contains or does, independent of anomaly, conflict, or edge-case behavior. |
 | LDA-04-055 | Slice-Roundtrip | MUST check each completed slice for material operational or manual surfaces in scope — including CLI/operator tools, health/readiness/metrics surfaces, SQL diagnostics, or comparable observability paths — and MUST write a new finding or update an existing finding when one is present. |
 | LDA-04-056 | Slice-Roundtrip | MUST check each completed slice for material data-model shape choices in scope — including storage topology, JSON-vs-typed structure, DB views as read models, key typing, or migration-authority boundaries — and MUST write a new finding or update an existing finding when one is present. |
 | LDA-04-057 | Slice-Roundtrip | MUST check each completed slice for material provider-set shape in scope — including primary, fallback, overlapping, deferred, or disabled-but-wired providers — and MUST write a new finding or update an existing finding when one is present. |
 | LDA-04-058 | Slice-Roundtrip | MUST check each completed slice for material non-error runtime states in scope — including warmup, degraded-but-expected, or long-running intermediate states — and MUST write a new finding or update an existing finding when one is present. |
-| LDA-04-059 | Slice-Roundtrip | MUST check each completed slice for target-design forks implied by the evidence — including `preserve-vs-adapt`, `scope-v1`, `fidelity`, and `naming` forks — and MUST create a new Question or update an existing Question when one is present. |
+| LDA-04-059 | Slice-Roundtrip | MUST check each completed slice for target-design forks implied by the evidence — including `preserve-vs-adapt`, `scope-v1`, `fidelity`, `naming`, and `deferred-feature` forks — and MUST use engineering judgment to identify materially unresolved forks even when no direct artifact conflict states them. MUST create a new Question or update an existing Question when one is present. |
 | LDA-04-060 | Slice-Roundtrip | Reference enrichment MUST be complete before `app-local-complete`. |
 | LDA-04-070 | Slice-Roundtrip | MUST NOT treat the baseline-finding requirement alone as sufficient when a slice also clearly establishes rewrite-facing conclusions, operational/manual surfaces, data-model shape, provider-set shape, non-error runtime states, or target-design forks; those evidence classes still need their own finding or Question coverage in the same pass. |
 | LDA-05-010 | Blockwise | Blocks are a planning convenience for related slices with overlapping evidence, not a replacement for slices — MUST mark each included slice individually in the slice status table. |
