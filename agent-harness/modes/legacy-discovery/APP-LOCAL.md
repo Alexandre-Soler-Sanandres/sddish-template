@@ -52,24 +52,27 @@ Before marking a slice `done`:
 1. Confirm at least one finding records what the slice's area concretely contains or does.
 2. Check `LDA-04-055`/`056`/`057`/`058`/`059` coverage for the slice.
 3. Check whether any sub-area needs its own fidelity-preservation finding instead of only a broader family
-   summary.
-4. Check whether any concrete runtime-correctness defect, stale-code conclusion, or dead/wired-but-inert
+   summary, including deployment posture, observability surface, hardening posture, and benchmark/evaluation policy
+   sub-areas when evidenced in the slice.
+4. Record a split-vs-enrich decision for each deployment, observability, hardening, and benchmark/evaluation
+   sub-area evidenced in the slice.
+5. Check whether any concrete runtime-correctness defect, stale-code conclusion, or dead/wired-but-inert
    behavior needs its own first-class finding.
-5. Create or update any required finding or Question in the same pass.
-6. Review `## Candidate Artifacts` for every new or updated finding, recording each clearly supported candidate
+6. Create or update any required finding or Question in the same pass.
+7. Review `## Candidate Artifacts` for every new or updated finding, recording each clearly supported candidate
    and leaving the section empty only after a conscious negative check.
-7. Record the specific docs consulted for the slice, or explicitly record that none were relevant.
-8. Record negative results for checked `LDA-04-055`/`056`/`057`/`058`/`059` categories when no qualifying
+8. Record the specific docs consulted for the slice, or explicitly record that none were relevant.
+9. Record negative results for checked `LDA-04-055`/`056`/`057`/`058`/`059` categories when no qualifying
    evidence or unresolved fork is found.
-9. Record the concrete evidence basis for each `LDA-04-055`/`056`/`057`/`058`/`059` check.
-10. Record every material unresolved target choice the slice leaves behind, and create or update a Question for
+10. Record the concrete evidence basis for each `LDA-04-055`/`056`/`057`/`058`/`059` check.
+11. Record every material unresolved target choice the slice leaves behind, and create or update a Question for
    each one that is not merely hypothetical.
-11. Run an explicit visible-behavior and scope/policy Question pass for the slice: release scope,
+12. Run an explicit visible-behavior and scope/policy Question pass for the slice: release scope,
     configurability versus fixed policy, visibility/warning behavior, acceptance/proof surface, and
     operator/consumer priority when relevant.
-12. Complete a fresh-context verification pass for the slice.
-13. Address any gap found by that verification pass before closing the slice.
-14. Update `SOURCE-MAP.md` before closing the slice.
+13. Complete a fresh-context verification pass for the slice.
+14. Address any gap found by that verification pass before closing the slice.
+15. Update `SOURCE-MAP.md` before closing the slice.
 
 For this checklist, a fresh-context verification pass means a separate agent invocation that receives only the
 slice's recorded evidence, findings/Questions, and checklist outputs needed to perform the verification.
@@ -102,6 +105,7 @@ slice's recorded evidence, findings/Questions, and checklist outputs needed to p
 | LDA-04-058 | Slice-Roundtrip | MUST check each completed slice for material non-error runtime states in scope — including warmup, degraded-but-expected, or long-running intermediate states — and MUST write a new finding or update an existing finding when one is present. |
 | LDA-04-059 | Slice-Roundtrip | MUST check each completed slice for target-design forks implied by the evidence — including `preserve-vs-adapt`, `scope-v1`, `fidelity`, `naming`, and `deferred-feature` forks — and MUST use engineering judgment to identify materially unresolved forks even when no direct artifact conflict states them. This includes visible-behavior questions, release-scope questions, configurability-vs-fixed-policy questions, deployment/runtime-policy questions, quality/acceptance-surface questions, and operator- or consumer-priority questions when the current evidence establishes the surface but not the target decision. MUST create a new Question or update an existing Question when one is present. |
 | LDA-04-060 | Slice-Roundtrip | Reference enrichment MUST be complete before `app-local-complete`. |
+| LDA-04-062 | Slice-Roundtrip | MUST check each completed slice for unresolved release, deployment, observability, benchmark, documentation-surface, and acceptance-policy forks established by in-scope deployment files, checked-in contracts, or historical docs, and create a new Question or update an existing Question when one is present. |
 | LDA-04-065 | Slice-Roundtrip | MUST check each completed slice for sub-area-local fidelity that would be lost if the slice were represented only by a broader family summary, and MUST write a new finding or update an existing finding when such a sub-area is present. |
 | LDA-04-066 | Slice-Roundtrip | MUST check each completed slice for concrete runtime-correctness defects, stale-code conclusions, or dead/wired-but-inert behavior that deserves first-class preservation, and MUST write a new finding or update an existing finding when such evidence is present. |
 | LDA-04-070 | Slice-Roundtrip | MUST NOT treat the baseline-finding requirement alone as sufficient when a slice also clearly establishes rewrite-facing conclusions, operational/manual surfaces, data-model shape, provider-set shape, non-error runtime states, sub-area-local fidelity worth preserving separately, concrete defect-shaped evidence worth preserving separately, or target-design forks; those evidence classes still need their own finding or Question coverage in the same pass. |
@@ -114,6 +118,7 @@ slice's recorded evidence, findings/Questions, and checklist outputs needed to p
 | LDA-06-020 | Slice-Closeout | MUST name the specific docs consulted for each completed slice, or explicitly record that no relevant docs were found for that slice's scope. |
 | LDA-06-030 | Slice-Closeout | MUST record a negative result for each checked `LDA-04-055`/`056`/`057`/`058`/`059` category when no qualifying evidence is found. |
 | LDA-06-040 | Slice-Closeout | MUST record the concrete evidence basis for each `LDA-04-055`/`056`/`057`/`058`/`059` check. |
+| LDA-06-045 | Slice-Closeout | MUST record a split-vs-enrich decision for each deployment, observability, hardening, and benchmark/evaluation sub-area evidenced in the slice before marking the slice `done`. |
 | LDA-06-050 | Slice-Closeout | MUST complete a fresh-context verification pass before marking a slice `done`. |
 | LDA-06-055 | Slice-Closeout | MUST address any gap found by the fresh-context verification pass before marking a slice `done`. |
 | LDA-06-060 | Slice-Closeout | MUST complete the Slice Closeout Checklist before marking a slice `done`. |

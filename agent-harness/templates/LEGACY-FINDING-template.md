@@ -20,7 +20,8 @@ tags: []                 # include `bug` when this finding documents a confirmed
 
 (describe what was found in the legacy code or documentation; when the evidence clearly supports a rewrite-facing
 conclusion, state that conclusion here too, not only the narrow local fact. When this finding must remain
-separate to preserve sub-area-local fidelity or a concrete defect, state that reason explicitly.)
+separate to preserve sub-area-local fidelity, a concrete defect, a distinct deployment posture, a log-only
+visibility surface, a hardening posture, or a benchmark/evaluation policy surface, state that reason explicitly.)
 
 ## Evidence
 
@@ -33,15 +34,16 @@ contributing app finding IDs and the underlying source evidence they synthesize.
 - **Documented behavior**: (what the docs say it does)
 - **Inferred intent**: (what it was probably meant to do)
 - **Accidental complexity**: (anything that looks unintentional or unclear)
-- **Operator/runtime visibility**: (if relevant, what operators, scripts, endpoints, dashboards, or diagnostics use to
-  observe or trust this behavior today)
+- **Operator/runtime visibility**: (if relevant, what operators, scripts, endpoints, dashboards, diagnostics, or
+  log-only timing/startup traces use to observe or trust this behavior today, and whether scrape-policy or similar
+  visibility policy is absent)
 - **Persistence/data-model shape**: (if relevant, what storage shape, schema choice, read-model, key typing, or
   migration-authority boundary this finding establishes)
 - **Architectural boundary implication**: (if relevant, what cross-layer or cross-subsystem contract inside the app
   this finding establishes)
 - **Fidelity-critical sub-area detail**: (if relevant, what sub-area-local contract shape, fetch/execution pattern,
-  fallback strategy, interaction model, dependency timing, state model, or cost profile would be lost if this were
-  collapsed into a broader family summary)
+  fallback strategy, interaction model, dependency timing, state model, cost profile, deployment posture, hardening
+  posture, or benchmark/evaluation policy surface would be lost if this were collapsed into a broader family summary)
 
 ## Evidence Conflict
 
