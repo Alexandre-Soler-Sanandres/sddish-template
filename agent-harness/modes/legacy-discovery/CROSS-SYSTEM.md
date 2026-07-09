@@ -55,6 +55,14 @@ Use the cross-system artifacts for distinct jobs:
 | LDC-04-015 | Evidence-Precedence | This order deliberately differs from `DISCOVERING-LEGACY.md`'s app-local order (`LD-08-020`) for the same evidence classes: app-local precedence favors migration/audit docs over contract snapshots because they capture a single app's own reviewed decisions; cross-system precedence favors checked-in contracts over migration/audit docs because a contract is the structurally shared, verifiable interface between apps, while a migration/audit doc is authored by only one side and may not reflect the other app's actual behavior. A fact crossing from app-local evidence into cross-system synthesis MUST be re-evaluated under this cross-system order, not carried forward under its app-local ranking. |
 | LDC-04-020 | Evidence-Precedence | MUST NOT treat a checked-in contract snapshot as current runtime behavior until it is compared against the producing app; mark stale or superseded evidence explicitly. |
 | LDC-04-030 | Evidence-Precedence | MUST capture a three-way mismatch (contract snapshot vs. consumer adapter vs. producing runtime) in a cross-system finding first, then route the decision to the Questions registry (`CSQ-*`), the proof need to a `CSP-*` row, and any planning impact to `REWRITE-READINESS.md`. |
+| LDC-05-010 | Slice | MUST treat cross-system slices as the durable unit of synthesis progress, tracked in `SUMMARY.md`'s Working Discovery Plan status table. |
+| LDC-05-020 | Slice | MUST define enough cross-system slices to cover every inter-app boundary, contract, and shared concern in the active synthesis scope where material cross-app findings could exist; the apps and boundaries actually in scope — not `CROSS-SYSTEM-SUMMARY-template.md`'s example slice list — decide how many slices that requires and where their boundaries fall. |
+| LDC-05-030 | Slice | Completed Slice Notes in `SUMMARY.md` MUST hold one entry per completed cross-system slice, recording the closeout outputs required by `LDC-06-010` through `LDC-06-050`. |
+| LDC-06-010 | Slice-Closeout | MUST check each completed cross-system slice for material cross-app parity gaps — operational/observability surfaces, data-model/contract shape, provider-set shape, non-error runtime states, sub-area-local fidelity, and concrete cross-app defects that a broader cross-app summary would lose — and MUST write a new cross-system finding or update an existing one when present. |
+| LDC-06-020 | Slice-Closeout | MUST review every new or updated cross-system finding's `## Candidate Artifacts` section before closing the slice, and MUST leave it empty only after confirming that no plausible downstream Use Case, Idea, Spec, or proof surface is clearly indicated by the evidence. |
+| LDC-06-030 | Slice-Closeout | MUST run an explicit visible-behavior and scope/policy Question pass for the slice (release scope, configurability vs. fixed policy, visibility/warning behavior, acceptance/proof surface, operator/consumer priority) before marking it done, per `LD-04-050`/`060`. |
+| LDC-06-040 | Slice-Closeout | MUST complete a fresh-context verification pass — a separate agent invocation receiving only the slice's recorded evidence, findings, Questions/parity rows, and checklist outputs — before marking a cross-system slice `done`, and MUST address any gap it finds before closing the slice. |
+| LDC-06-050 | Slice-Closeout | MUST complete the Cross-System Slice Closeout Checklist before marking a cross-system slice `done`. |
 
 ## Slice Roundtrip
 
@@ -70,8 +78,33 @@ For each cross-system slice:
 7. Link parity rows (`CSP-*`) and readiness blockers back to the finding, question, or proof IDs they depend on.
 8. Route stable system-level findings to reference docs only when they are target-relevant and not merely legacy
    drift.
-9. Validate docs with `git diff --check`.
-10. Commit only when the user explicitly asks.
+9. Complete the Cross-System Slice Closeout Checklist (`LDC-06-050`).
+10. Validate docs with `git diff --check`.
+11. Commit only when the user explicitly asks.
+
+## Slice Closeout Checklist
+
+Before marking a cross-system slice `done`:
+
+1. Confirm at least one finding, contract entry, or parity row records what the slice's cross-app area
+   concretely establishes.
+2. Check for cross-app parity gaps in operational/observability surfaces, data-model/contract shape, provider-set
+   shape, and non-error runtime states.
+3. Check whether any cross-app sub-area needs its own fidelity-preservation finding instead of only a broader
+   cross-app summary.
+4. Check whether any concrete cross-app defect or drift needs its own first-class finding.
+5. Create or update any required finding, `CSQ-*`, or `CSP-*` row in the same pass.
+6. Review `## Candidate Artifacts` for every new or updated cross-system finding.
+7. Record the specific app source maps, findings, or contracts consulted, or explicitly record that none were
+   relevant.
+8. Record negative results for checked categories when no qualifying evidence or unresolved fork is found.
+9. Record the concrete evidence basis for each check.
+10. Record every material unresolved cross-app decision, and create or update a `CSQ-*` row for each one that is
+    not merely hypothetical.
+11. Run the explicit visible-behavior and scope/policy Question pass.
+12. Complete a fresh-context verification pass for the slice.
+13. Address any gap found by that verification pass before closing the slice.
+14. Update `SUMMARY.md` before closing the slice.
 
 ## Evidence Precedence
 

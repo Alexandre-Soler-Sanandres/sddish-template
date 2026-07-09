@@ -42,8 +42,9 @@ governing default order and conflict-routing rule.
 
 ## Working Discovery Plan
 
-Example slice order — adjust names and count to the active synthesis scope; keep every slice focused enough to
-complete with a small evidence set:
+Example slice order — adjust names and count to the active synthesis scope, and define enough slices to cover
+every inter-app boundary, contract, and shared concern where material cross-app findings could exist (see
+`CROSS-SYSTEM.md`'s `LDC-05-020`); keep every slice focused enough to complete with a small evidence set:
 
 | Order | Slice | Status | Primary output | Purpose |
 | --- | --- | --- | --- | --- |
@@ -62,6 +63,13 @@ complete with a small evidence set:
 
 See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s own `## Slice Roundtrip` section for the governing
 per-slice procedure.
+
+## Completed Slice Notes
+
+(one entry per completed cross-system slice; list: included scope, app source maps/findings/contracts consulted,
+stable cross-system findings, `CSQ-*`/`CSP-*` updates, docs consulted or "none relevant", negative results for
+checked closeout categories, the evidence basis for those checks, the fresh-context verification result, and any
+resulting follow-up)
 
 ## Reference Enrichment Routing
 

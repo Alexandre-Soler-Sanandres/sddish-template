@@ -99,7 +99,10 @@ The important files are:
 | `findings/active/LF-<APP>-NNN.md` | Review durable claims backed by evidence. |
 | Questions registry (`harness-data/artifacts/questions/QUESTIONS-OPEN.md` and friends) | Track decisions discovery cannot settle by itself — harness-level, not per-app. |
 
-Ask the agent to use the templates and keep `SOURCE-MAP.md` as the restart point.
+Ask the agent to use the templates and keep `SOURCE-MAP.md` as the restart point. `INVENTORY.md` and
+`SOURCE-MAP.md` must be created together, before any finding, per `LDA-01-030`; `SOURCE-MAP.md` must have its
+`Source Root` filled in and a `Slice 0: Baseline inventory and import hygiene` row present at creation time, per
+`LDA-02-016`.
 
 Human check: do not let chat become the only plan. If the next step matters, it belongs in `SOURCE-MAP.md`.
 
