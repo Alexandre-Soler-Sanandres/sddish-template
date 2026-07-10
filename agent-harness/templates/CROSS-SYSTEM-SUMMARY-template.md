@@ -2,7 +2,7 @@
 id: CROSS-SYSTEM-SUMMARY-001
 type: cross-system-summary
 status: active
-discovery_state: cross-system-active
+discovery_state: cross-system-active  # cross-system-active | cross-system-complete — see CROSS-SYSTEM.md's LDC-02-035
 updated: ""                 # YYYY-MM-DD
 active_synthesis_scope: []  # app slugs, e.g. [app-one, app-two]
 source_maps: []             # app-scoped source-map paths
