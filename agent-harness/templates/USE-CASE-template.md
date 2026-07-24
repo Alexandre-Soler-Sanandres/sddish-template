@@ -11,6 +11,7 @@ supporting_actors: []
 source: []               # e.g. [IDEA-001]; include legacy finding IDs when derived from Legacy Discovery
 derived_specs: []        # e.g. [SPEC-001]
 tags: []
+technical_impact: []     # e.g. [db-schema, api-contract] — see agent-harness/artifact-specs/USE-CASES.md's UCS-06-020
 confidence: medium       # low | medium | high
 risk: low                # low | medium | high
 ---

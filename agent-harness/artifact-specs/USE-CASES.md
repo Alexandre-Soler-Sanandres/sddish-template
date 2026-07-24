@@ -37,6 +37,7 @@ Create a Use Case when:
 
 - Primary actor
 - Supporting actors
+- Technical impact (`db-schema`/`api-contract`/empty — see `UCS-06-020`)
 - Goal
 - Trigger
 - Preconditions
@@ -65,6 +66,8 @@ When legacy evidence is involved, the body should also preserve the design-relev
 | UCS-05-020 | Carry-Forward | MUST carry registry items forward by effect per `CORE.md`'s `COR-01-120`: actor-visible uncertainty belongs in `Open Questions` as canonical Question ID references; behavior constraints belong in the scenario, preconditions, or failure paths. `UCS-03-010` governs whether an unresolved reference stops advancement. |
 | UCS-02-030 | Significant-Change | MUST treat a change to the primary actor, goal, trigger, preconditions, main success scenario, or non-goals as significant; a typo, clarification, added Open Questions reference, or `updated`-field bump is not. |
 | UCS-02-040 | Cascade | MUST run this cascade when a significant change lands on a Use Case already at `ready-for-spec` or later: reset the Use Case to `draft`; set every Spec whose `source` includes this Use Case to `draft` (triggering that Spec's own `SPS-07-020` cascade in turn); report all affected IDs; then stop and wait for user instruction. |
+| UCS-06-010 | Boundaries | When a Use Case's primary or supporting actor is itself a separate deployable service (not a human or external actor), the Trigger and/or Main Success Scenario MUST state the interaction mechanism explicitly (e.g. synchronous API call, async event, precomputed-and-polled read) — MUST NOT carry forward legacy phrasing such as "called directly"/"invoked by" without confirming that same in-process assumption still holds under the target architecture. |
+| UCS-06-020 | Technical-Impact | MUST set the `technical_impact` frontmatter field at creation/update time: include `db-schema` when the Use Case implies new/changed *database-backed* persisted state (a flat-file or other non-database write does not qualify); include `api-contract` when the primary or supporting actor is another service this monorepo/system owns and deploys, reached via a real call — excluding external third-party actors, since this system defines no contract for those, only a client against theirs; leave empty if neither applies. |
 
 ## When a Use Case Changes
 
