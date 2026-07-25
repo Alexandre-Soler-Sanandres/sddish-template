@@ -30,6 +30,7 @@ All items must be checked before this plan may advance to `approved`:
 - [ ] No blockers or unresolved dependencies
 - [ ] High-risk areas identified
 - [ ] Each plan step defines expected files, validation, and a suggested commit
+- [ ] Structural ADR scaffolding this plan's steps depend on was verified to exist, or a bootstrap step was added
 
 ## Included Artifacts
 
