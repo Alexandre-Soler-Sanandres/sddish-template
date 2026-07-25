@@ -7,6 +7,7 @@ created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
 source: []               # e.g. [SPEC-001]
+related: []              # e.g. [ADR-005] — accepted ADRs this Task depends on; see TASKS.md's TSK-05-010
 depends_on: []           # e.g. [TASK-000]
 blocks: []               # e.g. [TASK-002]
 risk: low                # low | medium | high
@@ -50,3 +51,4 @@ Before advancing to `ready`, verify all items are checked:
 - [ ] allowed_paths are defined
 - [ ] Validation commands are specified
 - [ ] No unresolved blocking dependencies
+- [ ] Accepted ADRs checked for scope-relevant area tags; matches cited or explicitly ruled out

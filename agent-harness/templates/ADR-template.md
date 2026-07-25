@@ -13,6 +13,7 @@ superseded_by: []         # e.g. [ADR-010] — filled in later if this ADR is ev
 related: []                # e.g. [SPEC-002, ADR-005] — loosely related artifacts; each needs a "Relation to" note in the body, per DEC-09-010
 derived_use_cases: []      # e.g. [UC-011] — Use Cases created that depend on this ADR
 derived_specs: []          # e.g. [SPEC-021] — Specs created that depend on this ADR
+derived_tasks: []          # e.g. [TASK-004] — Tasks created that depend on this ADR; see TASKS.md's TSK-05-010
 tags: []
 ---
 

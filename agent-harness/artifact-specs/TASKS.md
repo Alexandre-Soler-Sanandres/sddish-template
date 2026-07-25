@@ -28,6 +28,8 @@ A Task is created only from within Refining (`/create-tasks`), from an approved 
 | ID | Type | Rule |
 | --- | --- | --- |
 | TSK-02-010 | Readiness-Gate | Before setting a Task status to `ready`, MUST verify the Readiness Checklist in the artifact; all items must be checked, and a single unchecked item blocks the status change. |
+| TSK-05-010 | Traceability | When a Task is created that depends on an accepted ADR, MUST add the ADR's ID to the Task's `related` field and add the Task's ID to the ADR's `derived_tasks` field, in the same pass — the Task-side equivalent of `RELATIONS-AND-SUPERSESSION.md`'s `DEC-07-010`, which covers Use Case/Spec only. |
+| TSK-06-010 | ADR-Check | Before setting a Task status to `ready`, MUST grep `harness-data/artifacts/adrs/accepted/*.md` frontmatter `area:` values for terms matching this Task's own `area`/scope keywords, and for each match either cite the ADR (via `TSK-05-010`'s `related` field) or note explicitly that it was checked and found not applicable. |
 
 ## Output
 

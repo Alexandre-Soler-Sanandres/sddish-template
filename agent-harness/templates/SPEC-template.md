@@ -94,3 +94,4 @@ Before advancing to `approved`, verify all items are checked:
 - [ ] Dependencies are resolved or explicitly accepted
 - [ ] Task decision notes are filled in
 - [ ] No open questions remain
+- [ ] Accepted ADRs checked for scope-relevant area tags; matches cited or explicitly ruled out

@@ -9,6 +9,7 @@ area: ""                 # domain area, e.g. user-management | payments | report
 primary_actor: ""        # e.g. operator | user | system | external-service
 supporting_actors: []
 source: []               # e.g. [IDEA-001]; include legacy finding IDs when derived from Legacy Discovery
+related: []              # e.g. [ADR-005] — accepted ADRs this Use Case depends on; see USE-CASES.md's UCS-07-010
 derived_specs: []        # e.g. [SPEC-001]
 tags: []
 technical_impact: []     # e.g. [db-schema, api-contract] — see agent-harness/artifact-specs/USE-CASES.md's UCS-06-020
@@ -65,3 +66,4 @@ Before advancing to `ready-for-spec`, verify all items are checked:
 - [ ] Alternatives and failure paths are defined
 - [ ] Observable outcome is defined
 - [ ] No open questions remain that would block Spec creation
+- [ ] Accepted ADRs checked for scope-relevant area tags; matches cited or explicitly ruled out

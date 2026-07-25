@@ -59,6 +59,7 @@ See `SPS-07-010` for what counts as significant, and `SPS-07-020` for the requir
 | SPS-06-020 | Legacy-Handoff | A Spec SHOULD NOT duplicate unrelated `CSP-*` rows or store proof IDs in `test_refs`. |
 | SPS-07-010 | Significant-Change | MUST treat a change to scope, non-goals, functional requirements, acceptance criteria, or constraints as significant; a typo, clarification, added open question, or `updated`-field bump is not. |
 | SPS-07-020 | Cascade | MUST run this cascade when a significant change lands on an `approved` Spec: reset the Spec to `draft`; set every Task in `derived_tasks` to `draft`; set every Implementation Plan whose `source` includes this Spec to `proposed`; report all affected IDs; then stop and wait for user instruction. |
+| SPS-08-010 | ADR-Check | Before setting a Spec status to `approved`, MUST grep `harness-data/artifacts/adrs/accepted/*.md` frontmatter `area:` values for terms matching this Spec's own `area`/scope keywords, and for each match either cite the ADR (via the `related` field) or note explicitly that it was checked and found not applicable. |
 
 ## Output
 
