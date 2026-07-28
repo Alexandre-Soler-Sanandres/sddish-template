@@ -68,6 +68,7 @@ activity, the artifact spec governs the resulting Plan's own body schema and rea
 | IPL-05-040 | Parallel-Work | Plans on non-overlapping Specs MAY run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
 | IPL-05-050 | Parallel-Work | MUST stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution, if two active Plans have overlapping `allowed_paths` across their Tasks. |
 | IPL-07-010 | Scaffold-Check | Before finalizing Implementation Plan steps that reference file paths implied by a structural/foundational accepted ADR (directory layout, workspace/build config, deployment topology), MUST verify those paths/structures actually exist in the repository via a direct filesystem check, not an assumption from the ADR text — if they don't, MUST add an explicit bootstrap step covering only what the plan's own steps need, not a general build-out of everything the ADR describes. |
+| IPL-07-020 | Scaffold-Check | Before finalizing an Implementation Plan, MUST verify that any tooling a step's own `## Validation` commands invoke (lint/type-check/test runners, etc.) is provisioned by an earlier step in the same Plan (config present, declared as a dependency) rather than assumed available — if missing, MUST add that provisioning to the bootstrap step (or the earliest step that needs it), scoped to only what the plan's own steps actually invoke. |
 
 ## Reference Files
 

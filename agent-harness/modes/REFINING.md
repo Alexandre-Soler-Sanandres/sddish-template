@@ -76,6 +76,9 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 | Database migration | Yes | High risk |
 | Destructive data job | Yes | High risk |
 | Deployment or infrastructure change | Yes | Operational risk |
+| CI/CD workflow setup | Yes | Operational risk |
+| Local development execution path | Yes | Operational risk |
+| API contract publication or change | Yes | Operational risk |
 | Security, secrets or auth | Yes | Safety-critical |
 | Payment or financial transaction execution | Yes | Safety-critical |
 | Domain-critical business logic | Yes | Domain-critical |

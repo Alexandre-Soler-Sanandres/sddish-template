@@ -31,6 +31,7 @@ All items must be checked before this plan may advance to `approved`:
 - [ ] High-risk areas identified
 - [ ] Each plan step defines expected files, validation, and a suggested commit
 - [ ] Structural ADR scaffolding this plan's steps depend on was verified to exist, or a bootstrap step was added
+- [ ] Tooling required by this plan's own validation commands is provisioned by an earlier step, not assumed
 
 ## Included Artifacts
 
