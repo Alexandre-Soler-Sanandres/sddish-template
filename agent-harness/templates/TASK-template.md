@@ -52,3 +52,4 @@ Before advancing to `ready`, verify all items are checked:
 - [ ] Validation commands are specified
 - [ ] No unresolved blocking dependencies
 - [ ] Accepted ADRs checked for scope-relevant area tags; matches cited or explicitly ruled out
+- [ ] If this Task adds/changes a route or an external dependency, health/readiness-check accuracy verified against this project's accepted health-check convention ADR, if one exists (or explicitly not applicable)
