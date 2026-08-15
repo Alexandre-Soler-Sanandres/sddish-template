@@ -57,12 +57,19 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
 - `rejected`
 - `follow-up-required`
 
+## Status Lifecycle
+
+`status` moves `draft` -> `assessed` -> `resolved`, with `discarded` reachable directly from `draft` or
+`assessed` when the user calls off further work (`RVW-07-010`). `outcome` records *what was decided*; `status`
+separately records *whether, and how, the record is closed* — see `RVW-06-010` (resolve) and `RVW-07-010`/
+`RVW-07-020` (discard) for the mechanics. This is documented once, here — individual Review instances do not
+restate it.
+
 ## Review Body Should Include
 
 - Target artifact or implementation
 - Checklist of criteria (from the matching flavor above)
 - Findings
-- Outcome
 - Follow-up artifacts (Improvements, new Tasks, etc.)
 
 ## After Review — Required Agent Actions, Product/Requirements Flavor
@@ -95,6 +102,14 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
 | RVW-03-020 | Procedure | Playbooks MAY refine how the review is performed; they do not change Review outcomes, follow-up actions, or mode boundaries (`COR-04-070`). |
 | RVW-04-010 | Flavor | `target_type` determines the flavor (see Two Flavors) — MUST use the matching Criteria Checklist and After-Review action table; never mix the two. |
 | RVW-05-010 | Required-Actions | MUST take exactly the action listed in the matching After-Review table for the recorded Outcome before stopping — do not improvise or skip the required status change, archive move, or artifact creation. |
+| RVW-06-010 | Closure | A harness/process-flavored Review with `outcome: follow-up-required` MUST move `active/` → `archive/` and set `status: resolved` once every `follow_up` Improvement ID reaches `done` or `rejected`. |
+| RVW-06-020 | Closure | Stays `status: assessed` in `active/` while `follow_up` is empty or contains a non-terminal Improvement. |
+| RVW-06-030 | Closure | MUST add a `## Closure` section (date, terminal Improvement ID(s), `done`/`rejected` for each) as part of the `RVW-06-010` move. |
+| RVW-07-010 | Discard | A Review MAY move to `status: discarded` (→ `archive/`) only on the user's explicit instruction that no further work will happen for it — MUST NOT be inferred from a stalled draft or an unresolved `follow_up` alone (`COR-01-090` governs inferred approval generally). |
+| RVW-07-020 | Discard | Reachable from `draft` (`outcome` MAY stay unset) or `assessed` (`outcome`/`follow_up` stay as recorded). |
+| RVW-07-030 | Discard | MUST add a `## Discard Note` (date, reason) as part of the `RVW-07-010` move. |
+| RVW-07-040 | Discard | MUST NOT use `discarded` in place of `RVW-06-010` once a `follow_up` Improvement has already gone terminal. |
+| RVW-07-050 | Discard | When the user explicitly declines further follow-up for a Review's finding, MUST apply `RVW-07-010` that same turn, not merely acknowledge it in conversation. |
 
 ## Output
 

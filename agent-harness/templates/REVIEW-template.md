@@ -1,7 +1,7 @@
 ---
 id: REVIEW-001
 type: review
-status: draft            # draft | completed; decision semantics live in outcome
+status: draft            # draft | assessed | resolved | discarded; decision semantics live in outcome
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
@@ -40,14 +40,6 @@ Harness/process flavor (`target_type`: process/harness):
 ## Findings
 
 (list findings — positive or negative)
-
-## Outcome
-
-(accepted | accepted-with-notes | changes-requested | rejected | follow-up-required)
-
-## Lifecycle Note
-
-Review artifacts stay on a simple `draft` -> `completed` path because the actual review decision is recorded separately in `outcome`.
 
 ## Follow-Up
 
