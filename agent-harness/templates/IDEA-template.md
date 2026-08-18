@@ -1,7 +1,7 @@
 ---
 id: IDEA-001
 type: idea
-status: captured         # captured | clarifying | ready-for-use-case | archived | rejected
+status: captured         # captured | clarifying | ready-for-use-case | landed | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD

@@ -41,7 +41,9 @@ source and readiness checks as its CLI equivalent.
 6. Write the main success scenario, alternatives, and failure paths.
 7. Define non-goals and the observable outcome.
 8. Carry forward relevant Questions-registry entries tied to the source artifact (`UCS-05-010`).
-9. Stop before creating a Spec, Task, or Implementation Plan.
+9. If the source is an Idea, close it per `IDEA.md`'s `IDA-06-010` (status `landed`, `next` set to this Use
+   Case's ID, moved to `archive/`) as part of this same action.
+10. Stop before creating a Spec, Task, or Implementation Plan.
 
 ## Spec Creation Should (via `/create-spec`)
 
