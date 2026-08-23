@@ -62,6 +62,7 @@ See `DEC-12-010` for when to load `agent-harness/artifact-specs/adr/RELATIONS-AN
 | DEC-05-030 | Citation-Gate | A `proposed` ADR MUST NOT be treated as settled. |
 | DEC-12-010 | Context-Loading | MUST load `agent-harness/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md` in addition to this file when the ADR supersedes another ADR, cites a `related` ADR, or settles a Questions-registry entry. |
 | DEC-13-010 | Creation-Gate | MUST NOT create an ADR while the conversation is still exploring options (route to a Transcript or Idea instead) or when the decision is about actor-visible behavior (route to a Use Case instead). |
+| DEC-14-010 | Scope | Every ADR MUST set `scope` to `fleet-wide` (applies to every artifact regardless of `area`) or `scoped` (applies only where area-based relevance judgment finds it applicable). |
 
 ## Output
 

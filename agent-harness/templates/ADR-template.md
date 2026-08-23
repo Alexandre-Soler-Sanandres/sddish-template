@@ -6,6 +6,7 @@ title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 area: ""                  # e.g. service-boundaries | data-ownership | security | deployment
+scope: ""                 # fleet-wide | scoped — see ADR.md's DEC-14-010
 source: []                # e.g. [TRANSCRIPT-002], [IDEA-001]
 legacy_refs: []            # e.g. [CSQ-NNN] — legacy decisions this ADR builds on, narrows, or overrides
 supersedes: []            # e.g. [IDEA-001] — artifacts this ADR replaces

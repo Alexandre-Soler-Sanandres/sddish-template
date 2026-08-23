@@ -36,27 +36,31 @@ source and readiness checks as its CLI equivalent.
    source types have no formal readiness gate — use judgment that the source material is concrete enough to
    draft a scenario from.
 3. Read the source material.
-4. Identify the primary actor and supporting actors.
-5. Define the goal, trigger, and preconditions.
-6. Write the main success scenario, alternatives, and failure paths.
-7. Define non-goals and the observable outcome.
-8. Carry forward relevant Questions-registry entries tied to the source artifact (`UCS-05-010`).
-9. If the source is an Idea, close it per `IDEA.md`'s `IDA-06-010` (status `landed`, `next` set to this Use
-   Case's ID, moved to `archive/`) as part of this same action.
-10. Stop before creating a Spec, Task, or Implementation Plan.
+4. Load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance;
+   record the result in `related` now (`UCS-01-040`) — before drafting the goal/scenario, not after.
+5. Identify the primary actor and supporting actors.
+6. Define the goal, trigger, and preconditions.
+7. Write the main success scenario, alternatives, and failure paths.
+8. Define non-goals and the observable outcome.
+9. Carry forward relevant Questions-registry entries tied to the source artifact (`UCS-05-010`).
+10. If the source is an Idea, close it per `IDEA.md`'s `IDA-06-010` (status `landed`, `next` set to this Use
+    Case's ID, moved to `archive/`) as part of this same action.
+11. Stop before creating a Spec, Task, or Implementation Plan.
 
 ## Spec Creation Should (via `/create-spec`)
 
 1. Verify the source Use Case is at status `ready-for-spec` before proceeding.
 2. Read the Use Case.
-3. Inspect source Ideas or Legacy Findings when additional context is needed.
-4. Identify problem and goal.
-5. Define scope and non-goals.
-6. Define functional and non-functional requirements.
-7. Define acceptance criteria.
-8. Identify risks and constraints.
-9. Identify whether Tasks are likely required.
-10. Stop before implementation.
+3. Load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance;
+   record the result in `related` now (`SPS-01-030`) — before drafting scope/requirements, not after.
+4. Inspect source Ideas or Legacy Findings when additional context is needed.
+5. Identify problem and goal.
+6. Define scope and non-goals.
+7. Define functional and non-functional requirements.
+8. Define acceptance criteria.
+9. Identify risks and constraints.
+10. Identify whether Tasks are likely required.
+11. Stop before implementation.
 
 Questions-registry carry-forward (inspecting inherited open items from the source Use Case, legacy-origin or not)
 is a separate, cross-cutting concern, not part of this mechanical derivation — see
@@ -92,8 +96,10 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 | --- | --- | --- |
 | UCS-01-010 | Sources | A Use Case MUST be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation; if the source is an Idea, it MUST be at status `ready-for-use-case` (`IDA-01-010`) before a Use Case may be created from it. |
 | UCS-01-030 | Sources | For source types other than an Idea, which have no formal status gate, the agent SHOULD use judgment that the source material is concrete enough to draft a scenario from. |
+| UCS-01-040 | Sources | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Use Case's content, recording the result in `related` at creation time — `UCS-07-010`/`UCS-07-020`/`UCS-07-030` (in `USE-CASES.md`) remain the final verification pass, not the first point of contact. |
 | UCS-04-020 | Boundaries | MUST NOT trigger implementation, and MUST NOT create Specs, Tasks, or Implementation Plans. |
 | SPS-01-010 | Sources | MUST create a Spec only from a Use Case at status `ready-for-spec` — do not proceed otherwise. |
+| SPS-01-030 | Sources | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Spec's content, recording the result in `related` at creation time — `SPS-08-010`/`SPS-08-020`/`SPS-08-030` (in `SPECS.md`) remain the final verification pass, not the first point of contact. |
 | SPS-04-010 | Boundaries | MUST NOT implement or change code, and MUST NOT create Tasks or Implementation Plans while creating a Spec. |
 | TSK-01-010 | Sources | MUST create Tasks only from a Spec at status `approved` — do not proceed otherwise. |
 | TSK-03-010 | Boundaries | MUST NOT implement or change code, and MUST NOT create Implementation Plans. |

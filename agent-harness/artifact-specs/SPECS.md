@@ -59,7 +59,9 @@ See `SPS-07-010` for what counts as significant, and `SPS-07-020` for the requir
 | SPS-06-020 | Legacy-Handoff | A Spec SHOULD NOT duplicate unrelated `CSP-*` rows or store proof IDs in `test_refs`. |
 | SPS-07-010 | Significant-Change | MUST treat a change to scope, non-goals, functional requirements, acceptance criteria, or constraints as significant; a typo, clarification, added open question, or `updated`-field bump is not. |
 | SPS-07-020 | Cascade | MUST run this cascade when a significant change lands on an `approved` Spec (also applies at `implemented`, per `CORE.md`'s `COR-01-130`): reset the Spec to `draft`; set every Task in `derived_tasks` to `draft`; set every Implementation Plan whose `source` includes this Spec to `proposed`; report all affected IDs; then stop and wait for user instruction. See `COR-01-130` for the upward direction — reconsidering this Spec's own source Use Case's status, not only the Spec's own downstream artifacts. |
-| SPS-08-010 | ADR-Check | Before setting a Spec status to `approved`, MUST grep `harness-data/artifacts/adrs/accepted/*.md` frontmatter `area:` values for terms matching this Spec's own `area`/scope keywords, and for each match either cite the ADR (via the `related` field) or note explicitly that it was checked and found not applicable. |
+| SPS-08-010 | ADR-Check | Missed-ADR recheck. Before setting a Spec status to `approved`, MUST re-run the relevance judgment against the *current* accepted-ADR list: every `fleet-wide` ADR MUST be present in `related`; every `scoped` ADR MUST be re-judged, added if newly relevant, or explicitly ruled out. |
+| SPS-08-020 | ADR-Check | Content-drift recheck. Before setting a Spec status to `approved`, MUST judge ADR relevance against the Spec's actual current content, not only its original `area` — drafting can drift the content into territory an ADR bears on that the creation-time load never saw. |
+| SPS-08-030 | ADR-Check | Compliance check. Before setting a Spec status to `approved`, MUST verify every ADR cited in `related` is actually reflected in the Spec's requirements/scope — a citation with no matching content is a gate failure. |
 
 ## Output
 
