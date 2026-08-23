@@ -28,6 +28,8 @@ A Task is created only from within Refining (`/create-tasks`), from an approved 
 | ID | Type | Rule |
 | --- | --- | --- |
 | TSK-02-010 | Readiness-Gate | Before setting a Task status to `ready`, MUST verify the Readiness Checklist in the artifact; all items must be checked, and a single unchecked item blocks the status change. |
+| TSK-02-015 | Approval | Status MUST NOT be set to `ready` without the user's explicit confirmation of that specific Task — do not infer approval from discussion, per `ADR.md`'s `DEC-04-010`. |
+| TSK-02-016 | Approval | When the user confirms, MUST set the Task's own `approval.approved_by`/`approved_at` in the same pass. |
 | TSK-02-020 | Cascade | Reopening a `done` Task (moving it off `done` for a reason other than `SPECS.md`'s `SPS-07-020` cascade already having done so) MUST trigger `CORE.md`'s `COR-01-130` — the source Spec's `implemented` status may now be stale and must be explicitly reconsidered, not left as-is by default. |
 | TSK-05-010 | Traceability | When a Task is created that depends on an accepted `scoped` ADR, MUST add the ADR's ID to the Task's `related` field and add the Task's ID to the ADR's `derived_tasks` field, in the same pass — the Task-side equivalent of `RELATIONS-AND-SUPERSESSION.md`'s `DEC-07-010`, which covers Use Case/Spec only. A `fleet-wide` ADR is exempt from the reverse-link half of this rule, per the same reasoning as `DEC-07-010`. |
 | TSK-06-010 | ADR-Check | Missed-ADR recheck. Before setting a Task status to `ready`, MUST re-run the relevance judgment against the *current* accepted-ADR list: every `fleet-wide` ADR MUST be present in `related`; every `scoped` ADR MUST be re-judged, added if newly relevant, or explicitly ruled out. |
