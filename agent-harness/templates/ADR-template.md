@@ -47,7 +47,7 @@ Before advancing to `accepted`, verify all items are checked:
 - [ ] Decision is stated as a single, standalone statement that could be quoted without needing the rest of the document
 - [ ] At least one real alternative is documented in Considered Alternatives, with a concrete reason for rejection
 - [ ] Consequences names concrete downstream effects, not a restatement of the Decision
-- [ ] `legacy_refs`, `supersedes`, `superseded_by`, and `related` are accurate and complete (`derived_use_cases`/`derived_specs` are expected to be empty at acceptance — they're populated later, per `DEC-07-010`)
+- [ ] `legacy_refs`, `supersedes`, `superseded_by`, and `related` are accurate and complete (`derived_use_cases`/`derived_specs`/`derived_tasks` are expected to be empty at acceptance; for a `scoped` ADR they're populated later per `DEC-07-010`/`TSK-05-010`, while a `fleet-wide` ADR stays empty permanently — see `DEC-14-010`)
 - [ ] Every ID in `related` has an inline "Relation to" note stating its relationship type and reason (per `DEC-09-010`)
 - [ ] No open questions remain that would change the Decision itself
 - [ ] The user has explicitly confirmed acceptance (not inferred from discussion)
