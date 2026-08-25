@@ -1,8 +1,32 @@
 # Modes
 
 A Mode is a true, distinct behavioral posture the agent adopts. See [01-core-principles.md](01-core-principles.md)'s
-"Three Kinds of Harness File" section for how Modes relate to artifact specs and shared procedures. This document
-covers Modes only.
+"Harness File Taxonomy" section for how Mode Workflows relate to Artifact Contracts, Procedure Guides, Systems,
+Rules, and Templates. This document covers Modes only.
+
+## Mode Workflow Form
+
+A file under `agent-harness/modes/` is a Mode Workflow. It should teach the agent how to do excellent work in that
+mode: posture, path choice, examples, handoffs, common failure modes, and how to use the mode's rules. It should
+not become a thin pointer file, and it should not hide enforceable constraints in prose once paired rules exist.
+
+Canonical Mode Workflow sections:
+
+- `Purpose`
+- `Mode Story`
+- `Operating Posture`
+- `When To Use`
+- `Workflow Paths`
+- `Core Moves`
+- `Routing`
+- `Outputs`
+- `Examples`
+- `Rules Map`
+- `Reference Files`
+
+Every mode file follows this canonical form. Explanatory mode prose stays in the Mode Workflow; enforceable
+gates, approvals, validation, loading, traceability, and safety boundaries live in paired rules under
+`agent-harness/rules/modes/`.
 
 ## Mode Overview
 
@@ -22,21 +46,27 @@ covers Modes only.
 The conversational front door for unclear thinking — a structured sparring partner, not a solution machine.
 Produces Transcripts and Ideas, and identifies ADRs and Use Cases for hand-off to the appropriate mode — Partnering
 may draft a candidate ADR itself when a settled decision surfaces (`DEC-01-010`, mirrored by `PTN-02-100`), but
-does not draft Use Cases; those hand off to Refining. Ends only on explicit user request, never on a vague statement. See
-`agent-harness/modes/PARTNERING.md` for the full rule set.
+does not draft Use Cases, Specs, Tasks, or Plans itself; it classifies the request via
+`shared-procs/RISK-TIER.md`'s cascade and hands off to whichever entry point the classification lands on —
+Refining, or directly into Planning-Implementation when no upstream artifact is needed at all. Ends only on
+explicit user request, never on a vague statement. See `agent-harness/modes/PARTNERING.md` for the full rule set.
 
 ## Refining
 
 Derives the next artifact in the Use-Case → Spec → Task funnel from its source — a Use Case from an Idea/
-Transcript/Partnering discussion/Legacy Finding/existing docs, a Spec from a Use Case, or Tasks from a Spec. Each
-entry point also accepts natural language. See `agent-harness/modes/REFINING.md` for entry points, gates, and
-boundaries, and [03-artifacts.md](03-artifacts.md) for the resulting documents' own schemas.
+Transcript/Partnering discussion/Legacy Finding/existing docs, a Spec from a Use Case, or Tasks from a Spec —
+unless `shared-procs/RISK-TIER.md`'s cascade classifies a lower tier sufficient, in which case the corresponding
+entry point may be entered directly. Each entry point also accepts natural language. See
+`agent-harness/modes/REFINING.md` for entry points, gates, and boundaries, and [03-artifacts.md](03-artifacts.md)
+for the resulting documents' own schemas.
 
 ## Planning-Implementation
 
 The mandatory gate before code changes: inspect the artifact, gather downstream artifacts, verify maturity,
-produce an Implementation Plan, and wait for approval. See `agent-harness/modes/PLANNING-IMPLEMENTATION.md` for
-entry points and routing.
+produce an Implementation Plan, and wait for approval. Also reachable with no upstream artifact at all, when
+`shared-procs/RISK-TIER.md`'s cascade classifies a request as needing none of Use Case/Spec/Task — see that
+file and `agent-harness/modes/PLANNING-IMPLEMENTATION.md`'s `IPL-08-010`/`IPL-08-020`. See
+`agent-harness/modes/PLANNING-IMPLEMENTATION.md` for entry points and routing.
 
 ## Implementing
 

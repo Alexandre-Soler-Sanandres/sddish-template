@@ -3,11 +3,44 @@
 Every artifact is a Markdown file with YAML frontmatter. Artifacts are the source of truth — not agent memory, not conversation history.
 Lifecycle artifacts live under `harness-data/artifacts/`.
 
+Each file under `agent-harness/artifact-specs/` is an Artifact Contract: it defines what one artifact means, when
+it is created, how its fields and lifecycle work, and what makes it valid. "Artifact spec" is the historical folder
+name; "Artifact Contract" is the role.
+
 This document covers harness-managed lifecycle artifacts only. Project-owned support files such as
 `harness-data/reference/`, `harness-data/guides/`, and `harness-data/playbooks/` are not artifacts and do not follow
 artifact lifecycle statuses.
 
 For project-owned support files, see [10-guides.md](10-guides.md) and [11-project-playbooks.md](11-project-playbooks.md).
+
+## Artifact Contract Form
+
+Artifact Contracts teach meaning, validity, lifecycle, relationships, examples, and quality expectations. They are
+not Mode Workflows: they do not describe how to conduct an interactive mode session except where that context is
+needed to explain creation paths. Once a contract has paired rules, enforceable constraints move to the paired
+rules and the contract keeps the explanation and Rules Map.
+
+Canonical Artifact Contract sections:
+
+- `Purpose`
+- `Artifact Story`
+- `Entry / Creation Paths`
+- `Sources`
+- `When To Create`
+- `When Not To Create`
+- `Artifact Shape`
+- `Field Semantics`
+- `Body Should Include`
+- `Lifecycle`
+- `Readiness / Acceptance`
+- `Relationships`
+- `Output / Location`
+- `Template`
+- `Examples`
+- `Rules Map`
+- `Reference Files`
+
+Every artifact spec already follows this canonical form.
 
 ## Reference File Structure
 
@@ -90,7 +123,7 @@ Transcripts are evidence — not approved requirements.
 
 Early structured thoughts. Not implementation requests.
 
-**Statuses:** `captured` → `clarifying` → `ready-for-use-case` → `archived` → `rejected`
+**Statuses:** `captured` → `clarifying` → `ready-for-refining` → `landed` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/ideas/active/IDEA-*.md`
 **Template:** `agent-harness/templates/IDEA-template.md`
 
@@ -114,11 +147,14 @@ frontmatter fields.
 ### Use Case
 
 Describes actor-driven behavior. A behavioral anchor — not an implementation plan.
-Must always be created via Refining, from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing
-documentation.
+Created via Refining, from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing
+documentation — unless `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix classifies the request below UC-tier,
+in which case no Use Case is created at all and work proceeds directly to a Spec or Task.
 
 **Statuses:** `draft` → `ready-for-spec` → `implemented` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/use-cases/active/UC-*.md`
+**Location:** `harness-data/artifacts/use-cases/active/UC-*.md` (`draft`/`ready-for-spec`),
+`harness-data/artifacts/use-cases/implemented/UC-*.md` (`implemented`), or
+`harness-data/artifacts/use-cases/archive/UC-*.md` (`archived`/`rejected`)
 **Template:** `agent-harness/templates/USE-CASE-template.md`
 
 Body should include: primary actor, supporting actors, goal, trigger, preconditions, main success scenario, alternatives and failure paths, non-goals, observable outcome, open questions.
@@ -126,10 +162,14 @@ Body should include: primary actor, supporting actors, goal, trigger, preconditi
 ### Spec
 
 The central artifact of the SDD-ish process. Defines desired behavior and acceptance criteria.
-Must always be created from a Use Case at `ready-for-spec` status.
+Created from a Use Case at `ready-for-spec` status — OR, when `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix
+classifies the request below UC-tier, directly from the same source types a Use Case would have been created
+from.
 
 **Statuses:** `draft` → `approved` → `implemented` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/specs/active/SPEC-*.md`
+**Location:** `harness-data/artifacts/specs/active/SPEC-*.md` (`draft`/`approved`),
+`harness-data/artifacts/specs/implemented/SPEC-*.md` (`implemented`), or
+`harness-data/artifacts/specs/archive/SPEC-*.md` (`archived`/`rejected`)
 **Template:** `agent-harness/templates/SPEC-template.md`
 
 Body should include: problem, goal, scope, non-goals, functional requirements, non-functional requirements, acceptance criteria, constraints, dependencies, risks, validation approach, task decision notes.
@@ -141,9 +181,11 @@ The `test_refs` frontmatter field is populated by the agent during implementatio
 ### Task
 
 Execution unit derived from a Spec. Tasks are not the source of truth for behavior — Specs are.
-Must always be created from an approved Spec. Not always required — see [05-workflows.md](05-workflows.md).
+Created from an approved Spec — OR, when `shared-procs/RISK-TIER.md`'s Spec-Necessity Matrix classifies the
+request below Spec-tier, directly from the same source types a Spec would have been created from. Not always
+required — see [05-workflows.md](05-workflows.md).
 
-**Statuses:** `draft` → `ready` → `planned` → `in-progress` → `done` → `blocked` → `archived` → `rejected`
+**Statuses:** `draft` → `ready` → `in-progress` → `done` → `blocked` → `archived` → `rejected`
 **Location:** `harness-data/artifacts/tasks/active/TASK-*.md`
 **Template:** `agent-harness/templates/TASK-template.md`
 
@@ -169,7 +211,7 @@ Review is not only approval — it is how process problems are discovered.
 - **Harness/process flavor** (`process`/`harness`): produced from within any Mode when a process problem
   surfaces; consumed by Improving-Harness, which is entered only from one. No target-artifact status to advance.
 
-**Statuses:** `draft` → `completed`
+**Statuses:** `draft` | `assessed` | `resolved` | `discarded`
 **Outcomes:** `accepted` | `accepted-with-notes` | `changes-requested` | `rejected` | `follow-up-required`
 **Location:** `harness-data/artifacts/reviews/active/REVIEW-*.md`
 **Template:** `agent-harness/templates/REVIEW-template.md`
@@ -241,6 +283,6 @@ An artifact is mature enough to proceed when its status is at an accepted level:
 | --- | --- |
 | Use Case | `ready-for-spec` |
 | Spec | `approved` |
-| Task | `ready` or `planned` |
+| Task | `ready` |
 | Implementation Plan | `approved` |
 | ADR (before being cited as settled authority) | `accepted` |

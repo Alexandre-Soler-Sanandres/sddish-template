@@ -1,5 +1,16 @@
 # CATALOG.md
 
+## Harness Definition Locations
+
+Canonical taxonomy terms are defined in `agent-harness/docs/08-glossary.md`.
+
+- Mode Workflows: `agent-harness/modes/`
+- Artifact Contracts: `agent-harness/artifact-specs/`
+- Procedure Guides: `agent-harness/shared-procs/`
+- Systems: `agent-harness/systems/`
+- Rules: `agent-harness/rules/`
+- Templates: `agent-harness/templates/`
+
 ## Artifact Locations
 
 These are the lifecycle-managed artifact roots under `harness-data/artifacts/`. Project-owned support files such as

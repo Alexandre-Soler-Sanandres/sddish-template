@@ -51,8 +51,3 @@ Before advancing to `accepted`, verify all items are checked:
 - [ ] Every ID in `related` has an inline "Relation to" note stating its relationship type and reason (per `DEC-09-010`)
 - [ ] No open questions remain that would change the Decision itself
 - [ ] The user has explicitly confirmed acceptance (not inferred from discussion)
-
-## Lifecycle Note
-
-See `agent-harness/artifact-specs/ADR.md`'s `DEC-03-010` (acceptance gate) and `DEC-04-010` (approval), plus
-`agent-harness/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md`'s `DEC-06-010` (immutability).

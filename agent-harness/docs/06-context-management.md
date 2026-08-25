@@ -10,22 +10,26 @@ When an agent starts a task, it loads context in this order — stopping as soon
 
 1. User request
 2. Root loader file (`AGENTS.md`)
-3. `agent-harness/CORE.md`
-4. `agent-harness/OUTPUTS.md`
-5. Active mode file
+3. `agent-harness/CORE.md` and the required CORE rule groups from its Rules Map
+4. `agent-harness/OUTPUTS.md` plus paired output rules when present
+5. Active Mode Workflow plus paired mode rules when present
 6. Explicitly referenced artifact
-7. Frontmatter links (`source`, `derived_*`, `related`)
-8. Local `SUMMARY.md` if the target artifact is ambiguous
-9. Full related artifact — only if required
-10. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
-11. Reference files — only when affected by the current task
-12. Universal playbook index — only when the task may match a recurring cross-project procedure
-13. Project playbook index — only when the task may match a repo-specific recurring procedure or subsystem workflow
-14. Project guide index — only when the task may depend on local setup, tooling usage, or operating context
-15. Matched support files — only when the relevant index points to them
-16. Archived artifacts — only when explicitly needed
+7. Relevant Artifact Contract plus paired artifact rules when creating, updating, or reviewing an artifact
+8. Frontmatter links (`source`, `derived_*`, `related`)
+9. Local `SUMMARY.md` if the target artifact is ambiguous
+10. Full related artifact — only if required
+11. Systems cited by the loaded rules/contracts/procedures when the interaction model matters
+12. Procedure Guides invoked by name from the active flow
+13. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
+14. Reference files — only when affected by the current task
+15. Universal playbook index — only when the task may match a recurring cross-project procedure
+16. Project playbook index — only when the task may match a repo-specific recurring procedure or subsystem workflow
+17. Project guide index — only when the task may depend on local setup, tooling usage, or operating context
+18. Matched support files — only when the relevant index points to them
+19. Archived artifacts — only when explicitly needed
 
-In many cases, you can stop at step 6.
+In many cases, you can stop after the active mode and explicitly referenced artifact. When the next action is
+creating, updating, or reviewing an artifact, include that artifact type's Artifact Contract before acting.
 
 ## Core Rules
 
@@ -43,11 +47,40 @@ In many cases, you can stop at step 6.
 
 These files are always loaded by the agent regardless of mode:
 
-- `agent-harness/CORE.md` — universal rules
+- `agent-harness/CORE.md` — universal contract and Rules Map
+- required CORE rule groups, at minimum `UNIVERSAL.md` and `CONTEXT-LOADING.md`
 - `agent-harness/OUTPUTS.md` — artifact formats and folder structure
-- The active mode file
+- the active Mode Workflow
 
 For agent behavior, this is the minimum harness checkpoint before high-impact work.
+
+## Paired Rules And Rules Maps
+
+When a harness source file has paired rules, load the source file first, then use its Rules Map to select the
+paired rules needed for the current action. The pairing convention is:
+
+- small source file: `agent-harness/rules/<same-relative-path>.md`
+- large or grouped source file: `agent-harness/rules/<same-relative-path-without-.md>/`
+- files with no paired rules are read as-is
+- files under `agent-harness/rules/` do not recursively pair
+
+If the needed rule group is unclear, or the work edits, moves, cites, or audits rules, load all paired rules for
+the affected source file.
+
+Rule grouping policy:
+
+- under 25 rules: use one paired rules file with internal sections
+- 25-35 rules: use one paired file by default; split only if clusters are strongly independent
+- 35+ rules: grouped rule files are justified
+- legacy discovery may split earlier when inventory, slice, blockwise, and closeout phases are naturally independent
+
+The initial grouped splits are `CORE`, `DISCOVERING-LEGACY`, `APP-LOCAL`, and `CROSS-SYSTEM`. Other files start as
+single paired rules files unless later practice proves grouping useful.
+
+On a true Mode transition, reload the initial harness block for the newly active Mode Workflow and current restart
+or referenced artifact. After initial loading, expand to cited Systems, Artifact Contracts, Procedure Guides,
+validation or approval gates, linked artifacts, and support-file index matches only when they become relevant.
+Stop link-chasing once the needed rule, procedure, system, or context is understood.
 
 ## Load When Relevant
 
@@ -78,7 +111,7 @@ Agents should check support files in this order:
 
 Use this precedence when more than one support file applies:
 
-- `CORE.md` and the active mode file
+- `CORE.md`, required CORE rule groups, and the active Mode Workflow
 - universal playbooks
 - project playbooks
 - guides

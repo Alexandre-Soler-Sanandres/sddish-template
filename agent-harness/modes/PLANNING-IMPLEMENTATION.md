@@ -2,23 +2,42 @@
 
 ## Purpose
 
-Planning-Implementation is the mandatory gate before code changes.
-These commands do not mean "start coding now" — they mean "create a plan and wait for approval."
+Planning-Implementation is the mandatory gate before code changes. These commands do not mean "start coding
+now" — they mean "create a plan and wait for approval."
 
-## Entry Points
+## Mode Story
+
+A Task, Spec, or Use Case (or, for the Plan-tier entry, no upstream artifact at all) arrives ready for
+implementation planning. The agent verifies the source is at an accepted status, checks for existing Tasks so it
+never duplicates planning work, drafts a focused Implementation Plan, and stops — waiting for explicit approval
+before any code changes. Every entry point ends the same way: plan produced, approval awaited, no code touched.
+
+## Operating Posture
+
+Gate, not gateway to typing code immediately. Verify preconditions before drafting anything; when a precondition
+fails, stop and report rather than proceeding on a best-effort basis. Once the plan exists, the mode's job is done
+until approval arrives.
+
+## When To Use
+
+Use Planning-Implementation once a Task, Spec, or Use Case has reached the status this mode requires, or when
+Refining's/Partnering's risk-tier cascade classifies a request as needing no upstream artifact at all
+(`IPL-08-010`/`IPL-08-020`).
+
+## Workflow Paths
 
 - `/plan-task <task-file>`
 - `/plan-spec <spec-file>`
 - `/plan-use-case <use-case-file>`
+- A direct instruction naming the change, with no Use Case/Spec/Task file named — e.g. "plan the implementation
+  for the Dockerfile chown fix." See `IPL-08-010`/`IPL-08-020`.
 
-## Consumes
+Consumes: Task, Spec, or Use Case (depending on entry point) — or, for the natural-language entry point, no
+upstream artifact at all, per `shared-procs/RISK-TIER.md`'s cascade (`IPL-08-010`). Produces: Implementation Plan.
+Per `COR-03-090`, load `agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md` in addition to this file — this file
+governs the planning activity, the artifact spec governs the resulting Plan's own body schema and readiness gate.
 
-Task, Spec, or Use Case (depending on entry point) — see each entry point's Required Steps below for the exact
-precondition. Produces: Implementation Plan. Per `COR-03-090`, load
-`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md` in addition to this file — this file governs the planning
-activity, the artifact spec governs the resulting Plan's own body schema and readiness gate.
-
-## Required Steps
+## Core Moves
 
 ### Entering via `/plan-task`
 
@@ -56,19 +75,36 @@ activity, the artifact spec governs the resulting Plan's own body schema and rea
 6. Create a coherent end-to-end Implementation Plan covering all derived Specs.
 7. Wait for approval — do not change code.
 
-## Rules
+### Entering via direct instruction (no Use Case/Spec/Task file named)
 
-| ID | Type | Rule |
-| --- | --- | --- |
-| IPL-03-010 | Boundaries | MUST NOT: change code; treat `proposed` status as approved; proceed if the source artifact is not at an accepted status; or generate duplicate Tasks or skip existing ones. |
-| IPL-03-020 | Boundaries | MUST consult `REFINING.md`'s Task Decision Matrix before creating an inline Implementation Plan for a Spec/Use Case with no existing Tasks. Stop and report instead of proceeding if existing Tasks are `draft` or `blocked`. |
-| IPL-04-010 | Procedure | MUST load the relevant universal and project playbooks before finalizing the plan, when the planning task matches a reusable procedure. |
-| IPL-04-020 | Procedure | MUST reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
-| IPL-05-030 | Parallel-Work | MUST NOT allow more than one Implementation Plan at status `approved` or `in-progress` per Spec. |
-| IPL-05-040 | Parallel-Work | Plans on non-overlapping Specs MAY run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
-| IPL-05-050 | Parallel-Work | MUST stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution, if two active Plans have overlapping `allowed_paths` across their Tasks. |
-| IPL-07-010 | Scaffold-Check | Before finalizing Implementation Plan steps that reference file paths implied by a structural/foundational accepted ADR (directory layout, workspace/build config, deployment topology), MUST verify those paths/structures actually exist in the repository via a direct filesystem check, not an assumption from the ADR text — if they don't, MUST add an explicit bootstrap step covering only what the plan's own steps need, not a general build-out of everything the ADR describes. |
-| IPL-07-020 | Scaffold-Check | Before finalizing an Implementation Plan, MUST verify that any tooling a step's own `## Validation` commands invoke (lint/type-check/test runners, etc.) is provisioned by an earlier step in the same Plan (config present, declared as a dependency) rather than assumed available — if missing, MUST add that provisioning to the bootstrap step (or the earliest step that needs it), scoped to only what the plan's own steps actually invoke. |
+1. Reuse an existing classification or run the cascade fresh (`IPL-08-010`/`IPL-08-011`).
+2. If above Plan-tier, stop and route to Refining instead (`IPL-08-020`/`IPL-08-021`).
+3. If at Plan-tier, create the Implementation Plan (`IPL-08-022`).
+4. Wait for approval; do not change code (`IPL-08-023`/`IPL-08-024`).
+
+## Routing
+
+If the cascade lands above Plan-tier, stop, report which tier is actually required, and route to the matching
+Refining entry point (`/create-use-case`, `/create-spec`, or `/create-tasks`) — do not proceed to planning
+(`IPL-08-020`/`IPL-08-021`). A missing-Tasks precondition inside `/plan-spec` or `/plan-use-case` routes to
+`/create-tasks` instead.
+
+## Outputs
+
+An Implementation Plan under `harness-data/artifacts/implementation-plans/active/PLAN-*.md`, per
+`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`, awaiting approval.
+
+## Examples
+
+"Plan the implementation for the Dockerfile chown fix" with no Task/Spec/Use Case named: the agent runs the
+risk-tier cascade, finds it lands at Plan-tier, creates an Implementation Plan with `entrypoint_type: none`, and
+waits for approval rather than making the fix directly.
+
+## Rules Map
+
+This mode's enforceable rules live in `agent-harness/rules/modes/PLANNING-IMPLEMENTATION.md` (single paired
+file — under the 25-rule grouping threshold). Load it alongside this file whenever Planning-Implementation is
+the active mode.
 
 ## Reference Files
 

@@ -76,6 +76,11 @@ must later be discharged here or in Open Questions, not in `test_refs`)
 
 (are Tasks required for this spec? rationale)
 
+## Risk-Tier Classification
+
+(optional — filled in only when this Spec was entered via `shared-procs/RISK-TIER.md`'s UC-skip path; see
+`SPECS.md`'s `SPS-01-050`)
+
 ## Open Questions
 
 (MUST list canonical Question IDs per `COR-01-120`. MUST NOT restate full backlog text — cite the ID. `SPS-02-010`
@@ -93,5 +98,6 @@ Before advancing to `approved`, verify all items are checked:
 - [ ] Risks are identified
 - [ ] Dependencies are resolved or explicitly accepted
 - [ ] Task decision notes are filled in
+- [ ] If entered via the UC-skip path, `## Risk-Tier Classification` section is present and complete
 - [ ] No open questions remain
 - [ ] Accepted ADRs checked for scope-relevant area tags; matches cited or explicitly ruled out

@@ -2,58 +2,83 @@
 
 ## Purpose
 
-Implementing mode executes an approved Implementation Plan.
-Default execution is one plan step at a time.
+Implementing mode executes an approved Implementation Plan. Default execution is one plan step at a time.
 
-## Entry
+## Mode Story
 
-Via CLI: `/execute-plan <plan-file>`
-Via natural language: explicit instruction referencing an approved plan.
+An approved Implementation Plan and its `ready` Tasks exist. The agent attests to the gate before touching any
+file, executes the plan one step at a time by default, keeps the diff focused, runs validation after each step,
+and updates Task/Plan/Spec/Use Case status as it goes. It stops immediately on unexpected validation failure,
+missing/contradictory requirements, or an uncovered high-risk area.
 
-## Consumes
+## Operating Posture
 
-An Implementation Plan at status `approved` (`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`) whose included
-Tasks are `ready` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-03-090`, this file's Execution rules
-trigger status changes on Task, Plan, Spec, and Use Case (`IMPL-03-030`, `IMPL-03-110`) — load
+Follow the plan; do not deviate from approved scope. Prefer stopping and reporting over improvising past a gap the
+plan didn't anticipate — a high-risk surprise or a validation failure outside expected scope is a stop condition,
+not a judgment call to push through.
+
+## When To Use
+
+Use Implementing only once an Implementation Plan exists at status `approved` and its included Tasks are `ready`
+(`IMPL-01-010`/`IMPL-01-020`).
+
+## Workflow Paths
+
+- CLI: `/execute-plan <plan-file>`
+- Natural language: explicit instruction referencing an approved plan.
+
+Consumes: an Implementation Plan at status `approved` (`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`)
+whose included Tasks are `ready` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-03-090`, this file's
+Execution rules trigger status changes on Task, Plan, Spec, and Use Case (`IMPL-03-030`, `IMPL-03-110`) — load
 `agent-harness/artifact-specs/TASKS.md`, `IMPLEMENTATION-PLAN.md`, `SPECS.md`, and `USE-CASES.md` for those
 artifacts' own status-transition rules; this file only says when to trigger the change, not what the change
 requires.
 
-## Rules
+## Core Moves
 
-| ID | Type | Rule |
-| --- | --- | --- |
-| IMPL-01-010 | Preconditions | An Implementation Plan MUST exist at status `approved`. |
-| IMPL-01-020 | Preconditions | All included Tasks MUST be at status `ready`. |
-| IMPL-01-030 | Preconditions | Safety and risk rules MUST be satisfied. |
-| IMPL-02-010 | Gate-Attestation | MUST write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of a plan step, recording the Plan ID, Plan status, and the Task's `allowed_paths`. |
-| IMPL-03-010 | Execution | MUST follow the plan — do not deviate from approved scope. |
-| IMPL-03-020 | Execution | SHOULD execute one plan step at a time by default. |
-| IMPL-03-030 | Execution | MUST set Task status to `in-progress` when starting a Task, `done` when complete. |
-| IMPL-03-040 | Execution | MUST set Plan status to `in-progress` when execution begins, `done` when all steps are complete. |
-| IMPL-03-050 | Execution | MUST keep the diff focused on the current step. |
-| IMPL-03-060 | Execution | MUST respect allowed and forbidden paths from Task frontmatter. |
-| IMPL-03-070 | Execution | SHOULD NOT perform unrelated refactoring. |
-| IMPL-03-080 | Execution | MUST run the planned validation after each step. |
-| IMPL-03-090 | Execution | SHOULD follow the suggested commit boundaries defined in the plan. |
-| IMPL-03-100 | Execution | MUST summarize results per Task or plan step. |
-| IMPL-03-110 | Execution | MUST verify, before marking a plan step done, that every acceptance criterion in the Spec is covered by either (a) an entry in `test_refs` in the Spec frontmatter pointing to an existing test file, or (b) a validation command in the Task frontmatter that exercises that criterion. |
-| IMPL-03-120 | Execution | MUST stop if validation fails outside the expected scope. |
-| IMPL-03-130 | Execution | MUST stop if missing or contradictory requirements are discovered. |
-| IMPL-03-140 | Execution | MUST stop if a high-risk area is encountered that was not covered by the plan. |
-| IMPL-03-150 | Execution | MUST follow `IMPLEMENTATION-PLAN.md`'s own status-transition rules for CATALOG bookkeeping and the Spec/Use-Case status cascade when a Plan's status changes (`in-progress`, `done`), or when every Task derived from a Spec reaches `done`. |
-| IMPL-04-010 | Batch | Batch implementation MAY proceed only when explicitly planned and approved. |
-| IMPL-04-020 | Batch | High-risk tasks MUST remain separate unless explicitly approved. |
-| IMPL-05-050 | Boundaries | MUST NOT continue past a failing validation without explicit approval. |
-| IMPL-06-010 | Procedure | MUST load any relevant playbook or guide before substantive execution, when required by the task shape or local project context. See `COR-04-070` for what playbooks/guides may not do. |
+1. Write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of a plan step, recording
+   the Plan ID, Plan status, and the Task's `allowed_paths` (`IMPL-02-010`).
+2. Execute one plan step at a time by default (`IMPL-03-020`), following the plan without deviating from approved
+   scope (`IMPL-03-010`).
+3. Set Task status to `in-progress` when starting a Task, `done` when complete; set Plan status to `in-progress`
+   when execution begins, `done` when all steps are complete (`IMPL-03-030`/`IMPL-03-040`).
+4. Keep the diff focused on the current step (`IMPL-03-050`) and respect allowed/forbidden paths from Task
+   frontmatter (`IMPL-03-060`) — no unrelated refactoring (`IMPL-03-070`).
+5. Run the planned validation after each step (`IMPL-03-080`); before marking a plan step done, verify every Spec
+   acceptance criterion is covered by a `test_refs` entry or a Task-frontmatter validation command that exercises
+   it (`IMPL-03-110`).
+6. Summarize results per Task or plan step (`IMPL-03-100`), following the plan's suggested commit boundaries
+   where given (`IMPL-03-090`).
+7. Follow `IMPLEMENTATION-PLAN.md`'s own status-transition rules for CATALOG bookkeeping and the Spec/Use-Case
+   status cascade when a Plan's status changes, or when every Task derived from a Spec reaches `done`
+   (`IMPL-03-150`).
 
-## Output
+## Routing
+
+Stop and report — do not push through — if validation fails outside the expected scope (`IMPL-03-120`), missing
+or contradictory requirements are discovered (`IMPL-03-130`), or a high-risk area not covered by the plan is
+encountered (`IMPL-03-140`); continuing past a failing validation requires explicit approval (`IMPL-05-050`).
+Batch implementation may proceed only when explicitly planned and approved; high-risk tasks stay separate unless
+explicitly approved (`IMPL-04-010`/`IMPL-04-020`).
+
+## Outputs
 
 Implementing does not produce a new artifact type of its own — it updates Task/Plan/Spec/Use Case status
-(`IMPL-03-030`, `IMPL-03-040`, `IMPL-03-150`) and the code itself. When a durable record is needed (e.g. before a status
-advance that should be citable later), it produces the product/requirements flavor of Review
+(`IMPL-03-030`, `IMPL-03-040`, `IMPL-03-150`) and the code itself. When a durable record is needed (e.g. before a
+status advance that should be citable later), it produces the product/requirements flavor of Review
 (`agent-harness/artifact-specs/REVIEW.md`'s Two Flavors) — not required for every plan step, only when a formal
 record is warranted.
+
+## Examples
+
+Executing step 2 of an approved Plan: the agent logs the gate-check line, sets the Task to `in-progress`, makes
+the focused change described in that step, runs the planned validation command, confirms the covered acceptance
+criteria, and summarizes the result before moving to step 3.
+
+## Rules Map
+
+This mode's enforceable rules live in `agent-harness/rules/modes/IMPLEMENTING.md` (single paired file — under
+the 25-rule grouping threshold). Load it alongside this file whenever Implementing is the active mode.
 
 ## Reference Files
 

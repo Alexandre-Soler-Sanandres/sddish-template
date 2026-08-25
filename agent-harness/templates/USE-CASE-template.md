@@ -51,7 +51,7 @@ risk: low                # low | medium | high
 
 ## Open Questions
 
-(MUST list canonical Question IDs per `COR-01-120`. MUST NOT restate full backlog text — cite the ID. `UCS-03-010`
+(MUST list canonical Question IDs per `COR-01-120`. MUST NOT restate full backlog text — cite the ID. `UCS-03-011`
 governs whether an unresolved reference stops advancement.)
 
 ## Readiness Checklist

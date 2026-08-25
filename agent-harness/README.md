@@ -17,12 +17,14 @@ Without structure, agents drift: they implement before requirements are clear, m
 
 ## The Core Idea
 
-No code without a Spec. No Spec without a Use Case. No implementation without an approved plan.
+No code without a Plan. No Plan without going through every tier `shared-procs/RISK-TIER.md`'s cascade
+classifies as necessary. No implementation without an approved plan.
 
 ```text
 Voice / Text / Ideas
   → Partnering
-  → Refining (Use Case → Spec → [Tasks, when required])
+  → Refining (Use Case → Spec → [Tasks, when required] — or directly, per the risk-tier cascade,
+    when a layer is classified unnecessary)
   → Planning-Implementation (approved plan)
   → Implementing
   → Validation
@@ -34,13 +36,13 @@ Every persistent artifact lives in Markdown, every file is traceable to its sour
 ## Modes
 
 A Mode is a true, distinct behavioral posture — only one is active at a time. Artifact schemas (ADR, Use Case,
-Spec, Task, Review, Improvement, Question, ...) are defined separately as artifact specs, and Validation is a
-shared procedure, not a mode — see [docs/01-core-principles.md](docs/01-core-principles.md).
+Spec, Task, Review, Improvement, Question, ...) are defined separately as Artifact Contracts, and Validation is a
+Procedure Guide, not a mode — see [docs/01-core-principles.md](docs/01-core-principles.md).
 
 | Mode | Purpose |
 | --- | --- |
 | Partnering | Structured conversation to capture ideas and problems |
-| Refining | Derive a Spec from a Use Case, or Tasks from a Spec |
+| Refining | Derive a Spec from a Use Case, or Tasks from a Spec (or directly, per the risk-tier cascade, when a layer is classified unnecessary) |
 | Planning-Implementation | Plan and gate code changes |
 | Implementing | Execute an approved plan |
 | Discovering-Legacy | Extract evidence from existing code |
@@ -54,16 +56,21 @@ using this harness, and the only thing that syncs to or from the template repo:
 ``` text
 agent-harness/
   README.md            ← harness overview
-  CORE.md              ← universal rules (always loaded)
+  CORE.md              ← universal harness contract and Rules Map
   OUTPUTS.md           ← artifact formats and folder structure (always loaded)
   CATALOG.md           ← universal navigation: where artifacts live
-  docs/                ← harness documentation and human guides
-  modes/               ← one file per Mode (universal, stack-neutral)
-  artifact-specs/      ← one file per artifact type: schema, creation trigger, lifecycle gate
-  shared-procs/        ← procedures invoked by name from within a Mode (e.g. Validation)
+  docs/                ← human-readable explanation of how the harness works
+  modes/               ← Mode Workflows: one file per true Mode
+  artifact-specs/      ← Artifact Contracts: one file per artifact type
+  shared-procs/        ← Procedure Guides invoked by name from harness control flow
+  systems/             ← agent-facing operating models spanning rules/artifacts/procedures
+  rules/               ← enforceable rule tables, paired with their source files
   playbooks/           ← optional universal reusable procedures + index.yaml
-  templates/           ← artifact templates
+  templates/           ← lean artifact/support-file scaffolds
 ```
+
+Short form: Rules constrain. Workflows guide. Contracts define. Procedures run. Systems explain interactions.
+Templates scaffold. See [docs/08-glossary.md](docs/08-glossary.md) for canonical terms.
 
 `harness-data/` is this project's own data. It holds both project-owned support files and the lifecycle artifacts
 the harness creates while the project uses it. Nothing here is ever copied into or out of the template:
@@ -94,9 +101,11 @@ harness-data/
     legacy/
 ```
 
-A third, thin layer wires the harness into each agent's own CLI: `.claude/skills/harness/` for Claude Code and
-`.agents/skills/harness/` for Codex CLI, one skill per mode/artifact entry point. These are per-agent invocation
-wrappers, not harness logic — each just names the mode or artifact-spec file to follow.
+A third, thin layer wires the harness into each agent's own CLI: `.claude/skills/harness/` for Claude Code,
+`.agents/skills/harness/` for Codex CLI, and `.github/agents/` for GitHub Copilot (custom agents, paired with
+`.github/copilot-instructions.md` as Copilot's repo-wide loader), one skill/agent per mode/artifact entry point.
+These are per-agent invocation wrappers, not harness logic — each just names the mode or artifact-spec file to
+follow.
 
 ## Getting Started
 
@@ -117,7 +126,7 @@ smallest useful first pass and the same guide for full adoption instructions.
 
 | Document | Contents |
 | --- | --- |
-| [docs/01-core-principles.md](docs/01-core-principles.md) | Start here for why the harness exists, what problems it is trying to prevent, and how Modes/artifact specs/shared procedures relate |
+| [docs/01-core-principles.md](docs/01-core-principles.md) | Start here for why the harness exists, what problems it is trying to prevent, and how Mode Workflows, Artifact Contracts, Procedure Guides, Systems, Rules, and Templates relate |
 | [docs/02-modes.md](docs/02-modes.md) | Use this when you need to know which mode you are in and what it allows |
 | [docs/03-artifacts.md](docs/03-artifacts.md) | Use this to check what file should exist, what it contains, and what status it should have |
 | [docs/04-shared-procs.md](docs/04-shared-procs.md) | Use this to understand Validation and other procedures invoked from within a Mode |
@@ -131,7 +140,9 @@ smallest useful first pass and the same guide for full adoption instructions.
 
 ## Key Principles
 
-- **Modes are universal** — mode files work for any tech stack without modification
+- **Mode Workflows are universal** — mode files work for any tech stack without modification
+- **Rules are paired when split** — source files explain workflow/contract/procedure/system behavior; paired rules
+  hold enforceable tables
 - **References are project-specific** — architecture, domain, tooling, and quality vary per project
 - **Guides are project-specific** — setup and operating guidance stays local to each adopting repository
 - **Project playbooks are project-specific** — scoped procedures live under `harness-data/`, not in the universal harness

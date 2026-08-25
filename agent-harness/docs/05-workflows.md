@@ -3,14 +3,29 @@
 This file is the practical "what happens next?" guide.
 Use this guide when you already understand the artifact types and want the normal operating flow explained clearly.
 
+## Rules/Procedure Split (History)
+
+Every harness source file follows the paired-loading model: the source file teaches the workflow, contract,
+procedure, or system, and its paired rules under `agent-harness/rules/` hold the enforceable table. This split
+was carried out in reviewable passes, recorded here for reference:
+
+- `IMPROVEMENT-114`: foundation / grouped `CORE`
+- `IMPROVEMENT-116`: taxonomy and migration architecture
+- `IMPROVEMENT-122`: `OUTPUTS.md` guide / paired output rules split
+- `IMPROVEMENT-117`: Mode Workflow rewrites and paired mode rules
+- `IMPROVEMENT-118`: Artifact Contract rewrites and paired artifact rules
+- `IMPROVEMENT-119`: Procedure Guide rewrites and paired procedure rules
+- `IMPROVEMENT-120`: cross-file System extraction
+- `IMPROVEMENT-121`: lean template migration
+
 ## The Standard Flow
 
 ```text
 Voice / Text / Ideas
   → Partnering (TRANSCRIPT, IDEA, ADR when a structural decision settles)
-  → Refining: Idea/Transcript/Partnering discussion/Legacy Finding/docs → Use Case (UC-*)
-  → Refining: Use Case → Spec (SPEC-*)
-  → Refining: Spec → Tasks (TASK-*) — when required
+  → Refining: Idea/Transcript/Partnering discussion/Legacy Finding/docs → Use Case (UC-*)     [skippable — see "Risk-Tier Cascade" below]
+  → Refining: Use Case → Spec (SPEC-*)                                                          [skippable — see "Risk-Tier Cascade" below]
+  → Refining: Spec → Tasks (TASK-*) — when required                                             [skippable — see "Risk-Tier Cascade" below]
   → Planning-Implementation (PLAN-*)
   → Implementing
   → Validation (shared procedure, invoked from within Implementing)
@@ -20,6 +35,35 @@ Voice / Text / Ideas
 A Question (`harness-data/artifacts/questions/`) may be raised from any point in this flow without switching
 mode — it does not appear as its own step above because it is not a stage the work passes through, but a
 cross-cutting registry any mode can write to.
+
+## Risk-Tier Cascade
+
+Each of the three Refining stages above is conditional, not automatic. Before Partnering routes, or Refining
+creates a Use Case/Spec/Task, or Planning-Implementation is entered with no file named, the agent runs
+`shared-procs/RISK-TIER.md`'s cascade to decide the minimum stage actually required:
+
+```text
+UC-Necessity?   --No--> Spec-Necessity?  --No--> Task-Necessity?  --No--> Planning-Implementation,
+(RSK-02-010)             (RSK-03-010)              (RSK-04-010)           directly (Plan-tier,
+  |Yes                     |Yes                      |Yes                 no artifact required first)
+  v                        v                          v
+/create-use-case       /create-spec                /create-tasks
+```
+
+A few things always hold, regardless of how many stages get skipped:
+
+- The cascade runs once per request, at the first opportunity it's reached, and is carried forward — a
+  later stage reuses an existing classification instead of recomputing it (`RSK-07-010`).
+- Whatever artifact is produced (or the Implementation Plan, if none is) records why any stage was skipped,
+  in a `## Risk-Tier Classification` section (`RSK-05-010`) — never silently.
+- Ambiguous or unclear-scope requests default to *more* ceremony, not less (`RSK-06-010`).
+- Database migrations, security/secrets/auth, deploys/CI, API contract changes, payments, domain-critical
+  logic, and major architecture changes can never drop below Spec tier, no matter how small they look
+  (`RSK-06-020`).
+- Planning-Implementation's own gate is never skippable — every path still ends in an approved Implementation
+  Plan before any code changes (`COR-01-060`).
+
+See `agent-harness/shared-procs/RISK-TIER.md` for the full matrices.
 
 In plain terms:
 
@@ -35,7 +79,8 @@ In plain terms:
 
 Partnering is the front door for unclear thinking. It listens, captures Transcripts and Ideas, and identifies
 (without drafting) candidate ADRs and Use Cases. It must not create Use Cases, Specs, Tasks, or Implementation
-Plans, or infer approval from discussion. See `agent-harness/modes/PARTNERING.md` for the full rule set.
+Plans, or infer approval from discussion. Routing out of Partnering is risk-tier-informed, not automatically
+toward a Use Case — see "Risk-Tier Cascade" above. See `agent-harness/modes/PARTNERING.md` for the full rule set.
 
 ## ADR Creation
 
@@ -118,7 +163,7 @@ does not need a run log; reach for it when a future resume would otherwise depen
 
 ## Validation and Quality
 
-**Validation** (a shared procedure, not a mode or artifact — invoked by name from within Implementing and
+**Validation** (a Procedure Guide, not a mode or artifact — invoked by name from within Implementing and
 Improving-Harness) covers: artifact completeness, process rule compliance, acceptance criteria, readiness checks.
 It is universal and does not contain project-specific commands.
 
@@ -128,6 +173,17 @@ Short version:
 
 - Validation asks "did we follow the process, and is the behavior verifiable?"
 - Implementing asks "did we run the actual project checks?"
+
+## Template Discipline
+
+Templates are lean blank forms. They should contain frontmatter keys, section headings, checklists, placeholders,
+and short field prompts. They should not teach artifact theory, mode workflow, or cross-rule systems.
+
+When migrating template content:
+
+- explanation moves to the relevant Mode Workflow, Artifact Contract, Procedure Guide, or System
+- enforceable constraints move to paired Rules
+- placeholders and scaffold stay in the template
 
 ## Readiness Gates
 
@@ -174,6 +230,10 @@ harness-data/artifacts/legacy/apps/<legacy-app-slug>/
   → Implementation Plan
 ```
 
+The direct-to-Spec exception above is a separate, narrower exception from `shared-procs/RISK-TIER.md`'s general
+cascade — see `RISK-TIER.md`'s `RSK-03-010` for the cascade's own Spec-Necessity criteria, which also apply once
+a Legacy Finding reaches Refining.
+
 The legacy project is evidence, not authority. The agent must never treat legacy code as automatically correct.
 
 ## End-to-End Example: Voice to Implementation
@@ -190,3 +250,18 @@ The legacy project is evidence, not authority. The agent must never treat legacy
 10. Validation checks acceptance criteria
 11. Review evaluates the result
 12. If process problems found → Improvement artifact → harness updated
+
+## End-to-End Example: A Low-Risk Fix (Skip-Path)
+
+1. User, in Partnering: "fix the `chown -R` layer duplication and the `psycopg[binary]`/`libpq5` duplication
+   in `services/tw-watchlist/Dockerfile`."
+2. Partnering (`PTN-02-110`) runs the cascade: UC-Necessity → No (technical-only, no actor-facing scenario
+   changes). Spec-Necessity → No (routine packaging change, one clear approach, no contract change).
+   Task-Necessity → No (single file, single module, no cross-cutting risk).
+3. Cascade lands on Plan-tier — Partnering routes directly into Planning-Implementation's natural-language
+   entry. No Use Case, Spec, or Task is created.
+4. Planning-Implementation (`IPL-08-010`/`IPL-08-020`) creates `PLAN-0NN` directly (`entrypoint_type: none`),
+   including a `## Risk-Tier Classification` section citing the three "No" rows and their reasons.
+5. User reviews and approves `PLAN-0NN`.
+6. Implementation executes the plan's steps.
+7. Validation confirms the skip was legitimate (`VAL-02-010`'s carve-out) and the change matches the plan.

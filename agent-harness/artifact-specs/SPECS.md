@@ -6,14 +6,56 @@ Specs are the source of truth for desired behavior. This file is the Spec artifa
 boundary rules; the mechanical activity of deriving a Spec from a Use Case lives in
 `agent-harness/modes/REFINING.md` — load both (per `COR-03-090`) before creating or updating a Spec.
 
+## Artifact Story
+
+A Use Case (or, via the UC-skip path, an Idea/Transcript/Partnering discussion/Legacy Finding/existing doc)
+reaches the point where its behavior needs a technical contract. Refining derives the Spec's scope, requirements,
+and acceptance criteria; relevant ADRs get checked and re-checked as the content firms up; and once every
+Readiness Checklist item is satisfied, the Spec becomes `approved` — the status Planning-Implementation requires
+before it will plan any code change. A significant change to an `approved` (or later) Spec cascades back down to
+its Tasks and Plans, and up to its own source Use Case.
+
+## Entry / Creation Paths
+
+Created only from within Refining (`/create-spec`).
+
 ## Sources
 
-A Spec is created only from within Refining (`/create-spec`), from a Use Case. Legacy Findings, Ideas,
-Transcripts, and ADRs are upstream/reference inputs, not direct Spec sources — Legacy Findings, Ideas, and
-Transcripts produce Use Cases, not Specs directly; ADRs are cited as reference authority and never produce a Use
-Case or Spec directly (see `agent-harness/artifact-specs/ADR.md`'s `DEC-02-020`).
+A Spec is created only from within Refining (`/create-spec`), from a Use Case — OR, when
+`shared-procs/RISK-TIER.md`'s UC-Necessity Matrix (`RSK-02-010`) classifies the request below UC-tier, directly
+from the same source types a Use Case would have been created from (Idea, Transcript, Partnering discussion,
+Legacy Finding, existing documentation). ADRs remain reference authority only, never a direct Spec source
+(`ADR.md`'s `DEC-02-020`), in both cases.
 
-## Spec Body Should Include
+## When To Create
+
+Whenever a Use Case reaches `ready-for-spec`, or a request classifies below UC-tier via the risk-tier cascade.
+
+## When Not To Create
+
+Legacy Findings, Ideas, and Transcripts must not be treated as direct Spec sources except via the UC-skip path
+above — outside that path they are upstream inputs that produce Use Cases, not Specs directly (`SPS-01-020`).
+ADRs must never be treated as a Spec source either — reference authority only (`SPS-01-021`; see `ADR.md`'s
+`DEC-02-020`/`DEC-05-010`).
+
+## Artifact Shape
+
+A Spec entered via the UC-skip path must include a `## Risk-Tier Classification` section (`RSK-05-010`); its
+`source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Use Case
+(`SPS-01-050`). `technical_refs` names external technical artifacts (OpenAPI specs, database schemas, contracts)
+that live outside `agent-harness/` — input constraints or expected outputs, not part of the behavioral spec
+itself; their location is project-defined, not enforced by the harness.
+
+## Field Semantics
+
+- `status` — see `## Lifecycle`.
+- `source` — the Use Case (or UC-skip-path source) this Spec was derived from.
+- `related` — accepted ADRs this Spec depends on; see `## Relationships`.
+- `technical_refs` — see `## Artifact Shape`.
+- `test_refs` — links to test files exercising this Spec's acceptance criteria; consumed by
+  `IMPLEMENTING.md`'s `IMPL-03-110`.
+
+## Body Should Include
 
 - Problem
 - Goal
@@ -27,46 +69,68 @@ Case or Spec directly (see `agent-harness/artifact-specs/ADR.md`'s `DEC-02-020`)
 - Risks
 - Validation approach
 - Task decision notes (if relevant)
+- Risk-Tier Classification (if entered via the UC-skip path — see `SPS-01-050`)
 
 When legacy evidence is involved, the Spec should additionally:
 
-- carry inherited legacy open questions into `Open Questions` until they are resolved, deferred, marked not-needed, or proof-routed for this Spec
-- place technical legacy obligations in the section they constrain: requirements, constraints, dependencies, risks, validation, or `technical_refs` / `test_refs`
+- carry inherited legacy open questions into `Open Questions` until they are resolved, deferred, marked
+  not-needed, or proof-routed for this Spec
+- place technical legacy obligations in the section they constrain: requirements, constraints, dependencies,
+  risks, validation, or `technical_refs` / `test_refs`
 - cite canonical legacy IDs (`CSQ-*`, `Q-<APP>-*`, `CSP-*`) rather than duplicating full legacy backlog rows
 
-## Technical References
+## Lifecycle
 
-A Spec may reference external technical artifacts via the `technical_refs` frontmatter field.
-These are project artifacts (OpenAPI specs, database schemas, contracts) that live outside `agent-harness/`.
-They are input constraints or expected outputs, not part of the behavioral spec itself.
-Their location is project-defined — the harness does not enforce a specific folder.
+A Spec may be updated when new information changes the scope or requirements, open questions are resolved, or
+acceptance criteria need correction (`SPS-03-010`) — updating must never change the Spec ID, and must update the
+`updated` field (`SPS-03-020`/`SPS-03-021`). A change to scope, non-goals, functional requirements, acceptance
+criteria, or constraints is significant; a typo, clarification, added open question, or `updated`-field bump is
+not (`SPS-07-010`). A significant change landing on an `approved` (or `implemented`) Spec triggers the downward
+half of the harness-wide status cascade — see `agent-harness/systems/STATUS-CASCADE.md` for the full mechanism,
+including the upward reconsideration direction (`SPS-07-020`, `CORE.md`'s `COR-01-130`).
 
-## When a Spec Changes
+## Readiness / Acceptance
 
-See `SPS-07-010` for what counts as significant, and `SPS-07-020` for the required cascade.
+Before setting a Spec status to `approved`, verify the Readiness Checklist in the artifact — every item must be
+checked; a single unchecked item blocks the status change (`SPS-02-010`/`SPS-02-011`). Also re-run three ADR
+checks before approval: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR
+present in `related` and every `scoped` ADR re-judged (`SPS-08-010`–`012`); content-drift recheck against the
+Spec's actual current content, not only its original `area` (`SPS-08-020`); and a compliance check that every ADR
+cited in `related` is actually reflected in the Spec's requirements/scope (`SPS-08-030`). Also verify the
+Questions registry holds nothing unresolved that should block the advance (`SPS-05-011`).
 
-## Rules
+## Relationships
 
-| ID | Type | Rule |
-| --- | --- | --- |
-| SPS-01-020 | Sources | Legacy Findings, Ideas, and Transcripts MUST NOT be treated as direct Spec sources — they are upstream inputs that produce Use Cases, not Specs directly; ADRs likewise must not be treated as a Spec source, reference authority only — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
-| SPS-02-010 | Readiness-Gate | Before setting a Spec status to `approved`, MUST verify the Readiness Checklist in the artifact; all items must be checked, and a single unchecked item blocks the status change. |
-| SPS-03-010 | Updating | A Spec MAY be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
-| SPS-03-020 | Updating | Updating MUST NOT change the Spec ID; must update the `updated` field. |
-| SPS-05-010 | Carry-Forward | When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy origin — MUST load those referenced items and route them into the Spec sections they constrain. Before setting status to `approved` (see `SPS-02-010`), must verify the registry holds nothing unresolved that should block the advance. |
-| SPS-05-020 | Carry-Forward | MUST carry registry items forward by effect per `CORE.md`'s `COR-01-120`: unresolved approval-shaping questions belong in `Open Questions` as canonical Question ID references; requirements, constraints, dependencies, risks, and validation obligations belong in the section they constrain. `SPS-02-010` governs whether an unresolved reference stops approval. |
-| SPS-06-010 | Legacy-Handoff | The Questions registry's `CSP-*` rows remain the canonical proof/parity backlog. A Spec MAY cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions. |
-| SPS-06-020 | Legacy-Handoff | A Spec SHOULD NOT duplicate unrelated `CSP-*` rows or store proof IDs in `test_refs`. |
-| SPS-07-010 | Significant-Change | MUST treat a change to scope, non-goals, functional requirements, acceptance criteria, or constraints as significant; a typo, clarification, added open question, or `updated`-field bump is not. |
-| SPS-07-020 | Cascade | MUST run this cascade when a significant change lands on an `approved` Spec (also applies at `implemented`, per `CORE.md`'s `COR-01-130`): reset the Spec to `draft`; set every Task in `derived_tasks` to `draft`; set every Implementation Plan whose `source` includes this Spec to `proposed`; report all affected IDs; then stop and wait for user instruction. See `COR-01-130` for the upward direction — reconsidering this Spec's own source Use Case's status, not only the Spec's own downstream artifacts. |
-| SPS-08-010 | ADR-Check | Missed-ADR recheck. Before setting a Spec status to `approved`, MUST re-run the relevance judgment against the *current* accepted-ADR list: every `fleet-wide` ADR MUST be present in `related`; every `scoped` ADR MUST be re-judged, added if newly relevant, or explicitly ruled out. |
-| SPS-08-020 | ADR-Check | Content-drift recheck. Before setting a Spec status to `approved`, MUST judge ADR relevance against the Spec's actual current content, not only its original `area` — drafting can drift the content into territory an ADR bears on that the creation-time load never saw. |
-| SPS-08-030 | ADR-Check | Compliance check. Before setting a Spec status to `approved`, MUST verify every ADR cited in `related` is actually reflected in the Spec's requirements/scope — a citation with no matching content is a gate failure. |
+When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy
+origin — load those referenced items and route them into the Spec sections they constrain (`SPS-05-010`), by
+effect per `CORE.md`'s `COR-01-120`: unresolved approval-shaping questions belong in `Open Questions` as
+canonical Question ID references; requirements, constraints, dependencies, risks, and validation obligations
+belong in the section they constrain (`SPS-05-020`). The Questions registry's `CSP-*` rows remain the canonical
+proof/parity backlog — a Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open
+questions, but should not duplicate unrelated rows or store proof IDs in `test_refs` (`SPS-06-010`/`SPS-06-020`).
 
-## Output
+## Output / Location
 
-- `harness-data/artifacts/specs/active/SPEC-*.md`
-- Use `agent-harness/templates/SPEC-template.md` as the starting point for every new Spec.
+- `harness-data/artifacts/specs/active/SPEC-*.md` (`draft`/`approved`)
+- `harness-data/artifacts/specs/implemented/SPEC-*.md` (`implemented` — still-authoritative behavior, distinct
+  from closed/superseded; see `agent-harness/systems/LIFECYCLE-FOLDERS.md`)
+- `harness-data/artifacts/specs/archive/SPEC-*.md` (`archived`/`rejected`)
+
+## Template
+
+Use `agent-harness/templates/SPEC-template.md` as the starting point for every new Spec.
+
+## Examples
+
+A Use Case reaches `ready-for-spec`. The agent drafts scope, functional/non-functional requirements, and
+acceptance criteria, loads every `fleet-wide` accepted ADR plus relevant `scoped` ones, and — once the Readiness
+Checklist and all three ADR checks pass — sets the Spec to `approved`.
+
+## Rules Map
+
+This contract's enforceable rules live in `agent-harness/rules/artifact-specs/SPECS.md` (single paired file —
+under the 25-rule grouping threshold). Load it alongside `agent-harness/modes/REFINING.md`'s own Rules Map
+whenever creating, updating, or approving a Spec.
 
 ## Reference Files
 

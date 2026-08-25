@@ -6,12 +6,52 @@ An Implementation Plan is the schema, grouping logic, and lifecycle gate for the
 `agent-harness/modes/PLANNING-IMPLEMENTATION.md` — see that file for the behavioral rules governing how a Plan is
 created.
 
+## Artifact Story
+
+A Task, Spec, or Use Case (or, for a Plan-tier request, nothing at all) is ready for implementation. The agent
+groups the required changes into steps, records validation and risk per step, and drafts the Plan at `active/`.
+Nothing changes in the codebase until the user explicitly approves it — approval moves the Plan to `approved/`
+and unlocks Implementing mode. Once every step completes, the Plan reaches `done`, which can cascade the source
+Spec and Use Case to `implemented`.
+
+## Entry / Creation Paths
+
+Created only from within Planning-Implementation (`agent-harness/modes/PLANNING-IMPLEMENTATION.md`), never
+directly.
+
 ## Sources
 
-A Plan is created only from within Planning-Implementation, from a Task, Spec, or Use Case (see that mode's Entry
-Points).
+A Plan is created only from within Planning-Implementation, from a Task, Spec, or Use Case — OR, when
+`shared-procs/RISK-TIER.md`'s cascade lands on Plan-tier, directly from a natural-language request with no
+upstream artifact at all (`entrypoint_type: none`) (see that mode's Entry Points).
 
-## Plan Body Should Include
+## When To Create
+
+Whenever a Task, Spec, or Use Case has reached the status Planning-Implementation requires, or a direct request
+classifies as Plan-tier — see `PLANNING-IMPLEMENTATION.md`'s `## Workflow Paths`.
+
+## When Not To Create
+
+Never create a Plan outside Planning-Implementation, and never treat its existence as license to change code —
+code changes require the separate `approved` status transition (`## Readiness / Acceptance`).
+
+## Artifact Shape
+
+Grouping logic: Tasks SHOULD be grouped in one step when they belong to the same approved Spec, are small and
+tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable
+diff, and no high-risk work is involved (`IPL-01-010`). Tasks SHOULD stay separate when risk is high, validation
+differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the
+change touches database, deployment, security, payment execution, security-critical logic, or domain-critical
+business rules (`IPL-01-020`). A Plan whose entry skipped any risk-tier level MUST include a `## Risk-Tier
+Classification` section regardless of how small the change is (`IPL-01-030`/`IPL-01-031`).
+
+## Field Semantics
+
+`entrypoint_type` distinguishes a Plan sourced from a Task/Spec/Use Case from a Plan-tier Plan with no upstream
+artifact (`entrypoint_type: none`) — the latter records its Spec-ID column as `—` in `harness-data/CATALOG.md`'s
+Active Implementation Plans table (`IPL-05-020`).
+
+## Body Should Include
 
 - Target artifact
 - Readiness checks
@@ -23,6 +63,39 @@ Points).
 - Risk level per step
 - Suggested commit boundaries
 - Approval status
+- Risk-Tier Classification (if entry skipped any tier — see `IPL-01-030`)
+
+## Lifecycle
+
+`active/` while drafting or in progress; `approved/` once the Readiness Gate passes; `done/` on completion (see
+`## Output / Location`). A Plan's completion is also the forward-moving half of the harness-wide status cascade —
+see `agent-harness/systems/STATUS-CASCADE.md` for the full mechanism, including the reopening/reconsideration
+direction (`IPL-05-080`–`082`, `CORE.md`'s `COR-01-130`).
+
+## Readiness / Acceptance
+
+Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact — every item must
+be checked; a single unchecked item blocks the status change (`IPL-02-010`/`IPL-02-011`). Before that, also check
+`harness-data/CATALOG.md` for other Plans at status `approved` or `in-progress` on the same Spec, or with
+overlapping Task `allowed_paths` — stop and surface the conflict if either condition is found (`IPL-05-010`/
+`IPL-05-011`). Keep `harness-data/CATALOG.md`'s Active Implementation Plans table accurate for all Plans at
+status `approved` or `in-progress`, adding/updating a row in the same pass the status changes and removing it
+once the Plan is no longer either (`IPL-05-020`).
+
+## Relationships
+
+A Plan's `source` names the Task/Spec/Use Case it was planned from (or is absent for a Plan-tier Plan). Its
+completion drives the Spec/Use-Case status cascade described in `## Lifecycle`.
+
+## Output / Location
+
+`harness-data/artifacts/implementation-plans/active/PLAN-*.md` while drafting or in progress; `approved/` once
+the Readiness Gate passes; `done/` on completion. See `agent-harness/OUTPUTS.md` for the full lifecycle-folder
+rules.
+
+## Template
+
+Use `agent-harness/templates/IMPLEMENTATION-PLAN-template.md` as the starting point for every new plan.
 
 ## Commit Message Convention
 
@@ -37,19 +110,22 @@ Source:
 - SPEC-XXX
 ```
 
-## Rules
+Use this format for a Plan step's suggested commit boundaries, citing the step's Task IDs under `Implements:` and
+its source Spec under `Source:` (`IPL-06-010`).
 
-| ID | Type | Rule |
-| --- | --- | --- |
-| IPL-01-010 | Grouping | SHOULD group Tasks in one step when they belong to the same approved Spec, are small and tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and no high-risk work is involved. |
-| IPL-01-020 | Grouping | SHOULD keep Tasks separate when risk is high, validation differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules. |
-| IPL-02-010 | Readiness-Gate | Before setting a Plan status to `approved`, MUST verify the Readiness Checks section in the artifact; all items must be checked, and a single unchecked item blocks the status change. |
-| IPL-05-010 | Parallel-Work | Before setting a Plan status to `approved`, MUST check `harness-data/CATALOG.md` for other Plans at status `approved` or `in-progress` on the same Spec (`IPL-05-030`) or with overlapping Task `allowed_paths` (`IPL-05-050`); must stop and surface the conflict if either applies. |
-| IPL-05-020 | Parallel-Work | MUST keep `harness-data/CATALOG.md`'s Active Implementation Plans table accurate for all Plans at status `approved` or `in-progress`: add or update a Plan's row in the same pass its status changes to `approved` or `in-progress`; remove the row once the Plan is no longer either. |
-| IPL-05-080 | Cascade | When a Plan reaches status `done` and every Task derived from a Spec is `done`, MUST set that Spec's status to `implemented`. When every Spec derived from a Use Case is `implemented`, must set the Use Case's status to `implemented`. If a Plan or Task reopens after this cascade already ran (independent of `SPECS.md`'s `SPS-07-020`), see `CORE.md`'s `COR-01-130` — the Spec's/Use Case's `implemented` status this cascade set may now be stale and must be explicitly reconsidered, not left as-is by default. |
-| IPL-06-010 | Commit-Convention | MUST use the Commit Message Convention format above for a Plan step's suggested commit boundaries, citing the step's Task IDs under `Implements:` and its source Spec under `Source:`. |
+## Examples
 
-## Output
+A `ready` Task for a Dockerfile chown fix: the agent creates a single-step Plan (small, tightly related, no
+high-risk work), records the suggested commit message under the Commit Message Convention, and waits for
+approval.
 
-- `harness-data/artifacts/implementation-plans/active/PLAN-*.md` while drafting or in progress; `approved/` once `IPL-02-010`'s Readiness Gate passes; `done/` on completion. See `agent-harness/OUTPUTS.md` for the full lifecycle-folder rules.
-- Use `agent-harness/templates/IMPLEMENTATION-PLAN-template.md` as the starting point for every new plan.
+## Rules Map
+
+This contract's enforceable rules live in `agent-harness/rules/artifact-specs/IMPLEMENTATION-PLAN.md` (single
+paired file — under the 25-rule grouping threshold). Load it whenever creating, updating, approving, or executing
+against an Implementation Plan.
+
+## Reference Files
+
+None beyond the template and `harness-data/CATALOG.md` — see `PLANNING-IMPLEMENTATION.md`'s and
+`IMPLEMENTING.md`'s own Reference Files for planning/execution-time context.

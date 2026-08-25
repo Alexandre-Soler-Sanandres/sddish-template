@@ -22,38 +22,67 @@ The harness addresses all of these through explicit modes, bounded artifacts, an
 
 ## Core Principle: SDD-ish Development
 
-The central principle is: **no code without a Spec, no Spec without a Use Case, no implementation without an approved plan.**
+The central principle is: **no code without a Plan, no Plan without going through every tier `shared-procs/RISK-TIER.md`'s cascade classifies as necessary, no implementation without an approved plan.**
 
 This creates a clear dependency chain:
 
 ```text
 Voice / Text / Legacy Code
   → Transcript / Idea
-  → Use Case
-  → Spec
-  → Tasks (when required)
-  → Implementation Plan (approved)
+  → Use Case         (skippable per shared-procs/RISK-TIER.md's cascade)
+  → Spec              (skippable per shared-procs/RISK-TIER.md's cascade)
+  → Tasks (when required — skippable per shared-procs/RISK-TIER.md's cascade)
+  → Implementation Plan (approved) — the only stage every path passes through
   → Implementation
   → Validation
   → [Review / Improving-Harness — when a stronger formal loop is wanted]
 ```
 
-Each persistent stage produces a file-based artifact. Each artifact is traceable to its source. No stage may be skipped — but stages may be lightweight when the work is small and low-risk.
+Each persistent stage produces a file-based artifact. Each artifact is traceable to its source. A stage may be
+skipped entirely when `shared-procs/RISK-TIER.md`'s cascade classifies it unnecessary (recorded in the resulting
+artifact, per `RSK-05-010`); otherwise stages may be lightweight when the work is small and low-risk, but not
+skipped without that classification.
 
-## Three Kinds of Harness File
+## Harness File Taxonomy
 
-The harness distinguishes three kinds of file under `agent-harness/`, by location and purpose:
+The harness distinguishes several kinds of file under `agent-harness/`, by location and purpose. Canonical term
+definitions live in [08-glossary.md](08-glossary.md).
 
-- **Modes** (`agent-harness/modes/`) — a true interaction-pattern the agent adopts. Only one is active at a time.
+- **Mode Workflows** (`agent-harness/modes/`) — true interaction-patterns the agent adopts. Only one is active at a time.
   Mode transitions happen only when the user explicitly requests them; ambiguous intent must be clarified before
   switching. Voice, text, and chat are **input channels**, not modes — the input channel never changes what the
   agent may do. See [02-modes.md](02-modes.md).
-- **Artifact specs** (`agent-harness/artifact-specs/`) — the schema, creation trigger, and lifecycle gate for one
+- **Artifact Contracts** (`agent-harness/artifact-specs/`) — the meaning, schema, creation trigger, and lifecycle gate for one
   document type. Producing or updating one of these does not require switching Mode; any Mode's own rules may
   invoke one directly (this mirrors how ADR has always worked: "any mode may draft a candidate ADR"). See
   [03-artifacts.md](03-artifacts.md).
-- **Shared procedures** (`agent-harness/shared-procs/`) — a checklist invoked by name from within a Mode's own
-  rules. No schema, no artifact of its own. See [04-shared-procs.md](04-shared-procs.md).
+- **Procedure Guides** (`agent-harness/shared-procs/`) — reusable harness-native procedures invoked by name from
+  Mode or artifact control flow. No schema, no artifact of their own. See [04-shared-procs.md](04-shared-procs.md).
+- **Systems** (`agent-harness/systems/`) — agent-facing operating-model explanations for mechanisms spanning
+  multiple rules, artifacts, statuses, or procedures.
+- **Rules** (`agent-harness/rules/`) — enforceable rule tables only, paired with the source files whose
+  explanation and constraints they were split from.
+- **Templates** (`agent-harness/templates/`) — lean scaffolds: frontmatter keys, section headings, checklists,
+  placeholders, and short field prompts.
+
+Short form: Rules constrain. Workflows guide. Contracts define. Procedures run. Systems explain interactions.
+Templates scaffold.
+
+## Extraction Criteria
+
+When splitting or migrating a harness file, route content by role:
+
+| Content role | Destination |
+| --- | --- |
+| Enforceable gates, approval/status/validation/loading/traceability requirements, safety boundaries, and anything auditable by rule ID | Rules |
+| Posture, examples, route shapes, how to think, common paths, and quality guidance for mode work | Mode Workflow |
+| Artifact meaning, shape, field semantics, lifecycle, validity, relationships, examples, and quality expectations | Artifact Contract |
+| Repeatable harness-native steps required by control-flow semantics | Procedure Guide |
+| Cross-rule/cross-artifact operating models that are bigger than one file | System |
+| Blank structure, placeholders, section headings, checklists, and short fill prompts | Template |
+
+Casual prose using words like "must" or "should" should be rewritten as plain prose unless enforcement is
+intended. Intended enforcement gets a rule ID.
 
 ## Modes Are Universal. References Are Project-Specific.
 

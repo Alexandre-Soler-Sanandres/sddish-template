@@ -5,21 +5,11 @@
 Canonical output rules for harness artifacts: format, naming, placement, and lifecycle folders.
 For artifact-language rules and closed-artifact rewrite rules, see `agent-harness/CORE.md`.
 
-## Rules
+## Rules Map
 
-| ID | Type | Rule |
-| --- | --- | --- |
-| OUT-01-010 | Format | All lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body. |
-| OUT-02-010 | Scope | `agent-harness/README.md` is the harness overview, not a lifecycle artifact. |
-| OUT-02-020 | Scope | Do not create directory-scoped README files as harness artifacts. Use mode files, templates, `CATALOG.md`, and scoped restart artifacts such as `SOURCE-MAP.md` or `SUMMARY.md` for harness guidance. |
-| OUT-03-010 | Naming | Artifact filenames must follow the canonical naming patterns in `## File Naming Conventions`. |
-| OUT-03-020 | Naming | IDs must remain stable even if filenames or folders change. |
-| OUT-04-010 | Lifecycle | New artifacts are created in `active/` unless a mode explicitly defines a different starting location. |
-| OUT-04-020 | Lifecycle | Move artifacts between lifecycle subfolders as their status changes. Do not rename the file ID when moving them. |
-| OUT-05-010 | Improvement-Lifecycle | For Improvements, `done/` means the approved target changes are applied and the artifact records a `## Validation Result` confirming what was checked. |
-| OUT-06-010 | Legacy-Discovery | Legacy Discovery artifacts must use the scoped folder structure defined in `## Legacy Discovery Structure`. |
-| OUT-07-010 | ADR-Lifecycle | ADRs use `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair — see `## Folder Structure`. |
-| OUT-08-010 | Questions-Lifecycle | The Questions registry does not use lifecycle subfolders. It is three flat files under `harness-data/artifacts/questions/`; a row's file *is* its status — see `agent-harness/artifact-specs/QUESTIONS.md`. |
+This file's enforceable rules live in `agent-harness/rules/OUTPUTS.md` (single paired file, not grouped — `OUTPUTS.md`
+has fewer than 25 rules). `OUTPUTS.md` is always loaded per `AGENTS.md`'s Always Follow list, so load
+`agent-harness/rules/OUTPUTS.md` alongside it every time.
 
 ## Artifact Format
 
@@ -53,11 +43,14 @@ Within that root, each artifact directory uses subfolders to reflect lifecycle s
 | `archive/` | all artifact dirs except `questions/` | artifact is closed, superseded or no longer relevant |
 | `approved/` | `implementation-plans/` | plan has been approved and is awaiting execution |
 | `done/` | `implementation-plans/`, `tasks/`, `improvements/` | execution is complete |
+| `implemented/` | `specs/`, `use-cases/` | described behavior now exists in code and remains citable authority |
 | `proposed/` | `adrs/` | not yet settled |
 | `accepted/` | `adrs/` | in force, citable authority |
 
 `adrs/` uses `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair (`OUT-07-010`).
-`questions/` has no lifecycle subfolders at all — it is three flat files, one per status (`OUT-08-010`).
+`questions/` has no lifecycle subfolders at all — it is three flat files, one per status (`OUT-08-010`). See
+`agent-harness/systems/LIFECYCLE-FOLDERS.md` for why these shapes diverge and how each artifact's `status` field
+and folder location move together.
 
 ## Legacy Discovery Structure
 

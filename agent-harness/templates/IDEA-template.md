@@ -1,7 +1,7 @@
 ---
 id: IDEA-001
 type: idea
-status: captured         # captured | clarifying | ready-for-use-case | landed | archived | rejected
+status: captured         # captured | clarifying | ready-for-refining | landed | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
@@ -29,3 +29,9 @@ next: []                 # e.g. [UC-001]
 ## Notes
 
 (any additional context)
+
+## Risk-Tier Classification
+
+(optional — filled in only when `PARTNERING.md`'s `PTN-02-110` classifies this Idea's next step before it is
+promoted in the same action; see `IDEA.md`'s `IDA-05-020` and `shared-procs/RISK-TIER.md`'s `RSK-05-010`/
+`RSK-07-010`)

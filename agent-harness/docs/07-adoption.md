@@ -17,8 +17,10 @@ This repository is marked as a GitHub template. There are two ways to create a n
    - `harness-data/reference/QUALITY.md`
 4. Start with a Partnering or Use Case session
 
-You get the full structure — mode files, templates, artifact folders, and CLI entry points for both Claude Code
-(`.claude/skills/harness/`) and Codex CLI (`.agents/skills/harness/`) — with a clean git history.
+You get the full structure — Mode Workflows, Artifact Contracts, Procedure Guides, Systems, Rules, templates,
+artifact folders, and CLI entry points for Claude Code (`.claude/skills/harness/`), Codex CLI
+(`.agents/skills/harness/`), and GitHub Copilot (`.github/agents/` custom agents, plus
+`.github/copilot-instructions.md`) — with a clean git history.
 
 ### Option B: Local clone
 
@@ -219,6 +221,11 @@ Use this as the smallest useful onboarding path for a new project:
 
 That is enough to prove the harness works in a real project. Everything beyond that is refinement.
 
+Once this path has been exercised, everyday changes may skip stages the risk-tier cascade classifies as
+unnecessary — see [05-workflows.md](05-workflows.md)'s Risk-Tier Cascade section. Steps 5–8 above are a
+deliberate full-tier walkthrough to prove every stage works at least once, not a claim that every future change
+needs all four.
+
 ### After setup (both options)
 
 These are the details people most often need once the basic files exist:
@@ -238,7 +245,8 @@ These are the details people most often need once the basic files exist:
 - Keep `harness-data/guides/index.yaml` and `harness-data/playbooks/index.yaml` accurate when those support files exist
 - Keep `agent-harness/docs/` for harness guidance; project documentation can use the repository root or another
   project-owned docs location
-- The mode files, templates, `CORE.md`, `CATALOG.md`, and `OUTPUTS.md` are universal — do not add project-specific content to them
+- The Mode Workflows, Artifact Contracts, Procedure Guides, Systems, Rules, templates, `CORE.md`, `CATALOG.md`,
+  and `OUTPUTS.md` are universal — do not add project-specific content to them
 
 ## Two Root Directories
 
@@ -263,9 +271,13 @@ When in doubt:
 | `agent-harness/CORE.md` | Universal — do not modify |
 | `agent-harness/OUTPUTS.md` | Universal — do not modify |
 | `agent-harness/CATALOG.md` | Universal — do not modify |
-| `agent-harness/modes/**/*.md` | Universal — do not modify |
+| `agent-harness/modes/**/*.md` | Universal Mode Workflows — do not modify for project-specific needs |
+| `agent-harness/artifact-specs/**/*.md` | Universal Artifact Contracts — do not modify for project-specific needs |
+| `agent-harness/shared-procs/**/*.md` | Universal Procedure Guides — do not modify for project-specific needs |
+| `agent-harness/systems/**/*.md` | Universal Systems — do not modify for project-specific needs |
+| `agent-harness/rules/**/*.md` | Universal enforceable Rules — do not modify for project-specific needs |
 | `agent-harness/playbooks/` | Universal — reusable procedures owned by the harness |
-| `agent-harness/templates/*.md` | Universal — do not modify |
+| `agent-harness/templates/*.md` | Universal lean scaffolds — do not modify for project-specific needs |
 | `harness-data/CATALOG.md` | Project-specific — live state, not part of the template |
 | `harness-data/RUN-LOG.md` | Optional — temporary operational trace the agent may use for interrupted or higher-risk work |
 | `REPO-MAP.md` | Optional — structural context for large repos or major subtrees |
@@ -286,7 +298,8 @@ If you are adopting the harness for an existing active codebase:
 1. Use **Discovering-Legacy mode** to extract evidence from the existing code
 2. Produce Legacy Findings → candidate Use Cases
 3. Refine Use Cases → create Specs
-4. Use Specs as the basis for all future work
+4. Use Specs as the basis for all future work — subject to the same risk-tier cascade as any other source once
+   Refining is reached; a legacy-derived Idea or Finding is not exempt from it.
 
 The legacy codebase is evidence, not authority. Do not treat existing code as automatically correct.
 
@@ -307,10 +320,12 @@ Use these docs for the detailed guidance:
 - [10-guides.md](10-guides.md)
 - [11-project-playbooks.md](11-project-playbooks.md)
 
-`agent-harness/playbooks/` is a separate harness-owned layer for reusable procedures.
+`agent-harness/playbooks/` is a separate harness-owned layer for optional reusable procedures. It is distinct from
+`agent-harness/shared-procs/`, whose Procedure Guides are required by harness control flow when invoked.
 Each support-file layer uses an `index.yaml` file so agents can discover relevant support files without opening every file.
 
-Project-specific rules must never be placed in mode files. Put them in the relevant project-owned support file instead.
+Project-specific rules must never be placed in Mode Workflows, Artifact Contracts, Procedure Guides, Systems, Rules,
+or templates. Put them in the relevant project-owned support file instead.
 
 ## Optional Advanced Disciplines
 
@@ -319,7 +334,10 @@ Review and Improving-Harness are part of the harness, but they do not need to do
 For many teams, the default path is:
 
 ```text
-Partnering → Refining (Use Case → Spec → [Task]) → Planning-Implementation → Implementing → Validation
+Partnering → Refining (Use Case → Spec → [Task] — each stage skippable per shared-procs/RISK-TIER.md)
+  → Planning-Implementation → Implementing → Validation
 ```
+
+See [05-workflows.md](05-workflows.md)'s "Risk-Tier Cascade" section for when a stage is skippable.
 
 Use Review and Improving-Harness when you want a stronger formal loop around output evaluation or process correction.

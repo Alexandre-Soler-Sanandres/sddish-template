@@ -4,37 +4,67 @@
 
 Refining mode derives the next artifact in the Use-Case → Spec → Task funnel from its immediate source: a Use
 Case from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation; a Spec from a
-Use Case; or Task(s) from a Spec. This file governs the mechanical derivation activity only — the resulting
-document's own schema and lifecycle rules (readiness gates, Updating rules, Output) live in the corresponding
-artifact spec. Per `COR-03-090`, load both this file and the relevant artifact spec
+Use Case; or Task(s) from a Spec — unless a lower tier is classified sufficient, per `shared-procs/RISK-TIER.md`;
+when even Task-tier is classified unnecessary, the request routes to Planning-Implementation's Plan-tier entry
+instead of Refining producing anything at all. This file governs the mechanical derivation activity only — the
+resulting document's own schema and lifecycle rules (readiness gates, Updating rules, Output) live in the
+corresponding artifact spec. Per `COR-03-090`, load both this file and the relevant artifact spec
 (`agent-harness/artifact-specs/USE-CASES.md`, `agent-harness/artifact-specs/SPECS.md`, or
 `agent-harness/artifact-specs/TASKS.md`) before acting — neither substitutes for the other.
 
-## Entry Points
+## Mode Story
+
+Refining is a funnel, not three unrelated commands. A request usually arrives already carrying a risk-tier
+classification from whichever mode routed it here (Partnering's `PTN-02-110`, or an earlier step in this same
+funnel); each entry point's first move is to check for and reuse that classification rather than re-deriving it.
+From there the agent reads the source, loads relevant accepted ADRs, and mechanically derives the next artifact's
+content — stopping cleanly before implementation or before drafting anything further downstream.
+
+## Operating Posture
+
+Mechanical derivation, not design-from-scratch: the source material (Idea, Transcript, Use Case, Spec) already
+carries the substance; Refining's job is to shape it into the next funnel artifact's form, load the relevant ADRs,
+and stop at the boundary of that artifact. Every entry point accepts natural language as well as its CLI form —
+the input channel does not change what the mode allows (mirrors `PTN-01-010`).
+
+## When To Use
+
+Use Refining once Partnering (or an earlier Refining step) has classified the request as needing a Use Case, a
+Spec, or Tasks. Each entry point may also be triggered directly by natural language — an explicit instruction
+naming the source and what to derive from it, e.g. "use Idea IDEA-012 to create a Use Case," "from our Partnering
+transcript and ADR-003, extract the Use Cases we need," "create the spec for UC-007," or "plan tasks from
+SPEC-014."
+
+## Workflow Paths
 
 - `/create-use-case <source-reference>`
 - `/create-spec <use-case-file>`
 - `/create-tasks <spec-file>`
 
-Each entry point may also be triggered by natural language — an explicit instruction naming the source and what
-to derive from it, e.g. "use Idea IDEA-012 to create a Use Case," "from our Partnering transcript and ADR-003,
-extract the Use Cases we need," "create the spec for UC-007," or "plan tasks from SPEC-014." The input channel
-does not change what the mode allows (mirrors `PTN-01-010`) — a natural-language trigger still requires the same
-source and readiness checks as its CLI equivalent.
-
-## Consumes / Produces
+Consumes / Produces:
 
 - `/create-use-case`: consumes an Idea, Transcript, Partnering discussion, Legacy Finding, or existing
-  documentation — if the source is an Idea, it must be at status `ready-for-use-case`; produces a Use Case.
-- `/create-spec`: consumes a Use Case at status `ready-for-spec`; produces a Spec.
-- `/create-tasks`: consumes a Spec at status `approved`; produces Task(s).
+  documentation — if the source is an Idea, it must be at status `ready-for-refining`; produces a Use Case.
+- `/create-spec`: consumes a Use Case at status `ready-for-spec` — OR, when `shared-procs/RISK-TIER.md`'s
+  UC-Necessity Matrix classifies the request below UC-tier, the same source types `/create-use-case` consumes;
+  produces a Spec.
+- `/create-tasks`: consumes a Spec at status `approved` — OR, when `RISK-TIER.md`'s Spec-Necessity Matrix
+  classifies the request below Spec-tier, the same source types a Spec would have been created from; produces
+  Task(s).
 
-## Use Case Creation Should (via `/create-use-case`)
+## Core Moves
 
+### Use Case Creation (via `/create-use-case`)
+
+0. Step 0 (`UCS-01-050`): if the source Idea already carries a `## Risk-Tier Classification` (per `IDA-05-020`)
+   or the source is a Transcript/Partnering discussion where `PTN-02-110` already classified this same request,
+   reuse that result per `RISK-TIER.md`'s `RSK-07-010` — otherwise run the UC-Necessity Matrix (`RSK-02-010`)
+   fresh. If it classifies the request below UC-tier, stop here and proceed via `/create-spec`'s skip-path
+   instead of creating a Use Case.
 1. Identify the source: Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation.
-2. If the source is an Idea, verify it is at status `ready-for-use-case` before proceeding (per `IDA-01-010`). Other
-   source types have no formal readiness gate — use judgment that the source material is concrete enough to
-   draft a scenario from.
+2. If the source is an Idea, verify it is at status `ready-for-refining` before proceeding (per `IDA-01-010`).
+   Other source types have no formal readiness gate — use judgment that the source material is concrete enough
+   to draft a scenario from.
 3. Read the source material.
 4. Load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance;
    record the result in `related` now (`UCS-01-040`) — before drafting the goal/scenario, not after.
@@ -47,10 +77,16 @@ source and readiness checks as its CLI equivalent.
     Case's ID, moved to `archive/`) as part of this same action.
 11. Stop before creating a Spec, Task, or Implementation Plan.
 
-## Spec Creation Should (via `/create-spec`)
+### Spec Creation (via `/create-spec`)
 
-1. Verify the source Use Case is at status `ready-for-spec` before proceeding.
-2. Read the Use Case.
+0. Step 0 (`SPS-01-040`): same carry-forward check as Use Case Creation's step 0, for the Spec-Necessity Matrix
+   (`RSK-03-010`) — reuse an existing classification per `RSK-07-010` before running it fresh, or run it fresh
+   immediately after step 0 above classified UC as not required (Spec-Necessity has not yet been checked in that
+   case). If entering directly (no Use Case in hand), this is the source's first check.
+1. Verify the source Use Case is at status `ready-for-spec` before proceeding — unless entered via the UC-skip
+   path (step 0 classified UC-tier unnecessary), in which case proceed directly from the same source types Use
+   Case creation would have used.
+2. Read the Use Case (or, on the skip-path, the source material directly).
 3. Load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance;
    record the result in `related` now (`SPS-01-030`) — before drafting scope/requirements, not after.
 4. Inspect source Ideas or Legacy Findings when additional context is needed.
@@ -66,50 +102,39 @@ Questions-registry carry-forward (inspecting inherited open items from the sourc
 is a separate, cross-cutting concern, not part of this mechanical derivation — see
 `agent-harness/artifact-specs/SPECS.md`'s `SPS-05-010`.
 
-## Task Decision Matrix (via `/create-tasks`)
+### Task Creation (via `/create-tasks`)
 
-| Situation | Tasks required? | Reason |
-| --- | --- | --- |
-| Small documentation-only change | No | Inline plan is sufficient |
-| Small isolated config change | Optional | Use inline plan if validation is clear |
-| Small bugfix in one module | Optional | Use inline plan if scope is clear |
-| Multiple files or modules | Yes | Reviewability and traceability |
-| Multiple implementation steps | Yes | Ordering and validation boundaries |
-| Cross-cutting change | Yes | Scope control |
-| Unclear dependencies | Yes | Dependency management |
-| Use Case with multiple Specs | Yes | Too broad for inline planning |
-| Spec with multiple features | Yes | Needs execution slices |
-| Database migration | Yes | High risk |
-| Destructive data job | Yes | High risk |
-| Deployment or infrastructure change | Yes | Operational risk |
-| CI/CD workflow setup | Yes | Operational risk |
-| Local development execution path | Yes | Operational risk |
-| API contract publication or change | Yes | Operational risk |
-| Security, secrets or auth | Yes | Safety-critical |
-| Payment or financial transaction execution | Yes | Safety-critical |
-| Domain-critical business logic | Yes | Domain-critical |
-| Major architecture change | Yes | Requires reviewable slices |
+Task-necessity classification uses `shared-procs/RISK-TIER.md`'s `RSK-04-010` (Task-Necessity Matrix) — see that
+file for the table. This mode's own step-0 check before running it, reached whenever `/create-tasks` is entered
+via the Spec-skip path, is `TSK-01-030` in the paired rules file — there is no separate prose checklist for
+`/create-tasks` (unlike Use Case and Spec creation above), so that rule is the sole statement of the check.
 
-## Rules
+## Routing
 
-| ID | Type | Rule |
-| --- | --- | --- |
-| UCS-01-010 | Sources | A Use Case MUST be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation; if the source is an Idea, it MUST be at status `ready-for-use-case` (`IDA-01-010`) before a Use Case may be created from it. |
-| UCS-01-030 | Sources | For source types other than an Idea, which have no formal status gate, the agent SHOULD use judgment that the source material is concrete enough to draft a scenario from. |
-| UCS-01-040 | Sources | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Use Case's content, recording the result in `related` at creation time — `UCS-07-010`/`UCS-07-020`/`UCS-07-030` (in `USE-CASES.md`) remain the final verification pass, not the first point of contact. |
-| UCS-04-020 | Boundaries | MUST NOT trigger implementation, and MUST NOT create Specs, Tasks, or Implementation Plans. |
-| SPS-01-010 | Sources | MUST create a Spec only from a Use Case at status `ready-for-spec` — do not proceed otherwise. |
-| SPS-01-030 | Sources | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Spec's content, recording the result in `related` at creation time — `SPS-08-010`/`SPS-08-020`/`SPS-08-030` (in `SPECS.md`) remain the final verification pass, not the first point of contact. |
-| SPS-04-010 | Boundaries | MUST NOT implement or change code, and MUST NOT create Tasks or Implementation Plans while creating a Spec. |
-| TSK-01-010 | Sources | MUST create Tasks only from a Spec at status `approved` — do not proceed otherwise. |
-| TSK-03-010 | Boundaries | MUST NOT implement or change code, and MUST NOT create Implementation Plans. |
-| TSK-04-010 | Dedup | MUST verify existing Tasks derived from that Spec before generating Tasks from a Spec — via this entry point directly, not only when Planning-Implementation happens to check first; do not generate duplicate Tasks or skip existing ones. This rule is owned here, not borrowed from `PLANNING-IMPLEMENTATION.md`'s `IPL-03-010`, so `/create-tasks` is protected regardless of entry path. |
+When `TSK-01-030`'s check classifies Tasks as not required, or the request qualifies for "Optional" and the user
+prefers the lighter path, stop Task creation and report that the request lands on Plan-tier, routing to
+Planning-Implementation's natural-language entry (`IPL-08-010`) rather than creating a Task (`TSK-01-031`). This
+does not apply when `/create-tasks` is entered normally from an `approved` Spec — that case's Task-necessity was
+already decided when the Spec was approved with Tasks in mind (`TSK-01-032`).
 
-## Output
+## Outputs
 
 - Use Case: `harness-data/artifacts/use-cases/active/UC-*.md`, per `agent-harness/artifact-specs/USE-CASES.md`.
 - Spec: `harness-data/artifacts/specs/active/SPEC-*.md`, per `agent-harness/artifact-specs/SPECS.md`.
 - Task: `harness-data/artifacts/tasks/active/TASK-*.md`, per `agent-harness/artifact-specs/TASKS.md`.
+
+## Examples
+
+"Create the spec for UC-007" — the agent verifies UC-007 is `ready-for-spec`, reads it, loads relevant ADRs,
+drafts scope/requirements/acceptance-criteria, and stops before touching code or drafting Tasks.
+
+## Rules Map
+
+This mode's enforceable rules live in `agent-harness/rules/modes/REFINING.md` (single paired file covering all
+three entry points — `UCS-*`, `SPS-*`, and `TSK-*`; their combined count falls in the 25–35-rule band, where a
+single file is the default per `IMPROVEMENT-116`'s grouping policy, and the three clusters are not independent
+enough to justify splitting — they share one funnel). Load it alongside this file whenever Refining is the
+active mode.
 
 ## Reference Files
 

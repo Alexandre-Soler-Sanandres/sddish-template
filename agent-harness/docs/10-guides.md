@@ -14,6 +14,8 @@ Guides are useful for practical project-specific setup and operating knowledge s
 - project-specific conventions that are too operational for `reference/`
 
 Guides explain how this project works in practice.
+They are optional support material, not Procedure Guides. Procedure Guides live under `agent-harness/shared-procs/`
+and are required by harness control flow when invoked.
 
 ## What Guides Are Not
 
@@ -21,6 +23,7 @@ Guides are not:
 
 - harness lifecycle artifacts
 - universal harness rules
+- Procedure Guides under `agent-harness/shared-procs/`
 - the canonical source of domain or architecture truth
 - a place for fake template content
 - a substitute for project playbooks
@@ -68,7 +71,8 @@ Typical examples:
 
 Agents should not load guides by default for every task.
 When both a playbook and a guide are relevant, the playbook defines the procedure and the guide supplies the local operating details.
-Guides do not override `agent-harness/CORE.md`, the active mode file, or relevant playbooks.
+Guides do not override `agent-harness/CORE.md`, the active Mode Workflow, paired rules, Procedure Guides, or
+relevant playbooks.
 
 `harness-data/guides/index.yaml` should stay minimal. Each entry uses:
 

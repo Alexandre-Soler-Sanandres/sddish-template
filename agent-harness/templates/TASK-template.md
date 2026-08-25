@@ -46,11 +46,16 @@ unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `
 
 (describe how to verify this task is complete, beyond the commands in frontmatter)
 
+## Risk-Tier Classification
+
+(optional — filled in only when this Task was entered via `shared-procs/RISK-TIER.md`'s Spec-skip path; see
+`TASKS.md`'s `TSK-02-025`)
+
 ## Readiness Checklist
 
 Before advancing to `ready`, verify all items are checked:
 
-- [ ] Source Spec is approved
+- [ ] Source Spec is approved (or, if entered via the Spec-skip path, `## Risk-Tier Classification` section is present and complete)
 - [ ] Goal is specific enough to implement
 - [ ] allowed_paths are defined
 - [ ] Validation commands are specified

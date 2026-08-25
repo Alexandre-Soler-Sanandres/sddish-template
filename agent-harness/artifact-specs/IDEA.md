@@ -3,20 +3,55 @@
 ## Purpose
 
 An Idea is a candidate opportunity or problem worth remembering before it is mature enough to commit to a Use
-Case. Ideas are meant to stay fuzzy — `maturity`/`confidence` fields exist precisely to express that. This spec is
-deliberately lightweight, proportional to Idea's intentionally rough nature; do not import ADR-level rigor.
+Case. Ideas are meant to stay fuzzy — `maturity`/`confidence` fields exist precisely to express that. This
+contract is deliberately lightweight, proportional to Idea's intentionally rough nature; do not import
+ADR-level rigor.
 
-## Status
+## Artifact Story
 
-`captured | clarifying | ready-for-use-case | landed | archived | rejected`. `landed` and `archived` both leave
-`active/` but mean opposite outcomes: `archived` is a dead end (superseded by a split per `IDA-01-020`, or
-rejected outright — `rejected` is the sharper-worded variant of the same dead-end family); `landed` means the
-Idea's content is now inside a Use Case or Spec and no longer a candidate to evaluate on its own — see
-`IDA-06-010`/`IDA-06-020`.
+Something worth remembering surfaces — in Partnering, in a Review finding, in Legacy Discovery — but isn't yet
+concrete enough to draft a Use Case from. The agent captures it as an Idea and lets it stay `captured` or
+`clarifying` while it firms up. Once it's concrete enough to act on, promotion to the next funnel artifact
+(Use Case, or a lower tier per the risk-tier cascade) requires the user's explicit confirmation — the Idea is
+never silently promoted from discussion alone. Once promoted or merged into an existing artifact, the Idea
+closes: `landed`, pointing at whatever it became.
+
+## Entry / Creation Paths
+
+Created inline from whichever mode surfaces it — no dedicated CLI command or mode switch required.
 
 ## Sources
 
 An Idea may be created from Partnering discussion, Transcript, Review finding, or Legacy Discovery insight.
+
+## When To Create
+
+Create an Idea when a candidate opportunity or problem has a direction worth remembering but is not yet mature
+enough to commit to a Use Case — see `QUESTIONS.md`'s `QST-06-010` for the exact test distinguishing a candidate
+direction (Idea) from an unresolved fork (Question).
+
+## When Not To Create
+
+Do not classify an item as an Idea if it is an open fork with no proposed solution yet — that is a Question, not
+an Idea (`IDA-04-010`). Do not create a new Idea when an existing `active` Idea already covers the same
+Problem/Opportunity — merge into it instead (`IDA-02-010`). An Idea must never itself trigger implementation, or
+create a Use Case, Spec, Task, or Plan directly (`IDA-03-010`).
+
+## Artifact Shape
+
+`status` is one of `captured | clarifying | ready-for-refining | landed | archived | rejected`. `landed` and
+`archived` both leave `active/` but mean opposite outcomes: `archived` is a dead end (superseded by a split per
+`IDA-01-020`, or rejected outright — `rejected` is the sharper-worded variant of the same dead-end family);
+`landed` means the Idea's content is now inside a Use Case or Spec and no longer a candidate to evaluate on its
+own (see `## Lifecycle`).
+
+## Field Semantics
+
+- `status` — see `## Artifact Shape` for the enum and `## Lifecycle` for transitions.
+- `next` — populated only when closing per `IDA-06-030`, pointing at the citing artifact's ID.
+- `## Risk-Tier Classification` (optional body section) — see `IDA-05-020`: records the classification when
+  `PTN-02-110` classifies this Idea's next step and the Idea is not promoted in the same action, so the artifact
+  that eventually promotes this Idea carries the classification forward rather than re-running the cascade.
 
 ## Body Should Include
 
@@ -24,27 +59,56 @@ An Idea may be created from Partnering discussion, Transcript, Review finding, o
 - Initial Thoughts
 - Open Questions
 - Notes
+- Risk-Tier Classification (optional — see `IDA-05-020`)
 
 (schema unchanged — see `agent-harness/templates/IDEA-template.md`)
 
-## Rules
+## Lifecycle
 
-| ID | Type | Rule |
-| --- | --- | --- |
-| IDA-01-010 | Readiness-Gate | Before setting status to `ready-for-use-case`, MUST judge (not checklist) whether the Problem/Opportunity is stated concretely enough that a Use Case could plausibly be drafted from it. |
-| IDA-01-020 | Boundaries | An Idea MUST represent one distinguishable, independently-decidable opportunity or problem — something that could be pursued or skipped on its own, separately from its neighbors. When source evidence bundles several (a roadmap table, a research-backlog document, a multi-item legacy doc), MUST split into one Idea per opportunity, not one Idea per source document. |
-| IDA-01-030 | Boundaries | Genuinely interchangeable variations of the same opportunity (e.g. a list of similar technical indicators serving one purpose) MAY stay grouped as one Idea. |
-| IDA-01-040 | Boundaries | A distinguishable architecture or product-shape decision MUST get its own Idea even if it is a single line in the source. |
-| IDA-02-010 | Dedup | Before creating a new Idea, MUST check existing `active` Ideas for overlapping Problem/Opportunity and merge instead of duplicating (scaled-down mirror of Legacy Discovery's `LD-04-020`). |
-| IDA-03-010 | Boundaries | An Idea MUST NOT itself trigger implementation or create a Use Case/Spec directly; promotion to a Use Case requires explicit user confirmation, not inferred from discussion. |
-| IDA-04-010 | Idea-vs-Question | MUST classify an item as an Idea only if it has a candidate direction, not an open fork — see `QUESTIONS.md`'s `QST-06-010` for the exact test and how a Question resolving toward "yes, pursue this" spins off a new Idea. |
-| IDA-05-010 | Carry-Forward | When an Idea is seeded from a source (Transcript, Review finding, etc.) that has its own Questions-registry entries, SHOULD note the relevant canonical Question ID(s) in this Idea's own Open Questions per `CORE.md`'s `COR-01-120` — informally; this has no effect on `captured` or `clarifying` status, since Ideas are not gated the way Use Cases/Specs/ADRs are (see `IDA-01-010`). |
-| IDA-06-010 | Lifecycle | When `/create-use-case` (`REFINING.md`) successfully creates a new Use Case from this Idea, MUST close this Idea per `IDA-06-030`. |
-| IDA-06-020 | Lifecycle | When this Idea's content is incorporated as an in-place amendment to an already-existing Use Case or Spec, MUST close this Idea per `IDA-06-030`, regardless of which mode performs the amendment. |
-| IDA-06-030 | Lifecycle | Closing an Idea means, as one action: set `status` to `landed`, populate `next` with the citing artifact's ID, and move it to `archive/` per this file's Output rule. |
-| IDA-06-040 | Lifecycle | `landed` MUST NOT wait for the citing Use Case/Spec to reach `implemented`/`done` — the citing artifact's own status tracks whether that work is still planned or already done. |
+Before setting status to `ready-for-refining`, judge (not checklist) whether the Problem/Opportunity is stated
+concretely enough that a next artifact could plausibly be drafted from it — a Use Case, or, per
+`shared-procs/RISK-TIER.md`'s cascade, directly a Spec, Task, or Plan (`IDA-01-010`). When `/create-use-case`, or
+(skip-path) `/create-spec`/`/create-tasks`, or a direct Planning-Implementation entry successfully creates the
+next artifact from this Idea, or when this Idea's content is incorporated as an in-place amendment to an
+already-existing Use Case or Spec, close the Idea (`IDA-06-010`/`IDA-06-020`). Closing means, as one action: set
+`status` to `landed`, populate `next` with the citing artifact's ID, and move it to `archive/` (`IDA-06-030`).
+`landed` does not wait for the citing Use Case/Spec to reach `implemented`/`done` — the citing artifact's own
+status tracks whether that work is still planned or already done (`IDA-06-040`).
 
-## Output
+## Readiness / Acceptance
+
+See `## Lifecycle`'s `IDA-01-010` judgment gate for `ready-for-refining`. Promotion to the next funnel artifact
+requires explicit user confirmation, never inferred from discussion (`IDA-03-010`).
+
+## Relationships
+
+An Idea seeded from a source (Transcript, Review finding, etc.) that has its own Questions-registry entries
+should note the relevant canonical Question ID(s) in this Idea's own Open Questions per `CORE.md`'s `COR-01-120`
+— informally; this has no effect on `captured` or `clarifying` status, since Ideas are not gated the way Use
+Cases/Specs/ADRs are (`IDA-05-010`).
+
+## Output / Location
 
 - `harness-data/artifacts/ideas/active/IDEA-*.md`, using `agent-harness/templates/IDEA-template.md` unchanged.
-- `landed`/`archived`/`rejected` Ideas move to `harness-data/artifacts/ideas/archive/` (content preserved, per `COR-01-080`).
+- `landed`/`archived`/`rejected` Ideas move to `harness-data/artifacts/ideas/archive/` (content preserved, per
+  `COR-01-080`).
+
+## Template
+
+Use `agent-harness/templates/IDEA-template.md` unchanged.
+
+## Examples
+
+A Review finding notes that a legacy retry policy might be worth generalizing across services. The agent captures
+it as an Idea (`captured`), and once discussion firms up which services and what trigger conditions apply, moves
+it to `ready-for-refining` and, on explicit user confirmation, promotes it via `/create-use-case`.
+
+## Rules Map
+
+This contract's enforceable rules live in `agent-harness/rules/artifact-specs/IDEA.md` (single paired file —
+under the 25-rule grouping threshold). Load it whenever creating, updating, or closing an Idea.
+
+## Reference Files
+
+None beyond the template — Ideas are intentionally lightweight and rarely need reference-doc context of their
+own before promotion.

@@ -6,6 +6,8 @@ They are project-owned, not lifecycle artifacts, and they capture recurring proj
 Universal playbooks may also exist under `agent-harness/playbooks/`.
 Those are harness-owned reusable procedures for task shapes that recur across projects.
 They are not project playbooks and should not be maintained through this project-owned layer.
+Both kinds of playbook are optional support material, selected through an `index.yaml`. They are distinct from
+Procedure Guides under `agent-harness/shared-procs/`, which are required by harness control flow when invoked.
 
 ## What Project Playbooks Are For
 
@@ -26,12 +28,14 @@ Project playbooks are not:
 
 - harness lifecycle artifacts
 - harness-owned universal playbooks
+- Procedure Guides under `agent-harness/shared-procs/`
 - setup/bootstrap notes
 - the canonical source of domain or architecture truth
 - a place for fake template content
 
 Setup and operating help belongs in `harness-data/guides/`.
 Harness-owned universal reusable procedures belong in `agent-harness/playbooks/`.
+Harness-native required procedures belong in `agent-harness/shared-procs/`.
 
 ## When To Create A Project Playbook
 
@@ -79,6 +83,8 @@ When both a universal playbook and a project playbook are relevant, agents shoul
 3. follow the project-specific constraint when they differ
 
 When both apply, the universal playbook provides the generic procedure and the project playbook refines it for this repository.
+Neither playbook layer overrides `agent-harness/CORE.md`, the active Mode Workflow, paired rules, or required
+Procedure Guides.
 
 `harness-data/playbooks/index.yaml` should stay minimal. Each entry uses:
 

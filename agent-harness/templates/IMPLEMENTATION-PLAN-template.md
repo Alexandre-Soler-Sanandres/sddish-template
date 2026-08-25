@@ -5,9 +5,9 @@ status: proposed         # proposed | approved | in-progress | done | rejected |
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-entrypoint_type: ""      # task | spec | use-case
+entrypoint_type: ""      # task | spec | use-case | none
 entrypoint: ""           # e.g. SPEC-001
-source: []               # e.g. [SPEC-001]
+source: []               # e.g. [SPEC-001] — empty ([]) for entrypoint_type: none; the Idea/Transcript actually used, if any, goes in the Risk-Tier Classification section instead
 included_tasks: []       # e.g. [TASK-001, TASK-002]
 excluded_tasks: []       # e.g. [TASK-003]
 risk: low                # low | medium | high
@@ -21,11 +21,16 @@ approval:
 
 (what this plan implements)
 
+## Risk-Tier Classification
+
+(optional — filled in only when this Plan skipped any tier per `shared-procs/RISK-TIER.md`'s cascade, including
+Plan-tier direct entry with `entrypoint_type: none`; see `IMPLEMENTATION-PLAN.md`'s `IPL-01-030`)
+
 ## Readiness Checks
 
 All items must be checked before this plan may advance to `approved`:
 
-- [ ] Source artifact is approved
+- [ ] Source artifact is approved (or, if entered with no upstream artifact per `RISK-TIER.md`'s cascade, `## Risk-Tier Classification` section is present and complete)
 - [ ] Required Tasks exist and are ready
 - [ ] No blockers or unresolved dependencies
 - [ ] High-risk areas identified

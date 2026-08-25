@@ -25,13 +25,10 @@ Split across three files, one per status — a row moves file when its status ch
 | --- | --- | --- | --- | --- | --- |
 | Q-001 | | local / cross-artifact / systemic | active / none | | |
 
-Source: the artifact or transcript whose evidence raised this question — `TRANSCRIPT-NNN`, `IDEA-NNN`, `UC-NNN`,
-`SPEC-NNN`, `TASK-NNN`, `ADR-NNN`, `LF-<APP>-NNN`/`LF-CROSS-NNN`, or `REVIEW-NNN`. Link bidirectionally at
-authoring time when the source artifact has its own Open Questions section: add this ID there too.
-
-`Impact` (`QST-10-010`): `active` if this Question's fork is currently degrading a running system; `none`
-otherwise. Distinct from `Classification`'s blast-radius axis — a `local` Question can be `active`-impact while a
-`systemic` one sits at `none`, and vice versa.
+`Source`: the artifact or transcript whose evidence raised this question (e.g. `TRANSCRIPT-NNN`, `IDEA-NNN`,
+`UC-NNN`, `LF-<APP>-NNN`) — link bidirectionally at authoring time by also adding this ID to the source
+artifact's own Open Questions section. `Impact`: `active` (currently degrading a running system) or `none` —
+see `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-10-010`.
 
 ## `QUESTIONS-RESOLVED.md` / `QUESTIONS-DISCARDED.md` shape
 
@@ -41,9 +38,6 @@ Table, parallel in spirit to the Open shape but with the decision recorded, not 
 | --- | --- | --- | --- |
 | Q-001 | | | |
 
-`QUESTIONS-RESOLVED.md`: record the actual decision (not the original question/task framing it replaces), citing
-the artifact that settled it (e.g. an accepting ADR) in `Notes`. `QUESTIONS-DISCARDED.md`: considered and dropped
-without becoming a decision — record why in `Notes`. `Source`: same semantics as the Open shape. `Impact` is not
-carried into these two files — once resolved or discarded, the question is no longer an active-degradation
-concern in the sense `Impact` tracks; if the underlying degradation itself is still unresolved, that belongs to a
-new Question or Task, not this row's `Notes`.
+`Resolved`: record the actual decision (not the original question), citing what settled it in `Notes`.
+`Discarded`: considered and dropped without becoming a decision — record why in `Notes`. `Source`: same
+semantics as the Open shape. `Impact` is not carried into these two files.
