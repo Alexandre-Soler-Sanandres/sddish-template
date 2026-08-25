@@ -147,8 +147,9 @@ a supporting actor is another owned service, and stops before `ready-for-spec` u
 ## Rules Map
 
 This contract's enforceable rules live in `agent-harness/rules/artifact-specs/USE-CASES.md` (single paired
-file — under the 25-rule grouping threshold). Load it alongside `agent-harness/modes/REFINING.md`'s own Rules
-Map whenever creating, updating, or approving a Use Case.
+file — at the 25-rule grouping threshold; grouping into a directory has not yet been done and is a separate
+decision, not required by this rule count alone). Load it alongside `agent-harness/modes/REFINING.md`'s own
+Rules Map whenever creating, updating, or approving a Use Case.
 
 ## Reference Files
 

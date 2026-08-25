@@ -28,7 +28,8 @@ Plan-tier direct entry with `entrypoint_type: none`; see `IMPLEMENTATION-PLAN.md
 
 ## Readiness Checks
 
-All items must be checked before this plan may advance to `approved`:
+All items must be checked before this plan may advance to `approved`. Cite a one-line evidence pointer per
+checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-PLAN.md`'s `IPL-02-012`.
 
 - [ ] Source artifact is approved (or, if entered with no upstream artifact per `RISK-TIER.md`'s cascade, `## Risk-Tier Classification` section is present and complete)
 - [ ] Required Tasks exist and are ready

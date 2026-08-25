@@ -6,6 +6,7 @@
 | --- | --- | --- |
 | TSK-02-010 | Readiness-Gate | Before setting a Task status to `ready`, MUST verify the Readiness Checklist in the artifact. |
 | TSK-02-011 | Readiness-Gate | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
+| TSK-02-012 | Readiness-Gate | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |
 | TSK-02-025 | Sources | A Task entered via the Spec-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010`); its `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Spec. |
 | TSK-02-015 | Approval | Status MUST NOT be set to `ready` without the user's explicit confirmation of that specific Task, per `ADR.md`'s `DEC-04-010`. |
 | TSK-02-017 | Approval | That confirmation MUST NOT be inferred from discussion. |

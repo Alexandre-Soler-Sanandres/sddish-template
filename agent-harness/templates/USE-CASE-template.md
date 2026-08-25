@@ -56,7 +56,8 @@ governs whether an unresolved reference stops advancement.)
 
 ## Readiness Checklist
 
-Before advancing to `ready-for-spec`, verify all items are checked:
+Before advancing to `ready-for-spec`, verify all items are checked. Cite a one-line evidence pointer per checked
+item beneath the checklist — see `rules/artifact-specs/USE-CASES.md`'s `UCS-03-012`.
 
 - [ ] Primary actor is defined
 - [ ] Goal is clear and specific

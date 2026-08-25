@@ -88,7 +88,8 @@ governs whether an unresolved reference stops approval.)
 
 ## Readiness Checklist
 
-Before advancing to `approved`, verify all items are checked:
+Before advancing to `approved`, verify all items are checked. Cite a one-line evidence pointer per checked item
+beneath the checklist — see `rules/artifact-specs/SPECS.md`'s `SPS-02-012`.
 
 - [ ] Problem is clearly stated
 - [ ] Goal is measurable or verifiable

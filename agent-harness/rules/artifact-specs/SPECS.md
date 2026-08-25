@@ -9,6 +9,7 @@
 | SPS-01-050 | Sources | A Spec entered via the UC-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010`); its `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Use Case. |
 | SPS-02-010 | Readiness-Gate | Before setting a Spec status to `approved`, MUST verify the Readiness Checklist in the artifact. |
 | SPS-02-011 | Readiness-Gate | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
+| SPS-02-012 | Readiness-Gate | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |
 | SPS-03-010 | Updating | A Spec MAY be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
 | SPS-03-020 | Updating | Updating MUST NOT change the Spec ID. |
 | SPS-03-021 | Updating | Updating MUST update the `updated` field. |
