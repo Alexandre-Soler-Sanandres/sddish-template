@@ -1,15 +1,15 @@
 ---
-id: PLAN-001
+id: PLAN-0001
 type: implementation-plan
 status: proposed         # proposed | approved | in-progress | done | rejected | archived
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 entrypoint_type: ""      # task | spec | use-case | none
-entrypoint: ""           # e.g. SPEC-001
-source: []               # e.g. [SPEC-001] — empty ([]) for entrypoint_type: none; the Idea/Transcript actually used, if any, goes in the Risk-Tier Classification section instead
-included_tasks: []       # e.g. [TASK-001, TASK-002]
-excluded_tasks: []       # e.g. [TASK-003]
+entrypoint: ""           # e.g. SPEC-0001
+source: []               # e.g. [SPEC-0001] — empty ([]) for entrypoint_type: none; the Idea/Transcript actually used, if any, goes in the Risk-Tier Classification section instead
+included_tasks: []       # e.g. [TASK-0001, TASK-0002]
+excluded_tasks: []       # e.g. [TASK-0003]
 risk: low                # low | medium | high
 approval:
   required: true

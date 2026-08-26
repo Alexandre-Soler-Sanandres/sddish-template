@@ -98,7 +98,7 @@ The important files are:
 | --- | --- |
 | `INVENTORY.md` | Understand what exists before interpreting behavior. |
 | `SOURCE-MAP.md` | See the discovery plan, slice status, evidence areas, and restart point. |
-| `findings/active/LF-<APP>-NNN.md` | Review durable claims backed by evidence. |
+| `findings/active/LF-<APP>-NNNN.md` | Review durable claims backed by evidence. |
 | Questions registry (`harness-data/artifacts/questions/QUESTIONS-OPEN.md` and friends) | Track decisions discovery cannot settle by itself — harness-level, not per-app. |
 
 Ask the agent to use the templates and keep `SOURCE-MAP.md` as the restart point. `INVENTORY.md` and
@@ -306,12 +306,12 @@ Use the artifacts this way:
 | Artifact | Human question it helps answer |
 | --- | --- |
 | `CONTRACTS.md` | What are the producer/consumer, API, data, auth, health, deployment, and ownership boundaries? |
-| `findings/active/LF-CROSS-NNN.md` | What cross-app claim is supported by multiple evidence trails? |
+| `findings/active/LF-CROSS-NNNN.md` | What cross-app claim is supported by multiple evidence trails? |
 | Questions registry, `CSQ-*` rows | What cross-app or systemic decision remains open? |
-| Questions registry, `CSP-*` rows | What matches, drifts, or needs executable proof? |
+| Questions registry, `CSP-NNNN` rows | What matches, drifts, or needs executable proof? |
 | `REWRITE-READINESS.md` | What is ready to feed Use Cases/Specs and what proof or planning obligations still need to be carried forward? |
 
-Tip: proof IDs should come from the Questions registry's `CSP-*` rows; readiness should cite them instead of creating another ID system.
+Tip: proof IDs should come from the Questions registry's `CSP-NNNN` rows; readiness should cite them instead of creating another ID system.
 
 ## Step 13: Normalize Without Rediscovering
 
@@ -385,7 +385,7 @@ shape the scenario:
 - actor-visible or workflow-shaping open decisions should appear in the Use Case's `Open Questions`
 - behavior-shaping proof or parity obligations should appear in the Use Case's preconditions, failure paths, or
   `Open Questions`
-- the Use Case should cite canonical IDs such as `CSQ-*`, `Q-<APP>-*`, and `CSP-*`, not copy large backlog tables
+- the Use Case should cite canonical IDs such as `CSQ-*`, `Q-<APP>-*`, and `CSP-NNNN`, not copy large backlog tables
 
 When you then move from Use Case to Spec, ask the agent to carry forward the remaining technical obligations into the
 sections they constrain:
@@ -395,7 +395,7 @@ sections they constrain:
 - validation approach, later tests, and any remaining cited proof IDs for proof that still needs to be discharged
 - `Open Questions` only for what is still unresolved for that specific Spec
 
-Tip: keep the Questions registry's `CSP-*` rows as the canonical home of proof/parity rows. Downstream artifacts
+Tip: keep the Questions registry's `CSP-NNNN` rows as the canonical home of proof/parity rows. Downstream artifacts
 should cite relevant IDs, not duplicate the whole matrix.
 
 ## Common Human Traps
@@ -437,7 +437,7 @@ Before accepting cross-system completion:
 - Is the active app scope explicit?
 - Are cross-system claims supported by app findings?
 - Are contracts, questions, parity rows, and readiness notes linked?
-- Are proof IDs canonical in the Questions registry's `CSP-*` rows?
+- Are proof IDs canonical in the Questions registry's `CSP-NNNN` rows?
 - Are target-product decisions separated from legacy facts?
 
 ## Useful Commands to Ask For

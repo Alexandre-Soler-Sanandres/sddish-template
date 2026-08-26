@@ -60,7 +60,7 @@ registry move and any downstream artifact updates happen together.
 ## Examples
 
 - A Legacy Finding establishes current behavior but leaves the target policy open. The agent raises a
-  `Q-<APP>-NNN` row, cites the finding in `Source`, and adds the ID to the finding's own Open Questions. Later, a
+  `Q-<APP>-NNNN` row, cites the finding in `Source`, and adds the ID to the finding's own Open Questions. Later, a
   Use Case drafted from that finding loads the still-open row and carries it into its own Open Questions rather
   than repeating the question text.
 - Question Clarification resolves that row toward "adopt the legacy behavior as-is." The agent moves it to

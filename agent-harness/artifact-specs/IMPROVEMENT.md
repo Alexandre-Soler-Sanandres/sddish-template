@@ -91,8 +91,8 @@ Use `agent-harness/templates/IMPROVEMENT-template.md` as the starting point for 
 
 ## Examples
 
-`REVIEW-052` finds that mode files mix workflow prose with enforceable rules. The agent drafts
-`IMPROVEMENT-117`, adds its ID to `REVIEW-052`'s `follow_up` immediately, waits for explicit approval, applies
+`REVIEW-0052` finds that mode files mix workflow prose with enforceable rules. The agent drafts
+`IMPROVEMENT-0117`, adds its ID to `REVIEW-0052`'s `follow_up` immediately, waits for explicit approval, applies
 the approved rewrite, records the validation result, and — once every other `follow_up` Improvement on that
 Review also reaches a terminal status — resolves the Review itself.
 

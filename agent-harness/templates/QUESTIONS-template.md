@@ -23,10 +23,10 @@ Split across three files, one per status — a row moves file when its status ch
 
 | ID | Question | Classification | Impact | Source | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Q-001 | | local / cross-artifact / systemic | active / none | | |
+| Q-0001 | | local / cross-artifact / systemic | active / none | | |
 
-`Source`: the artifact or transcript whose evidence raised this question (e.g. `TRANSCRIPT-NNN`, `IDEA-NNN`,
-`UC-NNN`, `LF-<APP>-NNN`) — link bidirectionally at authoring time by also adding this ID to the source
+`Source`: the artifact or transcript whose evidence raised this question (e.g. `TRANSCRIPT-NNNN`, `IDEA-NNNN`,
+`UC-NNNN`, `LF-<APP>-NNNN`) — link bidirectionally at authoring time by also adding this ID to the source
 artifact's own Open Questions section. `Impact`: `active` (currently degrading a running system) or `none` —
 see `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-10-010`.
 
@@ -36,7 +36,7 @@ Table, parallel in spirit to the Open shape but with the decision recorded, not 
 
 | ID | Decision | Source | Notes |
 | --- | --- | --- | --- |
-| Q-001 | | | |
+| Q-0001 | | | |
 
 `Resolved`: record the actual decision (not the original question), citing what settled it in `Notes`.
 `Discarded`: considered and dropped without becoming a decision — record why in `Notes`. `Source`: same

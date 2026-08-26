@@ -1,16 +1,16 @@
 ---
-id: REVIEW-001
+id: REVIEW-0001
 type: review
 status: draft            # draft | assessed | resolved | discarded; decision semantics live in outcome
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 target_type: ""          # idea | use-case | spec | task | implementation-plan | implementation | process | harness
-target: ""               # e.g. TASK-001
-source: []               # e.g. [PLAN-001]
+target: ""               # e.g. TASK-0001
+source: []               # e.g. [PLAN-0001]
 outcome: ""              # accepted | accepted-with-notes | changes-requested | rejected | follow-up-required
 reviewer: ""             # name or role
-follow_up: []            # e.g. [IMPROVEMENT-001]
+follow_up: []            # e.g. [IMPROVEMENT-0001]
 ---
 
 ## Target

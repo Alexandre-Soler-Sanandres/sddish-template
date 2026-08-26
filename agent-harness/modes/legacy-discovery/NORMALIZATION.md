@@ -36,7 +36,7 @@ evidence into Use Cases, Specs, Tasks, or Implementation Planning, in this order
 
 1. Fix Markdown formatting, heading hierarchy, table consistency, stale restart pointers, obvious ordering
    issues, and duplicate sections with the same claim, for each artifact (`LDG-01-020`).
-2. For `findings/`, merge two `LF-<APP>-NNN` files that make the same claim into one: keep the ID with the
+2. For `findings/`, merge two `LF-<APP>-NNNN` files that make the same claim into one: keep the ID with the
    stronger evidence set, fold the other file's evidence paths into it, set the superseded file's `status` to
    `archived`, add a one-line pointer to the surviving ID, and move it to `findings/archive/` — never reuse or
    silently drop an ID as part of this merge (`LDG-01-050`/`LDG-01-051`).
@@ -77,7 +77,7 @@ item instead (`LDG-01-080`).
 
 ## Examples
 
-Two `LF-APP-014` and `LF-APP-021` findings both describe the same caching behavior. The agent merges them,
+Two `LF-APP-0014` and `LF-APP-0021` findings both describe the same caching behavior. The agent merges them,
 keeping the ID with stronger evidence, folding in the other's evidence paths, archiving the superseded file with
 a pointer, and preserving both files' original question-ID citations.
 

@@ -1,15 +1,15 @@
 ---
-id: TASK-001
+id: TASK-0001
 type: task
 status: draft            # draft | ready | in-progress | done | blocked | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
-source: []               # e.g. [SPEC-001]
-related: []              # e.g. [ADR-005] — accepted ADRs this Task depends on; see TASKS.md's TSK-05-010
-depends_on: []           # e.g. [TASK-000]
-blocks: []               # e.g. [TASK-002]
+source: []               # e.g. [SPEC-0001]
+related: []              # e.g. [ADR-0005] — accepted ADRs this Task depends on; see TASKS.md's TSK-05-010
+depends_on: []           # e.g. [TASK-0000]
+blocks: []               # e.g. [TASK-0002]
 risk: low                # low | medium | high
 estimated_size: small    # small | medium | large
 approval:
@@ -34,7 +34,7 @@ tags: []
 ## Non-Goals
 
 (what this task explicitly does not do — permanent exclusion by default; for a deferred/not-now item, add a
-forward pointer: `(deferred, see IDEA-NNN)` for a candidate feature, or `(deferred, see Q-NNN)` for a genuinely
+forward pointer: `(deferred, see IDEA-NNNN)` for a candidate feature, or `(deferred, see Q-NNNN)` for a genuinely
 unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `IDA-04-010`/
 `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-06-010` for which applies)
 

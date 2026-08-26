@@ -9,14 +9,14 @@ Every harness source file follows the paired-loading model: the source file teac
 procedure, or system, and its paired rules under `agent-harness/rules/` hold the enforceable table. This split
 was carried out in reviewable passes, recorded here for reference:
 
-- `IMPROVEMENT-114`: foundation / grouped `CORE`
-- `IMPROVEMENT-116`: taxonomy and migration architecture
-- `IMPROVEMENT-122`: `OUTPUTS.md` guide / paired output rules split
-- `IMPROVEMENT-117`: Mode Workflow rewrites and paired mode rules
-- `IMPROVEMENT-118`: Artifact Contract rewrites and paired artifact rules
-- `IMPROVEMENT-119`: Procedure Guide rewrites and paired procedure rules
-- `IMPROVEMENT-120`: cross-file System extraction
-- `IMPROVEMENT-121`: lean template migration
+- `IMPROVEMENT-0114`: foundation / grouped `CORE`
+- `IMPROVEMENT-0116`: taxonomy and migration architecture
+- `IMPROVEMENT-0122`: `OUTPUTS.md` guide / paired output rules split
+- `IMPROVEMENT-0117`: Mode Workflow rewrites and paired mode rules
+- `IMPROVEMENT-0118`: Artifact Contract rewrites and paired artifact rules
+- `IMPROVEMENT-0119`: Procedure Guide rewrites and paired procedure rules
+- `IMPROVEMENT-0120`: cross-file System extraction
+- `IMPROVEMENT-0121`: lean template migration
 
 ## The Standard Flow
 
@@ -223,7 +223,7 @@ For the practical step-by-step legacy application playbook, see
 harness-data/artifacts/legacy/apps/<legacy-app-slug>/
   → legacy inventory
   → source maps
-  → findings (LF-<APP>-NNN, or LF-CROSS-NNN for cross-system findings)
+  → findings (LF-<APP>-NNNN, or LF-CROSS-NNNN for cross-system findings)
   → Refining: Legacy Finding → Use Case (once evidence is strong enough)
   → Specs (only when evidence is strong enough — directly from Legacy Discovery is the rare exception)
   → Tasks if required
@@ -238,14 +238,14 @@ The legacy project is evidence, not authority. The agent must never treat legacy
 
 ## End-to-End Example: Voice to Implementation
 
-1. User speaks — agent records `TRANSCRIPT-001`
-2. Agent identifies candidate idea — creates `IDEA-018`
+1. User speaks — agent records `TRANSCRIPT-0001`
+2. Agent identifies candidate idea — creates `IDEA-0018`
 3. Partnering session clarifies the problem
-4. Refining creates a Use Case from the Idea — `UC-011` at status `ready-for-spec`
-5. Spec created — `SPEC-021` reviewed and approved
+4. Refining creates a Use Case from the Idea — `UC-0011` at status `ready-for-spec`
+5. Spec created — `SPEC-0021` reviewed and approved
 6. Task Decision Matrix applied — Tasks required
-7. Tasks created — `TASK-071`, `TASK-072`, `TASK-073`
-8. Implementation Plan created — `PLAN-009` reviewed and approved
+7. Tasks created — `TASK-0071`, `TASK-0072`, `TASK-0073`
+8. Implementation Plan created — `PLAN-0009` reviewed and approved
 9. Implementation executes step by step
 10. Validation checks acceptance criteria
 11. Review evaluates the result

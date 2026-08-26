@@ -5,7 +5,7 @@
 | ID | Type | Rule |
 | --- | --- | --- |
 | QST-01-010 | Classification | MUST classify by blast radius: `local` (one artifact), `cross-artifact` (multiple artifacts), or `systemic` (overall architecture/target-product shape), judging legacy `target-product` tags by content, not mechanical mapping — see `QUESTIONS.md`'s `## Field Semantics`. |
-| QST-02-010 | ID-Scheme | Migrated legacy entries MUST keep their exact existing ID (`Q-<APP>-NNN`, `CSQ-NNN`, `CSP-*`), unchanged; brand-new, non-legacy entries get a plain `Q-NNN` ID — the next unused integer in one shared counter across all three files (not per-file, not per-classification). |
+| QST-02-010 | ID-Scheme | Every Question ID family with a numeric suffix MUST use four digits: `Q-NNNN`, `Q-<APP>-NNNN`, `CSQ-NNNN`, `CSP-NNNN`. New IDs take the next unused integer in their existing family/counter shape, zero-padded to four digits. |
 | QST-03-010 | Status | Status MUST be one of `Open`, `Resolved`, `Discarded` — the file a row lives in *is* its status, no separate column. A decision to defer ("not now, revisit later") is still `Resolved`, since the decision itself is settled; only a genuinely undecided, deprioritized item stays `Open` (noted in `Notes`). |
 | QST-04-010 | Dedup | MUST check existing rows across all three files for the same underlying question by content and merge into the existing row instead of filing a duplicate, before adding a new entry (mirrors Legacy Discovery's `LD-04-020`). |
 | QST-05-010 | Non-Deletion | IDs MUST remain permanent even if the question is later merged, discarded, or resolved — record the disposition in `Notes` instead of deleting the row (same non-destructive precedent as `COR-01-080`). |

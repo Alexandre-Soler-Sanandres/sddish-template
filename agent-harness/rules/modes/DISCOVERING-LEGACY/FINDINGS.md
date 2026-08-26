@@ -5,7 +5,7 @@
 | ID | Type | Rule |
 | --- | --- | --- |
 | LD-03-010 | Findings | MUST store each finding as its own file, using `agent-harness/templates/LEGACY-FINDING-template.md` as-is: `harness-data/artifacts/legacy/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` for cross-system findings. |
-| LD-03-020 | Findings | MUST follow the existing `LF-<APP>-NNN` convention for IDs, numbered once per app (or `LF-CROSS-NNN` for cross-system). |
+| LD-03-020 | Findings | MUST follow the existing `LF-<APP>-NNNN` convention for IDs, numbered once per app (or `LF-CROSS-NNNN` for cross-system). |
 | LD-03-021 | Findings | An `LF-*` ID MUST NOT be reused, even after a finding moves or is merged. |
 | LD-03-030 | Findings | MUST move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`, or `rejected`; findings with `status: draft` or `status: reviewed` stay in `findings/active/`. |
 | LD-03-040 | Findings | MUST NOT look up or add a finding except by ID — scan `findings/active/` and `findings/archive/` file names or frontmatter, not by reading through file append order or by creating slice-numbered or subsystem-named headings as a substitute for the ID. |

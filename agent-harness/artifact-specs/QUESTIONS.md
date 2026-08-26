@@ -54,9 +54,9 @@ status (`QST-03-010`).
   (core safety boundaries, service-topology) are `systemic`; most single-app feature/config/deployment decisions
   are `local`; anything crossing an app boundary via a shared contract, volume, or visible field is
   `cross-artifact`.
-- ID scheme (`QST-02-010`) — migrated legacy entries keep their exact existing ID (`Q-<APP>-NNN`, `CSQ-NNN`,
-  `CSP-*`), unchanged; brand-new, non-legacy entries get a plain `Q-NNN` ID — the next unused integer in one
-  shared counter across all three files (not per-file, not per-classification).
+- ID scheme (`QST-02-010`) — every Question ID family with a numeric suffix uses four digits:
+  `Q-NNNN`, `Q-<APP>-NNNN`, `CSQ-NNNN`, `CSP-NNNN`. New IDs take the next unused integer in their existing
+  family/counter shape, zero-padded to four digits.
 - `Impact` (`QST-10-010`–`030`) — `active` (currently degrading a running system — worth prioritizing now) or
   `none` (no current operational impact — a design fork, a someday improvement, or a decision with no live
   consequence yet); defaults to `none` at creation, but must be set to `active` explicitly whenever the raising
@@ -112,7 +112,7 @@ Use `agent-harness/templates/QUESTIONS-template.md` for all three files.
 ## Examples
 
 A Legacy Finding establishes current retry behavior but leaves the target policy unresolved. The agent checks
-existing `QUESTIONS-OPEN.md` rows for an overlapping question, finds none, and adds a `Q-<APP>-NNN` row with
+existing `QUESTIONS-OPEN.md` rows for an overlapping question, finds none, and adds a `Q-<APP>-NNNN` row with
 `Classification: local`, citing the finding in `Source`.
 
 ## Rules Map

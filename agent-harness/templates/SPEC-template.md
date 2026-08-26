@@ -1,14 +1,14 @@
 ---
-id: SPEC-001
+id: SPEC-0001
 type: spec
 status: draft            # draft | approved | implemented | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
-source: []               # e.g. [UC-001]; inherited legacy IDs stay in body sections, not as a copied backlog
-related: []              # e.g. [SPEC-002, IDEA-001]
-derived_tasks: []        # e.g. [TASK-001, TASK-002]
+source: []               # e.g. [UC-0001]; inherited legacy IDs stay in body sections, not as a copied backlog
+related: []              # e.g. [SPEC-0002, IDEA-0001]
+derived_tasks: []        # e.g. [TASK-0001, TASK-0002]
 risk: low                # low | medium | high
 approval:
   required: true
@@ -35,7 +35,7 @@ tags: []
 ## Non-Goals
 
 (what is explicitly excluded — permanent exclusion by default; for a deferred/not-now item, add a forward
-pointer: `(deferred, see IDEA-NNN)` for a candidate feature, or `(deferred, see Q-NNN)` for a genuinely
+pointer: `(deferred, see IDEA-NNNN)` for a candidate feature, or `(deferred, see Q-NNNN)` for a genuinely
 unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `IDA-04-010`/
 `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-06-010` for which applies)
 
@@ -53,7 +53,7 @@ unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `
 
 ## Constraints
 
-(technical or business constraints that limit the solution space; cite inherited `CSQ-*` / `Q-<APP>-*` / `CSP-*`
+(technical or business constraints that limit the solution space; cite inherited `CSQ-*` / `Q-<APP>-*` / `CSP-NNNN`
 IDs when they constrain the design)
 
 ## Dependencies
@@ -69,7 +69,7 @@ ID when relevant)
 
 ## Validation Approach
 
-(how this spec will be validated — tests, checks, manual review; cite any inherited `CSP-*` proof obligations that
+(how this spec will be validated — tests, checks, manual review; cite any inherited `CSP-NNNN` proof obligations that
 must later be discharged here or in Open Questions, not in `test_refs`)
 
 ## Task Decision Notes

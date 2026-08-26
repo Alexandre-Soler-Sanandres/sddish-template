@@ -48,11 +48,11 @@ Every artifact spec already follows this canonical form.
 profiles. Structure each file with up to two top-level sections so a reader can tell them apart:
 
 - `## Discovered` — present only in projects that ran Legacy Discovery. Facts extracted from `LF-*` findings.
-  Cite the finding ID inline (e.g. "billing service owns invoice writes (LF-BILLING-014)"). Stable once written —
+  Cite the finding ID inline (e.g. "billing service owns invoice writes (LF-BILLING-0014)"). Stable once written —
   edit only to correct a transcription error against the finding, never because a target decision changed.
 - `## Decisions` — present once at least one target-architecture decision exists. States the decision in one or
-  two lines, then cites whatever settled it: an accepted ADR (`ADR-NNN`), a Legacy Finding (`LF-*`), the Questions
-  registry (`CSQ-*`/`CSP-*` rows), or a legacy synthesis artifact (`REWRITE-READINESS.md`, `CONTRACTS.md`). Cite
+  two lines, then cites whatever settled it: an accepted ADR (`ADR-NNNN`), a Legacy Finding (`LF-*`), the Questions
+  registry (`CSQ-*`/`CSP-NNNN` rows), or a legacy synthesis artifact (`REWRITE-READINESS.md`, `CONTRACTS.md`). Cite
   authority, don't restate its reasoning — mirrors `DEC-02-020`'s rule for Use Cases/Specs citing ADRs.
 
 A greenfield project (no Legacy Discovery) has `## Decisions` only — do not add a `## Discovered` section with
@@ -88,7 +88,7 @@ updated: ""   # YYYY-MM-DD
 | `IMPROVEMENT-` | Harness Improvement |
 | `ADR-` | Architecture Decision Record |
 | `LF-<APP>-` / `LF-CROSS-` | Legacy Finding (app / cross-system, see `agent-harness/modes/DISCOVERING-LEGACY.md` LD-03-010/LD-03-020) |
-| `Q-NNN` (new) / `Q-<APP>-NNN`, `CSQ-`, `CSP-` (migrated legacy) | Question |
+| `Q-NNNN` (new) / `Q-<APP>-NNNN`, `CSQ-`, `CSP-` (migrated legacy) | Question |
 
 ### Relationship Fields
 

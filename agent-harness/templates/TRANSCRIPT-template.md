@@ -1,5 +1,5 @@
 ---
-id: TRANSCRIPT-001
+id: TRANSCRIPT-0001
 type: transcript
 status: raw              # raw | reviewed | processed | archived
 title: ""
@@ -11,7 +11,7 @@ language: en             # ISO 639-1 language code, e.g. en | de | es
 participants: []         # e.g. [user, alex]
 transcription_engine: "" # whisper | manual | other
 confidence: medium       # low | medium | high
-processed_into: []       # e.g. [IDEA-001]
+processed_into: []       # e.g. [IDEA-0001]
 tags: []
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: ADR-001
+id: ADR-0001
 type: adr
 status: proposed        # proposed | accepted | superseded | rejected
 title: ""
@@ -7,14 +7,14 @@ created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 area: ""                  # e.g. service-boundaries | data-ownership | security | deployment
 scope: ""                 # fleet-wide | scoped — see ADR.md's DEC-14-010
-source: []                # e.g. [TRANSCRIPT-002], [IDEA-001]
-legacy_refs: []            # e.g. [CSQ-NNN] — legacy decisions this ADR builds on, narrows, or overrides
-supersedes: []            # e.g. [IDEA-001] — artifacts this ADR replaces
-superseded_by: []         # e.g. [ADR-010] — filled in later if this ADR is ever replaced
-related: []                # e.g. [SPEC-002, ADR-005] — loosely related artifacts; each needs a "Relation to" note in the body, per DEC-09-010
-derived_use_cases: []      # e.g. [UC-011] — Use Cases created that depend on this ADR
-derived_specs: []          # e.g. [SPEC-021] — Specs created that depend on this ADR
-derived_tasks: []          # e.g. [TASK-004] — Tasks created that depend on this ADR; see TASKS.md's TSK-05-010
+source: []                # e.g. [TRANSCRIPT-0002], [IDEA-0001]
+legacy_refs: []            # e.g. [CSQ-NNNN] — legacy decisions this ADR builds on, narrows, or overrides
+supersedes: []            # e.g. [IDEA-0001] — artifacts this ADR replaces
+superseded_by: []         # e.g. [ADR-0010] — filled in later if this ADR is ever replaced
+related: []                # e.g. [SPEC-0002, ADR-0005] — loosely related artifacts; each needs a "Relation to" note in the body, per DEC-09-010
+derived_use_cases: []      # e.g. [UC-0011] — Use Cases created that depend on this ADR
+derived_specs: []          # e.g. [SPEC-0021] — Specs created that depend on this ADR
+derived_tasks: []          # e.g. [TASK-0004] — Tasks created that depend on this ADR; see TASKS.md's TSK-05-010
 tags: []
 ---
 

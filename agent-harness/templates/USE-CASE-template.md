@@ -1,5 +1,5 @@
 ---
-id: UC-001
+id: UC-0001
 type: use-case
 status: draft            # draft | ready-for-spec | implemented | archived | rejected
 title: ""
@@ -8,9 +8,9 @@ updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
 primary_actor: ""        # e.g. operator | user | system | external-service
 supporting_actors: []
-source: []               # e.g. [IDEA-001]; include legacy finding IDs when derived from Legacy Discovery
-related: []              # e.g. [ADR-005] — accepted ADRs this Use Case depends on; see USE-CASES.md's UCS-07-010
-derived_specs: []        # e.g. [SPEC-001]
+source: []               # e.g. [IDEA-0001]; include legacy finding IDs when derived from Legacy Discovery
+related: []              # e.g. [ADR-0005] — accepted ADRs this Use Case depends on; see USE-CASES.md's UCS-07-010
+derived_specs: []        # e.g. [SPEC-0001]
 tags: []
 technical_impact: []     # e.g. [db-schema, api-contract] — see agent-harness/artifact-specs/USE-CASES.md's UCS-06-020
 confidence: medium       # low | medium | high
@@ -41,7 +41,7 @@ risk: low                # low | medium | high
 ## Non-Goals
 
 - (what this use case explicitly does not cover — permanent exclusion by default; for a deferred/not-now item,
-  add a forward pointer: `(deferred, see IDEA-NNN)` for a candidate feature, or `(deferred, see Q-NNN)` for a
+  add a forward pointer: `(deferred, see IDEA-NNNN)` for a candidate feature, or `(deferred, see Q-NNNN)` for a
   genuinely unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `IDA-04-010`/
   `agent-harness/artifact-specs/QUESTIONS.md`'s `QST-06-010` for which applies)
 

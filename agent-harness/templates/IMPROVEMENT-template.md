@@ -1,11 +1,11 @@
 ---
-id: IMPROVEMENT-001
+id: IMPROVEMENT-0001
 type: harness-improvement
 status: proposed         # proposed | approved | in-progress | done | rejected | archived
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-source: []               # e.g. [REVIEW-001]
+source: []               # e.g. [REVIEW-0001]
 area: ""                 # templates | modes | reference | process
 target_files: []         # files to be changed
 risk: low                # low | medium | high

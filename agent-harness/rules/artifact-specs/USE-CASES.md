@@ -11,6 +11,7 @@
 | UCS-02-021 | Refining | Refining MUST update the `updated` field and status as appropriate. |
 | UCS-03-010 | Readiness-Gate | Before setting a Use Case status to `ready-for-spec`, MUST verify the Readiness Checklist in the artifact. |
 | UCS-03-011 | Readiness-Gate | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
+| UCS-03-012 | Readiness-Gate | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |
 | UCS-04-010 | Boundaries | MUST NOT contain low-level implementation detail (unless essential to the scenario). |
 | UCS-05-010 | Carry-Forward | When a Use Case is created, MUST check the Questions registry for entries tied to the source artifact — regardless of legacy or non-legacy origin — and load any that changes actor goals, workflow shape, scope boundaries, alternatives, or failure paths. |
 | UCS-05-015 | Carry-Forward | Before advancing to `ready-for-spec`, MUST verify the registry holds nothing unresolved that should block the advance (see `UCS-03-010`). |

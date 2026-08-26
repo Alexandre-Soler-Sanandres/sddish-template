@@ -53,7 +53,7 @@ entry-point layer must be mirrored across the others unless it's agent-specific 
    (`IMPR-02-040`) — recording target files in frontmatter (`IMPR-02-030`).
 2. Wait for the user to explicitly transition it from `proposed` to `approved`, including `approval.approved_by`
    /`approved_at` (`IMPR-02-026`). A general instruction to improve the harness is not approval of any specific
-   `IMPROVEMENT-NNN` — approval is valid only after the user has had the chance to see that artifact's own
+   `IMPROVEMENT-NNNN` — approval is valid only after the user has had the chance to see that artifact's own
    proposed change (`IMPR-02-025`); never infer or self-approve it (`IMPR-02-020`).
 3. Apply the target-file changes only after that specific approval exists (`IMPR-02-027`).
 4. When the Improvement touches rule IDs or Rules-table placement, run the `COR-10-060`–`COR-10-063` citation

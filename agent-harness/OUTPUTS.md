@@ -19,17 +19,17 @@ Lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body.
 
 | Artifact | Pattern |
 | --- | --- |
-| Transcript | `TRANSCRIPT-NNN.md` |
-| Idea | `IDEA-NNN.md` |
-| ADR | `ADR-NNN.md` |
-| Use Case | `UC-NNN.md` |
-| Spec | `SPEC-NNN.md` |
-| Task | `TASK-NNN.md` |
-| Implementation Plan | `PLAN-NNN.md` |
-| Review | `REVIEW-NNN.md` |
-| Improvement | `IMPROVEMENT-NNN.md` |
-| Legacy Finding | `LF-<APP>-NNN.md` (app findings) or `LF-CROSS-NNN.md` (cross-system findings) — see `## Legacy Discovery Structure` |
-| Question | Row ID `Q-NNN` (new) or `Q-<APP>-NNN` / `CSQ-NNN` / `CSP-*` (migrated legacy) — a row in `QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, or `QUESTIONS-DISCARDED.md`, not a separate file per question |
+| Transcript | `TRANSCRIPT-NNNN.md` |
+| Idea | `IDEA-NNNN.md` |
+| ADR | `ADR-NNNN.md` |
+| Use Case | `UC-NNNN.md` |
+| Spec | `SPEC-NNNN.md` |
+| Task | `TASK-NNNN.md` |
+| Implementation Plan | `PLAN-NNNN.md` |
+| Review | `REVIEW-NNNN.md` |
+| Improvement | `IMPROVEMENT-NNNN.md` |
+| Legacy Finding | `LF-<APP>-NNNN.md` (app findings) or `LF-CROSS-NNNN.md` (cross-system findings) — see `## Legacy Discovery Structure` |
+| Question | Row ID `Q-NNNN` (new) or `Q-<APP>-NNNN` / `CSQ-NNNN` / `CSP-NNNN` — a row in `QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, or `QUESTIONS-DISCARDED.md`, not a separate file per question |
 
 ## Folder Structure
 

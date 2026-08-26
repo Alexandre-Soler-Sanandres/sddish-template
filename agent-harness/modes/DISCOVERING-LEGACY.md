@@ -114,7 +114,7 @@ implementation-shaping constraint (`LD-02-026`).
   `findings/`.
 - Cross-system: `harness-data/artifacts/legacy/cross-system/` — `SUMMARY.md`, `CONTRACTS.md`, `findings/`,
   `REWRITE-READINESS.md`.
-- Questions registry rows (`Q-<APP>-NNN`, `CSQ-NNN`, `CSP-*`) in `harness-data/artifacts/questions/`.
+- Questions registry rows (`Q-<APP>-NNNN`, `CSQ-NNNN`, `CSP-NNNN`) in `harness-data/artifacts/questions/`.
 - Candidate Use Cases, Ideas, direct Specs, and Harness Improvements, routed rather than drafted here except
   where `LD-01-080`/`LD-02-010` permit a direct Spec.
 

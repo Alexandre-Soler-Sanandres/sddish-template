@@ -31,9 +31,9 @@ the input channel does not change what the mode allows (mirrors `PTN-01-010`).
 
 Use Refining once Partnering (or an earlier Refining step) has classified the request as needing a Use Case, a
 Spec, or Tasks. Each entry point may also be triggered directly by natural language — an explicit instruction
-naming the source and what to derive from it, e.g. "use Idea IDEA-012 to create a Use Case," "from our Partnering
-transcript and ADR-003, extract the Use Cases we need," "create the spec for UC-007," or "plan tasks from
-SPEC-014."
+naming the source and what to derive from it, e.g. "use Idea IDEA-0012 to create a Use Case," "from our Partnering
+transcript and ADR-0003, extract the Use Cases we need," "create the spec for UC-0007," or "plan tasks from
+SPEC-0014."
 
 ## Workflow Paths
 
@@ -125,14 +125,14 @@ already decided when the Spec was approved with Tasks in mind (`TSK-01-032`).
 
 ## Examples
 
-"Create the spec for UC-007" — the agent verifies UC-007 is `ready-for-spec`, reads it, loads relevant ADRs,
+"Create the spec for UC-0007" — the agent verifies UC-0007 is `ready-for-spec`, reads it, loads relevant ADRs,
 drafts scope/requirements/acceptance-criteria, and stops before touching code or drafting Tasks.
 
 ## Rules Map
 
 This mode's enforceable rules live in `agent-harness/rules/modes/REFINING.md` (single paired file covering all
 three entry points — `UCS-*`, `SPS-*`, and `TSK-*`; their combined count falls in the 25–35-rule band, where a
-single file is the default per `IMPROVEMENT-116`'s grouping policy, and the three clusters are not independent
+single file is the default per `IMPROVEMENT-0116`'s grouping policy, and the three clusters are not independent
 enough to justify splitting — they share one funnel). Load it alongside this file whenever Refining is the
 active mode.
 

@@ -1,5 +1,5 @@
 ---
-id: CROSS-SYSTEM-SUMMARY-001
+id: CROSS-SYSTEM-SUMMARY-0001
 type: cross-system-summary
 status: active
 discovery_state: cross-system-active  # cross-system-active | cross-system-complete — see CROSS-SYSTEM.md's LDC-02-035
