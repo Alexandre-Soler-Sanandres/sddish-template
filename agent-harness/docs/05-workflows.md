@@ -60,7 +60,7 @@ A few things always hold, regardless of how many stages get skipped:
 - Database migrations, security/secrets/auth, deploys/CI, API contract changes, payments, domain-critical
   logic, and major architecture changes can never drop below Spec tier, no matter how small they look
   (`RSK-06-020`).
-- Planning-Implementation's own gate is never skippable — every path still ends in an approved Implementation
+- Planning-Implementation's own gate is never skippable — every path still ends in a `ready` Implementation
   Plan before any code changes (`COR-01-060`).
 
 See `agent-harness/shared-procs/RISK-TIER.md` for the full matrices.
@@ -71,7 +71,7 @@ In plain terms:
 - Refining derives a Use Case from an Idea/Transcript/Partnering discussion/Legacy Finding/existing docs, a Spec
   from a Use Case, and Tasks from a Spec — these make the intended behavior explicit and, when needed, break it
   into execution slices.
-- Planning-Implementation is the gate that turns requirements into an approved path.
+- Planning-Implementation is the gate that turns requirements into a `ready` Implementation Plan.
 - Implementing executes that path.
 - Validation checks that the result and the process both hold up.
 
@@ -100,7 +100,7 @@ documentation. See `agent-harness/modes/REFINING.md`'s "Use Case Creation Should
 
 ## Spec Creation
 
-A Spec is created via Refining (`/create-spec`) from a Use Case at `ready-for-spec`. See
+A Spec is created via Refining (`/create-spec`) from a Use Case (any status). See
 `agent-harness/modes/REFINING.md`'s "Spec Creation Should" for the full procedure.
 
 ## Are Tasks Required?
@@ -114,7 +114,7 @@ Case/Spec boundary does).
 
 For small, low-risk, single-area Specs, an Implementation Plan may contain inline steps without separate Task artifacts if:
 
-- The Spec is approved
+- The Spec is `ready`
 - Acceptance criteria are clear
 - Validation is clear
 - Expected changes are small
@@ -193,10 +193,10 @@ status change.
 
 | Artifact | Gate status | Checklist location |
 | --- | --- | --- |
-| Use Case | `ready-for-spec` | `## Readiness Checklist` in the artifact |
-| Spec | `approved` | `## Readiness Checklist` in the artifact |
+| Use Case | `ready` | `## Readiness Checklist` in the artifact |
+| Spec | `ready` | `## Readiness Checklist` in the artifact |
 | Task | `ready` | `## Readiness Checklist` in the artifact |
-| Implementation Plan | `approved` | `## Readiness Checks` in the artifact |
+| Implementation Plan | `ready` | `## Readiness Checks` in the artifact |
 
 ## Review and Improving-Harness
 
@@ -241,11 +241,11 @@ The legacy project is evidence, not authority. The agent must never treat legacy
 1. User speaks — agent records `TRANSCRIPT-0001`
 2. Agent identifies candidate idea — creates `IDEA-0018`
 3. Partnering session clarifies the problem
-4. Refining creates a Use Case from the Idea — `UC-0011` at status `ready-for-spec`
-5. Spec created — `SPEC-0021` reviewed and approved
+4. Refining creates a Use Case from the Idea — `UC-0011` at status `ready`
+5. Spec created — `SPEC-0021` reviewed, set `ready`
 6. Task Decision Matrix applied — Tasks required
 7. Tasks created — `TASK-0071`, `TASK-0072`, `TASK-0073`
-8. Implementation Plan created — `PLAN-0009` reviewed and approved
+8. Implementation Plan created — `PLAN-0009` reviewed, set `ready`
 9. Implementation executes step by step
 10. Validation checks acceptance criteria
 11. Review evaluates the result

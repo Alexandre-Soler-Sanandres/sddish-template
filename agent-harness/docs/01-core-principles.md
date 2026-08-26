@@ -6,7 +6,7 @@ The SDD-ish Agent Harness provides a structured, file-based process for working 
 
 It gives agents a clear operating context — defining what they are allowed to do, what artifacts they produce, and how they hand off to the next stage. Without structure, agents drift: they implement before requirements are clear, mix concerns across artifacts, and lose traceability between decisions and code.
 
-The harness prevents this by making the process explicit and file-based. Every artifact is traceable. Every mode is bounded. Every implementation starts from an approved plan.
+The harness prevents this by making the process explicit and file-based. Every artifact is traceable. Every mode is bounded. Every implementation starts from a `ready` plan.
 
 ## Problem Statement
 
@@ -22,7 +22,7 @@ The harness addresses all of these through explicit modes, bounded artifacts, an
 
 ## Core Principle: SDD-ish Development
 
-The central principle is: **no code without a Plan, no Plan without going through every tier `shared-procs/RISK-TIER.md`'s cascade classifies as necessary, no implementation without an approved plan.**
+The central principle is: **no code without a Plan, no Plan without going through every tier `shared-procs/RISK-TIER.md`'s cascade classifies as necessary, no implementation without a `ready` plan.**
 
 This creates a clear dependency chain:
 
@@ -32,7 +32,7 @@ Voice / Text / Legacy Code
   → Use Case         (skippable per shared-procs/RISK-TIER.md's cascade)
   → Spec              (skippable per shared-procs/RISK-TIER.md's cascade)
   → Tasks (when required — skippable per shared-procs/RISK-TIER.md's cascade)
-  → Implementation Plan (approved) — the only stage every path passes through
+  → Implementation Plan (`ready`) — the only stage every path passes through
   → Implementation
   → Validation
   → [Review / Improving-Harness — when a stronger formal loop is wanted]
@@ -96,7 +96,7 @@ Reference files (`harness-data/reference/`) are project-specific. They define th
 
 - **Artifacts over memory** — everything lives in files, not agent context
 - **Traceability over convenience** — every artifact links to its source
-- **Explicit gates** — implementation requires an approved plan; no exceptions
+- **Explicit gates** — implementation requires a `ready` plan; no exceptions
 - **Readiness checklists** — every artifact gate is enforced by a checklist; no unchecked item passes
 - **Test coverage as done criteria** — a plan step is not done until ACs are covered by tests or validation commands
 - **Smallest sufficient context** — agents load only what they need

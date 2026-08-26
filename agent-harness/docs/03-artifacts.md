@@ -151,9 +151,10 @@ Created via Refining, from an Idea, Transcript, Partnering discussion, Legacy Fi
 documentation — unless `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix classifies the request below UC-tier,
 in which case no Use Case is created at all and work proceeds directly to a Spec or Task.
 
-**Statuses:** `draft` → `ready-for-spec` → `implemented` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/use-cases/active/UC-*.md` (`draft`/`ready-for-spec`),
-`harness-data/artifacts/use-cases/implemented/UC-*.md` (`implemented`), or
+**Statuses:** `draft` → `ready` → `done` → `archived` → `rejected`
+**Location:** `harness-data/artifacts/use-cases/active/UC-*.md` (`draft`),
+`harness-data/artifacts/use-cases/ready/UC-*.md` (`ready`),
+`harness-data/artifacts/use-cases/done/UC-*.md` (`done`), or
 `harness-data/artifacts/use-cases/archive/UC-*.md` (`archived`/`rejected`)
 **Template:** `agent-harness/templates/USE-CASE-template.md`
 
@@ -162,13 +163,14 @@ Body should include: primary actor, supporting actors, goal, trigger, preconditi
 ### Spec
 
 The central artifact of the SDD-ish process. Defines desired behavior and acceptance criteria.
-Created from a Use Case at `ready-for-spec` status — OR, when `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix
+Created from a Use Case (any status) — OR, when `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix
 classifies the request below UC-tier, directly from the same source types a Use Case would have been created
 from.
 
-**Statuses:** `draft` → `approved` → `implemented` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/specs/active/SPEC-*.md` (`draft`/`approved`),
-`harness-data/artifacts/specs/implemented/SPEC-*.md` (`implemented`), or
+**Statuses:** `draft` → `ready` → `done` → `archived` → `rejected`
+**Location:** `harness-data/artifacts/specs/active/SPEC-*.md` (`draft`),
+`harness-data/artifacts/specs/ready/SPEC-*.md` (`ready`),
+`harness-data/artifacts/specs/done/SPEC-*.md` (`done`), or
 `harness-data/artifacts/specs/archive/SPEC-*.md` (`archived`/`rejected`)
 **Template:** `agent-harness/templates/SPEC-template.md`
 
@@ -181,12 +183,15 @@ The `test_refs` frontmatter field is populated by the agent during implementatio
 ### Task
 
 Execution unit derived from a Spec. Tasks are not the source of truth for behavior — Specs are.
-Created from an approved Spec — OR, when `shared-procs/RISK-TIER.md`'s Spec-Necessity Matrix classifies the
+Created from a Spec at any status — OR, when `shared-procs/RISK-TIER.md`'s Spec-Necessity Matrix classifies the
 request below Spec-tier, directly from the same source types a Spec would have been created from. Not always
 required — see [05-workflows.md](05-workflows.md).
 
 **Statuses:** `draft` → `ready` → `in-progress` → `done` → `blocked` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/tasks/active/TASK-*.md`
+**Location:** `harness-data/artifacts/tasks/active/TASK-*.md` (`draft`/`in-progress`/`blocked`),
+`harness-data/artifacts/tasks/ready/TASK-*.md` (`ready`),
+`harness-data/artifacts/tasks/done/TASK-*.md` (`done`), or
+`harness-data/artifacts/tasks/archive/TASK-*.md` (`archived`/`rejected`)
 **Template:** `agent-harness/templates/TASK-template.md`
 
 Task frontmatter includes `allowed_paths` and `forbidden_paths` to constrain implementation scope.
@@ -195,8 +200,11 @@ Task frontmatter includes `allowed_paths` and `forbidden_paths` to constrain imp
 
 Defines how implementation will proceed. Required before any code changes.
 
-**Statuses:** `proposed` → `approved` → `in-progress` → `done` → `rejected` → `archived`
-**Location:** `harness-data/artifacts/implementation-plans/active/PLAN-*.md`
+**Statuses:** `draft` → `ready` → `in-progress` → `done` → `rejected` → `archived`
+**Location:** `harness-data/artifacts/implementation-plans/active/PLAN-*.md` (`draft`/`in-progress`),
+`harness-data/artifacts/implementation-plans/ready/PLAN-*.md` (`ready`),
+`harness-data/artifacts/implementation-plans/done/PLAN-*.md` (`done`), or
+`harness-data/artifacts/implementation-plans/archive/PLAN-*.md` (`archived`/`rejected`)
 **Template:** `agent-harness/templates/IMPLEMENTATION-PLAN-template.md`
 
 Each plan step must define: Tasks (or "inline"), expected files, validation, risk level, and a suggested commit boundary.
@@ -269,20 +277,8 @@ status change.
 
 | Artifact | Gate status | Checklist section |
 | --- | --- | --- |
-| Use Case | `ready-for-spec` | `## Readiness Checklist` |
-| Spec | `approved` | `## Readiness Checklist` |
+| Use Case | `ready` | `## Readiness Checklist` |
+| Spec | `ready` | `## Readiness Checklist` |
 | Task | `ready` | `## Readiness Checklist` |
-| Implementation Plan | `approved` | `## Readiness Checks` |
+| Implementation Plan | `ready` | `## Readiness Checks` |
 | ADR | `accepted` | `## Readiness Checklist` |
-
-## Artifact Maturity
-
-An artifact is mature enough to proceed when its status is at an accepted level:
-
-| Artifact | Required Status Before Next Step |
-| --- | --- |
-| Use Case | `ready-for-spec` |
-| Spec | `approved` |
-| Task | `ready` |
-| Implementation Plan | `approved` |
-| ADR (before being cited as settled authority) | `accepted` |

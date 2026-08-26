@@ -1,7 +1,7 @@
 ---
 id: PLAN-0001
 type: implementation-plan
-status: proposed         # proposed | approved | in-progress | done | rejected | archived
+status: draft            # draft | ready | in-progress | blocked | done | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
@@ -28,11 +28,12 @@ Plan-tier direct entry with `entrypoint_type: none`; see `IMPLEMENTATION-PLAN.md
 
 ## Readiness Checks
 
-All items must be checked before this plan may advance to `approved`. Cite a one-line evidence pointer per
+All items must be checked before this plan may advance to `ready`. Cite a one-line evidence pointer per
 checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-PLAN.md`'s `IPL-02-012`.
 
-- [ ] Source artifact is approved (or, if entered with no upstream artifact per `RISK-TIER.md`'s cascade, `## Risk-Tier Classification` section is present and complete)
-- [ ] Required Tasks exist and are ready
+- [ ] Required Tasks exist
+- [ ] Upward cascade (`systems/STATUS-TRANSITIONS.md`'s `STT-01-030`) succeeded: included Task(s), their Spec(s) (fan-out complete — every sibling Task also `ready`), and Use Case (fan-out complete — every sibling Spec also `ready`) all independently re-verified and promoted
+- [ ] If entered with no upstream artifact per `RISK-TIER.md`'s cascade, `## Risk-Tier Classification` section is present and complete
 - [ ] No blockers or unresolved dependencies
 - [ ] High-risk areas identified
 - [ ] Each plan step defines expected files, validation, and a suggested commit
@@ -63,6 +64,6 @@ checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-
 
 ## Approval
 
-- Status: proposed
+- Status: draft
 - Approved by: (name)
 - Approved at: (date)

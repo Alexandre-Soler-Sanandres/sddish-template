@@ -35,15 +35,16 @@ Lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body.
 
 All lifecycle artifacts live under `harness-data/artifacts/`.
 
-Within that root, each artifact directory uses subfolders to reflect lifecycle state.
+Within that root, each artifact directory uses subfolders to reflect lifecycle state. Use Case, Spec, Task, and
+Implementation Plan share an identical four-folder shape (`active/`/`ready/`/`done/`/`archive/`) — see
+`systems/LIFECYCLE-FOLDERS.md` for why this is now uniform rather than diverging per artifact type.
 
 | Subfolder | Used in | Meaning |
 | --- | --- | --- |
 | `active/` | all artifact dirs except `adrs/` and `questions/` | artifact is in progress or under review |
 | `archive/` | all artifact dirs except `questions/` | artifact is closed, superseded or no longer relevant |
-| `approved/` | `implementation-plans/` | plan has been approved and is awaiting execution |
-| `done/` | `implementation-plans/`, `tasks/`, `improvements/` | execution is complete |
-| `implemented/` | `specs/`, `use-cases/` | described behavior now exists in code and remains citable authority |
+| `ready/` | `specs/`, `use-cases/`, `tasks/`, `implementation-plans/` | artifact has passed its Readiness Checklist/Checks and may be relied on by the next tier or by Implementing |
+| `done/` | `specs/`, `use-cases/`, `implementation-plans/`, `tasks/`, `improvements/` | execution is complete |
 | `proposed/` | `adrs/` | not yet settled |
 | `accepted/` | `adrs/` | in force, citable authority |
 

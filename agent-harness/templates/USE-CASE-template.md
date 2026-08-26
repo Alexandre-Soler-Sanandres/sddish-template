@@ -1,7 +1,7 @@
 ---
 id: UC-0001
 type: use-case
-status: draft            # draft | ready-for-spec | implemented | archived | rejected
+status: draft            # draft | ready | in-progress | blocked | done | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
@@ -56,7 +56,7 @@ governs whether an unresolved reference stops advancement.)
 
 ## Readiness Checklist
 
-Before advancing to `ready-for-spec`, verify all items are checked. Cite a one-line evidence pointer per checked
+Before advancing to `ready`, verify all items are checked. Cite a one-line evidence pointer per checked
 item beneath the checklist — see `rules/artifact-specs/USE-CASES.md`'s `UCS-03-012`.
 
 - [ ] Primary actor is defined

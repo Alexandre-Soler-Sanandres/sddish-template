@@ -10,9 +10,9 @@ created.
 
 A Task, Spec, or Use Case (or, for a Plan-tier request, nothing at all) is ready for implementation. The agent
 groups the required changes into steps, records validation and risk per step, and drafts the Plan at `active/`.
-Nothing changes in the codebase until the user explicitly approves it — approval moves the Plan to `approved/`
+Nothing changes in the codebase until the user explicitly approves it — approval moves the Plan to `ready/`
 and unlocks Implementing mode. Once every step completes, the Plan reaches `done`, which can cascade the source
-Spec and Use Case to `implemented`.
+Spec and Use Case to `done`.
 
 ## Entry / Creation Paths
 
@@ -33,13 +33,13 @@ classifies as Plan-tier — see `PLANNING-IMPLEMENTATION.md`'s `## Workflow Path
 ## When Not To Create
 
 Never create a Plan outside Planning-Implementation, and never treat its existence as license to change code —
-code changes require the separate `approved` status transition (`## Readiness / Acceptance`).
+code changes require the separate `ready` status transition (`## Readiness / Acceptance`).
 
 ## Artifact Shape
 
-Grouping logic: Tasks SHOULD be grouped in one step when they belong to the same approved Spec, are small and
-tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable
-diff, and no high-risk work is involved (`IPL-01-010`). Tasks SHOULD stay separate when risk is high, validation
+Grouping logic: Tasks SHOULD be grouped in one step when they belong to the same Spec, are small and tightly
+related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and
+no high-risk work is involved (`IPL-01-010`). Tasks SHOULD stay separate when risk is high, validation
 differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the
 change touches database, deployment, security, payment execution, security-critical logic, or domain-critical
 business rules (`IPL-01-020`). A Plan whose entry skipped any risk-tier level MUST include a `## Risk-Tier
@@ -67,19 +67,19 @@ Active Implementation Plans table (`IPL-05-020`).
 
 ## Lifecycle
 
-`active/` while drafting or in progress; `approved/` once the Readiness Gate passes; `done/` on completion (see
-`## Output / Location`). A Plan's completion is also the forward-moving half of the harness-wide status cascade —
-see `agent-harness/systems/STATUS-CASCADE.md` for the full mechanism, including the reopening/reconsideration
-direction (`IPL-05-080`–`082`, `CORE.md`'s `COR-01-130`).
+`active/` while drafting or in progress; `ready/` once the Readiness Gate passes; `done/` on completion (see
+`## Output / Location`). Status transitions for this artifact — including the upward cascade this Plan's
+promotion and completion trigger — are governed by `agent-harness/systems/STATUS-TRANSITIONS.md`, not defined
+here (`IPL-05-083`).
 
 ## Readiness / Acceptance
 
-Before setting a Plan status to `approved`, verify the Readiness Checks section in the artifact — every item must
-be checked; a single unchecked item blocks the status change (`IPL-02-010`/`IPL-02-011`). Before that, also check
-`harness-data/CATALOG.md` for other Plans at status `approved` or `in-progress` on the same Spec, or with
+Before this Plan's promotion (`STT-01-030`'s Plan row), verify the Readiness Checks section in the artifact —
+every item must be checked; a single unchecked item blocks the status change (`IPL-02-010`/`IPL-02-011`). Before that, also check
+`harness-data/CATALOG.md` for other Plans at status `ready` or `in-progress` on the same Spec, or with
 overlapping Task `allowed_paths` — stop and surface the conflict if either condition is found (`IPL-05-010`/
 `IPL-05-011`). Keep `harness-data/CATALOG.md`'s Active Implementation Plans table accurate for all Plans at
-status `approved` or `in-progress`, adding/updating a row in the same pass the status changes and removing it
+status `ready` or `in-progress`, adding/updating a row in the same pass the status changes and removing it
 once the Plan is no longer either (`IPL-05-020`).
 
 ## Relationships
@@ -89,7 +89,7 @@ completion drives the Spec/Use-Case status cascade described in `## Lifecycle`.
 
 ## Output / Location
 
-`harness-data/artifacts/implementation-plans/active/PLAN-*.md` while drafting or in progress; `approved/` once
+`harness-data/artifacts/implementation-plans/active/PLAN-*.md` while drafting or in progress; `ready/` once
 the Readiness Gate passes; `done/` on completion. See `agent-harness/OUTPUTS.md` for the full lifecycle-folder
 rules.
 

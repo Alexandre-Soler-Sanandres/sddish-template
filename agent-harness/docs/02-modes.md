@@ -35,7 +35,7 @@ gates, approvals, validation, loading, traceability, and safety boundaries live 
 | Partnering | — | Structured conversation to capture ideas and problems |
 | Refining | `/create-use-case`, `/create-spec`, `/create-tasks` | Derive a Use Case, Spec, or Tasks from their upstream source |
 | Planning-Implementation | `/plan-task`, `/plan-spec`, `/plan-use-case` | Plan and gate code changes |
-| Implementing | `/execute-plan` | Execute an approved plan |
+| Implementing | `/execute-plan` | Execute a `ready` plan |
 | Discovering-Legacy | `/legacy-discovery` | Extract evidence from existing code |
 | Improving-Harness | `/improve-harness` | Change the harness itself |
 
@@ -70,7 +70,7 @@ file and `agent-harness/modes/PLANNING-IMPLEMENTATION.md`'s `IPL-08-010`/`IPL-08
 
 ## Implementing
 
-Changes code, one plan step at a time by default, only after an approved Implementation Plan exists. Invokes the
+Changes code, one plan step at a time by default, only after a `ready` Implementation Plan exists. Invokes the
 shared Validation procedure ([04-shared-procs.md](04-shared-procs.md)) as its closing gate after each step. See
 `agent-harness/modes/IMPLEMENTING.md`.
 

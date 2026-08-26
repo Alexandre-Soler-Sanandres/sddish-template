@@ -91,7 +91,7 @@ process violation, not a valid shortcut (`RSK-05-010`).
 Partnering's hand-off, Refining's entry, or Planning-Implementation's entry, whichever comes first. The result is
 carried forward, not recomputed: a skip is recorded via the `## Risk-Tier Classification` section above; a
 non-skip (full tier required) is evidenced by the artifact's own normal chain (an accepted Use Case behind an
-approved Spec behind a `ready` Task is itself proof the classification already happened) (`RSK-07-010`). Every
+ready Spec behind a `ready` Task is itself proof the classification already happened) (`RSK-07-010`). Every
 consuming mode checks for an existing classification — on the named artifact, or on its cited source
 Idea/Transcript — before running it fresh, and never recomputes one that already exists unless the user
 explicitly asks for re-evaluation (`RSK-07-011`/`RSK-07-012`). This run-once rule applies per-matrix, not only to

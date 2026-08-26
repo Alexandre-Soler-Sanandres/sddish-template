@@ -12,9 +12,11 @@ Use Case.
 
 An Idea, Transcript, Partnering discussion, Legacy Finding, or existing doc reaches the point where it needs a
 behavioral anchor. Refining derives the primary/supporting actors, goal, scenario, and failure paths; relevant
-ADRs get checked and re-checked as content firms up; and once the Readiness Checklist passes, the Use Case
-reaches `ready-for-spec` — the status Refining's `/create-spec` requires. A significant change to a Use Case
-already at `ready-for-spec` or later cascades its derived Specs back to `draft`, which in turn triggers each
+ADRs get checked and re-checked as content firms up; and once the Readiness Checklist passes — via the
+cascade or explicit operator instruction described in `agent-harness/systems/STATUS-TRANSITIONS.md`'s
+`STT-01-030`/`040` — the Use Case reaches `ready`,
+no longer a precondition for Spec creation (`SPS-01-010`). A significant change to a Use Case
+already at `ready` or later cascades its derived Specs back to `draft`, which in turn triggers each
 Spec's own cascade.
 
 ## Entry / Creation Paths
@@ -104,20 +106,21 @@ open questions are resolved, or the primary actor or scenario needs correction �
 Use Case ID, and must update the `updated` field and status as appropriate (`UCS-02-010`–`021`). A change to the
 primary actor, goal, trigger, preconditions, main success scenario, or non-goals is significant; a typo,
 clarification, added Open Questions reference, or `updated`-field bump is not (`UCS-02-030`). A significant
-change landing on a Use Case already at `ready-for-spec` or later (also at `implemented`) triggers the downward
-half of the harness-wide status cascade at the funnel's head — see `agent-harness/systems/STATUS-CASCADE.md` for
-the full mechanism, including why this cascade covers only a change originating on the Use Case itself, not a
-downstream Spec/Task/Plan reopening (`UCS-02-040`–`042`, `CORE.md`'s `COR-01-130`).
+change to this Use Case is significant (`UCS-02-030`). Status transitions for this artifact — including what
+happens when a significant change lands on an already-`ready` Use Case — are governed by
+`agent-harness/systems/STATUS-TRANSITIONS.md`, not defined here (`UCS-02-043`).
 
 ## Readiness / Acceptance
 
-Before setting a Use Case status to `ready-for-spec`, verify the Readiness Checklist in the artifact — every item
+Before setting a Use Case status to `ready`, verify the Readiness Checklist in the artifact — every item
 must be checked; a single unchecked item blocks the status change (`UCS-03-010`/`UCS-03-011`). Also re-run three
 ADR checks: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR present in
 `related` and every `scoped` ADR re-judged (`UCS-07-010`–`012`); content-drift recheck against the Use Case's
 actual current content, not only its original `area` (`UCS-07-020`); and a compliance check that every ADR cited
 in `related` is actually reflected in the Use Case's content (`UCS-07-030`). Also verify the registry holds
-nothing unresolved that should block the advance (`UCS-05-015`).
+nothing unresolved that should block the advance (`UCS-05-015`). `ready` is no longer a precondition for
+Spec creation (see `REFINING.md`'s `SPS-01-010`) — it is set per `agent-harness/systems/STATUS-TRANSITIONS.md`'s
+`STT-01-030`/`040`.
 
 ## Relationships
 
@@ -129,8 +132,9 @@ constraints belong in the scenario, preconditions, or failure paths (`UCS-05-020
 
 ## Output / Location
 
-- `harness-data/artifacts/use-cases/active/UC-*.md` (`draft`/`ready-for-spec`)
-- `harness-data/artifacts/use-cases/implemented/UC-*.md` (`implemented` — still-authoritative behavior, distinct
+- `harness-data/artifacts/use-cases/active/UC-*.md` (`draft`)
+- `harness-data/artifacts/use-cases/ready/UC-*.md` (`ready`)
+- `harness-data/artifacts/use-cases/done/UC-*.md` (`done` — still-authoritative behavior, distinct
   from closed/superseded; see `agent-harness/systems/LIFECYCLE-FOLDERS.md`)
 - `harness-data/artifacts/use-cases/archive/UC-*.md` (`archived`/`rejected`)
 
@@ -142,7 +146,7 @@ Use `agent-harness/templates/USE-CASE-template.md` as the starting point for eve
 
 A Legacy Finding establishes a recurring operator workflow with an unresolved visibility question. The agent
 drafts a Use Case, carries the Question ID into `Open Questions`, sets `technical_impact` to `api-contract` since
-a supporting actor is another owned service, and stops before `ready-for-spec` until that Question resolves.
+a supporting actor is another owned service, and stops before `ready` until that Question resolves.
 
 ## Rules Map
 

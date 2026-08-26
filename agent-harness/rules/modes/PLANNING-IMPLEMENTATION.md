@@ -4,11 +4,11 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IPL-03-010 | Boundaries | MUST NOT: change code; treat `proposed` status as approved; proceed if the source artifact is not at an accepted status; or generate duplicate Tasks or skip existing ones. |
+| IPL-03-010 | Boundaries | MUST NOT: change code; treat `draft` status as ready; proceed if the source artifact is not at an accepted status; or generate duplicate Tasks or skip existing ones. |
 | IPL-03-020 | Boundaries | MUST consult `REFINING.md`'s Task Decision Matrix before creating an inline Implementation Plan for a Spec/Use Case with no existing Tasks. Stop and report instead of proceeding if existing Tasks are `draft` or `blocked`. |
 | IPL-04-010 | Procedure | MUST load the relevant universal and project playbooks before finalizing the plan, when the planning task matches a reusable procedure. |
 | IPL-04-020 | Procedure | MUST reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
-| IPL-05-030 | Parallel-Work | MUST NOT allow more than one Implementation Plan at status `approved` or `in-progress` per Spec. For a Plan-tier Plan with `entrypoint_type: none` (no source Spec), this check does not apply — there is no Spec to key it on. |
+| IPL-05-030 | Parallel-Work | MUST NOT allow more than one Implementation Plan at status `ready` or `in-progress` per Spec. For a Plan-tier Plan with `entrypoint_type: none` (no source Spec), this check does not apply — there is no Spec to key it on. |
 | IPL-05-031 | Parallel-Work | For a Plan-tier Plan, `IPL-05-050`'s path-overlap check is the only dedup protection available, so it MUST still be run. |
 | IPL-05-040 | Parallel-Work | Plans on non-overlapping Specs MAY run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
 | IPL-05-050 | Parallel-Work | MUST stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution, if two active Plans have overlapping `allowed_paths` across their Tasks. |

@@ -82,13 +82,13 @@ name from within a mode or artifact rule. No schema and no artifact of its own.
 Conversational mode for capture, clarification, and idea formation. The front door for unclear thinking.
 
 **Refining**
-Mode that derives the next artifact in the Use Case → Spec → Task funnel from its immediate source: a Spec from a Use Case at `ready-for-spec`, or Tasks from an approved Spec — or directly from a lower-tier source when `RISK-TIER.md` classifies the layer above as unnecessary. Owns the mechanical derivation activity only — the resulting artifact's meaning, schema, and lifecycle rules live in its Artifact Contract.
+Mode that derives the next artifact in the Use Case → Spec → Task funnel from its immediate source: a Spec from a Use Case, or Tasks from a Spec — neither gated on the source's own status — or directly from a lower-tier source when `RISK-TIER.md` classifies the layer above as unnecessary. Owns the mechanical derivation activity only — the resulting artifact's meaning, schema, and lifecycle rules live in its Artifact Contract.
 
 **Planning-Implementation**
 The mandatory gate mode before any code change. Inspects the artifact, gathers downstream artifacts, verifies maturity, and produces an Implementation Plan.
 
 **Implementing**
-Mode that executes an approved Implementation Plan. Invokes Validation as its own closing gate after each step.
+Mode that executes a `ready` Implementation Plan. Invokes Validation as its own closing gate after each step.
 
 **Discovering-Legacy**
 Mode for analyzing existing code and documentation to derive artifacts without implementing. The legacy project is evidence, not authority.
@@ -115,10 +115,10 @@ A durable, discoverable registry entry for an unresolved (or resolved) point tha
 The source of truth for desired behavior. Created from a Use Case — or directly from a lower-tier source when `RISK-TIER.md`'s UC-Necessity Matrix classifies a Use Case unnecessary. Defines problem, goal, scope, requirements, acceptance criteria, and risks.
 
 **Task**
-An optional executable work unit derived from an approved Spec when smaller, traceable slices are needed.
+An optional executable work unit derived from a Spec (any status) when smaller, traceable slices are needed.
 
 **Implementation Plan**
-A required plan that defines how implementation will proceed before any code is changed. Must be approved before Implementing mode may start.
+A required plan that defines how implementation will proceed before any code is changed. Must be `ready` before Implementing mode may start.
 
 **Validation**
 A Procedure Guide — not a mode, not an Artifact Contract — that checks artifacts, plans, and implementations against process and behavioral criteria. Does not run technical checks. Invoked by name from within Implementing and Improving-Harness.
@@ -157,7 +157,7 @@ The failure mode where an agent loads a massive index of every artifact instead 
 An artifact recording a single piece of evidence extracted from a legacy project — observed behavior, documented behavior, inferred intent, accidental complexity, or dead/uncertain code. Scoped per app or cross-system; see `agent-harness/modes/DISCOVERING-LEGACY.md`.
 
 **Readiness Checklist**
-A section present in every artifact template. Every item must be checked before the agent advances the artifact to its gate status (e.g. Spec to `approved`, Task to `ready`). A single unchecked item blocks the status change.
+A section present in every artifact template. Every item must be checked before the agent advances the artifact to its gate status (e.g. Spec to `ready`, Task to `ready`). A single unchecked item blocks the status change.
 
 **Task Decision Matrix**
 The table in `agent-harness/modes/REFINING.md` used to decide whether a Spec needs separate Task artifacts or can proceed straight to an inline Implementation Plan.

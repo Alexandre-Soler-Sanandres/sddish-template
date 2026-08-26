@@ -35,7 +35,7 @@ mechanisms — per `COR-03-048`, this is normal context expansion, not part of t
 
 | System | File | Load when |
 | --- | --- | --- |
-| Status Cascade | `agent-harness/systems/STATUS-CASCADE.md` | A Use Case/Spec/Task/Plan completes, reopens, or its terminal status might now be stale. |
+| Status Transitions | `agent-harness/systems/STATUS-TRANSITIONS.md` | A Use Case/Spec/Task/Plan/Idea promotes, completes, reopens, or its terminal status might now be stale. |
 | Question Lifecycle | `agent-harness/systems/QUESTION-LIFECYCLE.md` | Raising, carrying forward, or resolving a Question that other artifacts cite. |
 | ADR Authority | `agent-harness/systems/ADR-AUTHORITY.md` | Citing, re-checking, or superseding an ADR. |
 | Lifecycle Folders | `agent-harness/systems/LIFECYCLE-FOLDERS.md` | Moving an artifact between lifecycle subfolders, or judging whether a folder move is actually due. |

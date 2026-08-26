@@ -44,13 +44,12 @@ SPEC-0014."
 Consumes / Produces:
 
 - `/create-use-case`: consumes an Idea, Transcript, Partnering discussion, Legacy Finding, or existing
-  documentation — if the source is an Idea, it must be at status `ready-for-refining`; produces a Use Case.
-- `/create-spec`: consumes a Use Case at status `ready-for-spec` — OR, when `shared-procs/RISK-TIER.md`'s
-  UC-Necessity Matrix classifies the request below UC-tier, the same source types `/create-use-case` consumes;
-  produces a Spec.
-- `/create-tasks`: consumes a Spec at status `approved` — OR, when `RISK-TIER.md`'s Spec-Necessity Matrix
-  classifies the request below Spec-tier, the same source types a Spec would have been created from; produces
-  Task(s).
+  documentation, at any status — `IDA-01-010`'s judgment gate still applies informally when the source is an
+  Idea; produces a Use Case.
+- `/create-spec`: consumes a Use Case at any status — OR, when `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix
+  classifies the request below UC-tier, the same source types `/create-use-case` consumes; produces a Spec.
+- `/create-tasks`: consumes a Spec at any status — OR, when `RISK-TIER.md`'s Spec-Necessity Matrix classifies the
+  request below Spec-tier, the same source types a Spec would have been created from; produces Task(s).
 
 ## Core Moves
 
@@ -62,9 +61,9 @@ Consumes / Produces:
    fresh. If it classifies the request below UC-tier, stop here and proceed via `/create-spec`'s skip-path
    instead of creating a Use Case.
 1. Identify the source: Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation.
-2. If the source is an Idea, verify it is at status `ready-for-refining` before proceeding (per `IDA-01-010`).
-   Other source types have no formal readiness gate — use judgment that the source material is concrete enough
-   to draft a scenario from.
+2. If the source is an Idea, apply `IDA-01-010`'s judgment informally — the Problem/Opportunity should be
+   concrete enough to draft a scenario from; this is no longer a formal status gate. Other source types have no
+   formal readiness gate either — use the same judgment that the source material is concrete enough.
 3. Read the source material.
 4. Load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance;
    record the result in `related` now (`UCS-01-040`) — before drafting the goal/scenario, not after.
@@ -73,8 +72,9 @@ Consumes / Produces:
 7. Write the main success scenario, alternatives, and failure paths.
 8. Define non-goals and the observable outcome.
 9. Carry forward relevant Questions-registry entries tied to the source artifact (`UCS-05-010`).
-10. If the source is an Idea, close it per `IDEA.md`'s `IDA-06-010` (status `landed`, `next` set to this Use
-    Case's ID, moved to `archive/`) as part of this same action.
+10. If the source is an Idea, close it per `IDEA.md`'s `IDA-06-050` (`systems/STATUS-TRANSITIONS.md`'s
+    `STT-01-050`: status `landed`, `next` set to this Use Case's ID, moved to `archive/`) as part of this same
+    action.
 11. Stop before creating a Spec, Task, or Implementation Plan.
 
 ### Spec Creation (via `/create-spec`)
@@ -83,9 +83,8 @@ Consumes / Produces:
    (`RSK-03-010`) — reuse an existing classification per `RSK-07-010` before running it fresh, or run it fresh
    immediately after step 0 above classified UC as not required (Spec-Necessity has not yet been checked in that
    case). If entering directly (no Use Case in hand), this is the source's first check.
-1. Verify the source Use Case is at status `ready-for-spec` before proceeding — unless entered via the UC-skip
-   path (step 0 classified UC-tier unnecessary), in which case proceed directly from the same source types Use
-   Case creation would have used.
+1. Identify the source Use Case (any status) — unless entered via the UC-skip path (step 0 classified UC-tier
+   unnecessary), in which case proceed directly from the same source types Use Case creation would have used.
 2. Read the Use Case (or, on the skip-path, the source material directly).
 3. Load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance;
    record the result in `related` now (`SPS-01-030`) — before drafting scope/requirements, not after.
@@ -114,8 +113,8 @@ via the Spec-skip path, is `TSK-01-030` in the paired rules file — there is no
 When `TSK-01-030`'s check classifies Tasks as not required, or the request qualifies for "Optional" and the user
 prefers the lighter path, stop Task creation and report that the request lands on Plan-tier, routing to
 Planning-Implementation's natural-language entry (`IPL-08-010`) rather than creating a Task (`TSK-01-031`). This
-does not apply when `/create-tasks` is entered normally from an `approved` Spec — that case's Task-necessity was
-already decided when the Spec was approved with Tasks in mind (`TSK-01-032`).
+does not apply when `/create-tasks` is entered normally from a `ready` Spec — that case's Task-necessity was
+already decided when the Spec was made ready with Tasks in mind (`TSK-01-032`).
 
 ## Outputs
 
@@ -125,8 +124,8 @@ already decided when the Spec was approved with Tasks in mind (`TSK-01-032`).
 
 ## Examples
 
-"Create the spec for UC-0007" — the agent verifies UC-0007 is `ready-for-spec`, reads it, loads relevant ADRs,
-drafts scope/requirements/acceptance-criteria, and stops before touching code or drafting Tasks.
+"Create the spec for UC-0007" — the agent reads UC-0007, loads relevant ADRs, drafts
+scope/requirements/acceptance-criteria, and stops before touching code or drafting Tasks.
 
 ## Rules Map
 

@@ -9,9 +9,11 @@ creating or updating a Task.
 
 ## Artifact Story
 
-An approved Spec (or, via the Spec-skip path, a lower-tier source) needs execution units. Refining derives Tasks
-with allowed/forbidden paths and validation commands; each Task waits for the user's explicit confirmation before
-becoming `ready` for Planning-Implementation to plan against. ADR checks re-run at that gate the same way they do
+A Spec (any status — no longer gated on `ready`, `TSK-01-010`), or via the Spec-skip path a lower-tier source,
+needs execution units. Refining derives Tasks with allowed/forbidden paths and validation commands; each Task
+becomes `ready` for Planning-Implementation via the cascade or explicit operator instruction described in
+`agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`, not a standalone per-Task confirmation
+step. ADR checks re-run at that gate the same way they do
 for Specs and Use Cases, plus an extra check when a Task's paths touch a route, service instance, or external
 dependency that a health/readiness-check ADR might govern.
 
@@ -21,19 +23,19 @@ Created only from within Refining (`/create-tasks`).
 
 ## Sources
 
-A Task is created only from within Refining (`/create-tasks`), from an approved Spec — OR, when
+A Task is created only from within Refining (`/create-tasks`), from a Spec at any status — OR, when
 `shared-procs/RISK-TIER.md`'s Spec-Necessity Matrix (`RSK-03-010`) classifies the request below Spec-tier,
 directly from the same source types a Spec would have been created from.
 
 ## When To Create
 
-Whenever a Spec reaches `approved` and the Task Decision Matrix determines Tasks are required, or a request
-classifies below Spec-tier via the risk-tier cascade.
+Whenever a Spec exists and the Task Decision Matrix determines Tasks are required, or a request classifies below
+Spec-tier via the risk-tier cascade.
 
 ## When Not To Create
 
-Not applicable beyond `## Sources`' precondition — see `agent-harness/modes/REFINING.md`'s `TSK-01-011`/
-`TSK-01-031` for when `/create-tasks` must stop instead of creating a Task.
+Not applicable beyond `## Sources`' precondition — see `agent-harness/modes/REFINING.md`'s `TSK-01-031` for when
+`/create-tasks` must stop instead of creating a Task.
 
 ## Artifact Shape
 
@@ -46,7 +48,6 @@ A Task entered via the Spec-skip path must include a `## Risk-Tier Classificatio
 
 - `status` — see `## Lifecycle`.
 - `related` — accepted ADRs this Task depends on; see `## Relationships`.
-- `approval.approved_by`/`approved_at` — set together when the user confirms the Task (`TSK-02-016`).
 - `allowed_paths`/`forbidden_paths` — see `## Artifact Shape`.
 
 ## Body Should Include
@@ -65,16 +66,14 @@ A Task entered via the Spec-skip path must include a `## Risk-Tier Classificatio
 ## Lifecycle
 
 Before setting a Task status to `ready`, verify the Readiness Checklist in the artifact — every item must be
-checked; a single unchecked item blocks the status change (`TSK-02-010`/`TSK-02-011`). Reopening a `done` Task
-for a reason other than `SPECS.md`'s `SPS-07-020` cascade already having done so is a reopening trigger in the
-harness-wide status cascade — see `agent-harness/systems/STATUS-CASCADE.md` for the full mechanism (`TSK-02-020`,
-`CORE.md`'s `COR-01-130`).
+checked; a single unchecked item blocks the status change (`TSK-02-010`/`TSK-02-011`). Status transitions for
+this artifact — including how it reaches `ready` and what happens on reopening — are governed by
+`agent-harness/systems/STATUS-TRANSITIONS.md`, not defined here (`TSK-02-021`).
 
 ## Readiness / Acceptance
 
-Status must not be set to `ready` without the user's explicit confirmation of that specific Task, per `ADR.md`'s
-`DEC-04-010` — never inferred from discussion; when confirmed, set the Task's own `approval.approved_by`/
-`approved_at` in the same pass (`TSK-02-015`–`017`). Also re-run the same three ADR checks Specs and Use Cases
+Status is set to `ready` per `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`. Also re-run
+the same three ADR checks Specs and Use Cases
 require: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR present in
 `related` and every `scoped` ADR re-judged (`TSK-06-010`–`012`); content-drift recheck against the Task's actual
 current scope, not only its original `area` (`TSK-06-030`); and a compliance check that every ADR cited in
@@ -93,7 +92,10 @@ from the reverse-link half of this rule, per the same reasoning as `DEC-07-010` 
 
 ## Output / Location
 
-- `harness-data/artifacts/tasks/active/TASK-*.md`
+- `harness-data/artifacts/tasks/active/TASK-*.md` (`draft`/`in-progress`/`blocked`)
+- `harness-data/artifacts/tasks/ready/TASK-*.md` (`ready`)
+- `harness-data/artifacts/tasks/done/TASK-*.md` (`done`)
+- `harness-data/artifacts/tasks/archive/TASK-*.md` (`archived`/`rejected`)
 
 ## Template
 
@@ -101,7 +103,7 @@ Use `agent-harness/templates/TASK-template.md` as the starting point for every n
 
 ## Examples
 
-An approved Spec needs three small, related file changes with no high risk. The agent derives one Task covering
+A ready Spec needs three small, related file changes with no high risk. The agent derives one Task covering
 all three (per `REFINING.md`'s Task Decision Matrix), sets `allowed_paths` to the touched files, and waits for
 the user's explicit confirmation before the Task becomes `ready`.
 

@@ -18,20 +18,20 @@ Without structure, agents drift: they implement before requirements are clear, m
 ## The Core Idea
 
 No code without a Plan. No Plan without going through every tier `shared-procs/RISK-TIER.md`'s cascade
-classifies as necessary. No implementation without an approved plan.
+classifies as necessary. No implementation without a `ready` plan.
 
 ```text
 Voice / Text / Ideas
   → Partnering
   → Refining (Use Case → Spec → [Tasks, when required] — or directly, per the risk-tier cascade,
     when a layer is classified unnecessary)
-  → Planning-Implementation (approved plan)
+  → Planning-Implementation (`ready` plan)
   → Implementing
   → Validation
   → [Review / Improving-Harness — when a team wants formal evaluation or process correction]
 ```
 
-Every persistent artifact lives in Markdown, every file is traceable to its source, and every implementation starts from an approved plan.
+Every persistent artifact lives in Markdown, every file is traceable to its source, and every implementation starts from a `ready` plan.
 
 ## Modes
 
@@ -44,7 +44,7 @@ Procedure Guide, not a mode — see [docs/01-core-principles.md](docs/01-core-pr
 | Partnering | Structured conversation to capture ideas and problems |
 | Refining | Derive a Spec from a Use Case, or Tasks from a Spec (or directly, per the risk-tier cascade, when a layer is classified unnecessary) |
 | Planning-Implementation | Plan and gate code changes |
-| Implementing | Execute an approved plan |
+| Implementing | Execute a `ready` plan |
 | Discovering-Legacy | Extract evidence from existing code |
 | Improving-Harness | Change the harness itself |
 
@@ -149,6 +149,6 @@ smallest useful first pass and the same guide for full adoption instructions.
 - **Support files are selective context** — agents consult support-file `index.yaml` files and load only the matched guides or playbooks they need
 - **Lifecycle artifacts are separate** — harness-managed project artifacts live under `harness-data/artifacts/`
 - **Artifacts over memory** — everything lives in files, not agent context
-- **Explicit gates** — implementation requires an approved plan; no exceptions
+- **Explicit gates** — implementation requires a `ready` plan; no exceptions
 - **Smallest sufficient context** — agents load only what they need
 - **Process improves itself when needed** — Review and Improving-Harness exist for teams that want a stronger formal loop

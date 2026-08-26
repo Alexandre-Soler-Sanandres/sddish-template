@@ -1,7 +1,7 @@
 ---
 id: SPEC-0001
 type: spec
-status: draft            # draft | approved | implemented | archived | rejected
+status: draft            # draft | ready | in-progress | blocked | done | archived | rejected
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
@@ -88,7 +88,7 @@ governs whether an unresolved reference stops approval.)
 
 ## Readiness Checklist
 
-Before advancing to `approved`, verify all items are checked. Cite a one-line evidence pointer per checked item
+Before advancing to `ready`, verify all items are checked. Cite a one-line evidence pointer per checked item
 beneath the checklist — see `rules/artifact-specs/SPECS.md`'s `SPS-02-012`.
 
 - [ ] Problem is clearly stated

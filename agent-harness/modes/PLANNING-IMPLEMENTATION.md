@@ -49,7 +49,7 @@ governs the planning activity, the artifact spec governs the resulting Plan's ow
 ### Entering via `/plan-spec`
 
 1. Load the Spec.
-2. Verify the Spec is at status `approved`. If not, stop and report.
+2. Verify the Spec is at status `ready`. If not, stop and report.
 3. Find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
    - If Tasks exist but are draft or blocked → stop and report.
@@ -63,9 +63,9 @@ governs the planning activity, the artifact spec governs the resulting Plan's ow
 ### Entering via `/plan-use-case`
 
 1. Load the Use Case.
-2. Verify the Use Case is at status `ready-for-spec`. If not, stop and report.
+2. Verify the Use Case is at status `ready`. If not, stop and report.
 3. Find all derived Specs from the Use Case frontmatter.
-   - If Specs are missing or not at status `approved` → stop and route to `/create-spec`.
+   - If Specs are missing or not at status `ready` → stop and route to `/create-spec`.
 4. For each Spec, find existing Tasks and check their status:
    - If ready Tasks exist → use them as the planning basis.
    - If Tasks exist but are draft or blocked → stop and report.

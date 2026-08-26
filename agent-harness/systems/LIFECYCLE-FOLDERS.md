@@ -20,8 +20,8 @@ enforceable obligations remain in the rule files that define the participating r
 | `OUT-08-010` | `agent-harness/rules/OUTPUTS.md` | Questions-specific | The Questions registry has no lifecycle subfolders at all — the file a row lives in *is* its status. |
 | `COR-01-080` | `agent-harness/rules/CORE/UNIVERSAL.md` | Non-destructive | Artifacts already in `done/`/`archive/` are never retroactively rewritten when conventions change elsewhere. |
 | `DEC-04-010`/`DEC-05-010`–`030` | `agent-harness/rules/artifact-specs/ADR.md` | ADR gate | Explicit acceptance is what makes `accepted/` — and therefore citable authority — load-bearing rather than a label. |
-| `IDA-06-030` | `agent-harness/rules/artifact-specs/IDEA.md` | Idea-specific | Closing an Idea is one action: `status: landed`, `next` populated, moved to `archive/`. |
-| `IPL-02-010`/`011` | `agent-harness/rules/artifact-specs/IMPLEMENTATION-PLAN.md` | Plan-specific | The Readiness Gate is what makes `approved/` load-bearing — Implementing may only act on a Plan that actually cleared it. |
+| `STT-01-050` | `agent-harness/systems/STATUS-TRANSITIONS.md` | Idea-specific | Closing an Idea is one action: `status: landed`, `next` populated, moved to `archive/`. |
+| `STT-01-030` | `agent-harness/systems/STATUS-TRANSITIONS.md` | Plan-specific (own row) | The Readiness Gate is what makes `ready/` load-bearing for a Plan — Implementing may only act on a Plan that actually cleared it, the same weight `ready/` now carries for every other artifact type too. |
 | `IMPR-03-040` | `agent-harness/rules/artifact-specs/IMPROVEMENT.md` | Improvement-specific | An Improvement cannot move to `done/` until both the target changes are applied and `## Validation Result` is documented. |
 | `TRN-01-030` | `agent-harness/rules/artifact-specs/TRANSCRIPT.md` | Transcript-specific | `archived` Transcripts move to `archive/`, content preserved. |
 | `QST-07-010` | `agent-harness/rules/artifact-specs/QUESTIONS.md` | Questions-specific | Resolving/discarding a Question is the row-move itself — there is no separate folder move to perform. |
@@ -33,25 +33,22 @@ closed, ID stable across the move (`OUT-04-010`/`OUT-04-020`). Several artifact 
 because a plain `active/`→`archive/` pair cannot express a load-bearing intermediate state that downstream work
 actually depends on. They split into two groups by *why* the divergence needs its own rule.
 
-**Plain case — the third folder's name is a direct 1:1 match to the status it holds, so `OUT-04-020` plus a
-Folder Structure table row is the complete mechanism, with no extra clarifying rule needed:**
+**Use Case, Spec, Task, and Implementation Plan share one four-folder shape**: `active/` (covers `draft`,
+`in-progress`, `blocked` — none of these need their own folder, since nothing downstream depends on
+distinguishing them by location), `ready/` (the artifact's own Readiness Checklist/Checks passed — set via
+`systems/STATUS-TRANSITIONS.md`'s `STT-01-030` cascade-or-manual-instruction mechanism for UC/Spec/Task, and its
+own Plan row — the walk's own root trigger, not a downstream output — for Plan; this is where the next tier, or
+Implementing for a Plan, may safely rely on it), `done/` (fully realized — set via `STT-01-020` for all four),
+`archive/` (`archived`/`rejected`). The folder name matches the status word exactly at every step; no artifact
+type needs its own clarifying rule for this shape anymore — `ready/` carries the same load-bearing weight for
+all four, not just Plan.
 
-- **Tasks** add `done/` for status `done`.
-- **Specs and Use Cases** add `implemented/` for status `implemented` — the same "complete, but still
-  authoritative" gap Implementation Plans/Improvements solve below, but resolved here without a dedicated rule
-  because, like Task's `done/`, the folder name already says exactly what the status means.
-
-**Clarifying case — the folder's meaning is not a simple name match, so each gets its own rule beyond the
-generic mechanism:**
+Two artifact types still diverge, for reasons unrelated to the above and each still getting its own rule:
 
 - **ADRs** add `accepted/` between `proposed/` and `archive/`, because "this decision is settled and citable" is
   not the same claim as "this decision exists" — `accepted/` is where an ADR becomes authority other artifacts
   may rely on (see `agent-harness/systems/ADR-AUTHORITY.md`), and that transition requires the explicit
   confirmation gate in `DEC-04-010`, not a folder move on its own.
-- **Implementation Plans** add `approved/` between `active/` and `done/`, for the identical reason one layer
-  down the funnel: `approved/` is where a Plan becomes safe for Implementing to act on, gated by the Readiness
-  Checks passing (`IPL-02-010`/`011`) — the folder move is a *consequence* of the gate clearing, never a
-  substitute for it.
 - **Improvements** keep the generic `active/`→`done/` pair, but `done/` itself carries an extra load-bearing
   condition unique to this artifact type: it means the approved changes are actually applied *and* validated
   (`OUT-05-010`, `IMPR-03-040`) — a status flip with no applied change and no validation record is not a
@@ -76,8 +73,10 @@ match a newer convention — a later Improvement changing folder or naming conve
 
 ## Examples
 
-- An Implementation Plan's Readiness Checks all pass. The agent moves it `active/`→`approved/` in the same pass
-  as setting `status: approved` — the folder move is not a separate, later housekeeping step.
+- Any of UC/Spec/Task/Plan's Readiness Checklist passes. The agent moves it `active/`→`ready/` in the same pass
+  as setting `status: ready` — the folder move is not a separate, later housekeeping step.
+- `UC-0012.md` moves `active/`→`ready/` when its own Readiness Checklist passes and either the Plan-approval
+  cascade or an explicit operator instruction sets it `ready`.
 - An Improvement's target changes are applied but `## Validation Result` is not yet written. The artifact stays
   in `active/` even though the code changes already landed — `done/` requires both conditions together.
 - A Question resolves. The agent deletes its row from `QUESTIONS-OPEN.md` and adds it to
@@ -86,6 +85,7 @@ match a newer convention — a later Improvement changing folder or naming conve
 ## Reference Files
 
 - `agent-harness/OUTPUTS.md`
+- `agent-harness/systems/STATUS-TRANSITIONS.md`
 - `agent-harness/artifact-specs/ADR.md`
 - `agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`
 - `agent-harness/artifact-specs/IMPROVEMENT.md`

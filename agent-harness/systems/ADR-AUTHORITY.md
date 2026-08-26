@@ -21,8 +21,8 @@ enforceable obligations remain in the rule files that define the participating r
 | `DEC-09-010` | `agent-harness/rules/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md` | Relations | Every `related` ID needs an explicit relationship-type note. |
 | `DEC-10-010` | `agent-harness/rules/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md` | Supersession timing | A superseding ADR's `supersedes` link only sets once it itself becomes `accepted`. |
 | `DEC-08-010` | `agent-harness/rules/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md` | Reference sync | A superseded ADR's citations in `harness-data/reference/*.md` update to the superseding ADR. |
-| `UCS-07-010`–`030` | `agent-harness/rules/artifact-specs/USE-CASES.md` | Re-check (readiness) | Missed-ADR, content-drift, and compliance rechecks before `ready-for-spec`. |
-| `SPS-08-010`–`030` | `agent-harness/rules/artifact-specs/SPECS.md` | Re-check (readiness) | Same three rechecks before `approved`. |
+| `UCS-07-010`–`030` | `agent-harness/rules/artifact-specs/USE-CASES.md` | Re-check (readiness) | Missed-ADR, content-drift, and compliance rechecks before `ready`. |
+| `SPS-08-010`–`030` | `agent-harness/rules/artifact-specs/SPECS.md` | Re-check (readiness) | Same three rechecks before `ready`. |
 | `TSK-06-010`–`040` | `agent-harness/rules/artifact-specs/TASKS.md` | Re-check (readiness) | Same three rechecks (plus a health/readiness-check ADR check) before `ready`. |
 
 ## Operating Model

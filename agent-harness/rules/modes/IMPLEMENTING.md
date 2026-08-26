@@ -4,14 +4,13 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IMPL-01-010 | Preconditions | An Implementation Plan MUST exist at status `approved`. |
+| IMPL-01-010 | Preconditions | An Implementation Plan MUST exist at status `ready`. |
 | IMPL-01-020 | Preconditions | All included Tasks MUST be at status `ready`. |
+| IMPL-01-021 | Preconditions | `IMPL-01-020`'s check MUST be re-verified per Task at the point Implementing starts that specific Task, not only once at the Plan's own start — since `systems/STATUS-TRANSITIONS.md`'s `STT-01-010` downward reset can reset an included Task to `draft` after the Plan was set `ready` without revoking the Plan's own `ready` status. A Task found off `ready` at that point blocks Implementing from acting on it regardless of the Plan's own status. |
 | IMPL-01-030 | Preconditions | Safety and risk rules MUST be satisfied. |
 | IMPL-02-010 | Gate-Attestation | MUST write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of a plan step, recording the Plan ID, Plan status, and the Task's `allowed_paths`. |
 | IMPL-03-010 | Execution | MUST follow the plan — do not deviate from approved scope. |
 | IMPL-03-020 | Execution | SHOULD execute one plan step at a time by default. |
-| IMPL-03-030 | Execution | MUST set Task status to `in-progress` when starting a Task, `done` when complete. |
-| IMPL-03-040 | Execution | MUST set Plan status to `in-progress` when execution begins, `done` when all steps are complete. |
 | IMPL-03-050 | Execution | MUST keep the diff focused on the current step. |
 | IMPL-03-060 | Execution | MUST respect allowed and forbidden paths from Task frontmatter. |
 | IMPL-03-070 | Execution | SHOULD NOT perform unrelated refactoring. |
@@ -22,7 +21,7 @@
 | IMPL-03-120 | Execution | MUST stop if validation fails outside the expected scope. |
 | IMPL-03-130 | Execution | MUST stop if missing or contradictory requirements are discovered. |
 | IMPL-03-140 | Execution | MUST stop if a high-risk area is encountered that was not covered by the plan. |
-| IMPL-03-150 | Execution | MUST follow `IMPLEMENTATION-PLAN.md`'s own status-transition rules for CATALOG bookkeeping and the Spec/Use-Case status cascade when a Plan's status changes (`in-progress`, `done`), or when every Task derived from a Spec reaches `done`. |
+| IMPL-03-150 | Execution | MUST follow `systems/STATUS-TRANSITIONS.md`'s transition tables, and `IMPLEMENTATION-PLAN.md`'s own CATALOG bookkeeping rules (`IPL-05-020`), when a Plan's status changes or when every Task derived from a Spec reaches `done`. |
 | IMPL-04-010 | Batch | Batch implementation MAY proceed only when explicitly planned and approved. |
 | IMPL-04-020 | Batch | High-risk tasks MUST remain separate unless explicitly approved. |
 | IMPL-05-050 | Boundaries | MUST NOT continue past a failing validation without explicit approval. |

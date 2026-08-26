@@ -9,12 +9,12 @@
 | VAL-01-030 | Artifact-Validation | Traceability links (`source`, `derived_*`, `related`) MUST be present and synchronized where required. |
 | VAL-01-040 | Artifact-Validation | ID MUST be stable and follow naming conventions. |
 | VAL-01-050 | Artifact-Validation | Body sections MUST be complete and not left as placeholders. |
-| VAL-02-010 | Process-Validation | The artifact MUST have been created from an accepted-status source artifact appropriate to its type — OR, when the artifact's own `## Risk-Tier Classification` section (`RSK-05-010`) documents a valid `shared-procs/RISK-TIER.md` skip, that section satisfies this check in place of an accepted upstream source artifact. |
-| VAL-02-020 | Process-Validation | The Implementation Plan MUST be at status `approved` before implementation starts. |
-| VAL-02-030 | Process-Validation | Implementation MUST NOT have happened before a plan was accepted. |
+| VAL-02-010 | Process-Validation | The artifact's creation MUST have been permitted by `shared-procs/RISK-TIER.md`'s Necessity cascade for its tier (carried forward from an earlier stage, or run fresh) — OR, when the artifact's own `## Risk-Tier Classification` section (`RSK-05-010`) documents a valid skip, that section satisfies this check. A parent artifact's own status is not itself a creation precondition (`IMPROVEMENT-0129`). |
+| VAL-02-020 | Process-Validation | The Implementation Plan MUST be at status `ready` before implementation starts. |
+| VAL-02-030 | Process-Validation | Implementation MUST NOT have happened before a plan was `ready`. |
 | VAL-02-040 | Process-Validation | Specs or Tasks MUST NOT have been created from Partnering mode. |
 | VAL-02-050 | Process-Validation | MUST verify `COR-09-010`'s high-risk handling (scope and validation coverage, plus approval coverage for payments) was followed for any high-risk area touched. |
-| VAL-02-060 | Process-Validation | MUST reconcile the actual code changes (via `git log`/`git diff`) against the approved Implementation Plan's `allowed_paths` and steps, flagging any file changed outside `allowed_paths`, or any change with no corresponding Plan step, as a finding. |
+| VAL-02-060 | Process-Validation | MUST reconcile the actual code changes (via `git log`/`git diff`) against the `ready` Implementation Plan's `allowed_paths` and steps, flagging any file changed outside `allowed_paths`, or any change with no corresponding Plan step, as a finding. |
 | VAL-03-010 | Behavioral-Validation | Each acceptance criterion MUST be met and verifiable. |
 | VAL-03-020 | Behavioral-Validation | `test_refs` in the Spec frontmatter MUST be populated, contain only test file paths, with all referenced test files existing. |
 | VAL-03-030 | Behavioral-Validation | Each acceptance criterion MUST be traceable to an entry in `test_refs` or a Task validation command. |

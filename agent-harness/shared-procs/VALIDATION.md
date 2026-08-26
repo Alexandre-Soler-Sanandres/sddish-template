@@ -25,15 +25,15 @@ Validation covers four areas, in no fixed order — use whichever the target art
 stage; traceability links (`source`, `derived_*`, `related`) present and synchronized where required; ID stable
 and following naming conventions; body sections complete, not left as placeholders (`VAL-01-010`–`050`).
 
-**Process validation** — the artifact was created from an accepted-status source artifact appropriate to its
-type, OR its own `## Risk-Tier Classification` section documents a valid `shared-procs/RISK-TIER.md` skip in
-place of that upstream source (`VAL-02-010`); an Implementation Plan is `approved` before implementation starts,
-and implementation never happened before that approval (`VAL-02-020`/`VAL-02-030`); Specs/Tasks were never
-created from Partnering mode (`VAL-02-040`); `CORE.md`'s `COR-09-010` high-risk handling (scope and validation
-coverage, plus approval coverage for payments) was followed for any high-risk area touched (`VAL-02-050`); the
-actual code changes (via `git log`/`git diff`) reconcile against the approved Plan's `allowed_paths` and steps,
-flagging any file changed outside `allowed_paths` or any change with no corresponding step as a finding
-(`VAL-02-060`).
+**Process validation** — the artifact's creation was permitted by `shared-procs/RISK-TIER.md`'s Necessity cascade
+for its tier, OR its own `## Risk-Tier Classification` section documents a valid skip (`VAL-02-010`) — a parent
+artifact's own status is not itself a creation precondition (`IMPROVEMENT-0129`); an Implementation Plan is
+`ready` before implementation starts, and implementation never happened before that (`VAL-02-020`/`VAL-02-030`);
+Specs/Tasks were never created from Partnering mode (`VAL-02-040`); `CORE.md`'s `COR-09-010` high-risk handling
+(scope and validation coverage, plus approval coverage for payments) was followed for any high-risk area touched
+(`VAL-02-050`); the actual code changes (via `git log`/`git diff`) reconcile against the `ready` Plan's
+`allowed_paths` and steps, flagging any file changed outside `allowed_paths` or any change with no corresponding
+step as a finding (`VAL-02-060`).
 
 **Behavioral validation** — each acceptance criterion met and verifiable (`VAL-03-010`); `test_refs` in the Spec
 frontmatter populated, containing only existing test file paths (`VAL-03-020`); each acceptance criterion

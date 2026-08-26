@@ -3,7 +3,7 @@
 ## Use When
 
 - reviewing code changes before acceptance
-- checking an implementation against its approved plan
+- checking an implementation against its `ready` plan
 - producing formal review findings
 
 ## Do Not Use For
@@ -15,13 +15,13 @@
 ## Required Inputs
 
 - changed files or diff
-- approved plan, task, or spec when applicable
+- `ready` plan, task, or spec when applicable
 - available tests, validation results, or reproduction evidence
 
 ## Agent Procedure
 
 1. Confirm the review target and scope.
-2. Check whether the change matches the approved plan and stated intent.
+2. Check whether the change matches the `ready` plan and stated intent.
 3. Review correctness first: logic, edge cases, failure paths, and regressions.
 4. Review safety next: state changes, data handling, auth, config, migrations, and external effects.
 5. Review quality next: tests, missing tests, docs, naming, and maintainability.
@@ -45,7 +45,7 @@
 
 ## Escalate When
 
-- no approved plan exists for implementation work that required one
+- no `ready` plan exists for implementation work that required one
 - the change scope is larger than the stated intent
 - high-risk areas are changed without matching validation
 - review cannot be completed because key context is missing
