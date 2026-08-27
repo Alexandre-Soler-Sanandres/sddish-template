@@ -47,6 +47,12 @@ unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `
 
 - AC-1: (concrete, testable criterion)
 
+## Requirement Coverage Map
+
+| AC ID | Requirement IDs | Scenario | Evidence intent |
+| --- | --- | --- | --- |
+| AC-1 | FR-1, NFR-1 | (Given/When/Then or EARS-style condition/action/outcome) | (test, check, or review that proves this AC) |
+
 ## Constraints
 
 (technical or business constraints that limit the solution space; cite inherited `CSQ-*` / `Q-<APP>-*` / `CSP-NNNN`
@@ -62,6 +68,11 @@ ID when relevant)
 | Risk | Likelihood | Impact | Mitigation |
 | --- | --- | --- | --- |
 | | | | |
+
+## Behavior to Preserve
+
+(required for fixes, refactors, migrations, and scoped behavior changes where existing behavior outside scope must
+remain stable; list regression invariants or mark `Not applicable — net-new behavior` explicitly)
 
 ## Validation Approach
 
@@ -92,7 +103,10 @@ beneath the checklist — see `rules/artifact-specs/SPECS.md`'s `SPS-02-012`.
 - [ ] Scope and non-goals are defined
 - [ ] All functional requirements are concrete
 - [ ] Acceptance criteria are testable
+- [ ] Every acceptance criterion maps to requirement IDs, a scenario, and evidence intent
+- [ ] Normal, boundary, error, and recovery behavior is covered or explicitly marked not applicable
 - [ ] Risks are identified
+- [ ] `## Behavior to Preserve` is filled in or explicitly marked not applicable
 - [ ] Dependencies are resolved or explicitly accepted
 - [ ] Task decision notes are filled in
 - [ ] If entered via the UC-skip path, `## Risk-Tier Classification` section is present and complete

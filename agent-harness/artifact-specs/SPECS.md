@@ -45,7 +45,11 @@ A Spec entered via the UC-skip path must include a `## Risk-Tier Classification`
 `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Use Case
 (`SPS-01-050`). `technical_refs` names external technical artifacts (OpenAPI specs, database schemas, contracts)
 that live outside `agent-harness/` — input constraints or expected outputs, not part of the behavioral spec
-itself; their location is project-defined, not enforced by the harness.
+itself; their location is project-defined, not enforced by the harness. The body also carries a compact
+requirement-to-acceptance mapping table so each acceptance criterion names the requirement IDs it proves, the
+scenario form that exercises it, and the intended evidence. When the change is a fix, migration, refactor, or
+partial behavior change inside an existing system, the Spec also carries a `## Behavior to Preserve` section for
+the out-of-scope behavior that must remain stable (`SPS-02-013`-`SPS-02-015`).
 
 ## Field Semantics
 
@@ -65,9 +69,11 @@ itself; their location is project-defined, not enforced by the harness.
 - Functional requirements
 - Non-functional requirements
 - Acceptance criteria
+- Requirement coverage map
 - Constraints
 - Dependencies
 - Risks
+- Behavior to Preserve (when preserving existing behavior is part of the contract)
 - Validation approach
 - Task decision notes (if relevant)
 - Risk-Tier Classification (if entered via the UC-skip path — see `SPS-01-050`)
@@ -98,8 +104,12 @@ ADR checks before promotion: missed-ADR recheck against the *current* accepted-A
 `fleet-wide` ADR present in `related` and every `scoped` ADR re-judged (`SPS-08-010`–`012`); content-drift
 recheck against the Spec's actual current content, not only its original `area` (`SPS-08-020`); and a
 compliance check that every ADR cited in `related` is actually reflected in the Spec's requirements/scope
-(`SPS-08-030`). Also verify the Questions registry holds nothing unresolved that should block the advance
-(`SPS-05-011`). `ready` is no
+(`SPS-08-030`). Also verify that every acceptance criterion maps to requirement IDs, a scenario, and evidence
+intent (`SPS-02-013`), and that normal, boundary, error, and recovery behavior is either covered or explicitly
+ruled out as not applicable (`SPS-02-014`). When the change preserves existing behavior outside the changed
+surface, verify that `## Behavior to Preserve` records those regression invariants or explicitly states that the
+section is not applicable (`SPS-02-015`). Also verify the Questions registry holds nothing unresolved that should
+block the advance (`SPS-05-011`). `ready` is no
 longer a precondition for Task creation (see `REFINING.md`'s `TSK-01-010`) — `STT-01-030`/`040` set it once
 these local gates pass.
 

@@ -26,6 +26,27 @@ approval:
 (optional — filled in only when this Plan skipped any tier per `shared-procs/RISK-TIER.md`'s cascade, including
 Plan-tier direct entry with `entrypoint_type: none`; see `IMPLEMENTATION-PLAN.md`'s `IPL-01-030`)
 
+## Behavior Contract
+
+(required only when no Spec participates; keep this compact and state the expected change, preserved behavior, and
+observable proof. Otherwise write `Not applicable — covered by SPEC-NNNN`.)
+
+- Expected change:
+- Preserved behavior:
+- Observable proof:
+
+## Chain Preflight
+
+(required when this Plan participates in a real UC/Spec/Task chain; Planning records Validation's durable
+read-only report here. Otherwise write `Not applicable — no higher-tier chain participates`.)
+
+- Profile:
+- Run at:
+- Outcome:
+- Checked artifacts:
+- Artifact provenance:
+- Findings or Review reference:
+
 ## Readiness Checks
 
 All items must be checked before this plan may advance to `ready`. Cite a one-line evidence pointer per
@@ -34,6 +55,8 @@ checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-
 - [ ] Required Tasks exist
 - [ ] `STT-01-030` preconditions verified: this Plan's readiness and parallel-work gates pass, every included Task passes its own local promotion gates, every participating Spec/Use Case has full child fan-out already at `ready`, and the full promotion walk can complete atomically with no failed participant
 - [ ] If entered with no upstream artifact per `RISK-TIER.md`'s cascade, `## Risk-Tier Classification` section is present and complete
+- [ ] If no Spec participates, `## Behavior Contract` is present and complete
+- [ ] If a real UC/Spec/Task chain participates, `## Chain Preflight` is present, passing, and current
 - [ ] No blockers or unresolved dependencies
 - [ ] High-risk areas identified
 - [ ] Each plan step defines expected files, validation, and a suggested commit

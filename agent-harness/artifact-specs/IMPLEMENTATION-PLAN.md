@@ -43,7 +43,9 @@ no high-risk work is involved (`IPL-01-010`). Tasks SHOULD stay separate when ri
 differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the
 change touches database, deployment, security, payment execution, security-critical logic, or domain-critical
 business rules (`IPL-01-020`). A Plan whose entry skipped any risk-tier level MUST include a `## Risk-Tier
-Classification` section regardless of how small the change is (`IPL-01-030`/`IPL-01-031`).
+Classification` section regardless of how small the change is (`IPL-01-030`/`IPL-01-031`). When no Spec
+participates, the Plan must carry a compact `## Behavior Contract` section stating the expected change,
+preserved behavior, and observable proof instead of forcing a full Spec (`IPL-01-032`).
 
 ## Field Semantics
 
@@ -54,6 +56,8 @@ Active Implementation Plans table (`IPL-05-020`).
 ## Body Should Include
 
 - Target artifact
+- Behavior Contract (when no Spec participates)
+- Chain Preflight (when a UC/Spec/Task chain participates)
 - Readiness checks
 - Included artifacts
 - Excluded artifacts
@@ -81,7 +85,12 @@ check `harness-data/CATALOG.md` for other Plans at status `ready` or `in-progres
 overlapping Task `allowed_paths` — stop and surface the conflict if either condition is found (`IPL-05-010`/
 `IPL-05-011`). Keep `harness-data/CATALOG.md`'s Active Implementation Plans table accurate for all Plans at
 status `ready` or `in-progress`, adding/updating a row in the same pass the status changes and removing it
-once the Plan is no longer either (`IPL-05-020`).
+once the Plan is no longer either (`IPL-05-020`). If no Spec participates, verify the Plan's own
+`## Behavior Contract` captures the expected delta, preserved behavior, and observable proof before advancing
+(`IPL-02-014`). When a real UC/Spec/Task chain participates, require a passing `## Chain Preflight` report
+recording the validation profile, run date/time, checked artifact IDs and paths, each checked artifact's
+`updated` value, git blob/hash when available, and either findings or a cited Review reference; any later change
+to a participating artifact makes that report stale until rerun (`IPL-02-015`/`IPL-02-016`).
 
 ## Relationships
 

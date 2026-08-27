@@ -58,7 +58,9 @@ governs the planning activity, the artifact spec governs the resulting Plan's ow
    - If Tasks are not required → create an inline Implementation Plan.
 4. Do not generate duplicate Tasks or ignore existing ones.
 5. Create the Implementation Plan.
-6. Wait for approval — do not change code.
+6. Run Validation's `chain-preflight` profile against the selected chain and record the resulting durable report
+   in the Plan's `## Chain Preflight` section.
+7. Wait for approval — do not change code.
 
 ### Entering via `/plan-use-case`
 
@@ -73,14 +75,21 @@ governs the planning activity, the artifact spec governs the resulting Plan's ow
    - If Tasks are required but missing → stop and route to `/create-tasks`.
 5. Do not generate duplicate Tasks or ignore existing ones.
 6. Create a coherent end-to-end Implementation Plan covering all derived Specs.
-7. Wait for approval — do not change code.
+7. Run Validation's `chain-preflight` profile against the selected chain and record the resulting durable report
+   in the Plan's `## Chain Preflight` section.
+8. Wait for approval — do not change code.
 
 ### Entering via direct instruction (no Use Case/Spec/Task file named)
 
 1. Reuse an existing classification or run the cascade fresh (`IPL-08-010`/`IPL-08-011`).
 2. If above Plan-tier, stop and route to Refining instead (`IPL-08-020`/`IPL-08-021`).
 3. If at Plan-tier, create the Implementation Plan (`IPL-08-022`).
-4. Wait for approval; do not change code (`IPL-08-023`/`IPL-08-024`).
+   - If no Spec participates, include the compact `## Behavior Contract` required by the Plan contract instead of
+     inventing a full Spec.
+4. Run Validation's `chain-preflight` profile when a chain exists, or `artifact-readiness` against the Plan
+   itself when no higher-tier artifact participates; record the resulting durable report in the Plan's
+   `## Chain Preflight` section when preflight was used.
+5. Wait for approval; do not change code (`IPL-08-023`/`IPL-08-024`).
 
 ## Routing
 
@@ -92,13 +101,15 @@ Refining entry point (`/create-use-case`, `/create-spec`, or `/create-tasks`) �
 ## Outputs
 
 An Implementation Plan under `harness-data/artifacts/implementation-plans/active/PLAN-*.md`, per
-`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`, awaiting approval.
+`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`, with its required validation state recorded before
+awaiting approval.
 
 ## Examples
 
 "Plan the implementation for the Dockerfile chown fix" with no Task/Spec/Use Case named: the agent runs the
 risk-tier cascade, finds it lands at Plan-tier, creates an Implementation Plan with `entrypoint_type: none`, and
-waits for approval rather than making the fix directly.
+waits for approval rather than making the fix directly. That Plan includes a compact `## Behavior Contract`
+capturing the expected change, preserved behavior, and observable proof.
 
 ## Rules Map
 

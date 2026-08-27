@@ -26,7 +26,9 @@
 4. Separate observed facts from hypotheses.
 5. Trace the failure path until the likely cause is isolated or the search boundary is clear.
 6. Check for nearby regressions, hidden side effects, and missing coverage.
-7. Propose the smallest safe next step: fix, deeper investigation, or escalation.
+7. Translate the confirmed expected behavior, negative/error paths, and preserved behavior into the destination
+   Spec's requirement/coverage sections or the destination Plan's `## Behavior Contract`.
+8. Propose the smallest safe next step: fix, deeper investigation, or escalation.
 
 ## Required Checks
 
@@ -34,6 +36,7 @@
 - likely cause is backed by evidence, not guesswork
 - affected scope and risk are stated
 - missing validation or missing evidence is stated
+- any preserved behavior or regression-sensitive edge is captured for the resulting Spec or Plan
 
 ## Required Output
 
@@ -41,6 +44,7 @@
 - reproduction steps or reproduction gap
 - current evidence and likely cause
 - affected paths or components
+- preserved behavior, negative paths, and regression-sensitive edges to carry forward
 - recommended next action
 
 ## Escalate When

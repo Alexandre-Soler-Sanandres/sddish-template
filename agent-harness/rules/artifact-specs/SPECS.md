@@ -10,6 +10,9 @@
 | SPS-02-010 | Readiness-Gate | Before this Spec's promotion (`STT-01-030`/`040`), MUST verify the Readiness Checklist in the artifact. |
 | SPS-02-011 | Readiness-Gate | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
 | SPS-02-012 | Readiness-Gate | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |
+| SPS-02-013 | Readiness-Gate | Every acceptance criterion MUST map to at least one requirement ID, a scenario form, and an evidence intent in the Spec's requirement-coverage section before the Spec may advance to `ready`. |
+| SPS-02-014 | Readiness-Gate | Before the Spec may advance to `ready`, normal, boundary, error, and recovery behavior MUST be covered in the requirement/acceptance contract or explicitly marked not applicable. |
+| SPS-02-015 | Readiness-Gate | When the change is a fix, migration, refactor, or scoped behavior change in an existing system, the Spec MUST include a `## Behavior to Preserve` section recording the behavior outside scope that must remain stable; otherwise the section MUST explicitly state that it is not applicable. |
 | SPS-03-010 | Updating | A Spec MAY be updated when new information changes the scope or requirements, open questions are resolved, or acceptance criteria need correction. |
 | SPS-03-020 | Updating | Updating MUST NOT change the Spec ID. |
 | SPS-03-021 | Updating | Updating MUST update the `updated` field. |

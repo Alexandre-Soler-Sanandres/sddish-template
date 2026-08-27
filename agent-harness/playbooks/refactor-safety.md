@@ -26,6 +26,8 @@
 4. Re-run the baseline after each increment to confirm behavior is unchanged.
 5. Check for subtle drift: changed defaults, altered ordering, dropped edge-case handling, or changed error behavior.
 6. Confirm test coverage was preserved or improved, not incidentally weakened by the restructuring.
+7. Carry the established baseline and no-drift invariants into the destination Spec's `## Behavior to Preserve`
+   section or the destination Plan's `## Behavior Contract`.
 
 ## Required Checks
 
@@ -33,12 +35,14 @@
 - baseline still holds after the refactor
 - no incidental behavior drift is introduced
 - test coverage is preserved or improved, not reduced
+- preserved behavior is explicit enough to review before implementation begins
 
 ## Required Output
 
 - summary of the structural change and its intended scope
 - baseline used to confirm behavior preservation
 - confirmation that behavior is unchanged, or exact points of drift found
+- preserved behavior invariants to carry into the resulting Spec or Plan
 - test coverage impact
 
 ## Escalate When

@@ -25,7 +25,9 @@
 3. Identify the specific commit, change, or condition that introduced the regression.
 4. Verify the suspected cause by reproducing with and without it when feasible.
 5. Assess blast radius: what else the same change may have affected.
-6. Recommend the smallest safe next action: revert, forward fix, or deeper investigation.
+6. Translate the last known-good behavior, failure mode, and blast-radius invariants into the destination Spec's
+   requirement/coverage sections or the destination Plan's `## Behavior Contract`.
+7. Recommend the smallest safe next action: revert, forward fix, or deeper investigation.
 
 ## Required Checks
 
@@ -33,6 +35,7 @@
 - the suspected introducing change is backed by evidence, not just timing correlation
 - blast radius beyond the reported symptom is considered
 - the recommended action matches the confirmed risk
+- preserved behavior and regression boundaries are captured for the resulting Spec or Plan
 
 ## Required Output
 
@@ -40,6 +43,7 @@
 - identified or suspected introducing change
 - supporting evidence
 - blast radius assessment
+- last known-good and preserved-behavior details to carry into the resulting Spec or Plan
 - recommended next action
 
 ## Escalate When

@@ -17,11 +17,13 @@ Procedure Guide prose explains how to run the procedure well; paired rules under
 `VALIDATION.md` checks artifacts, plans, and implementations against process and behavioral criteria. It does not
 run technical checks — those belong to Implementing, guided by `harness-data/reference/QUALITY.md` and `TOOLING.md`.
 
-**Invoked from:** Implementing (as its own closing gate, after each plan step), Improving-Harness (as part of its
-own change process)
+**Invoked from:** Planning-Implementation (the `chain-preflight` profile, before a Plan is promoted), Implementing
+(as its own closing gate, after each plan step), Improving-Harness (as part of its own change process)
 **Covers:** Artifact completeness, process rule compliance, acceptance criteria, readiness checks
-**Output:** Findings documented inline in the plan step summary, or as a Review artifact when a formal record is
-needed.
+**Output:** Profile-dependent — `artifact-readiness` reports pass/fail to the invoking mode or wrapper,
+`chain-preflight` returns a read-only report for the Plan's `## Chain Preflight` section, and
+`implementation-result` reports into the relevant closeout surface. Validation does not modify the checked
+artifacts beyond status; a Review artifact holds the record when a formal one is needed.
 
 Short version:
 
