@@ -105,6 +105,10 @@ Three files, one per status, using `agent-harness/templates/QUESTIONS-template.m
 There is no separate local-only Question store — every Question must be recorded in this registry, regardless of
 how material it is to any given artifact (`QST-09-010`).
 
+The template ships these three files initialized and empty. If an older adopter is missing any of them, create
+all three from `agent-harness/templates/QUESTIONS-template.md` in one bootstrap action before the first dedup
+scan or row insertion, so deduplication and later row moves span every status file (`QST-09-020`).
+
 ## Template
 
 Use `agent-harness/templates/QUESTIONS-template.md` for all three files.

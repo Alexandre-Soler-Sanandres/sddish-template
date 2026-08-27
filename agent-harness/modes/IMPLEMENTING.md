@@ -36,7 +36,8 @@ only says when to trigger the change, not what the change requires.
 ## Core Moves
 
 1. Write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of a plan step, recording
-   the Plan ID, Plan status, and the Task's `allowed_paths` (`IMPL-02-010`).
+   the Plan ID, Plan status, and the Task's `allowed_paths` (`IMPL-02-010`). Create `RUN-LOG.md` first if it does
+   not yet exist, keeping it minimal — do not backfill earlier history (`IMPL-02-011`).
 2. Execute one plan step at a time by default (`IMPL-03-020`), following the plan without deviating from approved
    scope (`IMPL-03-010`).
 3. Set Task status to `in-progress` when starting a Task, `done` when complete; set Plan status to `in-progress`

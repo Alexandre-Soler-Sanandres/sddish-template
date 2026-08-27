@@ -226,6 +226,20 @@ unnecessary — see [05-workflows.md](05-workflows.md)'s Risk-Tier Cascade secti
 deliberate full-tier walkthrough to prove every stage works at least once, not a claim that every future change
 needs all four.
 
+### Adoption Smoke-Check
+
+Run this once after setup to confirm a fresh checkout can actually execute the rules, before starting real work:
+
+- [ ] The four `harness-data/reference/` files hold real project content, not template placeholders.
+- [ ] `harness-data/CATALOG.md`'s Active Implementation Plans note uses the `ready | in-progress` vocabulary.
+- [ ] All three Questions registry files exist under `harness-data/artifacts/questions/`
+      (`QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, `QUESTIONS-DISCARDED.md`).
+- [ ] Every expected lifecycle folder under `harness-data/artifacts/` is present.
+- [ ] Raising the first Question dedups across all three registry files and inserts a row without inventing structure.
+- [ ] Promoting the first Plan to `ready` yields a `harness-data/CATALOG.md` row using `ready`.
+- [ ] Starting the first implementation creates `harness-data/RUN-LOG.md` when absent, containing only the
+      `IMPL-02-010` gate line.
+
 ### After setup (both options)
 
 These are the details people most often need once the basic files exist:
@@ -237,7 +251,8 @@ These are the details people most often need once the basic files exist:
   universal index, the other is this project's own bookkeeping against it
 - `harness-data/RUN-LOG.md` is not required by default, but the agent may use it for interrupted, approval-heavy,
   multi-step, or high-risk work; keep it temporary and collapse or clear it after completion. The one mandatory
-  case is the `IMPL-02-010` gate-check line written before the first file mutation of a plan step.
+  case is the `IMPL-02-010` gate-check line written before the first file mutation of a plan step; Implementing
+  creates the file at that point if it does not yet exist, without backfilling earlier history (`IMPL-02-011`).
 - Optionally add `REPO-MAP.md` at repo root or a major subtree when the codebase is large enough that normal context
   loading becomes clumsy
 - Optionally add project-specific setup and operating guides under `harness-data/guides/`
