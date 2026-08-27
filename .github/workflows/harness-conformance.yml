@@ -1,0 +1,19 @@
+name: harness-conformance
+
+# Structural guard for the agent harness skeleton. This is NOT a substitute for the
+# agent-performed COR-10-060 citation audit, Improvement validation, explicit approval,
+# or human semantic review — it only catches cross-surface drift in the template.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run harness conformance check
+        run: bash scripts/check-harness-conformance.sh

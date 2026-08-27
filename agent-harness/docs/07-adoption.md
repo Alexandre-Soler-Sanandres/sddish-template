@@ -240,6 +240,22 @@ Run this once after setup to confirm a fresh checkout can actually execute the r
 - [ ] Starting the first implementation creates `harness-data/RUN-LOG.md` when absent, containing only the
       `IMPL-02-010` gate line.
 
+### Structural Conformance Check
+
+`scripts/check-harness-conformance.sh` is a portable structural guard copied into every repository created from
+this template. It checks rule-ID uniqueness and citation resolution, Rules-Map and referenced-file paths,
+Markdown links, entry-point wrapper parity across the Codex/Claude/Copilot layers, the lifecycle skeleton and
+Plan status vocabulary, and template/placeholder hygiene.
+
+- Template maintainers: it runs in CI (`.github/workflows/harness-conformance.yml`) on every push and pull
+  request, and should pass before an `agent-harness/` change is synced outward.
+- Adopters: run `bash scripts/check-harness-conformance.sh` from your checkout after adopting the harness and
+  after any later harness sync. It needs only bash and common CLI tools — no network, no maintainer-only tooling.
+
+It is structural support only. It does not satisfy or replace the agent-performed `COR-10-060` citation audit,
+Improvement validation (`IMPR-05-*`), explicit per-Improvement approval, or human semantic review of a harness
+change.
+
 ### After setup (both options)
 
 These are the details people most often need once the basic files exist:
