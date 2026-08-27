@@ -64,7 +64,9 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
   After-Review action table for that flavor, not a mix of both (`RVW-04-010`).
 - `outcome` — records *what was decided*; drives the required action in `## Lifecycle`.
 - `status` — `draft` -> `assessed` -> `resolved`, with `discarded` reachable directly from `draft` or `assessed`;
-  records *whether, and how, the record is closed*, separately from `outcome` (see `## Lifecycle`).
+  records *whether, and how, the record is closed*, separately from `outcome` (see `## Lifecycle`). `resolved` is
+  reached differently per flavor: harness/process via `RVW-06-010` (its `follow_up` Improvements all terminal),
+  product/requirements via `RVW-06-040` (the user confirms every finding addressed or waived).
 - `follow_up` — for a harness/process Review with `outcome: follow-up-required`, holds the Improvement ID(s)
   created from it (see `## Relationships`).
 
@@ -78,7 +80,13 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
     clear enough? did the agent follow the context checkpoint before high-impact actions? should the harness
     improve?
 - Findings
+- Finding Disposition — product/requirements flavor only: a `## Finding Disposition` table
+  (Finding, Status, Updated, Evidence; `Status` one of `open` / `addressed` / `waived` / `open-by-design`)
+  maintained as findings are worked through in the target artifact's producing mode; it is the source the
+  `## Closure` section summarizes (`RVW-06-042`/`RVW-06-043`). Harness/process Reviews track findings as
+  `follow_up` Improvement IDs instead and omit this section.
 - Follow-up artifacts (Improvements, new Tasks, etc.)
+- Closure (added only on the `RVW-06-010`/`RVW-06-040` move — see `## Lifecycle`)
 
 ## Lifecycle
 
@@ -94,8 +102,8 @@ Product/Requirements flavor:
 | Outcome | Action |
 | --- | --- |
 | `accepted` | Advance artifact to its next accepted status. Report completion. |
-| `accepted-with-notes` | Advance artifact status. Record findings in the Review artifact, and add open questions to the target artifact only when that artifact is the correct place to carry those notes forward. |
-| `changes-requested` | Set artifact status to `draft`. Record findings in the Review artifact. Stop and wait for user instruction. |
+| `accepted-with-notes` | Advance artifact status. Record findings in the Review artifact, and add open questions to the target artifact only when that artifact is the correct place to carry those notes forward. The Review stays `status: assessed` in `active/` until the user confirms every finding is addressed or explicitly waived, then moves `active/` → `archive/` at `status: resolved` with a `## Closure` section (`RVW-06-040`–`RVW-06-042`). |
+| `changes-requested` | Set artifact status to `draft`. Record findings in the Review artifact. Stop and wait for user instruction. The Review stays `status: assessed` in `active/` until the user confirms every finding is addressed (via the target artifact's producing mode) or explicitly waived, then moves `active/` → `archive/` at `status: resolved` with a `## Closure` section (`RVW-06-040`–`RVW-06-042`). The agent MUST NOT make that move on its own initiative. |
 | `rejected` | Set artifact status to `rejected`. Move artifact to `archive/`. Stop and wait for user instruction. |
 | `follow-up-required` | Hold artifact at current status. Note any process problem found in the Review artifact — MUST NOT create an Improvement artifact from this flavor. An Improvement may only be created from a harness/process-flavored Review (see `IMPROVEMENT.md`'s Sources rule); if a process fix is warranted, that requires a separate harness/process-flavored Review. Stop and wait for user instruction. |
 
@@ -117,11 +125,24 @@ The agent must never autonomously re-enter a producing mode after `changes-reque
 Not applicable in the artifact-readiness sense — a Review's own completion is governed by `## Lifecycle`'s
 closure and discard rules below, not a pre-status checklist.
 
-Closure: a harness/process-flavored Review with `outcome: follow-up-required` moves `active/` → `archive/` and
+Closure (harness/process flavor): a Review with `outcome: follow-up-required` moves `active/` → `archive/` and
 sets `status: resolved` once every `follow_up` Improvement ID reaches `done` or `rejected` (`RVW-06-010`) — it
 stays `status: assessed` in `active/` while `follow_up` is empty or contains a non-terminal Improvement
 (`RVW-06-020`). The move adds a `## Closure` section (date, terminal Improvement ID(s), `done`/`rejected` for
 each) (`RVW-06-030`).
+
+Closure (product/requirements flavor): a Review with `outcome: changes-requested` or `accepted-with-notes` moves
+`active/` → `archive/` and sets `status: resolved` once the user confirms every finding is addressed — through
+the target artifact's own producing mode — or explicitly waived; the agent never makes this move on its own
+initiative (`RVW-06-040`), and the Review stays `status: assessed` in `active/` until then (`RVW-06-041`). The
+move adds a `## Closure` section: date, and one line per finding giving its disposition
+(`addressed` / `waived` / `open-by-design`) and the artifact + mode or user instruction that resolved it,
+matching the latest `## Finding Disposition` rows (`RVW-06-042`). That `## Finding Disposition` table is the
+running per-finding record this flavor keeps in place of `follow_up` Improvement IDs (`RVW-06-043`).
+
+`resolved` (findings worked through) is distinct from `discarded` (work called off): once a `follow_up`
+Improvement has gone terminal, or once the user has confirmed a product/requirements Review's findings are all
+addressed or waived, the Review closes as `resolved`, never `discarded` (`RVW-07-040`).
 
 Discard: a Review may move to `status: discarded` (→ `archive/`) only on the user's explicit instruction that no
 further work will happen for it — never inferred from a stalled draft or an unresolved `follow_up` alone

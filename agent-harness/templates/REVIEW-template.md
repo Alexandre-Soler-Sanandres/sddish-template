@@ -41,6 +41,27 @@ Harness/process flavor (`target_type`: process/harness):
 
 (list findings — positive or negative)
 
+## Finding Disposition
+
+<!-- Product/requirements flavor only (RVW-06-043). Harness/process Reviews track findings via `follow_up`
+     Improvement IDs and delete this section. Maintain the table as findings are worked through; it is the
+     source the `## Closure` section summarizes. Status: open | addressed | waived | open-by-design
+     (`open-by-design` only where the user explicitly chose to leave the finding open). -->
+
+| Finding | Status | Updated | Evidence |
+| --- | --- | --- | --- |
+| F-01 | open | YYYY-MM-DD | (artifact + mode, or user instruction, that resolves it) |
+
 ## Follow-Up
 
 (list any follow-up artifacts, tasks or improvements required)
+
+## Closure
+
+<!-- Added only on the `active/` → `archive/` move that sets `status: resolved`. Delete until then.
+     Harness/process (RVW-06-030): date; each terminal `follow_up` Improvement ID with `done`/`rejected`.
+     Product/requirements (RVW-06-042): date; one line per finding with its disposition
+     (addressed / waived / open-by-design) and the artifact + mode (or user instruction) that resolved it,
+     matching the latest `## Finding Disposition` rows. -->
+
+Date: YYYY-MM-DD
