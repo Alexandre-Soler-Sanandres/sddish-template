@@ -2,107 +2,85 @@
 
 ## Purpose
 
-The source of truth for how status changes across the Idea -> Use Case -> Spec -> Task -> Plan chain: which
-artifact moves to which status, what triggers it, and what condition must hold. Every transition table below is
-enforceable — this file is not an index of pointers to other rules; it is the rules table itself.
+Explain how status changes compose across the Idea -> Use Case -> Spec -> Task -> Plan chain: which transition
+rules exist, which artifact-local gates they invoke, and how the cascade and reconsideration paths fit
+together. This is a System file: it models the interaction among rule families. The enforceable `STT-*` rows
+live in the paired rules file.
 
-## Transition Tables
+## Rules Map
 
-`Artifact | From | Trigger | To | Condition`. `From: any` means the transition applies regardless of current
-status. Vocabulary: `draft | ready | in-progress | blocked | done | archived | rejected` for Use Case, Spec,
-Task, and Implementation Plan; Idea keeps its own separate vocabulary (`captured | clarifying | ready-for-refining
-| landed | archived | rejected`) throughout.
+This System's enforceable rules live in
+`agent-harness/rules/systems/STATUS-TRANSITIONS.md` (single paired file — under the 25-rule grouping
+threshold). Load it alongside this file whenever status-transition mechanics, routing, or reconsideration are in
+scope.
 
-### `STT-01-010` — Downward-reset
+## Transition Vocabulary
 
-| Artifact | From | Trigger | To | Condition |
-| --- | --- | --- | --- | --- |
-| Use Case or Spec | `ready` or later | a significant change lands on it | `draft` | every child artifact derived from it (a Spec's `source` citing this UC; a Task's `derived_tasks` membership under this Spec) also resets, recursively — this row fires again for each; Implementation Plans are never reset directly by this row |
+`draft | ready | in-progress | blocked | done | archived | rejected` apply to Use Case, Spec, Task, and
+Implementation Plan. Idea keeps its own separate vocabulary:
+`captured | clarifying | ready-for-refining | landed | archived | rejected`.
 
-After firing: MUST stop and wait for user instruction before further action.
+`From: any` in the paired rules file means the transition can begin from any current status. The artifact-local
+rules decide whether a local gate passes; the `STT-*` rules decide which status change follows from that gate
+clearing and which related artifacts the change reaches.
 
-### `STT-01-020` — Completion
+## Participating Rules
 
-| Artifact | From | Trigger | To | Condition |
-| --- | --- | --- | --- | --- |
-| Task or Plan | any | Implementing starts the work | `in-progress` | — |
-| Task or Plan | `in-progress` | Implementing completes the work | `done` | — |
-| Spec or Use Case | any | (chained from the row above) | `done` | every child derived from it (a Spec's Tasks; a UC's Specs) is `done` |
+| Transition | Paired Rule Home | Artifact-Local Gates It Invokes | Notes |
+| --- | --- | --- | --- |
+| `STT-01-010` | `agent-harness/rules/systems/STATUS-TRANSITIONS.md` | `UCS-02-030`, `SPS-07-010` | Uses artifact-local significant-change definitions, then fans downward through the derived-artifact chain. |
+| `STT-01-020` | `agent-harness/rules/systems/STATUS-TRANSITIONS.md` | `IMPL-03-150` consumes it during execution | Covers execution start/completion for Task and Plan, plus the resulting parent completion cascade. |
+| `STT-01-030` | `agent-harness/rules/systems/STATUS-TRANSITIONS.md` | `IPL-02-010`-`012`, `IPL-05-010`/`011`; `TSK-02-010`-`012`, `TSK-06-010`-`040`; `SPS-02-010`-`012`, `SPS-05-011`, `SPS-08-010`-`030`; `UCS-03-010`-`012`, `UCS-05-015`, `UCS-07-010`-`030` | The Plan row is the walk's root trigger; lower tiers are promoted only if their own local gates re-pass fresh. |
+| `STT-01-040` | `agent-harness/rules/systems/STATUS-TRANSITIONS.md` | `TSK-02-010`-`012`, `TSK-06-010`-`040`; `SPS-02-010`-`012`, `SPS-05-011`, `SPS-08-010`-`030`; `UCS-03-010`-`012`, `UCS-05-015`, `UCS-07-010`-`030` | Manual promotion path for one named artifact only; unlike `STT-01-030`, it does not require child fan-out. |
+| `STT-01-050` | `agent-harness/rules/systems/STATUS-TRANSITIONS.md` | `IDA-03-010` remains the separate confirmation gate for promotion itself | Idea closure happens as part of the same action that lands or merges the Idea into the next artifact. |
+| `STT-02-010` / `STT-02-011` | `agent-harness/rules/systems/STATUS-TRANSITIONS.md` | — | Reconsideration runs after the transition rule that directly handled the reopening, reset, or completion change. |
 
-### `STT-01-030` — Upward, approval-triggered cascade
+## Operating Model
 
-| Artifact | From | Trigger | To | Condition |
-| --- | --- | --- | --- | --- |
-| Plan | any | operator explicitly confirms this Plan's Readiness Checks pass (human-only, `COR-01-090` — this is the walk's own root trigger, not a downstream output of it) | `ready` | this Plan's own Readiness Checks (`IPL-02-010`/`011`/`012`) pass; the walk below succeeds |
-| Task, Spec, or Use Case | any | (chained from the Plan row above — the walk this Plan's promotion triggers) | `ready` | this artifact's own Readiness Checklist re-verified fresh against current content; AND, if it has children in the funnel (a Spec's Tasks, a UC's Specs — not applicable to Task), every one of those children is already `ready` too |
+`STT-01-010` is the downward reset path. It begins only when a Use Case or Spec has already reached the
+load-bearing portion of its lifecycle and then receives a significant content change under its own artifact-local
+definition. The reset moves downward through derived children and leaves Implementation Plans alone.
 
-All-or-nothing: any artifact's condition failing halts the whole walk — no status changes anywhere in the chain,
-including the Plan row itself. Walk stops at Use Case; never reaches Idea. A Risk-Tier skip-path entry truncates
-the walk at the point the chain actually ends: a Task with no Spec (Spec-skip path) is promoted and the walk
-stops there; a Spec with no Use Case (UC-skip path) is promoted and the walk stops there; a Plan with no Task at
-all (`entrypoint_type: none`, Plan-tier skip) has nothing to promote below the Plan row and trivially succeeds.
-Setting these statuses is not itself a "significant change" for `STT-01-010`'s purposes — promoting an artifact
-via this cascade MUST NOT itself re-trigger a downward-reset cascade on the artifact just promoted. Independent
-of `STT-01-020` (different trigger — approval vs. completion — even though both target `ready`/`done`, this row
-is pre-implementation, `STT-01-020` is post-implementation; both remain in force independently).
+`STT-01-020` is the execution path. Implementing uses it when work starts and finishes on Tasks and Plans, and
+that completion can then settle the parent Spec or Use Case when every derived child is already `done`.
 
-### `STT-01-040` — Manual instruction
+`STT-01-030` is the Plan-triggered upward walk. The Plan's own readiness and conflict checks open the walk; each
+lower artifact is then re-checked through its own local readiness, ADR, and question gates. The transition rule
+owns the walk's scope, atomicity, and truncation behavior; the artifact-local rules own the evidence needed to
+pass.
 
-| Artifact | From | Trigger | To | Condition |
-| --- | --- | --- | --- | --- |
-| Task, Spec, or Use Case | any | explicit operator instruction naming this specific artifact | `ready` | this artifact's own Readiness Checklist passes — fan-out (children already `ready`) is NOT required on this path, unlike `STT-01-030` |
+`STT-01-040` is the manual promotion path for one named Task, Spec, or Use Case. It uses the same artifact-local
+promotion gates as `STT-01-030`, but it does not walk through siblings or ancestors as a precondition.
 
-`STT-01-030` and `STT-01-040` are the only two paths to `ready` for these three artifact types — no other path is
-permitted, and neither may be inferred from discussion (`COR-01-090`). Plan has no equivalent manual-instruction
-row: it IS the manual gate `STT-01-030`'s Plan row already describes, not a downstream artifact with an
-alternative path.
+`STT-01-050` closes Ideas once their content has actually landed in the next artifact or in an amendment to an
+existing artifact. It is separate from the confirmation rule that allows the promotion in the first place.
 
-### `STT-01-050` — Idea closure
-
-| Artifact | From | Trigger | To | Condition |
-| --- | --- | --- | --- | --- |
-| Idea | any | a next-tier artifact is created from it (Use Case, or Risk-Tier skip-path Spec/Task/Plan), or its content is incorporated as an in-place amendment to an already-existing Use Case/Spec | `landed` (archived) | populate `next` with the citing artifact's ID |
-
-Does not wait for the citing artifact's own `done` status. This is the one row where the artifact type is not a
-variable, because nothing else in the chain shares Idea's shape.
-
-### `STT-02-010` / `STT-02-011` — Reconsideration
-
-`STT-02-010`: Whenever an artifact in the Idea -> Use Case -> Spec -> Task -> Plan chain moves off a status that
-one of `STT-01-010`-`050` set, for a reason other than another `STT-01-*` row already having set it again, MUST
-reconsider every other artifact in the chain — in either direction — whose own status depended on that fact.
-
-`STT-02-011`: MUST report the `STT-02-010` reconsideration outcome explicitly — "no change needed" is a valid
-outcome, but it MUST be stated, not left unexamined by default.
+`STT-02-010` and `STT-02-011` are the follow-on path when an artifact later moves off a status one of the
+transition rules had previously set. Reconsideration is broader than any one local cascade, because the stale
+dependency can point upward or downward in the chain.
 
 ## How To Apply
 
-When a Use Case, Spec, Task, or Plan moves off a status, identify which table row set the status it's leaving.
-Apply that row's own logic first (e.g. `STT-01-010`'s cascade for a reopened Spec). Then use `STT-02-010` for any
-remaining chain member whose status may still depend on the artifact that just changed — this covers directions
-the local table row doesn't already handle (for example, an upstream Use Case's status depending on a downstream
-Spec that just reopened).
-
-Do not infer that every related artifact must change status. The required action is reconsideration, not
-automatic reset. A recorded "no change needed" outcome satisfies `STT-02-011` when the evidence supports it.
+When an artifact changes status, first identify which `STT-*` rule directly governs that change. Then load the
+artifact-local gates that transition rule invokes, rather than re-deriving the gate from examples or lifecycle
+prose elsewhere. If the artifact is moving off a previously set status, the direct transition rule runs first
+and the reconsideration pair is applied afterward for any remaining dependent artifacts.
 
 ## Examples
 
-- A significant change lands on a `ready` Spec. `STT-01-010` fires: the Spec resets to `draft`, every Task
-  derived from it also resets to `draft`. The Spec's own source Use Case is not touched by this row directly —
-  `STT-02-010` covers whether it needs reconsidering.
-- An operator confirms a Plan's Readiness Checks pass. `STT-01-030` walks upward: each included Task's Readiness
-  Checklist is re-verified and, if it passes, the Task becomes `ready`; each such Task's Spec is checked the same
-  way once every Task derived from it is `ready`; that Spec's Use Case is checked once every Spec derived from it
-  is `ready`. Any failure anywhere halts the whole walk with no status changes.
-- `UC-0012.md` moves `active/`→`ready/` when its own Readiness Checklist passes and either the Plan-approval
-  cascade (`STT-01-030`) or an explicit operator instruction (`STT-01-040`) sets it `ready`.
-- A Task marked `done` through Plan completion reopens because implementation evidence was wrong. `STT-02-010`
-  requires reconsidering the source Spec's `done` status — it may now be stale, since it depended on that Task's
-  completion.
+- A significant change lands on a `ready` Spec. `STT-01-010` resets the Spec and its derived Tasks to `draft`.
+  Whether the source Use Case now needs attention is handled by the reconsideration pair, not by the reset row
+  itself.
+- An operator approves a Plan's readiness. `STT-01-030` opens the upward walk, and each included Task, Spec, and
+  Use Case is re-checked through its own local gates before any `ready` status is recorded.
+- A Task becomes `ready` by explicit instruction. `STT-01-040` uses that Task's own readiness and ADR gates, but
+  it does not require sibling Tasks or the parent Spec to be `ready` first.
+- A completed Task later reopens because the implementation evidence was wrong. `STT-02-010` then covers whether
+  the parent Spec's or Use Case's `done` claim has gone stale.
 
 ## Reference Files
 
+- `agent-harness/rules/systems/STATUS-TRANSITIONS.md`
 - `agent-harness/rules/CORE/UNIVERSAL.md`
 - `agent-harness/rules/modes/IMPLEMENTING.md`
 - `agent-harness/rules/artifact-specs/USE-CASES.md`

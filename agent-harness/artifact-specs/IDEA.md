@@ -67,14 +67,12 @@ own (see `## Lifecycle`).
 
 Before setting status to `ready-for-refining`, judge (not checklist) whether the Problem/Opportunity is stated
 concretely enough that a next artifact could plausibly be drafted from it — a Use Case, or, per
-`shared-procs/RISK-TIER.md`'s cascade, directly a Spec, Task, or Plan (`IDA-01-010`). When `/create-use-case`, or
-(skip-path) `/create-spec`/`/create-tasks`, or a direct Planning-Implementation entry successfully creates the
-next artifact from this Idea, or when this Idea's content is incorporated as an in-place amendment to an
-already-existing Use Case or Spec, close the Idea. Closing means, as one action: set `status` to `landed`,
-populate `next` with the citing artifact's ID, and move it to `archive/`. `landed` does not wait for the citing
-Use Case/Spec to reach `done` — the citing artifact's own status tracks whether that work is still planned or
-already done. This closure mechanism is governed by `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-050`,
-not defined here (`IDA-06-050`).
+`shared-procs/RISK-TIER.md`'s cascade, directly a Spec, Task, or Plan (`IDA-01-010`). When `/create-use-case`,
+or (skip-path) `/create-spec`/`/create-tasks`, or a direct Planning-Implementation entry successfully creates
+the next artifact from this Idea, or when this Idea's content is incorporated as an in-place amendment to an
+already-existing Use Case or Spec, `STT-01-050` closes the Idea in the same action: `status: landed`, `next`
+set to the citing artifact's ID, moved to `archive/`. This does not wait for the citing artifact to reach
+`done`.
 
 ## Readiness / Acceptance
 

@@ -24,4 +24,3 @@
 | SPS-08-012 | ADR-Check | Every `scoped` ADR MUST be re-judged: added to `related` if newly relevant, or explicitly ruled out. |
 | SPS-08-020 | ADR-Check | Content-drift recheck. Before this Spec's promotion (`STT-01-030`/`040`), MUST judge ADR relevance against the Spec's actual current content, not only its original `area` — drafting can drift the content into territory an ADR bears on that the creation-time load never saw. |
 | SPS-08-030 | ADR-Check | Compliance check. Before this Spec's promotion (`STT-01-030`/`040`), MUST verify every ADR cited in `related` is actually reflected in the Spec's requirements/scope — a citation with no matching content is a gate failure. |
-| SPS-07-021 | Cascade | Status transitions for this artifact are governed by `systems/STATUS-TRANSITIONS.md`, not defined here. |

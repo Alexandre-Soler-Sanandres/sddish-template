@@ -10,11 +10,10 @@ boundary rules; the mechanical activity of deriving a Spec from a Use Case lives
 
 A Use Case (or, via the UC-skip path, an Idea/Transcript/Partnering discussion/Legacy Finding/existing doc)
 reaches the point where its behavior needs a technical contract. Refining derives the Spec's scope, requirements,
-and acceptance criteria; relevant ADRs get checked and re-checked as the content firms up; and once every
-Readiness Checklist item is satisfied — via the cascade or explicit operator instruction described in
-`agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040` — the Spec becomes `ready`, the status
-Planning-Implementation requires before it will plan any code change. Status transitions for this artifact,
-including what a significant change does, are governed by `agent-harness/systems/STATUS-TRANSITIONS.md`.
+and acceptance criteria; relevant ADRs get checked and re-checked as the content firms up; and once the
+transition rules promote it under `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`, the Spec
+becomes `ready`, the status Planning-Implementation requires before it will plan any code change. Significant
+changes and later reopening/reset behavior are modeled in that same transition system.
 
 ## Entry / Creation Paths
 
@@ -87,21 +86,21 @@ A Spec may be updated when new information changes the scope or requirements, op
 acceptance criteria need correction (`SPS-03-010`) — updating must never change the Spec ID, and must update the
 `updated` field (`SPS-03-020`/`SPS-03-021`). A change to scope, non-goals, functional requirements, acceptance
 criteria, or constraints is significant; a typo, clarification, added open question, or `updated`-field bump is
-not (`SPS-07-010`). Status transitions for this artifact — including what happens when a significant change
-lands on a `ready` (or `done`) Spec — are governed by `agent-harness/systems/STATUS-TRANSITIONS.md`, not
-defined here (`SPS-07-021`).
+not (`SPS-07-010`). Status transitions for this artifact — including promotion to `ready` and the effect of a
+later significant change — are described in `agent-harness/systems/STATUS-TRANSITIONS.md` and enforced by the
+paired `STT-*` rules.
 
 ## Readiness / Acceptance
 
-Before setting a Spec status to `ready`, verify the Readiness Checklist in the artifact — every item must be
-checked; a single unchecked item blocks the status change (`SPS-02-010`/`SPS-02-011`). Also re-run three ADR
-checks before approval: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR
-present in `related` and every `scoped` ADR re-judged (`SPS-08-010`–`012`); content-drift recheck against the
-Spec's actual current content, not only its original `area` (`SPS-08-020`); and a compliance check that every ADR
-cited in `related` is actually reflected in the Spec's requirements/scope (`SPS-08-030`). Also verify the
-Questions registry holds nothing unresolved that should block the advance (`SPS-05-011`). `ready` is no longer
-a precondition for Task creation (see `REFINING.md`'s `TSK-01-010`) — it is set per
-`agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`.
+Before a transition rule promotes a Spec to `ready`, verify the Readiness Checklist in the artifact — every item
+must be checked; a single unchecked item blocks the promotion (`SPS-02-010`/`SPS-02-011`). Also re-run three
+ADR checks before approval: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide`
+ADR present in `related` and every `scoped` ADR re-judged (`SPS-08-010`–`012`); content-drift recheck against
+the Spec's actual current content, not only its original `area` (`SPS-08-020`); and a compliance check that
+every ADR cited in `related` is actually reflected in the Spec's requirements/scope (`SPS-08-030`). Also verify
+the Questions registry holds nothing unresolved that should block the advance (`SPS-05-011`). `ready` is no
+longer a precondition for Task creation (see `REFINING.md`'s `TSK-01-010`) — `STT-01-030`/`040` set it once
+these local gates pass.
 
 ## Relationships
 
@@ -127,9 +126,10 @@ Use `agent-harness/templates/SPEC-template.md` as the starting point for every n
 
 ## Examples
 
-A Use Case reaches `ready`. The agent drafts scope, functional/non-functional requirements, and
-acceptance criteria, loads every `fleet-wide` accepted ADR plus relevant `scoped` ones, and — once the Readiness
-Checklist and all three ADR checks pass — sets the Spec to `ready`.
+An existing Use Case needs technical detail, regardless of its current status. The agent drafts scope,
+functional/non-functional requirements, and acceptance criteria, loads every `fleet-wide` accepted ADR plus
+relevant `scoped` ones, and leaves the Spec's promotion to `STT-01-030`/`040` once the local readiness gates
+pass.
 
 ## Rules Map
 

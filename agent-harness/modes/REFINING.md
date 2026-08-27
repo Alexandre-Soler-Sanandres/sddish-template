@@ -72,9 +72,8 @@ Consumes / Produces:
 7. Write the main success scenario, alternatives, and failure paths.
 8. Define non-goals and the observable outcome.
 9. Carry forward relevant Questions-registry entries tied to the source artifact (`UCS-05-010`).
-10. If the source is an Idea, close it per `IDEA.md`'s `IDA-06-050` (`systems/STATUS-TRANSITIONS.md`'s
-    `STT-01-050`: status `landed`, `next` set to this Use Case's ID, moved to `archive/`) as part of this same
-    action.
+10. If the source is an Idea, close it per `systems/STATUS-TRANSITIONS.md`'s `STT-01-050` (status `landed`,
+    `next` set to this Use Case's ID, moved to `archive/`) as part of this same action.
 11. Stop before creating a Spec, Task, or Implementation Plan.
 
 ### Spec Creation (via `/create-spec`)

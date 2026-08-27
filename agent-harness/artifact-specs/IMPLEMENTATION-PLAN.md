@@ -69,8 +69,8 @@ Active Implementation Plans table (`IPL-05-020`).
 
 `active/` while drafting or in progress; `ready/` once the Readiness Gate passes; `done/` on completion (see
 `## Output / Location`). Status transitions for this artifact — including the upward cascade this Plan's
-promotion and completion trigger — are governed by `agent-harness/systems/STATUS-TRANSITIONS.md`, not defined
-here (`IPL-05-083`).
+promotion and completion trigger — are described in `agent-harness/systems/STATUS-TRANSITIONS.md` and enforced
+by the paired `STT-*` rules.
 
 ## Readiness / Acceptance
 
@@ -85,7 +85,7 @@ once the Plan is no longer either (`IPL-05-020`).
 ## Relationships
 
 A Plan's `source` names the Task/Spec/Use Case it was planned from (or is absent for a Plan-tier Plan). Its
-completion drives the Spec/Use-Case status cascade described in `## Lifecycle`.
+completion can settle the parent Spec or Use Case through the transition system described in `## Lifecycle`.
 
 ## Output / Location
 

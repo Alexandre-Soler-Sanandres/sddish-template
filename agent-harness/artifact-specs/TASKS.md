@@ -11,9 +11,9 @@ creating or updating a Task.
 
 A Spec (any status — no longer gated on `ready`, `TSK-01-010`), or via the Spec-skip path a lower-tier source,
 needs execution units. Refining derives Tasks with allowed/forbidden paths and validation commands; each Task
-becomes `ready` for Planning-Implementation via the cascade or explicit operator instruction described in
-`agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`, not a standalone per-Task confirmation
-step. ADR checks re-run at that gate the same way they do
+becomes `ready` for Planning-Implementation only when `agent-harness/systems/STATUS-TRANSITIONS.md`'s
+`STT-01-030`/`040` applies, not through a standalone per-Task confirmation step. ADR checks re-run at that gate
+the same way they do
 for Specs and Use Cases, plus an extra check when a Task's paths touch a route, service instance, or external
 dependency that a health/readiness-check ADR might govern.
 
@@ -65,15 +65,15 @@ A Task entered via the Spec-skip path must include a `## Risk-Tier Classificatio
 
 ## Lifecycle
 
-Before setting a Task status to `ready`, verify the Readiness Checklist in the artifact — every item must be
-checked; a single unchecked item blocks the status change (`TSK-02-010`/`TSK-02-011`). Status transitions for
-this artifact — including how it reaches `ready` and what happens on reopening — are governed by
-`agent-harness/systems/STATUS-TRANSITIONS.md`, not defined here (`TSK-02-021`).
+Before a transition rule promotes a Task to `ready`, verify the Readiness Checklist in the artifact — every item
+must be checked; a single unchecked item blocks the promotion (`TSK-02-010`/`TSK-02-011`). Status transitions
+for this artifact — including how it reaches `ready` and how reopening and reconsideration work — are described
+in `agent-harness/systems/STATUS-TRANSITIONS.md` and enforced by the paired `STT-*` rules.
 
 ## Readiness / Acceptance
 
-Status is set to `ready` per `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`. Also re-run
-the same three ADR checks Specs and Use Cases
+Status is set to `ready` only when `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040` applies.
+Also re-run the same three ADR checks Specs and Use Cases
 require: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR present in
 `related` and every `scoped` ADR re-judged (`TSK-06-010`–`012`); content-drift recheck against the Task's actual
 current scope, not only its original `area` (`TSK-06-030`); and a compliance check that every ADR cited in
@@ -103,9 +103,9 @@ Use `agent-harness/templates/TASK-template.md` as the starting point for every n
 
 ## Examples
 
-A ready Spec needs three small, related file changes with no high risk. The agent derives one Task covering
-all three (per `REFINING.md`'s Task Decision Matrix), sets `allowed_paths` to the touched files, and waits for
-the user's explicit confirmation before the Task becomes `ready`.
+A ready Spec needs three small, related file changes with no high risk. The agent derives one Task covering all
+three (per `REFINING.md`'s Task Decision Matrix), sets `allowed_paths` to the touched files, and then leaves the
+Task's eventual promotion to `ready` to `STT-01-030`/`040` once the local gates are satisfied.
 
 ## Rules Map
 

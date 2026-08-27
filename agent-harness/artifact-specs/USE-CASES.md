@@ -12,12 +12,10 @@ Use Case.
 
 An Idea, Transcript, Partnering discussion, Legacy Finding, or existing doc reaches the point where it needs a
 behavioral anchor. Refining derives the primary/supporting actors, goal, scenario, and failure paths; relevant
-ADRs get checked and re-checked as content firms up; and once the Readiness Checklist passes — via the
-cascade or explicit operator instruction described in `agent-harness/systems/STATUS-TRANSITIONS.md`'s
-`STT-01-030`/`040` — the Use Case reaches `ready`,
-no longer a precondition for Spec creation (`SPS-01-010`). A significant change to a Use Case
-already at `ready` or later cascades its derived Specs back to `draft`, which in turn triggers each
-Spec's own cascade.
+ADRs get checked and re-checked as content firms up; and once the transition rules promote it under
+`agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`, the Use Case reaches `ready`, no longer a
+precondition for Spec creation (`SPS-01-010`). Later significant changes can send derived artifacts back down
+the funnel through the same transition system.
 
 ## Entry / Creation Paths
 
@@ -105,22 +103,21 @@ A Use Case may be refined when new information from a Partnering session or Lega
 open questions are resolved, or the primary actor or scenario needs correction — refining must never change the
 Use Case ID, and must update the `updated` field and status as appropriate (`UCS-02-010`–`021`). A change to the
 primary actor, goal, trigger, preconditions, main success scenario, or non-goals is significant; a typo,
-clarification, added Open Questions reference, or `updated`-field bump is not (`UCS-02-030`). A significant
-change to this Use Case is significant (`UCS-02-030`). Status transitions for this artifact — including what
-happens when a significant change lands on an already-`ready` Use Case — are governed by
-`agent-harness/systems/STATUS-TRANSITIONS.md`, not defined here (`UCS-02-043`).
+clarification, added Open Questions reference, or `updated`-field bump is not (`UCS-02-030`). Status
+transitions for this artifact — including promotion to `ready` and the effect of a later significant change —
+are described in `agent-harness/systems/STATUS-TRANSITIONS.md` and enforced by the paired `STT-*` rules.
 
 ## Readiness / Acceptance
 
-Before setting a Use Case status to `ready`, verify the Readiness Checklist in the artifact — every item
-must be checked; a single unchecked item blocks the status change (`UCS-03-010`/`UCS-03-011`). Also re-run three
-ADR checks: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR present in
-`related` and every `scoped` ADR re-judged (`UCS-07-010`–`012`); content-drift recheck against the Use Case's
-actual current content, not only its original `area` (`UCS-07-020`); and a compliance check that every ADR cited
-in `related` is actually reflected in the Use Case's content (`UCS-07-030`). Also verify the registry holds
-nothing unresolved that should block the advance (`UCS-05-015`). `ready` is no longer a precondition for
-Spec creation (see `REFINING.md`'s `SPS-01-010`) — it is set per `agent-harness/systems/STATUS-TRANSITIONS.md`'s
-`STT-01-030`/`040`.
+Before a transition rule promotes a Use Case to `ready`, verify the Readiness Checklist in the artifact — every
+item must be checked; a single unchecked item blocks the promotion (`UCS-03-010`/`UCS-03-011`). Also re-run
+three ADR checks: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR
+present in `related` and every `scoped` ADR re-judged (`UCS-07-010`–`012`); content-drift recheck against the
+Use Case's actual current content, not only its original `area` (`UCS-07-020`); and a compliance check that
+every ADR cited in `related` is actually reflected in the Use Case's content (`UCS-07-030`). Also verify the
+registry holds nothing unresolved that should block the advance (`UCS-05-015`). `ready` is no longer a
+precondition for Spec creation (see `REFINING.md`'s `SPS-01-010`) — `STT-01-030`/`040` set it once these local
+gates pass.
 
 ## Relationships
 
