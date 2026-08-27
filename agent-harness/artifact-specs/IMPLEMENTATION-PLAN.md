@@ -10,9 +10,9 @@ created.
 
 A Task, Spec, or Use Case (or, for a Plan-tier request, nothing at all) is ready for implementation. The agent
 groups the required changes into steps, records validation and risk per step, and drafts the Plan at `active/`.
-Nothing changes in the codebase until the user explicitly approves it — approval moves the Plan to `ready/`
-and unlocks Implementing mode. Once every step completes, the Plan reaches `done`, which can cascade the source
-Spec and Use Case to `done`.
+Nothing changes in the codebase until the user explicitly approves the Plan and that approval is recorded in the
+same transition that moves it to `ready/` and unlocks Implementing mode. Once every step completes, the Plan
+reaches `done`, which can cascade the source Spec and Use Case to `done`.
 
 ## Entry / Creation Paths
 
@@ -62,7 +62,6 @@ Active Implementation Plans table (`IPL-05-020`).
 - Expected file areas
 - Risk level per step
 - Suggested commit boundaries
-- Approval status
 - Risk-Tier Classification (if entry skipped any tier — see `IPL-01-030`)
 
 ## Lifecycle
@@ -75,8 +74,10 @@ by the paired `STT-*` rules.
 ## Readiness / Acceptance
 
 Before this Plan's promotion (`STT-01-030`'s Plan row), verify the Readiness Checks section in the artifact —
-every item must be checked; a single unchecked item blocks the status change (`IPL-02-010`/`IPL-02-011`). Before that, also check
-`harness-data/CATALOG.md` for other Plans at status `ready` or `in-progress` on the same Spec, or with
+every item must be checked; a single unchecked item blocks the status change (`IPL-02-010`/`IPL-02-011`). In
+the same transition that sets the Plan to `ready`, populate `approval.approved_by` and `approval.approved_at`
+from the explicit user instruction authorizing that promotion (`IPL-02-013`). Before that transition, also
+check `harness-data/CATALOG.md` for other Plans at status `ready` or `in-progress` on the same Spec, or with
 overlapping Task `allowed_paths` — stop and surface the conflict if either condition is found (`IPL-05-010`/
 `IPL-05-011`). Keep `harness-data/CATALOG.md`'s Active Implementation Plans table accurate for all Plans at
 status `ready` or `in-progress`, adding/updating a row in the same pass the status changes and removing it

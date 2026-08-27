@@ -32,7 +32,7 @@ All items must be checked before this plan may advance to `ready`. Cite a one-li
 checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-PLAN.md`'s `IPL-02-012`.
 
 - [ ] Required Tasks exist
-- [ ] Upward cascade (`systems/STATUS-TRANSITIONS.md`'s `STT-01-030`) succeeded: included Task(s), their Spec(s) (fan-out complete — every sibling Task also `ready`), and Use Case (fan-out complete — every sibling Spec also `ready`) all independently re-verified and promoted
+- [ ] `STT-01-030` preconditions verified: this Plan's readiness and parallel-work gates pass, every included Task passes its own local promotion gates, every participating Spec/Use Case has full child fan-out already at `ready`, and the full promotion walk can complete atomically with no failed participant
 - [ ] If entered with no upstream artifact per `RISK-TIER.md`'s cascade, `## Risk-Tier Classification` section is present and complete
 - [ ] No blockers or unresolved dependencies
 - [ ] High-risk areas identified
@@ -61,9 +61,3 @@ checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-
 ### Step 2 — (title)
 
 (repeat as needed — every step must define expected files, validation, and a suggested commit regardless of whether Task artifacts exist)
-
-## Approval
-
-- Status: draft
-- Approved by: (name)
-- Approved at: (date)

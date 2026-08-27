@@ -25,7 +25,7 @@ explicit user request.
 | Partnering | `agent-harness/modes/PARTNERING.md` | Structured conversation to capture ideas and problems |
 | Refining | `agent-harness/modes/REFINING.md` | Derive a Spec from a Use Case, or Tasks from a Spec (or directly, per the risk-tier cascade, when a layer is classified unnecessary) |
 | Planning-Implementation | `agent-harness/modes/PLANNING-IMPLEMENTATION.md` | Plan and gate code changes |
-| Implementing | `agent-harness/modes/IMPLEMENTING.md` | Execute an approved plan |
+| Implementing | `agent-harness/modes/IMPLEMENTING.md` | Execute a user-approved plan at status `ready` |
 | Discovering-Legacy | `agent-harness/modes/DISCOVERING-LEGACY.md` | Extract evidence from existing code |
 | Improving-Harness | `agent-harness/modes/IMPROVING-HARNESS.md` | Change the harness itself |
 
@@ -38,4 +38,4 @@ checkpoint and high-impact action list.
 
 ## Implementation Gate
 
-Do not implement before an approved Implementation Plan exists.
+Do not implement before a user-approved Implementation Plan is at status `ready`.

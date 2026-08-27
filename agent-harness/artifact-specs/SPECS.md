@@ -94,11 +94,12 @@ paired `STT-*` rules.
 
 Before a transition rule promotes a Spec to `ready`, verify the Readiness Checklist in the artifact — every item
 must be checked; a single unchecked item blocks the promotion (`SPS-02-010`/`SPS-02-011`). Also re-run three
-ADR checks before approval: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide`
-ADR present in `related` and every `scoped` ADR re-judged (`SPS-08-010`–`012`); content-drift recheck against
-the Spec's actual current content, not only its original `area` (`SPS-08-020`); and a compliance check that
-every ADR cited in `related` is actually reflected in the Spec's requirements/scope (`SPS-08-030`). Also verify
-the Questions registry holds nothing unresolved that should block the advance (`SPS-05-011`). `ready` is no
+ADR checks before promotion: missed-ADR recheck against the *current* accepted-ADR list, with every
+`fleet-wide` ADR present in `related` and every `scoped` ADR re-judged (`SPS-08-010`–`012`); content-drift
+recheck against the Spec's actual current content, not only its original `area` (`SPS-08-020`); and a
+compliance check that every ADR cited in `related` is actually reflected in the Spec's requirements/scope
+(`SPS-08-030`). Also verify the Questions registry holds nothing unresolved that should block the advance
+(`SPS-05-011`). `ready` is no
 longer a precondition for Task creation (see `REFINING.md`'s `TSK-01-010`) — `STT-01-030`/`040` set it once
 these local gates pass.
 
@@ -106,7 +107,7 @@ these local gates pass.
 
 When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy
 origin — load those referenced items and route them into the Spec sections they constrain (`SPS-05-010`), by
-effect per `CORE.md`'s `COR-01-120`: unresolved approval-shaping questions belong in `Open Questions` as
+effect per `CORE.md`'s `COR-01-120`: unresolved promotion-shaping questions belong in `Open Questions` as
 canonical Question ID references; requirements, constraints, dependencies, risks, and validation obligations
 belong in the section they constrain (`SPS-05-020`). The Questions registry's `CSP-*` rows remain the canonical
 proof/parity backlog — a Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open
@@ -135,7 +136,7 @@ pass.
 
 This contract's enforceable rules live in `agent-harness/rules/artifact-specs/SPECS.md` (single paired file —
 under the 25-rule grouping threshold). Load it alongside `agent-harness/modes/REFINING.md`'s own Rules Map
-whenever creating, updating, or approving a Spec.
+whenever creating, updating, or promoting a Spec.
 
 ## Reference Files
 

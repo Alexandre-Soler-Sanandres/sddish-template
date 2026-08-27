@@ -105,8 +105,9 @@ supersedes another ADR, cites a `related` ADR, or settles a Questions-registry e
 
 - `harness-data/artifacts/adrs/proposed/ADR-*.md` (every new ADR starts here)
 - A new ADR is created in `proposed/`. When it advances to `accepted` (per `## Lifecycle`), move it to
-  `accepted/` — this is the load-bearing status that makes it citable authority, the same reason Implementation
-  Plan gives `approved` its own folder rather than lumping it into `active/`. `superseded` and `rejected` ADRs
+  `accepted/` — this is the load-bearing status that makes it citable authority, the same way an
+  Implementation Plan's load-bearing promotion state is `ready` rather than a separate `approved` folder.
+  `superseded` and `rejected` ADRs
   move to `archive/` together (content preserved, per the same non-destructive precedent as `COR-01-080`) — no
   operational reason to split those two further, matching how Idea lumps `archived`/`rejected` into one
   `archive/` folder.
