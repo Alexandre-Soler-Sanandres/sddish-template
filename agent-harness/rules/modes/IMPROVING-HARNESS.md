@@ -12,7 +12,7 @@
 | IMPR-02-026 | Boundaries | The agent MUST perform the `proposed` -> `approved` transition, including `approval.approved_by`/`approved_at`, when the user explicitly instructs it to do so. |
 | IMPR-02-027 | Boundaries | MUST NOT apply an Improvement's target-file changes before that specific approval exists. |
 | IMPR-02-030 | Boundaries | Target files MUST be listed in frontmatter. |
-| IMPR-02-040 | Boundaries | MUST NOT create Improvement artifacts from Partnering — only from Review findings. |
+| IMPR-02-040 | Boundaries | MUST NOT create Improvement artifacts from Partnering; MUST create them from a harness/process Review, which direct explicit harness-improvement intake MAY create in the same transaction. |
 | IMPR-05-010 | Rule-ID-Audit | An approved Improvement that touches rule IDs or Rules-table placement MUST satisfy `CORE.md`'s `COR-10-060`–`COR-10-063` before it can be set to `done`. |
 | IMPR-05-020 | Rule-ID-Audit | A `COR-10-060` citation audit MUST cover at minimum: `agent-harness/`, `harness-data/reference/`, root loader files (`AGENTS.md`, `CLAUDE.md`, and future equivalents), and entry-point wrapper layers (`.claude/skills/harness/`, `.agents/skills/harness/`, and future `.github/` Copilot wrapper paths when present). |
 | IMPR-05-030 | Rule-ID-Audit | The Improvement's `## Validation Result` MUST report the scan roots used, duplicate-definition result, dangling-citation result, and whether before-and-after audit evidence was required by `COR-10-061`. |

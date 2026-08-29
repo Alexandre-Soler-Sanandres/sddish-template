@@ -4,6 +4,7 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| SPS-00-010 | Lane Boundary | MUST use a Change Spec rather than a separate Spec for new Standard work unless Assured work or independent behavioral authority requires the separate contract. |
 | SPS-01-020 | Sources | Legacy Findings, Ideas, and Transcripts MUST NOT be treated as direct Spec sources except via `shared-procs/RISK-TIER.md`'s UC-skip path (`SPECS.md`'s `## Sources`) — outside that path they are upstream inputs that produce Use Cases, not Specs directly. |
 | SPS-01-021 | Sources | ADRs MUST NOT be treated as a Spec source either, reference authority only — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
 | SPS-01-050 | Sources | A Spec entered via the UC-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010`); its `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Use Case. |

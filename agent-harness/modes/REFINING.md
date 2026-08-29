@@ -12,6 +12,13 @@ corresponding artifact spec. Per `COR-03-090`, load both this file and the relev
 (`agent-harness/artifact-specs/USE-CASES.md`, `agent-harness/artifact-specs/SPECS.md`, or
 `agent-harness/artifact-specs/TASKS.md`) before acting — neither substitutes for the other.
 
+## Standard-Lane Boundary
+
+Refining is an Assured-lane and v1-compatibility workflow. For new Standard work, create a single Change Spec
+instead of deriving a separate Use Case, Spec, Task, and Plan. A separate Use Case is justified only by reused
+behavioral authority; a standalone Task only by independent ownership, delegation, reuse, cross-plan dependency,
+or lifecycle. The Change Spec contract owns ordinary execution steps.
+
 ## Mode Story
 
 Refining is a funnel, not three unrelated commands. A request usually arrives already carrying a risk-tier

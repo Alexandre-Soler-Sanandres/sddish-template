@@ -30,6 +30,9 @@ directly from the same source types a Spec would have been created from.
 
 ## When To Create
 
+For new Standard work, use the Change Spec's plan steps by default. Create a standalone Task only when it has
+independent ownership, delegation, reuse by more than one plan, a cross-plan dependency, or a separate lifecycle.
+
 Whenever a Spec exists and the Task Decision Matrix determines Tasks are required, or a request classifies below
 Spec-tier via the risk-tier cascade.
 

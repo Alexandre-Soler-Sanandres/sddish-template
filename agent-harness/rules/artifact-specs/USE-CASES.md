@@ -4,6 +4,7 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| UCS-00-010 | Conditional Creation | MUST NOT create a separate Use Case for Standard work unless it provides reused actor-journey authority, crosses several components or services, or is the durable behavioral authority. |
 | UCS-01-020 | Sources | An ADR MUST NOT be used as a source that produces a Use Case — reference authority only — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
 | UCS-01-060 | Sources | This file's `## Sources` statement that no Use Case is created when the UC-Necessity Matrix classifies a request below UC-tier is normative, not descriptive — mirrors `REFINING.md`'s `UCS-01-050`. |
 | UCS-02-010 | Refining | A Use Case MAY be refined when new information from a Partnering session or Legacy Finding changes the scope, open questions are resolved, or the primary actor or scenario needs correction. |

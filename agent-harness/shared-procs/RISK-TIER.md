@@ -2,6 +2,9 @@
 
 ## Purpose
 
+For new work, `WORK-LANES.md` is the top-level classification procedure. This legacy tier cascade remains the
+compatibility procedure for active v1 UC/Spec/Task/Plan chains; it is not the default routing model for v2 work.
+
 The risk-tier cascade decides the minimum artifact tier a request actually needs — Use Case, Spec, Task, or none
 of those (Plan-tier only) — before Refining or Planning-Implementation produces anything. It extends the same
 risk-scaling pattern this harness already applies to Task-necessity (previously `REFINING.md`'s local Task
@@ -87,14 +90,16 @@ and reasoning. When classification happens before any resulting artifact exists 
 before the Idea is promoted), the source Idea holds it instead, until something actually results. Omission is a
 process violation, not a valid shortcut (`RSK-05-010`).
 
-**Run-once discipline:** the cascade runs at most once per request, at the first opportunity it's reached —
+**Run-once discipline:** the cascade runs at most once per unchanged v1 request scope, at the first opportunity it's reached —
 Partnering's hand-off, Refining's entry, or Planning-Implementation's entry, whichever comes first. The result is
 carried forward, not recomputed: a skip is recorded via the `## Risk-Tier Classification` section above; a
 non-skip (full tier required) is evidenced by the artifact's own normal chain (an accepted Use Case behind an
 ready Spec behind a `ready` Task is itself proof the classification already happened) (`RSK-07-010`). Every
 consuming mode checks for an existing classification — on the named artifact, or on its cited source
 Idea/Transcript — before running it fresh, and never recomputes one that already exists unless the user
-explicitly asks for re-evaluation (`RSK-07-011`/`RSK-07-012`). This run-once rule applies per-matrix, not only to
+explicitly asks for re-evaluation or when intended behavior, non-goals, owner/service/public contract,
+persistence, deployment, reversibility, allowed paths, or identified risk changes materially
+(`RSK-07-011`/`RSK-07-012`). This run-once rule applies per-matrix, not only to
 the cascade as a whole: if an earlier stage already ran UC-Necessity or Spec-Necessity and recorded a partial
 result, a later stage picking up the same request reuses that partial result and continues from the next unrun
 matrix, not a restart (`RSK-07-013`).

@@ -2,6 +2,9 @@
 
 ## Purpose
 
+Implementation Plans are the separately resumable execution contract for Assured work and retained v1 chains.
+New Standard work uses the Change Spec's embedded plan steps unless a separate plan has independent lifecycle value.
+
 An Implementation Plan is the schema, grouping logic, and lifecycle gate for the artifact produced by
 `agent-harness/modes/PLANNING-IMPLEMENTATION.md` — see that file for the behavioral rules governing how a Plan is
 created.

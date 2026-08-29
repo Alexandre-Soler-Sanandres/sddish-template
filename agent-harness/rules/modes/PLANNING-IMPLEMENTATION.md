@@ -4,6 +4,7 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| IPL-00-011 | Lane Boundary | MUST NOT create an Implementation Plan for new Standard-lane work solely to duplicate Change Spec plan steps. |
 | IPL-03-010 | Boundaries | MUST NOT: change code; treat an upstream `draft` or Plan `draft` status as implementation authorization; or generate duplicate Tasks or skip existing ones. |
 | IPL-03-020 | Boundaries | MUST consult `REFINING.md`'s Task Decision Matrix before creating an inline Implementation Plan for a Spec/Use Case with no existing Tasks and record existing Tasks' current status, dependencies, and implementation-readiness facts without treating them as Plan-creation blockers. |
 | IPL-04-010 | Procedure | MUST load the relevant universal and project playbooks before finalizing the plan, when the planning task matches a reusable procedure. |

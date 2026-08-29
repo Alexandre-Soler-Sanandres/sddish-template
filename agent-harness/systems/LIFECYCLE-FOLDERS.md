@@ -33,7 +33,7 @@ closed, ID stable across the move (`OUT-04-010`/`OUT-04-020`). Several artifact 
 because a plain `active/`→`archive/` pair cannot express a load-bearing intermediate state that downstream work
 actually depends on. They split into two groups by *why* the divergence needs its own rule.
 
-**Use Case, Spec, Task, and Implementation Plan share one four-folder shape**: `active/` (covers `draft`,
+**Change Spec, Use Case, Spec, Task, and Implementation Plan share one four-folder shape**: `active/` (covers `draft`,
 `in-progress`, `blocked` — none of these need their own folder, since nothing downstream depends on
 distinguishing them by location), `ready/` (the artifact's own Readiness Checklist/Checks passed — set via
 `systems/STATUS-TRANSITIONS.md`'s `STT-01-030` cascade-or-manual-instruction mechanism for UC/Spec/Task, and its
@@ -42,6 +42,10 @@ Implementing for a Plan, may safely rely on it), `done/` (fully realized — set
 `archive/` (`archived`/`rejected`). The folder name matches the status word exactly at every step; no artifact
 type needs its own clarifying rule for this shape anymore — `ready/` carries the same load-bearing weight for
 all four, not just Plan.
+
+For a **Change Spec**, `ready/` means its current-content approval and evidence mapping are complete. It is then
+the Standard-lane execution contract; `in-progress` stays in `active/`, and `done` moves to `done/`. `blocked` and
+`abandoned` remain in `active/` until explicitly archived.
 
 Two artifact types still diverge, for reasons unrelated to the above and each still getting its own rule:
 

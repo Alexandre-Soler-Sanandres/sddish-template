@@ -3,6 +3,14 @@
 This file is the practical "what happens next?" guide.
 Use this guide when you already understand the artifact types and want the normal operating flow explained clearly.
 
+## Work Lanes (v2)
+
+New work is first classified as Fast, Standard, or Assured. Fast records a micro-plan and executes only the
+approved local/reversible scope. Standard creates one Change Spec, promotes it by explicit current-content
+approval, and executes its embedded steps. Assured uses a behavior contract and resumable execution plan; its
+secondary artifacts remain separate when their authority or lifecycle is independently useful. The Risk-Tier
+Cascade below remains for existing v1 chains until their explicit migration.
+
 ## Rules/Procedure Split (History)
 
 Every harness source file follows the paired-loading model: the source file teaches the workflow, contract,

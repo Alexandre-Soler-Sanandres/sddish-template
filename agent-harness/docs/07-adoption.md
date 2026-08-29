@@ -2,6 +2,13 @@
 
 This guide is for turning the template into a usable project workspace without over-documenting on day one.
 
+## Work-Lane Adoption (v2)
+
+Adopters classify new material work through `shared-procs/WORK-LANES.md`. Begin with Standard Change Specs for
+ordinary bounded work, retain Assured chains for hard-floor or high-ambiguity work, and use Fast only where its
+strict local/reversible conditions hold. Do not rewrite closed historical artifacts; active v1 work remains
+compatible until explicitly migrated.
+
 ## Using This Template
 
 This repository is marked as a GitHub template. There are two ways to create a new project from it.

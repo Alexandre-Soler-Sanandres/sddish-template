@@ -15,3 +15,4 @@
 | OUT-06-010 | Legacy-Discovery | Legacy Discovery artifacts MUST use the scoped folder structure defined in `OUTPUTS.md`'s `## Legacy Discovery Structure`. |
 | OUT-07-010 | ADR-Lifecycle | ADRs use `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair — see `OUTPUTS.md`'s `## Folder Structure`. |
 | OUT-08-010 | Questions-Lifecycle | The Questions registry does not use lifecycle subfolders. It is three flat files under `harness-data/artifacts/questions/`; a row's file *is* its status — see `agent-harness/artifact-specs/QUESTIONS.md`. |
+| OUT-09-010 | Change-Spec-Lifecycle | Change Specs MUST use the common `active/`, `ready/`, `done/`, and `archive/` lifecycle folders. |

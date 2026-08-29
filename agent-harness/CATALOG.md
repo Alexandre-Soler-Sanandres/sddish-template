@@ -27,6 +27,7 @@ Support-file discovery uses these index files instead:
 - Ideas: `harness-data/artifacts/ideas/`
 - Use Cases: `harness-data/artifacts/use-cases/`
 - Specs: `harness-data/artifacts/specs/`
+- Change Specs: `harness-data/artifacts/change-specs/`
 - Tasks: `harness-data/artifacts/tasks/`
 - Implementation Plans: `harness-data/artifacts/implementation-plans/`
 - Reviews: `harness-data/artifacts/reviews/`

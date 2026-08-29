@@ -11,6 +11,14 @@ This document covers harness-managed lifecycle artifacts only. Project-owned sup
 `harness-data/reference/`, `harness-data/guides/`, and `harness-data/playbooks/` are not artifacts and do not follow
 artifact lifecycle statuses.
 
+## Standard Change Spec (v2)
+
+`CHANGE-NNNN.md` is the single durable execution contract for Standard work. It records intent, preserved
+behavior, scope, non-goals, paths, requirements and acceptance criteria, verification evidence, dependencies,
+approved execution steps, progress, and closeout. Use Cases, Tasks, Plans, Transcripts, Ideas, and Reviews are
+conditional artifacts: persist them only when they supply independent authority, ownership/lifecycle, provenance,
+backlog, findings, or handoff value.
+
 For project-owned support files, see [10-guides.md](10-guides.md) and [11-project-playbooks.md](11-project-playbooks.md).
 
 ## Artifact Contract Form

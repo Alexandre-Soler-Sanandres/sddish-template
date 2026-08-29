@@ -39,10 +39,11 @@ or Planning-Implementation would be premature.
 6. Mark uncertainty explicitly rather than presenting a guess as settled (`PTN-02-070`).
 7. Identify a candidate ADR when the conversation reaches a settled structural or architectural decision — full
    rules live in `agent-harness/artifact-specs/ADR.md`, not here (`PTN-02-100`).
-8. The agent, not the user, creates Transcripts — write a `TRANSCRIPT-*.md` proactively as the conversation
-   unfolds; lifecycle rules live in `agent-harness/artifact-specs/TRANSCRIPT.md` (`PTN-03-010`).
-9. Once enough material exists to act on, classify and route per `## Routing` below — not only when a Use Case is
-   warranted (`PTN-02-110`).
+8. Create a Transcript only when the user requests it or durable provenance, audit, or a long-running handoff
+   requires it; otherwise retain only the concise continuation context needed for the current work
+   (`PTN-03-010`).
+9. Once enough material exists to act on, classify new work through `WORK-LANES.md`; active v1 chains retain the
+   recorded Risk-Tier route (`PTN-02-110`).
 
 ## Core Moves
 
@@ -58,8 +59,11 @@ or Planning-Implementation would be premature.
 
 ## Routing
 
-Once the classification cascade (`PTN-02-110`–`PTN-02-113`) completes, route to whichever entry point the result
-lands on:
+New work routes by lane: Fast uses a stated micro-plan; Standard uses a Change Spec; Assured uses the complete
+behavioral and execution package. A Use Case, standalone Task, Plan, Transcript, Idea, or Review is created only
+when its independent authority, ownership, lifecycle, provenance, backlog, findings, or handoff value warrants
+it. Existing active v1 work continues through the classification cascade
+(`PTN-02-110`–`PTN-02-113`) and routes to whichever entry point the result lands on:
 
 | Classification result | Route to |
 | --- | --- |
@@ -78,8 +82,8 @@ alone and default to `/create-spec` or `/create-tasks` on that partial basis (`P
 
 ## Outputs
 
-- `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
-- `harness-data/artifacts/ideas/active/IDEA-*.md`
+- optional `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
+- optional `harness-data/artifacts/ideas/active/IDEA-*.md`
 - `harness-data/artifacts/adrs/proposed/ADR-*.md` (when a structural/architectural decision has been reached)
 - Open questions list
 

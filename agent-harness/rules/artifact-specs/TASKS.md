@@ -4,6 +4,7 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| TSK-00-010 | Conditional Creation | MUST NOT create a standalone Task for an ordinary Standard Change Spec step; MUST create one only for independent ownership, delegation, reuse, cross-plan dependency, or a separate lifecycle. |
 | TSK-02-010 | Readiness-Gate | Before this Task's promotion (`STT-01-030`/`040`), MUST verify the Readiness Checklist in the artifact. |
 | TSK-02-011 | Readiness-Gate | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
 | TSK-02-012 | Readiness-Gate | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |

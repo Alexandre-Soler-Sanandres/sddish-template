@@ -4,6 +4,7 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| RVW-00-010 | Conditional Creation | MUST persist a Review only for findings, approval provenance, audit value, a durable handoff, or Assured-work review; routine clean self-review MUST record evidence in the execution-contract closeout instead. |
 | RVW-01-010 | Escalation | The agent MUST NOT autonomously re-enter a producing mode after `changes-requested`, `rejected`, or `follow-up-required` — the user must explicitly request the next action. |
 | RVW-02-010 | Boundaries | MUST NOT change the substantive content of the artifact under review as part of the review itself (status transitions and explicitly prescribed follow-up metadata updates are allowed). |
 | RVW-02-011 | Boundaries | MUST NOT implement fixes as part of a review. |

@@ -4,16 +4,16 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IMPL-01-010 | Preconditions | An Implementation Plan MUST exist at status `ready`. |
-| IMPL-01-020 | Preconditions | All included Tasks MUST be at status `ready`. |
+| IMPL-01-010 | Preconditions | A Standard Change Spec or an Assured/v1 Implementation Plan MUST exist at status `ready`. |
+| IMPL-01-020 | Preconditions | All included Tasks MUST be at status `ready` when the execution contract is an Assured/v1 Implementation Plan. |
 | IMPL-01-021 | Preconditions | `IMPL-01-020`'s check MUST be re-verified per Task at the point Implementing starts that specific Task, not only once at the Plan's own start — since `systems/STATUS-TRANSITIONS.md`'s `STT-01-010` downward reset can reset an included Task to `draft` after the Plan was set `ready` without revoking the Plan's own `ready` status. A Task found off `ready` at that point blocks Implementing from acting on it regardless of the Plan's own status. |
 | IMPL-01-030 | Preconditions | Safety and risk rules MUST be satisfied. |
-| IMPL-02-010 | Gate-Attestation | MUST write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of a plan step, recording the Plan ID, Plan status, and the Task's `allowed_paths`. |
+| IMPL-02-010 | Gate-Attestation | MUST write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of an execution step, recording the execution-contract ID, status, and allowed paths. |
 | IMPL-02-011 | Gate-Attestation | If `harness-data/RUN-LOG.md` does not exist when the `IMPL-02-010` gate-check line is due, MUST create it in the same action, immediately before writing that line, keeping its temporary and minimal semantics; MUST NOT backfill earlier history into it. |
 | IMPL-03-010 | Execution | MUST follow the plan — do not deviate from approved scope. |
 | IMPL-03-020 | Execution | SHOULD execute one plan step at a time by default. |
 | IMPL-03-050 | Execution | MUST keep the diff focused on the current step. |
-| IMPL-03-060 | Execution | MUST respect allowed and forbidden paths from Task frontmatter. |
+| IMPL-03-060 | Execution | MUST respect allowed and forbidden paths from the current execution contract. |
 | IMPL-03-070 | Execution | SHOULD NOT perform unrelated refactoring. |
 | IMPL-03-080 | Execution | MUST run the planned validation after each step. |
 | IMPL-03-090 | Execution | SHOULD follow the suggested commit boundaries defined in the plan. |

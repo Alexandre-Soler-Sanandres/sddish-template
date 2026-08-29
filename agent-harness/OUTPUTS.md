@@ -24,6 +24,7 @@ Lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body.
 | ADR | `ADR-NNNN.md` |
 | Use Case | `UC-NNNN.md` |
 | Spec | `SPEC-NNNN.md` |
+| Change Spec | `CHANGE-NNNN.md` |
 | Task | `TASK-NNNN.md` |
 | Implementation Plan | `PLAN-NNNN.md` |
 | Review | `REVIEW-NNNN.md` |
@@ -43,8 +44,8 @@ Implementation Plan share an identical four-folder shape (`active/`/`ready/`/`do
 | --- | --- | --- |
 | `active/` | all artifact dirs except `adrs/` and `questions/` | artifact is in progress or under review |
 | `archive/` | all artifact dirs except `questions/` | artifact is closed, superseded or no longer relevant |
-| `ready/` | `specs/`, `use-cases/`, `tasks/`, `implementation-plans/` | artifact has passed its Readiness Checklist/Checks and may be relied on by the next tier or by Implementing |
-| `done/` | `specs/`, `use-cases/`, `implementation-plans/`, `tasks/`, `improvements/` | execution is complete |
+| `ready/` | `change-specs/`, `specs/`, `use-cases/`, `tasks/`, `implementation-plans/` | artifact has passed its Readiness Checklist/Checks and may be relied on by the next tier or by Implementing |
+| `done/` | `change-specs/`, `specs/`, `use-cases/`, `implementation-plans/`, `tasks/`, `improvements/` | execution is complete |
 | `proposed/` | `adrs/` | not yet settled |
 | `accepted/` | `adrs/` | in force, citable authority |
 

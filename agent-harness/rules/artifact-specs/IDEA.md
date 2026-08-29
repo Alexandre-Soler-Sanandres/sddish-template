@@ -4,6 +4,7 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| IDA-00-010 | Conditional Creation | MUST create an Idea only for requested durable backlog storage or a future opportunity that needs persistence; MUST NOT turn every deferred item or non-goal into an Idea. |
 | IDA-01-010 | Readiness-Gate | Before setting status to `ready-for-refining`, MUST judge (not checklist) whether the Problem/Opportunity is stated concretely enough that a next artifact could plausibly be drafted from it — a Use Case, or, per `shared-procs/RISK-TIER.md`'s cascade, directly a Spec, Task, or Plan. |
 | IDA-01-011 | Readiness-Gate | A Use Case MAY be created from this Idea regardless of status (see `UCS-01-011`). |
 | IDA-01-020 | Boundaries | An Idea MUST represent one distinguishable, independently-decidable opportunity or problem — something that could be pursued or skipped on its own, separately from its neighbors. When source evidence bundles several (a roadmap table, a research-backlog document, a multi-item legacy doc), MUST split into one Idea per opportunity, not one Idea per source document. |

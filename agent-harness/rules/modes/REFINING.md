@@ -4,6 +4,8 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| RFD-00-010 | Lane Boundary | MUST use `CHANGE-SPEC.md` rather than the v1 derivation funnel for new Standard-lane work. |
+| RFD-00-020 | Conditional Artifacts | MUST create a separate Use Case only for reused behavioral authority or a standalone Task only for independent ownership, delegation, reuse, cross-plan dependency, or lifecycle. |
 | UCS-01-010 | Sources | A Use Case MUST be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation. |
 | UCS-01-011 | Sources | MAY create a Use Case from an Idea at any status — `IDA-01-010`'s judgment gate still applies. |
 | UCS-01-012 | Sources | When `RISK-TIER.md`'s UC-Necessity Matrix (`RSK-02-010`) classifies the request below UC-tier, `/create-spec` MAY be entered directly, skipping Use Case creation. |

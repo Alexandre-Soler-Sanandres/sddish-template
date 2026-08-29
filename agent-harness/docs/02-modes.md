@@ -10,6 +10,13 @@ A file under `agent-harness/modes/` is a Mode Workflow. It should teach the agen
 mode: posture, path choice, examples, handoffs, common failure modes, and how to use the mode's rules. It should
 not become a thin pointer file, and it should not hide enforceable constraints in prose once paired rules exist.
 
+## Work Lanes (v2)
+
+Before entering a producing or execution workflow, classify new material work using
+`shared-procs/WORK-LANES.md`. Fast records an in-session micro-plan; Standard creates an approved Change Spec;
+Assured uses the complete behavior and execution package. The pre-v2 Refining and Planning-Implementation funnel
+remains the compatibility route for active v1 work and the normal Assured route.
+
 Canonical Mode Workflow sections:
 
 - `Purpose`

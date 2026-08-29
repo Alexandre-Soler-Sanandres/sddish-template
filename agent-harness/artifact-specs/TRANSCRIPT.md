@@ -2,8 +2,8 @@
 
 ## Purpose
 
-A Transcript is the raw or lightly-processed record of a conversation, captured proactively during Partnering
-(`PTN-03-010`). Given the same standard of treatment as every other artifact — its status enum is not decorative.
+A Transcript is the raw or lightly-processed record of a conversation, captured only when requested or when it
+has durable provenance, audit, or long-running-handoff value (`PTN-03-010`). Its status enum is not decorative.
 
 ## Artifact Story
 
@@ -14,7 +14,7 @@ once that normalization is verified.
 
 ## Entry / Creation Paths
 
-Created only from within Partnering, proactively by the agent — never by the user.
+Created from Partnering when the creation criterion is met.
 
 ## Sources
 
@@ -22,13 +22,13 @@ Created only from within Partnering, capturing that session's own conversation.
 
 ## When To Create
 
-At the start of every Partnering conversation the agent expects to continue — see
+When the user requests a Transcript or durable provenance, audit, or long-running handoff requires one — see
 `agent-harness/modes/PARTNERING.md`'s `PTN-03-010`.
 
 ## When Not To Create
 
-Not applicable — a Transcript is always created proactively whenever Partnering conducts a conversation worth
-recording; there is no separate creation gate to fail.
+Do not create a Transcript merely because a Partnering conversation occurred; retain concise continuation context
+unless the `## When To Create` criterion applies.
 
 ## Artifact Shape
 

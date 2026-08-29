@@ -7,8 +7,9 @@ opportunistic. This is the only Mode allowed to modify `agent-harness/*`.
 
 ## Mode Story
 
-A Review finding — never a direct request, never Partnering — identifies a recurring harness problem: a
-misinterpreted template, a repeated mistake, weak acceptance criteria, missing validation. The agent drafts an
+A Review finding identifies a recurring harness problem; an explicit harness-improvement request may create that
+Review and proposed Improvements in the same transaction. The request is intake, never approval. A misinterpreted
+template, repeated mistake, weak acceptance criteria, or missing validation can motivate the Review. The agent drafts an
 Improvement artifact describing the problem, root cause, and proposed change; waits for the user's explicit
 approval of that specific Improvement; applies the approved target-file changes; and records what was validated
 before marking it `done`.
@@ -22,7 +23,8 @@ instruction to "improve the harness."
 ## When To Use
 
 Entered via CLI (`/improve-harness <review-file>`) or via an explicit natural-language instruction to improve a
-harness file, template, or process rule — always triggered by a Review finding, never entered from Partnering or
+harness file, template, or process rule. Direct intake creates the required Review first in the same transaction;
+it never authorizes changes. The workflow is never entered from Partnering or
 any other unreviewed source. These are symptoms that motivate writing a Review finding, not direct entry
 triggers — this mode is still only entered from that Review finding, never straight from noticing one of these:
 
@@ -49,8 +51,9 @@ entry-point layer must be mirrored across the others unless it's agent-specific 
 
 ## Core Moves
 
-1. Draft the Improvement artifact from a harness/process-flavored Review finding — never from Partnering
-   (`IMPR-02-040`) — recording target files in frontmatter (`IMPR-02-030`).
+1. Draft the Improvement artifact from a harness/process-flavored Review finding; direct explicit intake may
+   create that Review and proposed Improvements in the same transaction, never from Partnering
+   (`IMPR-02-040`), recording target files in frontmatter (`IMPR-02-030`).
 2. Wait for the user to explicitly transition it from `proposed` to `approved`, including `approval.approved_by`
    /`approved_at` (`IMPR-02-026`). A general instruction to improve the harness is not approval of any specific
    `IMPROVEMENT-NNNN` — approval is valid only after the user has had the chance to see that artifact's own

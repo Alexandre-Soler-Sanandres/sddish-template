@@ -4,6 +4,7 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| IMPR-00-010 | Direct Intake | MAY create a process Review and proposed Improvement artifacts in one transaction for an explicit harness-improvement request, but MUST NOT treat that request as approval or target-file authorization. |
 | IMPR-03-010 | Validation | MUST keep `## Validation` as the validation plan or checklist. |
 | IMPR-03-020 | Validation | MUST add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done` or moved to `done/`. |
 | IMPR-03-030 | Validation | If a validation item is prospective and cannot be fully proven yet, MUST state that explicitly instead of treating it as completed evidence. |

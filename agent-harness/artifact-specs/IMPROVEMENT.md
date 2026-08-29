@@ -16,6 +16,9 @@ Improvement on the originating Review reaches a terminal status, that Review its
 
 ## Entry / Creation Paths
 
+An explicit direct request to improve the harness may create the required process Review and proposed Improvement
+artifacts in the same transaction. It does not approve any proposed Improvement or authorize target-file changes.
+
 Created only from within Improving-Harness mode (`agent-harness/modes/IMPROVING-HARNESS.md`).
 
 ## Sources

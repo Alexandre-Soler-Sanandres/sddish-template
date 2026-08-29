@@ -43,6 +43,10 @@ directly — legacy-origin entries live in the same registry as everything else 
 
 ## When To Create
 
+For new Standard-lane work, create a separate Use Case only when its actor journey is reused by multiple changes,
+crosses several components or services, or is the durable behavioral authority. Otherwise state the relevant actor,
+trigger, outcome, alternatives, and failures in the Change Spec.
+
 Create a Use Case when:
 
 - A human actor or external system has a goal to pursue

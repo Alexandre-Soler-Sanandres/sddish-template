@@ -5,6 +5,12 @@
 Planning-Implementation is the mandatory gate before code changes. These commands do not mean "start coding
 now" — they mean "create a plan and wait for approval."
 
+## Standard-Lane Boundary
+
+For Standard work, the approved Change Spec embeds the execution steps and is the execution contract; do not
+create an Implementation Plan merely to restate those steps. Planning-Implementation remains for Assured work,
+active v1 chains, and cases where a separately resumable execution plan has independent value.
+
 ## Mode Story
 
 A Task, Spec, or Use Case (or, for the Plan-tier entry, no upstream artifact at all) needs implementation

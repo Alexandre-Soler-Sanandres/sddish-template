@@ -33,6 +33,10 @@ A Review may target:
 
 ## When To Create
 
+Persist a Review when it has findings, approval provenance, audit value, or a handoff that must survive. Assured
+work uses a persisted Review and, where feasible, a fresh context or independent reviewer; routine clean
+self-review records its evidence in the execution contract closeout.
+
 Create a Review whenever a deliverable needs evaluating for correctness/completeness/scope (product/requirements
 flavor), or whenever the agent's own behavior — context loading, rule clarity, checkpoint discipline — needs
 evaluating (harness/process flavor). See `## Artifact Shape`'s Two Flavors for how `target_type` decides which.

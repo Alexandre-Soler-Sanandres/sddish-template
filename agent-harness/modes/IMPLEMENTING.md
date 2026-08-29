@@ -2,7 +2,8 @@
 
 ## Purpose
 
-Implementing mode executes a `ready` Implementation Plan. Default execution is one plan step at a time.
+Implementing mode executes an approved Standard Change Spec or a `ready` Assured/v1 Implementation Plan. Default
+execution is one plan step at a time.
 
 ## Mode Story
 
@@ -19,15 +20,16 @@ not a judgment call to push through.
 
 ## When To Use
 
-Use Implementing only once an Implementation Plan exists at status `ready` and its included Tasks are `ready`
-(`IMPL-01-010`/`IMPL-01-020`).
+Use Implementing only once a Standard Change Spec exists at status `ready`, or an Assured/v1 Implementation Plan
+exists at status `ready` and its included Tasks are `ready` (`IMPL-01-010`/`IMPL-01-020`).
 
 ## Workflow Paths
 
-- CLI: `/execute-plan <plan-file>`
-- Natural language: explicit instruction referencing a `ready` plan.
+- CLI: `/execute-plan <plan-file>` or `/execute-change <change-spec-file>`
+- Natural language: explicit instruction referencing a `ready` execution contract.
 
-Consumes: an Implementation Plan at status `ready` (`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`)
+Consumes: a Change Spec at status `ready` (`agent-harness/artifact-specs/CHANGE-SPEC.md`) or an Implementation
+Plan at status `ready` (`agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`)
 whose included Tasks are `ready` (`agent-harness/artifact-specs/TASKS.md`). Per `COR-03-090`, this file's
 Execution rules trigger status changes on Task, Plan, Spec, and Use Case (`IMPL-03-150`, `IMPL-03-110`) — load
 `agent-harness/systems/STATUS-TRANSITIONS.md` for those artifacts' own status-transition mechanics; this file
@@ -35,16 +37,17 @@ only says when to trigger the change, not what the change requires.
 
 ## Core Moves
 
-1. Write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of a plan step, recording
-   the Plan ID, Plan status, and the Task's `allowed_paths` (`IMPL-02-010`). Create `RUN-LOG.md` first if it does
+1. Write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of an execution step, recording
+   the execution-contract ID, status, and allowed paths (`IMPL-02-010`). Create `RUN-LOG.md` first if it does
    not yet exist, keeping it minimal — do not backfill earlier history (`IMPL-02-011`).
 2. Execute one plan step at a time by default (`IMPL-03-020`), following the plan without deviating from approved
    scope (`IMPL-03-010`).
-3. Set Task status to `in-progress` when starting a Task, `done` when complete; set Plan status to `in-progress`
+3. Set a Change Spec to `in-progress` when execution begins and `done` when all embedded steps are complete. For
+   Assured/v1 work, set Task status to `in-progress` when starting a Task, `done` when complete; set Plan status to `in-progress`
    when execution begins, `done` when all steps are complete, per `systems/STATUS-TRANSITIONS.md`'s `STT-01-020`
    (`IMPL-03-150`).
-4. Keep the diff focused on the current step (`IMPL-03-050`) and respect allowed/forbidden paths from Task
-   frontmatter (`IMPL-03-060`) — no unrelated refactoring (`IMPL-03-070`).
+4. Keep the diff focused on the current step (`IMPL-03-050`) and respect allowed/forbidden paths from the execution
+   contract (`IMPL-03-060`) — no unrelated refactoring (`IMPL-03-070`).
 5. Run the planned validation after each step (`IMPL-03-080`); before marking a plan step done, verify every Spec
    acceptance criterion is covered by a `test_refs` entry or a Task-frontmatter validation command that exercises
    it (`IMPL-03-110`).
@@ -64,7 +67,8 @@ explicitly approved (`IMPL-04-010`/`IMPL-04-020`).
 
 ## Outputs
 
-Implementing does not produce a new artifact type of its own — it updates Task/Plan/Spec/Use Case status
+Implementing does not produce a new artifact type of its own — it updates the execution contract and, for Assured
+work, Task/Plan/Spec/Use Case status
 (`IMPL-03-150`) and the code itself. When a durable record is needed (e.g. before a
 status advance that should be citable later), it produces the product/requirements flavor of Review
 (`agent-harness/artifact-specs/REVIEW.md`'s Two Flavors) — not required for every plan step, only when a formal

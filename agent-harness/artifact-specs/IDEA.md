@@ -26,6 +26,9 @@ An Idea may be created from Partnering discussion, Transcript, Review finding, o
 
 ## When To Create
 
+Create an Idea only when the user requests durable backlog storage or a candidate opportunity needs to survive as
+a future option; a deferred non-goal alone is not enough.
+
 Create an Idea when a candidate opportunity or problem has a direction worth remembering but is not yet mature
 enough to commit to a Use Case — see `QUESTIONS.md`'s `QST-06-010` for the exact test distinguishing a candidate
 direction (Idea) from an unresolved fork (Question).

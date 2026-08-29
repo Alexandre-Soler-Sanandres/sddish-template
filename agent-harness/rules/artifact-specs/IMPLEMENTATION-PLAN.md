@@ -4,6 +4,7 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| IPL-00-010 | Lane Boundary | MUST NOT create an Implementation Plan for new Standard work unless a separately resumable execution contract has independent lifecycle value. |
 | IPL-01-010 | Grouping | SHOULD group Tasks in one step when they belong to the same Spec, are small and tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and no high-risk work is involved. |
 | IPL-01-030 | Grouping | A Plan whose entry skipped any tier (per `shared-procs/RISK-TIER.md`'s cascade) MUST include a `## Risk-Tier Classification` section (`RSK-05-010`). |
 | IPL-01-031 | Grouping | MUST NOT omit `IPL-01-030`'s `## Risk-Tier Classification` section regardless of how small the change is. |
