@@ -135,7 +135,17 @@ declare -A statuses=(
   [adr]='proposed accepted superseded archived'
 )
 
+# ---------------------------------------------------------------------------
+# Record-level v2 validations. The read-only Legacy Discovery bridge
+# (harness-data/artifacts/legacy/, removed by IMPROVEMENT-0150) is governed
+# by the extension, not by the core v2 record model — it is skipped here.
+# ---------------------------------------------------------------------------
+declare -A rec_seen_type=()
+declare -A rec_fwd=()
+declare -A rec_src=()
+
 while IFS= read -r -d '' file; do
+  case "$file" in "$artifacts"/legacy/*) continue ;; esac
   front=$(sed -n '/^---$/,/^---$/p' "$file")
   id=$(printf '%s\n' "$front" | sed -n 's/^id: *//p' | head -1)
   type=$(printf '%s\n' "$front" | sed -n 's/^type: *//p' | head -1)
@@ -146,16 +156,82 @@ while IFS= read -r -d '' file; do
   [[ -n ${paths[$type]+x} ]] || { echo "unknown type '$type': $file" >&2; fail=1; continue; }
   [[ " ${statuses[$type]} " == *" $status "* ]] || { echo "invalid status '$status' for $id" >&2; fail=1; }
   [[ $file == "$artifacts/${paths[$type]}/$id.md" ]] || { echo "unstable path for $id: $file" >&2; fail=1; }
+
+  # (IMPROVEMENT-0149) no v1 reverse-link, renamed, or derived_* frontmatter field
+  # survives on a migrated record. Canonical forward links are source_ids /
+  # related_adrs / question_refs / included_ids only (OUTPUTS.md).
+  bad=$( { printf '%s\n' "$front" | grep -oE '^(source|related|legacy_refs|entrypoint|entrypoint_type|included_tasks|excluded_tasks|blocks|next|follow_up|superseded_by|derived_[a-z_]+):' || true; } | sed 's/:$//' | sort -u | tr '\n' ' ')
+  [[ -z ${bad// } ]] || { echo "v1 reverse/renamed field(s) on $id: $bad" >&2; fail=1; }
+
+  rec_seen_type[$id]=$type
+  rec_fwd[$id]=$(printf '%s\n' "$front" | sed -nE 's/^(source_ids|related_adrs|included_ids|question_refs): *\[(.*)\].*$/\2/p' | tr ',' ' ')
+  rec_src[$id]=$(printf '%s\n' "$front" | sed -nE 's/^source_ids: *\[(.*)\].*$/\1/p' | tr ',' ' ')
 done < <(find "$artifacts" -type f -name '*.md' ! -path '*/questions/QUESTIONS.md' -print0)
 
+# (IMPROVEMENT-0149) no record left under a v1 lifecycle subfolder
+while IFS= read -r -d '' d; do
+  case "$d" in "$artifacts"/legacy/*) continue ;; esac
+  if compgen -G "$d/*.md" >/dev/null; then
+    echo "records under v1 lifecycle path: $d" >&2; fail=1
+  fi
+done < <(find "$artifacts" -type d \( -name active -o -name ready -o -name done -o -name blocked -o -name archive -o -name proposed \) -print0 2>/dev/null)
+
+# ---- Questions registry: one QUESTIONS.md, no v1 status-split remnants ----
+if compgen -G "$artifacts/questions/QUESTIONS-*.md" >/dev/null; then
+  echo "v1 Questions split file(s) remain under $artifacts/questions/" >&2; fail=1
+fi
 questions="$artifacts/questions/QUESTIONS.md"
+declare -A qseen=()
 if [[ -f $questions ]]; then
+  while IFS= read -r qid; do [[ -n $qid ]] && qseen[$qid]=1; done < <(
+    grep -oE '^\|[[:space:]]*(Q|CSQ|CSP)-[A-Z0-9-]*[0-9]{4}[[:space:]]*\|' "$questions" \
+      | grep -oE '(Q|CSQ|CSP)-[A-Z0-9-]*[0-9]{4}')
   awk -F'|' '
-    /^\| Q-/ {
+    /^\|[[:space:]]*(Q|CSQ|CSP)-/ {
       for (i=1;i<=NF;i++) gsub(/^ +| +$/, "", $i)
       if ($3 == "resolved" || $3 == "discarded")
         if ($8 == "" || $9 == "" || $10 == "" || $11 == "") { print "incomplete terminal Question: " $2 > "/dev/stderr"; exit 1 }
     }' "$questions" || fail=1
+fi
+
+# ---- (IMPROVEMENT-0149) forward-link resolution + typing ----
+for id in "${!rec_fwd[@]}"; do
+  for ref in ${rec_fwd[$id]}; do
+    ref=${ref// /}
+    [[ -n $ref ]] || continue
+    case "$ref" in
+      Q-*|CSQ-*|CSP-*)
+        [[ -n ${qseen[$ref]+x} ]] || { echo "unresolved question_ref '$ref' on $id" >&2; fail=1; } ;;
+      *)
+        [[ -n ${seen[$ref]+x} ]] || { echo "unresolved forward link '$ref' on $id" >&2; fail=1; } ;;
+    esac
+  done
+done
+
+# ---- (IMPROVEMENT-0149) no self-referential or cyclic source_ids ----
+# self-reference
+for id in "${!rec_src[@]}"; do
+  for s in ${rec_src[$id]}; do s=${s// /}; [[ $s == "$id" ]] && { echo "self-referential source_ids on $id" >&2; fail=1; }; done
+done
+# cycle: topological peel over the source_ids edge set; anything left is in a cycle
+declare -A indeg=() adj=()
+for id in "${!rec_src[@]}"; do
+  : "${indeg[$id]:=0}"
+  for s in ${rec_src[$id]}; do
+    s=${s// /}; [[ -n $s && -n ${rec_seen_type[$s]+x} ]] || continue
+    adj[$id]+=" $s"; indeg[$s]=$(( ${indeg[$s]:-0} + 1 ))
+  done
+done
+queue=(); for id in "${!indeg[@]}"; do (( indeg[$id] == 0 )) && queue+=("$id"); done
+removed=0
+while (( ${#queue[@]} )); do
+  n=${queue[0]}; queue=("${queue[@]:1}"); removed=$(( removed + 1 ))
+  for m in ${adj[$n]:-}; do
+    indeg[$m]=$(( indeg[$m] - 1 )); (( indeg[$m] == 0 )) && queue+=("$m")
+  done
+done
+if (( removed < ${#indeg[@]} )); then
+  echo "cyclic source_ids detected among $(( ${#indeg[@]} - removed )) record(s)" >&2; fail=1
 fi
 
 if (( fail )); then exit 1; fi
