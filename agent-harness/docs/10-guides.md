@@ -71,7 +71,7 @@ Typical examples:
 
 Agents should not load guides by default for every task.
 When both a playbook and a guide are relevant, the playbook defines the procedure and the guide supplies the local operating details.
-Guides do not override `agent-harness/CORE.md`, the active Mode Workflow, paired rules, Procedure Guides, or
+Guides do not override `agent-harness/CORE.md`, the active Mode Workflow, co-located rules, Procedure Guides, or
 relevant playbooks.
 
 `harness-data/guides/index.yaml` should stay minimal. Each entry uses:

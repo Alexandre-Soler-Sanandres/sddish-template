@@ -83,7 +83,7 @@ When both a universal playbook and a project playbook are relevant, agents shoul
 3. follow the project-specific constraint when they differ
 
 When both apply, the universal playbook provides the generic procedure and the project playbook refines it for this repository.
-Neither playbook layer overrides `agent-harness/CORE.md`, the active Mode Workflow, paired rules, or required
+Neither playbook layer overrides `agent-harness/CORE.md`, the active Mode Workflow, co-located rules, or required
 Procedure Guides.
 
 `harness-data/playbooks/index.yaml` should stay minimal. Each entry uses:

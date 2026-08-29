@@ -18,8 +18,7 @@ Procedure Guides are harness-native and universal. They are required by the harn
 one can change routing, validation, lifecycle, or approval semantics. That is why `RISK-TIER.md` is a Procedure
 Guide, not a playbook: its cascade decides which artifact tiers may be skipped before Planning-Implementation.
 
-Procedure Guide prose explains how to run the procedure well; paired rules under
-`agent-harness/rules/shared-procs/` hold enforceable gates, routing requirements, and audit points.
+Procedure Guide prose explains how to run the procedure well; the file`s own `## Rules` section holds the enforceable gates, routing requirements, and audit points.
 
 ## Validation
 

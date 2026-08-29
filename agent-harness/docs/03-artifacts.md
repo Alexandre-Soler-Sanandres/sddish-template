@@ -25,8 +25,7 @@ For project-owned support files, see [10-guides.md](10-guides.md) and [11-projec
 
 Artifact Contracts teach meaning, validity, lifecycle, relationships, examples, and quality expectations. They are
 not Mode Workflows: they do not describe how to conduct an interactive mode session except where that context is
-needed to explain creation paths. Once a contract has paired rules, enforceable constraints move to the paired
-rules and the contract keeps the explanation and Rules Map.
+needed to explain creation paths. Enforceable constraints live in the contract`s own `## Rules` section; the surrounding prose keeps the explanation.
 
 Canonical Artifact Contract sections:
 
@@ -45,7 +44,7 @@ Canonical Artifact Contract sections:
 - `Output / Location`
 - `Template`
 - `Examples`
-- `Rules Map`
+- `Rules`
 - `Reference Files`
 
 Every artifact spec already follows this canonical form.

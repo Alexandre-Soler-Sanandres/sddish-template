@@ -8,7 +8,7 @@ Rules, and Templates. This document covers Modes only.
 
 A file under `agent-harness/modes/` is a Mode Workflow. It should teach the agent how to do excellent work in that
 mode: posture, path choice, examples, handoffs, common failure modes, and how to use the mode's rules. It should
-not become a thin pointer file, and it should not hide enforceable constraints in prose once paired rules exist.
+not become a thin pointer file, and it should not hide enforceable constraints in prose rather than its `## Rules` section.
 
 ## Work Lanes (v2)
 
@@ -28,12 +28,11 @@ Canonical Mode Workflow sections:
 - `Routing`
 - `Outputs`
 - `Examples`
-- `Rules Map`
+- `Rules`
 - `Reference Files`
 
 Every mode file follows this canonical form. Explanatory mode prose stays in the Mode Workflow; enforceable
-gates, approvals, validation, loading, traceability, and safety boundaries live in paired rules under
-`agent-harness/rules/modes/`.
+gates, approvals, validation, loading, traceability, and safety boundaries live in the file`s own `## Rules` section.
 
 ## Mode Overview
 

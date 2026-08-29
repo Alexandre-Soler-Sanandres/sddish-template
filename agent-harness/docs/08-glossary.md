@@ -6,8 +6,8 @@ These are the canonical terms for files under `agent-harness/` and their project
 
 **Mode Workflow**
 A rich agent-facing guide under `agent-harness/modes/` that teaches how to operate in one true Mode: posture,
-route choices, workflow paths, handoffs, examples, and common failure modes. A Mode Workflow guides; enforceable
-obligations live in paired rules under `agent-harness/rules/`.
+route choices, workflow paths, handoffs, examples, and common failure modes. A Mode Workflow guides; its
+enforceable obligations live in its own `## Rules` section in the same file.
 
 **Artifact Contract**
 An agent-facing contract under `agent-harness/artifact-specs/` that defines what one artifact type means, when it
@@ -26,21 +26,14 @@ Rules tables.
 
 **Rules**
 Enforceable constraints with stable rule IDs. Rules constrain gates, approvals, statuses, validation, loading,
-traceability, safety boundaries, and other behavior that must be auditable by ID. Rules live under
-`agent-harness/rules/`.
+traceability, safety boundaries, and other behavior that must be auditable by ID. Every rule lives in a `## Rules`
+section inside the Workflow, Contract, Procedure Guide, or System it belongs to — `CORE.md` and `OUTPUTS.md` hold
+the universal and output rules the same way. There is no separate rules tree.
 
-**Rules Map**
-A section in a source file that tells the agent which paired rules file or grouped rules files apply, including
-which rules always load and which rules load only for specific operations.
-
-**Paired Rules**
-A rules file or grouped rules directory under `agent-harness/rules/` that corresponds to a source file elsewhere
-in `agent-harness/`. A small source file may pair to `agent-harness/rules/<same-relative-path>.md`; a large source
-file may pair to `agent-harness/rules/<same-relative-path-without-.md>/`.
-
-**Grouped Rule Directory**
-A paired rules directory used when one source file has enough independent rule clusters to justify multiple rule
-files. `agent-harness/rules/CORE/` is the first pilot.
+**Rules section**
+The `## Rules` section a source file carries directly, holding its ID'd enforceable rule rows. Larger files may
+split it into `###` subsections by concern (see `CORE.md`). A superseded pre-v2 rule set retained for the
+migration window sits in a `### Legacy (v1)` subsection with `-v1`-suffixed IDs.
 
 **Template**
 A lean scaffold under `agent-harness/templates/`: frontmatter keys, section headings, checklists, placeholders,

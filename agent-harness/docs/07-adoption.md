@@ -250,9 +250,9 @@ Run this once after setup to confirm a fresh checkout can actually execute the r
 ### Structural Conformance Check
 
 `scripts/check-harness-conformance.sh` is a portable structural guard copied into every repository created from
-this template. It checks rule-ID uniqueness and citation resolution, Rules-Map and referenced-file paths,
-Markdown links, entry-point wrapper parity across the Codex/Claude/Copilot layers, the lifecycle skeleton and
-Plan status vocabulary, and template/placeholder hygiene.
+this template. It checks rule-ID uniqueness and citation resolution, referenced-file paths, Markdown links,
+entry-point wrapper parity across the Codex/Claude/Copilot layers, the lifecycle skeleton and Plan status
+vocabulary, and template/placeholder hygiene.
 
 - Template maintainers: it runs in CI (`.github/workflows/harness-conformance.yml`) on every push and pull
   request, and should pass before an `agent-harness/` change is synced outward.
@@ -262,6 +262,20 @@ Plan status vocabulary, and template/placeholder hygiene.
 It is structural support only. It does not satisfy or replace the agent-performed `COR-10-060` citation audit,
 Improvement validation (`IMPR-05-*`), explicit per-Improvement approval, or human semantic review of a harness
 change.
+
+#### Tooling dependencies
+
+The harness scripts assume:
+
+- a **POSIX shell** — `bash` (or `sh`) plus the usual `grep` / `sed` / `find` / `sort` / `diff`. This covers
+  `scripts/check-harness.sh`, `scripts/check-harness-conformance.sh`, and `scripts/render-harness-views.sh`.
+- **Python 3.14+ with `PyYAML`** — required only by `scripts/generate-harness-wrappers.sh`, which parses
+  `agent-harness/entrypoints.yaml` to render the per-agent wrapper layers, and transitively by
+  `scripts/check-harness.sh`'s generated-wrapper cleanliness check (it regenerates into a scratch dir and
+  diffs). When `python3` is absent, `check-harness.sh` skips only that check and still runs every bash-only
+  check; an adopter repo that merely mirrors the generated wrappers never needs Python.
+
+No other runtime, package manager, or network access is required.
 
 ### After setup (both options)
 
@@ -313,7 +327,7 @@ When in doubt:
 | `agent-harness/artifact-specs/**/*.md` | Universal Artifact Contracts — do not modify for project-specific needs |
 | `agent-harness/shared-procs/**/*.md` | Universal Procedure Guides — do not modify for project-specific needs |
 | `agent-harness/systems/**/*.md` | Universal Systems — do not modify for project-specific needs |
-| `agent-harness/rules/**/*.md` | Universal enforceable Rules — do not modify for project-specific needs |
+| `agent-harness/**` `## Rules` sections | Universal enforceable Rules, co-located in each source file — do not modify for project-specific needs |
 | `agent-harness/playbooks/` | Universal — reusable procedures owned by the harness |
 | `agent-harness/templates/*.md` | Universal lean scaffolds — do not modify for project-specific needs |
 | `harness-data/CATALOG.md` | Project-specific — live state, not part of the template |

@@ -1,6 +1,6 @@
 ---
 name: create-adr
-description: Create or refine an ADR (Architecture Decision Record). Use when a settled structural/architectural decision has been reached.
+description: Create or refine an ADR (Architecture Decision Record).
 ---
 
 Create or refine an ADR.

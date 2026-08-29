@@ -4,7 +4,7 @@ This guide is for humans using the harness to understand and rewrite legacy appl
 work, what to ask for, what to review, and which decisions you should keep in your hands.
 
 The detailed agent workflow lives in `agent-harness/modes/DISCOVERING-LEGACY.md`: workflow guidance in the
-Discovering-Legacy Mode Workflow, enforceable rules in paired files under `agent-harness/rules/modes/`. Use this
+Discovering-Legacy Mode Workflow, enforceable rules in each submode file`s `## Rules` section. Use this
 guide as the human-readable explanation of the legacy discovery practice.
 
 ## Your Role

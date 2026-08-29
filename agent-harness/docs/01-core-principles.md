@@ -65,8 +65,8 @@ definitions live in [08-glossary.md](08-glossary.md).
   Mode or artifact control flow. No schema, no artifact of their own. See [04-shared-procs.md](04-shared-procs.md).
 - **Systems** (`agent-harness/systems/`) — agent-facing operating-model explanations for mechanisms spanning
   multiple rules, artifacts, statuses, or procedures.
-- **Rules** (`agent-harness/rules/`) — enforceable rule tables only, paired with the source files whose
-  explanation and constraints they were split from.
+- **Rules** — enforceable rule rows only, co-located in a `## Rules` section inside the Workflow, Contract,
+  Procedure Guide, or System they constrain (`CORE.md`/`OUTPUTS.md` for the universal and output rules).
 - **Templates** (`agent-harness/templates/`) — lean scaffolds: frontmatter keys, section headings, checklists,
   placeholders, and short field prompts.
 

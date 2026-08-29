@@ -6,6 +6,90 @@ artifacts="$root/artifacts"
 fail=0
 declare -A seen=()
 
+# ---------------------------------------------------------------------------
+# Harness source checks (IMPROVEMENT-0146): rules are co-located in each
+# source file's "## Rules" section; there is no agent-harness/rules/ tree.
+# ---------------------------------------------------------------------------
+repo="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ah="$repo/agent-harness"
+if [[ -d $ah ]]; then
+  # 1. no paired-rules residue
+  if [[ -d "$ah/rules" ]]; then
+    echo "paired-rules residue: $ah/rules still exists" >&2; fail=1
+  fi
+
+  # scan roots: all of agent-harness, root loaders, generated wrapper layers
+  mapfile -t src < <(
+    { find "$ah" -type f -name '*.md'
+      for x in AGENTS.md CLAUDE.md .github/copilot-instructions.md; do [[ -f $repo/$x ]] && echo "$repo/$x"; done
+      find "$repo/.claude/skills/harness" "$repo/.agents/skills/harness" "$repo/.github/agents" -type f 2>/dev/null || true
+    } | sort -u
+  )
+  idre='[A-Z]{2,4}-[0-9]{2}-[0-9]{3}(-v1)?'
+
+  # 2. every rule ID defined exactly once (a "definition" = a table row whose
+  #    first cell is exactly the ID)
+  dup=$(grep -hoE "^\|[[:space:]]*${idre}[[:space:]]*\|" "${src[@]}" 2>/dev/null \
+        | grep -oE "$idre" | sort | uniq -d)
+  if [[ -n $dup ]]; then
+    echo "rule ID defined more than once:" >&2
+    printf '  %s\n' $dup >&2
+    fail=1
+  fi
+
+  # 3. no dangling citations (every cited ID resolves to a definition row)
+  defs=$(grep -hoE "^\|[[:space:]]*${idre}[[:space:]]*\|" "${src[@]}" 2>/dev/null | grep -oE "$idre" | sort -u)
+  cites=$(grep -hoE "$idre" "${src[@]}" 2>/dev/null | sort -u)
+  dangle=$(comm -13 <(printf '%s\n' "$defs") <(printf '%s\n' "$cites"))
+  if [[ -n $dangle ]]; then
+    echo "dangling rule-ID citations (cited, never defined):" >&2
+    printf '  %s\n' $dangle >&2
+    fail=1
+  fi
+
+  # 4. entry-point manifest completeness: entrypoints.yaml <-> the three
+  #    wrapper layers, name-for-name
+  manifest="$ah/entrypoints.yaml"
+  if [[ -f $manifest ]]; then
+    names=$(grep -oE '^[[:space:]]*- name: [a-z0-9-]+' "$manifest" | awk '{print $3}' | sort)
+    for n in $names; do
+      [[ -f "$repo/.claude/skills/harness/$n/SKILL.md" ]] || { echo "manifest: missing .claude wrapper for '$n'" >&2; fail=1; }
+      [[ -f "$repo/.agents/skills/harness/$n/SKILL.md" ]] || { echo "manifest: missing .agents wrapper for '$n'" >&2; fail=1; }
+      [[ -f "$repo/.github/agents/$n.agent.md" ]] || { echo "manifest: missing .github wrapper for '$n'" >&2; fail=1; }
+    done
+    for d in "$repo"/.claude/skills/harness/*/; do
+      n=$(basename "$d")
+      grep -qE "^[[:space:]]*- name: $n\$" "$manifest" || { echo "wrapper '$n' has no entrypoints.yaml entry" >&2; fail=1; }
+    done
+  else
+    echo "missing entry-point manifest: $manifest" >&2; fail=1
+  fi
+
+  # 5. generated-wrapper cleanliness: the live wrapper layers must equal what
+  #    generate-harness-wrappers.sh produces from entrypoints.yaml (catches
+  #    hand-edits and manifest drift). Skipped when the generator is absent
+  #    (adopter repos that only mirror generated output).
+  gen="$repo/scripts/generate-harness-wrappers.sh"
+  if [[ -x $gen ]] && command -v python3 >/dev/null 2>&1; then
+    tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
+    mkdir -p "$tmp/agent-harness"
+    cp "$manifest" "$tmp/agent-harness/entrypoints.yaml"
+    for layer in .claude/skills/harness .agents/skills/harness .github/agents; do
+      [[ -e "$repo/$layer" ]] && { mkdir -p "$tmp/$(dirname "$layer")"; cp -r "$repo/$layer" "$tmp/$layer"; }
+    done
+    if ! "$gen" "$tmp" >/dev/null 2>&1; then
+      echo "generate-harness-wrappers.sh failed to run" >&2; fail=1
+    else
+      for layer in .claude/skills/harness .agents/skills/harness .github/agents; do
+        if ! diff -r "$repo/$layer" "$tmp/$layer" >/dev/null 2>&1; then
+          echo "wrapper layer $layer is out of sync with agent-harness/entrypoints.yaml — run scripts/generate-harness-wrappers.sh" >&2
+          fail=1
+        fi
+      done
+    fi
+  fi
+fi
+
 profile="$root/HARNESS-PROFILE.yaml"
 if [[ -f $profile ]]; then
   if ! awk '

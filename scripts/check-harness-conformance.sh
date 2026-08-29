@@ -31,7 +31,7 @@ pass()    { CHECKS=$((CHECKS + 1)); printf 'PASS  %s\n' "$1"; }
 fail()    { CHECKS=$((CHECKS + 1)); FAILED=1; printf 'FAIL  %s\n' "$1"; }
 detail()  { printf '        %s\n' "$1"; }
 
-RULE_RE='[A-Z]{2,6}-[0-9]{2}-[0-9]{3}'
+RULE_RE='[A-Z]{2,6}-[0-9]{2}-[0-9]{3}(-v1)?'
 
 # Harness surfaces that carry rule-ID citations and canonical instructions.
 CITE_ROOTS=(agent-harness)
@@ -45,9 +45,10 @@ CITE_ROOTS=(agent-harness)
 # ---------------------------------------------------------------------------
 section "Rule-ID definitions and citations"
 # ---------------------------------------------------------------------------
-# Definitions are Rules-table rows under agent-harness/rules/ shaped '| ID | ... |'.
+# Definitions are '## Rules' table rows co-located in each source file, shaped
+# '| ID | ... |' with the ID as the whole first cell.
 defs_file="$(mktemp)"
-grep -rhoE "^\| ${RULE_RE} " agent-harness/rules/ 2>/dev/null \
+grep -rhoE "^\|[[:space:]]*${RULE_RE}[[:space:]]*\|" agent-harness/ 2>/dev/null \
   | grep -oE "${RULE_RE}" | sort > "$defs_file"
 
 dupes="$(uniq -d "$defs_file")"
@@ -75,7 +76,7 @@ fi
 rm -f "$defs_file" "$defs_uniq" "$cites_file"
 
 # ---------------------------------------------------------------------------
-section "Rules Map and referenced local paths"
+section "Referenced local paths"
 # ---------------------------------------------------------------------------
 # Every backtick-quoted agent-harness/....md file mentioned in a harness source file
 # must exist. Only .md targets are checked: bare directory tokens are also used in
@@ -165,9 +166,12 @@ skel_fail=0
 for d in adrs ideas implementation-plans improvements legacy questions reviews specs tasks transcripts use-cases; do
   [ -d "harness-data/artifacts/$d" ] || { fail "missing lifecycle folder: harness-data/artifacts/$d"; skel_fail=1; }
 done
-for f in QUESTIONS-OPEN.md QUESTIONS-RESOLVED.md QUESTIONS-DISCARDED.md; do
-  [ -f "harness-data/artifacts/questions/$f" ] || { fail "missing Questions registry file: $f"; skel_fail=1; }
-done
+# v2 uses a single Questions registry file (IMPROVEMENT-0144); the v1 three-file
+# split (QUESTIONS-OPEN/RESOLVED/DISCARDED.md) is gone.
+if [ -d harness-data/artifacts/questions ]; then
+  [ -f harness-data/artifacts/questions/QUESTIONS.md ] \
+    || { fail "missing Questions registry file: harness-data/artifacts/questions/QUESTIONS.md"; skel_fail=1; }
+fi
 for d in proposed accepted; do
   [ -d "harness-data/artifacts/adrs/$d" ] || { fail "missing ADR folder: harness-data/artifacts/adrs/$d"; skel_fail=1; }
 done

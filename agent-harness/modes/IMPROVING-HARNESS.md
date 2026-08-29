@@ -60,8 +60,8 @@ entry-point layer must be mirrored across the others unless it's agent-specific 
    proposed change (`IMPR-02-025`); never infer or self-approve it (`IMPR-02-020`).
 3. Apply the target-file changes only after that specific approval exists (`IMPR-02-027`).
 4. When the Improvement touches rule IDs or Rules-table placement, run the `COR-10-060`–`COR-10-063` citation
-   audit before setting the Improvement to `done` (`IMPR-05-010`) — see `## Rules Map` for the paired rules that
-   define the audit's scan roots and reporting requirements.
+   audit before setting the Improvement to `done` (`IMPR-05-010`) — see `## Rules` (`IMPR-05-020`/`IMPR-05-030`)
+   for the audit's scan roots and reporting requirements.
 5. Record the `## Validation Result`: scan roots used, duplicate-definition result, dangling-citation result, and
    whether before-and-after audit evidence was required (`IMPR-05-030`).
 
@@ -79,14 +79,27 @@ terminal status: `done`, `rejected`, or `archived`). It does not hand off to ano
 ## Examples
 
 A Review finds that agents repeatedly forget to reload `CORE.md` after a context compaction. The agent drafts an
-Improvement proposing a new Checkpoint rule, waits for explicit approval, adds the rule to
-`agent-harness/rules/CORE/CHECKPOINT.md`, runs the citation audit, and records the validation result before
-marking the Improvement `done`.
+Improvement proposing a new Checkpoint rule, waits for explicit approval, adds the rule to `CORE.md`'s `## Rules`
+`### Checkpoint` section, runs the citation audit, and records the validation result before marking the
+Improvement `done`.
 
-## Rules Map
+## Rules
 
-This mode's enforceable rules live in `agent-harness/rules/modes/IMPROVING-HARNESS.md` (single paired file —
-under the 25-rule grouping threshold). Load it alongside this file whenever Improving-Harness is the active mode.
+| ID | Rule |
+| --- | --- |
+| IMPR-01-010 | MAY apply approved changes by default to: any file under `agent-harness/`; `.claude/skills/harness/`, `.agents/skills/harness/`, and `.github/agents/` (the per-agent CLI entry-point layers); and root-level `AGENTS.md`/`CLAUDE.md`/`.github/copilot-instructions.md` (the harness's loader files). |
+| IMPR-01-011 | Other files MAY change too when the Improvement explicitly calls for it. |
+| IMPR-01-020 | MUST mirror a change to one entry-point layer across the others unless it's agent-specific. |
+| IMPR-02-020 | Harness changes MUST be explicit and approved. |
+| IMPR-02-025 | The agent MUST NOT infer approval or approve an Improvement on its own (this is `COR-01-090` applied to Improvement artifacts specifically). A general instruction to improve the harness is not approval of any specific `IMPROVEMENT-NNNN`; approval is valid only after the user has had the chance to see that artifact's own proposed change. |
+| IMPR-02-026 | The agent MUST perform the `proposed` -> `approved` transition, including `approval.approved_by`/`approved_at`, when the user explicitly instructs it to do so. |
+| IMPR-02-027 | MUST NOT apply an Improvement's target-file changes before that specific approval exists. |
+| IMPR-02-030 | Target files MUST be listed in frontmatter. |
+| IMPR-02-040 | MUST NOT create Improvement artifacts from Partnering; MUST create them from a harness/process Review, which direct explicit harness-improvement intake MAY create in the same transaction. |
+| IMPR-05-010 | An approved Improvement that touches rule IDs or Rules-table placement MUST satisfy `CORE.md`'s `COR-10-060`–`COR-10-063` before it can be set to `done`. |
+| IMPR-05-020 | A `COR-10-060` citation audit MUST cover at minimum: `agent-harness/`, `harness-data/reference/`, root loader files (`AGENTS.md`, `CLAUDE.md`, and future equivalents), and entry-point wrapper layers (`.claude/skills/harness/`, `.agents/skills/harness/`, and future `.github/` Copilot wrapper paths when present). |
+| IMPR-05-030 | The Improvement's `## Validation Result` MUST report the scan roots used, duplicate-definition result, dangling-citation result, and whether before-and-after audit evidence was required by `COR-10-061`. |
+| IMPR-05-040 | Improving-Harness mode MUST NOT create `agent-harness/tools/`, generated rule indexes, or other repo-local validation artifacts to satisfy `COR-10-060`; future automation belongs in a separate template-repository Improvement. |
 
 ## Reference Files
 

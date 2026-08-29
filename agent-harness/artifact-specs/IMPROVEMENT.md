@@ -99,12 +99,19 @@ Use `agent-harness/templates/IMPROVEMENT-template.md` as the starting point for 
 the approved rewrite, records the validation result, and — once every other `follow_up` Improvement on that
 Review also reaches a terminal status — resolves the Review itself.
 
-## Rules Map
+## Rules
 
-This contract's enforceable rules live in `agent-harness/rules/artifact-specs/IMPROVEMENT.md` (single paired
-file — under the 25-rule grouping threshold). Load it whenever drafting, approving, applying, or validating an
-Improvement. See also `agent-harness/modes/IMPROVING-HARNESS.md`'s own Rules Map for the behavioral (Scope/
-Boundaries/Rule-ID-Audit) rules governing the surrounding mode activity.
+| ID | Rule |
+| --- | --- |
+| IMPR-00-010 | MAY create a process Review and proposed Improvement artifacts in one transaction for an explicit harness-improvement request, but MUST NOT treat that request as approval or target-file authorization. |
+| IMPR-03-010 | MUST keep `## Validation` as the validation plan or checklist. |
+| IMPR-03-020 | MUST add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done` or moved to `done/`. |
+| IMPR-03-030 | If a validation item is prospective and cannot be fully proven yet, MUST state that explicitly instead of treating it as completed evidence. |
+| IMPR-03-040 | MUST NOT move an Improvement artifact to `done/` until the approved target changes are applied and the validation result is documented. |
+| IMPR-03-050 | `status: proposed -> approved` is a distinct, user-only gate from this file's `approved -> done` validation gate (`IMPR-03-040`) — see `IMPR-02-025` in `IMPROVING-HARNESS.md`. Meeting `IMPR-03-040`'s validation conditions MUST NOT be treated as substituting for that approval. |
+| IMPR-04-010 | MUST add this Improvement's own ID to the `follow_up` field of every Review in `source`, at creation time — not deferred until approval or `done`. |
+| IMPR-04-020 | When this Improvement's `status` transitions to `done` or `rejected`, MUST resolve each `source` Review per `REVIEW.md`'s `RVW-06-010` if every `follow_up` Improvement is now terminal. |
+| IMPR-04-030 | MUST perform the `RVW-06-010` resolution in the same action as this Improvement's `done`/`rejected` transition — not a separately-scheduled sweep. |
 
 ## Reference Files
 

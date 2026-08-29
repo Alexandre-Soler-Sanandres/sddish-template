@@ -81,11 +81,26 @@ Two `LF-APP-0014` and `LF-APP-0021` findings both describe the same caching beha
 keeping the ID with stronger evidence, folding in the other's evidence paths, archiving the superseded file with
 a pointer, and preserving both files' original question-ID citations.
 
-## Rules Map
+## Rules
 
-This submode's enforceable rules live in `agent-harness/rules/modes/legacy-discovery/NORMALIZATION.md` (single
-paired file — under the 25-rule grouping threshold). Load it alongside this file whenever Artifact Normalization
-is the active phase.
+| ID | Rule |
+| --- | --- |
+| LDG-01-010 | MUST run normalization after app-local discovery and cross-system synthesis are complete, before moving legacy evidence into Use Cases, Specs, Tasks, or Implementation Planning, in this order: one app folder at a time (`INVENTORY.md`, `SOURCE-MAP.md`, `findings/`), then cross-system artifacts (`SUMMARY.md`, `CONTRACTS.md`, `findings/`, `REWRITE-READINESS.md`), then the unified Questions registry. |
+| LDG-01-020 | MUST fix Markdown formatting, heading hierarchy, table consistency, stale restart pointers, obvious ordering issues, and duplicate sections with the same claim for each artifact. |
+| LDG-01-030 | MUST preserve information density, evidence paths, artifact IDs, question IDs, finding IDs, proof IDs, lifecycle metadata, and evidence classifications. |
+| LDG-01-040 | For cross-system artifacts, MUST preserve the traceability chain across app finding IDs, cross-system finding IDs, question IDs, proof IDs, parity rows, and readiness blockers — tightening wording or merging duplicates must not sever those links. |
+| LDG-01-050 | For `findings/`, MUST merge two `LF-<APP>-NNNN` files that make the same claim into one: keep the ID with the stronger evidence set, fold the other file's evidence paths into it, set the superseded file's `status` to `archived`, add a one-line pointer to the surviving ID, and move it to `findings/archive/`. |
+| LDG-01-051 | MUST NOT reuse or silently drop an ID as part of an `LDG-01-050` merge. |
+| LDG-01-060 | MUST verify each cross-system finding's `## Evidence` section cites the contributing app finding IDs it synthesizes, not only raw source paths; add missing citations before normalization is considered complete. |
+| LDG-01-070 | `SOURCE-MAP.md` and cross-system `SUMMARY.md` MUST collapse to their `Discovery-Complete Shape` (see the templates) once `discovery_state` is `app-local-complete` or cross-system synthesis is finished — the file stays at the same path as the stable restart point. |
+| LDG-01-071 | MUST port forward, before an `LDG-01-070` collapse, any stable finding or candidate Use Case note that lacks an equivalent entry in `findings/` or the reference docs. |
+| LDG-01-080 | Normalization is not new discovery — MUST NOT add findings from source inspection; record a gap needing source inspection or runtime execution as a follow-up question or proof item instead. |
+| LDG-01-090 | MUST re-walk the full `Resolved`/`Discarded` lists against the Reference Enrichment table in `DISCOVERING-LEGACY.md` every normalization pass, and confirm each decision that produces a stable, target-relevant fact is actually reflected there. This is a repeatable sweep, not a one-time backfill. |
+| LDG-02-010 | MUST sweep `QUESTIONS-OPEN.md` for duplicate-decision signals before normalization is considered complete: any two rows whose `Source` values overlap, and any row whose `Notes` column references another question ID ("see CSQ-", "same as Q-", "duplicate of", or similar) — these self-flagged candidates must be resolved into an actual merge, not left as narrative. |
+| LDG-02-030 | MUST merge confirmed duplicates without resolving them — normalization does not decide open questions. Keep the clearer/more complete question text as the single entry, and add a one-line `Notes` recording the merged-away ID and why. The question stays open until Question Clarification resolves it. |
+| LDG-02-031 | MUST NOT silently drop a merged-away row per `LDG-02-030` — it must stay traceable, mirroring finding-dedup's archive pointer. |
+| LDG-02-040 | MUST flag any ID that appears in more than one of the three status files, and remove the stale row; the `Resolved`/`Discarded` file's row is authoritative over `Open`. |
+| LDG-02-050 | MUST re-check, for each `Resolved`/`Discarded` row, every finding listed in its `Source` column — the ID must appear in that finding's `## Resolved Questions`, not left in `## Open Questions`. Check every cited finding, not just the first. |
 
 ## Reference Files
 

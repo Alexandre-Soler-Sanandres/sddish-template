@@ -10,9 +10,9 @@ When an agent starts a task, it loads context in this order — stopping as soon
 
 1. User request
 2. Root loader file (`AGENTS.md`)
-3. `agent-harness/CORE.md` and the required CORE rule groups from its Rules Map
-4. `agent-harness/OUTPUTS.md` plus paired output rules when present
-5. Active Mode Workflow plus paired mode rules when present
+3. `agent-harness/CORE.md` (its `## Rules` section carries every universal rule)
+4. `agent-harness/OUTPUTS.md` (its `## Rules` section carries the output rules)
+5. Active Mode Workflow (its `## Rules` section carries the mode rules)
 6. Explicitly referenced artifact
 7. Relevant Artifact Contract plus paired artifact rules when creating, updating, or reviewing an artifact
 8. Frontmatter links (`source`, `derived_*`, `related`)
@@ -47,35 +47,20 @@ creating, updating, or reviewing an artifact, include that artifact type's Artif
 
 These files are always loaded by the agent regardless of mode:
 
-- `agent-harness/CORE.md` — universal contract and Rules Map
-- required CORE rule groups, at minimum `UNIVERSAL.md` and `CONTEXT-LOADING.md`
+- `agent-harness/CORE.md` — universal contract; its `## Rules` section carries every `COR-*` rule
 - `agent-harness/OUTPUTS.md` — artifact formats and folder structure
 - the active Mode Workflow
 
 For agent behavior, this is the minimum harness checkpoint before high-impact work.
 
-## Paired Rules And Rules Maps
+## Rules Sections
 
-When a harness source file has paired rules, load the source file first, then use its Rules Map to select the
-paired rules needed for the current action. The pairing convention is:
+Every harness source file carries its own enforceable rules in a `## Rules` section in the same file. Loading the
+source file loads its rules — there is no separate rules tree and no Rules Map to consult.
 
-- small source file: `agent-harness/rules/<same-relative-path>.md`
-- large or grouped source file: `agent-harness/rules/<same-relative-path-without-.md>/`
-- files with no paired rules are read as-is
-- files under `agent-harness/rules/` do not recursively pair
-
-If the needed rule group is unclear, or the work edits, moves, cites, or audits rules, load all paired rules for
-the affected source file.
-
-Rule grouping policy:
-
-- under 25 rules: use one paired rules file with internal sections
-- 25-35 rules: use one paired file by default; split only if clusters are strongly independent
-- 35+ rules: grouped rule files are justified
-- legacy discovery may split earlier when inventory, slice, blockwise, and closeout phases are naturally independent
-
-The initial grouped splits are `CORE`, `DISCOVERING-LEGACY`, `APP-LOCAL`, and `CROSS-SYSTEM`. Other files start as
-single paired rules files unless later practice proves grouping useful.
+- larger files split `## Rules` into `###` subsections by concern; `CORE.md` groups the universal rules this way
+- a pre-v2 rule set kept for the migration window lives in a `### Legacy (v1)` subsection with `-v1`-suffixed IDs
+- when the work edits, moves, cites, or audits rules, read the whole `## Rules` section of every affected file
 
 On a true Mode transition, reload the initial harness block for the newly active Mode Workflow and current restart
 or referenced artifact. After initial loading, expand to cited Systems, Artifact Contracts, Procedure Guides,

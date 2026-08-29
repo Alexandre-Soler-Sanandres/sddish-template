@@ -59,7 +59,7 @@ using this harness, and the only thing that syncs to or from the template repo:
 ``` text
 agent-harness/
   README.md            ← harness overview
-  CORE.md              ← universal harness contract and Rules Map
+  CORE.md              ← universal harness contract; carries all COR-* rules in its ## Rules section
   OUTPUTS.md           ← artifact formats and folder structure (always loaded)
   CATALOG.md           ← universal navigation: where artifacts live
   docs/                ← human-readable explanation of how the harness works
@@ -144,8 +144,7 @@ smallest useful first pass and the same guide for full adoption instructions.
 ## Key Principles
 
 - **Mode Workflows are universal** — mode files work for any tech stack without modification
-- **Rules are paired when split** — source files explain workflow/contract/procedure/system behavior; paired rules
-  hold enforceable tables
+- **Rules are co-located** — every source file carries its own enforceable rule rows in a `## Rules` section; there is no separate rules tree
 - **References are project-specific** — architecture, domain, tooling, and quality vary per project
 - **Guides are project-specific** — setup and operating guidance stays local to each adopting repository
 - **Project playbooks are project-specific** — scoped procedures live under `harness-data/`, not in the universal harness

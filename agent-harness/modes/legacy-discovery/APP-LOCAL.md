@@ -115,20 +115,59 @@ finding describing the current auth flow; writes a second finding flagging an un
 behavior as a target-policy fork; raises a `Q-<APP>-NNNN` row for that fork; enriches `DOMAIN.md` with the stable
 auth-concept vocabulary; and runs the Slice Closeout Checklist before marking the slice `done`.
 
-## Rules Map
+## Rules
 
-This submode's enforceable rules live in a grouped directory under
-`agent-harness/rules/modes/legacy-discovery/APP-LOCAL/`:
-
-| Group | File | Load when |
-| --- | --- | --- |
-| Inventory-and-Source-Map | `agent-harness/rules/modes/legacy-discovery/APP-LOCAL/INVENTORY-AND-SOURCE-MAP.md` | Creating or updating `INVENTORY.md`/`SOURCE-MAP.md`. |
-| Slice | `agent-harness/rules/modes/legacy-discovery/APP-LOCAL/SLICE.md` | Defining or tracking slice status. |
-| Slice-Roundtrip | `agent-harness/rules/modes/legacy-discovery/APP-LOCAL/SLICE-ROUNDTRIP.md` | Doing the roundtrip work inside a slice — evidence checks, candidate-artifact review, target-fork checks. |
-| Blockwise | `agent-harness/rules/modes/legacy-discovery/APP-LOCAL/BLOCKWISE.md` | Grouping related slices into a block. |
-| Slice-Closeout | `agent-harness/rules/modes/legacy-discovery/APP-LOCAL/SLICE-CLOSEOUT.md` | Closing out a slice before marking it `done`. |
-
-If the relevant group is unclear, load every group in this table.
+| ID | Rule |
+| --- | --- |
+| LDA-01-010 | App `INVENTORY.md` MUST use `agent-harness/templates/INVENTORY-template.md`: fixed `Scope`, `Identity`, `Major Runtime Areas`, `Operations, Tooling, and Quality`, and `Inventory Gaps` sections, plus as many app-specific structural sections as the app's own shape needs in between. |
+| LDA-01-020 | MUST name app-specific sections after what they actually cover in this app, not copy another app's section names. |
+| LDA-01-030 | MUST create `INVENTORY.md` and `SOURCE-MAP.md` together for a newly-selected app, before reading evidence into any `LF-<APP>-NNNN.md` finding for that app. |
+| LDA-02-010 | Each app `SOURCE-MAP.md` (the app restart point, per `SOURCE-MAP-template.md`) MUST stay app-local, containing only: source root, primary evidence files, code areas, and candidate discovery slices; block list/status when blockwise; slice status table, completed notes, open app notes, restart pointers, and reference enrichment routing; deferred/cross-system Question ID references (per `COR-01-120` — classification itself lives only in the Questions registry, never duplicated here) before `app-local-complete`; import hygiene when the snapshot has secret-like files, local artifacts, or nested repo metadata. |
+| LDA-02-016 | At creation time (`LDA-01-030`), `SOURCE-MAP.md` MUST have `Source Root` filled in and a `Slice 0: Baseline inventory and import hygiene` row present in `Candidate Discovery Slices` (or `Current Status`, once slice work starts) with status `pending` or `next`. This is a minimum-at-creation floor, distinct from `LDA-02-010`'s ceiling on total allowed content once discovery is underway — `LDA-02-010` still governs what the file may contain as discovery proceeds; this rule only governs what must already be true at `t=0`. This fixed bootstrap slice name is a deliberate exception to `LDA-03-020`'s app-discretionary slice list, not a precedent for copying other slice names. |
+| LDA-02-020 | MUST NOT copy generic slice rules, block rules, roundtrip steps, cross-system judgments, or reusable process policy into app source maps. |
+| LDA-03-010 | MUST treat slices as the durable unit of discovery progress. |
+| LDA-03-020 | MUST define enough slices to cover every area of the app where material findings could exist; the app's own shape, not a fixed count or another app's slice list, decides how many slices that requires and where their boundaries fall. |
+| LDA-03-030 | Every slice MUST have status `done`, `next`, `pending`, or `not-needed`. |
+| LDA-03-040 | MUST NOT mark a slice `done` until findings and unresolved questions are recorded. |
+| LDA-03-050 | Completed slice notes (`Completed Notes` in the source map) MUST hold evidence paths, stable findings, unresolved decisions, and required slice-closeout records only. |
+| LDA-04-010 | Reference enrichment MAY be deferred across blockwise work only when the source map says so. |
+| LDA-04-020 | MUST review every new or updated finding for downstream artifact candidates before closing the slice. |
+| LDA-04-021 | MUST record each clearly supported candidate found per `LDA-04-020` in that finding's `## Candidate Artifacts` section at authoring time. |
+| LDA-04-025 | MUST leave a finding's `## Candidate Artifacts` section empty only after checking that no plausible downstream Use Case, Idea, Spec, proof surface, or other durable follow-on artifact is clearly indicated by the evidence. |
+| LDA-04-030 | MUST NOT invent a new per-slice `"Candidate <Something>"` list in `SOURCE-MAP.md`'s slice notes under any label; that is the same duplication. When a candidate spans multiple findings from the same slice, record it in each contributing finding's `Candidate Artifacts`, not as a new shared list. |
+| LDA-04-035 | SHOULD use a finding's `## Candidate Artifacts` section to note meaningful cross-finding impact when that traceability will materially help later synthesis or prioritization. Record each such note as a flat bullet in the form `- Affects: <LF-ID> — <short reason>`. Frontmatter `candidate_artifacts` remains for artifact IDs only. |
+| LDA-04-040 | MUST test each finding for a material unresolved target choice before leaving its `## Open Questions` empty, not only its own `Classification`/`Evidence Conflict` prose. |
+| LDA-04-041 | If `LDA-04-040`'s test finds a fork that satisfies `QST-06-010` and `QST-06-020`, whether explicit or latent after applying engineering judgment, MUST raise or update a `Q-<APP>-NNNN` registry row instead of leaving the fork only as prose in the finding. |
+| LDA-04-050 | MUST NOT mark a slice `done` until at least one finding records what the slice's area concretely contains or does, independent of anomaly, conflict, or edge-case behavior. |
+| LDA-04-055 | MUST check each completed slice for material operational or manual surfaces in scope — including CLI/operator tools, health/readiness/metrics surfaces, SQL diagnostics, or comparable observability paths. |
+| LDA-04-056 | MUST check each completed slice for material data-model shape choices in scope — including storage topology, JSON-vs-typed structure, DB views as read models, key typing, or migration-authority boundaries. |
+| LDA-04-057 | MUST check each completed slice for material provider-set shape in scope — including primary, fallback, overlapping, deferred, or disabled-but-wired providers. |
+| LDA-04-058 | MUST check each completed slice for material non-error runtime states in scope — including warmup, degraded-but-expected, or long-running intermediate states. |
+| LDA-04-059 | MUST check each completed slice for target-design forks implied by the evidence — including `preserve-vs-adapt`, `scope-v1`, `fidelity`, `naming`, and `deferred-feature` forks, plus visible-behavior questions, release-scope questions, configurability-vs-fixed-policy questions, deployment/runtime-policy questions, quality/acceptance-surface questions, and operator- or consumer-priority questions when the current evidence establishes the surface but not the target decision. |
+| LDA-04-060 | Reference enrichment MUST be complete before `app-local-complete`. |
+| LDA-04-062 | MUST check each completed slice for unresolved release, deployment, observability, benchmark, documentation-surface, and acceptance-policy forks established by in-scope deployment files, checked-in contracts, or historical docs. |
+| LDA-04-065 | MUST check each completed slice for sub-area-local fidelity that would be lost if the slice were represented only by a broader family summary. |
+| LDA-04-066 | MUST check each completed slice for concrete runtime-correctness defects, stale-code conclusions, or dead/wired-but-inert behavior that deserves first-class preservation. |
+| LDA-04-070 | MUST NOT treat the baseline-finding requirement alone as sufficient when a slice also clearly establishes rewrite-facing conclusions, operational/manual surfaces, data-model shape, provider-set shape, non-error runtime states, sub-area-local fidelity worth preserving separately, concrete defect-shaped evidence worth preserving separately, or target-design forks; those evidence classes still need their own finding or Question coverage in the same pass. |
+| LDA-04-071 | MUST use engineering judgment to identify materially unresolved forks per `LDA-04-059` even when no direct artifact conflict states them. |
+| LDA-04-072 | MUST write a new finding or update an existing finding when `LDA-04-055`/`056`/`057`/`058` finds a qualifying surface present. |
+| LDA-04-073 | MUST create a new Question or update an existing Question when `LDA-04-059` finds a qualifying fork present. |
+| LDA-04-074 | MUST create a new Question or update an existing Question when `LDA-04-062` finds a qualifying fork present. |
+| LDA-04-075 | MUST write a new finding or update an existing finding when `LDA-04-065` finds such a sub-area present. |
+| LDA-04-076 | MUST write a new finding or update an existing finding when `LDA-04-066` finds such evidence present. |
+| LDA-05-010 | Blocks are a planning convenience for related slices with overlapping evidence, not a replacement for slices — MUST mark each included slice individually in the slice status table. |
+| LDA-05-020 | MUST use a block only when the grouped slices share a focused evidence set. |
+| LDA-05-030 | MUST keep blocks app-scoped. |
+| LDA-05-040 | MUST write one completed block note listing included slices, evidence paths, stable findings, and unresolved decisions. |
+| LDA-05-050 | MUST set the next unfinished slice or coherent block to `next` after a block completes. |
+| LDA-06-010 | MUST record a listing of the app root's contents and of every package directory a slice's scope references before treating that scope as fully known. |
+| LDA-06-020 | MUST name the specific docs consulted for each completed slice, or explicitly record that no relevant docs were found for that slice's scope. |
+| LDA-06-030 | MUST record a negative result for each checked `LDA-04-055`/`056`/`057`/`058`/`059` category when no qualifying evidence is found. |
+| LDA-06-040 | MUST record the concrete evidence basis for each `LDA-04-055`/`056`/`057`/`058`/`059` check. |
+| LDA-06-045 | MUST record a split-vs-enrich decision for each deployment, observability, hardening, and benchmark/evaluation sub-area evidenced in the slice before marking the slice `done`. |
+| LDA-06-050 | MUST complete a fresh-context verification pass before marking a slice `done`. |
+| LDA-06-055 | MUST address any gap found by the fresh-context verification pass before marking a slice `done`. |
+| LDA-06-060 | MUST complete the Slice Closeout Checklist before marking a slice `done`. |
 
 ## Reference Files
 

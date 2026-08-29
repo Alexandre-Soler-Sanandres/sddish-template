@@ -1,0 +1,188 @@
+# Harness entry-point manifest — the single authored source for every CLI entry point.
+#
+# scripts/generate-harness-wrappers.sh (template-owned) renders this into the three
+# per-agent wrapper layers; generated outputs are mirrored into adopter repos:
+#   .claude/skills/harness/<name>/SKILL.md      (Claude Code)
+#   .agents/skills/harness/<name>/SKILL.md      (Codex CLI) + agents/openai.yaml
+#   .github/agents/<name>.agent.md              (Copilot)
+#
+# Direct edits to a generated wrapper fail conformance unless a regeneration
+# reproduces them. Change behaviour here, not in the wrappers.
+#
+# Fields:
+#   name        kebab-case entry-point / skill id (also the wrapper filename)
+#   description one line; becomes each wrapper's `description`
+#   kind        mode | contract | procedure — whether invoking it enters a true Mode
+#   follows     harness source file(s) the entry point runs under
+#   input       argument-hint label, or null when the entry point takes no argument
+#   condition   null, or `extension: <name>` when the entry point is gated on an
+#               enabled Extension (see harness-data/HARNESS-PROFILE.yaml)
+#   body        instruction lines shared by all three wrappers; the generator
+#               substitutes the per-agent argument placeholder into the `input:` line
+
+defaults:
+  disable_model_invocation: true
+
+entrypoints:
+  - name: partner
+    description: Enter Partnering mode for structured conversation to capture ideas and problems.
+    kind: mode
+    follows: [agent-harness/modes/PARTNERING.md]
+    input: null
+    condition: null
+    body: |
+      Enter Partnering mode.
+      Follow agent-harness/modes/PARTNERING.md.
+      Listen, capture, clarify. Do not create Specs or implement anything.
+      When the conversation yields enough substance, write a TRANSCRIPT-*.md proactively.
+
+  - name: create-use-case
+    description: Enter Refining mode to derive a Use Case from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation.
+    kind: mode
+    follows: [agent-harness/modes/REFINING.md, agent-harness/artifact-specs/USE-CASES.md]
+    input: source-reference
+    condition: null
+    body: |
+      Enter Refining mode.
+      Follow agent-harness/modes/REFINING.md (and agent-harness/artifact-specs/USE-CASES.md per COR-03-090).
+      Source (Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation): {input}
+      Create or refine a UC-*.md artifact. Do not trigger implementation.
+
+  - name: create-spec
+    description: Enter Refining mode to derive a Spec from a Use Case.
+    kind: mode
+    follows: [agent-harness/modes/REFINING.md, agent-harness/artifact-specs/SPECS.md]
+    input: use-case-file
+    condition: null
+    body: |
+      Enter Refining mode.
+      Follow agent-harness/modes/REFINING.md (and agent-harness/artifact-specs/SPECS.md per COR-03-090).
+      Use Case to process: {input}
+      Read the Use Case, create a SPEC-*.md artifact. Do not implement.
+
+  - name: create-tasks
+    description: Enter Refining mode to derive Tasks from a Spec.
+    kind: mode
+    follows: [agent-harness/modes/REFINING.md, agent-harness/artifact-specs/TASKS.md]
+    input: spec-file
+    condition: null
+    body: |
+      Enter Refining mode.
+      Follow agent-harness/modes/REFINING.md (and agent-harness/artifact-specs/TASKS.md per COR-03-090).
+      Spec to process: {input}
+      Read the Spec, apply the task decision matrix, create TASK-*.md artifacts if required. Do not implement.
+
+  - name: plan-use-case
+    description: Enter Planning-Implementation mode to plan and gate code changes from a Use Case.
+    kind: mode
+    follows: [agent-harness/modes/PLANNING-IMPLEMENTATION.md]
+    input: use-case-file
+    condition: null
+    body: |
+      Enter Planning-Implementation mode.
+      Follow agent-harness/modes/PLANNING-IMPLEMENTATION.md.
+      Use Case to plan: {input}
+      Find existing Specs and Tasks, create a PLAN-*.md artifact and wait for approval. Do not change code.
+
+  - name: plan-spec
+    description: Enter Planning-Implementation mode to plan and gate code changes from a Spec.
+    kind: mode
+    follows: [agent-harness/modes/PLANNING-IMPLEMENTATION.md]
+    input: spec-file
+    condition: null
+    body: |
+      Enter Planning-Implementation mode.
+      Follow agent-harness/modes/PLANNING-IMPLEMENTATION.md.
+      Spec to plan: {input}
+      Find existing Tasks, create a PLAN-*.md artifact and wait for approval. Do not change code.
+
+  - name: plan-task
+    description: Enter Planning-Implementation mode to plan and gate code changes from a Task.
+    kind: mode
+    follows: [agent-harness/modes/PLANNING-IMPLEMENTATION.md]
+    input: task-file
+    condition: null
+    body: |
+      Enter Planning-Implementation mode.
+      Follow agent-harness/modes/PLANNING-IMPLEMENTATION.md.
+      Task to plan: {input}
+      Create a PLAN-*.md artifact and wait for approval. Do not change code.
+
+  - name: execute-plan
+    description: Enter Implementing mode to execute a user-approved Implementation Plan at status `ready`.
+    kind: mode
+    follows: [agent-harness/modes/IMPLEMENTING.md]
+    input: plan-file
+    condition: null
+    body: |
+      Enter Implementing mode.
+      Follow agent-harness/modes/IMPLEMENTING.md.
+      Plan to execute: {input}
+      Verify the plan is user-approved and at status `ready`, then execute one step at a time. Run validation after each step.
+
+  - name: create-adr
+    description: Create or refine an ADR (Architecture Decision Record).
+    kind: contract
+    follows: [agent-harness/artifact-specs/ADR.md]
+    input: reference-artifact
+    condition: null
+    body: |
+      Create or refine an ADR.
+      Follow agent-harness/artifact-specs/ADR.md. ADR is not a mode — this may be invoked from whatever mode is
+      currently active, per COR-03-090.
+      Reference artifact (if any): {input}
+      Create or refine an ADR-*.md artifact for a settled structural/architectural decision. Do not trigger implementation.
+
+  - name: review-artifact
+    description: Review a harness target artifact, plan, implementation, or process step and produce a Review artifact.
+    kind: contract
+    follows: [agent-harness/artifact-specs/REVIEW.md]
+    input: target
+    condition: null
+    body: |
+      Review a target artifact, plan, implementation, or process step.
+      Follow agent-harness/artifact-specs/REVIEW.md. Review is not a mode — this may be invoked from whatever mode is
+      currently active.
+      Target to review: {input}
+      Evaluate the output, produce a REVIEW-*.md artifact with findings and outcome.
+
+  - name: validate
+    description: Run the harness Validation procedure for a named target and phase, then document the selected profile and outcome.
+    kind: procedure
+    follows: [agent-harness/shared-procs/VALIDATION.md]
+    input: target
+    condition: null
+    body: |
+      Run Validation.
+      Follow agent-harness/shared-procs/VALIDATION.md. Validation is a shared procedure, not a mode — this may be
+      invoked from within Implementing or Improving-Harness.
+      Target and phase to validate: {input}
+      Select the required validation profile. If target or phase is ambiguous, stop and request the missing choice.
+      Document the selected profile and outcome.
+
+  - name: improve-harness
+    description: Enter Improving-Harness mode to change the harness itself.
+    kind: mode
+    follows: [agent-harness/modes/IMPROVING-HARNESS.md]
+    input: review-file
+    condition: null
+    body: |
+      Enter Improving-Harness mode.
+      Follow agent-harness/modes/IMPROVING-HARNESS.md.
+      Source harness/process Review file: {input}
+      Improving-Harness is entered only from a Review finding. If the argument is a raw problem rather than a Review,
+      first create or assess a harness/process Review (agent-harness/artifact-specs/REVIEW.md), then enter from its
+      finding.
+      Create an IMPROVEMENT-*.md artifact and wait for approval. Do not change harness files without approval.
+
+  - name: legacy-discovery
+    description: Enter Discovering-Legacy mode to extract evidence from existing code.
+    kind: mode
+    follows: [agent-harness/modes/DISCOVERING-LEGACY.md]
+    input: legacy-path
+    condition: extension:legacy_discovery
+    body: |
+      Enter Discovering-Legacy mode.
+      Follow agent-harness/modes/DISCOVERING-LEGACY.md.
+      Legacy path to analyze: {input}
+      Do not modify legacy source code or implement anything. Extract findings and candidate artifacts only.

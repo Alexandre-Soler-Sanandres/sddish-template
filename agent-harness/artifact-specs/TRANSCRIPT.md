@@ -84,10 +84,16 @@ A Partnering session runs long and covers three distinct problems. The agent kee
 throughout (`raw`), then once the session distills into two Ideas and a candidate ADR, sets `processed_into` to
 those three IDs and moves the Transcript to `processed`.
 
-## Rules Map
+## Rules
 
-This contract's enforceable rules live in `agent-harness/rules/artifact-specs/TRANSCRIPT.md` (single paired
-file — under the 25-rule grouping threshold). Load it whenever creating or updating a Transcript.
+| ID | Rule |
+| --- | --- |
+| TRN-00-010 | MUST create a Transcript only on user request or when durable provenance, audit, or long-running handoff value requires it. |
+| TRN-01-010 | Before setting status to `reviewed`, MUST verify the content has been normalized per `CORE.md`'s `COR-02-010`/`COR-02-020` (original-language snippets preserved only where needed, everything else in English). |
+| TRN-01-020 | Before setting status to `processed`, MUST verify `processed_into` lists the artifact IDs this transcript was distilled into. |
+| TRN-01-030 | `archived` transcripts MUST move to `harness-data/artifacts/transcripts/archive/`, content preserved (same non-destructive precedent as `COR-01-080`). |
+| TRN-01-040 | `processed`/`reviewed` Transcripts MUST remain in `active/` — no folder move for these statuses. A Transcript keeps evidentiary value even once distilled, unlike `archived`, which means no longer relevant. |
+| TRN-02-010 | The Transcript ID MUST NOT change. Appending content while still `raw` is normal and does not require a status change. |
 
 ## Reference Files
 

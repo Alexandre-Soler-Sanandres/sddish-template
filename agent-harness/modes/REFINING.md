@@ -64,7 +64,7 @@ Consumes / Produces:
 
 0. Step 0 (`UCS-01-050`): if the source Idea already carries a `## Risk-Tier Classification` (per `IDA-05-020`)
    or the source is a Transcript/Partnering discussion where `PTN-02-110` already classified this same request,
-   reuse that result per `RISK-TIER.md`'s `RSK-07-010` — otherwise run the UC-Necessity Matrix (`RSK-02-010`)
+   reuse that result per `RISK-TIER.md`'s `RSK-07-010-v1` — otherwise run the UC-Necessity Matrix (`RSK-02-010-v1`)
    fresh. If it classifies the request below UC-tier, stop here and proceed via `/create-spec`'s skip-path
    instead of creating a Use Case.
 1. Identify the source: Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation.
@@ -79,14 +79,14 @@ Consumes / Produces:
 7. Write the main success scenario, alternatives, and failure paths.
 8. Define non-goals and the observable outcome.
 9. Carry forward relevant Questions-registry entries tied to the source artifact (`UCS-05-010`).
-10. If the source is an Idea, close it per `systems/STATUS-TRANSITIONS.md`'s `STT-01-050` (status `landed`,
+10. If the source is an Idea, close it per `systems/STATUS-TRANSITIONS.md`'s `STT-01-050-v1` (status `landed`,
     `next` set to this Use Case's ID, moved to `archive/`) as part of this same action.
 11. Stop before creating a Spec, Task, or Implementation Plan.
 
 ### Spec Creation (via `/create-spec`)
 
 0. Step 0 (`SPS-01-040`): same carry-forward check as Use Case Creation's step 0, for the Spec-Necessity Matrix
-   (`RSK-03-010`) — reuse an existing classification per `RSK-07-010` before running it fresh, or run it fresh
+   (`RSK-03-010-v1`) — reuse an existing classification per `RSK-07-010-v1` before running it fresh, or run it fresh
    immediately after step 0 above classified UC as not required (Spec-Necessity has not yet been checked in that
    case). If entering directly (no Use Case in hand), this is the source's first check.
 1. Identify the source Use Case (any status) — unless entered via the UC-skip path (step 0 classified UC-tier
@@ -109,9 +109,9 @@ is a separate, cross-cutting concern, not part of this mechanical derivation —
 
 ### Task Creation (via `/create-tasks`)
 
-Task-necessity classification uses `shared-procs/RISK-TIER.md`'s `RSK-04-010` (Task-Necessity Matrix) — see that
+Task-necessity classification uses `shared-procs/RISK-TIER.md`'s `RSK-04-010-v1` (Task-Necessity Matrix) — see that
 file for the table. This mode's own step-0 check before running it, reached whenever `/create-tasks` is entered
-via the Spec-skip path, is `TSK-01-030` in the paired rules file — there is no separate prose checklist for
+via the Spec-skip path, is `TSK-01-030` in `TASKS.md``s `## Rules` section — there is no separate prose checklist for
 `/create-tasks` (unlike Use Case and Spec creation above), so that rule is the sole statement of the check.
 
 ## Routing
@@ -133,13 +133,38 @@ already decided when the Spec was made ready with Tasks in mind (`TSK-01-032`).
 "Create the spec for UC-0007" — the agent reads UC-0007, loads relevant ADRs, drafts
 scope/requirements/acceptance-criteria, and stops before touching code or drafting Tasks.
 
-## Rules Map
+## Rules
 
-This mode's enforceable rules live in `agent-harness/rules/modes/REFINING.md` (single paired file covering all
-three entry points — `UCS-*`, `SPS-*`, and `TSK-*`; their combined count falls in the 25–35-rule band, where a
-single file is the default per `IMPROVEMENT-0116`'s grouping policy, and the three clusters are not independent
-enough to justify splitting — they share one funnel). Load it alongside this file whenever Refining is the
-active mode.
+| ID | Rule |
+| --- | --- |
+| RFD-00-010 | MUST use `CHANGE-SPEC.md` rather than the v1 derivation funnel for new Standard-lane work. |
+| RFD-00-020 | MUST create a separate Use Case only for reused behavioral authority or a standalone Task only for independent ownership, delegation, reuse, cross-plan dependency, or lifecycle. |
+| UCS-01-010 | A Use Case MUST be created from an Idea, Transcript, Partnering discussion, Legacy Finding, or existing documentation. |
+| UCS-01-011 | MAY create a Use Case from an Idea at any status — `IDA-01-010`'s judgment gate still applies. |
+| UCS-01-012 | When `RISK-TIER.md`'s UC-Necessity Matrix (`RSK-02-010-v1`) classifies the request below UC-tier, `/create-spec` MAY be entered directly, skipping Use Case creation. |
+| UCS-01-030 | For source types other than an Idea, which have no formal status gate, the agent SHOULD use judgment that the source material is concrete enough to draft a scenario from. |
+| UCS-01-040 | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Use Case's content, recording the result in `related` at creation time — `UCS-07-010`/`UCS-07-020`/`UCS-07-030` (in `USE-CASES.md`) remain the final verification pass, not the first point of contact. |
+| UCS-01-050 | Before starting Use Case creation or entering Refining at a lower tier: if the source Idea already carries a `## Risk-Tier Classification` (per `IDA-05-020`) or the source is a Transcript/Partnering discussion where `PTN-02-110` already classified this same request, MUST reuse that result per `RISK-TIER.md`'s `RSK-07-011-v1`/`RSK-07-012-v1`. This is step 0 of both the Use Case and Spec creation checklists in `REFINING.md`'s `## Core Moves`. |
+| UCS-01-051 | Otherwise MUST run the UC-Necessity Matrix (`RSK-02-010-v1`) fresh. |
+| UCS-04-020 | MUST NOT trigger implementation. |
+| UCS-04-021 | MUST NOT create Specs, Tasks, or Implementation Plans from Use Case creation. |
+| SPS-01-010 | MAY create a Spec from a Use Case at any status. |
+| SPS-01-012 | When `RISK-TIER.md`'s Spec-Necessity Matrix (`RSK-03-010-v1`) classifies the request below Spec-tier, `/create-tasks` MAY be entered directly, skipping Spec creation. |
+| SPS-01-030 | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Spec's content, recording the result in `related` at creation time — `SPS-08-010`/`SPS-08-020`/`SPS-08-030` (in `SPECS.md`) remain the final verification pass, not the first point of contact. |
+| SPS-01-040 | Same carry-forward check as `UCS-01-050`, for the Spec-Necessity Matrix (`RSK-03-010-v1`) — reuse an existing classification per `RSK-07-011-v1`/`RSK-07-012-v1` before running it fresh (or immediately after `UCS-01-050` classifies UC as not required, in which case Spec-Necessity has not yet been checked and MUST run). |
+| SPS-04-010 | MUST NOT implement or change code while creating a Spec. |
+| SPS-04-011 | MUST NOT create Tasks or Implementation Plans while creating a Spec. |
+| TSK-01-010 | MAY create Tasks from a Spec at any status. |
+| TSK-01-012 | When `RISK-TIER.md`'s Spec-Necessity Matrix already classified the request below Spec-tier and `TSK-01-030`'s Task-Necessity check requires a Task, it MAY be entered directly. |
+| TSK-01-020 | Task-necessity classification uses `RISK-TIER.md`'s `RSK-04-010-v1` matrix — see `REFINING.md`'s `## Core Moves` for this file's own step-0 pointer. |
+| TSK-01-030 | Step 0 of Task creation, mirroring `UCS-01-050`/`SPS-01-040` — reached whenever `/create-tasks` is entered via the Spec-skip path (i.e. `SPS-01-040` already classified Spec as not required). If the source already carries a recorded Task-Necessity result, MUST reuse it per `RSK-07-011-v1`/`RSK-07-012-v1`. |
+| TSK-01-033 | Otherwise MUST run `RSK-04-010-v1` fresh, per `RSK-07-021-v1`'s full-cascade-completion rule — Spec-Necessity saying "No" is not itself grounds to create a Task. |
+| TSK-01-031 | If `TSK-01-030`'s check classifies Tasks as not required (`RSK-04-010-v1`'s "No" rows) or the request qualifies for "Optional" and the user prefers the lighter path, MUST stop Task creation and instead report that the request lands on Plan-tier, routing to Planning-Implementation's natural-language entry (`IPL-08-010`) rather than creating a Task. |
+| TSK-01-032 | `TSK-01-030`/`TSK-01-031` do not apply when `/create-tasks` is entered normally from a `ready` Spec (`TSK-01-010`'s unconditional path) — that case's Task-necessity was already decided when the Spec was made ready with Tasks in mind. |
+| TSK-03-010 | MUST NOT implement or change code while creating Tasks. |
+| TSK-03-011 | MUST NOT create Implementation Plans while creating Tasks. |
+| TSK-04-010 | MUST verify existing Tasks derived from that Spec before generating Tasks from a Spec — via this entry point directly, not only when Planning-Implementation happens to check first. |
+| TSK-04-011 | MUST NOT generate duplicate Tasks or skip existing ones per `TSK-04-010`'s check. This rule is owned here, not borrowed from `PLANNING-IMPLEMENTATION.md`'s `IPL-03-010`, so `/create-tasks` is protected regardless of entry path. |
 
 ## Reference Files
 

@@ -31,7 +31,7 @@ A Use Case is created only from within Refining (`/create-use-case`), from:
 - Legacy Finding
 - Existing documentation
 
-— when `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix (`RSK-02-010`) classifies a request below UC-tier, no
+— when `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix (`RSK-02-010-v1`) classifies a request below UC-tier, no
 Use Case is created; work proceeds directly to Spec or Task creation instead (see `SPECS.md`/`TASKS.md`'s own
 Sources sections) — this statement is normative, not descriptive (`UCS-01-060`; mirrors `REFINING.md`'s
 `UCS-01-050`).
@@ -149,12 +149,32 @@ A Legacy Finding establishes a recurring operator workflow with an unresolved vi
 drafts a Use Case, carries the Question ID into `Open Questions`, sets `technical_impact` to `api-contract` since
 a supporting actor is another owned service, and stops before `ready` until that Question resolves.
 
-## Rules Map
+## Rules
 
-This contract's enforceable rules live in `agent-harness/rules/artifact-specs/USE-CASES.md` (single paired
-file — at the 25-rule grouping threshold; grouping into a directory has not yet been done and is a separate
-decision, not required by this rule count alone). Load it alongside `agent-harness/modes/REFINING.md`'s own
-Rules Map whenever creating, updating, or approving a Use Case.
+| ID | Rule |
+| --- | --- |
+| UCS-00-010 | MUST NOT create a separate Use Case for Standard work unless it provides reused actor-journey authority, crosses several components or services, or is the durable behavioral authority. |
+| UCS-01-020 | An ADR MUST NOT be used as a source that produces a Use Case — reference authority only — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
+| UCS-01-060 | This file's `## Sources` statement that no Use Case is created when the UC-Necessity Matrix classifies a request below UC-tier is normative, not descriptive — mirrors `REFINING.md`'s `UCS-01-050`. |
+| UCS-02-010 | A Use Case MAY be refined when new information from a Partnering session or Legacy Finding changes the scope, open questions are resolved, or the primary actor or scenario needs correction. |
+| UCS-02-020 | Refining MUST NOT change the Use Case ID. |
+| UCS-02-021 | Refining MUST update the `updated` field and status as appropriate. |
+| UCS-03-010 | Before this Use Case's promotion (`STT-01-030`/`040`), MUST verify the Readiness Checklist in the artifact. |
+| UCS-03-011 | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
+| UCS-03-012 | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |
+| UCS-04-010 | MUST NOT contain low-level implementation detail (unless essential to the scenario). |
+| UCS-05-010 | When a Use Case is created, MUST check the Questions registry for entries tied to the source artifact — regardless of legacy or non-legacy origin — and load any that changes actor goals, workflow shape, scope boundaries, alternatives, or failure paths. |
+| UCS-05-015 | Before advancing to `ready`, MUST verify the registry holds nothing unresolved that should block the advance (see `UCS-03-010`). |
+| UCS-05-020 | MUST carry registry items forward by effect per `CORE.md`'s `COR-01-120`: actor-visible uncertainty belongs in `Open Questions` as canonical Question ID references; behavior constraints belong in the scenario, preconditions, or failure paths. `UCS-03-011` governs whether an unresolved reference stops advancement. |
+| UCS-02-030 | MUST treat a change to the primary actor, goal, trigger, preconditions, main success scenario, or non-goals as significant; a typo, clarification, added Open Questions reference, or `updated`-field bump is not. |
+| UCS-06-010 | When a Use Case's primary or supporting actor is itself a separate deployable service (not a human or external actor), the Trigger and/or Main Success Scenario MUST state the interaction mechanism explicitly (synchronous API call, async event, precomputed-and-polled read, or whichever actually applies). |
+| UCS-06-011 | MUST NOT carry forward legacy phrasing such as "called directly"/"invoked by" without confirming that same in-process assumption still holds under the target architecture. |
+| UCS-06-020 | MUST set the `technical_impact` frontmatter field at creation/update time per the definition in `USE-CASES.md`'s `## Artifact Shape` above. |
+| UCS-07-010 | Missed-ADR recheck. Before this Use Case's promotion (`STT-01-030`/`040`), MUST re-run the relevance judgment against the *current* accepted-ADR list. |
+| UCS-07-011 | Every `fleet-wide` ADR MUST be present in `related`. |
+| UCS-07-012 | Every `scoped` ADR MUST be re-judged: added to `related` if newly relevant, or explicitly ruled out. |
+| UCS-07-020 | Content-drift recheck. Before this Use Case's promotion (`STT-01-030`/`040`), MUST judge ADR relevance against the Use Case's actual current content, not only its original `area` — drafting can drift the content into territory an ADR bears on that the creation-time load never saw. |
+| UCS-07-030 | Compliance check. Before this Use Case's promotion (`STT-01-030`/`040`), MUST verify every ADR cited in `related` is actually reflected in the Use Case's content — a citation with no matching content is a gate failure. |
 
 ## Reference Files
 
