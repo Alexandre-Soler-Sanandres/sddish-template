@@ -1,16 +1,16 @@
 ---
 id: IDEA-0001
 type: idea
-status: captured         # captured | clarifying | ready-for-refining | landed | archived | rejected
+status: active           # active | accepted | rejected | archived
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
-source: []               # e.g. [TRANSCRIPT-0001]
+source_ids: []           # e.g. [TRANSCRIPT-0001]
+question_refs: []        # e.g. [Q-0001]
 tags: []
 maturity: low            # low | medium | high
 confidence: medium       # low | medium | high
-next: []                 # e.g. [UC-0001]
 ---
 
 ## Problem or Opportunity

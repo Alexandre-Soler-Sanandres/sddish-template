@@ -6,13 +6,12 @@ title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
-source: []               # e.g. [UC-0001]; inherited legacy IDs stay in body sections, not as a copied backlog
-related: []              # e.g. [SPEC-0002, IDEA-0001]
-derived_tasks: []        # e.g. [TASK-0001, TASK-0002]
+source_ids: []           # e.g. [UC-0001]
+related_adrs: []         # e.g. [ADR-0005]
+question_refs: []        # e.g. [Q-0001]
+external_refs: []        # described external material
 risk: low                # low | medium | high
 requires: []             # harness reference files needed, e.g. [harness-data/reference/ARCHITECTURE.md#database]
-technical_refs: []       # external technical artifacts, e.g. [docs/api/openapi.yaml, docs/db/schema.sql]
-test_refs: []            # populated during implementation — test file paths covering each AC only
 tags: []
 ---
 
@@ -90,8 +89,7 @@ must later be discharged here or in Open Questions, not in `test_refs`)
 
 ## Open Questions
 
-(MUST list canonical Question IDs per `COR-01-120`. MUST NOT restate full backlog text — cite the ID. `SPS-02-010`
-governs whether an unresolved reference stops promotion to `ready`.)
+(cite only relevant `question_refs` IDs)
 
 ## Readiness Checklist
 

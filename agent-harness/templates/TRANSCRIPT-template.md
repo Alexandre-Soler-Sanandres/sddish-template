@@ -1,7 +1,7 @@
 ---
 id: TRANSCRIPT-0001
 type: transcript
-status: raw              # raw | reviewed | processed | archived
+status: recording        # recording | recorded | archived
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD

@@ -1,0 +1,3 @@
+# Optional project overrides. Omit this file to use every default.
+extensions:
+  legacy_discovery: disabled # enabled | disabled; default: disabled

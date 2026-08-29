@@ -5,7 +5,7 @@ status: proposed         # proposed | approved | in-progress | done | rejected |
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-source: []               # e.g. [REVIEW-0001]
+source_ids: []           # e.g. [REVIEW-0001]
 area: ""                 # templates | modes | reference | process
 target_files: []         # files to be changed
 risk: low                # low | medium | high

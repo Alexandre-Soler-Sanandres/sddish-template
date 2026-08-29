@@ -8,9 +8,10 @@ updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
 primary_actor: ""        # e.g. operator | user | system | external-service
 supporting_actors: []
-source: []               # e.g. [IDEA-0001]; include legacy finding IDs when derived from Legacy Discovery
-related: []              # e.g. [ADR-0005] — accepted ADRs this Use Case depends on; see USE-CASES.md's UCS-07-010
-derived_specs: []        # e.g. [SPEC-0001]
+source_ids: []           # e.g. [IDEA-0001]
+related_adrs: []         # e.g. [ADR-0005]
+question_refs: []        # e.g. [Q-0001]
+external_refs: []        # described external material
 tags: []
 technical_impact: []     # e.g. [db-schema, api-contract] — see agent-harness/artifact-specs/USE-CASES.md's UCS-06-020
 confidence: medium       # low | medium | high
@@ -51,8 +52,7 @@ risk: low                # low | medium | high
 
 ## Open Questions
 
-(MUST list canonical Question IDs per `COR-01-120`. MUST NOT restate full backlog text — cite the ID. `UCS-03-011`
-governs whether an unresolved reference stops advancement.)
+(cite only relevant `question_refs` IDs)
 
 ## Readiness Checklist
 

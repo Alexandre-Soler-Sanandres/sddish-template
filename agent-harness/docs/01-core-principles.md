@@ -1,5 +1,11 @@
 # Core Principles
 
+## V2 assurance split
+
+Intent Validation asks whether the requirements are right; Technical Verification runs the checks that prove the
+implementation; Conformance Audit reads records to prove process conformance. Tool success is evidence, never
+approval. Promotion owns common lifecycle checks and one atomic transition.
+
 ## Purpose
 
 The SDD-ish Agent Harness provides a structured, file-based process for working with AI agents on software development tasks.

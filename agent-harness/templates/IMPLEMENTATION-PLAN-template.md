@@ -7,9 +7,10 @@ created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 entrypoint_type: ""      # task | spec | use-case | none
 entrypoint: ""           # e.g. SPEC-0001
-source: []               # e.g. [SPEC-0001] — empty ([]) for entrypoint_type: none; the Idea/Transcript actually used, if any, goes in the Risk-Tier Classification section instead
-included_tasks: []       # e.g. [TASK-0001, TASK-0002]
-excluded_tasks: []       # e.g. [TASK-0003]
+source_ids: []           # e.g. [SPEC-0001]
+included_ids: []         # e.g. [TASK-0001, TASK-0002]
+related_adrs: []         # e.g. [ADR-0001]
+question_refs: []        # e.g. [Q-0001]
 risk: low                # low | medium | high
 approval:
   required: true

@@ -3,8 +3,9 @@ id: CHANGE-0001
 type: change-spec
 status: draft
 lane: standard
-source: []
-related: []
+source_ids: []
+related_adrs: []
+question_refs: []
 risk: low
 allowed_paths: []
 forbidden_paths: []

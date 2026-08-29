@@ -2,64 +2,43 @@
 
 ## Purpose
 
-Canonical output rules for harness artifacts: format, naming, placement, and lifecycle folders.
-For artifact-language rules and closed-artifact rewrite rules, see `agent-harness/CORE.md`.
+Defines the portable v2 artifact layout, identity, and lifecycle representation.
 
-## Rules Map
+## Artifact format
 
-This file's enforceable rules live in `agent-harness/rules/OUTPUTS.md` (single paired file, not grouped — `OUTPUTS.md`
-has fewer than 25 rules). `OUTPUTS.md` is always loaded per `AGENTS.md`'s Always Follow list, so load
-`agent-harness/rules/OUTPUTS.md` alongside it every time.
+Lifecycle artifacts use YAML frontmatter followed by Markdown. `id` is immutable and filenames use the canonical
+ID pattern below. Status is frontmatter only: a status change edits the same file and never changes its path.
 
-## Artifact Format
-
-Lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body.
-
-## File Naming Conventions
-
-| Artifact | Pattern |
-| --- | --- |
-| Transcript | `TRANSCRIPT-NNNN.md` |
-| Idea | `IDEA-NNNN.md` |
-| ADR | `ADR-NNNN.md` |
-| Use Case | `UC-NNNN.md` |
-| Spec | `SPEC-NNNN.md` |
-| Change Spec | `CHANGE-NNNN.md` |
-| Task | `TASK-NNNN.md` |
-| Implementation Plan | `PLAN-NNNN.md` |
-| Review | `REVIEW-NNNN.md` |
-| Improvement | `IMPROVEMENT-NNNN.md` |
-| Legacy Finding | `LF-<APP>-NNNN.md` (app findings) or `LF-CROSS-NNNN.md` (cross-system findings) — see `## Legacy Discovery Structure` |
-| Question | Row ID `Q-NNNN` (new) or `Q-<APP>-NNNN` / `CSQ-NNNN` / `CSP-NNNN` — a row in `QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, or `QUESTIONS-DISCARDED.md`, not a separate file per question |
-
-## Folder Structure
-
-All lifecycle artifacts live under `harness-data/artifacts/`.
-
-Within that root, each artifact directory uses subfolders to reflect lifecycle state. Change Spec, Use Case, Spec,
-Task, and Implementation Plan share an identical four-folder shape (`active/`/`ready/`/`done/`/`archive/`) — see
-`systems/LIFECYCLE-FOLDERS.md` for why this is now uniform rather than diverging per artifact type.
-
-| Subfolder | Used in | Meaning |
+| Type | Path | Filename |
 | --- | --- | --- |
-| `active/` | all artifact dirs except `adrs/` and `questions/` | artifact is in progress or under review |
-| `archive/` | all artifact dirs except `questions/` | artifact is closed, superseded or no longer relevant |
-| `ready/` | `change-specs/`, `specs/`, `use-cases/`, `tasks/`, `implementation-plans/` | artifact has passed its Readiness Checklist/Checks and may be relied on by the next tier or by Implementing |
-| `done/` | `change-specs/`, `specs/`, `use-cases/`, `implementation-plans/`, `tasks/`, `improvements/` | execution is complete |
-| `proposed/` | `adrs/` | not yet settled |
-| `accepted/` | `adrs/` | in force, citable authority |
+| Change Spec | `harness-data/artifacts/changes/` | `CHANGE-NNNN.md` |
+| Use Case | `harness-data/artifacts/use-cases/` | `UC-NNNN.md` |
+| Spec | `harness-data/artifacts/specs/` | `SPEC-NNNN.md` |
+| Task | `harness-data/artifacts/tasks/` | `TASK-NNNN.md` |
+| Implementation Plan | `harness-data/artifacts/plans/` | `PLAN-NNNN.md` |
+| Review | `harness-data/artifacts/reviews/` | `REVIEW-NNNN.md` |
+| Improvement | `harness-data/artifacts/improvements/` | `IMPROVEMENT-NNNN.md` |
+| Idea | `harness-data/artifacts/ideas/` | `IDEA-NNNN.md` |
+| Transcript | `harness-data/artifacts/transcripts/` | `TRANSCRIPT-NNNN.md` |
+| ADR | `harness-data/artifacts/adrs/` | `ADR-NNNN.md` |
+| Questions | `harness-data/artifacts/questions/QUESTIONS.md` | registry rows `Q-NNNN` |
 
-`adrs/` uses `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair (`OUT-07-010`).
-`questions/` has no lifecycle subfolders at all — it is three flat files, one per status (`OUT-08-010`). See
-`agent-harness/systems/LIFECYCLE-FOLDERS.md` for why these shapes diverge and how each artifact's `status` field
-and folder location move together.
+## Canonical relationships
 
-## Legacy Discovery Structure
+Use only canonical forward ID links: `source_ids`, `related_adrs`, `question_refs`, and, on an execution
+coordinator, `included_ids`. Internal values are IDs, never paths; every ID resolves exactly once. Requirement IDs
+are local to their artifact and evidence names the requirement it proves. External material belongs in described
+`external_refs`. Reverse links, derived-child lists, and handwritten backlinks are generated views, not canonical
+metadata.
 
-Legacy Discovery uses scoped folders:
+## Rules
 
-- App-specific discovery: `harness-data/artifacts/legacy/apps/<legacy-app-slug>/`
-- Cross-system synthesis: `harness-data/artifacts/legacy/cross-system/`
-
-Detailed Legacy Discovery layout and rules are defined in
-`agent-harness/modes/DISCOVERING-LEGACY.md`.
+| ID | Rule |
+| --- | --- |
+| OUT-01-010 | Lifecycle artifacts MUST use YAML frontmatter and Markdown. |
+| OUT-03-010 | Artifact filenames MUST follow this file's canonical patterns. |
+| OUT-03-020 | Artifact IDs MUST remain stable. |
+| OUT-04-010 | Artifact paths MUST be stable by type and MUST NOT encode lifecycle status. |
+| OUT-04-020 | A lifecycle transition MUST update frontmatter status in place. |
+| OUT-08-010 | Questions MUST be rows in the single registry and MUST NOT use status-specific files or folders. |
+| OUT-09-010 | Canonical internal relationship fields MUST contain IDs, not paths or handwritten reverse links. |

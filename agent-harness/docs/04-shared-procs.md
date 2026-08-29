@@ -1,5 +1,14 @@
 # Shared Procedures
 
+## V2 procedures
+
+- `INTENT-VALIDATION.md` — requirements correctness, completeness, feasibility, and verifiability.
+- `TECHNICAL-VERIFICATION.md` — executed tests and other technical evidence.
+- `CONFORMANCE-AUDIT.md` — read-only lane, approval, traceability, Question, ADR, conflict, and evidence review.
+- `PROMOTION.md` — common promotion gates and atomic status transition.
+
+`VALIDATION.md` is a temporary v1 migration shim only and is not a v2 procedure.
+
 A shared procedure file under `agent-harness/shared-procs/` is a Procedure Guide. It is invoked by name from Mode
 or artifact control flow, has no schema, and produces no artifact of its own. It is neither a Mode Workflow (a
 behavioral posture) nor an Artifact Contract (a document type). See [01-core-principles.md](01-core-principles.md)'s

@@ -6,10 +6,10 @@ title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
 area: ""                 # domain area, e.g. user-management | payments | reporting
-source: []               # e.g. [SPEC-0001]
-related: []              # e.g. [ADR-0005] — accepted ADRs this Task depends on; see TASKS.md's TSK-05-010
+source_ids: []           # e.g. [SPEC-0001]
+related_adrs: []         # e.g. [ADR-0005]
+question_refs: []        # e.g. [Q-0001]
 depends_on: []           # e.g. [TASK-0000]
-blocks: []               # e.g. [TASK-0002]
 risk: low                # low | medium | high
 estimated_size: small    # small | medium | large
 allowed_paths: []        # paths the agent may modify

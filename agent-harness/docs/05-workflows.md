@@ -1,5 +1,12 @@
 # Workflows
 
+## V2 work lanes
+
+Fast work has an in-session micro-plan and no persistent artifact by default. Standard work has one approved
+Change Spec. Assured work retains Use Case, Spec, Task, and Execution Plan records. Routine conformance evidence
+lives in the Standard Change Spec or Assured Plan closeout; a Review is only for independent findings or an
+explicitly requested review.
+
 This file is the practical "what happens next?" guide.
 Use this guide when you already understand the artifact types and want the normal operating flow explained clearly.
 
