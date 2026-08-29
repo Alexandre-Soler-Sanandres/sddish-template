@@ -8,11 +8,12 @@ created.
 
 ## Artifact Story
 
-A Task, Spec, or Use Case (or, for a Plan-tier request, nothing at all) is ready for implementation. The agent
-groups the required changes into steps, records validation and risk per step, and drafts the Plan at `active/`.
-Nothing changes in the codebase until the user explicitly approves the Plan and that approval is recorded in the
-same transition that moves it to `ready/` and unlocks Implementing mode. Once every step completes, the Plan
-reaches `done`, which can cascade the source Spec and Use Case to `done`.
+A Task, Spec, or Use Case (or, for a Plan-tier request, nothing at all) needs implementation guidance. The agent
+may draft the Plan at `active/` while the upstream chain is at any status, recording its current dependencies and
+implementation-readiness facts. Nothing changes in the codebase until the operator explicitly requests Plan
+promotion, the `STT-01-030` upward readiness walk succeeds, and that approval is recorded in the same transition
+that moves the Plan to `ready/` and unlocks Implementing mode. Once every step completes, the Plan reaches `done`,
+which can cascade the source Spec and Use Case to `done`.
 
 ## Entry / Creation Paths
 
@@ -27,8 +28,8 @@ upstream artifact at all (`entrypoint_type: none`) (see that mode's Entry Points
 
 ## When To Create
 
-Whenever a Task, Spec, or Use Case has reached the status Planning-Implementation requires, or a direct request
-classifies as Plan-tier — see `PLANNING-IMPLEMENTATION.md`'s `## Workflow Paths`.
+Whenever a Task, Spec, or Use Case needs implementation guidance, regardless of its current status, or a direct
+request classifies as Plan-tier — see `PLANNING-IMPLEMENTATION.md`'s `## Workflow Paths`.
 
 ## When Not To Create
 
@@ -125,9 +126,9 @@ its source Spec under `Source:` (`IPL-06-010`).
 
 ## Examples
 
-A `ready` Task for a Dockerfile chown fix: the agent creates a single-step Plan (small, tightly related, no
-high-risk work), records the suggested commit message under the Commit Message Convention, and waits for
-approval.
+A draft Task for a Dockerfile chown fix: the agent creates a single-step Plan (small, tightly related, no
+high-risk work), records the Task's implementation-readiness facts and suggested commit message, and waits for
+an explicit Plan-promotion request.
 
 ## Rules Map
 

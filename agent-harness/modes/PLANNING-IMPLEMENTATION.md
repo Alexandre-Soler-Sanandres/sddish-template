@@ -7,21 +7,23 @@ now" — they mean "create a plan and wait for approval."
 
 ## Mode Story
 
-A Task, Spec, or Use Case (or, for the Plan-tier entry, no upstream artifact at all) arrives ready for
-implementation planning. The agent verifies the source is at an accepted status, checks for existing Tasks so it
-never duplicates planning work, drafts a focused Implementation Plan, and stops — waiting for explicit approval
-before any code changes. Every entry point ends the same way: plan produced, approval awaited, no code touched.
+A Task, Spec, or Use Case (or, for the Plan-tier entry, no upstream artifact at all) needs implementation
+guidance. The agent loads the selected chain at its current status, checks for existing Tasks so it never duplicates
+planning work, records readiness facts and dependencies, drafts a focused Implementation Plan, and stops — waiting
+for an explicit promotion request before any code changes. Every entry point ends the same way: draft Plan
+produced, no code touched.
 
 ## Operating Posture
 
-Gate, not gateway to typing code immediately. Verify preconditions before drafting anything; when a precondition
-fails, stop and report rather than proceeding on a best-effort basis. Once the plan exists, the mode's job is done
-until approval arrives.
+Planning, not a gateway to typing code immediately. Verify that the selected chain is sufficient to make a useful
+plan, and record its current dependencies and readiness facts. An upstream draft or blocked status never blocks
+Plan creation; it is assessed again when an operator requests Plan promotion. Once the draft Plan exists, the
+mode's job is done until that request arrives.
 
 ## When To Use
 
-Use Planning-Implementation once a Task, Spec, or Use Case has reached the status this mode requires, or when
-Refining's/Partnering's risk-tier cascade classifies a request as needing no upstream artifact at all
+Use Planning-Implementation when an existing Task, Spec, or Use Case needs implementation guidance, regardless of
+its current status, or when Refining's/Partnering's risk-tier cascade classifies a request as needing no upstream artifact at all
 (`IPL-08-010`/`IPL-08-020`).
 
 ## Workflow Paths
@@ -42,42 +44,42 @@ governs the planning activity, the artifact spec governs the resulting Plan's ow
 ### Entering via `/plan-task`
 
 1. Load the Task.
-2. Verify the Task is at status `ready`. If not, stop and report.
+2. Record the Task's current status, dependencies, and implementation-readiness facts in the Plan; do not treat
+   them as Plan-creation blockers.
 3. Create a focused Implementation Plan for that Task.
-4. Wait for approval — do not change code.
+4. Wait for an explicit promotion request — do not change code.
 
 ### Entering via `/plan-spec`
 
 1. Load the Spec.
-2. Verify the Spec is at status `ready`. If not, stop and report.
-3. Find existing Tasks and check their status:
-   - If ready Tasks exist → use them as the planning basis.
-   - If Tasks exist but are draft or blocked → stop and report.
+2. Record the Spec's current status, dependencies, and implementation-readiness facts in the Plan; do not treat
+   them as Plan-creation blockers.
+3. Find existing Tasks and record their current status, dependencies, and implementation-readiness facts:
+   - If Tasks exist → use them as the planning basis, regardless of current status.
    - If no Tasks exist → apply the Task Decision Matrix (`IPL-03-020`).
    - If Tasks are required but missing → stop and route to `/create-tasks`.
    - If Tasks are not required → create an inline Implementation Plan.
 4. Do not generate duplicate Tasks or ignore existing ones.
 5. Create the Implementation Plan.
-6. Run Validation's `chain-preflight` profile against the selected chain and record the resulting durable report
-   in the Plan's `## Chain Preflight` section.
-7. Wait for approval — do not change code.
+6. Wait for an explicit promotion request — do not change code. Run Validation's `chain-preflight` profile only
+   before that promotion, and record the resulting durable report in the Plan's `## Chain Preflight` section.
 
 ### Entering via `/plan-use-case`
 
 1. Load the Use Case.
-2. Verify the Use Case is at status `ready`. If not, stop and report.
+2. Record the Use Case's current status, dependencies, and implementation-readiness facts in the Plan; do not
+   treat them as Plan-creation blockers.
 3. Find all derived Specs from the Use Case frontmatter.
-   - If Specs are missing or not at status `ready` → stop and route to `/create-spec`.
-4. For each Spec, find existing Tasks and check their status:
-   - If ready Tasks exist → use them as the planning basis.
-   - If Tasks exist but are draft or blocked → stop and report.
+   - If Specs are missing → stop and route to `/create-spec`.
+4. For each Spec, record its current status, dependencies, and implementation-readiness facts. Then find existing
+   Tasks and record the same facts:
+   - If Tasks exist → use them as the planning basis, regardless of current status.
    - If no Tasks exist → apply the Task Decision Matrix (`IPL-03-020`).
    - If Tasks are required but missing → stop and route to `/create-tasks`.
 5. Do not generate duplicate Tasks or ignore existing ones.
 6. Create a coherent end-to-end Implementation Plan covering all derived Specs.
-7. Run Validation's `chain-preflight` profile against the selected chain and record the resulting durable report
-   in the Plan's `## Chain Preflight` section.
-8. Wait for approval — do not change code.
+7. Wait for an explicit promotion request — do not change code. Run Validation's `chain-preflight` profile only
+   before that promotion, and record the resulting durable report in the Plan's `## Chain Preflight` section.
 
 ### Entering via direct instruction (no Use Case/Spec/Task file named)
 

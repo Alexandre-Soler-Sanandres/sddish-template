@@ -12,8 +12,9 @@ A Use Case (or, via the UC-skip path, an Idea/Transcript/Partnering discussion/L
 reaches the point where its behavior needs a technical contract. Refining derives the Spec's scope, requirements,
 and acceptance criteria; relevant ADRs get checked and re-checked as the content firms up; and once the
 transition rules promote it under `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`, the Spec
-becomes `ready`, the status Planning-Implementation requires before it will plan any code change. Significant
-changes and later reopening/reset behavior are modeled in that same transition system.
+becomes `ready` for implementation. Planning-Implementation may draft a Plan while the Spec is at any status;
+implementation remains unavailable until Plan promotion completes the upward readiness walk. Significant changes
+and later reopening/reset behavior are modeled in that same transition system.
 
 ## Entry / Creation Paths
 

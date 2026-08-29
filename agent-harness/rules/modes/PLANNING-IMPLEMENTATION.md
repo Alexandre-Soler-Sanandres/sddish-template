@@ -4,12 +4,12 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
-| IPL-03-010 | Boundaries | MUST NOT: change code; treat `draft` status as ready; proceed if the source artifact is not at an accepted status; or generate duplicate Tasks or skip existing ones. |
-| IPL-03-020 | Boundaries | MUST consult `REFINING.md`'s Task Decision Matrix before creating an inline Implementation Plan for a Spec/Use Case with no existing Tasks. Stop and report instead of proceeding if existing Tasks are `draft` or `blocked`. |
+| IPL-03-010 | Boundaries | MUST NOT: change code; treat an upstream `draft` or Plan `draft` status as implementation authorization; or generate duplicate Tasks or skip existing ones. |
+| IPL-03-020 | Boundaries | MUST consult `REFINING.md`'s Task Decision Matrix before creating an inline Implementation Plan for a Spec/Use Case with no existing Tasks and record existing Tasks' current status, dependencies, and implementation-readiness facts without treating them as Plan-creation blockers. |
 | IPL-04-010 | Procedure | MUST load the relevant universal and project playbooks before finalizing the plan, when the planning task matches a reusable procedure. |
 | IPL-04-020 | Procedure | MUST reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
 | IPL-04-021 | Procedure | When a loaded playbook establishes preserved behavior, regression risk, or baseline evidence, the resulting Spec or Plan MUST carry that forward in its own contract sections rather than leaving it only in conversational output. |
-| IPL-04-030 | Procedure | Before a Plan is finalized for approval, Planning-Implementation MUST invoke Validation with the profile required by `VAL-00-020` and record the resulting durable report in the Plan when that profile is `chain-preflight`. |
+| IPL-04-030 | Procedure | Before requesting a Plan's promotion to `ready`, Planning-Implementation MUST invoke Validation with the profile required by `VAL-00-020` and record the resulting durable report in the Plan when that profile is `chain-preflight`. |
 | IPL-04-031 | Procedure | Planning-Implementation MUST NOT treat local artifact readiness alone as sufficient when `VAL-00-030` requires `chain-preflight` for the selected chain. |
 | IPL-05-030 | Parallel-Work | MUST NOT allow more than one Implementation Plan at status `ready` or `in-progress` per Spec. For a Plan-tier Plan with `entrypoint_type: none` (no source Spec), this check does not apply — there is no Spec to key it on. |
 | IPL-05-031 | Parallel-Work | For a Plan-tier Plan, `IPL-05-050`'s path-overlap check is the only dedup protection available, so it MUST still be run. |
