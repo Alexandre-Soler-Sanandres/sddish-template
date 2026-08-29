@@ -36,8 +36,8 @@ Lifecycle artifacts use YAML frontmatter for metadata and Markdown for the body.
 
 All lifecycle artifacts live under `harness-data/artifacts/`.
 
-Within that root, each artifact directory uses subfolders to reflect lifecycle state. Use Case, Spec, Task, and
-Implementation Plan share an identical four-folder shape (`active/`/`ready/`/`done/`/`archive/`) — see
+Within that root, each artifact directory uses subfolders to reflect lifecycle state. Change Spec, Use Case, Spec,
+Task, and Implementation Plan share an identical four-folder shape (`active/`/`ready/`/`done/`/`archive/`) — see
 `systems/LIFECYCLE-FOLDERS.md` for why this is now uniform rather than diverging per artifact type.
 
 | Subfolder | Used in | Meaning |

@@ -17,8 +17,9 @@ scope.
 ## Transition Vocabulary
 
 `draft | ready | in-progress | blocked | done | archived | rejected` apply to Use Case, Spec, Task, and
-Implementation Plan. Change Specs use `draft | ready | in-progress | blocked | done | abandoned`; their local
-lifecycle is governed by `CHANGE-SPEC.md`, not the v1 chain cascade. Idea keeps its own separate vocabulary:
+Implementation Plan. Change Specs use the same `draft | ready | in-progress | blocked | done | archived |
+rejected` vocabulary; their local lifecycle is governed by `CHANGE-SPEC.md`, not the v1 chain cascade. Idea keeps
+its own separate vocabulary:
 `captured | clarifying | ready-for-refining | landed | archived | rejected`.
 
 `From: any` in the paired rules file means the transition can begin from any current status. The artifact-local

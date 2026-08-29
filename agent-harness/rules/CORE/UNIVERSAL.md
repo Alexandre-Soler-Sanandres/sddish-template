@@ -4,6 +4,14 @@
 
 | ID | Type | Rule |
 | --- | --- | --- |
+| COR-01-001 | Invariant Kernel | MUST understand the intended outcome before mutation. |
+| COR-01-002 | Invariant Kernel | MUST state changed behavior and applicable preserved behavior before mutation. |
+| COR-01-003 | Invariant Kernel | MUST record a bounded plan before mutation. |
+| COR-01-004 | Invariant Kernel | MUST obtain the execution authorization required by the selected Work Lane before mutation. |
+| COR-01-005 | Invariant Kernel | MUST scale assurance by ambiguity, reversibility, boundary impact, and risk. |
+| COR-01-006 | Invariant Kernel | MUST keep approved scope and execution batches bounded. |
+| COR-01-007 | Invariant Kernel | MUST verify applicable acceptance criteria with credible evidence. |
+| COR-01-008 | Invariant Kernel | MUST persist decisions, blockers, and handoffs only when they need to survive context loss. |
 | COR-01-020 | Universal | MUST NOT load unrelated artifact directories. |
 | COR-01-030 | Universal | MUST NOT expose secrets. |
 | COR-01-040 | Universal | MUST NOT run commands that are irreversible or have a wide blast radius (data loss, schema changes, production state changes, force operations) without explicit approval. |

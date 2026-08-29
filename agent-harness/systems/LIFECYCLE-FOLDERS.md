@@ -44,8 +44,8 @@ type needs its own clarifying rule for this shape anymore — `ready/` carries t
 all four, not just Plan.
 
 For a **Change Spec**, `ready/` means its current-content approval and evidence mapping are complete. It is then
-the Standard-lane execution contract; `in-progress` stays in `active/`, and `done` moves to `done/`. `blocked` and
-`abandoned` remain in `active/` until explicitly archived.
+the Standard-lane execution contract; `draft`, `in-progress`, and `blocked` stay in `active/`; `done` moves to
+`done/`; and `archived` or `rejected` moves to `archive/`, exactly as for Tasks and Specs.
 
 Two artifact types still diverge, for reasons unrelated to the above and each still getting its own rule:
 

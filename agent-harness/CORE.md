@@ -46,3 +46,10 @@ Classify new material work through `agent-harness/shared-procs/WORK-LANES.md` be
 Fast work uses an in-session micro-plan, Standard work uses an approved Change Spec, and Assured work uses the
 full behavior-contract and execution-plan structure. Active v1 UC/Spec/Task/Plan chains remain under their
 recorded v1 contract until reopened or explicitly migrated.
+
+## Invariant Kernel
+
+Every lane preserves the same outcomes: understand intent; state changed and preserved behavior; have a bounded
+plan before mutation; obtain the authorization appropriate to the lane; scale rigor by risk and reversibility;
+keep scope and batches bounded; verify acceptance with evidence; and persist only decisions, blockers, and
+handoffs that must survive context loss. `WORK-LANES.md` decides the proportionate execution contract.

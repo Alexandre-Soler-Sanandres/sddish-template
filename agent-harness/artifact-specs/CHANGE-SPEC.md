@@ -14,8 +14,9 @@ and Risks, Plan Steps, Open Questions, Execution Progress, and Closeout.
 
 ## Lifecycle
 
-`draft -> ready -> in-progress -> done`, with `blocked` and `abandoned` exits. One explicit current-content
-approval moves it to `ready`; material input changes stale approval and require reclassification per Work Lanes.
+Change Specs use the same lifecycle as Use Cases, Specs, and Tasks: `draft -> ready -> in-progress -> done`.
+`blocked` remains in `active/`; `archived` and `rejected` move to `archive/`. One explicit current-content approval
+moves it to `ready`; material input changes stale approval and require reclassification per Work Lanes.
 
 ## Relationships
 

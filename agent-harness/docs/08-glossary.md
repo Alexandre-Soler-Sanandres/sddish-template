@@ -84,11 +84,19 @@ Conversational mode for capture, clarification, and idea formation. The front do
 **Refining**
 Mode that derives the next artifact in the Use Case → Spec → Task funnel from its immediate source: a Spec from a Use Case, or Tasks from a Spec — neither gated on the source's own status — or directly from a lower-tier source when `RISK-TIER.md` classifies the layer above as unnecessary. Owns the mechanical derivation activity only — the resulting artifact's meaning, schema, and lifecycle rules live in its Artifact Contract.
 
+**Work Lane**
+A proportional assurance classification for new material work: Fast, Standard, or Assured. It determines the
+execution contract, approval, and persistence required for the unchanged scope.
+
+**Change Spec**
+The Standard-lane durable execution contract. It combines behavior, scope, non-goals, paths, acceptance evidence,
+approval, and executable steps in one artifact.
+
 **Planning-Implementation**
-The mandatory gate mode before any code change. Inspects the artifact, gathers downstream artifacts, verifies maturity, and produces an Implementation Plan.
+The Assured/v1 planning mode that produces a separately resumable Implementation Plan where that contract is required.
 
 **Implementing**
-Mode that executes a `ready` Implementation Plan. Invokes Validation as its own closing gate after each step.
+Mode that executes a ready lane-authorized execution contract: a Fast micro-plan, Standard Change Spec, or Assured/v1 Implementation Plan.
 
 **Discovering-Legacy**
 Mode for analyzing existing code and documentation to derive artifacts without implementing. The legacy project is evidence, not authority.

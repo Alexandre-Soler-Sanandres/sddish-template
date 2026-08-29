@@ -6,7 +6,7 @@ The SDD-ish Agent Harness provides a structured, file-based process for working 
 
 It gives agents a clear operating context — defining what they are allowed to do, what artifacts they produce, and how they hand off to the next stage. Without structure, agents drift: they implement before requirements are clear, mix concerns across artifacts, and lose traceability between decisions and code.
 
-The harness prevents this by making the process explicit and file-based. Every artifact is traceable. Every mode is bounded. Every implementation starts from a `ready` plan.
+The harness prevents this by making the process explicit and file-based. Every artifact is traceable. Every mode is bounded. Every implementation starts from a lane-authorized execution contract.
 
 ## Problem Statement
 
@@ -22,26 +22,25 @@ The harness addresses all of these through explicit modes, bounded artifacts, an
 
 ## Core Principle: SDD-ish Development
 
-The central principle is: **no code without a Plan, no Plan without going through every tier `shared-procs/RISK-TIER.md`'s cascade classifies as necessary, no implementation without a `ready` plan.**
+The central principle is: **no code without a bounded plan and the authorization required by
+`shared-procs/WORK-LANES.md`.** Fast work uses a stated micro-plan; Standard work an approved Change Spec; and
+Assured work an approved Execution Plan. Active v1 chains retain their recorded Risk-Tier and Plan semantics.
 
 This creates a clear dependency chain:
 
 ```text
 Voice / Text / Legacy Code
-  → Transcript / Idea
-  → Use Case         (skippable per shared-procs/RISK-TIER.md's cascade)
-  → Spec              (skippable per shared-procs/RISK-TIER.md's cascade)
-  → Tasks (when required — skippable per shared-procs/RISK-TIER.md's cascade)
-  → Implementation Plan (`ready`) — the only stage every path passes through
+  → Fast: stated micro-plan
+  → Standard: approved Change Spec (`ready`)
+  → Assured: Use Case / Spec / Tasks / Execution Plan (`ready`) as independently warranted
   → Implementation
   → Validation
   → [Review / Improving-Harness — when a stronger formal loop is wanted]
 ```
 
-Each persistent stage produces a file-based artifact. Each artifact is traceable to its source. A stage may be
-skipped entirely when `shared-procs/RISK-TIER.md`'s cascade classifies it unnecessary (recorded in the resulting
-artifact, per `RSK-05-010`); otherwise stages may be lightweight when the work is small and low-risk, but not
-skipped without that classification.
+Only a lane’s required durable contract must persist. Secondary artifacts exist when they add independent
+behavioral authority, ownership/lifecycle, provenance, backlog, findings, or handoff value. The v1 Risk-Tier
+cascade remains a compatibility procedure for active v1 chains.
 
 ## Harness File Taxonomy
 
