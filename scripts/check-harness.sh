@@ -194,6 +194,17 @@ if [[ -f $questions ]]; then
     }' "$questions" || fail=1
 fi
 
+# (IMPROVEMENT-0149) the enabled Legacy Discovery extension's records are real
+# in-repo artifacts for forward-link resolution. Harvest their IDs into `seen`;
+# their own model (LD-* status vocab, nested layout) is not checked here.
+ext="$root/extensions/legacy-discovery"
+if [[ -d $ext ]]; then
+  while IFS= read -r -d '' f; do
+    eid=$(sed -n '/^---$/,/^---$/p' "$f" | sed -n 's/^id: *//p' | head -1)
+    [[ -n $eid ]] && seen[$eid]=1
+  done < <(find "$ext" -type f -name '*.md' ! -path '*/imported/*' -print0)
+fi
+
 # ---- (IMPROVEMENT-0149) forward-link resolution + typing ----
 for id in "${!rec_fwd[@]}"; do
   for ref in ${rec_fwd[$id]}; do
