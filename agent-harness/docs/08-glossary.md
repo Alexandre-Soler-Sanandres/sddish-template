@@ -32,8 +32,7 @@ the universal and output rules the same way. There is no separate rules tree.
 
 **Rules section**
 The `## Rules` section a source file carries directly, holding its ID'd enforceable rule rows. Larger files may
-split it into `###` subsections by concern (see `CORE.md`). A superseded earlier rule set retained for the
-migration window sits in a `### Legacy (v1)` subsection with `-v1`-suffixed IDs.
+split it into `###` subsections by concern (see `CORE.md`).
 
 **Template**
 A lean scaffold under `agent-harness/templates/`: frontmatter keys, section headings, checklists, placeholders,
