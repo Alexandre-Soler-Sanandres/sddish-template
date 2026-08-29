@@ -186,11 +186,14 @@ if [[ -f $questions ]]; then
   while IFS= read -r qid; do [[ -n $qid ]] && qseen[$qid]=1; done < <(
     grep -oE '^\|[[:space:]]*(Q|CSQ|CSP)-[A-Z0-9-]*[0-9]{4}[[:space:]]*\|' "$questions" \
       | grep -oE '(Q|CSQ|CSP)-[A-Z0-9-]*[0-9]{4}')
-  awk -F'|' '
+  awk '
     /^\|[[:space:]]*(Q|CSQ|CSP)-/ {
-      for (i=1;i<=NF;i++) gsub(/^ +| +$/, "", $i)
-      if ($3 == "resolved" || $3 == "discarded")
-        if ($8 == "" || $9 == "" || $10 == "" || $11 == "") { print "incomplete terminal Question: " $2 > "/dev/stderr"; exit 1 }
+      gsub(/\\\|/, "\007", $0)            # protect markdown-escaped pipes
+      n = split($0, f, "|")
+      for (i=1;i<=n;i++) { gsub(/^ +| +$/, "", f[i]); gsub(/\007/, "\\|", f[i]) }
+      if (f[3] == "resolved" || f[3] == "discarded")
+        if (f[8] == "" || f[9] == "" || f[10] == "" || f[11] == "") {
+          print "incomplete terminal Question: " f[2] > "/dev/stderr"; exit 1 }
     }' "$questions" || fail=1
 fi
 
