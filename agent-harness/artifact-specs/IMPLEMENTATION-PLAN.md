@@ -11,7 +11,7 @@ created.
 A Task, Spec, or Use Case (or, for a Plan-tier request, nothing at all) needs implementation guidance. The agent
 may draft the Plan at `active/` while the upstream chain is at any status, recording its current dependencies and
 implementation-readiness facts. Nothing changes in the codebase until the operator explicitly requests Plan
-promotion, the `STT-01-030` upward readiness walk succeeds, and that approval is recorded in the same transition
+promotion, the `STT-01-030` scoped readiness transition succeeds, and that approval is recorded in the same transition
 that moves the Plan to `ready/` and unlocks Implementing mode. Once every step completes, the Plan reaches `done`,
 which can cascade the source Spec and Use Case to `done`.
 
@@ -58,6 +58,7 @@ Active Implementation Plans table (`IPL-05-020`).
 
 - Target artifact
 - Behavior Contract (when no Spec participates)
+- Scoped Parent Readiness (when a UC/Spec/Task chain participates)
 - Chain Preflight (when a UC/Spec/Task chain participates)
 - Readiness checks
 - Included artifacts
@@ -88,10 +89,12 @@ overlapping Task `allowed_paths` — stop and surface the conflict if either con
 status `ready` or `in-progress`, adding/updating a row in the same pass the status changes and removing it
 once the Plan is no longer either (`IPL-05-020`). If no Spec participates, verify the Plan's own
 `## Behavior Contract` captures the expected delta, preserved behavior, and observable proof before advancing
-(`IPL-02-014`). When a real UC/Spec/Task chain participates, require a passing `## Chain Preflight` report
-recording the validation profile, run date/time, checked artifact IDs and paths, each checked artifact's
-`updated` value, git blob/hash when available, and either findings or a cited Review reference; any later change
-to a participating artifact makes that report stale until rerun (`IPL-02-015`/`IPL-02-016`).
+(`IPL-02-014`). When a real UC/Spec/Task chain participates, require a complete `## Scoped Parent Readiness`
+section and a passing `## Chain Preflight` report. They record included and every excluded sibling Task/Spec,
+scope-affecting dependencies or blockers, parent requirements/criteria/constraints/dependencies/risks/preserved
+behavior, and the current full-parent-fan-out result, plus validation profile, run date/time, checked IDs/paths,
+`updated` values, git blob/hash when available, and findings or a cited Review reference. A later change to any
+recorded participant or parent item makes the report stale until rerun (`IPL-02-015`-`019`).
 
 ## Relationships
 

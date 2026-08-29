@@ -21,7 +21,8 @@ run technical checks — those belong to Implementing, guided by `harness-data/r
 (as its own closing gate, after each plan step), Improving-Harness (as part of its own change process)
 **Covers:** Artifact completeness, process rule compliance, acceptance criteria, readiness checks
 **Output:** Profile-dependent — `artifact-readiness` reports pass/fail to the invoking mode or wrapper,
-`chain-preflight` returns a read-only report for the Plan's `## Chain Preflight` section, and
+`chain-preflight` returns a read-only report for the Plan's `## Chain Preflight` section and verifies its
+`## Scoped Parent Readiness` evidence, and
 `implementation-result` reports into the relevant closeout surface. Validation does not modify the checked
 artifacts beyond status; a Review artifact holds the record when a formal one is needed.
 

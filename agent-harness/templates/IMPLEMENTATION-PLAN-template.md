@@ -35,6 +35,19 @@ observable proof. Otherwise write `Not applicable — covered by SPEC-NNNN`.)
 - Preserved behavior:
 - Observable proof:
 
+## Scoped Parent Readiness
+
+(required when this Plan participates in a real UC/Spec/Task chain. Account for every Task in each participating
+Spec: include this Plan's Tasks and record every sibling below. Otherwise write `Not applicable — no higher-tier
+chain participates`.)
+
+- Source-chain parents and paths:
+- Included Tasks:
+- Recorded sibling Tasks/Specs: (ID, current status, owning Plan when known, and why nonblocking)
+- Parent items used by this slice: (requirement/acceptance IDs, constraints, dependencies, risks, and behavior to preserve)
+- Open Question/Review/blocker assessment:
+- Full parent fan-out currently satisfied: yes / no — why:
+
 ## Chain Preflight
 
 (required when this Plan participates in a real UC/Spec/Task chain; Planning records Validation's durable
@@ -53,10 +66,11 @@ All items must be checked before this plan may advance to `ready`. Cite a one-li
 checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-PLAN.md`'s `IPL-02-012`.
 
 - [ ] Required Tasks exist
-- [ ] `STT-01-030` preconditions verified: this Plan's readiness and parallel-work gates pass, every included Task passes its own local promotion gates, every participating Spec/Use Case has full child fan-out already at `ready`, and the full promotion walk can complete atomically with no failed participant
+- [ ] `STT-01-030` preconditions verified: this Plan's readiness and parallel-work gates pass, included Tasks pass their local gates, scoped accounting and dependencies pass, and any parent promotion is conditional on satisfied child fan-out plus fresh parent gates
 - [ ] If entered with no upstream artifact per `RISK-TIER.md`'s cascade, `## Risk-Tier Classification` section is present and complete
 - [ ] If no Spec participates, `## Behavior Contract` is present and complete
 - [ ] If a real UC/Spec/Task chain participates, `## Chain Preflight` is present, passing, and current
+- [ ] If a real UC/Spec/Task chain participates, `## Scoped Parent Readiness` is complete and current
 - [ ] No blockers or unresolved dependencies
 - [ ] High-risk areas identified
 - [ ] Each plan step defines expected files, validation, and a suggested commit

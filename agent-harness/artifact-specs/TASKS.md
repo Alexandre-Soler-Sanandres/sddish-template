@@ -13,8 +13,8 @@ A Spec (any status — no longer gated on `ready`, `TSK-01-010`), or via the Spe
 needs execution units. Refining derives Tasks with allowed/forbidden paths and validation commands; each Task
 becomes `ready` for implementation only when `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`
 applies, not through a standalone per-Task confirmation step. Planning-Implementation may draft a Plan while the
-Task is at any status; implementation remains unavailable until Plan promotion completes the upward readiness
-walk. ADR checks re-run at that gate the same way they do
+Task is at any status; implementation remains unavailable until scoped Plan promotion completes the required
+readiness transition. ADR checks re-run at that gate the same way they do
 for Specs and Use Cases, plus an extra check when a Task's paths touch a route, service instance, or external
 dependency that a health/readiness-check ADR might govern.
 

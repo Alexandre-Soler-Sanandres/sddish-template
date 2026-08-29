@@ -41,14 +41,16 @@ clearing and which related artifacts the change reaches.
 load-bearing portion of its lifecycle and then receives a significant content change under its own artifact-local
 definition. The reset moves downward through derived children and leaves Implementation Plans alone.
 
-`STT-01-020` is the execution path. Implementing uses it when work starts and finishes on Tasks and Plans, and
-that completion can then settle the parent Spec or Use Case when every derived child is already `done`.
+`STT-01-020` is the execution path. Implementing uses it when work starts and finishes on Tasks and Plans. A
+parent may settle only after it has reached `ready` and every derived child is `done`; completion never bypasses
+the parent readiness gate.
 
-`STT-01-030` is the Plan-triggered upward walk. First evaluate the Plan's own readiness and conflict checks and
-every participating lower artifact's local readiness, ADR, question, and fan-out preconditions without mutating
-anything; then, only if every participant passes, apply the full promotion transaction together, including the
-Plan's approval provenance. The transition rule owns the walk's scope, atomicity, and truncation behavior; the
-artifact-local rules own the evidence needed to pass.
+`STT-01-030` is the Plan-triggered scoped promotion. First evaluate the Plan, its declared included Tasks, and
+its recorded sibling/parent scope without mutating anything. A passing scope promotes the Plan and included Tasks
+together, including approval provenance. Parent promotion is a separate conditional extension: it occurs only
+when every direct child is satisfied (`ready`, `done`, or being promoted) and that parent passes its fresh local
+gate. An incomplete future sibling therefore does not block a coherent Plan slice, but it prevents premature
+parent readiness. The transition rule owns scope, atomicity, and truncation; artifact-local rules own evidence.
 
 `STT-01-040` is the manual promotion path for one named Task, Spec, or Use Case. It uses the same artifact-local
 promotion gates as `STT-01-030`, but it does not walk through siblings or ancestors as a precondition.
@@ -72,8 +74,9 @@ and the reconsideration pair is applied afterward for any remaining dependent ar
 - A significant change lands on a `ready` Spec. `STT-01-010` resets the Spec and its derived Tasks to `draft`.
   Whether the source Use Case now needs attention is handled by the reconsideration pair, not by the reset row
   itself.
-- An operator approves a Plan's readiness. `STT-01-030` first proves the whole walk can succeed, then records the
-  Plan's approval provenance and each included Task, Spec, and Use Case `ready` status together.
+- An operator approves a Plan's readiness. `STT-01-030` first proves its declared scope can succeed, then records
+  the Plan's approval provenance and every included Task `ready` status together. It promotes a Spec or Use Case
+  only if its whole direct-child fan-out is satisfied and its own gate passes.
 - A Task becomes `ready` by explicit instruction. `STT-01-040` uses that Task's own readiness and ADR gates, but
   it does not require sibling Tasks or the parent Spec to be `ready` first.
 - A completed Task later reopens because the implementation evidence was wrong. `STT-02-010` then covers whether

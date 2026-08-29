@@ -13,7 +13,7 @@ reaches the point where its behavior needs a technical contract. Refining derive
 and acceptance criteria; relevant ADRs get checked and re-checked as the content firms up; and once the
 transition rules promote it under `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040`, the Spec
 becomes `ready` for implementation. Planning-Implementation may draft a Plan while the Spec is at any status;
-implementation remains unavailable until Plan promotion completes the upward readiness walk. Significant changes
+implementation remains unavailable until scoped Plan promotion completes the required readiness transition. Significant changes
 and later reopening/reset behavior are modeled in that same transition system.
 
 ## Entry / Creation Paths

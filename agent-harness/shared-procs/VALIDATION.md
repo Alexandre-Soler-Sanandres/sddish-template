@@ -62,10 +62,13 @@ produces findings for Planning to record in the Plan's `## Chain Preflight` sect
 
 Check the selected chain for bidirectional ID consistency, requirement/acceptance coverage, Task and Plan-step
 coverage, dependency order, allowed/expected-path consistency, ADR application, unresolved Questions,
-non-goal conflicts, risk coverage, and validation-command coverage (`VAL-02-061`-`VAL-02-069`). Record the
-profile used, run date/time, pass/fail outcome, checked artifact IDs and paths, each checked artifact's
-`updated` value, and git blob/hash when available. If any participating artifact changes after that run, the
-report is stale and must be rerun before promotion (`VAL-04-020`/`VAL-04-021`).
+non-goal conflicts, risk coverage, validation-command coverage, and the Plan's declared scoped parent readiness
+(`VAL-02-061`-`VAL-02-071`). Verify included/sibling accounting is complete; verify that no excluded sibling has
+a dependency, shared path, requirement/acceptance overlap, or unresolved Question/Review affecting the slice;
+and verify the declared parent items and full-parent-fan-out result rather than trusting the Plan. Record the
+profile used, run date/time, pass/fail outcome, checked artifact IDs and paths, each checked artifact's `updated`
+value, git blob/hash when available, and the recorded parent items. If any participant or recorded parent item
+changes after that run, the report is stale and must be rerun before promotion (`VAL-04-020`/`VAL-04-021`).
 
 Validation itself does not write that section; Planning owns the durable report. If findings need an independent
 durable record, create or update a Review and cite it from the Plan (`VAL-06-022`).

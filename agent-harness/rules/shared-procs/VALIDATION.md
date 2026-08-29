@@ -29,6 +29,8 @@
 | VAL-02-067 | Process-Validation | `chain-preflight` MUST verify that the selected validation commands or other evidence cover the approved scope without relying on future implementation outputs. |
 | VAL-02-068 | Process-Validation | `chain-preflight` MUST report the checked artifact IDs, paths, `updated` values, and git blob/hash when available for every participating artifact. |
 | VAL-02-069 | Process-Validation | `chain-preflight` findings MUST be returned read-only to Planning for durable recording in the Plan rather than written directly into the checked artifacts by Validation. |
+| VAL-02-070 | Process-Validation | `chain-preflight` MUST verify each source-chain Spec's complete included/sibling Task accounting, the declared statuses/ownership/nonblocking rationale, and whether any excluded sibling's dependency, required shared path, requirement/acceptance overlap, or unresolved Question/Review affects the Plan slice. |
+| VAL-02-071 | Process-Validation | `chain-preflight` MUST verify the Plan's declared parent requirement, acceptance, constraint, dependency, risk, and preserved-behavior items and current full-parent-fan-out result against current source artifacts. |
 | VAL-03-010 | Behavioral-Validation | Each acceptance criterion MUST be met and verifiable. |
 | VAL-03-020 | Behavioral-Validation | Under `artifact-readiness`, a Spec's `test_refs` evidence MAY be planned rather than already implemented, but the validation mapping MUST be credible and MUST NOT invent future test files merely to satisfy the gate. |
 | VAL-03-021 | Behavioral-Validation | Under `implementation-result`, when tests are the chosen evidence, `test_refs` in the Spec frontmatter MUST be populated, contain only test file paths, and every referenced test file MUST exist. |
@@ -37,9 +39,9 @@
 | VAL-03-040 | Behavioral-Validation | Non-goals MUST NOT have been implemented. |
 | VAL-03-050 | Behavioral-Validation | Scope MUST NOT drift beyond what was planned. |
 | VAL-03-060 | Behavioral-Validation | Technical checks MUST have been run during Implementation (see `agent-harness/modes/IMPLEMENTING.md`). |
-| VAL-04-010 | Readiness-Checks | Before moving to the next stage, MUST verify: no open `changes-requested` or `rejected` review findings, all blockers are resolved, and dependent artifacts are at an accepted status. |
+| VAL-04-010 | Readiness-Checks | Before moving to the next stage, MUST verify: no open `changes-requested` or `rejected` review findings, all scope-affecting blockers are resolved, and included or scope-affecting dependent artifacts are at an accepted status; an unrelated recorded draft or blocked sibling outside a scoped Plan does not itself block promotion. |
 | VAL-04-020 | Readiness-Checks | A Plan's `## Chain Preflight` report MUST be present and passing before the Plan may advance to `ready`. |
-| VAL-04-021 | Readiness-Checks | If any artifact participating in a Plan's recorded `chain-preflight` report changes after that run, the report is stale and MUST be rerun before promotion. |
+| VAL-04-021 | Readiness-Checks | If any artifact or parent item participating in a Plan's recorded `chain-preflight` report changes after that run, the report is stale and MUST be rerun before promotion. |
 | VAL-05-010 | Fallback | Manual review is the primary verification mechanism by design, not a fallback for missing automation; MUST document what was checked and the outcome. |
 | VAL-06-010 | Boundaries | MUST NOT implement or change code. |
 | VAL-06-020 | Boundaries | MUST NOT modify artifacts beyond updating their status. |

@@ -61,8 +61,9 @@ governs the planning activity, the artifact spec governs the resulting Plan's ow
    - If Tasks are not required → create an inline Implementation Plan.
 4. Do not generate duplicate Tasks or ignore existing ones.
 5. Create the Implementation Plan.
-6. Wait for an explicit promotion request — do not change code. Run Validation's `chain-preflight` profile only
-   before that promotion, and record the resulting durable report in the Plan's `## Chain Preflight` section.
+6. Wait for an explicit promotion request — do not change code. Before that promotion, record the Plan's scoped
+   parent readiness and run Validation's `chain-preflight` profile; record its durable report in `## Chain
+   Preflight`.
 
 ### Entering via `/plan-use-case`
 
@@ -78,8 +79,9 @@ governs the planning activity, the artifact spec governs the resulting Plan's ow
    - If Tasks are required but missing → stop and route to `/create-tasks`.
 5. Do not generate duplicate Tasks or ignore existing ones.
 6. Create a coherent end-to-end Implementation Plan covering all derived Specs.
-7. Wait for an explicit promotion request — do not change code. Run Validation's `chain-preflight` profile only
-   before that promotion, and record the resulting durable report in the Plan's `## Chain Preflight` section.
+7. Wait for an explicit promotion request — do not change code. Before that promotion, record the Plan's scoped
+   parent readiness and run Validation's `chain-preflight` profile; record its durable report in `## Chain
+   Preflight`.
 
 ### Entering via direct instruction (no Use Case/Spec/Task file named)
 
