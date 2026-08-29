@@ -207,6 +207,21 @@ fi
 [ "$tmpl_fail" -eq 0 ] && pass "templates have frontmatter and committed artifacts carry no placeholders"
 
 # ---------------------------------------------------------------------------
+section "Harness evaluation suite"
+# ---------------------------------------------------------------------------
+eval_fail=0
+if [ -d harness-evals ]; then
+  [ -x scripts/evaluate-harness.sh ] || { fail "harness evaluation runner is missing or not executable"; eval_fail=1; }
+  if [ -x scripts/evaluate-harness.sh ] && ! bash scripts/evaluate-harness.sh --check; then
+    fail "harness evaluation suite structure is invalid"
+    eval_fail=1
+  fi
+  [ "$eval_fail" -eq 0 ] && pass "harness evaluation suite is structurally valid"
+else
+  detail "harness evaluation suite not yet installed"
+fi
+
+# ---------------------------------------------------------------------------
 printf '\n'
 if [ "$FAILED" -eq 0 ]; then
   printf 'OK  %d checks passed\n' "$CHECKS"
