@@ -23,14 +23,14 @@ restate generic process policy that already lives in this file.
 ## When To Use
 
 Load this file when running App-Local Discovery — see the Discovery Phases table in
-`agent-harness/modes/DISCOVERING-LEGACY.md`.
+`agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`.
 
 ## Workflow Paths
 
 App-specific discovery goes under:
 
 ```text
-harness-data/artifacts/legacy/apps/<legacy-app-slug>/
+harness-data/extensions/legacy-discovery/apps/<legacy-app-slug>/
   INVENTORY.md
   SOURCE-MAP.md
   findings/
@@ -48,7 +48,7 @@ per-app file.
 
 1. Select the smallest useful evidence set from the source map.
 2. Inspect code, then docs, then tests.
-3. Classify evidence and conflicts using the Core rules in `agent-harness/modes/DISCOVERING-LEGACY.md`.
+3. Classify evidence and conflicts using the Core rules in `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`.
 4. Update app `findings/` (add or merge into an `LF-<APP>-NNNN` file, looked up by ID), the unified Questions
    registry, and `SOURCE-MAP.md`. When a question is recorded, link it bidirectionally: cite the originating
    finding(s) in the registry's `Source` column, and add the question ID to each cited finding's
@@ -56,7 +56,7 @@ per-app file.
    a specific finding. Before leaving any finding's `## Open Questions` empty, test its own `Classification` and
    `Evidence Conflict` text against `QST-06-010` — if it reads as an undecided fork, raise a `Q-<APP>-NNNN` row
    instead of leaving it as prose (`LDA-04-040`).
-5. Enrich stable reference docs per the Reference Enrichment table in `agent-harness/modes/DISCOVERING-LEGACY.md`.
+5. Enrich stable reference docs per the Reference Enrichment table in `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`.
 6. Before marking a slice `done`, confirm at least one of its findings is a plain baseline/descriptive finding —
    what the slice's area concretely contains or does — not only anomaly, conflict, or edge-case findings; write
    the missing baseline finding first if every finding so far is anomaly-shaped (`LDA-04-050`).
@@ -103,9 +103,9 @@ Not applicable at this level — App-Local Discovery routes findings to candidat
 
 ## Outputs
 
-- `harness-data/artifacts/legacy/apps/<legacy-app-slug>/INVENTORY.md`
-- `harness-data/artifacts/legacy/apps/<legacy-app-slug>/SOURCE-MAP.md`
-- `harness-data/artifacts/legacy/apps/<legacy-app-slug>/findings/active/<LF-ID>.md` (or `findings/archive/`)
+- `harness-data/extensions/legacy-discovery/apps/<legacy-app-slug>/INVENTORY.md`
+- `harness-data/extensions/legacy-discovery/apps/<legacy-app-slug>/SOURCE-MAP.md`
+- `harness-data/extensions/legacy-discovery/apps/<legacy-app-slug>/findings/active/<LF-ID>.md` (or `findings/archive/`)
 - Rows in the unified Questions registry
 
 ## Examples
@@ -119,7 +119,7 @@ auth-concept vocabulary; and runs the Slice Closeout Checklist before marking th
 
 | ID | Rule |
 | --- | --- |
-| LDA-01-010 | App `INVENTORY.md` MUST use `agent-harness/templates/INVENTORY-template.md`: fixed `Scope`, `Identity`, `Major Runtime Areas`, `Operations, Tooling, and Quality`, and `Inventory Gaps` sections, plus as many app-specific structural sections as the app's own shape needs in between. |
+| LDA-01-010 | App `INVENTORY.md` MUST use `agent-harness/extensions/legacy-discovery/templates/INVENTORY-template.md`: fixed `Scope`, `Identity`, `Major Runtime Areas`, `Operations, Tooling, and Quality`, and `Inventory Gaps` sections, plus as many app-specific structural sections as the app's own shape needs in between. |
 | LDA-01-020 | MUST name app-specific sections after what they actually cover in this app, not copy another app's section names. |
 | LDA-01-030 | MUST create `INVENTORY.md` and `SOURCE-MAP.md` together for a newly-selected app, before reading evidence into any `LF-<APP>-NNNN.md` finding for that app. |
 | LDA-02-010 | Each app `SOURCE-MAP.md` (the app restart point, per `SOURCE-MAP-template.md`) MUST stay app-local, containing only: source root, primary evidence files, code areas, and candidate discovery slices; block list/status when blockwise; slice status table, completed notes, open app notes, restart pointers, and reference enrichment routing; deferred/cross-system Question ID references (per `COR-01-120` — classification itself lives only in the Questions registry, never duplicated here) before `app-local-complete`; import hygiene when the snapshot has secret-like files, local artifacts, or nested repo metadata. |
@@ -171,5 +171,5 @@ auth-concept vocabulary; and runs the Slice Closeout Checklist before marking th
 
 ## Reference Files
 
-Load per `agent-harness/modes/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
+Load per `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
 files of its own.

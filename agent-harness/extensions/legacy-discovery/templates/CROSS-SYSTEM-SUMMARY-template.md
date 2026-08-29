@@ -20,7 +20,7 @@ tags: [legacy-discovery, cross-system]
 This `SUMMARY.md` documents the whole cross-system discovery plan. The other cross-system artifacts
 (`CONTRACTS.md`, `findings/`, `REWRITE-READINESS.md`, plus `CSQ-*`/`CSP-*` rows in the harness Questions registry)
 are created only when a slice produces evidence that needs them — see
-`agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s `LDC-01-020`/`030` for the governing rules and each
+`agent-harness/extensions/legacy-discovery/submodes/CROSS-SYSTEM.md`'s `LDC-01-020`/`030` for the governing rules and each
 artifact's job.
 
 ## Entry Criteria
@@ -29,7 +29,7 @@ Cross-system synthesis scope is explicit:
 
 | App | Source map | Discovery state | Proof flag |
 | --- | --- | --- | --- |
-| `<app-slug>` | `harness-data/artifacts/legacy/apps/<app-slug>/SOURCE-MAP.md` | `app-local-complete` | `proof_needed: false` |
+| `<app-slug>` | `harness-data/extensions/legacy-discovery/apps/<app-slug>/SOURCE-MAP.md` | `app-local-complete` | `proof_needed: false` |
 
 All in-scope app source maps must be at `app-local-complete` before synthesis starts. App-level proof flags do not
 block cross-system synthesis when they are already accepted or explicitly deferred, but cross-system slices may still
@@ -37,7 +37,7 @@ identify proof work required before rewrite-readiness.
 
 ## Evidence Precedence
 
-See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s own `## Evidence Precedence` section for the
+See `agent-harness/extensions/legacy-discovery/submodes/CROSS-SYSTEM.md`'s own `## Evidence Precedence` section for the
 governing default order and conflict-routing rule.
 
 ## Working Discovery Plan
@@ -61,7 +61,7 @@ every inter-app boundary, contract, and shared concern where material cross-app 
 
 ## Slice Roundtrip
 
-See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s own `## Slice Roundtrip` section for the governing
+See `agent-harness/extensions/legacy-discovery/submodes/CROSS-SYSTEM.md`'s own `## Slice Roundtrip` section for the governing
 per-slice procedure.
 
 ## Completed Slice Notes
@@ -81,8 +81,8 @@ resulting follow-up)
 | Contract tests, parity tests, security gates, readiness/proof standards | `harness-data/reference/QUALITY.md` |
 
 Cross-system artifact responsibilities and canonical-ID ownership: see
-`agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`'s Artifact Routing table and `LDC-01-040`. Clarification
-sequencing after normalization: see `agent-harness/modes/legacy-discovery/CLARIFICATION.md`'s `LDG-03-020`/`040`.
+`agent-harness/extensions/legacy-discovery/submodes/CROSS-SYSTEM.md`'s Artifact Routing table and `LDC-01-040`. Clarification
+sequencing after normalization: see `agent-harness/extensions/legacy-discovery/submodes/CLARIFICATION.md`'s `LDG-03-020`/`040`.
 
 ## Initial Cross-System Questions
 
@@ -99,7 +99,7 @@ Next action: (slice name and status)
 
 Start from:
 
-- `harness-data/artifacts/legacy/apps/<app-slug>/SOURCE-MAP.md`
+- `harness-data/extensions/legacy-discovery/apps/<app-slug>/SOURCE-MAP.md`
 
 Read only the source-map sections and evidence paths needed for the next slice.
 
@@ -110,7 +110,7 @@ not change evidence meaning or remove traceability.
 ## Discovery-Complete Shape
 
 The collapsed shape of this same file once cross-system synthesis is finished — see
-`agent-harness/modes/legacy-discovery/NORMALIZATION.md`'s `LDG-01-070` for the collapse procedure itself.
+`agent-harness/extensions/legacy-discovery/submodes/NORMALIZATION.md`'s `LDG-01-070` for the collapse procedure itself.
 
 Collapses to only: `Purpose`, `Entry Criteria` (kept as a record of the scope synthesis actually ran against),
 `Evidence Precedence`, `Reference Enrichment Routing`, and any unresolved items from

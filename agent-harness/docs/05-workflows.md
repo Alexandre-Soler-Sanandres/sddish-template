@@ -232,7 +232,7 @@ work. See `agent-harness/modes/IMPROVING-HARNESS.md`.
 ## Legacy Discovery Flow
 
 For the practical step-by-step legacy application playbook, see
-[09-legacy-applications.md](09-legacy-applications.md).
+[the Legacy Discovery guide](../extensions/legacy-discovery/GUIDE.md).
 
 ```text
 harness-data/artifacts/legacy/apps/<legacy-app-slug>/

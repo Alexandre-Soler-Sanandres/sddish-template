@@ -3,7 +3,7 @@
 This guide is for humans using the harness to understand and rewrite legacy applications. It explains how to steer the
 work, what to ask for, what to review, and which decisions you should keep in your hands.
 
-The detailed agent workflow lives in `agent-harness/modes/DISCOVERING-LEGACY.md`: workflow guidance in the
+The detailed agent workflow lives in `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`: workflow guidance in the
 Discovering-Legacy Mode Workflow, enforceable rules in each submode file`s `## Rules` section. Use this
 guide as the human-readable explanation of the legacy discovery practice.
 
@@ -29,7 +29,7 @@ risk.
 Start with a concrete app or imported source path:
 
 ```text
-Please run legacy discovery for `harness-data/artifacts/legacy/imported/<app-slug>`.
+Please run legacy discovery for `harness-data/extensions/legacy-discovery/imported/<app-slug>`.
 ```
 
 If you are unsure about scope, ask for a short discovery proposal first:
@@ -89,7 +89,7 @@ be your call.
 For each app, discovery should live under:
 
 ```text
-harness-data/artifacts/legacy/apps/<app-slug>/
+harness-data/extensions/legacy-discovery/apps/<app-slug>/
 ```
 
 The important files are:
@@ -446,9 +446,9 @@ You can ask the agent to run these when relevant:
 
 ```sh
 git diff --check
-find harness-data/artifacts/legacy/imported/<app-slug> -path '*/.git' -type d
+find harness-data/extensions/legacy-discovery/imported/<app-slug> -path '*/.git' -type d
 rg --files agent-harness -g 'README.md' -g 'README.*'
 ```
 
 Expected result for the last command: only `agent-harness/README.md`. Extra directory-scoped harness READMEs should
-not appear. Imported application READMEs under `harness-data/artifacts/legacy/imported/` are source evidence, not harness artifacts.
+not appear. Imported application READMEs under `harness-data/extensions/legacy-discovery/imported/` are source evidence, not harness artifacts.

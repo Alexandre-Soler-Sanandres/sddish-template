@@ -39,6 +39,14 @@ migration window sits in a `### Legacy (v1)` subsection with `-v1`-suffixed IDs.
 A lean scaffold under `agent-harness/templates/`: frontmatter keys, section headings, checklists, placeholders,
 and short field prompts. Templates scaffold; they do not teach artifact theory or mode workflow.
 
+**Extension**
+An optional, self-contained capability tree under `agent-harness/extensions/<name>/` with its own Mode
+Workflow, submodes, templates, co-located rules, and entry point, gated by a `harness-data/HARNESS-PROFILE.yaml`
+`extensions.<name>: enabled | disabled` override (default `disabled`). An Extension MUST NOT weaken any CORE
+or Work-Lane invariant; when disabled it is invisible to CORE, the Catalog, context loading, and wrapper
+generation. `agent-harness/extensions/legacy-discovery/` is the first Extension. Its own `EXTENSION.md` is the
+capability manifest.
+
 **Guide**
 An optional project-owned support file under `harness-data/guides/` that explains local setup, tooling usage,
 operating context, or repository-specific practical knowledge. Guides are selected through
@@ -59,9 +67,9 @@ lifecycle gate is defined by an Artifact Contract under `agent-harness/artifact-
 
 **Mode**
 A true, distinct behavioral posture the agent adopts — defines what the agent may do, not what document it
-produces. Only one mode is active at a time; switching happens only on explicit user request. The six modes are
-Partnering, Refining, Planning-Implementation, Implementing, Discovering-Legacy, and Improving-Harness. Each Mode
-is described by a Mode Workflow.
+produces. Only one mode is active at a time; switching happens only on explicit user request. The base modes are
+Partnering, Refining, Planning-Implementation, Implementing, and Improving-Harness; Discovering-Legacy is
+provided by the optional Legacy Discovery Extension. Each Mode is described by a Mode Workflow.
 
 **Artifact Spec**
 Legacy name for an Artifact Contract under `agent-harness/artifact-specs/`. Current docs should prefer Artifact
@@ -92,7 +100,10 @@ The Assured/v1 planning mode that produces a separately resumable Implementation
 Mode that executes a ready lane-authorized execution contract: a Fast micro-plan, Standard Change Spec, or Assured/v1 Implementation Plan.
 
 **Discovering-Legacy**
-Mode for analyzing existing code and documentation to derive artifacts without implementing. The legacy project is evidence, not authority.
+Mode for analyzing existing code and documentation to derive artifacts without implementing — the legacy project
+is evidence, not authority. Provided by the optional Legacy Discovery Extension
+(`agent-harness/extensions/legacy-discovery/`), active only when `harness-data/HARNESS-PROFILE.yaml` enables
+`legacy_discovery`.
 
 **Improving-Harness**
 Mode that changes the harness itself. Only triggered by a harness/process-flavored Review finding, never from Partnering or a direct request. The only mode allowed to modify `agent-harness/*`.
@@ -155,7 +166,7 @@ A tiny harness navigation file listing artifact locations. Not a god-index.
 The failure mode where an agent loads a massive index of every artifact instead of navigating from a specific referenced artifact. Causes context collapse and loss of precision.
 
 **Legacy Finding**
-An artifact recording a single piece of evidence extracted from a legacy project — observed behavior, documented behavior, inferred intent, accidental complexity, or dead/uncertain code. Scoped per app or cross-system; see `agent-harness/modes/DISCOVERING-LEGACY.md`.
+An artifact recording a single piece of evidence extracted from a legacy project — observed behavior, documented behavior, inferred intent, accidental complexity, or dead/uncertain code. Scoped per app or cross-system; see `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`.
 
 **Readiness Checklist**
 A section present in every artifact template. Every item must be checked before the agent advances the artifact to its gate status (e.g. Spec to `ready`, Task to `ready`). A single unchecked item blocks the status change.

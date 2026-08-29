@@ -77,6 +77,7 @@ Discovering-Legacy, Improving-Harness, Planning-Implementation, Refining.
 | COR-03-090 | Work MUST also load that artifact type's Contract under `agent-harness/artifact-specs/` before creating or updating an artifact, in addition to the active Mode file (`COR-03-040`). |
 | COR-03-100 | Work MUST NOT load `agent-harness/shared-procs/` by default — load only when a shared procedure is actually invoked by name from the active mode file's own rules. |
 | COR-03-110 | A delegation prompt to a sub-agent doing mode-scoped work MUST name, as required reading for that sub-agent, the same mode/spec/core layer `COR-03-040`/`COR-03-090` require the primary agent to load: `CORE.md`, the active mode file, and the relevant Artifact Contract. This does not require the sub-agent to read every reference file (`COR-03-070` still applies); it only stops the mode/spec/core layer being left to the orchestrator's own prompt wording. |
+| COR-03-120 | Work MUST NOT load, cite, or route through an Extension's files (`agent-harness/extensions/<name>/**`) unless `harness-data/HARNESS-PROFILE.yaml` sets `extensions.<name>: enabled`; a disabled or absent Extension is invisible to context loading, the Catalog, and wrapper generation. |
 
 ### Support-files
 
@@ -95,7 +96,7 @@ Discovering-Legacy, Improving-Harness, Planning-Implementation, Refining.
 | ID | Rule |
 | --- | --- |
 | COR-05-010 | Work MUST checkpoint mode, authorization, in-scope files, and validation before high-impact actions, stopping, or committing. |
-| COR-05-020 | Work MUST treat these as high-impact actions: committing; changing harness mode files, templates, or process rules; creating Review or Improvement artifacts; moving artifacts between lifecycle folders (see `agent-harness/systems/LIFECYCLE-FOLDERS.md` for why that move is never a bare housekeeping step). Discovering-Legacy mode adds its own high-impact actions on top of this list — see `agent-harness/modes/DISCOVERING-LEGACY.md`. |
+| COR-05-020 | Work MUST treat these as high-impact actions: committing; changing harness mode files, templates, or process rules; creating Review or Improvement artifacts; moving artifacts between lifecycle folders (see `agent-harness/systems/LIFECYCLE-FOLDERS.md` for why that move is never a bare housekeeping step). Discovering-Legacy mode adds its own high-impact actions on top of this list — see `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`. |
 | COR-05-030 | After a resume or context compaction, Work MUST repeat the checkpoint (`COR-05-010`) and re-read `CORE.md` and the active true-Mode file in full before the next high-impact action — the checkpoint verifies state, not rule text, so confirming mode identity alone is not enough. |
 | COR-05-040 | On a true Mode transition (per `COR-03-040`'s list — not every artifact-producing action), Work MUST re-read the newly-active mode file in full before taking any mode-specific action. |
 

@@ -30,13 +30,13 @@ or modifies legacy source, and never implements new code (`LD-01-010`).
 
 | Phase | Entry gate | Work | Exit gate |
 | --- | --- | --- | --- |
-| App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `findings/`, the Questions registry, and stable reference docs. See `agent-harness/modes/legacy-discovery/APP-LOCAL.md`. | Source map reaches `app-local-complete`. |
-| Cross-system synthesis | Active scope is explicit and all in-scope apps are `app-local-complete`. | Synthesize contracts, parity, questions, proof needs, and readiness across apps. See `agent-harness/modes/legacy-discovery/CROSS-SYSTEM.md`. | Cross-system `SUMMARY.md` marks synthesis complete and names the restart point. |
-| Artifact normalization | App-local and required cross-system discovery are complete. | Format, dedupe, order, and tighten existing artifacts without new source discovery. See `agent-harness/modes/legacy-discovery/NORMALIZATION.md`. | Restart pointer moves to question clarification. |
-| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. See `agent-harness/modes/legacy-discovery/CLARIFICATION.md`. | Downstream-work is unblocked once P0/migration-critical blockers are resolved, deferred, or proof-routed (see `CLARIFICATION.md`'s `LDG-04-100`), so the restart pointer may move to Use Cases or Specs. This does not mean Question Clarification is complete, and it does not make other open Questions irrelevant. See `CLARIFICATION.md`'s `LDG-04-120` and `CORE.md`'s `COR-01-120` for how remaining Questions stay tracked and referenced downstream. |
+| App-local discovery | Imported app selected | Slice app evidence, update app `SOURCE-MAP.md`, `findings/`, the Questions registry, and stable reference docs. See `agent-harness/extensions/legacy-discovery/submodes/APP-LOCAL.md`. | Source map reaches `app-local-complete`. |
+| Cross-system synthesis | Active scope is explicit and all in-scope apps are `app-local-complete`. | Synthesize contracts, parity, questions, proof needs, and readiness across apps. See `agent-harness/extensions/legacy-discovery/submodes/CROSS-SYSTEM.md`. | Cross-system `SUMMARY.md` marks synthesis complete and names the restart point. |
+| Artifact normalization | App-local and required cross-system discovery are complete. | Format, dedupe, order, and tighten existing artifacts without new source discovery. See `agent-harness/extensions/legacy-discovery/submodes/NORMALIZATION.md`. | Restart pointer moves to question clarification. |
+| Question clarification | Normalization is complete. | Resolve, defer, discard, or route open questions and proof needs. See `agent-harness/extensions/legacy-discovery/submodes/CLARIFICATION.md`. | Downstream-work is unblocked once P0/migration-critical blockers are resolved, deferred, or proof-routed (see `CLARIFICATION.md`'s `LDG-04-100`), so the restart pointer may move to Use Cases or Specs. This does not mean Question Clarification is complete, and it does not make other open Questions irrelevant. See `CLARIFICATION.md`'s `LDG-04-120` and `CORE.md`'s `COR-01-120` for how remaining Questions stay tracked and referenced downstream. |
 
 Before inventorying or reading files in a freshly imported legacy snapshot, load
-`agent-harness/modes/legacy-discovery/IMPORT-HYGIENE.md` first, not after noticing something suspicious.
+`agent-harness/extensions/legacy-discovery/submodes/IMPORT-HYGIENE.md` first, not after noticing something suspicious.
 
 ## Core Moves
 
@@ -110,9 +110,9 @@ implementation-shaping constraint (`LD-02-026`).
 
 ## Outputs
 
-- App-scoped: `harness-data/artifacts/legacy/apps/<legacy-app-slug>/` — `INVENTORY.md`, `SOURCE-MAP.md`,
+- App-scoped: `harness-data/extensions/legacy-discovery/apps/<legacy-app-slug>/` — `INVENTORY.md`, `SOURCE-MAP.md`,
   `findings/`.
-- Cross-system: `harness-data/artifacts/legacy/cross-system/` — `SUMMARY.md`, `CONTRACTS.md`, `findings/`,
+- Cross-system: `harness-data/extensions/legacy-discovery/cross-system/` — `SUMMARY.md`, `CONTRACTS.md`, `findings/`,
   `REWRITE-READINESS.md`.
 - Questions registry rows (`Q-<APP>-NNNN`, `CSQ-NNNN`, `CSP-NNNN`) in `harness-data/artifacts/questions/`.
 - Candidate Use Cases, Ideas, direct Specs, and Harness Improvements, routed rather than drafted here except
@@ -142,6 +142,7 @@ unresolved, and enriches `QUALITY.md`'s `## Discovered` section only once the fi
 | LD-01-110 | MUST capture the rewrite-facing conclusion when the evidence clearly establishes one, not only the local implementation fact that produced it. |
 | LD-01-115 | MUST capture not only factual legacy behavior but also any material target decisions the evidence leaves unresolved, including latent forks recognized through engineering judgment, not only direct source conflict. |
 | LD-01-120 | MUST treat changing source-map workflow or status rules, and starting cross-system synthesis, as additional high-impact actions under `COR-05-010`'s checkpoint, on top of the universal list in `COR-05-020`. |
+| LD-01-130 | MUST write all Legacy Discovery artifacts (inventories, source maps, findings, summaries, contracts, restart data) only under `harness-data/extensions/legacy-discovery/`. The pre-migration `harness-data/artifacts/legacy/` tree is an explicitly temporary, read-only bridge until `IMPROVEMENT-0149` migrates it; work MAY read it for continuity but MUST NOT create, update, move, or link any artifact there. `IMPROVEMENT-0150` removes the bridge. |
 | LD-02-010 | MAY include, as other outputs, a candidate `harness-data/artifacts/specs/active/SPEC-*.md` (per `LD-01-080`'s exception) and Harness Improvement candidates. |
 | LD-02-020 | A Legacy Finding's evidence MAY produce a candidate `harness-data/artifacts/ideas/active/IDEA-*.md` when it states a future/roadmap direction rather than an unresolved fork — apply `COR-01-110`'s test. Ideas spun off from a *resolved* Question are governed by `QUESTIONS.md`'s `QST-07-020-v1` instead. |
 | LD-02-021 | MUST note a `LD-02-020` candidate Idea in the originating finding's `## Candidate Artifacts`. |
@@ -149,7 +150,7 @@ unresolved, and enriches `QUALITY.md`'s `## Discovered` section only once the fi
 | LD-02-025 | SHOULD prefer candidate Use Cases or Ideas before direct candidate Specs when a finding primarily shapes behavior, actor workflow, or future direction. |
 | LD-02-026 | A direct candidate Spec SHOULD be named only when the evidence already defines a concrete standalone technical contract, proof surface, or implementation-shaping constraint that is not merely downstream of an expected Use Case or Idea. |
 | LD-02-030 | MUST NOT draft a Use Case in Legacy Discovery — once a Legacy Finding is strong enough (`LD-01-070`), route to Refining (`/create-use-case`) to create the `UC-*.md`. |
-| LD-03-010 | MUST store each finding as its own file, using `agent-harness/templates/LEGACY-FINDING-template.md` as-is: `harness-data/artifacts/legacy/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` for cross-system findings. |
+| LD-03-010 | MUST store each finding as its own file, using `agent-harness/extensions/legacy-discovery/templates/LEGACY-FINDING-template.md` as-is: `harness-data/extensions/legacy-discovery/apps/<app-slug>/findings/active/<LF-ID>.md` for app-scoped findings, `harness-data/extensions/legacy-discovery/cross-system/findings/active/<LF-ID>.md` for cross-system findings. |
 | LD-03-020 | MUST follow the existing `LF-<APP>-NNNN` convention for IDs, numbered once per app (or `LF-CROSS-NNNN` for cross-system). |
 | LD-03-021 | An `LF-*` ID MUST NOT be reused, even after a finding moves or is merged. |
 | LD-03-030 | MUST move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`, or `rejected`; findings with `status: draft` or `status: reviewed` stay in `findings/active/`. |

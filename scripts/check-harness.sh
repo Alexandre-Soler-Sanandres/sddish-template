@@ -47,17 +47,24 @@ if [[ -d $ah ]]; then
     fail=1
   fi
 
-  # 4. entry-point manifest completeness: entrypoints.yaml <-> the three
-  #    wrapper layers, name-for-name
+  # 4. entry-point manifest completeness: every UNCONDITIONED entrypoints.yaml
+  #    entry has all three wrappers, and every wrapper has a manifest entry.
+  #    Conditioned entries (`condition: extension:<name>`) may legitimately have
+  #    no wrappers when the extension is disabled — check 5 validates those.
   manifest="$ah/entrypoints.yaml"
   if [[ -f $manifest ]]; then
-    names=$(grep -oE '^[[:space:]]*- name: [a-z0-9-]+' "$manifest" | awk '{print $3}' | sort)
-    for n in $names; do
+    uncond=$(awk '
+      /^[[:space:]]*- name:[[:space:]]/ { name=$3; cond=0 }
+      /^[[:space:]]*condition:[[:space:]]*extension:/ { cond=1 }
+      /^[[:space:]]*body:[[:space:]]*\|/ { if (name && !cond) print name; name="" }
+    ' "$manifest")
+    for n in $uncond; do
       [[ -f "$repo/.claude/skills/harness/$n/SKILL.md" ]] || { echo "manifest: missing .claude wrapper for '$n'" >&2; fail=1; }
       [[ -f "$repo/.agents/skills/harness/$n/SKILL.md" ]] || { echo "manifest: missing .agents wrapper for '$n'" >&2; fail=1; }
       [[ -f "$repo/.github/agents/$n.agent.md" ]] || { echo "manifest: missing .github wrapper for '$n'" >&2; fail=1; }
     done
     for d in "$repo"/.claude/skills/harness/*/; do
+      [[ -d $d ]] || continue
       n=$(basename "$d")
       grep -qE "^[[:space:]]*- name: $n\$" "$manifest" || { echo "wrapper '$n' has no entrypoints.yaml entry" >&2; fail=1; }
     done
@@ -74,6 +81,11 @@ if [[ -d $ah ]]; then
     tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT
     mkdir -p "$tmp/agent-harness"
     cp "$manifest" "$tmp/agent-harness/entrypoints.yaml"
+    # carry the project profile so extension-gated entry points resolve the same way
+    if [[ -f "$repo/harness-data/HARNESS-PROFILE.yaml" ]]; then
+      mkdir -p "$tmp/harness-data"
+      cp "$repo/harness-data/HARNESS-PROFILE.yaml" "$tmp/harness-data/HARNESS-PROFILE.yaml"
+    fi
     for layer in .claude/skills/harness .agents/skills/harness .github/agents; do
       [[ -e "$repo/$layer" ]] && { mkdir -p "$tmp/$(dirname "$layer")"; cp -r "$repo/$layer" "$tmp/$layer"; }
     done

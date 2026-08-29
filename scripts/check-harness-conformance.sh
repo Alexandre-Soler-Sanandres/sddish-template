@@ -163,9 +163,14 @@ done
 section "Lifecycle skeleton and status vocabulary"
 # ---------------------------------------------------------------------------
 skel_fail=0
-for d in adrs ideas implementation-plans improvements legacy questions reviews specs tasks transcripts use-cases; do
+for d in adrs ideas implementation-plans improvements questions reviews specs tasks transcripts use-cases; do
   [ -d "harness-data/artifacts/$d" ] || { fail "missing lifecycle folder: harness-data/artifacts/$d"; skel_fail=1; }
 done
+# Legacy Discovery is an optional Extension: its artifact root exists only when enabled.
+if [ -f harness-data/HARNESS-PROFILE.yaml ] && grep -qE '^[[:space:]]*legacy_discovery:[[:space:]]*enabled' harness-data/HARNESS-PROFILE.yaml; then
+  [ -d harness-data/extensions/legacy-discovery ] || [ -d harness-data/artifacts/legacy ] \
+    || { fail "legacy_discovery enabled but no harness-data/extensions/legacy-discovery/ (or bridge) present"; skel_fail=1; }
+fi
 # v2 uses a single Questions registry file (IMPROVEMENT-0144); the v1 three-file
 # split (QUESTIONS-OPEN/RESOLVED/DISCARDED.md) is gone.
 if [ -d harness-data/artifacts/questions ]; then

@@ -17,11 +17,29 @@ manifest="$repo/agent-harness/entrypoints.yaml"
 [[ -f $manifest ]] || { echo "no manifest: $manifest" >&2; exit 1; }
 
 python3 - "$repo" "$manifest" <<'PY'
-import os, sys, yaml
+import os, re, sys, yaml
 
 repo, manifest = sys.argv[1], sys.argv[2]
 doc = yaml.safe_load(open(manifest))
 eps = doc["entrypoints"]
+
+# Project profile: which optional Extensions are enabled? Absent file / key -> disabled.
+profile_path = os.path.join(repo, "harness-data", "HARNESS-PROFILE.yaml")
+enabled_ext = set()
+if os.path.isfile(profile_path):
+    prof = yaml.safe_load(open(profile_path)) or {}
+    for k, v in (prof.get("extensions") or {}).items():
+        if str(v).strip() == "enabled":
+            enabled_ext.add(k)
+
+def gated_out(ep):
+    cond = ep.get("condition")
+    if not cond:
+        return False
+    m = re.match(r"\s*extension\s*:\s*([A-Za-z0-9_-]+)\s*$", str(cond))
+    return bool(m) and m.group(1) not in enabled_ext
+
+eps = [ep for ep in eps if not gated_out(ep)]
 
 def write(path, text):
     os.makedirs(os.path.dirname(path), exist_ok=True)

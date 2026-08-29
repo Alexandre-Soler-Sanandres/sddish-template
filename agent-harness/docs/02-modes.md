@@ -42,7 +42,7 @@ gates, approvals, validation, loading, traceability, and safety boundaries live 
 | Refining | `/create-use-case`, `/create-spec`, `/create-tasks` | Derive a Use Case, Spec, or Tasks from their upstream source |
 | Planning-Implementation | `/plan-task`, `/plan-spec`, `/plan-use-case` | Plan and gate code changes |
 | Implementing | `/execute-plan` | Execute a `ready` plan |
-| Discovering-Legacy | `/legacy-discovery` | Extract evidence from existing code |
+| Discovering-Legacy | `/legacy-discovery` | Extract evidence from existing code (Legacy Discovery Extension — active only when enabled in `HARNESS-PROFILE.yaml`) |
 | Improving-Harness | `/improve-harness` | Change the harness itself |
 
 ---
@@ -82,8 +82,9 @@ shared Validation procedure ([04-shared-procs.md](04-shared-procs.md)) as its cl
 
 ## Discovering-Legacy
 
-Extracts rewrite-quality evidence from an existing project — evidence, not authority. See
-`agent-harness/modes/DISCOVERING-LEGACY.md`.
+Extracts rewrite-quality evidence from an existing project — evidence, not authority. Provided by the optional
+Legacy Discovery Extension; base context never loads it unless `harness-data/HARNESS-PROFILE.yaml` sets
+`extensions.legacy_discovery: enabled`. See `agent-harness/extensions/legacy-discovery/EXTENSION.md`.
 
 ## Improving-Harness
 

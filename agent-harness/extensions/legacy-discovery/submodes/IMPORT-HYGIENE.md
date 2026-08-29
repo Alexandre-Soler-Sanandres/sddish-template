@@ -34,7 +34,7 @@ begins on a fresh import, not a separate entry point of its own.
    contain secrets (`LD-07-020`).
 3. Never remove or rewrite imported artifacts during normal discovery (`LD-07-030`).
 4. Before committing an imported snapshot or import-hygiene change, verify nested Git metadata:
-   `find harness-data/artifacts/legacy/apps/<legacy-app-slug> -path '*/.git' -type d` — expected result is no
+   `find harness-data/extensions/legacy-discovery/apps/<legacy-app-slug> -path '*/.git' -type d` — expected result is no
    output (`LD-07-040`). Surface any hit to the user before proceeding (`LD-07-041`).
 5. When import noise needs a user decision, add a Findings entry for the risk and a Questions entry asking
    whether to remove, quarantine, or leave it as-is; the user's response authorizes cleanup (`LD-07-050`).
@@ -62,12 +62,12 @@ quarantine it.
 | LD-07-010 | MUST NOT open the contents of `.env`, `.env.*`, `.env.local`, `secrets/`, `*.key`, `*.pem`, password files, token files, logs, caches, virtual environments, coverage output, test artifacts, generated metadata, egg-info, or build output during normal discovery — inventory them by path only. |
 | LD-07-020 | MUST NOT open log contents except in an explicit log or security discovery slice, after confirming they do not contain secrets. |
 | LD-07-030 | MUST NOT remove or rewrite imported artifacts during normal discovery. |
-| LD-07-040 | MUST verify nested Git metadata before committing an imported snapshot or import-hygiene change: `find harness-data/artifacts/legacy/apps/<legacy-app-slug> -path '*/.git' -type d` — expected result is no output. |
+| LD-07-040 | MUST verify nested Git metadata before committing an imported snapshot or import-hygiene change: `find harness-data/extensions/legacy-discovery/apps/<legacy-app-slug> -path '*/.git' -type d` — expected result is no output. |
 | LD-07-041 | MUST surface any hit from `LD-07-040`'s check to the user before proceeding. |
 | LD-07-050 | MUST add a FINDINGS entry for the risk and a QUESTIONS entry asking whether to remove, quarantine, or leave it as-is, when import noise needs a user decision; the user's response authorizes cleanup. |
 | LD-07-060 | MUST load this file before inventorying or reading any file in a freshly imported legacy snapshot, not after noticing something suspicious. Not required for discovery work that doesn't touch a fresh import. |
 
 ## Reference Files
 
-Load per `agent-harness/modes/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
+Load per `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
 files of its own.

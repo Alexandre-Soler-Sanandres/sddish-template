@@ -23,14 +23,14 @@ every app in that scope is `app-local-complete` (`LDC-02-010`).
 ## When To Use
 
 Load this file when running Cross-System Synthesis — see the Discovery Phases table in
-`agent-harness/modes/DISCOVERING-LEGACY.md`.
+`agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`.
 
 ## Workflow Paths
 
 Cross-system synthesis goes under:
 
 ```text
-harness-data/artifacts/legacy/cross-system/
+harness-data/extensions/legacy-discovery/cross-system/
   SUMMARY.md
   CONTRACTS.md
   findings/
@@ -120,10 +120,10 @@ stable target-relevant findings to reference docs and leave legacy drift in lega
 
 ## Outputs
 
-- `harness-data/artifacts/legacy/cross-system/SUMMARY.md`
-- `harness-data/artifacts/legacy/cross-system/CONTRACTS.md`
-- `harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` (or `findings/archive/`)
-- `harness-data/artifacts/legacy/cross-system/REWRITE-READINESS.md`
+- `harness-data/extensions/legacy-discovery/cross-system/SUMMARY.md`
+- `harness-data/extensions/legacy-discovery/cross-system/CONTRACTS.md`
+- `harness-data/extensions/legacy-discovery/cross-system/findings/active/<LF-ID>.md` (or `findings/archive/`)
+- `harness-data/extensions/legacy-discovery/cross-system/REWRITE-READINESS.md`
 - `CSQ-*`/`CSP-*` rows in the unified Questions registry
 
 ## Examples
@@ -136,14 +136,14 @@ and links a `CSP-*` row noting the parity gap still needs executable proof.
 
 | ID | Rule |
 | --- | --- |
-| LDC-01-010 | MUST start cross-system synthesis by creating `harness-data/artifacts/legacy/cross-system/SUMMARY.md` from `agent-harness/templates/CROSS-SYSTEM-SUMMARY-template.md`. The summary is the cross-system restart point and working plan: it names the active synthesis scope, entry criteria, slice order, artifact routing, and next action. |
+| LDC-01-010 | MUST start cross-system synthesis by creating `harness-data/extensions/legacy-discovery/cross-system/SUMMARY.md` from `agent-harness/extensions/legacy-discovery/templates/CROSS-SYSTEM-SUMMARY-template.md`. The summary is the cross-system restart point and working plan: it names the active synthesis scope, entry criteria, slice order, artifact routing, and next action. |
 | LDC-01-015 | At creation time (LDC-01-010), SUMMARY.md MUST have active_synthesis_scope and the Entry Criteria table filled in for every in-scope app, and a "Slice 0: Cross-system plan and scope setup" row present in the Working Discovery Plan with status done or next. This is a minimum-at-creation floor, distinct from LDC-01-020's ceiling on speculative placeholder content once synthesis is underway. |
 | LDC-01-018 | MUST NOT copy generic slice, block, roundtrip, or closeout-checklist process policy from `CROSS-SYSTEM.md` into `SUMMARY.md`. |
 | LDC-01-020 | MUST NOT create `CONTRACTS.md`, `findings/` entries, Questions-registry rows (`CSQ-*`/`CSP-*`), or `REWRITE-READINESS.md` speculatively as empty placeholders — create them only when a slice produces evidence that needs them, and cite app-scoped artifacts and source evidence instead of copying app-local detail. |
 | LDC-01-030 | Cross-system artifacts are connected, not independent: findings SHOULD feed `CONTRACTS.md`, the Questions registry, and `REWRITE-READINESS.md` by citation. |
 | LDC-01-031 | Parity rows and readiness blockers SHOULD point back to the finding IDs and proof/question IDs they depend on. |
 | LDC-01-040 | MUST use the proof/parity IDs (`CSP-*`) defined in the Questions registry as the canonical IDs. |
-| LDC-01-050 | MUST continue new discovery in the scoped structure unless an explicit Improvement or cleanup task migrates the older flat files under `harness-data/artifacts/legacy/` (legacy layout debt). |
+| LDC-01-050 | MUST continue new discovery in the scoped structure under `harness-data/extensions/legacy-discovery/`; older flat files under the read-only bridge `harness-data/artifacts/legacy/` are migrated only by `IMPROVEMENT-0149`, never edited in place (`LD-01-130`). |
 | LDC-01-060 | `REWRITE-READINESS.md` SHOULD reference those existing proof IDs directly instead of inventing a second blocker-ID namespace. |
 | LDC-02-010 | MUST NOT start cross-system synthesis until every app in the active synthesis scope is `app-local-complete`. |
 | LDC-02-011 | MUST NOT infer the active synthesis scope — it must be stated explicitly. |
@@ -178,5 +178,5 @@ and links a `CSP-*` row noting the parity gap still needs executable proof.
 
 ## Reference Files
 
-Load per `agent-harness/modes/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
+Load per `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
 files of its own.

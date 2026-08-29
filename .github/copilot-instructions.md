@@ -6,14 +6,14 @@ for GitHub Copilot.
 
 ## Always Follow
 
-- `agent-harness/CORE.md` — universal harness contract and Rules Map; load paired CORE rules per its map
+- `agent-harness/CORE.md` — universal harness contract; its `## Rules` section carries every `COR-*` rule
 - `agent-harness/OUTPUTS.md` — artifact formats, naming conventions, folder structure
-- The active Mode Workflow under `agent-harness/modes/`
+- The active Mode Workflow under `agent-harness/modes/` (or `agent-harness/extensions/<name>/` for an enabled Extension)
 - The explicitly referenced artifact
 
-When a required harness file has a paired rules file or grouped rules directory under `agent-harness/rules/`, load
-the source file's Rules Map and the applicable paired rules. If the relevant rule group is unclear, or the work is
-editing/auditing rules, load every paired rules group for that source file.
+Every harness source file carries its own enforceable rules in a `## Rules` section in the same file; loading the
+file loads its rules. There is no separate rules tree. An Extension under `agent-harness/extensions/<name>/` is
+loaded only when `harness-data/HARNESS-PROFILE.yaml` sets `extensions.<name>: enabled`.
 
 ## Modes
 
@@ -26,13 +26,13 @@ explicit user request.
 | Refining | `agent-harness/modes/REFINING.md` | Derive a Spec from a Use Case, or Tasks from a Spec (or directly, per the risk-tier cascade, when a layer is classified unnecessary) |
 | Planning-Implementation | `agent-harness/modes/PLANNING-IMPLEMENTATION.md` | Plan and gate code changes |
 | Implementing | `agent-harness/modes/IMPLEMENTING.md` | Execute a ready lane-authorized execution contract |
-| Discovering-Legacy | `agent-harness/modes/DISCOVERING-LEGACY.md` | Extract evidence from existing code |
+| Discovering-Legacy | `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md` (Extension — active only when `HARNESS-PROFILE.yaml` enables `legacy_discovery`) | Extract evidence from existing code |
 | Improving-Harness | `agent-harness/modes/IMPROVING-HARNESS.md` | Change the harness itself |
 
 ## Context Checkpoint
 
 At the start of harness work, load `AGENTS.md`, `CORE.md`, `OUTPUTS.md`, the active Mode Workflow, and the explicitly
-referenced artifact, plus paired rules required by their Rules Maps where present. After a resume or context
+referenced artifact — each file's own `## Rules` section comes with it. After a resume or context
 compaction, repeat the checkpoint before the next high-impact action. See `agent-harness/CORE.md` for the full
 checkpoint and high-impact action list.
 

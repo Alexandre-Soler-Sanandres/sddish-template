@@ -277,6 +277,23 @@ The harness scripts assume:
 
 No other runtime, package manager, or network access is required.
 
+### Extensions
+
+An Extension is an optional capability tree under `agent-harness/extensions/<name>/` with its own Mode
+Workflow, submodes, templates, co-located rules, guide, and entry point. Legacy Discovery
+(`agent-harness/extensions/legacy-discovery/`) is the first one.
+
+- **Enable:** set `extensions.<name>: enabled` in `harness-data/HARNESS-PROFILE.yaml` (see
+  `agent-harness/templates/HARNESS-PROFILE.example.yaml`), then run `scripts/generate-harness-wrappers.sh`.
+  A disabled or absent Extension is invisible to context loading, the Catalog, and wrapper generation
+  (`COR-03-120`); its entry point is not generated.
+- **Disable / remove:** flip the key to `disabled` (or delete it) and regenerate. Only safe when the
+  repository has no active work depending on the Extension. Remove the tree entirely only when its
+  artifact root and any bridge are empty — see the Extension's own `EXTENSION.md`.
+
+The canonical template ships every Extension's files plus example configuration, but no live profile, so the
+documented default is `disabled` and adopters enable what they need without any network install.
+
 ### After setup (both options)
 
 These are the details people most often need once the basic files exist:
@@ -330,6 +347,7 @@ When in doubt:
 | `agent-harness/**` `## Rules` sections | Universal enforceable Rules, co-located in each source file — do not modify for project-specific needs |
 | `agent-harness/playbooks/` | Universal — reusable procedures owned by the harness |
 | `agent-harness/templates/*.md` | Universal lean scaffolds — do not modify for project-specific needs |
+| `agent-harness/extensions/**/*.md` | Optional capability trees (Mode Workflow, submodes, templates, rules, guide) gated by `harness-data/HARNESS-PROFILE.yaml` — do not modify for project-specific needs |
 | `harness-data/CATALOG.md` | Project-specific — live state, not part of the template |
 | `harness-data/RUN-LOG.md` | Optional — temporary operational trace the agent may use for interrupted or higher-risk work |
 | `REPO-MAP.md` | Optional — structural context for large repos or major subtrees |

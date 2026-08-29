@@ -23,7 +23,7 @@ cross-system finding IDs, question IDs, proof IDs, parity rows, and readiness bl
 ## When To Use
 
 Load this file once app-local discovery and/or cross-system synthesis are complete and discovery moves toward
-this gate — see the Discovery Phases table in `agent-harness/modes/DISCOVERING-LEGACY.md`.
+this gate — see the Discovery Phases table in `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`.
 
 ## Workflow Paths
 
@@ -66,7 +66,7 @@ evidence into Use Cases, Specs, Tasks, or Implementation Planning, in this order
 ## Routing
 
 Not applicable — normalization does not route findings or make target decisions; it hands off to Question
-Clarification once complete (`agent-harness/modes/legacy-discovery/CLARIFICATION.md`).
+Clarification once complete (`agent-harness/extensions/legacy-discovery/submodes/CLARIFICATION.md`).
 
 ## Outputs
 
@@ -104,5 +104,5 @@ a pointer, and preserving both files' original question-ID citations.
 
 ## Reference Files
 
-Load per `agent-harness/modes/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
+Load per `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
 files of its own.

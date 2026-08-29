@@ -23,7 +23,7 @@ than needing this gate to close first (`LDG-04-120`).
 ## When To Use
 
 Load this file once Artifact Normalization is complete — see the Discovery Phases table in
-`agent-harness/modes/DISCOVERING-LEGACY.md`.
+`agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`.
 
 ## Workflow Paths
 
@@ -111,5 +111,5 @@ with the settled retry policy.
 
 ## Reference Files
 
-Load per `agent-harness/modes/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
+Load per `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`'s `## Reference Files` table — this file adds no reference
 files of its own.

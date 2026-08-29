@@ -48,7 +48,7 @@ Procedure Guide, not a mode — see [docs/01-core-principles.md](docs/01-core-pr
 | Refining | Derive a Spec from a Use Case, or Tasks from a Spec (or directly, per the risk-tier cascade, when a layer is classified unnecessary) |
 | Planning-Implementation | Plan and gate code changes |
 | Implementing | Execute a `ready` plan |
-| Discovering-Legacy | Extract evidence from existing code |
+| Discovering-Legacy | Extract evidence from existing code — provided by the optional Legacy Discovery Extension (`agent-harness/extensions/legacy-discovery/`), active only when `harness-data/HARNESS-PROFILE.yaml` enables it |
 | Improving-Harness | Change the harness itself |
 
 ## Repository Structure
@@ -137,7 +137,7 @@ smallest useful first pass and the same guide for full adoption instructions.
 | [docs/06-context-management.md](docs/06-context-management.md) | Use this when deciding what to load into context and when to use `CATALOG.md`, `SUMMARY.md`, or `RUN-LOG.md` |
 | [docs/07-adoption.md](docs/07-adoption.md) | Use this when adopting the harness in a new or existing repository |
 | [docs/08-glossary.md](docs/08-glossary.md) | Use this when a harness term is unclear |
-| [docs/09-legacy-applications.md](docs/09-legacy-applications.md) | Use this for practical legacy discovery work in an existing codebase |
+| [extensions/legacy-discovery/GUIDE.md](extensions/legacy-discovery/GUIDE.md) | Use this for practical legacy discovery work in an existing codebase |
 | [docs/10-guides.md](docs/10-guides.md) | Use this to understand project-specific setup and operating guides under `harness-data/guides/` |
 | [docs/11-project-playbooks.md](docs/11-project-playbooks.md) | Use this to understand project-specific scoped procedures under `harness-data/playbooks/` |
 

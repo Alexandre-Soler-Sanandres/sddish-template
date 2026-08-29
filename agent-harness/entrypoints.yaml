@@ -178,11 +178,11 @@ entrypoints:
   - name: legacy-discovery
     description: Enter Discovering-Legacy mode to extract evidence from existing code.
     kind: mode
-    follows: [agent-harness/modes/DISCOVERING-LEGACY.md]
+    follows: [agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md]
     input: legacy-path
     condition: extension:legacy_discovery
     body: |
       Enter Discovering-Legacy mode.
-      Follow agent-harness/modes/DISCOVERING-LEGACY.md.
+      Follow agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md.
       Legacy path to analyze: {input}
       Do not modify legacy source code or implement anything. Extract findings and candidate artifacts only.
