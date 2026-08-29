@@ -8,7 +8,7 @@
 | COR-01-030 | Universal | MUST NOT expose secrets. |
 | COR-01-040 | Universal | MUST NOT run commands that are irreversible or have a wide blast radius (data loss, schema changes, production state changes, force operations) without explicit approval. |
 | COR-01-050 | Universal | MUST NOT implement from Partnering mode. |
-| COR-01-060 | Universal | MUST NOT implement before a `ready` Implementation Plan exists. |
+| COR-01-060 | Universal | MUST NOT implement without the authorized execution contract required by `shared-procs/WORK-LANES.md`: a stated Fast micro-plan, approved Standard Change Spec, or approved Assured Execution Plan. |
 | COR-01-070 | Universal | MUST keep traceability links aligned across Use Cases, Specs, Tasks, Plans, and Reviews. |
 | COR-01-080 | Universal | MUST NOT retroactively rewrite artifacts in `done/` or `archive/` folders when paths, structure, or conventions change elsewhere in the harness. See `agent-harness/systems/LIFECYCLE-FOLDERS.md` for how this rule holds across every artifact type's folder shape. |
 | COR-01-090 | Universal | MUST NOT infer approval from a conversation's tone or direction — any status change or action requiring user approval needs the user's explicit confirmation instead. |

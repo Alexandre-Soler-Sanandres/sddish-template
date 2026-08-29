@@ -39,3 +39,10 @@ mechanisms — per `COR-03-048`, this is normal context expansion, not part of t
 | Question Lifecycle | `agent-harness/systems/QUESTION-LIFECYCLE.md` | Raising, carrying forward, or resolving a Question that other artifacts cite. |
 | ADR Authority | `agent-harness/systems/ADR-AUTHORITY.md` | Citing, re-checking, or superseding an ADR. |
 | Lifecycle Folders | `agent-harness/systems/LIFECYCLE-FOLDERS.md` | Moving an artifact between lifecycle subfolders, or judging whether a folder move is actually due. |
+
+## Work Lanes
+
+Classify new material work through `agent-harness/shared-procs/WORK-LANES.md` before planning or execution.
+Fast work uses an in-session micro-plan, Standard work uses an approved Change Spec, and Assured work uses the
+full behavior-contract and execution-plan structure. Active v1 UC/Spec/Task/Plan chains remain under their
+recorded v1 contract until reopened or explicitly migrated.
