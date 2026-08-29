@@ -42,25 +42,3 @@ metadata.
 | OUT-04-020 | A lifecycle transition MUST update frontmatter status in place. |
 | OUT-08-010 | Questions MUST be rows in the single registry and MUST NOT use status-specific files or folders. |
 | OUT-09-010 | Canonical internal relationship fields MUST contain IDs, not paths or handwritten reverse links. |
-
-### Legacy (v1)
-
-Retained verbatim from the pre-v2 paired rules for active v1 artifact chains during the v2 cutover
-(`IMPROVEMENT-0148`–`0150`). The v2 rows above are authoritative for all new work; where a `-v1` row conflicts
-with a v2 row (notably folder-move lifecycle vs frontmatter-in-place), the v2 row governs. These `-v1` rows are
-retired by `IMPROVEMENT-0150`. IDs carry a `-v1` suffix.
-
-| ID | Rule |
-| --- | --- |
-| OUT-01-010-v1 | All lifecycle artifacts MUST use YAML frontmatter for metadata and Markdown for the body. |
-| OUT-02-010-v1 | `agent-harness/README.md` is the harness overview, not a lifecycle artifact. |
-| OUT-02-020-v1 | MUST NOT create directory-scoped README files as harness artifacts — use mode files, templates, `CATALOG.md`, and scoped restart artifacts (`SOURCE-MAP.md`, `SUMMARY.md`) for harness guidance instead. |
-| OUT-03-010-v1 | Artifact filenames MUST follow the canonical naming patterns in `OUTPUTS.md`'s `## File Naming Conventions`. |
-| OUT-03-020-v1 | IDs MUST remain stable even if filenames or folders change. |
-| OUT-04-010-v1 | New artifacts MUST be created in `active/` unless a mode explicitly defines a different starting location. |
-| OUT-04-020-v1 | MUST move artifacts between lifecycle subfolders as their status changes, without renaming the file ID. |
-| OUT-05-010-v1 | For Improvements, `done/` means the approved target changes are applied and the artifact records a `## Validation Result` confirming what was checked. |
-| OUT-06-010-v1 | Legacy Discovery artifacts MUST use the scoped folder structure defined in `OUTPUTS.md`'s `## Legacy Discovery Structure`. |
-| OUT-07-010-v1 | ADRs use `proposed/` / `accepted/` / `archive/` instead of the generic `active/`/`archive/` pair — see `OUTPUTS.md`'s `## Folder Structure`. |
-| OUT-08-010-v1 | The Questions registry does not use lifecycle subfolders. It is three flat files under `harness-data/artifacts/questions/`; a row's file *is* its status — see `agent-harness/artifact-specs/QUESTIONS.md`. |
-| OUT-09-010-v1 | Change Specs MUST use the common `active/`, `ready/`, `done/`, and `archive/` lifecycle folders. |

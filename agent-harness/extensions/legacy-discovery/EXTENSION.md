@@ -59,15 +59,6 @@ layout: per-app `apps/<slug>/` (`INVENTORY.md`, `SOURCE-MAP.md`, `findings/`), `
 `CONTRACTS.md`, `findings/`, `REWRITE-READINESS.md`), and `imported/<slug>/` for source snapshots. All new
 discovery work writes here (`LD-01-130`).
 
-### Temporary read-only v1 bridge
-
-The pre-migration tree `harness-data/artifacts/legacy/` is an explicitly temporary, **read-only** bridge.
-While the Extension is enabled, discovery MAY read that tree for continuity with in-flight work, but MUST NOT
-create, update, move, or link any artifact there — `LD-01-130` enforces this. `IMPROVEMENT-0149` performs the
-ledgered migration of every bridged record into the v2 root and proves resumability from the v2
-representation; `IMPROVEMENT-0150` then deletes the bridge and every remaining v1-specific Legacy Discovery
-path and `-v1` rule. The bridge is not a permanent compatibility promise.
-
 ## Enabling / disabling / removing
 
 - **Enable:** set `extensions.legacy_discovery: enabled` in `harness-data/HARNESS-PROFILE.yaml`, then
@@ -76,4 +67,4 @@ path and `-v1` rule. The bridge is not a permanent compatibility promise.
   active legacy work that depends on the Extension.
 - **Remove entirely:** delete `agent-harness/extensions/legacy-discovery/` and the profile key. Do this only
   in a repository with no content under `harness-data/extensions/legacy-discovery/` or the
-  `harness-data/artifacts/legacy/` bridge.
+  extension data root.

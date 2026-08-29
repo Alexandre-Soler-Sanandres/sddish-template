@@ -117,7 +117,7 @@ Route stable findings to the appropriate reference doc before closing the slice 
 ## Deferred and Cross-System Questions
 
 (list questions that cannot be answered from app-local evidence; classify by blast radius per
-`agent-harness/artifact-specs/QUESTIONS.md`'s `QST-01-010-v1`: `local`, `cross-artifact`, or `systemic`)
+`agent-harness/artifact-specs/QUESTIONS.md`'s `QST-01-010`: `local`, `cross-artifact`, or `systemic`)
 
 | Question | Classification | Notes |
 | --- | --- | --- |

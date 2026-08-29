@@ -17,6 +17,6 @@ Perform one atomic lifecycle transition after deterministic and semantic promoti
 
 | ID | Rule |
 | --- | --- |
-| PRM-01-010 | Promotion MUST run common schema, link, scope, approval, Question, ADR, evidence, and transition checks once. |
+| PRM-01-010 | Promotion MUST run common schema, link, scope, approval, Question, ADR, evidence, and transition checks once, including no open `changes-requested` or `rejected` Review finding, resolved scope-affecting blockers, and every included or scope-affecting dependency at an accepted status. An unrelated draft or blocked sibling outside a scoped Plan does not block promotion. |
 | PRM-01-020 | Promotion MUST invalidate stale approval when a material change returns executable work to draft. |
 | PRM-01-030 | Promotion MUST perform one atomic status transition only after applicable gates pass. |

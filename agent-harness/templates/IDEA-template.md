@@ -33,5 +33,5 @@ confidence: medium       # low | medium | high
 ## Risk-Tier Classification
 
 (optional — filled in only when `PARTNERING.md`'s `PTN-02-110` classifies this Idea's next step before it is
-promoted in the same action; see `IDEA.md`'s `IDA-05-020` and `shared-procs/RISK-TIER.md`'s `RSK-05-010-v1`/
-`RSK-07-010-v1`)
+promoted in the same action; see `IDEA.md`'s `IDA-05-020` and `shared-procs/RISK-TIER.md`'s `RSK-05-010`/
+`RSK-07-010`)

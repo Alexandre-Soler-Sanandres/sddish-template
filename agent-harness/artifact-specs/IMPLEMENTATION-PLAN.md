@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Implementation Plans are the separately resumable execution contract for Assured work and retained v1 chains.
+Implementation Plans are the separately resumable execution contract for Assured work and Assured chains.
 New Standard work uses the Change Spec's embedded plan steps unless a separate plan has independent lifecycle value.
 
 An Implementation Plan is the schema, grouping logic, and lifecycle gate for the artifact produced by
@@ -142,7 +142,7 @@ an explicit Plan-promotion request.
 | --- | --- |
 | IPL-00-010 | MUST NOT create an Implementation Plan for new Standard work unless a separately resumable execution contract has independent lifecycle value. |
 | IPL-01-010 | SHOULD group Tasks in one step when they belong to the same Spec, are small and tightly related, share a validation strategy, their scopes do not conflict, they produce a coherent reviewable diff, and no high-risk work is involved. |
-| IPL-01-030 | A Plan whose entry skipped any tier (per `shared-procs/RISK-TIER.md`'s cascade) MUST include a `## Risk-Tier Classification` section (`RSK-05-010-v1`). |
+| IPL-01-030 | A Plan whose entry skipped any tier (per `shared-procs/RISK-TIER.md`'s cascade) MUST include a `## Risk-Tier Classification` section (`RSK-05-010`). |
 | IPL-01-031 | MUST NOT omit `IPL-01-030`'s `## Risk-Tier Classification` section regardless of how small the change is. |
 | IPL-01-032 | When no Spec participates, a Plan MUST include a compact `## Behavior Contract` section stating the expected change, preserved behavior, and observable proof. |
 | IPL-01-020 | SHOULD keep Tasks separate when risk is high, validation differs between Tasks, separate commits are needed, review concerns differ, dependencies are unclear, or the change touches database, deployment, security, payment execution, security-critical logic, or domain-critical business rules. |

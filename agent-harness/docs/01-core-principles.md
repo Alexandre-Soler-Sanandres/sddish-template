@@ -30,7 +30,7 @@ The harness addresses all of these through explicit modes, bounded artifacts, an
 
 The central principle is: **no code without a bounded plan and the authorization required by
 `shared-procs/WORK-LANES.md`.** Fast work uses a stated micro-plan; Standard work an approved Change Spec; and
-Assured work an approved Execution Plan. Active v1 chains retain their recorded Risk-Tier and Plan semantics.
+Assured work an approved Execution Plan.
 
 This creates a clear dependency chain:
 
@@ -45,8 +45,8 @@ Voice / Text / Legacy Code
 ```
 
 Only a lane’s required durable contract must persist. Secondary artifacts exist when they add independent
-behavioral authority, ownership/lifecycle, provenance, backlog, findings, or handoff value. The v1 Risk-Tier
-cascade remains a compatibility procedure for active v1 chains.
+behavioral authority, ownership/lifecycle, provenance, backlog, findings, or handoff value. The Risk-Tier
+cascade remains a compatibility procedure for Assured chains.
 
 ## Harness File Taxonomy
 

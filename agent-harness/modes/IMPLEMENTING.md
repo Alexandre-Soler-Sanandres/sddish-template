@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Implementing mode executes an approved Standard Change Spec or a `ready` Assured/v1 Implementation Plan. Default
+Implementing mode executes an approved Standard Change Spec or a `ready` Assured Implementation Plan. Default
 execution is one plan step at a time.
 
 ## Mode Story
@@ -20,7 +20,7 @@ not a judgment call to push through.
 
 ## When To Use
 
-Use Implementing only once a Standard Change Spec exists at status `ready`, or an Assured/v1 Implementation Plan
+Use Implementing only once a Standard Change Spec exists at status `ready`, or an Assured Implementation Plan
 exists at status `ready` and its included Tasks are `ready` (`IMPL-01-010`/`IMPL-01-020`).
 
 ## Workflow Paths
@@ -43,7 +43,7 @@ only says when to trigger the change, not what the change requires.
 2. Execute one plan step at a time by default (`IMPL-03-020`), following the plan without deviating from approved
    scope (`IMPL-03-010`).
 3. Set a Change Spec to `in-progress` when execution begins and `done` when all embedded steps are complete. For
-   Assured/v1 work, set Task status to `in-progress` when starting a Task, `done` when complete; set Plan status to `in-progress`
+   Assured work, set Task status to `in-progress` when starting a Task, `done` when complete; set Plan status to `in-progress`
    when execution begins, `done` when all steps are complete, per `systems/STATUS-TRANSITIONS.md`'s `STT-01-020`
    (`IMPL-03-150`).
 4. Keep the diff focused on the current step (`IMPL-03-050`) and respect allowed/forbidden paths from the execution
@@ -84,8 +84,8 @@ criteria, and summarizes the result before moving to step 3.
 
 | ID | Rule |
 | --- | --- |
-| IMPL-01-010 | A Standard Change Spec or an Assured/v1 Implementation Plan MUST exist at status `ready`. |
-| IMPL-01-020 | All included Tasks MUST be at status `ready` when the execution contract is an Assured/v1 Implementation Plan. |
+| IMPL-01-010 | A Standard Change Spec or an Assured Implementation Plan MUST exist at status `ready`. |
+| IMPL-01-020 | All included Tasks MUST be at status `ready` when the execution contract is an Assured Implementation Plan. |
 | IMPL-01-021 | `IMPL-01-020`'s check MUST be re-verified per Task at the point Implementing starts that specific Task, not only once at the Plan's own start — since `systems/STATUS-TRANSITIONS.md`'s `STT-01-010` downward reset can reset an included Task to `draft` after the Plan was set `ready` without revoking the Plan's own `ready` status. A Task found off `ready` at that point blocks Implementing from acting on it regardless of the Plan's own status. |
 | IMPL-01-030 | Safety and risk rules MUST be satisfied. |
 | IMPL-02-010 | MUST write a gate-check line to `harness-data/RUN-LOG.md` before the first file mutation of an execution step, recording the execution-contract ID, status, and allowed paths. |

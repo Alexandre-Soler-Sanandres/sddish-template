@@ -32,7 +32,7 @@ the universal and output rules the same way. There is no separate rules tree.
 
 **Rules section**
 The `## Rules` section a source file carries directly, holding its ID'd enforceable rule rows. Larger files may
-split it into `###` subsections by concern (see `CORE.md`). A superseded pre-v2 rule set retained for the
+split it into `###` subsections by concern (see `CORE.md`). A superseded earlier rule set retained for the
 migration window sits in a `### Legacy (v1)` subsection with `-v1`-suffixed IDs.
 
 **Template**
@@ -94,10 +94,10 @@ The Standard-lane durable execution contract. It combines behavior, scope, non-g
 approval, and executable steps in one artifact.
 
 **Planning-Implementation**
-The Assured/v1 planning mode that produces a separately resumable Implementation Plan where that contract is required.
+The Assured planning mode that produces a separately resumable Implementation Plan where that contract is required.
 
 **Implementing**
-Mode that executes a ready lane-authorized execution contract: a Fast micro-plan, Standard Change Spec, or Assured/v1 Implementation Plan.
+Mode that executes a ready lane-authorized execution contract: a Fast micro-plan, Standard Change Spec, or Assured Implementation Plan.
 
 **Discovering-Legacy**
 Mode for analyzing existing code and documentation to derive artifacts without implementing — the legacy project

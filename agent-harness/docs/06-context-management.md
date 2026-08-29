@@ -59,7 +59,7 @@ Every harness source file carries its own enforceable rules in a `## Rules` sect
 source file loads its rules — there is no separate rules tree and no Rules Map to consult.
 
 - larger files split `## Rules` into `###` subsections by concern; `CORE.md` groups the universal rules this way
-- a pre-v2 rule set kept for the migration window lives in a `### Legacy (v1)` subsection with `-v1`-suffixed IDs
+- a earlier rule set kept for the migration window lives in a `### Legacy (v1)` subsection with `-v1`-suffixed IDs
 - when the work edits, moves, cites, or audits rules, read the whole `## Rules` section of every affected file
 
 On a true Mode transition, reload the initial harness block for the newly active Mode Workflow and current restart

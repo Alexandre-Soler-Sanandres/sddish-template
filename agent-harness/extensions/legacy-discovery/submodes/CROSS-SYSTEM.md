@@ -143,7 +143,7 @@ and links a `CSP-*` row noting the parity gap still needs executable proof.
 | LDC-01-030 | Cross-system artifacts are connected, not independent: findings SHOULD feed `CONTRACTS.md`, the Questions registry, and `REWRITE-READINESS.md` by citation. |
 | LDC-01-031 | Parity rows and readiness blockers SHOULD point back to the finding IDs and proof/question IDs they depend on. |
 | LDC-01-040 | MUST use the proof/parity IDs (`CSP-*`) defined in the Questions registry as the canonical IDs. |
-| LDC-01-050 | MUST continue new discovery in the scoped structure under `harness-data/extensions/legacy-discovery/`; older flat files under the read-only bridge `harness-data/artifacts/legacy/` are migrated only by `IMPROVEMENT-0149`, never edited in place (`LD-01-130`). |
+| LDC-01-050 | MUST continue new discovery in the scoped structure under `harness-data/extensions/legacy-discovery/`. |
 | LDC-01-060 | `REWRITE-READINESS.md` SHOULD reference those existing proof IDs directly instead of inventing a second blocker-ID namespace. |
 | LDC-02-010 | MUST NOT start cross-system synthesis until every app in the active synthesis scope is `app-local-complete`. |
 | LDC-02-011 | MUST NOT infer the active synthesis scope — it must be stated explicitly. |

@@ -40,4 +40,4 @@ checkpoint and high-impact action list.
 
 For new work, do not implement before the authorized execution contract required by
 `agent-harness/shared-procs/WORK-LANES.md` is ready: a stated Fast micro-plan, an approved Standard Change Spec,
-or an approved Assured Execution Plan. Active v1 chains retain their recorded Implementation Plan gate.
+or an approved Assured Execution Plan.

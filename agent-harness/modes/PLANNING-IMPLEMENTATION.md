@@ -9,7 +9,7 @@ now" — they mean "create a plan and wait for approval."
 
 For Standard work, the approved Change Spec embeds the execution steps and is the execution contract; do not
 create an Implementation Plan merely to restate those steps. Planning-Implementation remains for Assured work,
-active v1 chains, and cases where a separately resumable execution plan has independent value.
+Assured chains, and cases where a separately resumable execution plan has independent value.
 
 ## Mode Story
 
@@ -131,8 +131,8 @@ capturing the expected change, preserved behavior, and observable proof.
 | IPL-04-010 | MUST load the relevant universal and project playbooks before finalizing the plan, when the planning task matches a reusable procedure. |
 | IPL-04-020 | MUST reflect required procedure-specific checks or validation from relevant playbooks in the Implementation Plan. |
 | IPL-04-021 | When a loaded playbook establishes preserved behavior, regression risk, or baseline evidence, the resulting Spec or Plan MUST carry that forward in its own contract sections rather than leaving it only in conversational output. |
-| IPL-04-030 | Before requesting a Plan's promotion to `ready`, Planning-Implementation MUST invoke Validation with the profile required by `VAL-00-020-v1` and record the resulting durable report in the Plan when that profile is `chain-preflight`. |
-| IPL-04-031 | Planning-Implementation MUST NOT treat local artifact readiness alone as sufficient when `VAL-00-030-v1` requires `chain-preflight` for the selected chain. |
+| IPL-04-030 | Before requesting a Plan's promotion to `ready`, Planning-Implementation MUST invoke Validation with the profile required by `CFA-01-040` and record the resulting durable report in the Plan when that profile is `chain-preflight`. |
+| IPL-04-031 | Planning-Implementation MUST NOT treat local artifact readiness alone as sufficient when `CFA-01-040` requires `chain-preflight` for the selected chain. |
 | IPL-05-030 | MUST NOT allow more than one Implementation Plan at status `ready` or `in-progress` per Spec. For a Plan-tier Plan with `entrypoint_type: none` (no source Spec), this check does not apply — there is no Spec to key it on. |
 | IPL-05-031 | For a Plan-tier Plan, `IPL-05-050`'s path-overlap check is the only dedup protection available, so it MUST still be run. |
 | IPL-05-040 | Plans on non-overlapping Specs MAY run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
@@ -142,11 +142,11 @@ capturing the expected change, preserved behavior, and observable proof.
 | IPL-07-011 | If `IPL-07-010`'s check finds a path/structure missing, MUST add an explicit bootstrap step covering only what the plan's own steps need, not a general build-out of everything the ADR describes. |
 | IPL-07-020 | Before finalizing an Implementation Plan, MUST verify that any tooling a step's own `## Validation` commands invoke (lint/type-check/test runners, etc.) is provisioned by an earlier step in the same Plan (config present, declared as a dependency) rather than assumed available. |
 | IPL-07-021 | If `IPL-07-020`'s check finds provisioning missing, MUST add it to the bootstrap step (or the earliest step that needs it), scoped to only what the plan's own steps actually invoke. |
-| IPL-08-010 | When entered by a direct natural-language instruction with no Use Case/Spec/Task file named: if the request (or its cited source Idea/Transcript) already carries a `## Risk-Tier Classification` — whether complete or partial, since Partnering may already have resolved UC- and Spec-Necessity via `PTN-02-110` before routing here — MUST reuse that result and continue the cascade only from its next unrun matrix, per `shared-procs/RISK-TIER.md`'s `RSK-07-011-v1`–`RSK-07-013-v1`. |
-| IPL-08-011 | Otherwise MUST run the full cascade (`RSK-02-010-v1` → `RSK-03-010-v1` → `RSK-04-010-v1`) fresh to determine the minimum required tier. This entry point is not always the first opportunity for the request — it commonly is not, since `PARTNERING.md`'s `PTN-02-110` and `REFINING.md`'s `TSK-01-030` both hand off here after already running part or all of the cascade. |
+| IPL-08-010 | When entered by a direct natural-language instruction with no Use Case/Spec/Task file named: if the request (or its cited source Idea/Transcript) already carries a `## Risk-Tier Classification` — whether complete or partial, since Partnering may already have resolved UC- and Spec-Necessity via `PTN-02-110` before routing here — MUST reuse that result and continue the cascade only from its next unrun matrix, per `shared-procs/RISK-TIER.md`'s `RSK-07-011`–`RSK-07-013`. |
+| IPL-08-011 | Otherwise MUST run the full cascade (`RSK-02-010` → `RSK-03-010` → `RSK-04-010`) fresh to determine the minimum required tier. This entry point is not always the first opportunity for the request — it commonly is not, since `PARTNERING.md`'s `PTN-02-110` and `REFINING.md`'s `TSK-01-030` both hand off here after already running part or all of the cascade. |
 | IPL-08-020 | If the cascade lands above Plan-tier, MUST stop, report which tier is actually required, and route to the matching Refining entry point (`/create-use-case`, `/create-spec`, or `/create-tasks`). |
 | IPL-08-021 | MUST NOT proceed to planning when the cascade lands above Plan-tier. |
-| IPL-08-022 | If the cascade lands at Plan-tier, MUST create the Implementation Plan, including a `## Risk-Tier Classification` section (`RSK-05-010-v1`) and setting `entrypoint_type: none` since no Task/Spec/Use Case exists. |
+| IPL-08-022 | If the cascade lands at Plan-tier, MUST create the Implementation Plan, including a `## Risk-Tier Classification` section (`RSK-05-010`) and setting `entrypoint_type: none` since no Task/Spec/Use Case exists. |
 | IPL-08-025 | A Plan created under `IPL-08-022` MUST include the compact `## Behavior Contract` required by `IPL-01-032`/`IPL-02-014` rather than escalating to a full Spec solely to capture preserved behavior or proof intent. |
 | IPL-08-026 | A direct Plan-tier entry with no higher-tier artifact chain MUST NOT fabricate `chain-preflight`; it uses the single-artifact validation path until a real UC/Spec/Task chain exists. |
 | IPL-08-023 | MUST wait for approval, exactly as every other entry point already requires. |

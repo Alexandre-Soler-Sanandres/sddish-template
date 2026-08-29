@@ -31,7 +31,7 @@ A Use Case is created only from within Refining (`/create-use-case`), from:
 - Legacy Finding
 - Existing documentation
 
-— when `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix (`RSK-02-010-v1`) classifies a request below UC-tier, no
+— when `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix (`RSK-02-010`) classifies a request below UC-tier, no
 Use Case is created; work proceeds directly to Spec or Task creation instead (see `SPECS.md`/`TASKS.md`'s own
 Sources sections) — this statement is normative, not descriptive (`UCS-01-060`; mirrors `REFINING.md`'s
 `UCS-01-050`).

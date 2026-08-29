@@ -25,7 +25,7 @@ Created only from within Refining (`/create-tasks`).
 ## Sources
 
 A Task is created only from within Refining (`/create-tasks`), from a Spec at any status — OR, when
-`shared-procs/RISK-TIER.md`'s Spec-Necessity Matrix (`RSK-03-010-v1`) classifies the request below Spec-tier,
+`shared-procs/RISK-TIER.md`'s Spec-Necessity Matrix (`RSK-03-010`) classifies the request below Spec-tier,
 directly from the same source types a Spec would have been created from.
 
 ## When To Create
@@ -43,7 +43,7 @@ Not applicable beyond `## Sources`' precondition — see `agent-harness/modes/RE
 
 ## Artifact Shape
 
-A Task entered via the Spec-skip path must include a `## Risk-Tier Classification` section (`RSK-05-010-v1`); its
+A Task entered via the Spec-skip path must include a `## Risk-Tier Classification` section (`RSK-05-010`); its
 `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Spec
 (`TSK-02-025`). `allowed_paths`/`forbidden_paths` scope what Implementing may touch (`IMPLEMENTING.md`'s
 `IMPL-03-060`).
@@ -119,7 +119,7 @@ Task's eventual promotion to `ready` to `STT-01-030`/`040` once the local gates 
 | TSK-02-010 | Before this Task's promotion (`STT-01-030`/`040`), MUST verify the Readiness Checklist in the artifact. |
 | TSK-02-011 | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
 | TSK-02-012 | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |
-| TSK-02-025 | A Task entered via the Spec-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010-v1`); its `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Spec. |
+| TSK-02-025 | A Task entered via the Spec-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010`); its `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Spec. |
 | TSK-05-010 | When a Task is created that depends on an accepted `scoped` ADR, MUST add the ADR's ID to the Task's `related` field and add the Task's ID to the ADR's `derived_tasks` field, in the same pass — the Task-side equivalent of `RELATIONS-AND-SUPERSESSION.md`'s `DEC-07-010`, which covers Use Case/Spec only. A `fleet-wide` ADR is exempt from the reverse-link half of this rule, per the same reasoning as `DEC-07-010`. |
 | TSK-06-010 | Missed-ADR recheck. Before this Task's promotion (`STT-01-030`/`040`), MUST re-run the relevance judgment against the *current* accepted-ADR list. |
 | TSK-06-011 | Every `fleet-wide` ADR MUST be present in `related`. |

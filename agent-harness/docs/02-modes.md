@@ -14,8 +14,8 @@ not become a thin pointer file, and it should not hide enforceable constraints i
 
 Before entering a producing or execution workflow, classify new material work using
 `shared-procs/WORK-LANES.md`. Fast records an in-session micro-plan; Standard creates an approved Change Spec;
-Assured uses the complete behavior and execution package. The pre-v2 Refining and Planning-Implementation funnel
-remains the compatibility route for active v1 work and the normal Assured route.
+Assured uses the complete behavior and execution package. The earlier Refining and Planning-Implementation funnel
+remains the compatibility route for Assured work and the normal Assured route.
 
 Canonical Mode Workflow sections:
 

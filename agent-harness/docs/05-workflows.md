@@ -16,7 +16,7 @@ New work is first classified as Fast, Standard, or Assured. Fast records a micro
 approved local/reversible scope. Standard creates one Change Spec, promotes it by explicit current-content
 approval, and executes its embedded steps. Assured uses a behavior contract and resumable execution plan; its
 secondary artifacts remain separate when their authority or lifecycle is independently useful. The Risk-Tier
-Cascade below remains for existing v1 chains until their explicit migration.
+Cascade below determines the minimum Assured artifact tier.
 
 ## Rules/Procedure Split (History)
 
@@ -59,7 +59,7 @@ creates a Use Case/Spec/Task, or Planning-Implementation is entered with no file
 
 ```text
 UC-Necessity?   --No--> Spec-Necessity?  --No--> Task-Necessity?  --No--> Planning-Implementation,
-(RSK-02-010-v1)             (RSK-03-010-v1)              (RSK-04-010-v1)           directly (Plan-tier,
+(RSK-02-010)             (RSK-03-010)              (RSK-04-010)           directly (Plan-tier,
   |Yes                     |Yes                      |Yes                 no artifact required first)
   v                        v                          v
 /create-use-case       /create-spec                /create-tasks
@@ -68,13 +68,13 @@ UC-Necessity?   --No--> Spec-Necessity?  --No--> Task-Necessity?  --No--> Planni
 A few things always hold, regardless of how many stages get skipped:
 
 - The cascade runs once per request, at the first opportunity it's reached, and is carried forward — a
-  later stage reuses an existing classification instead of recomputing it (`RSK-07-010-v1`).
+  later stage reuses an existing classification instead of recomputing it (`RSK-07-010`).
 - Whatever artifact is produced (or the Implementation Plan, if none is) records why any stage was skipped,
-  in a `## Risk-Tier Classification` section (`RSK-05-010-v1`) — never silently.
-- Ambiguous or unclear-scope requests default to *more* ceremony, not less (`RSK-06-010-v1`).
+  in a `## Risk-Tier Classification` section (`RSK-05-010`) — never silently.
+- Ambiguous or unclear-scope requests default to *more* ceremony, not less (`RSK-06-010`).
 - Database migrations, security/secrets/auth, deploys/CI, API contract changes, payments, domain-critical
   logic, and major architecture changes can never drop below Spec tier, no matter how small they look
-  (`RSK-06-020-v1`).
+  (`RSK-06-020`).
 - Planning-Implementation's own gate is never skippable — every path still ends in a `ready` Implementation
   Plan before any code changes (`COR-01-060`).
 
@@ -235,7 +235,7 @@ For the practical step-by-step legacy application playbook, see
 [the Legacy Discovery guide](../extensions/legacy-discovery/GUIDE.md).
 
 ```text
-harness-data/artifacts/legacy/apps/<legacy-app-slug>/
+harness-data/extensions/legacy-discovery/apps/<legacy-app-slug>/
   → legacy inventory
   → source maps
   → findings (LF-<APP>-NNNN, or LF-CROSS-NNNN for cross-system findings)
@@ -246,7 +246,7 @@ harness-data/artifacts/legacy/apps/<legacy-app-slug>/
 ```
 
 The direct-to-Spec exception above is a separate, narrower exception from `shared-procs/RISK-TIER.md`'s general
-cascade — see `RISK-TIER.md`'s `RSK-03-010-v1` for the cascade's own Spec-Necessity criteria, which also apply once
+cascade — see `RISK-TIER.md`'s `RSK-03-010` for the cascade's own Spec-Necessity criteria, which also apply once
 a Legacy Finding reaches Refining.
 
 The legacy project is evidence, not authority. The agent must never treat legacy code as automatically correct.
@@ -279,4 +279,4 @@ The legacy project is evidence, not authority. The agent must never treat legacy
    including a `## Risk-Tier Classification` section citing the three "No" rows and their reasons.
 5. User reviews and approves `PLAN-0NN`.
 6. Implementation executes the plan's steps.
-7. Validation confirms the skip was legitimate (`VAL-02-010-v1`'s carve-out) and the change matches the plan.
+7. Validation confirms the skip was legitimate (`RSK-01-010`'s carve-out) and the change matches the plan.

@@ -12,7 +12,7 @@ Copyright (c) 2026 Alexandre Soler Sanandres.
 ## What It Is
 
 New work uses `shared-procs/WORK-LANES.md`: Fast records a micro-plan, Standard uses one approved Change Spec,
-and Assured uses the full behavior/execution chain. Existing active v1 work retains its recorded chain.
+and Assured uses the full behavior/execution chain. Existing Assured work retains its recorded chain.
 
 The SDD-ish Agent Harness gives AI agents a clear operating context, defining what they are allowed to do, what artifacts they produce, and how they hand off to the next stage.
 

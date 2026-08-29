@@ -12,7 +12,7 @@ sorts entries by ID and replaces the output atomically. A Catalog contains no pr
 regions, or canonical metadata. Backlinks, ADR consumers, active-work lists, and trace matrices are generated only
 as ephemeral query output.
 
-An Extension's artifact locations (e.g. `harness-data/artifacts/legacy/` for the Legacy Discovery Extension)
+An Extension's artifact locations (e.g. `harness-data/extensions/legacy-discovery/` for the Legacy Discovery Extension)
 appear in the Catalog only when `harness-data/HARNESS-PROFILE.yaml` sets `extensions.<name>: enabled`; a
 disabled Extension contributes nothing.
 

@@ -248,8 +248,8 @@ Changes the process itself. Triggered by Review findings.
 Records evidence extracted from legacy projects.
 
 **Statuses:** `draft` → `reviewed` → `converted` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/legacy/apps/<legacy-app-slug>/findings/active/<LF-ID>.md` (app-scoped) or
-`harness-data/artifacts/legacy/cross-system/findings/active/<LF-ID>.md` (cross-system) — see
+**Location:** `harness-data/extensions/legacy-discovery/apps/<legacy-app-slug>/findings/active/<LF-ID>.md` (app-scoped) or
+`harness-data/extensions/legacy-discovery/cross-system/findings/active/<LF-ID>.md` (cross-system) — see
 `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md` (LD-03-010)
 **Template:** `agent-harness/extensions/legacy-discovery/templates/LEGACY-FINDING-template.md`
 
