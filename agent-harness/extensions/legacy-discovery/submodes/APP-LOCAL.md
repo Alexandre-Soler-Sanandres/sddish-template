@@ -38,9 +38,8 @@ harness-data/extensions/legacy-discovery/apps/<legacy-app-slug>/
     archive/<LF-ID>.md
 ```
 
-Questions raised during this app's discovery live in the harness-level Questions registry
-(`harness-data/artifacts/questions/QUESTIONS-OPEN.md`/`QUESTIONS-RESOLVED.md`/`QUESTIONS-DISCARDED.md`), not a
-per-app file.
+Questions raised during this app's discovery use canonical `Q-NNNN` rows in the single
+`harness-data/artifacts/questions/QUESTIONS.md` registry, not a per-app file. Store app scope in row fields.
 
 ## Core Moves
 
@@ -54,7 +53,7 @@ per-app file.
    finding(s) in the registry's `Source` column, and add the question ID to each cited finding's
    `## Open Questions` section. Use `baseline` / `cross-cutting` in `Source` when the question does not trace to
    a specific finding. Before leaving any finding's `## Open Questions` empty, test its own `Classification` and
-   `Evidence Conflict` text against `QST-06-010` — if it reads as an undecided fork, raise a `Q-<APP>-NNNN` row
+   `Evidence Conflict` text against `QST-06-010` — if it reads as an undecided fork, raise a `Q-NNNN` row
    instead of leaving it as prose (`LDA-04-040`).
 5. Enrich stable reference docs per the Reference Enrichment table in `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`.
 6. Before marking a slice `done`, confirm at least one of its findings is a plain baseline/descriptive finding —
@@ -112,7 +111,7 @@ Not applicable at this level — App-Local Discovery routes findings to candidat
 
 Slicing an app's authentication module: the agent reads the code, then any docs, then tests; writes a baseline
 finding describing the current auth flow; writes a second finding flagging an undocumented session-timeout
-behavior as a target-policy fork; raises a `Q-<APP>-NNNN` row for that fork; enriches `DOMAIN.md` with the stable
+behavior as a target-policy fork; raises a `Q-NNNN` row for that fork; enriches `DOMAIN.md` with the stable
 auth-concept vocabulary; and runs the Slice Closeout Checklist before marking the slice `done`.
 
 ## Rules
@@ -137,7 +136,7 @@ auth-concept vocabulary; and runs the Slice Closeout Checklist before marking th
 | LDA-04-030 | MUST NOT invent a new per-slice `"Candidate <Something>"` list in `SOURCE-MAP.md`'s slice notes under any label; that is the same duplication. When a candidate spans multiple findings from the same slice, record it in each contributing finding's `Candidate Artifacts`, not as a new shared list. |
 | LDA-04-035 | SHOULD use a finding's `## Candidate Artifacts` section to note meaningful cross-finding impact when that traceability will materially help later synthesis or prioritization. Record each such note as a flat bullet in the form `- Affects: <LF-ID> — <short reason>`. Frontmatter `candidate_artifacts` remains for artifact IDs only. |
 | LDA-04-040 | MUST test each finding for a material unresolved target choice before leaving its `## Open Questions` empty, not only its own `Classification`/`Evidence Conflict` prose. |
-| LDA-04-041 | If `LDA-04-040`'s test finds a fork that satisfies `QST-06-010` and `QST-06-020`, whether explicit or latent after applying engineering judgment, MUST raise or update a `Q-<APP>-NNNN` registry row instead of leaving the fork only as prose in the finding. |
+| LDA-04-041 | If `LDA-04-040`'s test finds a fork that satisfies `QST-06-010` and `QST-06-020`, whether explicit or latent after applying engineering judgment, MUST raise or update a `Q-NNNN` registry row instead of leaving the fork only as prose in the finding. |
 | LDA-04-050 | MUST NOT mark a slice `done` until at least one finding records what the slice's area concretely contains or does, independent of anomaly, conflict, or edge-case behavior. |
 | LDA-04-055 | MUST check each completed slice for material operational or manual surfaces in scope — including CLI/operator tools, health/readiness/metrics surfaces, SQL diagnostics, or comparable observability paths. |
 | LDA-04-056 | MUST check each completed slice for material data-model shape choices in scope — including storage topology, JSON-vs-typed structure, DB views as read models, key typing, or migration-authority boundaries. |

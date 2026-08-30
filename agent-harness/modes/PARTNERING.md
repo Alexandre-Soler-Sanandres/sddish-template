@@ -82,9 +82,9 @@ alone and default to `/create-spec` or `/create-tasks` on that partial basis (`P
 
 ## Outputs
 
-- optional `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
-- optional `harness-data/artifacts/ideas/active/IDEA-*.md`
-- `harness-data/artifacts/adrs/proposed/ADR-*.md` (when a structural/architectural decision has been reached)
+- optional `harness-data/artifacts/transcripts/TRANSCRIPT-*.md`
+- optional `harness-data/artifacts/ideas/IDEA-*.md`
+- `harness-data/artifacts/adrs/ADR-*.md` (when a structural/architectural decision has been reached)
 - Open questions list
 
 Use Cases are not produced here — once enough material exists, hand off to Refining (`/create-use-case`).

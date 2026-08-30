@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | Change Spec, Use Case, Spec, Task, Plan | `draft`, `ready`, `in-progress`, `blocked`, `done`, `rejected`, `archived` | `draft -> ready -> in-progress -> done`; `in-progress <-> blocked`; `ready`, `in-progress`, or `blocked` -> `draft` after a material change; a nonterminal state -> `rejected` or `archived` |
 | Improvement | `proposed`, `approved`, `in-progress`, `done`, `rejected`, `archived` | `proposed -> approved -> in-progress -> done`; any nonterminal -> `rejected` or `archived` |
-| Review | `draft`, `assessed`, `closed`, `archived` | `draft -> assessed -> closed -> archived` |
+| Review | `draft`, `assessed`, `closed`, `archived` | `draft -> assessed -> closed -> archived`; `draft` or `assessed` -> `archived` when explicitly discarded |
 | ADR | `proposed`, `accepted`, `superseded`, `archived` | `proposed -> accepted | archived`; `accepted -> superseded` |
 | Idea | `active`, `accepted`, `rejected`, `archived` | `active -> accepted | rejected | archived` |
 | Question row | `open`, `resolved`, `discarded` | `open -> resolved | discarded` |
@@ -26,6 +26,6 @@
 | STT-01-040 | A controlled migration MAY preserve semantic status while changing representation and MUST NOT be treated as an ordinary transition. |
 | STT-01-050 | A material scope or behavior change to a Use Case or Spec at `ready` or later MUST reset that artifact and every transitively derived child to `draft`, invalidate approval, leave Implementation Plans unchanged, and stop for user instruction. |
 | STT-01-060 | A Spec or Use Case MAY reach `done` only when it is `ready` and every derived child is `done`; otherwise it MUST remain unchanged and report the missing readiness transition. |
-| STT-01-070 | An operator-approved chain promotion MUST atomically promote the named Plan and included Tasks when fresh local gates pass, write approval provenance and the catalog entry, then evaluate ancestors bottom-up. A scoped Plan promotion remains valid when optional ancestor promotion fails. |
+| STT-01-070 | An operator-approved chain promotion MUST atomically promote the named Plan and included Tasks when fresh local gates pass, write approval provenance, then evaluate ancestors bottom-up. A scoped Plan promotion remains valid when optional ancestor promotion fails. |
 | STT-01-080 | An explicit operator instruction naming one Task, Spec, or Use Case MAY promote only that artifact to `ready` when its local gates pass fresh. |
 | STT-02-020 | When an artifact leaves a status on which another artifact in its derivation chain depends, every affected artifact MUST be reconsidered in both directions and the outcome reported, including `no change needed`. |

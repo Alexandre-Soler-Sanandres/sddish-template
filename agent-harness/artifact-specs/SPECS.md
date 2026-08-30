@@ -46,7 +46,7 @@ ADRs must never be treated as a Spec source either — reference authority only 
 ## Artifact Shape
 
 A Spec entered via the UC-skip path must include a `## Risk-Tier Classification` section (`RSK-05-010`); its
-`source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Use Case
+`source_ids` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Use Case
 (`SPS-01-050`). `technical_refs` names external technical artifacts (OpenAPI specs, database schemas, contracts)
 that live outside `agent-harness/` — input constraints or expected outputs, not part of the behavioral spec
 itself; their location is project-defined, not enforced by the harness. The body also carries a compact
@@ -58,8 +58,8 @@ the out-of-scope behavior that must remain stable (`SPS-02-013`-`SPS-02-015`).
 ## Field Semantics
 
 - `status` — see `## Lifecycle`.
-- `source` — the Use Case (or UC-skip-path source) this Spec was derived from.
-- `related` — accepted ADRs this Spec depends on; see `## Relationships`.
+- `source_ids` — the Use Case (or UC-skip-path source) this Spec was derived from.
+- `related_adrs` — accepted ADRs this Spec depends on; see `## Relationships`.
 - `technical_refs` — see `## Artifact Shape`.
 - `test_refs` — links to test files exercising this Spec's acceptance criteria; consumed by
   `IMPLEMENTING.md`'s `IMPL-03-110`.
@@ -88,7 +88,7 @@ When legacy evidence is involved, the Spec should additionally:
   not-needed, or proof-routed for this Spec
 - place technical legacy obligations in the section they constrain: requirements, constraints, dependencies,
   risks, validation, or `technical_refs` / `test_refs`
-- cite canonical legacy IDs (`CSQ-*`, `Q-<APP>-*`, `CSP-*`) rather than duplicating full legacy backlog rows
+- cite canonical `Q-NNNN` IDs for genuine uncertainties and carry applicable proof obligations into validation
 
 ## Lifecycle
 
@@ -98,16 +98,16 @@ acceptance criteria need correction (`SPS-03-010`) — updating must never chang
 criteria, or constraints is significant; a typo, clarification, added open question, or `updated`-field bump is
 not (`SPS-07-010`). Status transitions for this artifact — including promotion to `ready` and the effect of a
 later significant change — are described in `agent-harness/systems/STATUS-TRANSITIONS.md` and enforced by the
-paired `STT-*` rules.
+co-located `STT-*` rules.
 
 ## Readiness / Acceptance
 
 Before a transition rule promotes a Spec to `ready`, verify the Readiness Checklist in the artifact — every item
 must be checked; a single unchecked item blocks the promotion (`SPS-02-010`/`SPS-02-011`). Also re-run three
 ADR checks before promotion: missed-ADR recheck against the *current* accepted-ADR list, with every
-`fleet-wide` ADR present in `related` and every `scoped` ADR re-judged (`SPS-08-010`–`012`); content-drift
+`fleet-wide` ADR present in `related_adrs` and every `scoped` ADR re-judged (`SPS-08-010`–`012`); content-drift
 recheck against the Spec's actual current content, not only its original `area` (`SPS-08-020`); and a
-compliance check that every ADR cited in `related` is actually reflected in the Spec's requirements/scope
+compliance check that every ADR cited in `related_adrs` is actually reflected in the Spec's requirements/scope
 (`SPS-08-030`). Also verify that every acceptance criterion maps to requirement IDs, a scenario, and evidence
 intent (`SPS-02-013`), and that normal, boundary, error, and recovery behavior is either covered or explicitly
 ruled out as not applicable (`SPS-02-014`). When the change preserves existing behavior outside the changed
@@ -123,17 +123,13 @@ When the source Use Case inherits unresolved Questions-registry entries — rega
 origin — load those referenced items and route them into the Spec sections they constrain (`SPS-05-010`), by
 effect per `CORE.md`'s `COR-01-120`: unresolved promotion-shaping questions belong in `Open Questions` as
 canonical Question ID references; requirements, constraints, dependencies, risks, and validation obligations
-belong in the section they constrain (`SPS-05-020`). The Questions registry's `CSP-*` rows remain the canonical
-proof/parity backlog — a Spec may cite relevant `CSP-*` IDs in requirements, risks, validation, or open
-questions, but should not duplicate unrelated rows or store proof IDs in `test_refs` (`SPS-06-010`/`SPS-06-020`).
+belong in the section they constrain (`SPS-05-020`). Known proof/parity obligations remain on Legacy Findings or
+rewrite-readiness evidence until a Spec carries them into requirements, risks, validation, or open
+questions, but should not duplicate unrelated rows or store proof obligations in `test_refs` (`SPS-06-010`/`SPS-06-020`).
 
 ## Output / Location
 
-- `harness-data/artifacts/specs/active/SPEC-*.md` (`draft`)
-- `harness-data/artifacts/specs/ready/SPEC-*.md` (`ready`)
-- `harness-data/artifacts/specs/done/SPEC-*.md` (`done` — still-authoritative behavior, distinct
-  from closed/superseded; see `agent-harness/systems/LIFECYCLE-FOLDERS.md`)
-- `harness-data/artifacts/specs/archive/SPEC-*.md` (`archived`/`rejected`)
+- `harness-data/artifacts/specs/SPEC-*.md` for every status; lifecycle is frontmatter-only.
 
 ## Template
 
@@ -153,7 +149,7 @@ pass.
 | SPS-00-010 | MUST use a Change Spec rather than a separate Spec for new Standard work unless Assured work or independent behavioral authority requires the separate contract. |
 | SPS-01-020 | Legacy Findings, Ideas, and Transcripts MUST NOT be treated as direct Spec sources except via `shared-procs/RISK-TIER.md`'s UC-skip path (`SPECS.md`'s `## Sources`) — outside that path they are upstream inputs that produce Use Cases, not Specs directly. |
 | SPS-01-021 | ADRs MUST NOT be treated as a Spec source either, reference authority only — see `ADR.md`'s `DEC-02-020`/`DEC-05-010` for the citation rule (accepted vs. proposed). |
-| SPS-01-050 | A Spec entered via the UC-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010`); its `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Use Case. |
+| SPS-01-050 | A Spec entered via the UC-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010`); its `source_ids` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Use Case. |
 | SPS-02-010 | Before this Spec's promotion (`STT-01-030`/`040`), MUST verify the Readiness Checklist in the artifact. |
 | SPS-02-011 | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
 | SPS-02-012 | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |
@@ -166,14 +162,14 @@ pass.
 | SPS-05-010 | When the source Use Case inherits unresolved Questions-registry entries — regardless of legacy or non-legacy origin — MUST load those referenced items and route them into the Spec sections they constrain. |
 | SPS-05-011 | Before setting status to `ready` (see `SPS-02-010`), MUST verify the registry holds nothing unresolved that should block the advance. |
 | SPS-05-020 | MUST carry registry items forward by effect per `CORE.md`'s `COR-01-120`: unresolved promotion-shaping questions belong in `Open Questions` as canonical Question ID references; requirements, constraints, dependencies, risks, and validation obligations belong in the section they constrain. `SPS-02-010` governs whether an unresolved reference stops promotion to `ready`. |
-| SPS-06-010 | The Questions registry's `CSP-*` rows remain the canonical proof/parity backlog. A Spec MAY cite relevant `CSP-*` IDs in requirements, risks, validation, or open questions. |
-| SPS-06-020 | A Spec SHOULD NOT duplicate unrelated `CSP-*` rows or store proof IDs in `test_refs`. |
+| SPS-06-010 | A Spec MUST carry applicable known proof/parity obligations into concrete requirements, risks, or validation; only genuine unresolved decisions receive `Q-NNNN` rows. |
+| SPS-06-020 | A Spec SHOULD NOT duplicate unrelated Legacy Discovery proof evidence or invent a separate proof-ID family. |
 | SPS-07-010 | MUST treat a change to scope, non-goals, functional requirements, acceptance criteria, or constraints as significant; a typo, clarification, added open question, or `updated`-field bump is not. |
 | SPS-08-010 | Missed-ADR recheck. Before this Spec's promotion (`STT-01-030`/`040`), MUST re-run the relevance judgment against the *current* accepted-ADR list. |
-| SPS-08-011 | Every `fleet-wide` ADR MUST be present in `related`. |
-| SPS-08-012 | Every `scoped` ADR MUST be re-judged: added to `related` if newly relevant, or explicitly ruled out. |
+| SPS-08-011 | Every `fleet-wide` ADR MUST be present in `related_adrs`. |
+| SPS-08-012 | Every `scoped` ADR MUST be re-judged: added to `related_adrs` if newly relevant, or explicitly ruled out. |
 | SPS-08-020 | Content-drift recheck. Before this Spec's promotion (`STT-01-030`/`040`), MUST judge ADR relevance against the Spec's actual current content, not only its original `area` — drafting can drift the content into territory an ADR bears on that the creation-time load never saw. |
-| SPS-08-030 | Compliance check. Before this Spec's promotion (`STT-01-030`/`040`), MUST verify every ADR cited in `related` is actually reflected in the Spec's requirements/scope — a citation with no matching content is a gate failure. |
+| SPS-08-030 | Compliance check. Before this Spec's promotion (`STT-01-030`/`040`), MUST verify every ADR cited in `related_adrs` is actually reflected in the Spec's requirements/scope — a citation with no matching content is a gate failure. |
 
 ## Reference Files
 
@@ -181,5 +177,5 @@ Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/DOMAIN.md` — when defining requirements that involve domain concepts, business rules, or domain terminology
 - `harness-data/reference/ARCHITECTURE.md` — when scope touches system boundaries, layers, or architectural constraints
-- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when scope touches a system boundary or structural decision already settled by an ADR
+- `harness-data/artifacts/adrs/` (accepted ADRs) — when scope touches a system boundary or structural decision already settled by an ADR
 - the Questions registry (`harness-data/artifacts/questions/`) or `REWRITE-READINESS.md` — when inherited legacy decisions or obligations still constrain the Spec

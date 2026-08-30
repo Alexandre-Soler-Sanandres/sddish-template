@@ -59,14 +59,14 @@ profiles. Structure each file with up to two top-level sections so a reader can 
   edit only to correct a transcription error against the finding, never because a target decision changed.
 - `## Decisions` — present once at least one target-architecture decision exists. States the decision in one or
   two lines, then cites whatever settled it: an accepted ADR (`ADR-NNNN`), a Legacy Finding (`LF-*`), the Questions
-  registry (`CSQ-*`/`CSP-NNNN` rows), or a legacy synthesis artifact (`REWRITE-READINESS.md`, `CONTRACTS.md`). Cite
+  registry (`Q-NNNN` rows), or a legacy synthesis artifact (`REWRITE-READINESS.md`, `CONTRACTS.md`). Cite
   authority, don't restate its reasoning — mirrors `DEC-02-020`'s rule for Use Cases/Specs citing ADRs.
 
 A greenfield project (no Legacy Discovery) has `## Decisions` only — do not add a `## Discovered` section with
 placeholder content just because this convention exists.
 
-When the artifact a `## Decisions` entry cites is superseded (an ADR superseded per `DEC-06-010`, or a Legacy
-Finding/Question re-resolved), update the citation in the same pass — see `DEC-08-010`.
+When the authority a `## Decisions` entry cites changes (an ADR is superseded per `DEC-06-010`, or a Legacy
+Finding/Question is corrected), update the citation in the same pass — see `DEC-08-010`.
 
 ## YAML Frontmatter
 
@@ -95,25 +95,21 @@ updated: ""   # YYYY-MM-DD
 | `IMPROVEMENT-` | Harness Improvement |
 | `ADR-` | Architecture Decision Record |
 | `LF-<APP>-` / `LF-CROSS-` | Legacy Finding (app / cross-system, see `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md` LD-03-010/LD-03-020) |
-| `Q-NNNN` (new) / `Q-<APP>-NNNN`, `CSQ-`, `CSP-` (migrated legacy) | Question |
+| `Q-NNNN` | Question row; historical legacy IDs remain migration evidence only |
 
 ### Relationship Fields
 
 | Field | Purpose |
 | --- | --- |
-| `source` | what this artifact was created from |
-| `derived_*` | artifacts derived from this one |
-| `related` | loosely related artifacts |
-| `depends_on` | what must exist before this can proceed |
-| `blocks` | what this artifact is blocking |
+| `source_ids` | what this artifact was created from |
+| `related_adrs` | accepted ADR authority this artifact depends on |
+| `question_refs` | unresolved or resolved canonical Question rows relevant here |
+| `included_ids` | artifacts coordinated by an execution artifact |
+| `depends_on` | forward Task dependencies |
 
-When a new artifact is created from an existing one, update the relationship fields in the same pass:
-
-- child artifact: set `source` to the parent ID
-- parent artifact: add the child ID to the relevant `derived_*` field when that field exists
-- sibling or cross-cutting links: update `related`, `depends_on`, or `blocks` where needed
-
-Frontmatter links are part of the harness's navigation contract, not optional bookkeeping.
+When creating an artifact, write only its canonical forward links. Backlinks, children, consumers, follow-ups,
+and blocked dependants are derived by scanning those links. Frontmatter links are navigation authority, not
+optional bookkeeping.
 
 ## Artifact Types
 
@@ -122,16 +118,16 @@ Frontmatter links are part of the harness's navigation contract, not optional bo
 Raw or lightly processed input from voice, chat, meetings, or imported notes.
 Transcripts are evidence — not approved requirements.
 
-**Statuses:** `raw` → `reviewed` → `processed` → `archived`
-**Location:** `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md`
+**Statuses:** `recording` → `recorded` → `archived`
+**Location:** `harness-data/artifacts/transcripts/TRANSCRIPT-*.md`
 **Template:** `agent-harness/templates/TRANSCRIPT-template.md`
 
 ### Idea
 
 Early structured thoughts. Not implementation requests.
 
-**Statuses:** `captured` → `clarifying` → `ready-for-refining` → `landed` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/ideas/active/IDEA-*.md`
+**Statuses:** `active` → `accepted` | `rejected` | `archived`
+**Location:** `harness-data/artifacts/ideas/IDEA-*.md`
 **Template:** `agent-harness/templates/IDEA-template.md`
 
 ### ADR (Architecture Decision Record)
@@ -140,16 +136,14 @@ A settled structural or architectural decision — durable and citable, unlike a
 a Use Case (which cannot itself decide architecture, per `UCS-04-010`–`030`). Referenced as authority by
 `harness-data/reference/ARCHITECTURE.md`, Use Cases, and Specs.
 
-**Statuses:** `proposed` → `accepted` → `superseded` | `rejected`
-**Location:** `harness-data/artifacts/adrs/proposed/ADR-*.md` (not yet settled),
-`harness-data/artifacts/adrs/accepted/ADR-*.md` (in force, citable authority), or
-`harness-data/artifacts/adrs/archive/ADR-*.md` (superseded/rejected)
+**Statuses:** `proposed` → `accepted` → `superseded`; rejected proposals become `archived`
+**Location:** `harness-data/artifacts/adrs/ADR-*.md`
 **Template:** `agent-harness/templates/ADR-template.md`
 
 Body should include: context, decision, considered alternatives, consequences, open questions, and a Readiness
 Checklist gating advancement to `accepted`. Once `accepted`, the decision and consequences are not rewritten in
-place — a change of direction produces a new ADR that supersedes it, linked via the `supersedes`/`superseded_by`
-frontmatter fields.
+place. A new ADR cites the old one in `related_adrs`, records a typed `supersedes` relation in its body, and the
+old ADR becomes `superseded` when the new one is accepted.
 
 ### Use Case
 
@@ -158,11 +152,8 @@ Created via Refining, from an Idea, Transcript, Partnering discussion, Legacy Fi
 documentation — unless `shared-procs/RISK-TIER.md`'s UC-Necessity Matrix classifies the request below UC-tier,
 in which case no Use Case is created at all and work proceeds directly to a Spec or Task.
 
-**Statuses:** `draft` → `ready` → `done` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/use-cases/active/UC-*.md` (`draft`),
-`harness-data/artifacts/use-cases/ready/UC-*.md` (`ready`),
-`harness-data/artifacts/use-cases/done/UC-*.md` (`done`), or
-`harness-data/artifacts/use-cases/archive/UC-*.md` (`archived`/`rejected`)
+**Statuses:** `draft` → `ready` → `in-progress` → `done`, with `blocked`, `archived`, and `rejected` as defined by the central transition model
+**Location:** `harness-data/artifacts/use-cases/UC-*.md`
 **Template:** `agent-harness/templates/USE-CASE-template.md`
 
 Body should include: primary actor, supporting actors, goal, trigger, preconditions, main success scenario, alternatives and failure paths, non-goals, observable outcome, open questions.
@@ -174,18 +165,15 @@ Created from a Use Case (any status) — OR, when `shared-procs/RISK-TIER.md`'s 
 classifies the request below UC-tier, directly from the same source types a Use Case would have been created
 from.
 
-**Statuses:** `draft` → `ready` → `done` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/specs/active/SPEC-*.md` (`draft`),
-`harness-data/artifacts/specs/ready/SPEC-*.md` (`ready`),
-`harness-data/artifacts/specs/done/SPEC-*.md` (`done`), or
-`harness-data/artifacts/specs/archive/SPEC-*.md` (`archived`/`rejected`)
+**Statuses:** `draft` → `ready` → `in-progress` → `done`, with `blocked`, `archived`, and `rejected` as defined by the central transition model
+**Location:** `harness-data/artifacts/specs/SPEC-*.md`
 **Template:** `agent-harness/templates/SPEC-template.md`
 
 Body should include: problem, goal, scope, non-goals, functional requirements, non-functional requirements, acceptance criteria, constraints, dependencies, risks, validation approach, task decision notes.
 
 The `technical_refs` frontmatter field links to external technical artifacts (OpenAPI specs, schemas, contracts) that live outside `agent-harness/`.
 
-The `test_refs` frontmatter field is populated by the agent during implementation — it lists paths to test files that cover each acceptance criterion. It is only for test file paths, not legacy proof IDs or other backlog references. A plan step is not done until `test_refs` is populated or each AC is covered by a Task validation command.
+The `test_refs` frontmatter field is populated by the agent during implementation — it lists paths to test files that cover each acceptance criterion. It is only for test file paths, not legacy proof obligations or other backlog references. A plan step is not done until `test_refs` is populated or each AC is covered by a Task validation command.
 
 ### Task
 
@@ -194,11 +182,8 @@ Created from a Spec at any status — OR, when `shared-procs/RISK-TIER.md`'s Spe
 request below Spec-tier, directly from the same source types a Spec would have been created from. Not always
 required — see [05-workflows.md](05-workflows.md).
 
-**Statuses:** `draft` → `ready` → `in-progress` → `done` → `blocked` → `archived` → `rejected`
-**Location:** `harness-data/artifacts/tasks/active/TASK-*.md` (`draft`/`in-progress`/`blocked`),
-`harness-data/artifacts/tasks/ready/TASK-*.md` (`ready`),
-`harness-data/artifacts/tasks/done/TASK-*.md` (`done`), or
-`harness-data/artifacts/tasks/archive/TASK-*.md` (`archived`/`rejected`)
+**Statuses:** `draft` → `ready` → `in-progress` → `done`; `in-progress` ↔ `blocked`; terminal alternatives are `archived` or `rejected`
+**Location:** `harness-data/artifacts/tasks/TASK-*.md`
 **Template:** `agent-harness/templates/TASK-template.md`
 
 Task frontmatter includes `allowed_paths` and `forbidden_paths` to constrain implementation scope.
@@ -207,11 +192,8 @@ Task frontmatter includes `allowed_paths` and `forbidden_paths` to constrain imp
 
 Defines how implementation will proceed. Required before any code changes.
 
-**Statuses:** `draft` → `ready` → `in-progress` → `done` → `rejected` → `archived`
-**Location:** `harness-data/artifacts/implementation-plans/active/PLAN-*.md` (`draft`/`in-progress`),
-`harness-data/artifacts/implementation-plans/ready/PLAN-*.md` (`ready`),
-`harness-data/artifacts/implementation-plans/done/PLAN-*.md` (`done`), or
-`harness-data/artifacts/implementation-plans/archive/PLAN-*.md` (`archived`/`rejected`)
+**Statuses:** `draft` → `ready` → `in-progress` → `done`; `in-progress` ↔ `blocked`; terminal alternatives are `archived` or `rejected`
+**Location:** `harness-data/artifacts/plans/PLAN-*.md`
 **Template:** `agent-harness/templates/IMPLEMENTATION-PLAN-template.md`
 
 Each plan step must define: Tasks (or "inline"), expected files, validation, risk level, and a suggested commit boundary.
@@ -226,9 +208,9 @@ Review is not only approval — it is how process problems are discovered.
 - **Harness/process flavor** (`process`/`harness`): produced from within any Mode when a process problem
   surfaces; consumed by Improving-Harness, which is entered only from one. No target-artifact status to advance.
 
-**Statuses:** `draft` | `assessed` | `resolved` | `discarded`
+**Statuses:** `draft` → `assessed` → `closed` → `archived`; explicit discard archives from `draft` or `assessed`
 **Outcomes:** `accepted` | `accepted-with-notes` | `changes-requested` | `rejected` | `follow-up-required`
-**Location:** `harness-data/artifacts/reviews/active/REVIEW-*.md`
+**Location:** `harness-data/artifacts/reviews/REVIEW-*.md`
 **Template:** `agent-harness/templates/REVIEW-template.md`
 
 After review, the agent takes a prescribed action based on the outcome and stops — it never autonomously
@@ -240,7 +222,7 @@ outcome-action table for the exact required action per outcome, for each flavor.
 Changes the process itself. Triggered by Review findings.
 
 **Statuses:** `proposed` → `approved` → `in-progress` → `done` → `rejected` → `archived`
-**Location:** `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
+**Location:** `harness-data/artifacts/improvements/IMPROVEMENT-*.md`
 **Template:** `agent-harness/templates/IMPROVEMENT-template.md`
 
 ### Legacy Finding
@@ -268,13 +250,12 @@ An unresolved (or resolved) point that needs a decision before some artifact can
 discoverable, unlike a Non-Goal (permanent exclusion) or an Idea (candidate work, not a question). May be created
 from any mode — no mode switch required.
 
-**Statuses:** none as a field — which of the three files a row lives in *is* its status (`Open`, `Resolved`,
-`Discarded`); see `agent-harness/artifact-specs/QUESTIONS.md`.
-**Location:** `harness-data/artifacts/questions/QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, `QUESTIONS-DISCARDED.md`
+**Statuses:** each row has `open`, `resolved`, or `discarded`; update the row in place.
+**Location:** `harness-data/artifacts/questions/QUESTIONS.md`
 **Template:** `agent-harness/templates/QUESTIONS-template.md`
 
 Classified by blast radius (`local` / `cross-artifact` / `systemic`), not by origin. IDs are permanent — a resolved
-or discarded question is moved to the corresponding file, never deleted.
+or discarded Question remains in the same registry and is never deleted.
 
 ## Readiness Checklists
 

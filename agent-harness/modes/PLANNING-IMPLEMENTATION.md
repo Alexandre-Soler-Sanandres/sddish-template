@@ -110,14 +110,14 @@ Refining entry point (`/create-use-case`, `/create-spec`, or `/create-tasks`) �
 
 ## Outputs
 
-An Implementation Plan under `harness-data/artifacts/implementation-plans/active/PLAN-*.md`, per
+An Implementation Plan under `harness-data/artifacts/plans/PLAN-*.md`, per
 `agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`, with its required validation state recorded before
 awaiting approval.
 
 ## Examples
 
 "Plan the implementation for the Dockerfile chown fix" with no Task/Spec/Use Case named: the agent runs the
-risk-tier cascade, finds it lands at Plan-tier, creates an Implementation Plan with `entrypoint_type: none`, and
+risk-tier cascade, finds it lands at Plan-tier, creates an Implementation Plan with empty `source_ids`, and
 waits for approval rather than making the fix directly. That Plan includes a compact `## Behavior Contract`
 capturing the expected change, preserved behavior, and observable proof.
 
@@ -133,7 +133,7 @@ capturing the expected change, preserved behavior, and observable proof.
 | IPL-04-021 | When a loaded playbook establishes preserved behavior, regression risk, or baseline evidence, the resulting Spec or Plan MUST carry that forward in its own contract sections rather than leaving it only in conversational output. |
 | IPL-04-030 | Before requesting a Plan's promotion to `ready`, Planning-Implementation MUST invoke Validation with the profile required by `CFA-01-040` and record the resulting durable report in the Plan when that profile is `chain-preflight`. |
 | IPL-04-031 | Planning-Implementation MUST NOT treat local artifact readiness alone as sufficient when `CFA-01-040` requires `chain-preflight` for the selected chain. |
-| IPL-05-030 | MUST NOT allow more than one Implementation Plan at status `ready` or `in-progress` per Spec. For a Plan-tier Plan with `entrypoint_type: none` (no source Spec), this check does not apply — there is no Spec to key it on. |
+| IPL-05-030 | MUST NOT allow more than one Implementation Plan at status `ready` or `in-progress` per Spec. For a Plan-tier Plan with empty `source_ids`, this check does not apply. |
 | IPL-05-031 | For a Plan-tier Plan, `IPL-05-050`'s path-overlap check is the only dedup protection available, so it MUST still be run. |
 | IPL-05-040 | Plans on non-overlapping Specs MAY run concurrently without restriction — the check in `IPL-05-010` only ever blocks on the same Spec or overlapping `allowed_paths`. |
 | IPL-05-050 | MUST stop, surface the conflict, list both Plan IDs and overlapping paths, and wait for explicit user resolution, if two active Plans have overlapping `allowed_paths` across their Tasks. |
@@ -146,7 +146,7 @@ capturing the expected change, preserved behavior, and observable proof.
 | IPL-08-011 | Otherwise MUST run the full cascade (`RSK-02-010` → `RSK-03-010` → `RSK-04-010`) fresh to determine the minimum required tier. This entry point is not always the first opportunity for the request — it commonly is not, since `PARTNERING.md`'s `PTN-02-110` and `REFINING.md`'s `TSK-01-030` both hand off here after already running part or all of the cascade. |
 | IPL-08-020 | If the cascade lands above Plan-tier, MUST stop, report which tier is actually required, and route to the matching Refining entry point (`/create-use-case`, `/create-spec`, or `/create-tasks`). |
 | IPL-08-021 | MUST NOT proceed to planning when the cascade lands above Plan-tier. |
-| IPL-08-022 | If the cascade lands at Plan-tier, MUST create the Implementation Plan, including a `## Risk-Tier Classification` section (`RSK-05-010`) and setting `entrypoint_type: none` since no Task/Spec/Use Case exists. |
+| IPL-08-022 | If the cascade lands at Plan-tier, MUST create the Plan with a `## Risk-Tier Classification` section (`RSK-05-010`) and empty `source_ids`. |
 | IPL-08-025 | A Plan created under `IPL-08-022` MUST include the compact `## Behavior Contract` required by `IPL-01-032`/`IPL-02-014` rather than escalating to a full Spec solely to capture preserved behavior or proof intent. |
 | IPL-08-026 | A direct Plan-tier entry with no higher-tier artifact chain MUST NOT fabricate `chain-preflight`; it uses the single-artifact validation path until a real UC/Spec/Task chain exists. |
 | IPL-08-023 | MUST wait for approval, exactly as every other entry point already requires. |
@@ -157,6 +157,6 @@ capturing the expected change, preserved behavior, and observable proof.
 Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/ARCHITECTURE.md` — when defining expected file areas or architectural boundaries in the plan
-- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
+- `harness-data/artifacts/adrs/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
 - `harness-data/reference/TOOLING.md` — when specifying validation commands per plan step
 - `harness-data/reference/DOMAIN.md` — when the plan touches domain-critical areas (payments, security, data integrity)

@@ -18,7 +18,7 @@ tags: [legacy-discovery, cross-system]
 ## Documentation Decision
 
 This `SUMMARY.md` documents the whole cross-system discovery plan. The other cross-system artifacts
-(`CONTRACTS.md`, `findings/`, `REWRITE-READINESS.md`, plus `CSQ-*`/`CSP-*` rows in the harness Questions registry)
+(`CONTRACTS.md`, `findings/`, `REWRITE-READINESS.md`, plus genuine `Q-NNNN` uncertainties)
 are created only when a slice produces evidence that needs them — see
 `agent-harness/extensions/legacy-discovery/submodes/CROSS-SYSTEM.md`'s `LDC-01-020`/`030` for the governing rules and each
 artifact's job.
@@ -50,12 +50,12 @@ every inter-app boundary, contract, and shared concern where material cross-app 
 | --- | --- | --- | --- | --- |
 | 0 | Cross-system plan and scope setup | done | `SUMMARY.md` | Define the synthesis scope, restart point, slice order, artifact routing, and validation expectations. |
 | 1 | Inter-app topology and contract inventory | next | `CONTRACTS.md`, `findings/` entries, Questions registry as needed | Map runtime relationships, inter-app calls, shared assumptions, and operator entry points. |
-| 2 | Contract parity and drift | pending | `CONTRACTS.md`, Questions registry (`CSP-*`) | Compare producer contracts, consumer adapters, checked-in snapshots, compatibility shims, and known drift. |
+| 2 | Contract parity and drift | pending | `CONTRACTS.md`, Findings | Compare producer contracts, consumer adapters, checked-in snapshots, compatibility shims, and known drift. |
 | 3 | Health, readiness, metrics, and observability | pending | `CONTRACTS.md`, `findings/` entries, Questions registry as needed | Synthesize liveness/readiness semantics, metrics surfaces, logs, dashboards, and alerting across apps. |
 | 4 | Security, auth, secrets, and trust boundaries | pending | `CONTRACTS.md`, Questions registry | Clarify user auth, service auth, API keys, secret handling, network trust, and target decisions. |
 | 5 | Deployment, runtime topology, and configuration parity | pending | `CONTRACTS.md`, `findings/` entries, Questions registry as needed | Synthesize ports, networks, Compose/Swarm/Kubernetes posture, images, volumes, env vars, and runtime responsibilities. |
 | 6 | Domain ownership and workflow boundary synthesis | pending | `findings/` entries, Questions registry | Confirm which app owns canonical outcomes versus presentation, orchestration, or adapter behavior. Record candidate Use Cases/Specs in the relevant finding's `Candidate Artifacts`, not as a separate list. |
-| 7 | Rewrite proof and parity | pending | Questions registry (`CSP-*`) | Turn known drift into executable proof candidates and parity rows. |
+| 7 | Rewrite proof and parity | pending | Findings, `REWRITE-READINESS.md` | Turn known drift into executable proof obligations. |
 | 8 | Cross-system rewrite-readiness assessment | pending | `REWRITE-READINESS.md` | Decide what is ready to feed rewrite design work, what remains a target-product decision, and which proof or validation obligations must be carried forward into Use Cases, Specs, validation, or Implementation Planning. |
 | 9 | Post-discovery artifact normalization | pending | App and cross-system legacy artifacts | Format, deduplicate, and merge within each artifact without losing information density, evidence paths, IDs, or correctness. |
 
@@ -67,7 +67,7 @@ per-slice procedure.
 ## Completed Slice Notes
 
 (one entry per completed cross-system slice; list: included scope, app source maps/findings/contracts consulted,
-stable cross-system findings, `CSQ-*`/`CSP-*` updates, docs consulted or "none relevant", negative results for
+stable cross-system findings, Question/proof-obligation updates, docs consulted or "none relevant", negative results for
 checked closeout categories, the evidence basis for those checks, the fresh-context verification result, and any
 resulting follow-up)
 

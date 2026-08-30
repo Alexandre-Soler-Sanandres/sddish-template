@@ -12,10 +12,10 @@ created.
 ## Artifact Story
 
 A Task, Spec, or Use Case (or, for a Plan-tier request, nothing at all) needs implementation guidance. The agent
-may draft the Plan at `active/` while the upstream chain is at any status, recording its current dependencies and
+may draft the Plan while the upstream chain is at any status, recording its current dependencies and
 implementation-readiness facts. Nothing changes in the codebase until the operator explicitly requests Plan
 promotion, the `STT-01-030` scoped readiness transition succeeds, and that approval is recorded in the same transition
-that moves the Plan to `ready/` and unlocks Implementing mode. Once every step completes, the Plan reaches `done`,
+that sets the Plan to `ready` and unlocks Implementing mode. Once every step completes, the Plan reaches `done`,
 which can cascade the source Spec and Use Case to `done`.
 
 ## Entry / Creation Paths
@@ -27,7 +27,7 @@ directly.
 
 A Plan is created only from within Planning-Implementation, from a Task, Spec, or Use Case — OR, when
 `shared-procs/RISK-TIER.md`'s cascade lands on Plan-tier, directly from a natural-language request with no
-upstream artifact at all (`entrypoint_type: none`) (see that mode's Entry Points).
+upstream artifact at all (empty `source_ids`) (see that mode's Entry Points).
 
 ## When To Create
 
@@ -53,9 +53,9 @@ preserved behavior, and observable proof instead of forcing a full Spec (`IPL-01
 
 ## Field Semantics
 
-`entrypoint_type` distinguishes a Plan sourced from a Task/Spec/Use Case from a Plan-tier Plan with no upstream
-artifact (`entrypoint_type: none`) — the latter records its Spec-ID column as `—` in `harness-data/CATALOG.md`'s
-Active Implementation Plans table (`IPL-05-020`).
+`source_ids` contains the Task, Spec, or Use Case that originated the Plan. An empty array identifies a direct
+Plan-tier entry. `included_ids` names coordinated Tasks or other execution artifacts. `allowed_paths` declares
+the complete path scope, including direct Plan-tier work, for deterministic overlap checks.
 
 ## Body Should Include
 
@@ -75,10 +75,10 @@ Active Implementation Plans table (`IPL-05-020`).
 
 ## Lifecycle
 
-`active/` while drafting or in progress; `ready/` once the Readiness Gate passes; `done/` on completion (see
-`## Output / Location`). Status transitions for this artifact — including the upward cascade this Plan's
+The Plan remains at its stable v2 path. Frontmatter status records drafting, readiness, execution, blocking, and
+completion. Status transitions — including the upward cascade this Plan's
 promotion and completion trigger — are described in `agent-harness/systems/STATUS-TRANSITIONS.md` and enforced
-by the paired `STT-*` rules.
+by the co-located `STT-*` rules.
 
 ## Readiness / Acceptance
 
@@ -86,11 +86,10 @@ Before this Plan's promotion (`STT-01-030`'s Plan row), verify the Readiness Che
 every item must be checked; a single unchecked item blocks the status change (`IPL-02-010`/`IPL-02-011`). In
 the same transition that sets the Plan to `ready`, populate `approval.approved_by` and `approval.approved_at`
 from the explicit user instruction authorizing that promotion (`IPL-02-013`). Before that transition, also
-check `harness-data/CATALOG.md` for other Plans at status `ready` or `in-progress` on the same Spec, or with
-overlapping Task `allowed_paths` — stop and surface the conflict if either condition is found (`IPL-05-010`/
-`IPL-05-011`). Keep `harness-data/CATALOG.md`'s Active Implementation Plans table accurate for all Plans at
-status `ready` or `in-progress`, adding/updating a row in the same pass the status changes and removing it
-once the Plan is no longer either (`IPL-05-020`). If no Spec participates, verify the Plan's own
+query canonical flat Plan/Task artifacts for other Plans at `ready` or `in-progress` on the same Spec or with
+overlapping Task `allowed_paths`; `scripts/render-harness-views.sh harness-data plan-conflicts` provides the
+derived conflict report. Stop and surface either conflict (`IPL-05-010`/`IPL-05-011`). Never edit the generated Catalog during a
+transition (`IPL-05-020`). If no Spec participates, verify the Plan's own
 `## Behavior Contract` captures the expected delta, preserved behavior, and observable proof before advancing
 (`IPL-02-014`). When a real UC/Spec/Task chain participates, require a complete `## Scoped Parent Readiness`
 section and a passing `## Chain Preflight` report. They record included and every excluded sibling Task/Spec,
@@ -101,14 +100,12 @@ recorded participant or parent item makes the report stale until rerun (`IPL-02-
 
 ## Relationships
 
-A Plan's `source` names the Task/Spec/Use Case it was planned from (or is absent for a Plan-tier Plan). Its
+A Plan's `source_ids` names the Task/Spec/Use Case it was planned from (or is empty for a Plan-tier Plan). Its
 completion can settle the parent Spec or Use Case through the transition system described in `## Lifecycle`.
 
 ## Output / Location
 
-`harness-data/artifacts/implementation-plans/active/PLAN-*.md` while drafting or in progress; `ready/` once
-the Readiness Gate passes; `done/` on completion. See `agent-harness/OUTPUTS.md` for the full lifecycle-folder
-rules.
+`harness-data/artifacts/plans/PLAN-*.md`; every status transition updates that file in place.
 
 ## Template
 
@@ -156,12 +153,12 @@ an explicit Plan-promotion request.
 | IPL-02-017 | When a UC/Spec/Task chain participates, the Plan MUST contain `## Scoped Parent Readiness` identifying its source-chain parents and paths, included Tasks, every excluded sibling Task/Spec with current status/known owning Plan/nonblocking rationale, parent requirement/acceptance/constraint/dependency/risk/preserved-behavior items used by the slice, open Question/Review/blocker assessment, and current full-parent-fan-out result. |
 | IPL-02-018 | For each source-chain Spec, the union of included Tasks and sibling Tasks recorded in `## Scoped Parent Readiness` MUST equal that Spec's current derived Task set; an excluded sibling with a dependency, required shared path, requirement/acceptance overlap, or unresolved Question/Review affecting the slice MUST block promotion unless included or resolved. |
 | IPL-02-019 | An included Task MAY be `draft` and promote only after its fresh local gate passes, or already `ready`; an included `blocked`, `in-progress`, `archived`, `rejected`, or `done` Task MUST block promotion, and a `done` Task MUST instead be recorded as completed sibling/foundation scope. |
-| IPL-05-010 | Before setting a Plan status to `ready`, MUST check `harness-data/CATALOG.md` for other Plans at status `ready` or `in-progress` on the same Spec (`IPL-05-030`) or with overlapping Task `allowed_paths` (`IPL-05-050`). |
+| IPL-05-010 | Before setting a Plan to `ready`, MUST derive other `ready`/`in-progress` Plans from canonical flat artifacts and check for the same Spec or overlapping Task `allowed_paths`. |
 | IPL-05-011 | MUST stop and surface the conflict if `IPL-05-010`'s check finds either condition. |
-| IPL-05-020 | MUST keep `harness-data/CATALOG.md`'s Active Implementation Plans table accurate for all Plans at status `ready` or `in-progress`: add or update a Plan's row in the same pass its status changes to `ready` or `in-progress`; remove the row once the Plan is no longer either. For a Plan-tier Plan (`entrypoint_type: none`), record its row with the Spec ID column as `—`; the row is still required while the Plan is `ready` or `in-progress`, so `IPL-05-050`'s path-overlap check has a live table to check against. |
+| IPL-05-020 | MUST treat `harness-data/CATALOG.md` as generated/read-only, never hand-maintain concurrency rows, and use the derived `plan-conflicts` query. |
 | IPL-06-010 | MUST use the Commit Message Convention format in `IMPLEMENTATION-PLAN.md`'s `## Commit Message Convention` for a Plan step's suggested commit boundaries, citing the step's Task IDs under `Implements:` and its source Spec under `Source:`. |
 
 ## Reference Files
 
-None beyond the template and `harness-data/CATALOG.md` — see `PLANNING-IMPLEMENTATION.md`'s and
+None beyond the template — see `PLANNING-IMPLEMENTATION.md`'s and
 `IMPLEMENTING.md`'s own Reference Files for planning/execution-time context.

@@ -25,8 +25,8 @@ ID pattern below. Status is frontmatter only: a status change edits the same fil
 
 ## Canonical relationships
 
-Use only canonical forward ID links: `source_ids`, `related_adrs`, `question_refs`, and, on an execution
-coordinator, `included_ids`. Internal values are IDs, never paths; every ID resolves exactly once. Requirement IDs
+Use only canonical forward ID links: `source_ids`, `related_adrs`, `question_refs`, `depends_on` on Tasks, and
+`included_ids` on execution coordinators. Internal values are IDs, never paths; every ID resolves exactly once. Requirement IDs
 are local to their artifact and evidence names the requirement it proves. External material belongs in described
 `external_refs`. Reverse links, derived-child lists, and handwritten backlinks are generated views, not canonical
 metadata.
@@ -42,3 +42,4 @@ metadata.
 | OUT-04-020 | A lifecycle transition MUST update frontmatter status in place. |
 | OUT-08-010 | Questions MUST be rows in the single registry and MUST NOT use status-specific files or folders. |
 | OUT-09-010 | Canonical internal relationship fields MUST contain IDs, not paths or handwritten reverse links. |
+| OUT-09-020 | Task dependencies MUST use forward `depends_on`; reverse dependency lists are generated, not authored. |

@@ -57,7 +57,7 @@ risk: low                # low | medium | high
 ## Readiness Checklist
 
 Before advancing to `ready`, verify all items are checked. Cite a one-line evidence pointer per checked
-item beneath the checklist — see `rules/artifact-specs/USE-CASES.md`'s `UCS-03-012`.
+item beneath the checklist — see `agent-harness/artifact-specs/USE-CASES.md`'s `UCS-03-012`.
 
 - [ ] Primary actor is defined
 - [ ] Goal is clear and specific

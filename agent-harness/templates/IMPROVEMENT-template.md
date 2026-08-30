@@ -37,5 +37,5 @@ approval:
 
 ## Validation Result
 
-(fill before setting status to `done` or moving to `done/`: date validated, checks performed, outcome, and any
+(fill before setting status to `done`: date validated, checks performed, outcome, and any
 prospective checks that still need confirmation in future use)

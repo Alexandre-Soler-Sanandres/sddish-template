@@ -8,9 +8,8 @@ has durable provenance, audit, or long-running-handoff value (`PTN-03-010`). Its
 ## Artifact Story
 
 A Partnering conversation unfolds and the agent writes it down as it happens — the user never has to ask.
-Content stays `raw` until it's normalized (original-language snippets preserved only where needed, everything
-else in English), then `processed` once the artifact IDs it was distilled into are recorded, then `reviewed`
-once that normalization is verified.
+Content stays `recording` while captured. It becomes `recorded` once normalization is verified; `processed_into`
+independently records any artifacts distilled from it.
 
 ## Entry / Creation Paths
 
@@ -32,13 +31,13 @@ unless the `## When To Create` criterion applies.
 
 ## Artifact Shape
 
-`status` moves through `raw` → `processed`/`reviewed` (see `## Lifecycle`) as content is normalized and
+`status` moves `recording` → `recorded` → `archived` (see `## Lifecycle`) as content is normalized and
 distilled into other artifacts. `processed_into` lists the artifact IDs this transcript was distilled into.
 
 ## Field Semantics
 
 - `status` — see `## Lifecycle`.
-- `processed_into` — required before `status: processed`; see `## Lifecycle`'s `TRN-01-020`.
+- `processed_into` — optional forward record of artifacts distilled from this Transcript.
 
 ## Body Should Include
 
@@ -50,18 +49,16 @@ distilled into other artifacts. `processed_into` lists the artifact IDs this tra
 
 ## Lifecycle
 
-Before setting status to `reviewed`, verify the content has been normalized per `CORE.md`'s `COR-02-010`/
+Before setting status to `recorded`, verify the content has been normalized per `CORE.md`'s `COR-02-010`/
 `COR-02-020` (original-language snippets preserved only where needed, everything else in English) (`TRN-01-010`).
-Before setting status to `processed`, verify `processed_into` lists the artifact IDs this transcript was
-distilled into (`TRN-01-020`). `archived` transcripts move to `harness-data/artifacts/transcripts/archive/`,
-content preserved (same non-destructive precedent as `COR-01-080`) (`TRN-01-030`). `processed`/`reviewed`
-Transcripts intentionally remain in `active/` — a Transcript keeps evidentiary value even once distilled, unlike
-`archived`, which means no longer relevant (`TRN-01-040`).
+When downstream artifacts are created, record their IDs in `processed_into` (`TRN-01-020`). Every status change
+updates the same stable file in place (`TRN-01-030`). A recorded Transcript keeps evidentiary value even once
+distilled (`TRN-01-040`).
 
 ## Readiness / Acceptance
 
-See `## Lifecycle`'s `TRN-01-010`/`TRN-01-020` gates for `reviewed`/`processed`. The Transcript ID must never
-change; appending content while still `raw` is normal and does not require a status change (`TRN-02-010`).
+See `## Lifecycle`'s `TRN-01-010` gate for `recorded`. The Transcript ID must never change; appending content
+while still `recording` is normal (`TRN-02-010`).
 
 ## Relationships
 
@@ -70,9 +67,9 @@ into.
 
 ## Output / Location
 
-- `harness-data/artifacts/transcripts/active/TRANSCRIPT-*.md` (`raw`/`processed`/`reviewed`), using
+- `harness-data/artifacts/transcripts/TRANSCRIPT-*.md` (`recording`/`recorded`/`archived`), using
   `agent-harness/templates/TRANSCRIPT-template.md` unchanged.
-- `harness-data/artifacts/transcripts/archive/TRANSCRIPT-*.md` (`archived`)
+- `harness-data/artifacts/transcripts/TRANSCRIPT-*.md` (`archived`)
 
 ## Template
 
@@ -81,19 +78,18 @@ Use `agent-harness/templates/TRANSCRIPT-template.md` unchanged.
 ## Examples
 
 A Partnering session runs long and covers three distinct problems. The agent keeps writing to one Transcript
-throughout (`raw`), then once the session distills into two Ideas and a candidate ADR, sets `processed_into` to
-those three IDs and moves the Transcript to `processed`.
+throughout (`recording`), then normalizes it, sets it to `recorded`, and records any distilled artifact IDs.
 
 ## Rules
 
 | ID | Rule |
 | --- | --- |
 | TRN-00-010 | MUST create a Transcript only on user request or when durable provenance, audit, or long-running handoff value requires it. |
-| TRN-01-010 | Before setting status to `reviewed`, MUST verify the content has been normalized per `CORE.md`'s `COR-02-010`/`COR-02-020` (original-language snippets preserved only where needed, everything else in English). |
-| TRN-01-020 | Before setting status to `processed`, MUST verify `processed_into` lists the artifact IDs this transcript was distilled into. |
-| TRN-01-030 | `archived` transcripts MUST move to `harness-data/artifacts/transcripts/archive/`, content preserved (same non-destructive precedent as `COR-01-080`). |
-| TRN-01-040 | `processed`/`reviewed` Transcripts MUST remain in `active/` — no folder move for these statuses. A Transcript keeps evidentiary value even once distilled, unlike `archived`, which means no longer relevant. |
-| TRN-02-010 | The Transcript ID MUST NOT change. Appending content while still `raw` is normal and does not require a status change. |
+| TRN-01-010 | Before setting status to `recorded`, MUST verify normalization per `CORE.md`'s `COR-02-010`/`COR-02-020`. |
+| TRN-01-020 | When a Transcript is distilled into artifacts, MUST list their IDs in `processed_into`. |
+| TRN-01-030 | Transcript status changes MUST update the stable file in place. |
+| TRN-01-040 | A `recorded` Transcript MUST retain evidentiary value even after downstream use. |
+| TRN-02-010 | The Transcript ID MUST NOT change. Appending content while `recording` is normal. |
 
 ## Reference Files
 

@@ -136,16 +136,15 @@ declare -A statuses=(
 )
 
 # ---------------------------------------------------------------------------
-# Record-level v2 validations. The read-only Legacy Discovery bridge
-# (harness-data/artifacts/legacy/, removed by IMPROVEMENT-0150) is governed
-# by the extension, not by the core v2 record model — it is skipped here.
+# Record-level v2 validations.
 # ---------------------------------------------------------------------------
 declare -A rec_seen_type=()
 declare -A rec_fwd=()
 declare -A rec_src=()
+declare -A rec_adrs=()
+declare -A rec_deps=()
 
 while IFS= read -r -d '' file; do
-  case "$file" in "$artifacts"/legacy/*) continue ;; esac
   front=$(sed -n '/^---$/,/^---$/p' "$file")
   id=$(printf '%s\n' "$front" | sed -n 's/^id: *//p' | head -1)
   type=$(printf '%s\n' "$front" | sed -n 's/^type: *//p' | head -1)
@@ -159,18 +158,19 @@ while IFS= read -r -d '' file; do
 
   # (IMPROVEMENT-0149) no v1 reverse-link, renamed, or derived_* frontmatter field
   # survives on a migrated record. Canonical forward links are source_ids /
-  # related_adrs / question_refs / included_ids only (OUTPUTS.md).
+  # related_adrs / question_refs / included_ids / depends_on only (OUTPUTS.md).
   bad=$( { printf '%s\n' "$front" | grep -oE '^(source|related|legacy_refs|entrypoint|entrypoint_type|included_tasks|excluded_tasks|blocks|next|follow_up|superseded_by|derived_[a-z_]+):' || true; } | sed 's/:$//' | sort -u | tr '\n' ' ')
   [[ -z ${bad// } ]] || { echo "v1 reverse/renamed field(s) on $id: $bad" >&2; fail=1; }
 
   rec_seen_type[$id]=$type
-  rec_fwd[$id]=$(printf '%s\n' "$front" | sed -nE 's/^(source_ids|related_adrs|included_ids|question_refs): *\[(.*)\].*$/\2/p' | tr ',' ' ')
+  rec_fwd[$id]=$(printf '%s\n' "$front" | sed -nE 's/^(source_ids|related_adrs|included_ids|question_refs|depends_on): *\[(.*)\].*$/\2/p' | tr ',' ' ')
   rec_src[$id]=$(printf '%s\n' "$front" | sed -nE 's/^source_ids: *\[(.*)\].*$/\1/p' | tr ',' ' ')
+  rec_adrs[$id]=$(printf '%s\n' "$front" | sed -nE 's/^related_adrs: *\[(.*)\].*$/\1/p' | tr ',' ' ')
+  rec_deps[$id]=$(printf '%s\n' "$front" | sed -nE 's/^depends_on: *\[(.*)\].*$/\1/p' | tr ',' ' ')
 done < <(find "$artifacts" -type f -name '*.md' ! -path '*/questions/QUESTIONS.md' -print0)
 
 # (IMPROVEMENT-0149) no record left under a v1 lifecycle subfolder
 while IFS= read -r -d '' d; do
-  case "$d" in "$artifacts"/legacy/*) continue ;; esac
   if compgen -G "$d/*.md" >/dev/null; then
     echo "records under v1 lifecycle path: $d" >&2; fail=1
   fi
@@ -184,6 +184,8 @@ questions="$artifacts/questions/QUESTIONS.md"
 declare -A qseen=()
 if [[ -f $questions ]]; then
   while IFS= read -r qid; do [[ -n $qid ]] && qseen[$qid]=1; done < <(
+    # Q-NNNN is the only family the v2 template creates. Grandfathered adopted
+    # Q-APPKEY/CSQ/CSP rows remain resolvable migration evidence.
     grep -oE '^\|[[:space:]]*(Q|CSQ|CSP)-[A-Z0-9-]*[0-9]{4}[[:space:]]*\|' "$questions" \
       | grep -oE '(Q|CSQ|CSP)-[A-Z0-9-]*[0-9]{4}')
   awk '
@@ -201,7 +203,7 @@ fi
 # in-repo artifacts for forward-link resolution. Harvest their IDs into `seen`;
 # their own model (LD-* status vocab, nested layout) is not checked here.
 ext="$root/extensions/legacy-discovery"
-if [[ -d $ext ]]; then
+if [[ -f $profile ]] && grep -qE '^[[:space:]]*legacy_discovery:[[:space:]]*enabled[[:space:]]*$' "$profile" && [[ -d $ext ]]; then
   while IFS= read -r -d '' f; do
     eid=$(sed -n '/^---$/,/^---$/p' "$f" | sed -n 's/^id: *//p' | head -1)
     [[ -n $eid ]] && seen[$eid]=1
@@ -219,6 +221,20 @@ for id in "${!rec_fwd[@]}"; do
       *)
         [[ -n ${seen[$ref]+x} ]] || { echo "unresolved forward link '$ref' on $id" >&2; fail=1; } ;;
     esac
+  done
+done
+
+for id in "${!rec_adrs[@]}"; do
+  for ref in ${rec_adrs[$id]}; do
+    ref=${ref// /}; [[ -n $ref ]] || continue
+    [[ ${rec_seen_type[$ref]:-} == adr ]] || { echo "related_adrs '$ref' on $id does not resolve to an ADR" >&2; fail=1; }
+  done
+done
+for id in "${!rec_deps[@]}"; do
+  for ref in ${rec_deps[$id]}; do
+    ref=${ref// /}; [[ -n $ref ]] || continue
+    [[ ${rec_seen_type[$id]:-} == task && ${rec_seen_type[$ref]:-} == task ]] \
+      || { echo "depends_on '$ref' on $id is not a Task-to-Task edge" >&2; fail=1; }
   done
 done
 

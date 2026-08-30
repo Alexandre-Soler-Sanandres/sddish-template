@@ -9,10 +9,10 @@ file for the behavioral rules governing when and how a harness change may be mad
 ## Artifact Story
 
 A harness/process-flavored Review finding identifies a recurring problem. The agent drafts an Improvement
-describing the problem, root cause, and proposed change, and links it back into that Review's `follow_up` field
-immediately — not deferred until approval. The user reviews the proposed change and explicitly approves it;
-only then does the agent apply the target-file changes and record what was validated. Once every `follow_up`
-Improvement on the originating Review reaches a terminal status, that Review itself closes.
+describing the problem, root cause, and proposed change, and cites that Review in `source_ids`. The user reviews
+the proposed change and explicitly approves it; only then does the agent apply the target-file changes and record
+what was validated. Once every Improvement citing the originating Review reaches a terminal status, that Review
+itself closes.
 
 ## Entry / Creation Paths
 
@@ -47,9 +47,7 @@ its target-file changes before the user has explicitly approved that specific Im
 ## Field Semantics
 
 - `status` — `proposed | approved | in-progress | done | rejected | archived`; see `## Lifecycle`.
-- `source` — the originating Review ID(s); see `## Relationships`.
-- `follow_up` (on the source Review, not this artifact) — this Improvement's own ID is added there at creation
-  time (`IMPR-04-010`).
+- `source_ids` — the originating Review ID(s); see `## Relationships`.
 
 ## Body Should Include
 
@@ -62,31 +60,27 @@ its target-file changes before the user has explicitly approved that specific Im
 
 ## Lifecycle
 
-`active/` while drafting or in progress; `done/` once the approved target changes are applied and the validation
-result is documented (`IMPR-03-040`). `## Validation` stays the validation plan or checklist; `## Validation
-Result` is added with the date, checks performed, and outcome before the Improvement is set to `done` or moved
-to `done/` (`IMPR-03-010`/`IMPR-03-020`). If a validation item is prospective and cannot be fully proven yet,
+The file remains at its stable v2 path for every status. `## Validation` stays the validation plan or checklist;
+`## Validation Result` is added with the date, checks performed, and outcome before the Improvement is set to
+`done` (`IMPR-03-010`/`IMPR-03-020`). If a validation item is prospective and cannot be fully proven yet,
 state that explicitly instead of treating it as completed evidence (`IMPR-03-030`).
 
 ## Readiness / Acceptance
 
-`status: proposed -> approved` is a distinct, user-only gate from the `approved -> done` validation gate — see
-`IMPROVING-HARNESS.md`'s `IMPR-02-025`. Meeting the validation conditions for `done` must never be treated as
-substituting for that separate approval (`IMPR-03-050`).
+`status: proposed -> approved` is a distinct, user-only gate. Set `in-progress` before the first approved target
+mutation; set `done` only after validation. Meeting the validation conditions must never substitute for approval
+(`IMPR-03-050`).
 
 ## Relationships
 
-This Improvement's own ID MUST be added to the `follow_up` field of every Review in `source`, at creation time —
-not deferred until approval or `done` (`IMPR-04-010`). When this Improvement's `status` transitions to `done` or
-`rejected`, resolve each `source` Review per `REVIEW.md`'s `RVW-06-010` if every `follow_up` Improvement is now
-terminal — performed in the same action as this Improvement's `done`/`rejected` transition, not a separately
-scheduled sweep (`IMPR-04-020`/`IMPR-04-030`).
+This Improvement MUST cite every originating Review in `source_ids` (`IMPR-04-010`). When its status transitions
+to `done` or `rejected`, resolve each source Review per `REVIEW.md`'s `RVW-06-010` if every Improvement citing
+that Review is terminal. Derive those backlinks by scanning `source_ids`; do not author reverse metadata on the
+Review (`IMPR-04-020`/`IMPR-04-030`).
 
 ## Output / Location
 
-`harness-data/artifacts/improvements/active/IMPROVEMENT-*.md` while drafting or in progress; `done/` once the
-`IMPR-03-040` conditions are met (approved changes applied, validation result documented). See
-`agent-harness/OUTPUTS.md` for the full lifecycle-folder rules.
+`harness-data/artifacts/improvements/IMPROVEMENT-*.md`; status changes update this stable file in place.
 
 ## Template
 
@@ -95,9 +89,8 @@ Use `agent-harness/templates/IMPROVEMENT-template.md` as the starting point for 
 ## Examples
 
 `REVIEW-0052` finds that mode files mix workflow prose with enforceable rules. The agent drafts
-`IMPROVEMENT-0117`, adds its ID to `REVIEW-0052`'s `follow_up` immediately, waits for explicit approval, applies
-the approved rewrite, records the validation result, and — once every other `follow_up` Improvement on that
-Review also reaches a terminal status — resolves the Review itself.
+`IMPROVEMENT-0117`, cites `REVIEW-0052` in `source_ids`, waits for explicit approval, applies the approved rewrite,
+records the validation result, and — once every Improvement citing that Review is terminal — resolves the Review.
 
 ## Rules
 
@@ -105,12 +98,12 @@ Review also reaches a terminal status — resolves the Review itself.
 | --- | --- |
 | IMPR-00-010 | MAY create a process Review and proposed Improvement artifacts in one transaction for an explicit harness-improvement request, but MUST NOT treat that request as approval or target-file authorization. |
 | IMPR-03-010 | MUST keep `## Validation` as the validation plan or checklist. |
-| IMPR-03-020 | MUST add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done` or moved to `done/`. |
+| IMPR-03-020 | MUST add `## Validation Result` with the date, checks performed, and outcome before an Improvement artifact is set to `done`. |
 | IMPR-03-030 | If a validation item is prospective and cannot be fully proven yet, MUST state that explicitly instead of treating it as completed evidence. |
-| IMPR-03-040 | MUST NOT move an Improvement artifact to `done/` until the approved target changes are applied and the validation result is documented. |
-| IMPR-03-050 | `status: proposed -> approved` is a distinct, user-only gate from this file's `approved -> done` validation gate (`IMPR-03-040`) — see `IMPR-02-025` in `IMPROVING-HARNESS.md`. Meeting `IMPR-03-040`'s validation conditions MUST NOT be treated as substituting for that approval. |
-| IMPR-04-010 | MUST add this Improvement's own ID to the `follow_up` field of every Review in `source`, at creation time — not deferred until approval or `done`. |
-| IMPR-04-020 | When this Improvement's `status` transitions to `done` or `rejected`, MUST resolve each `source` Review per `REVIEW.md`'s `RVW-06-010` if every `follow_up` Improvement is now terminal. |
+| IMPR-03-040 | MUST NOT set an Improvement to `done` until the approved target changes are applied and the validation result is documented. |
+| IMPR-03-050 | MUST treat user-only `proposed -> approved`, pre-mutation `approved -> in-progress`, and validated `in-progress -> done` as distinct gates. |
+| IMPR-04-010 | MUST cite every originating Review in this Improvement's `source_ids` at creation time. |
+| IMPR-04-020 | When this Improvement transitions to `done` or `rejected`, MUST resolve each source Review per `REVIEW.md`'s `RVW-06-010` if every Improvement whose `source_ids` cites it is terminal. |
 | IMPR-04-030 | MUST perform the `RVW-06-010` resolution in the same action as this Improvement's `done`/`rejected` transition — not a separately-scheduled sweep. |
 
 ## Reference Files

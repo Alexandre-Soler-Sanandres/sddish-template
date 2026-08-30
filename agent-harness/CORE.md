@@ -96,7 +96,7 @@ Discovering-Legacy, Improving-Harness, Planning-Implementation, Refining.
 | ID | Rule |
 | --- | --- |
 | COR-05-010 | Work MUST checkpoint mode, authorization, in-scope files, and validation before high-impact actions, stopping, or committing. |
-| COR-05-020 | Work MUST treat these as high-impact actions: committing; changing harness mode files, templates, or process rules; creating Review or Improvement artifacts; moving artifacts between lifecycle folders (see `agent-harness/systems/LIFECYCLE-FOLDERS.md` for why that move is never a bare housekeeping step). Discovering-Legacy mode adds its own high-impact actions on top of this list — see `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`. |
+| COR-05-020 | Work MUST treat these as high-impact actions: committing; changing harness mode files, templates, or process rules; creating Review or Improvement artifacts; and changing an artifact's lifecycle state (see `agent-harness/systems/LIFECYCLE-FOLDERS.md`). Discovering-Legacy mode adds its own high-impact actions — see `agent-harness/extensions/legacy-discovery/DISCOVERING-LEGACY.md`. |
 | COR-05-030 | After a resume or context compaction, Work MUST repeat the checkpoint (`COR-05-010`) and re-read `CORE.md` and the active true-Mode file in full before the next high-impact action — the checkpoint verifies state, not rule text, so confirming mode identity alone is not enough. |
 | COR-05-040 | On a true Mode transition (per `COR-03-040`'s list — not every artifact-producing action), Work MUST re-read the newly-active mode file in full before taking any mode-specific action. |
 

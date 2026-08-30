@@ -203,19 +203,129 @@ fi
 [ "$tmpl_fail" -eq 0 ] && pass "templates have frontmatter and committed artifacts carry no placeholders"
 
 # ---------------------------------------------------------------------------
-section "Harness evaluation suite"
+section "V2 regression guards"
 # ---------------------------------------------------------------------------
-eval_fail=0
-if [ -d harness-evals ]; then
-  [ -x scripts/evaluate-harness.sh ] || { fail "harness evaluation runner is missing or not executable"; eval_fail=1; }
-  if [ -x scripts/evaluate-harness.sh ] && ! bash scripts/evaluate-harness.sh --check; then
-    fail "harness evaluation suite structure is invalid"
-    eval_fail=1
-  fi
-  [ "$eval_fail" -eq 0 ] && pass "harness evaluation suite is structurally valid"
-else
-  detail "harness evaluation suite not yet installed"
+v2_fail=0
+stale_paths="$(grep -rEn 'harness-data/artifacts/(implementation-plans|legacy)/|harness-data/artifacts/(adrs|ideas|improvements|plans|reviews|specs|tasks|transcripts|use-cases)/(active|ready|done|archive|proposed|accepted)/|QUESTIONS-(OPEN|RESOLVED|DISCARDED)\.md' agent-harness README.md 2>/dev/null || true)"
+if [ -n "$stale_paths" ]; then
+  fail "active surfaces contain retired v1 paths"
+  printf '%s\n' "$stale_paths" | while IFS= read -r x; do detail "$x"; done
+  v2_fail=1
 fi
+legacy_fields="$(grep -rEn '^(source|related|entrypoint|entrypoint_type|included_tasks|blocks|next|follow_up|supersedes|superseded_by|derived_[a-z_]+):' agent-harness/templates 2>/dev/null || true)"
+if [ -n "$legacy_fields" ]; then
+  fail "templates contain retired relationship fields"
+  printf '%s\n' "$legacy_fields" | while IFS= read -r x; do detail "$x"; done
+  v2_fail=1
+fi
+legacy_schema_prose="$(grep -rEn '`(source|related|entrypoint|entrypoint_type|included_tasks|blocks|follow_up|superseded_by|derived_[a-z_]+)`' agent-harness 2>/dev/null || true)"
+if [ -n "$legacy_schema_prose" ]; then
+  fail "active harness prose names retired relationship fields"
+  printf '%s\n' "$legacy_schema_prose" | while IFS= read -r x; do detail "$x"; done
+  v2_fail=1
+fi
+retired_statuses="$({
+  grep -En '`(captured|clarifying|ready-for-refining|landed)`|status:[[:space:]]*(captured|clarifying|ready-for-refining|landed)' agent-harness/artifact-specs/IDEA.md || true
+  grep -En '`(raw|processed|reviewed)`|status:[[:space:]]*(raw|processed|reviewed)' agent-harness/artifact-specs/TRANSCRIPT.md || true
+  grep -En 'status[^[:cntrl:]]{0,30}(resolved|discarded)' agent-harness/artifact-specs/REVIEW.md || true
+  grep -En 'status[^[:cntrl:]]{0,30}rejected' agent-harness/artifact-specs/ADR.md || true
+} 2>/dev/null)"
+if [ -n "$retired_statuses" ]; then
+  fail "core Artifact Contracts contain retired status vocabulary"
+  printf '%s\n' "$retired_statuses" | while IFS= read -r x; do detail "$x"; done
+  v2_fail=1
+fi
+legacy_question_creation="$(grep -rEn 'MUST (use|create).*(Q-<APP>|Q-APPKEY|CSQ-|CSP-)|Create or update.*(CSQ-|CSP-)' agent-harness 2>/dev/null || true)"
+if [ -n "$legacy_question_creation" ]; then
+  fail "active instructions create retired Question ID families"
+  printf '%s\n' "$legacy_question_creation" | while IFS= read -r x; do detail "$x"; done
+  v2_fail=1
+fi
+[ "$v2_fail" -eq 0 ] && pass "active surfaces reject v1 paths, template fields, and Question creation rules"
+
+# ---------------------------------------------------------------------------
+section "Generated-view behavior"
+# ---------------------------------------------------------------------------
+view_fail=0
+fixture="$(mktemp -d)"
+mkdir -p "$fixture/artifacts/specs" "$fixture/artifacts/tasks" "$fixture/artifacts/plans" \
+  "$fixture/extensions/legacy-discovery/findings"
+write_record() {
+  local path=$1 body=$2
+  printf '%s\n' "$body" >"$path"
+}
+write_record "$fixture/artifacts/specs/SPEC-9001.md" '---
+id: SPEC-9001
+type: spec
+status: ready
+title: Fixture spec
+source_ids: []
+---'
+write_record "$fixture/artifacts/tasks/TASK-9001.md" '---
+id: TASK-9001
+type: task
+status: ready
+title: Fixture task one
+source_ids: [SPEC-9001]
+depends_on: [TASK-9002]
+allowed_paths: [src/app]
+---'
+write_record "$fixture/artifacts/tasks/TASK-9002.md" '---
+id: TASK-9002
+type: task
+status: ready
+title: Fixture task two
+source_ids: [SPEC-9001]
+depends_on: [TASK-9001]
+allowed_paths: [src]
+---'
+write_record "$fixture/artifacts/plans/PLAN-9001.md" '---
+id: PLAN-9001
+type: implementation-plan
+status: ready
+title: Fixture plan one
+source_ids: [SPEC-9001]
+included_ids: [TASK-9001]
+---'
+write_record "$fixture/artifacts/plans/PLAN-9002.md" '---
+id: PLAN-9002
+type: implementation-plan
+status: in-progress
+title: Fixture plan two
+source_ids: [SPEC-9001]
+included_ids: [TASK-9002]
+---'
+write_record "$fixture/extensions/legacy-discovery/findings/LF-FIX-0001.md" '---
+id: LF-FIX-0001
+type: legacy-finding
+status: reviewed
+title: Fixture extension record
+---'
+write_record "$fixture/HARNESS-PROFILE.yaml" 'extensions:
+  legacy_discovery: disabled'
+
+active="$(bash scripts/render-harness-views.sh "$fixture" active-plans)"
+conflicts="$(bash scripts/render-harness-views.sh "$fixture" plan-conflicts)"
+backlinks="$(bash scripts/render-harness-views.sh "$fixture" backlinks SPEC-9001)"
+trace="$(bash scripts/render-harness-views.sh "$fixture" trace TASK-9001)"
+disabled="$(bash scripts/render-harness-views.sh "$fixture" --stdout)"
+[[ $active == *'PLAN-9001|ready|SPEC-9001|TASK-9001|src/app'* ]] \
+  || { fail "active-plans query omitted canonical Plan/Task data"; view_fail=1; }
+[[ $conflicts == *'same-source:SPEC-9001'* && ( $conflicts == *'path-overlap:src/app:src'* || $conflicts == *'path-overlap:src:src/app'* ) ]] \
+  || { fail "plan-conflicts query missed same-source or ancestor-path overlap"; view_fail=1; }
+[[ $backlinks == *'PLAN-9001|source_ids|SPEC-9001'* ]] \
+  || { fail "backlinks query omitted a canonical incoming edge"; view_fail=1; }
+[[ $trace == *'TASK-9001|depends_on|TASK-9002'* ]] \
+  || { fail "trace query omitted a cyclic canonical edge"; view_fail=1; }
+[[ $disabled != *'LF-FIX-0001'* ]] \
+  || { fail "disabled Extension leaked into generated views"; view_fail=1; }
+write_record "$fixture/HARNESS-PROFILE.yaml" 'extensions:
+  legacy_discovery: enabled'
+enabled="$(bash scripts/render-harness-views.sh "$fixture" --stdout)"
+[[ $enabled == *'LF-FIX-0001'* ]] \
+  || { fail "enabled Extension was omitted from generated views"; view_fail=1; }
+rm -rf "$fixture"
+[ "$view_fail" -eq 0 ] && pass "active plans, conflicts, backlinks, trace cycles, and Extension gating behave as specified"
 
 # ---------------------------------------------------------------------------
 printf '\n'

@@ -61,8 +61,8 @@ will help later synthesis; record each such note as `- Affects: <LF-ID> — <sho
 
 ## Open Questions
 
-(list open question IDs from `QUESTIONS-OPEN.md` still open against this finding — `Q-<APP>-NNNN` for app findings,
-`CSQ-NNNN` for cross-system findings. Empty means no open question-blockers on this finding. Before leaving this
+(list canonical `Q-NNNN` IDs still open against this finding; scope belongs in registry row fields. Empty means
+no open question-blockers on this finding. Before leaving this
 empty, re-read this finding's own `Classification`/`Evidence Conflict` text against `QST-06-010`'s Question test
 — "we haven't decided whether/how to X." If the finding's own wording already reads that way (e.g. "worth
 tracking so a rewrite standardises on X"), or the finding clearly implies a `preserve-vs-adapt`, `scope-v1`,
@@ -72,6 +72,5 @@ policy unresolved.)
 
 ## Resolved Questions
 
-(for each question ID that used to be listed above and has since been resolved in `QUESTIONS-RESOLVED.md`, move it
-here with the resolution text copied in directly — e.g. `` `Q-<APP>-NNNN`: decision text `` or
-`` `CSQ-NNNN`: decision text `` — so this finding is self-contained without re-opening the registry)
+(for each formerly open Question now resolved, retain its `Q-NNNN` reference and record only the local effect or
+disposition needed to understand this finding; the registry remains resolution authority)

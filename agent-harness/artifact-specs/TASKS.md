@@ -44,14 +44,14 @@ Not applicable beyond `## Sources`' precondition — see `agent-harness/modes/RE
 ## Artifact Shape
 
 A Task entered via the Spec-skip path must include a `## Risk-Tier Classification` section (`RSK-05-010`); its
-`source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Spec
+`source_ids` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Spec
 (`TSK-02-025`). `allowed_paths`/`forbidden_paths` scope what Implementing may touch (`IMPLEMENTING.md`'s
 `IMPL-03-060`).
 
 ## Field Semantics
 
 - `status` — see `## Lifecycle`.
-- `related` — accepted ADRs this Task depends on; see `## Relationships`.
+- `related_adrs` — accepted ADRs this Task depends on; see `## Relationships`.
 - `allowed_paths`/`forbidden_paths` — see `## Artifact Shape`.
 
 ## Body Should Include
@@ -72,16 +72,16 @@ A Task entered via the Spec-skip path must include a `## Risk-Tier Classificatio
 Before a transition rule promotes a Task to `ready`, verify the Readiness Checklist in the artifact — every item
 must be checked; a single unchecked item blocks the promotion (`TSK-02-010`/`TSK-02-011`). Status transitions
 for this artifact — including how it reaches `ready` and how reopening and reconsideration work — are described
-in `agent-harness/systems/STATUS-TRANSITIONS.md` and enforced by the paired `STT-*` rules.
+in `agent-harness/systems/STATUS-TRANSITIONS.md` and governed by the co-located `STT-*` rules.
 
 ## Readiness / Acceptance
 
 Status is set to `ready` only when `agent-harness/systems/STATUS-TRANSITIONS.md`'s `STT-01-030`/`040` applies.
 Also re-run the same three ADR checks Specs and Use Cases
 require: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR present in
-`related` and every `scoped` ADR re-judged (`TSK-06-010`–`012`); content-drift recheck against the Task's actual
+`related_adrs` and every `scoped` ADR re-judged (`TSK-06-010`–`012`); content-drift recheck against the Task's actual
 current scope, not only its original `area` (`TSK-06-030`); and a compliance check that every ADR cited in
-`related` is actually reflected in the Task's `allowed_paths`/scope (`TSK-06-040`). If `allowed_paths` add or
+`related_adrs` is actually reflected in the Task's `allowed_paths`/scope (`TSK-06-040`). If `allowed_paths` add or
 modify an HTTP route, app instance, or an external dependency (database, model, credential) on a backend service,
 additionally verify whether this project's accepted health/readiness-check convention ADR (if one exists) needs
 updating for that change — regardless of whether the missed-ADR recheck matches — and either update it or note
@@ -89,17 +89,12 @@ explicitly why no update is needed (`TSK-06-020`).
 
 ## Relationships
 
-When a Task is created that depends on an accepted `scoped` ADR, add the ADR's ID to the Task's `related` field
-and the Task's ID to the ADR's `derived_tasks` field, in the same pass — the Task-side equivalent of
-`RELATIONS-AND-SUPERSESSION.md`'s `DEC-07-010`, which covers Use Case/Spec only. A `fleet-wide` ADR is exempt
-from the reverse-link half of this rule, per the same reasoning as `DEC-07-010` (`TSK-05-010`).
+When a Task depends on an accepted ADR, add the ADR ID to the Task's `related_adrs`. Derive ADR consumers by
+scanning those canonical forward citations (`TSK-05-010`).
 
 ## Output / Location
 
-- `harness-data/artifacts/tasks/active/TASK-*.md` (`draft`/`in-progress`/`blocked`)
-- `harness-data/artifacts/tasks/ready/TASK-*.md` (`ready`)
-- `harness-data/artifacts/tasks/done/TASK-*.md` (`done`)
-- `harness-data/artifacts/tasks/archive/TASK-*.md` (`archived`/`rejected`)
+- `harness-data/artifacts/tasks/TASK-*.md` for every status; lifecycle is frontmatter-only.
 
 ## Template
 
@@ -119,20 +114,20 @@ Task's eventual promotion to `ready` to `STT-01-030`/`040` once the local gates 
 | TSK-02-010 | Before this Task's promotion (`STT-01-030`/`040`), MUST verify the Readiness Checklist in the artifact. |
 | TSK-02-011 | Every Readiness Checklist item MUST be checked; a single unchecked item blocks the status change. |
 | TSK-02-012 | Each checked Readiness Checklist item MUST be accompanied by a one-line evidence pointer (e.g. a test name, file path, or line reference) recorded beneath the checklist; a checked item with no citable evidence blocks the status change the same as an unchecked one. |
-| TSK-02-025 | A Task entered via the Spec-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010`); its `source` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Spec. |
-| TSK-05-010 | When a Task is created that depends on an accepted `scoped` ADR, MUST add the ADR's ID to the Task's `related` field and add the Task's ID to the ADR's `derived_tasks` field, in the same pass — the Task-side equivalent of `RELATIONS-AND-SUPERSESSION.md`'s `DEC-07-010`, which covers Use Case/Spec only. A `fleet-wide` ADR is exempt from the reverse-link half of this rule, per the same reasoning as `DEC-07-010`. |
+| TSK-02-025 | A Task entered via the Spec-skip path MUST include a `## Risk-Tier Classification` section (`RSK-05-010`); its `source_ids` frontmatter field then points at the Idea/Transcript/etc. actually used instead of a Spec. |
+| TSK-05-010 | When a Task depends on an accepted ADR, MUST cite it in `related_adrs` and rely on generated consumer backlinks rather than handwritten ADR metadata. |
 | TSK-06-010 | Missed-ADR recheck. Before this Task's promotion (`STT-01-030`/`040`), MUST re-run the relevance judgment against the *current* accepted-ADR list. |
-| TSK-06-011 | Every `fleet-wide` ADR MUST be present in `related`. |
-| TSK-06-012 | Every `scoped` ADR MUST be re-judged: added to `related` if newly relevant, or explicitly ruled out. |
+| TSK-06-011 | Every `fleet-wide` ADR MUST be present in `related_adrs`. |
+| TSK-06-012 | Every `scoped` ADR MUST be re-judged: added to `related_adrs` if newly relevant, or explicitly ruled out. |
 | TSK-06-020 | Before this Task's promotion (`STT-01-030`/`040`), if the Task's `allowed_paths` add or modify an HTTP route, app instance, or an external dependency (database, model, credential) on a backend service, MUST additionally verify whether this project's accepted health/readiness-check convention ADR (if one exists) needs updating for that change — regardless of whether `TSK-06-010`'s recheck matches — and either update it or note explicitly why no update is needed. |
 | TSK-06-030 | Content-drift recheck. Before this Task's promotion (`STT-01-030`/`040`), MUST judge ADR relevance against the Task's actual current scope, not only its original `area` — drafting/scoping can drift the Task into territory an ADR bears on that the creation-time load never saw. |
-| TSK-06-040 | Compliance check. Before this Task's promotion (`STT-01-030`/`040`), MUST verify every ADR cited in `related` is actually reflected in the Task's `allowed_paths`/scope — a citation with no matching content is a gate failure. |
+| TSK-06-040 | Compliance check. Before this Task's promotion (`STT-01-030`/`040`), MUST verify every ADR cited in `related_adrs` is actually reflected in the Task's `allowed_paths`/scope — a citation with no matching content is a gate failure. |
 
 ## Reference Files
 
 Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/ARCHITECTURE.md` — when defining allowed and forbidden paths or verifying scope against system boundaries
-- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
+- `harness-data/artifacts/adrs/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
 - `harness-data/reference/TOOLING.md` — when specifying validation commands in Task frontmatter
 - `harness-data/reference/DOMAIN.md` — when the Task touches domain-critical areas (payments, security, data integrity)

@@ -73,14 +73,14 @@ Consumes / Produces:
    formal readiness gate either — use the same judgment that the source material is concrete enough.
 3. Read the source material.
 4. Load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance;
-   record the result in `related` now (`UCS-01-040`) — before drafting the goal/scenario, not after.
+   record the result in `related_adrs` now (`UCS-01-040`) — before drafting the goal/scenario, not after.
 5. Identify the primary actor and supporting actors.
 6. Define the goal, trigger, and preconditions.
 7. Write the main success scenario, alternatives, and failure paths.
 8. Define non-goals and the observable outcome.
 9. Carry forward relevant Questions-registry entries tied to the source artifact (`UCS-05-010`).
-10. If the source is an Idea, close it per `systems/STATUS-TRANSITIONS.md`'s `IDA-03-020` (status `landed`,
-    `next` set to this Use Case's ID, moved to `archive/`) as part of this same action.
+10. If the source is an Idea, close it per `systems/STATUS-TRANSITIONS.md`'s `IDA-03-020` (`status: accepted`;
+    this Use Case cites it in `source_ids`) as part of this same action.
 11. Stop before creating a Spec, Task, or Implementation Plan.
 
 ### Spec Creation (via `/create-spec`)
@@ -93,7 +93,7 @@ Consumes / Produces:
    unnecessary), in which case proceed directly from the same source types Use Case creation would have used.
 2. Read the Use Case (or, on the skip-path, the source material directly).
 3. Load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance;
-   record the result in `related` now (`SPS-01-030`) — before drafting scope/requirements, not after.
+   record the result in `related_adrs` now (`SPS-01-030`) — before drafting scope/requirements, not after.
 4. Inspect source Ideas or Legacy Findings when additional context is needed.
 5. Identify problem and goal.
 6. Define scope and non-goals.
@@ -124,9 +124,9 @@ already decided when the Spec was made ready with Tasks in mind (`TSK-01-032`).
 
 ## Outputs
 
-- Use Case: `harness-data/artifacts/use-cases/active/UC-*.md`, per `agent-harness/artifact-specs/USE-CASES.md`.
-- Spec: `harness-data/artifacts/specs/active/SPEC-*.md`, per `agent-harness/artifact-specs/SPECS.md`.
-- Task: `harness-data/artifacts/tasks/active/TASK-*.md`, per `agent-harness/artifact-specs/TASKS.md`.
+- Use Case: `harness-data/artifacts/use-cases/UC-*.md`, per `agent-harness/artifact-specs/USE-CASES.md`.
+- Spec: `harness-data/artifacts/specs/SPEC-*.md`, per `agent-harness/artifact-specs/SPECS.md`.
+- Task: `harness-data/artifacts/tasks/TASK-*.md`, per `agent-harness/artifact-specs/TASKS.md`.
 
 ## Examples
 
@@ -143,14 +143,14 @@ scope/requirements/acceptance-criteria, and stops before touching code or drafti
 | UCS-01-011 | MAY create a Use Case from an Idea at any status — `IDA-01-010`'s judgment gate still applies. |
 | UCS-01-012 | When `RISK-TIER.md`'s UC-Necessity Matrix (`RSK-02-010`) classifies the request below UC-tier, `/create-spec` MAY be entered directly, skipping Use Case creation. |
 | UCS-01-030 | For source types other than an Idea, which have no formal status gate, the agent SHOULD use judgment that the source material is concrete enough to draft a scenario from. |
-| UCS-01-040 | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Use Case's content, recording the result in `related` at creation time — `UCS-07-010`/`UCS-07-020`/`UCS-07-030` (in `USE-CASES.md`) remain the final verification pass, not the first point of contact. |
+| UCS-01-040 | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Use Case's content, recording the result in `related_adrs` at creation time — `UCS-07-010`/`UCS-07-020`/`UCS-07-030` (in `USE-CASES.md`) remain the final verification pass, not the first point of contact. |
 | UCS-01-050 | Before starting Use Case creation or entering Refining at a lower tier: if the source Idea already carries a `## Risk-Tier Classification` (per `IDA-05-020`) or the source is a Transcript/Partnering discussion where `PTN-02-110` already classified this same request, MUST reuse that result per `RISK-TIER.md`'s `RSK-07-011`/`RSK-07-012`. This is step 0 of both the Use Case and Spec creation checklists in `REFINING.md`'s `## Core Moves`. |
 | UCS-01-051 | Otherwise MUST run the UC-Necessity Matrix (`RSK-02-010`) fresh. |
 | UCS-04-020 | MUST NOT trigger implementation. |
 | UCS-04-021 | MUST NOT create Specs, Tasks, or Implementation Plans from Use Case creation. |
 | SPS-01-010 | MAY create a Spec from a Use Case at any status. |
 | SPS-01-012 | When `RISK-TIER.md`'s Spec-Necessity Matrix (`RSK-03-010`) classifies the request below Spec-tier, `/create-tasks` MAY be entered directly, skipping Spec creation. |
-| SPS-01-030 | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Spec's content, recording the result in `related` at creation time — `SPS-08-010`/`SPS-08-020`/`SPS-08-030` (in `SPECS.md`) remain the final verification pass, not the first point of contact. |
+| SPS-01-030 | MUST load every `fleet-wide` accepted ADR unconditionally and judge every `scoped` accepted ADR for relevance before drafting a Spec's content, recording the result in `related_adrs` at creation time — `SPS-08-010`/`SPS-08-020`/`SPS-08-030` (in `SPECS.md`) remain the final verification pass, not the first point of contact. |
 | SPS-01-040 | Same carry-forward check as `UCS-01-050`, for the Spec-Necessity Matrix (`RSK-03-010`) — reuse an existing classification per `RSK-07-011`/`RSK-07-012` before running it fresh (or immediately after `UCS-01-050` classifies UC as not required, in which case Spec-Necessity has not yet been checked and MUST run). |
 | SPS-04-010 | MUST NOT implement or change code while creating a Spec. |
 | SPS-04-011 | MUST NOT create Tasks or Implementation Plans while creating a Spec. |
@@ -172,6 +172,6 @@ Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/DOMAIN.md` — when defining actors, requirements, or Task scope that involve domain concepts, business rules, or domain-critical areas
 - `harness-data/reference/ARCHITECTURE.md` — when scope touches system boundaries, layers, or architectural constraints
-- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when scope touches a system boundary or structural decision already settled by an ADR
+- `harness-data/artifacts/adrs/` (accepted ADRs) — when scope touches a system boundary or structural decision already settled by an ADR
 - the Questions registry (`harness-data/artifacts/questions/`) — when the source Idea or Legacy Finding carries open items that shape the Use Case being drafted
 - `harness-data/reference/TOOLING.md` — when specifying validation commands in Task frontmatter

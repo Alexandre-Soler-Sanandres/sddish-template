@@ -13,7 +13,7 @@ incidentally inside another mode's work. Any mode may draft it as a `proposed` A
 decision as settled rather than still open. It stays `proposed` — citable only as pending context — until the
 user explicitly confirms it, at which point it becomes `accepted`: load-bearing authority that Use Cases and
 Specs may cite as settled. If the decision is later reversed, the ADR is never edited in place; a new ADR
-supersedes it, and both artifacts' relationship fields update together.
+supersedes it through a forward citation and typed relation note.
 
 ## Entry / Creation Paths
 
@@ -54,17 +54,14 @@ only as reference authority (`DEC-02-020`; see `SPECS.md`'s `SPS-01-020`/`SPS-01
 ## Artifact Shape
 
 Every ADR sets `scope` to `fleet-wide` (applies to every artifact regardless of `area`) or `scoped` (applies only
-where area-based relevance judgment finds it applicable) — `DEC-14-010`. `status` moves `proposed` → `accepted`,
-or to `superseded`/`rejected`. Relationship fields — `related`, `supersedes`, `superseded_by`,
-`derived_use_cases`, `derived_specs`, `derived_tasks` — are governed by `## Relationships` below and by
+where area-based relevance judgment finds it applicable) — `DEC-14-010`. `status` moves `proposed` → `accepted`
+or `archived`; an accepted ADR may become `superseded`. Canonical forward relationships are governed below and by
 `agent-harness/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md`.
 
 ## Field Semantics
 
-- `scope: fleet-wide` — a `fleet-wide` ADR is exempt from the `derived_use_cases`/`derived_specs`/`derived_tasks`
-  reverse-link bookkeeping that `scoped` ADRs carry, since its applicability is already fully expressed by the
-  field itself (`RELATIONS-AND-SUPERSESSION.md`'s `DEC-07-011`, `TASKS.md`'s `TSK-05-010`).
-- `scope: scoped` — applicability is judged case by case; reverse links to citing artifacts are required.
+- `scope: fleet-wide` — applies to every artifact regardless of area.
+- `scope: scoped` — applicability is judged case by case; consumers cite it in `related_adrs`.
 - `status` — see `## Lifecycle` below for the full transition set and gates.
 
 ## Body Should Include
@@ -85,7 +82,7 @@ tuning, or narrower in-scope choices does not block and may remain listed (`DEC-
 set to `accepted` without the user's explicit confirmation — never infer approval from discussion (`DEC-04-010`).
 Once `accepted`, `Decision`/`Consequences` are immutable — a change of mind creates a new superseding ADR instead
 of an in-place edit (`RELATIONS-AND-SUPERSESSION.md`'s `DEC-06-010`; refining `Context`/`Open Questions` before
-acceptance is fine). `superseded`/`rejected` ADRs move to `archive/` together.
+acceptance is fine). Rejected proposals use `archived`; every transition updates the stable file in place.
 
 ## Readiness / Acceptance
 
@@ -95,22 +92,17 @@ both required before `accepted`.
 ## Relationships
 
 See `agent-harness/systems/ADR-AUTHORITY.md` for the full story of how an ADR's authority propagates to
-dependent Use Cases/Specs/Tasks, how relationship fields stay wired both directions, and how a decision changes
-after acceptance without ever being edited in place. Locally: an ID in `related` always needs an explicit
+dependent Use Cases/Specs/Tasks, how backlinks are derived from forward citations, and how a decision changes
+after acceptance without ever being edited in place. Locally: an ID in `related_adrs` always needs an explicit
 "Relation to (ID) (type):" note (`DEC-09-010`), and load
 `agent-harness/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md` in addition to this file whenever the ADR
-supersedes another ADR, cites a `related` ADR, or settles a Questions-registry entry (`DEC-12-010`).
+supersedes another ADR, cites a related ADR, or settles a Questions-registry entry (`DEC-12-010`).
 
 ## Output / Location
 
-- `harness-data/artifacts/adrs/proposed/ADR-*.md` (every new ADR starts here)
-- A new ADR is created in `proposed/`. When it advances to `accepted` (per `## Lifecycle`), move it to
-  `accepted/` — this is the load-bearing status that makes it citable authority, the same way an
-  Implementation Plan's load-bearing promotion state is `ready` rather than a separate `approved` folder.
-  `superseded` and `rejected` ADRs
-  move to `archive/` together (content preserved, per the same non-destructive precedent as `COR-01-080`) — no
-  operational reason to split those two further, matching how Idea lumps `archived`/`rejected` into one
-  `archive/` folder.
+- `harness-data/artifacts/adrs/ADR-*.md` (every new ADR starts here)
+- Every ADR status updates this stable file in place. `accepted` is the load-bearing state; rejected proposals
+  become `archived`, and replaced accepted ADRs become `superseded`.
 
 ## Template
 
@@ -135,9 +127,9 @@ ADR stays `proposed`, citable only as pending context, until the user explicitly
 | DEC-05-010 | Use Cases and Specs MAY cite only `accepted` ADRs as settled authority. |
 | DEC-05-020 | A `proposed` ADR MAY be noted as pending context. |
 | DEC-05-030 | A `proposed` ADR MUST NOT be treated as settled. |
-| DEC-12-010 | MUST load `agent-harness/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md` in addition to this file when the ADR supersedes another ADR, cites a `related` ADR, or settles a Questions-registry entry. |
+| DEC-12-010 | MUST load `agent-harness/artifact-specs/adr/RELATIONS-AND-SUPERSESSION.md` when the ADR supersedes another ADR, cites `related_adrs`, or settles a Question. |
 | DEC-13-010 | MUST NOT create an ADR while the conversation is still exploring options (route to a Transcript or Idea instead) or when the decision is about actor-visible behavior (route to a Use Case instead). |
-| DEC-14-010 | Every ADR MUST set `scope` to `fleet-wide` (applies to every artifact regardless of `area`; exempt from `derived_use_cases`/`derived_specs`/`derived_tasks` reverse-link bookkeeping, per `RELATIONS-AND-SUPERSESSION.md`'s `DEC-07-010` and `TASKS.md`'s `TSK-05-010`) or `scoped` (applies only where area-based relevance judgment finds it applicable). |
+| DEC-14-010 | Every ADR MUST set `scope` to `fleet-wide` or `scoped`; consumers express applicability through forward `related_adrs` citations. |
 
 ## Reference Files
 
@@ -146,4 +138,4 @@ Load these when relevant — do not load all of them by default:
 - `harness-data/reference/DOMAIN.md` — when the decision involves domain concepts or business rules
 - `harness-data/reference/ARCHITECTURE.md` — when the decision touches system boundaries already described there
 - the Questions registry (`harness-data/artifacts/questions/`) or `CONTRACTS.md` — when the decision builds on, narrows, or overrides
-  a legacy-derived decision (cite via the `legacy_refs` frontmatter field rather than restating the text)
+  a legacy-derived decision (cite canonical artifact or Question IDs rather than restating the text)

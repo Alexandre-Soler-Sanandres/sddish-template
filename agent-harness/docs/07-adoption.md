@@ -238,12 +238,11 @@ needs all four.
 Run this once after setup to confirm a fresh checkout can actually execute the rules, before starting real work:
 
 - [ ] The four `harness-data/reference/` files hold real project content, not template placeholders.
-- [ ] `harness-data/CATALOG.md`'s Active Implementation Plans note uses the `ready | in-progress` vocabulary.
-- [ ] All three Questions registry files exist under `harness-data/artifacts/questions/`
-      (`QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, `QUESTIONS-DISCARDED.md`).
-- [ ] Every expected lifecycle folder under `harness-data/artifacts/` is present.
-- [ ] Raising the first Question dedups across all three registry files and inserts a row without inventing structure.
-- [ ] Promoting the first Plan to `ready` yields a `harness-data/CATALOG.md` row using `ready`.
+- [ ] `harness-data/CATALOG.md` regenerates without manual edits.
+- [ ] The single `harness-data/artifacts/questions/QUESTIONS.md` registry exists.
+- [ ] Every flat v2 artifact-type root from `OUTPUTS.md` is present and no core lifecycle subfolders exist.
+- [ ] Raising the first Question deduplicates within the single registry and inserts a canonical `Q-NNNN` row.
+- [ ] Promoting the first Plan to `ready` makes it appear in the generated `active-plans` query.
 - [ ] Starting the first implementation creates `harness-data/RUN-LOG.md` when absent, containing only the
       `IMPL-02-010` gate line.
 
@@ -267,13 +266,14 @@ change.
 
 The harness scripts assume:
 
-- a **POSIX shell** — `bash` (or `sh`) plus the usual `grep` / `sed` / `find` / `sort` / `diff`. This covers
+- **Bash** plus the usual `grep` / `sed` / `find` / `sort` / `diff`. The scripts use Bash-specific features and
+  are not supported under plain `sh`. This covers
   `scripts/check-harness.sh`, `scripts/check-harness-conformance.sh`, and `scripts/render-harness-views.sh`.
-- **Python 3.14+ with `PyYAML`** — required only by `scripts/generate-harness-wrappers.sh`, which parses
+- **Python 3 with `PyYAML`** — required by `scripts/generate-harness-wrappers.sh`, which parses
   `agent-harness/entrypoints.yaml` to render the per-agent wrapper layers, and transitively by
   `scripts/check-harness.sh`'s generated-wrapper cleanliness check (it regenerates into a scratch dir and
-  diffs). When `python3` is absent, `check-harness.sh` skips only that check and still runs every bash-only
-  check; an adopter repo that merely mirrors the generated wrappers never needs Python.
+  diffs). Template CI provisions this dependency and fails if wrapper generation cannot run. Adopter repositories
+  that only mirror generated wrappers can run the portable conformance check without Python.
 
 No other runtime, package manager, or network access is required.
 
@@ -298,11 +298,9 @@ documented default is `disabled` and adopters enable what they need without any 
 
 These are the details people most often need once the basic files exist:
 
-- `agent-harness/CATALOG.md` ships ready to use — it is a navigation index of where artifact types live, not a log
-  of individual artifacts; agents use it to locate artifacts, and it only changes if the harness structure itself
-  changes. Live per-project state (e.g. active Implementation Plan pointers, per `IMPLEMENTATION-PLAN.md`'s Parallel-Work rules)
-  lives in the separate `harness-data/CATALOG.md` instead — same name, different root, on purpose: one is the
-  universal index, the other is this project's own bookkeeping against it
+- `agent-harness/CATALOG.md` explains the generated-view contract. `harness-data/CATALOG.md` is an atomically
+  generated convenience index, not authored state. Use `active-plans`, `backlinks`, and `trace` queries for
+  derived coordination and navigation.
 - `harness-data/RUN-LOG.md` is not required by default, but the agent may use it for interrupted, approval-heavy,
   multi-step, or high-risk work; keep it temporary and collapse or clear it after completion. The one mandatory
   case is the `IMPL-02-010` gate-check line written before the first file mutation of a plan step; Implementing
@@ -348,7 +346,7 @@ When in doubt:
 | `agent-harness/playbooks/` | Universal — reusable procedures owned by the harness |
 | `agent-harness/templates/*.md` | Universal lean scaffolds — do not modify for project-specific needs |
 | `agent-harness/extensions/**/*.md` | Optional capability trees (Mode Workflow, submodes, templates, rules, guide) gated by `harness-data/HARNESS-PROFILE.yaml` — do not modify for project-specific needs |
-| `harness-data/CATALOG.md` | Project-specific — live state, not part of the template |
+| `harness-data/CATALOG.md` | Generated project view — committed template seed, never hand-edited state |
 | `harness-data/RUN-LOG.md` | Optional — temporary operational trace the agent may use for interrupted or higher-risk work |
 | `REPO-MAP.md` | Optional — structural context for large repos or major subtrees |
 | `harness-data/reference/ARCHITECTURE.md` | Project-specific — fill in |
@@ -357,7 +355,7 @@ When in doubt:
 | `harness-data/reference/QUALITY.md` | Project-specific — fill in |
 | `harness-data/guides/` | Optional — add project-specific setup and operating guidance |
 | `harness-data/playbooks/` | Optional — add project-specific scoped procedures for recurring work in this repo |
-| `harness-data/artifacts/{legacy,use-cases,specs,tasks,implementation-plans,reviews,improvements,transcripts,ideas,adrs,questions}/` | Project-specific — lifecycle artifacts generated and managed by using the harness |
+| `harness-data/artifacts/{changes,use-cases,specs,tasks,plans,reviews,improvements,transcripts,ideas,adrs,questions}/` | Project-specific — stable flat v2 artifact roots |
 
 ## Adopting for Existing Projects
 

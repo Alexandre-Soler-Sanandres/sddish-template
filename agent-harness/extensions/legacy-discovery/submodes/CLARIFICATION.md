@@ -44,14 +44,12 @@ source-map notes only to understand an existing question (`LDG-03-010`).
    `must-decide-before-implementation-planning`, `proof-needed`, `accepted-deferred`, or `not-needed`
    (`LDG-04-020`).
 5. Present target-product decisions with concrete options and a recommended proposal (`LDG-04-030`), preserving
-   evidence paths, finding IDs, proof IDs, and uncertainty notes (`LDG-04-040`).
-6. When marking a question resolved (including "defer to a later iteration" or "decided, proof pending"), move
-   its row per `QUESTIONS.md`'s `QST-07-010`, set `Origin: resolved-from-open` in `Notes`, and move the ID in
-   every cited finding's `Source` from `## Open Questions` to `## Resolved Questions` with the resolution text,
-   same pass (`LDG-04-060`). A source map's initial baseline-decision capture is exempt from this
-   `Origin: resolved-from-open` step — it goes directly to `QUESTIONS-RESOLVED.md` with `Origin: baseline`
-   instead (`LDG-04-061`). Never mark a question resolved until the answer is captured in the right question
-   file and affected restart/readiness notes (`LDG-04-050`).
+   evidence paths, finding IDs, proof obligations, and uncertainty notes (`LDG-04-040`).
+6. When resolving a Question, update its row status and terminal columns in place per `QST-07-010`. Update each
+   citing Finding's local disposition/effect without copying the registry's full resolution (`LDG-04-060`). A
+   source map's initial settled baseline is evidence, not a synthetic resolved Question; create a row only when
+   uncertainty exists (`LDG-04-061`). Never resolve a row until the answer and affected restart/readiness notes
+   are captured (`LDG-04-050`).
 7. Enrich the matching reference doc in the same pass when a resolution produces a stable, target-relevant fact —
    use the routing table in `DISCOVERING-LEGACY.md`'s Reference Enrichment section, or the cross-system
    `SUMMARY.md`'s Reference Enrichment Routing table. Skip only for purely process/traceability bookkeeping
@@ -68,20 +66,20 @@ source-map notes only to understand an existing question (`LDG-03-010`).
 Carry actor-visible uncertainty, workflow-shaping decisions, and behavior-shaping proof obligations into the Use
 Case, and technical constraints, dependency risks, validation/proof obligations, and any remaining inherited IDs
 into the Spec, when legacy evidence seeds downstream design work (`LDG-04-110`). Keep the unified Questions
-registry as the canonical home of parity/proof rows (`CSP-*`), and cite those IDs downstream instead of copying
+owning Findings or rewrite-readiness evidence as the canonical home of known parity/proof obligations, and carry them downstream instead of copying
 full rows (`LDG-04-111`).
 
 ## Outputs
 
-Updated rows in the unified Questions registry (moved between `QUESTIONS-OPEN.md`, `QUESTIONS-RESOLVED.md`, and
-`QUESTIONS-DISCARDED.md`), updated app/cross-system artifacts, and reference-doc enrichment where a resolution
+Updated rows in the single Questions registry (status changed in place), updated app/cross-system artifacts, and
+reference-doc enrichment where a resolution
 produced a stable fact.
 
 ## Examples
 
-A `CSQ-*` row asks whether the target system should preserve a legacy retry policy. The agent presents "preserve
-as-is" vs. "adopt exponential backoff" with a recommendation, the user decides, the agent moves the row to
-`QUESTIONS-RESOLVED.md` with the resolution text, updates every finding that cited it, and enriches `QUALITY.md`
+A `Q-NNNN` row asks whether the target system should preserve a legacy retry policy. The agent presents "preserve
+as-is" vs. "adopt exponential backoff" with a recommendation, the user decides, updates the row to `resolved`
+in place, records the local effect on every citing Finding, and enriches `QUALITY.md`
 with the settled retry policy.
 
 ## Rules
@@ -96,17 +94,17 @@ with the settled retry policy.
 | LDG-04-010 | MUST keep the original question ID stable; merge or cross-reference duplicates and near-duplicates. |
 | LDG-04-020 | MUST classify each question as `must-decide-before-use-cases`, `must-decide-before-specs`, `must-decide-before-implementation-planning`, `proof-needed`, `accepted-deferred`, or `not-needed`. |
 | LDG-04-030 | MUST present target-product decisions with concrete options and a recommended proposal. |
-| LDG-04-040 | MUST preserve evidence paths, finding IDs, proof IDs, and uncertainty notes. |
-| LDG-04-050 | MUST NOT mark a question resolved until the answer is captured in the right question file and affected restart/readiness notes. |
-| LDG-04-060 | When marking a question resolved (including "defer to a later iteration" or "decided, proof pending"), MUST move its row per `QUESTIONS.md`'s `QST-07-010`, set `Origin: resolved-from-open` in `Notes`, and move the ID in every cited finding's `Source` from `## Open Questions` to `## Resolved Questions` with the resolution text, same pass. |
-| LDG-04-061 | A source map's initial baseline-decision capture is exempt from `LDG-04-060`'s `Origin: resolved-from-open` step — it goes directly to `QUESTIONS-RESOLVED.md` with `Origin: baseline` instead (see `QUESTIONS-template.md`). |
+| LDG-04-040 | MUST preserve evidence paths, finding IDs, proof obligations, and uncertainty notes. |
+| LDG-04-050 | MUST NOT mark a Question resolved until its answer, basis, follow-up, date, and affected restart/readiness notes are captured. |
+| LDG-04-060 | When resolving a Question, MUST update its single registry row in place and update each citing Finding's local disposition/effect without copying the full canonical resolution. |
+| LDG-04-061 | A source map's already-settled baseline decision is evidence, not a synthetic resolved Question; MUST create `Q-NNNN` only when genuine uncertainty exists. |
 | LDG-04-070 | MUST enrich the matching reference doc in the same pass when a resolution produces a stable, target-relevant fact (architecture boundary, domain rule, tooling/command, quality standard) — use the routing table in `DISCOVERING-LEGACY.md`'s Reference Enrichment section, or the cross-system `SUMMARY.md`'s Reference Enrichment Routing table. Skip only for purely process/traceability bookkeeping (merging a duplicate ID) with no new stable fact. |
 | LDG-04-080 | MUST convert questions requiring new source inspection or runtime execution into proof items or follow-up tasks. |
 | LDG-04-090 | MUST update its row in the unified Questions registry, the linked app finding(s), and any affected source-map notes in the same pass when a cross-system clarification pass resolves an app question indirectly. |
 | LDG-04-091 | MUST NOT leave any of `LDG-04-090`'s updates waiting for a later reconciliation sweep. |
 | LDG-04-100 | P0/migration-critical blockers MUST be resolved, deferred, or routed to proof work before Use Case/Spec work begins — this is the blocking gate, not full completion of Question Clarification. |
 | LDG-04-110 | MUST carry actor-visible uncertainty, workflow-shaping decisions, and behavior-shaping proof obligations into the Use Case, and technical constraints, dependency risks, validation/proof obligations, and any remaining inherited IDs into the Spec, when legacy evidence seeds downstream design work. |
-| LDG-04-111 | MUST keep the unified Questions registry as the canonical home of parity/proof rows (`CSP-*`), and cite those IDs downstream instead of copying full rows. |
+| LDG-04-111 | MUST keep known parity/proof obligations on owning Findings or rewrite-readiness evidence, carry them into downstream validation, and create Question rows only for genuine uncertainty. |
 | LDG-04-120 | Questions outside the P0/migration-critical gate (`LDG-04-100`) MAY remain Open in the canonical Questions registry until resolved, deferred, or marked `not-needed`; per `CORE.md`'s `COR-01-120`, downstream artifacts reference the ID in their own Open Questions rather than the Question living only in the legacy artifacts. |
 
 ## Reference Files

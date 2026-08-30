@@ -78,7 +78,7 @@ in-process assumption still holds under the target architecture (`UCS-06-011`).
 
 - `status` — see `## Lifecycle`.
 - `technical_impact` — see `## Artifact Shape`.
-- `related` — accepted ADRs this Use Case depends on; see `## Relationships`.
+- `related_adrs` — accepted ADRs this Use Case depends on; see `## Relationships`.
 
 ## Body Should Include
 
@@ -99,7 +99,7 @@ When legacy evidence is involved, the body should also preserve the design-relev
 - actor-visible or workflow-shaping open decisions in `Open Questions`
 - behavior-shaping proof or parity obligations in `Alternatives and Failure Paths`, `Preconditions`, or
   `Open Questions`, whichever best matches their effect on the scenario
-- canonical legacy IDs by reference (`CSQ-*`, `Q-<APP>-*`, `CSP-*`) instead of copied backlog text
+- canonical `Q-NNNN` IDs for genuine uncertainties, plus applicable proof obligations in behavior evidence
 
 ## Lifecycle
 
@@ -109,16 +109,16 @@ Use Case ID, and must update the `updated` field and status as appropriate (`UCS
 primary actor, goal, trigger, preconditions, main success scenario, or non-goals is significant; a typo,
 clarification, added Open Questions reference, or `updated`-field bump is not (`UCS-02-030`). Status
 transitions for this artifact — including promotion to `ready` and the effect of a later significant change —
-are described in `agent-harness/systems/STATUS-TRANSITIONS.md` and enforced by the paired `STT-*` rules.
+are described in `agent-harness/systems/STATUS-TRANSITIONS.md` and governed by the co-located `STT-*` rules.
 
 ## Readiness / Acceptance
 
 Before a transition rule promotes a Use Case to `ready`, verify the Readiness Checklist in the artifact — every
 item must be checked; a single unchecked item blocks the promotion (`UCS-03-010`/`UCS-03-011`). Also re-run
 three ADR checks: missed-ADR recheck against the *current* accepted-ADR list, with every `fleet-wide` ADR
-present in `related` and every `scoped` ADR re-judged (`UCS-07-010`–`012`); content-drift recheck against the
+present in `related_adrs` and every `scoped` ADR re-judged (`UCS-07-010`–`012`); content-drift recheck against the
 Use Case's actual current content, not only its original `area` (`UCS-07-020`); and a compliance check that
-every ADR cited in `related` is actually reflected in the Use Case's content (`UCS-07-030`). Also verify the
+every ADR cited in `related_adrs` is actually reflected in the Use Case's content (`UCS-07-030`). Also verify the
 registry holds nothing unresolved that should block the advance (`UCS-05-015`). `ready` is no longer a
 precondition for Spec creation (see `REFINING.md`'s `SPS-01-010`) — `STT-01-030`/`040` set it once these local
 gates pass.
@@ -133,11 +133,7 @@ constraints belong in the scenario, preconditions, or failure paths (`UCS-05-020
 
 ## Output / Location
 
-- `harness-data/artifacts/use-cases/active/UC-*.md` (`draft`)
-- `harness-data/artifacts/use-cases/ready/UC-*.md` (`ready`)
-- `harness-data/artifacts/use-cases/done/UC-*.md` (`done` — still-authoritative behavior, distinct
-  from closed/superseded; see `agent-harness/systems/LIFECYCLE-FOLDERS.md`)
-- `harness-data/artifacts/use-cases/archive/UC-*.md` (`archived`/`rejected`)
+- `harness-data/artifacts/use-cases/UC-*.md` for every status; lifecycle is frontmatter-only.
 
 ## Template
 
@@ -171,10 +167,10 @@ a supporting actor is another owned service, and stops before `ready` until that
 | UCS-06-011 | MUST NOT carry forward legacy phrasing such as "called directly"/"invoked by" without confirming that same in-process assumption still holds under the target architecture. |
 | UCS-06-020 | MUST set the `technical_impact` frontmatter field at creation/update time per the definition in `USE-CASES.md`'s `## Artifact Shape` above. |
 | UCS-07-010 | Missed-ADR recheck. Before this Use Case's promotion (`STT-01-030`/`040`), MUST re-run the relevance judgment against the *current* accepted-ADR list. |
-| UCS-07-011 | Every `fleet-wide` ADR MUST be present in `related`. |
-| UCS-07-012 | Every `scoped` ADR MUST be re-judged: added to `related` if newly relevant, or explicitly ruled out. |
+| UCS-07-011 | Every `fleet-wide` ADR MUST be present in `related_adrs`. |
+| UCS-07-012 | Every `scoped` ADR MUST be re-judged: added to `related_adrs` if newly relevant, or explicitly ruled out. |
 | UCS-07-020 | Content-drift recheck. Before this Use Case's promotion (`STT-01-030`/`040`), MUST judge ADR relevance against the Use Case's actual current content, not only its original `area` — drafting can drift the content into territory an ADR bears on that the creation-time load never saw. |
-| UCS-07-030 | Compliance check. Before this Use Case's promotion (`STT-01-030`/`040`), MUST verify every ADR cited in `related` is actually reflected in the Use Case's content — a citation with no matching content is a gate failure. |
+| UCS-07-030 | Compliance check. Before this Use Case's promotion (`STT-01-030`/`040`), MUST verify every ADR cited in `related_adrs` is actually reflected in the Use Case's content — a citation with no matching content is a gate failure. |
 
 ## Reference Files
 
@@ -182,5 +178,5 @@ Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/DOMAIN.md` — when defining actors, goals, or business rules that require domain knowledge
 - `harness-data/reference/ARCHITECTURE.md` — when the use case involves system boundaries or external integrations
-- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when the use case touches a system boundary or structural decision already settled by an ADR
+- `harness-data/artifacts/adrs/` (accepted ADRs) — when the use case touches a system boundary or structural decision already settled by an ADR
 - the Questions registry (`harness-data/artifacts/questions/`) or `REWRITE-READINESS.md` — when the Use Case is being derived from Legacy Discovery and those artifacts affect the scenario

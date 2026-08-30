@@ -18,20 +18,10 @@ approval, and executes its embedded steps. Assured uses a behavior contract and 
 secondary artifacts remain separate when their authority or lifecycle is independently useful. The Risk-Tier
 Cascade below determines the minimum Assured artifact tier.
 
-## Rules/Procedure Split (History)
+## Co-located Rules
 
-Every harness source file follows the paired-loading model: the source file teaches the workflow, contract,
-procedure, or system, and its own `## Rules` section holds the enforceable table. This split
-was carried out in reviewable passes, recorded here for reference:
-
-- `IMPROVEMENT-0114`: foundation / grouped `CORE`
-- `IMPROVEMENT-0116`: taxonomy and migration architecture
-- `IMPROVEMENT-0122`: `OUTPUTS.md` guide / paired output rules split
-- `IMPROVEMENT-0117`: Mode Workflow rewrites and paired mode rules
-- `IMPROVEMENT-0118`: Artifact Contract rewrites and paired artifact rules
-- `IMPROVEMENT-0119`: Procedure Guide rewrites and paired procedure rules
-- `IMPROVEMENT-0120`: cross-file System extraction
-- `IMPROVEMENT-0121`: lean template migration
+Every harness source file teaches its workflow, contract, procedure, or system and carries its enforceable table
+in the same file's `## Rules` section. Load the source once; there is no paired `rules/` tree.
 
 ## The Standard Flow
 
@@ -197,7 +187,7 @@ and short field prompts. They should not teach artifact theory, mode workflow, o
 When migrating template content:
 
 - explanation moves to the relevant Mode Workflow, Artifact Contract, Procedure Guide, or System
-- enforceable constraints move to paired Rules
+- enforceable constraints move to the owning source file's co-located `## Rules`
 - placeholders and scaffold stay in the template
 
 ## Readiness Gates
@@ -275,7 +265,7 @@ The legacy project is evidence, not authority. The agent must never treat legacy
    Task-Necessity → No (single file, single module, no cross-cutting risk).
 3. Cascade lands on Plan-tier — Partnering routes directly into Planning-Implementation's natural-language
    entry. No Use Case, Spec, or Task is created.
-4. Planning-Implementation (`IPL-08-010`/`IPL-08-020`) creates `PLAN-0NN` directly (`entrypoint_type: none`),
+4. Planning-Implementation (`IPL-08-010`/`IPL-08-020`) creates `PLAN-0NN` directly (empty `source_ids`),
    including a `## Risk-Tier Classification` section citing the three "No" rows and their reasons.
 5. User reviews and approves `PLAN-0NN`.
 6. Implementation executes the plan's steps.

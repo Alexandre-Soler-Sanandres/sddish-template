@@ -5,10 +5,9 @@ status: draft            # draft | ready | in-progress | blocked | done | archiv
 title: ""
 created: ""              # YYYY-MM-DD
 updated: ""              # YYYY-MM-DD
-entrypoint_type: ""      # task | spec | use-case | none
-entrypoint: ""           # e.g. SPEC-0001
 source_ids: []           # e.g. [SPEC-0001]
 included_ids: []         # e.g. [TASK-0001, TASK-0002]
+allowed_paths: []        # complete execution path scope; include direct Plan-tier paths
 related_adrs: []         # e.g. [ADR-0001]
 question_refs: []        # e.g. [Q-0001]
 risk: low                # low | medium | high
@@ -25,7 +24,7 @@ approval:
 ## Risk-Tier Classification
 
 (optional — filled in only when this Plan skipped any tier per `shared-procs/RISK-TIER.md`'s cascade, including
-Plan-tier direct entry with `entrypoint_type: none`; see `IMPLEMENTATION-PLAN.md`'s `IPL-01-030`)
+Plan-tier direct entry with empty `source_ids`; see `IMPLEMENTATION-PLAN.md`'s `IPL-01-030`)
 
 ## Behavior Contract
 
@@ -64,7 +63,7 @@ read-only report here. Otherwise write `Not applicable — no higher-tier chain 
 ## Readiness Checks
 
 All items must be checked before this plan may advance to `ready`. Cite a one-line evidence pointer per
-checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-PLAN.md`'s `IPL-02-012`.
+checked item beneath the checklist — see `agent-harness/artifact-specs/IMPLEMENTATION-PLAN.md`'s `IPL-02-012`.
 
 - [ ] Required Tasks exist
 - [ ] `STT-01-030` preconditions verified: this Plan's readiness and parallel-work gates pass, included Tasks pass their local gates, scoped accounting and dependencies pass, and any parent promotion is conditional on satisfied child fan-out plus fresh parent gates
@@ -73,6 +72,7 @@ checked item beneath the checklist — see `rules/artifact-specs/IMPLEMENTATION-
 - [ ] If a real UC/Spec/Task chain participates, `## Chain Preflight` is present, passing, and current
 - [ ] If a real UC/Spec/Task chain participates, `## Scoped Parent Readiness` is complete and current
 - [ ] No blockers or unresolved dependencies
+- [ ] `allowed_paths` covers the complete execution scope
 - [ ] High-risk areas identified
 - [ ] Each plan step defines expected files, validation, and a suggested commit
 - [ ] Structural ADR scaffolding this plan's steps depend on was verified to exist, or a bootstrap step was added

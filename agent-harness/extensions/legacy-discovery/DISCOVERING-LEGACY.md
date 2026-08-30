@@ -114,7 +114,8 @@ implementation-shaping constraint (`LD-02-026`).
   `findings/`.
 - Cross-system: `harness-data/extensions/legacy-discovery/cross-system/` — `SUMMARY.md`, `CONTRACTS.md`, `findings/`,
   `REWRITE-READINESS.md`.
-- Questions registry rows (`Q-<APP>-NNNN`, `CSQ-NNNN`, `CSP-NNNN`) in `harness-data/artifacts/questions/`.
+- `Q-NNNN` rows for genuine uncertainties in `harness-data/artifacts/questions/QUESTIONS.md`; known proof
+  obligations remain on Findings or rewrite-readiness evidence.
 - Candidate Use Cases, Ideas, direct Specs, and Harness Improvements, routed rather than drafted here except
   where `LD-01-080`/`LD-02-010` permit a direct Spec.
 
@@ -143,8 +144,8 @@ unresolved, and enriches `QUALITY.md`'s `## Discovered` section only once the fi
 | LD-01-115 | MUST capture not only factual legacy behavior but also any material target decisions the evidence leaves unresolved, including latent forks recognized through engineering judgment, not only direct source conflict. |
 | LD-01-120 | MUST treat changing source-map workflow or status rules, and starting cross-system synthesis, as additional high-impact actions under `COR-05-010`'s checkpoint, on top of the universal list in `COR-05-020`. |
 | LD-01-130 | MUST write all Legacy Discovery artifacts (inventories, source maps, findings, summaries, contracts, restart data) only under `harness-data/extensions/legacy-discovery/`. |
-| LD-02-010 | MAY include, as other outputs, a candidate `harness-data/artifacts/specs/active/SPEC-*.md` (per `LD-01-080`'s exception) and Harness Improvement candidates. |
-| LD-02-020 | A Legacy Finding's evidence MAY produce a candidate `harness-data/artifacts/ideas/active/IDEA-*.md` when it states a future/roadmap direction rather than an unresolved fork — apply `COR-01-110`'s test. Ideas spun off from a *resolved* Question are governed by `QUESTIONS.md`'s `QST-07-010` instead. |
+| LD-02-010 | MAY include, as other outputs, a candidate `harness-data/artifacts/specs/SPEC-*.md` (per `LD-01-080`'s exception) and Harness Improvement candidates. |
+| LD-02-020 | A Legacy Finding's evidence MAY produce a candidate `harness-data/artifacts/ideas/IDEA-*.md` when it states a future/roadmap direction rather than an unresolved fork — apply `COR-01-110`'s test. Ideas spun off from a *resolved* Question are governed by `QUESTIONS.md`'s `QST-07-010` instead. |
 | LD-02-021 | MUST note a `LD-02-020` candidate Idea in the originating finding's `## Candidate Artifacts`. |
 | LD-02-022 | Before creating a new Idea per `LD-02-020`, MUST check existing `active` Ideas for overlap (`IDA-02-010`) and apply `IDA-01-020`'s atomicity rule — one Idea per opportunity, not one per source document. |
 | LD-02-025 | SHOULD prefer candidate Use Cases or Ideas before direct candidate Specs when a finding primarily shapes behavior, actor workflow, or future direction. |
@@ -155,7 +156,7 @@ unresolved, and enriches `QUALITY.md`'s `## Discovered` section only once the fi
 | LD-03-021 | An `LF-*` ID MUST NOT be reused, even after a finding moves or is merged. |
 | LD-03-030 | MUST move a finding to the matching `findings/archive/<LF-ID>.md` path when its `status` becomes `converted`, `archived`, or `rejected`; findings with `status: draft` or `status: reviewed` stay in `findings/active/`. |
 | LD-03-040 | MUST NOT look up or add a finding except by ID — scan `findings/active/` and `findings/archive/` file names or frontmatter, not by reading through file append order or by creating slice-numbered or subsystem-named headings as a substitute for the ID. |
-| LD-03-050 | MUST tag a finding `bug` in its `tags` frontmatter when it documents a confirmed defect (wrong runtime, dashboard, or metrics behavior) or dead/wired-but-inert code, as distinct from an unresolved fork (`Q-*`/`CSQ-*`) or future-facing intent (`IDEA-*`). This tag exists so bug-shaped findings stay discoverable across an app's full finding set, not to create a new artifact type or lifecycle. |
+| LD-03-050 | MUST tag a finding `bug` when it documents a confirmed defect or dead/wired-but-inert code, as distinct from an unresolved fork (`Q-NNNN`) or future-facing intent (`IDEA-*`). |
 | LD-03-055 | MUST preserve a concrete runtime-correctness defect, stale-code conclusion, or dead/wired-but-inert behavior as its own first-class finding when the evidence establishes it, even if a broader subsystem finding covering the same area also exists. |
 | LD-03-060 | MUST treat operational or manual surfaces as first-class findings when they materially define current runtime trust, operator workflow, or observability — including CLI/operator tools, health/readiness/metrics surfaces, SQL diagnostics, and other human-run inspection paths. |
 | LD-03-070 | MUST record material data-model shape choices when evidence establishes them, even without a defect — including storage topology, typed-vs-JSON structure, DB views as read models, key typing, and authority boundaries between ORM metadata and migrations. |
@@ -165,7 +166,7 @@ unresolved, and enriches `QUALITY.md`'s `## Discovered` section only once the fi
 | LD-03-088 | MUST preserve a log-only visibility surface or deployment-file omission as its own first-class finding when in-scope deployment files or runtime evidence establish that it materially affects operator trust, observability expectations, readiness semantics, hardening posture, or rewrite fidelity. |
 | LD-03-090 | MUST capture app-internal architectural boundaries when the evidence clearly establishes a cross-layer or cross-subsystem contract inside one app, not only the files or functions on each side. |
 | LD-03-100 | MUST record provider-set shape when a capability depends on providers and the evidence makes the portfolio materially relevant — including primary, fallback, overlapping, deferred, or disabled-but-wired providers. |
-| LD-04-010 | MUST use `Q-<APP>-NNNN` (app-scoped) or `CSQ-NNNN` (cross-system) IDs for Legacy Discovery questions (they live in the harness-level Questions registry — `QUESTIONS-OPEN`/`RESOLVED`/`DISCARDED.md`, schema in `agent-harness/artifact-specs/QUESTIONS.md` — not per-app files, and not organized by discovery slice, subsystem, or process block), fold `Decision type` (`scope-v1` \| `preserve-vs-adapt` \| `fidelity` \| `naming` \| `deferred-feature`) into `Notes`, and follow the registry's own classification (`QST-01-010`) and status (`QST-10-010`) rules. |
+| LD-04-010 | MUST use `Q-NNNN` for genuine Legacy Discovery uncertainties in the single `QUESTIONS.md` registry; store app/cross-system scope in Classification, Source IDs, and Notes, and follow `QST-01-010`/`QST-10-010`. Known proof obligations stay on Legacy Findings or rewrite-readiness evidence until downstream acceptance/validation work owns them. |
 | LD-04-020 | MUST check existing registry rows for the same decision by content and merge instead of duplicating, before adding a question. |
 | LD-04-030 | MUST link every question back to the finding(s) that raised it through the registry's `Source` column. |
 | LD-04-040 | SHOULD default cross-system questions' `Source` to `LF-CROSS-NNNN`, adding app finding IDs in `Notes` only when the extra traceability matters; provenance like slice name or artifact of origin belongs in `Notes`, not the table structure. |

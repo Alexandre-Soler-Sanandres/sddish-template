@@ -58,7 +58,8 @@ entry-point layer must be mirrored across the others unless it's agent-specific 
    /`approved_at` (`IMPR-02-026`). A general instruction to improve the harness is not approval of any specific
    `IMPROVEMENT-NNNN` — approval is valid only after the user has had the chance to see that artifact's own
    proposed change (`IMPR-02-025`); never infer or self-approve it (`IMPR-02-020`).
-3. Apply the target-file changes only after that specific approval exists (`IMPR-02-027`).
+3. After that specific approval exists, set the Improvement to `in-progress` before the first target-file change,
+   then apply only its listed targets (`IMPR-02-027`).
 4. When the Improvement touches rule IDs or Rules-table placement, run the `COR-10-060`–`COR-10-063` citation
    audit before setting the Improvement to `done` (`IMPR-05-010`) — see `## Rules` (`IMPR-05-020`/`IMPR-05-030`)
    for the audit's scan roots and reporting requirements.
@@ -72,7 +73,7 @@ terminal status: `done`, `rejected`, or `archived`). It does not hand off to ano
 
 ## Outputs
 
-- `harness-data/artifacts/improvements/active/IMPROVEMENT-*.md`
+- `harness-data/artifacts/improvements/IMPROVEMENT-*.md`
 - Use `agent-harness/artifact-specs/IMPROVEMENT.md` and `agent-harness/templates/IMPROVEMENT-template.md` for
   every new Improvement artifact.
 
@@ -93,7 +94,7 @@ Improvement `done`.
 | IMPR-02-020 | Harness changes MUST be explicit and approved. |
 | IMPR-02-025 | The agent MUST NOT infer approval or approve an Improvement on its own (this is `COR-01-090` applied to Improvement artifacts specifically). A general instruction to improve the harness is not approval of any specific `IMPROVEMENT-NNNN`; approval is valid only after the user has had the chance to see that artifact's own proposed change. |
 | IMPR-02-026 | The agent MUST perform the `proposed` -> `approved` transition, including `approval.approved_by`/`approved_at`, when the user explicitly instructs it to do so. |
-| IMPR-02-027 | MUST NOT apply an Improvement's target-file changes before that specific approval exists. |
+| IMPR-02-027 | MUST require specific approval and an `in-progress` transition before the first target-file mutation. |
 | IMPR-02-030 | Target files MUST be listed in frontmatter. |
 | IMPR-02-040 | MUST NOT create Improvement artifacts from Partnering; MUST create them from a harness/process Review, which direct explicit harness-improvement intake MAY create in the same transaction. |
 | IMPR-05-010 | An approved Improvement that touches rule IDs or Rules-table placement MUST satisfy `CORE.md`'s `COR-10-060`–`COR-10-063` before it can be set to `done`. |
@@ -106,4 +107,4 @@ Improvement `done`.
 Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/ARCHITECTURE.md` — when the improvement touches architectural boundaries or tooling structure
-- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
+- `harness-data/artifacts/adrs/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`

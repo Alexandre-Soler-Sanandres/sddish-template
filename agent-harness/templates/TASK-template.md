@@ -50,7 +50,7 @@ unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `
 ## Readiness Checklist
 
 Before advancing to `ready`, verify all items are checked. Cite a one-line evidence pointer per checked item
-beneath the checklist — see `rules/artifact-specs/TASKS.md`'s `TSK-02-012`.
+beneath the checklist — see `agent-harness/artifact-specs/TASKS.md`'s `TSK-02-012`.
 
 - [ ] Goal is specific enough to implement
 - [ ] allowed_paths are defined

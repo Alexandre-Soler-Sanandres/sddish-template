@@ -14,10 +14,10 @@ When an agent starts a task, it loads context in this order — stopping as soon
 4. `agent-harness/OUTPUTS.md` (its `## Rules` section carries the output rules)
 5. Active Mode Workflow (its `## Rules` section carries the mode rules)
 6. Explicitly referenced artifact
-7. Relevant Artifact Contract plus paired artifact rules when creating, updating, or reviewing an artifact
-8. Frontmatter links (`source`, `derived_*`, `related`)
-9. Local `SUMMARY.md` if the target artifact is ambiguous
-10. Full related artifact — only if required
+7. Relevant Artifact Contract, including its co-located Rules, when creating, updating, or reviewing an artifact
+8. Canonical forward frontmatter links (`source_ids`, `related_adrs`, `question_refs`, `included_ids`, `depends_on`)
+9. Generated Catalog or targeted backlink/trace query if the target is ambiguous
+10. Full linked artifact — only if required
 11. Systems cited by the loaded rules/contracts/procedures when the interaction model matters
 12. Procedure Guides invoked by name from the active flow
 13. `REPO-MAP.md` — only when repo size or subsystem sprawl makes normal navigation clumsy
@@ -35,10 +35,9 @@ creating, updating, or reviewing an artifact, include that artifact type's Artif
 
 - **Agents start from the explicitly referenced artifact** — they do not scan entire directories by default
 - **Agents use the smallest sufficient context** — they load only what the current task requires
-- **Agents use frontmatter links to navigate** — `source`, `derived_*`, `related` fields point to related artifacts
-- **Agents keep frontmatter links synchronized** — when creating or updating a derived artifact, they update the corresponding parent/child links in the same pass
+- **Agents use canonical forward links to navigate** — reverse links and children are generated views
+- **Agents write links on the artifact that owns the forward relationship**, never on both ends
 - **Agents use `CATALOG.md` to locate artifacts** when the target is unknown or ambiguous
-- **Agents use local `SUMMARY.md` files** only when the target artifact cannot be identified from CATALOG.md alone
 - **Agents use `REPO-MAP.md` only for large-structure help** — it is optional, structural, and should not become a second catalog
 - **Agents prefer frontmatter before full body** when only metadata is needed
 - **Agents summarize findings** when context becomes large
@@ -134,7 +133,8 @@ It must not list hundreds of individual artifacts. Use frontmatter links and SUM
 There are two files named `CATALOG.md`, and they do different jobs:
 
 - `agent-harness/CATALOG.md` explains the universal artifact locations and restart-point conventions.
-- `harness-data/CATALOG.md` is project-local bookkeeping, such as active Plan pointers required by some rules in `CORE.md`.
+- `harness-data/CATALOG.md` is an atomically generated, read-only convenience index. Active Plan coordination,
+  backlinks, and trace are derived queries over canonical artifacts.
 
 Lifecycle artifacts live under `harness-data/artifacts/`. Project support files such as `reference/`, `guides/`, and
 `playbooks/` stay at the root of `harness-data/`. Harness-owned reusable procedures live under `agent-harness/playbooks/`.

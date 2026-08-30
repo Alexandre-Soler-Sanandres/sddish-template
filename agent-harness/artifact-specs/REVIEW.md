@@ -67,12 +67,10 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
 - `target_type` — see `## Artifact Shape`'s Two Flavors; MUST use the matching Criteria Checklist and
   After-Review action table for that flavor, not a mix of both (`RVW-04-010`).
 - `outcome` — records *what was decided*; drives the required action in `## Lifecycle`.
-- `status` — `draft` -> `assessed` -> `resolved`, with `discarded` reachable directly from `draft` or `assessed`;
-  records *whether, and how, the record is closed*, separately from `outcome` (see `## Lifecycle`). `resolved` is
-  reached differently per flavor: harness/process via `RVW-06-010` (its `follow_up` Improvements all terminal),
+- `status` — `draft` -> `assessed` -> `closed`, with `archived` reachable directly from `draft` or `assessed` on
+  explicit discard; records *whether, and how, the record is closed*, separately from `outcome`. `closed` is
+  reached differently per flavor: harness/process via `RVW-06-010` (all derived Improvements terminal),
   product/requirements via `RVW-06-040` (the user confirms every finding addressed or waived).
-- `follow_up` — for a harness/process Review with `outcome: follow-up-required`, holds the Improvement ID(s)
-  created from it (see `## Relationships`).
 
 ## Body Should Include
 
@@ -88,27 +86,27 @@ A Review is one of two flavors, determined entirely by `target_type` — never b
   (Finding, Status, Updated, Evidence; `Status` one of `open` / `addressed` / `waived` / `open-by-design`)
   maintained as findings are worked through in the target artifact's producing mode; it is the source the
   `## Closure` section summarizes (`RVW-06-042`/`RVW-06-043`). Harness/process Reviews track findings as
-  `follow_up` Improvement IDs instead and omit this section.
+  Improvements derived through their `source_ids` instead and omit this section.
 - Follow-up artifacts (Improvements, new Tasks, etc.)
-- Closure (added only on the `RVW-06-010`/`RVW-06-040` move — see `## Lifecycle`)
+- Closure (added only on the `RVW-06-010`/`RVW-06-040` transition — see `## Lifecycle`)
 
 ## Lifecycle
 
-`status` moves `draft` -> `assessed` -> `resolved`, with `discarded` reachable directly from `draft` or
-`assessed` when the user calls off further work (`RVW-07-010`). `outcome` records *what was decided*; `status`
+`status` moves `draft` -> `assessed` -> `closed`; `archived` is reachable directly from `draft` or `assessed`
+when the user calls off further work (`RVW-07-010`). `outcome` records *what was decided*; `status`
 separately records *whether, and how, the record is closed*.
 
 After reaching an outcome, the agent must take exactly the action listed for it — never improvise or skip the
-required status change, archive move, or artifact creation (`RVW-05-010`/`RVW-05-020`):
+required status change or artifact creation (`RVW-05-010`/`RVW-05-020`):
 
 Product/Requirements flavor:
 
 | Outcome | Action |
 | --- | --- |
 | `accepted` | Advance artifact to its next accepted status. Report completion. |
-| `accepted-with-notes` | Advance artifact status. Record findings in the Review artifact, and add open questions to the target artifact only when that artifact is the correct place to carry those notes forward. The Review stays `status: assessed` in `active/` until the user confirms every finding is addressed or explicitly waived, then moves `active/` → `archive/` at `status: resolved` with a `## Closure` section (`RVW-06-040`–`RVW-06-042`). |
-| `changes-requested` | Set artifact status to `draft`. Record findings in the Review artifact. Stop and wait for user instruction. The Review stays `status: assessed` in `active/` until the user confirms every finding is addressed (via the target artifact's producing mode) or explicitly waived, then moves `active/` → `archive/` at `status: resolved` with a `## Closure` section (`RVW-06-040`–`RVW-06-042`). The agent MUST NOT make that move on its own initiative. |
-| `rejected` | Set artifact status to `rejected`. Move artifact to `archive/`. Stop and wait for user instruction. |
+| `accepted-with-notes` | Advance artifact status. Record findings in the Review artifact, and add open questions to the target artifact only when that artifact is the correct place to carry those notes forward. The Review stays `assessed` until the user confirms every finding is addressed or explicitly waived, then becomes `closed` in place with a `## Closure` section (`RVW-06-040`–`RVW-06-042`). |
+| `changes-requested` | Set artifact status to `draft`. Record findings in the Review artifact. Stop and wait for user instruction. The Review stays `assessed` until the user confirms every finding is addressed or explicitly waived, then becomes `closed` in place with a `## Closure` section (`RVW-06-040`–`RVW-06-042`). The agent MUST NOT make that transition on its own initiative. |
+| `rejected` | Set the reviewed artifact's status to `rejected` in place. Stop and wait for user instruction. |
 | `follow-up-required` | Hold artifact at current status. Note any process problem found in the Review artifact — MUST NOT create an Improvement artifact from this flavor. An Improvement may only be created from a harness/process-flavored Review (see `IMPROVEMENT.md`'s Sources rule); if a process fix is warranted, that requires a separate harness/process-flavored Review. Stop and wait for user instruction. |
 
 Harness/Process flavor:
@@ -129,43 +127,42 @@ The agent must never autonomously re-enter a producing mode after `changes-reque
 Not applicable in the artifact-readiness sense — a Review's own completion is governed by `## Lifecycle`'s
 closure and discard rules below, not a pre-status checklist.
 
-Closure (harness/process flavor): a Review with `outcome: follow-up-required` moves `active/` → `archive/` and
-sets `status: resolved` once every `follow_up` Improvement ID reaches `done` or `rejected` (`RVW-06-010`) — it
-stays `status: assessed` in `active/` while `follow_up` is empty or contains a non-terminal Improvement
-(`RVW-06-020`). The move adds a `## Closure` section (date, terminal Improvement ID(s), `done`/`rejected` for
+Closure (harness/process flavor): a Review with `outcome: follow-up-required` sets `status: closed` in place once
+every Improvement whose `source_ids` cites it reaches `done` or `rejected` (`RVW-06-010`) — it stays
+`status: assessed` while any such Improvement is nonterminal (`RVW-06-020`). The transition adds a `## Closure`
+section (date, terminal Improvement ID(s), `done`/`rejected` for
 each) (`RVW-06-030`).
 
-Closure (product/requirements flavor): a Review with `outcome: changes-requested` or `accepted-with-notes` moves
-`active/` → `archive/` and sets `status: resolved` once the user confirms every finding is addressed — through
-the target artifact's own producing mode — or explicitly waived; the agent never makes this move on its own
-initiative (`RVW-06-040`), and the Review stays `status: assessed` in `active/` until then (`RVW-06-041`). The
-move adds a `## Closure` section: date, and one line per finding giving its disposition
+Closure (product/requirements flavor): a Review with `outcome: changes-requested` or `accepted-with-notes` sets
+`status: closed` in place once the user confirms every finding is addressed — through
+the target artifact's own producing mode — or explicitly waived; the agent never makes this transition on its own
+initiative (`RVW-06-040`), and the Review stays `status: assessed` until then (`RVW-06-041`). The
+transition adds a `## Closure` section: date, and one line per finding giving its disposition
 (`addressed` / `waived` / `open-by-design`) and the artifact + mode or user instruction that resolved it,
 matching the latest `## Finding Disposition` rows (`RVW-06-042`). That `## Finding Disposition` table is the
-running per-finding record this flavor keeps in place of `follow_up` Improvement IDs (`RVW-06-043`).
+running per-finding record this flavor keeps in place of derived Improvement backlinks (`RVW-06-043`).
 
-`resolved` (findings worked through) is distinct from `discarded` (work called off): once a `follow_up`
+`closed` (findings worked through) is distinct from `archived` after explicit discard (work called off): once a
 Improvement has gone terminal, or once the user has confirmed a product/requirements Review's findings are all
-addressed or waived, the Review closes as `resolved`, never `discarded` (`RVW-07-040`).
+addressed or waived, the Review closes as `closed`, never `archived` (`RVW-07-040`).
 
-Discard: a Review may move to `status: discarded` (→ `archive/`) only on the user's explicit instruction that no
-further work will happen for it — never inferred from a stalled draft or an unresolved `follow_up` alone
+Discard: a Review may move to `status: archived` only on the user's explicit instruction that no
+further work will happen for it — never inferred from a stalled draft or a nonterminal derived Improvement alone
 (`RVW-07-010`/`RVW-07-011`; `COR-01-090` governs inferred approval generally). Reachable from `draft` (`outcome`
-may stay unset) or `assessed` (`outcome`/`follow_up` stay as recorded) (`RVW-07-020`), adding a `## Discard Note`
-(date, reason) as part of the move (`RVW-07-030`). Never use `discarded` in place of `RVW-06-010` once a
-`follow_up` Improvement has already gone terminal (`RVW-07-040`). When the user explicitly declines further
+may stay unset) or `assessed` (`outcome` stays as recorded) (`RVW-07-020`), adding a `## Discard Note`
+(date, reason) in the same transition (`RVW-07-030`). Never archive as discard in place of `RVW-06-010` once a
+derived Improvement has already gone terminal (`RVW-07-040`). When the user explicitly declines further
 follow-up for a Review's finding, apply the discard that same turn, not merely acknowledge it in conversation
 (`RVW-07-050`).
 
 ## Relationships
 
-A harness/process-flavored Review's `follow_up` field names every Improvement created from it — see
-`IMPROVEMENT.md`'s `IMPR-04-010` for the reverse-link obligation on the Improvement side, and `## Readiness /
-Acceptance`'s Closure rules above for how `follow_up` gates this Review's own resolution.
+A harness/process Review derives follow-up Improvements by scanning Improvement `source_ids` for its ID. The
+Review does not maintain a handwritten reverse list.
 
 ## Output / Location
 
-- `harness-data/artifacts/reviews/active/REVIEW-*.md`
+- `harness-data/artifacts/reviews/REVIEW-*.md`
 - The Review artifact feeds into Improving-Harness mode when process problems are found.
 
 ## Template
@@ -194,19 +191,19 @@ Improvement from within Improving-Harness.
 | RVW-03-020 | Playbooks MAY refine how the review is performed; they do not change Review outcomes, follow-up actions, or mode boundaries (`COR-04-070`). |
 | RVW-04-010 | `target_type` determines the flavor (see `REVIEW.md`'s Two Flavors) — MUST use the matching Criteria Checklist and After-Review action table for that flavor, not a mix of both. |
 | RVW-05-010 | MUST take exactly the action listed in the matching After-Review table for the recorded Outcome before stopping. |
-| RVW-05-020 | MUST NOT improvise or skip the required status change, archive move, or artifact creation named by `RVW-05-010`. |
-| RVW-06-010 | A harness/process-flavored Review with `outcome: follow-up-required` MUST move `active/` → `archive/` and set `status: resolved` once every `follow_up` Improvement ID reaches `done` or `rejected`. |
-| RVW-06-020 | A harness/process-flavored Review stays `status: assessed` in `active/` while `follow_up` is empty or contains a non-terminal Improvement. |
-| RVW-06-030 | MUST add a `## Closure` section (date, terminal Improvement ID(s), `done`/`rejected` for each) as part of the `RVW-06-010` move. |
-| RVW-06-040 | A product/requirements-flavored Review with `outcome: changes-requested` or `accepted-with-notes` MUST move `active/` → `archive/` and set `status: resolved` only once the user confirms every finding is addressed or explicitly waived — never on the agent's own initiative. |
-| RVW-06-041 | Before that confirmation such a Review stays `status: assessed` in `active/`. |
-| RVW-06-042 | MUST add a `## Closure` section (date; per finding: disposition `addressed` / `waived` / `open-by-design`, and the resolving artifact and mode or user instruction; `open-by-design` only where the user chose to leave the finding open), matching the `## Finding Disposition` rows, as part of the `RVW-06-040` move. |
-| RVW-06-043 | A product/requirements-flavored Review SHOULD maintain a `## Finding Disposition` table (columns Finding, Status, Updated, Evidence; `Status` one of `open` / `addressed` / `waived` / `open-by-design`) as findings are resolved; the harness/process flavor omits it and uses `follow_up` instead. |
-| RVW-07-010 | A Review MAY move to `status: discarded` (→ `archive/`) only on the user's explicit instruction that no further work will happen for it. |
-| RVW-07-011 | That instruction MUST NOT be inferred from a stalled draft or an unresolved `follow_up` alone (`COR-01-090` governs inferred approval generally). |
-| RVW-07-020 | Reachable from `draft` (`outcome` MAY stay unset) or `assessed` (`outcome`/`follow_up` stay as recorded). |
+| RVW-05-020 | MUST NOT improvise or skip the required status change or artifact creation named by `RVW-05-010`. |
+| RVW-06-010 | A harness/process Review with `outcome: follow-up-required` MUST set `status: closed` in place once every Improvement whose `source_ids` cites it reaches `done` or `rejected`. |
+| RVW-06-020 | A harness/process Review MUST stay `status: assessed` while any derived Improvement is nonterminal. |
+| RVW-06-030 | MUST add a `## Closure` section (date, terminal Improvement ID(s), `done`/`rejected` for each) as part of the `RVW-06-010` transition. |
+| RVW-06-040 | A product/requirements Review with `outcome: changes-requested` or `accepted-with-notes` MUST set `status: closed` in place only once the user confirms every finding is addressed or explicitly waived. |
+| RVW-06-041 | Before that confirmation such a Review MUST stay `status: assessed`. |
+| RVW-06-042 | MUST add a `## Closure` section (date; per finding: disposition `addressed` / `waived` / `open-by-design`, and the resolving artifact and mode or user instruction; `open-by-design` only where the user chose to leave the finding open), matching the `## Finding Disposition` rows, as part of the `RVW-06-040` transition. |
+| RVW-06-043 | A product/requirements Review SHOULD maintain a `## Finding Disposition` table; the harness/process flavor omits it and derives Improvements from their `source_ids`. |
+| RVW-07-010 | A Review MAY move to `status: archived` only on the user's explicit instruction that no further work will happen for it. |
+| RVW-07-011 | That instruction MUST NOT be inferred from a stalled draft or a nonterminal derived Improvement alone (`COR-01-090`). |
+| RVW-07-020 | `archived` is reachable from `draft` (`outcome` MAY stay unset) or `assessed` (`outcome` stays recorded). |
 | RVW-07-030 | MUST add a `## Discard Note` (date, reason) as part of the `RVW-07-010` move. |
-| RVW-07-040 | MUST NOT use `discarded` in place of `RVW-06-010` or `RVW-06-040` once a `follow_up` Improvement has gone terminal, or once the user has confirmed a product/requirements Review's findings are all addressed or waived. |
+| RVW-07-040 | MUST NOT use discard-style `archived` in place of `closed` once a derived Improvement is terminal or the user confirms all product findings addressed/waived. |
 | RVW-07-050 | When the user explicitly declines further follow-up for a Review's finding, MUST apply `RVW-07-010` that same turn, not merely acknowledge it in conversation. |
 
 ## Reference Files
@@ -215,4 +212,4 @@ Load these when relevant — do not load all of them by default:
 
 - `harness-data/reference/DOMAIN.md` — when reviewing domain correctness of a Spec, Use Case, or implementation
 - `harness-data/reference/ARCHITECTURE.md` — when reviewing scope or boundary decisions
-- `harness-data/artifacts/adrs/accepted/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`
+- `harness-data/artifacts/adrs/` (accepted ADRs) — when a specific boundary is settled by an ADR rather than only described generally in `ARCHITECTURE.md`

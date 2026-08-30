@@ -67,7 +67,6 @@ agent-harness/
   artifact-specs/      ← Artifact Contracts: one file per artifact type
   shared-procs/        ← Procedure Guides invoked by name from harness control flow
   systems/             ← agent-facing operating models spanning rules/artifacts/procedures
-  rules/               ← enforceable rule tables, paired with their source files
   playbooks/           ← optional universal reusable procedures + index.yaml
   templates/           ← lean artifact/support-file scaffolds
 ```
@@ -76,11 +75,12 @@ Short form: Rules constrain. Workflows guide. Contracts define. Procedures run. 
 Templates scaffold. See [docs/08-glossary.md](docs/08-glossary.md) for canonical terms.
 
 `harness-data/` is this project's own data. It holds both project-owned support files and the lifecycle artifacts
-the harness creates while the project uses it. Nothing here is ever copied into or out of the template:
+the harness creates while the project uses it. Template creation copies the initial skeleton; subsequent project
+data is project-owned and is not synchronized back automatically:
 
 ``` text
 harness-data/
-  CATALOG.md           ← this project's live state (e.g. active Implementation Plans)
+  CATALOG.md           ← generated convenience index; never authored state
   RUN-LOG.md           ← optional operational trace the agent may use for interrupted or higher-risk work
   REPO-MAP.md          ← optional structural context for large repos
   reference/           ← project-specific (fill these in)
@@ -97,11 +97,11 @@ harness-data/
     use-cases/
     specs/
     tasks/
-    implementation-plans/
+    plans/
     reviews/
     improvements/
     questions/
-    legacy/
+  extensions/          ← enabled Extension-owned runtime data
 ```
 
 A third, thin layer wires the harness into each agent's own CLI: `.claude/skills/harness/` for Claude Code,
@@ -112,8 +112,9 @@ follow.
 
 ## Getting Started
 
-When using the harness as a GitHub template, click **Use this template** to create a new repository with the full
-harness structure and a clean git history. Alternatively, clone it locally and reinitialize git:
+When using the repository as a GitHub template, **Use this template** copies the current template contents into
+a new repository with independent history; it does not establish later upstream synchronization. Alternatively,
+clone it locally and reinitialize git:
 
 ```bash
 git clone <template-url> your-project

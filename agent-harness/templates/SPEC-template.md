@@ -54,7 +54,7 @@ unresolved direction question — see `agent-harness/artifact-specs/IDEA.md`'s `
 
 ## Constraints
 
-(technical or business constraints that limit the solution space; cite inherited `CSQ-*` / `Q-<APP>-*` / `CSP-NNNN`
+(technical or business constraints that limit the solution space; cite inherited `Q-NNNN`
 IDs when they constrain the design)
 
 ## Dependencies
@@ -75,7 +75,7 @@ remain stable; list regression invariants or mark `Not applicable — net-new be
 
 ## Validation Approach
 
-(how this spec will be validated — tests, checks, manual review; cite any inherited `CSP-NNNN` proof obligations that
+(how this spec will be validated — tests, checks, manual review; carry any inherited proof obligations that
 must later be discharged here or in Open Questions, not in `test_refs`)
 
 ## Task Decision Notes
@@ -94,7 +94,7 @@ must later be discharged here or in Open Questions, not in `test_refs`)
 ## Readiness Checklist
 
 Before advancing to `ready`, verify all items are checked. Cite a one-line evidence pointer per checked item
-beneath the checklist — see `rules/artifact-specs/SPECS.md`'s `SPS-02-012`.
+beneath the checklist — see `agent-harness/artifact-specs/SPECS.md`'s `SPS-02-012`.
 
 - [ ] Problem is clearly stated
 - [ ] Goal is measurable or verifiable
