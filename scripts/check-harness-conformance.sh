@@ -163,34 +163,21 @@ done
 section "Lifecycle skeleton and status vocabulary"
 # ---------------------------------------------------------------------------
 skel_fail=0
-for d in adrs ideas implementation-plans improvements questions reviews specs tasks transcripts use-cases; do
-  [ -d "harness-data/artifacts/$d" ] || { fail "missing lifecycle folder: harness-data/artifacts/$d"; skel_fail=1; }
+for d in adrs changes ideas improvements plans questions reviews specs tasks transcripts use-cases; do
+  [ -d "harness-data/artifacts/$d" ] || { fail "missing artifact-type root: harness-data/artifacts/$d"; skel_fail=1; }
 done
-# Legacy Discovery is an optional Extension: its artifact root exists only when enabled.
+# Legacy Discovery is an optional Extension: its v2 artifact root exists only when enabled.
 if [ -f harness-data/HARNESS-PROFILE.yaml ] && grep -qE '^[[:space:]]*legacy_discovery:[[:space:]]*enabled' harness-data/HARNESS-PROFILE.yaml; then
-  [ -d harness-data/extensions/legacy-discovery ] || [ -d harness-data/artifacts/legacy ] \
-    || { fail "legacy_discovery enabled but no harness-data/extensions/legacy-discovery/ (or bridge) present"; skel_fail=1; }
+  [ -d harness-data/extensions/legacy-discovery ] \
+    || { fail "legacy_discovery enabled but harness-data/extensions/legacy-discovery/ is missing"; skel_fail=1; }
 fi
-# v2 uses a single Questions registry file (IMPROVEMENT-0144); the v1 three-file
-# split (QUESTIONS-OPEN/RESOLVED/DISCARDED.md) is gone.
+# V2 has one stable type/ID path per artifact; frontmatter status does not select a folder.
+# V2 uses a single Questions registry file.
 if [ -d harness-data/artifacts/questions ]; then
   [ -f harness-data/artifacts/questions/QUESTIONS.md ] \
     || { fail "missing Questions registry file: harness-data/artifacts/questions/QUESTIONS.md"; skel_fail=1; }
 fi
-for d in proposed accepted; do
-  [ -d "harness-data/artifacts/adrs/$d" ] || { fail "missing ADR folder: harness-data/artifacts/adrs/$d"; skel_fail=1; }
-done
-if [ -d harness-data/artifacts/implementation-plans/approved ]; then
-  fail "stale ADR-era folder present: harness-data/artifacts/implementation-plans/approved (canonical is ready/)"
-  skel_fail=1
-fi
-if [ -f harness-data/CATALOG.md ]; then
-  if grep -qE 'Plans at status `approved`' harness-data/CATALOG.md; then
-    fail "harness-data/CATALOG.md still tracks Plans at 'approved' (canonical is 'ready')"
-    skel_fail=1
-  fi
-fi
-[ "$skel_fail" -eq 0 ] && pass "lifecycle folders, Questions registry, and Plan status vocabulary are canonical"
+[ "$skel_fail" -eq 0 ] && pass "v2 artifact-type roots and Questions registry are canonical"
 
 # ---------------------------------------------------------------------------
 section "Templates and placeholder hygiene"
