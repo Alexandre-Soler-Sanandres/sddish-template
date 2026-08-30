@@ -5,9 +5,21 @@ name: harness-conformance
 # or human semantic review — it only catches cross-surface drift in the template.
 
 on:
-  push:
-    branches: [main]
+  # Only the surfaces the check scripts below actually read. `main` advances only
+  # through merged PRs (already checked pre-merge), so there is no push trigger.
   pull_request:
+    paths:
+      - 'agent-harness/**'                           # harness source: modes, artifact-specs, systems, templates, docs, entrypoints.yaml
+      - 'harness-data/**'                            # artifacts, CATALOG.md, reference/, HARNESS-PROFILE.yaml, playbooks/, guides/
+      - 'scripts/**'                                 # check-harness-conformance.sh, check-harness.sh, render-harness-views.sh, generate-harness-wrappers.sh
+      - 'AGENTS.md'                                  # root loader / citation root
+      - 'CLAUDE.md'                                  # root loader / citation root
+      - '.github/copilot-instructions.md'            # root loader / citation root
+      - '.github/agents/**'                          # Copilot wrapper layer (generated from entrypoints.yaml)
+      - '.claude/**'                                 # Claude Code wrapper layer (.claude/skills/harness/**)
+      - '.agents/**'                                 # Codex CLI wrapper layer (.agents/skills/harness/**)
+      - 'agents/**'                                  # generated Codex manifest (agents/openai.yaml) when present
+      - '.github/workflows/harness-conformance.yml'  # re-run when the guard itself changes
   workflow_dispatch:
 
 jobs:
