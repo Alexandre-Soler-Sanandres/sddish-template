@@ -22,11 +22,15 @@ profile_enables_legacy() {
 }
 
 frontmatter() { sed -n '/^---$/,/^---$/p' "$1"; }
+# Normalise whitespace on a single line (strip leading/trailing, collapse internal runs) without
+# xargs's shell-style quote parsing — xargs exits non-zero on the escaped quotes some artifact
+# titles carry, which under `set -e` aborts the whole run before CATALOG.md is written.
+trim() { awk 'NF { $1 = $1; print }'; }
 scalar() {
-  frontmatter "$1" | sed -n "s/^$2: *//p" | head -1 | sed 's/[[:space:]]*#.*$//' | xargs
+  frontmatter "$1" | sed -n "s/^$2: *//p" | head -1 | sed 's/[[:space:]]*#.*$//' | trim
 }
 array() {
-  frontmatter "$1" | sed -nE "s/^$2: *\[(.*)\].*$/\1/p" | tr ',' ' ' | xargs
+  frontmatter "$1" | sed -nE "s/^$2: *\[(.*)\].*$/\1/p" | tr ',' ' ' | trim
 }
 
 emit_record() {
